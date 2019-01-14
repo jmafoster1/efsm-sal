@@ -1,0 +1,16 @@
+
+% This will need to import option.sal
+
+value {N_ : nznat; STRING:TYPE} : CONTEXT = BEGIN
+  NAT : TYPE = [0..N_];
+
+  % The VALUE type for inputs, outputs, and registers
+  B_VALUE : TYPE = DATATYPE
+    VALUE_BB,
+    STR(stringOf: STRING),
+    NUM(natOf: NAT)
+  END;
+
+  VALUE : TYPE = {g : B_VALUE | g /= VALUE_BB};
+
+END
