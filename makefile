@@ -1,14 +1,12 @@
-DOT_FILES = $(shell find -type f -name '*.dot')
+DOT_FILES = $(shell find ./ -type f -name '*.dot')
 DATE=`date +'%d/%m/%y'`
 
 
 dot:
 	@ for b in $(basename $(DOT_FILES)) ; do \
-		firstString="I love Suzi and Marry" ;\
-		secondString="Sara" ;\
-		echo "${firstString/Suzi/$secondString}" ; \
-	  # dot -T pdf -o ../pdfs/$$b.pdf $$b.dot ; \
+	  dot -T pdf -o $$b.pdf $$b.dot ; \
 	done
+	@ mv dotfiles/*.pdf pdfs/
 
 eod:
 	git add -A ; \
