@@ -1,0 +1,59 @@
+horrible_example_2 {N_ : nznat} : CONTEXT = BEGIN
+
+LABEL : TYPE = DATATYPE
+  f,
+  g,
+  h
+END;
+
+STATES : TYPE = {State_0, State_1, State_2, NULL_STATE};
+                                                                 %%10
+NAT : TYPE = [0..N_];
+
+REG_NAT : TYPE = DATATYPE
+  null_int,
+  as_RegNat(as_Nat : NAT)
+END;
+
+h2 : MODULE =
+  BEGIN
+    INPUT label : LABEL                                          %%20
+    LOCAL cfstate : STATES
+    LOCAL r_1 : REG_NAT
+    INPUT ip_1_f_1 : NAT
+    INITIALIZATION [
+        cfstate = State_0 AND
+        r_1 = null_int
+      -->
+    ]
+    TRANSITION [
+      %% f                                                       %%30
+      T1 :
+          cfstate = State_0 AND label = f
+        -->
+          cfstate' = State_1;
+          r_1' = as_RegNat (ip_1_f_1)
+      []
+      %% g
+      T2 :
+          cfstate = State_1 AND label = g AND
+              as_Nat (r_1) > 5 AND as_Nat (r_1) + 5 <= N_          %%40
+        -->
+          cfstate' = State_1;
+          r_1' = as_RegNat (as_Nat (r_1) + 5)
+      []
+      %% h
+      T3 :
+          cfstate = State_1 AND label = h
+        -->
+          cfstate' = State_2;
+          r_1' = r_1                                             %%50
+      []
+      SINK_HOLE :
+          ELSE
+        -->
+          cfstate' = NULL_STATE;
+          r_1' = r_1
+    ]
+  END;
+END

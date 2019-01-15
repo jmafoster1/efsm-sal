@@ -1,0 +1,94 @@
+lift {N_ : nznat} : CONTEXT = BEGIN
+
+LABEL : TYPE = DATATYPE
+  close,
+  goDown,
+  goUp,
+  open
+END;
+
+STATES : TYPE = {State_0, State_1, State_2, State_3, NULL_STATE};%%10
+
+NAT : TYPE = [0..N_];
+
+lift : MODULE =
+  BEGIN
+    INPUT label : LABEL
+    LOCAL cfstate : STATES
+    INPUT ip_1_goDown_1 : NAT
+    INPUT ip_1_goUp_1 : NAT
+    OUTPUT op_1_close_0 : NAT                                    %%20
+    OUTPUT op_1_goDown_1 : NAT
+    OUTPUT op_1_goUp_1 : NAT
+    OUTPUT op_1_open_0 : NAT
+    INITIALIZATION [
+        cfstate = State_0
+      -->
+    ]
+    TRANSITION [
+      %% goUp
+      T1UP :                                                     %%30
+          cfstate = State_0 AND label = goUp AND ip_1_goUp_1 > 0
+        -->
+          cfstate' = State_1;
+          op_1_goUp_1' = ip_1_goUp_1
+      []
+      %% goUp
+      T2UP :
+          cfstate = State_1 AND label = goUp AND ip_1_goUp_1 > 0
+        -->
+          cfstate' = State_1;                                    %%40
+          op_1_goUp_1' = ip_1_goUp_1 + -1
+      []
+      %% goUp
+      T3UP :
+          cfstate = State_1 AND label = goUp AND ip_1_goUp_1 = 0
+        -->
+          cfstate' = State_0;
+          op_1_goUp_1' = 0
+      []
+      %% goDown                                                  %%50
+      T1DOWN :
+          cfstate = State_0 AND label = goDown AND
+              ip_1_goDown_1 > 0
+        -->
+          cfstate' = State_2;
+          op_1_goDown_1' = ip_1_goDown_1
+      []
+      %% goDown
+      T2DOWN :
+          cfstate = State_2 AND label = goDown AND               %%60
+              ip_1_goDown_1 > 0
+        -->
+          cfstate' = State_2;
+          op_1_goDown_1' = ip_1_goDown_1 + -1
+      []
+      %% goDown
+      T3DOWN :
+          cfstate = State_2 AND label = goDown AND
+              ip_1_goDown_1 = 0
+        -->                                                      %%70
+          cfstate' = State_0;
+          op_1_goDown_1' = 0
+      []
+      %% open
+      OPENDOORS :
+          cfstate = State_0 AND label = open
+        -->
+          cfstate' = State_3;
+          op_1_open_0' = 1
+      []                                                         %%80
+      %% close
+      CLOSEDOORS :
+          cfstate = State_3 AND label = close
+        -->
+          cfstate' = State_0;
+          op_1_close_0' = 0
+      []
+      SINK_HOLE :
+          ELSE
+        -->                                                      %%90
+          cfstate' = NULL_STATE
+    ]
+  END;
+END

@@ -1,0 +1,88 @@
+drinks_machine_payforward {N_ : nznat} : CONTEXT = BEGIN
+
+LABEL : TYPE = DATATYPE
+  coin,
+  select,
+  setup,
+  vend
+END;
+
+STRING : TYPE = {String_coke, String_inaccepts, String_pepsi};   %%10
+
+STATES : TYPE = {State_0, State_1, State_2, NULL_STATE};
+
+NAT : TYPE = [0..N_];
+
+REG_STRING : TYPE = DATATYPE
+  null_string,
+  as_RegStr(as_String : STRING)
+END;
+                                                                 %%20
+REG_NAT : TYPE = DATATYPE
+  null_int,
+  as_RegNat(as_Nat : NAT)
+END;
+
+drinks : MODULE =
+  BEGIN
+    INPUT label : LABEL
+    LOCAL cfstate : STATES
+    LOCAL r_1 : REG_STRING                                       %%30
+    LOCAL r_2 : REG_NAT
+    INPUT ip_1_coin_1 : NAT
+    INPUT ip_1_select_1 : STRING
+    OUTPUT op_1_coin_1 : NAT
+    OUTPUT op_1_vend_0 : STRING
+    INITIALIZATION [
+        cfstate = State_0 AND
+        r_1 = null_string AND
+        r_2 = null_int
+      -->                                                        %%40
+    ]
+    TRANSITION [
+      %% select
+      SELECT :
+          cfstate = State_1 AND label = select
+        -->
+          cfstate' = State_2;
+          r_1' = as_RegStr (ip_1_select_1);
+          r_2' = as_RegNat (0)
+      []                                                         %%50
+      %% coin
+      COIN :
+          cfstate = State_2 AND label = coin AND
+              as_Nat (r_2) + ip_1_coin_1 <= N_
+        -->
+          cfstate' = State_2;
+          r_1' = r_1;
+          r_2' = as_RegNat (as_Nat (r_2) + ip_1_coin_1);
+          op_1_coin_1' = as_Nat (r_2) + ip_1_coin_1
+      []                                                         %%60
+      %% setup
+      SETUP :
+          cfstate = State_0 AND label = setup
+        -->
+          cfstate' = State_1;
+          r_2' = as_RegNat (0);
+          r_1' = r_1
+      []
+      %% vend
+      VEND :                                                     %%70
+          cfstate = State_2 AND label = vend AND
+              as_Nat (r_2) >= 100 AND as_Nat (r_2) - 100 <= N_ AND
+              as_Nat (r_2) - 100 >= 0
+        -->
+          cfstate' = State_1;
+          r_1' = r_1;
+          r_2' = as_RegNat (as_Nat (r_2) - 100);
+          op_1_vend_0' = as_String (r_1)
+      []
+      SINK_HOLE :                                                %%80
+          ELSE
+        -->
+          cfstate' = NULL_STATE;
+          r_1' = r_1;
+          r_2' = r_2
+    ]
+  END;
+END

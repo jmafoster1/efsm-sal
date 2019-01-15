@@ -1,0 +1,132 @@
+linkedin {N_ : nznat} : CONTEXT = BEGIN
+
+LABEL : TYPE = DATATYPE
+  login,
+  pdf,
+  view
+END;
+
+STRING : TYPE =
+    {String_4Zof, String_HM8p, String_MNn5, String_OUT_OF_NETWORK, %%10
+    String_free, String_friendID, String_name, String_otherID};
+  
+STATES : TYPE =
+    {State_0, State_1, State_2, State_3, State_4, State_5,
+    NULL_STATE};
+  
+NAT : TYPE = [0..N_];
+
+linkedIn : MODULE =
+  BEGIN                                                          %%20
+    INPUT label : LABEL
+    LOCAL cfstate : STATES
+    INPUT ip_1_login_1 : STRING
+    INPUT ip_1_pdf_3 : STRING
+    INPUT ip_1_view_3 : STRING
+    INPUT ip_2_pdf_3 : STRING
+    INPUT ip_2_view_3 : STRING
+    INPUT ip_3_pdf_3 : STRING
+    INPUT ip_3_view_3 : STRING
+    OUTPUT op_1_view_3 : STRING                                  %%30
+    OUTPUT op_2_view_3 : STRING
+    OUTPUT op_3_view_3 : STRING
+    INITIALIZATION [
+        cfstate = State_0
+      -->
+    ]
+    TRANSITION [
+      %% login
+      LOGIN :
+          cfstate = State_0 AND label = login AND                %%40
+              ip_1_login_1 = String_free
+        -->
+          cfstate' = State_1
+      []
+      %% view
+      VIEWFRIEND :
+          cfstate = State_1 AND label = view AND
+              ip_1_view_3 = String_friendID AND
+              ip_2_view_3 = String_name AND
+              ip_3_view_3 = String_HM8p                            %%50
+        -->
+          cfstate' = State_2;
+          op_1_view_3' = String_friendID;
+          op_2_view_3' = String_name;
+          op_3_view_3' = String_HM8p
+      []
+      %% view
+      VIEWOTHER :
+          cfstate = State_1 AND label = view AND
+              ip_1_view_3 = String_otherID AND                     %%60
+              ip_2_view_3 = String_name AND
+              ip_3_view_3 = String_4Zof
+        -->
+          cfstate' = State_2;
+          op_1_view_3' = String_otherID;
+          op_2_view_3' = String_name;
+          op_3_view_3' = String_4Zof
+      []
+      %% view
+      VIEWOTHEROON :                                             %%70
+          cfstate = State_1 AND label = view AND
+              ip_1_view_3 = String_otherID AND
+              ip_2_view_3 = String_OUT_OF_NETWORK AND
+              ip_3_view_3 = String_MNn5
+        -->
+          cfstate' = State_3;
+          op_1_view_3' = String_otherID;
+          op_2_view_3' = String_OUT_OF_NETWORK;
+          op_3_view_3' = String_MNn5
+      []                                                         %%80
+      %% view
+      VIEWOTHERFUZZ :
+          cfstate = State_1 AND label = view AND
+              ip_1_view_3 = String_otherID AND
+              ip_2_view_3 = String_name AND
+              ip_3_view_3 = String_MNn5
+        -->
+          cfstate' = State_3;
+          op_1_view_3' = String_otherID;
+          op_2_view_3' = String_name;                            %%90
+          op_3_view_3' = String_MNn5
+      []
+      %% pdf
+      PDFFRIEND :
+          cfstate = State_2 AND label = pdf AND
+              ip_1_pdf_3 = String_friendID AND
+              ip_2_pdf_3 = String_name AND ip_3_pdf_3 = String_HM8p
+        -->
+          cfstate' = State_4
+      []                                                         %%100
+      %% pdf
+      PDFOTHER_A :
+          cfstate = State_3 AND label = pdf AND
+              ip_1_pdf_3 = String_otherID AND
+              ip_2_pdf_3 = String_name AND ip_3_pdf_3 = String_4Zof
+        -->
+          cfstate' = State_4
+      []
+      %% pdf
+      PDFOTHER_B :                                               %%110
+          cfstate = State_2 AND label = pdf AND
+              ip_1_pdf_3 = String_otherID AND
+              ip_2_pdf_3 = String_name AND ip_3_pdf_3 = String_4Zof
+        -->
+          cfstate' = State_4
+      []
+      %% pdf
+      PDFOTHEROON :
+          cfstate = State_3 AND label = pdf AND
+              ip_1_pdf_3 = String_otherID AND                      %%120
+              ip_2_pdf_3 = String_OUT_OF_NETWORK AND
+              ip_3_pdf_3 = String_MNn5
+        -->
+          cfstate' = State_5
+      []
+      SINK_HOLE :
+          ELSE
+        -->
+          cfstate' = NULL_STATE
+    ]                                                            %%130
+  END;
+END

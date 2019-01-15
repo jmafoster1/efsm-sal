@@ -1,0 +1,80 @@
+drinks_machine_change {N_ : nznat} : CONTEXT = BEGIN
+
+LABEL : TYPE = DATATYPE
+  coin,
+  select,
+  vend
+END;
+
+STRING : TYPE = {String_coke, String_inaccepts, String_invalid};
+                                                                 %%10
+STATES : TYPE = {State_0, State_1, State_2, NULL_STATE};
+
+NAT : TYPE = [0..N_];
+
+REG_STRING : TYPE = DATATYPE
+  null_string,
+  as_RegStr(as_String : STRING)
+END;
+
+REG_NAT : TYPE = DATATYPE                                        %%20
+  null_int,
+  as_RegNat(as_Nat : NAT)
+END;
+
+drinks : MODULE =
+  BEGIN
+    INPUT label : LABEL
+    LOCAL cfstate : STATES
+    LOCAL r_1 : REG_STRING
+    LOCAL r_2 : REG_NAT                                          %%30
+    INPUT ip_1_coin_1 : NAT
+    INPUT ip_1_select_1 : STRING
+    OUTPUT op_1_coin_1 : NAT
+    OUTPUT op_1_vend_0 : STRING
+    OUTPUT op_2_vend_0 : NAT
+    INITIALIZATION [
+        cfstate = State_0 AND
+        r_1 = null_string AND
+        r_2 = null_int
+      -->                                                        %%40
+    ]
+    TRANSITION [
+      %% select
+      SELECT :
+          cfstate = State_0 AND label = select
+        -->
+          cfstate' = State_1;
+          r_1' = as_RegStr (ip_1_select_1);
+          r_2' = as_RegNat (0)
+      []                                                         %%50
+      %% coin
+      COIN :
+          cfstate = State_1 AND label = coin AND
+              as_Nat (r_2) + ip_1_coin_1 <= N_
+        -->
+          cfstate' = State_1;
+          r_1' = r_1;
+          r_2' = as_RegNat (as_Nat (r_2) + ip_1_coin_1);
+          op_1_coin_1' = as_Nat (r_2) + ip_1_coin_1
+      []                                                         %%60
+      %% vend
+      VEND :
+          cfstate = State_1 AND label = vend AND
+              as_Nat (r_2) >= 100
+        -->
+          cfstate' = State_2;
+          r_1' = r_1;
+          r_2' = r_2;
+          op_1_vend_0' = as_String (r_1);
+          op_2_vend_0' = as_Nat (r_2) - 100                      %%70
+      []
+      SINK_HOLE :
+          ELSE
+        -->
+          cfstate' = NULL_STATE;
+          r_1' = r_1;
+          r_2' = r_2
+    ]
+  END;
+END                                                              %%80

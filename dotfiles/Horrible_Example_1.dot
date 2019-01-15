@@ -1,0 +1,14 @@
+digraph Horrible_Example_1{
+   graph [rankdir="LR", fontname="Latin Modern Math"];
+   node [color="black", fillcolor="white", shape="circle", style="filled", fontname="Latin Modern Math"];
+   edge [fontname="Latin Modern Math"];
+
+   State_0[fillcolor="gray", label=<state_<sub>0</sub>>];
+   State_1[label=<state_<sub>1</sub>>];
+   State_2[label=<state_<sub>2</sub>>];
+
+   State_0->State_1[label=<<i>f:1/&#91;r<sub>1</sub> := i<sub>1</sub>&#93;</i>>];
+   State_1->State_1[label=<<i>g:0&#91;r<sub>1</sub> &gt; 5&#93;/&#91;r<sub>1</sub> := r<sub>1</sub> + 5&#93;</i>>];
+   State_1->State_2[label=<<i>h:0&#91;r<sub>1</sub> &lt; 10&#93;/&#91;r<sub>1</sub> := r<sub>1</sub>&#93;</i>>];
+   State_1->State_2[label=<<i>h:0&#91;r<sub>1</sub> &ge; 10&#93;/&#91;r<sub>1</sub> := r<sub>1</sub>&#93;</i>>];
+}
