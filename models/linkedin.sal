@@ -9,117 +9,157 @@ END;
 STRING : TYPE =
     {String_4Zof, String_HM8p, String_MNn5, String_OUT_OF_NETWORK, %%10
     String_free, String_friendID, String_name, String_otherID};
-  
+
 STATES : TYPE =
     {State_0, State_1, State_2, State_3, State_4, State_5,
     NULL_STATE};
-  
+
 NAT : TYPE = [0..N_];
+
+Value:CONTEXT = value {N_, STRING};
+Arithmetic:CONTEXT = arithmetic{N_, STRING};
+
+B_VALUE : TYPE =  Value ! B_VALUE;
+VALUE : TYPE =  {g : B_VALUE | g /= value {N_, STRING} ! VALUE_BB};
+ValueOption:CONTEXT = option {VALUE};
+
+
+B_VALUE_OPTION : TYPE = ValueOption ! B_OPTION;
+VALUE_OPTION : TYPE =  {g : B_VALUE_OPTION | g /= ValueOption ! OPTION_BB};
+BOOL_OPTION : TYPE = option {bool} ! OPTION;
+
+Some : [VALUE -> VALUE_OPTION] = ValueOption ! Some;
+NUM: [Value!NAT -> VALUE] = Value ! NUM;
+STR: [STRING -> VALUE] = Value ! STR;
+
+value_plus : [[VALUE_OPTION, VALUE_OPTION] -> VALUE_OPTION] = Arithmetic ! value_plus;
+value_minus : [[VALUE_OPTION, VALUE_OPTION] -> VALUE_OPTION] = Arithmetic ! value_minus;
+
+value_le : [[VALUE_OPTION, VALUE_OPTION] -> BOOL_OPTION] = Arithmetic ! value_le;
+value_ge : [[VALUE_OPTION, VALUE_OPTION] -> BOOL_OPTION] = Arithmetic ! value_ge;
+value_lt : [[VALUE_OPTION, VALUE_OPTION] -> BOOL_OPTION] = Arithmetic ! value_lt;
+value_gt : [[VALUE_OPTION, VALUE_OPTION] -> BOOL_OPTION] = Arithmetic ! value_gt;
+
+OutputSequence : CONTEXT = sequence {B_VALUE_OPTION; ValueOption ! OPTION_BB, 3};
+InputSequence : CONTEXT = sequence {B_VALUE; value {N_, STRING} ! VALUE_BB, 3};
+
+gval : [BOOL_OPTION -> bool] =
+LAMBDA(g:BOOL_OPTION): g = option {bool} !Some(TRUE);
 
 linkedIn : MODULE =
   BEGIN                                                          %%20
     INPUT label : LABEL
     LOCAL cfstate : STATES
-    INPUT ip_1_login_1 : STRING
-    INPUT ip_1_pdf_3 : STRING
-    INPUT ip_1_view_3 : STRING
-    INPUT ip_2_pdf_3 : STRING
-    INPUT ip_2_view_3 : STRING
-    INPUT ip_3_pdf_3 : STRING
-    INPUT ip_3_view_3 : STRING
-    OUTPUT op_1_view_3 : STRING                                  %%30
-    OUTPUT op_2_view_3 : STRING
-    OUTPUT op_3_view_3 : STRING
+    INPUT I : InputSequence ! Sequence
+    OUTPUT O : OutputSequence ! Sequence
     INITIALIZATION [
-        cfstate = State_0
+        cfstate = State_0 AND
+        O = OutputSequence ! empty
       -->
     ]
     TRANSITION [
       %% login
       LOGIN :
-          cfstate = State_0 AND label = login AND                %%40
-              ip_1_login_1 = String_free
+          cfstate = State_0 AND
+          label = login AND                %%40
+          I(1) = STR(String_free)
         -->
           cfstate' = State_1
       []
       %% view
       VIEWFRIEND :
-          cfstate = State_1 AND label = view AND
-              ip_1_view_3 = String_friendID AND
-              ip_2_view_3 = String_name AND
-              ip_3_view_3 = String_HM8p                            %%50
+          cfstate = State_1 AND
+          label = view AND
+          InputSequence ! size?(I) = 3 AND
+          I(1) = STR(String_friendID) AND
+          I(2) = STR(String_name) AND
+          I(3) = STR(String_HM8p)                            %%50
         -->
           cfstate' = State_2;
-          op_1_view_3' = String_friendID;
-          op_2_view_3' = String_name;
-          op_3_view_3' = String_HM8p
+          O' = OutputSequence!insert(Some(STR(String_friendID)),
+               OutputSequence!insert(Some(STR(String_name)),
+               OutputSequence!insert(Some(STR(String_HM8p)), OutputSequence!empty)))
+
       []
       %% view
       VIEWOTHER :
           cfstate = State_1 AND label = view AND
-              ip_1_view_3 = String_otherID AND                     %%60
-              ip_2_view_3 = String_name AND
-              ip_3_view_3 = String_4Zof
+          InputSequence ! size?(I) = 3 AND
+          I(1) = STR(String_otherID) AND
+          I(2) = STR(String_name) AND
+          I(3) = STR(String_4Zof)
         -->
           cfstate' = State_2;
-          op_1_view_3' = String_otherID;
-          op_2_view_3' = String_name;
-          op_3_view_3' = String_4Zof
+          O' = OutputSequence!insert(Some(STR(String_otherID)),
+               OutputSequence!insert(Some(STR(String_name)),
+               OutputSequence!insert(Some(STR(String_4Zof)), OutputSequence!empty)))
       []
       %% view
       VIEWOTHEROON :                                             %%70
           cfstate = State_1 AND label = view AND
-              ip_1_view_3 = String_otherID AND
-              ip_2_view_3 = String_OUT_OF_NETWORK AND
-              ip_3_view_3 = String_MNn5
+              InputSequence ! size?(I) = 3 AND
+              I(1) = STR(String_otherID) AND
+              I(2) = STR(String_OUT_OF_NETWORK) AND
+              I(3) = STR(String_MNn5)
         -->
           cfstate' = State_3;
-          op_1_view_3' = String_otherID;
-          op_2_view_3' = String_OUT_OF_NETWORK;
-          op_3_view_3' = String_MNn5
+          O' = OutputSequence!insert(Some(STR(String_otherID)),
+               OutputSequence!insert(Some(STR(String_OUT_OF_NETWORK)),
+               OutputSequence!insert(Some(STR(String_MNn5)), OutputSequence!empty)))
       []                                                         %%80
       %% view
       VIEWOTHERFUZZ :
           cfstate = State_1 AND label = view AND
-              ip_1_view_3 = String_otherID AND
-              ip_2_view_3 = String_name AND
-              ip_3_view_3 = String_MNn5
+              InputSequence ! size?(I) = 3 AND
+              I(1) = STR(String_otherID) AND
+              I(2) = STR(String_name) AND
+              I(3) = STR(String_MNn5)
         -->
           cfstate' = State_3;
-          op_1_view_3' = String_otherID;
-          op_2_view_3' = String_name;                            %%90
-          op_3_view_3' = String_MNn5
+
+          O' = OutputSequence!insert(Some(STR(String_otherID)),
+               OutputSequence!insert(Some(STR(String_name)),
+               OutputSequence!insert(Some(STR(String_MNn5)), OutputSequence!empty)))
       []
       %% pdf
       PDFFRIEND :
           cfstate = State_2 AND label = pdf AND
-              ip_1_pdf_3 = String_friendID AND
-              ip_2_pdf_3 = String_name AND ip_3_pdf_3 = String_HM8p
+              InputSequence ! size?(I) = 3 AND
+              I(1) = STR(String_friendID) AND
+              I(2) = STR(String_name) AND
+              I(3) = STR(String_HM8p)
+
+
         -->
           cfstate' = State_4
       []                                                         %%100
       %% pdf
       PDFOTHER_A :
           cfstate = State_3 AND label = pdf AND
-              ip_1_pdf_3 = String_otherID AND
-              ip_2_pdf_3 = String_name AND ip_3_pdf_3 = String_4Zof
+              InputSequence ! size?(I) = 3 AND
+              I(1) = STR(String_otherID) AND
+              I(2) = STR(String_name) AND
+              I(3) = STR(String_4Zof)
         -->
           cfstate' = State_4
       []
       %% pdf
       PDFOTHER_B :                                               %%110
           cfstate = State_2 AND label = pdf AND
-              ip_1_pdf_3 = String_otherID AND
-              ip_2_pdf_3 = String_name AND ip_3_pdf_3 = String_4Zof
+              InputSequence ! size?(I) = 3 AND
+              I(1) = STR(String_otherID) AND
+              I(2) = STR(String_name) AND
+              I(3) = STR(String_4Zof)
         -->
           cfstate' = State_4
       []
       %% pdf
       PDFOTHEROON :
           cfstate = State_3 AND label = pdf AND
-              ip_1_pdf_3 = String_otherID AND                      %%120
-              ip_2_pdf_3 = String_OUT_OF_NETWORK AND
-              ip_3_pdf_3 = String_MNn5
+              InputSequence ! size?(I) = 3 AND
+              I(1) = STR(String_otherID) AND
+              I(2) = STR(String_OUT_OF_NETWORK) AND
+              I(3) = STR(String_MNn5)
         -->
           cfstate' = State_5
       []
