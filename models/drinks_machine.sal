@@ -7,7 +7,6 @@ LABEL : TYPE = DATATYPE
 END;
 
 STRING : TYPE = {String_coke, String_invalid};
-                                                                 %%10
 STATES : TYPE = {State_0, State_1, State_2, NULL_STATE};
 
 Value:CONTEXT = value {N_, STRING};
@@ -16,7 +15,6 @@ Arithmetic:CONTEXT = arithmetic{N_, STRING};
 B_VALUE : TYPE =  Value ! B_VALUE;
 VALUE : TYPE =  {g : B_VALUE | g /= value {N_, STRING} ! VALUE_BB};
 ValueOption:CONTEXT = option {VALUE};
-
 
 B_VALUE_OPTION : TYPE = ValueOption ! B_OPTION;
 VALUE_OPTION : TYPE =  {g : B_VALUE_OPTION | g /= ValueOption ! OPTION_BB};
@@ -54,52 +52,56 @@ drinks : MODULE =
         r_1 = ValueOption ! None AND
         r_2 = ValueOption ! None
       -->
-    ]                                                            %%40
+    ]
     TRANSITION [
       %% select
       SELECT :
-          cfstate = State_0 AND label = select
-          AND InputSequence ! size?(I) = 1
+          cfstate = State_0 AND
+          label = select AND
+          InputSequence ! size?(I) = 1
         -->
           cfstate' = State_1;
           O' = OutputSequence ! empty;
           r_1' = ValueOption ! Some(I(1));
           r_2' = ValueOption ! Some(NUM(0));
       []
-      %% coin                                                    %%50
+      %% coin
       COIN :
-          cfstate = State_1 AND label = coin
-          AND gval(value_le(value_plus(r_2, Some(I(1))), Some(NUM(N_))))
-          AND InputSequence ! size?(I) = 1
+          cfstate = State_1 AND
+          label = coin AND
+          InputSequence ! size?(I) = 1 AND
+          gval(value_le(value_plus(r_2, Some(I(1))), Some(NUM(N_))))
         -->
           cfstate' = State_1;
           r_1' = r_1;
           r_2' = value_plus(r_2, Some(I(1)));
           O' = OutputSequence!insert(value_plus(r_2, Some(I(1))), OutputSequence!empty)
       []
-      %% vend                                                    %%60
+      %% vend
       VEND :
-          cfstate = State_1 AND label = vend
-          AND gval(value_ge(r_2, Some(NUM(100))))
-          AND InputSequence ! size?(I) = 0
+          cfstate = State_1 AND
+          label = vend AND
+          InputSequence ! size?(I) = 0 AND
+          gval(value_ge(r_2, Some(NUM(100))))
         -->
           cfstate' = State_2;
           r_1' = r_1;
           r_2' = r_2;
           O' = OutputSequence!insert(r_1, OutputSequence!empty)
       []
-      %% vend                                                    %%70
+      %% vend
       VEND_FAIL :
-          cfstate = State_1 AND label = vend
-          AND gval(value_lt(r_2, Some(NUM(100))))
-          AND InputSequence ! size?(I) = 0
+          cfstate = State_1 AND
+          label = vend AND
+          InputSequence ! size?(I) = 0 AND
+          gval(value_lt(r_2, Some(NUM(100))))
         -->
           cfstate' = State_1;
           r_1' = r_1;
           r_2' = r_2
       []
       SINK_HOLE :
-          ELSE                                                   %%80
+          ELSE
         -->
           cfstate' = NULL_STATE;
           r_1' = r_1;
@@ -110,6 +112,4 @@ drinks : MODULE =
   neverReachS2: THEOREM drinks |- label=select AND I(1) = STR(String_coke) AND
                                   X(label=coin AND I(1) = NUM(100)) AND
                                   X(X(label=vend AND I=InputSequence ! empty)) => X(X(X(cfstate=State_2)));
-  %null_String: THEOREM drinks |- STR(null_value) = String_coke;
-
 END
