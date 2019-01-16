@@ -109,7 +109,7 @@ drinks : MODULE =
   costsMoney: THEOREM drinks |- G(X(cfstate=State_2) => gval(value_ge(r_2, Some(NUM(100)))));
   neverReachS2: THEOREM drinks |- label=select AND I(1) = STR(String_coke) AND
                                   X(label=coin AND I(1) = NUM(100)) AND
-                                  X(X(label=vend AND I=sequence {B_VALUE; value {N_, STRING} ! VALUE_BB, 1} ! empty)) => X(X(X(cfstate=State_2)));
+                                  X(X(label=vend AND I=InputSequence ! empty)) => X(X(X(cfstate=State_2)));
   %null_String: THEOREM drinks |- STR(null_value) = String_coke;
 
 END
