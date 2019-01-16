@@ -13,76 +13,109 @@ STATES : TYPE = {State_0, State_1, State_2, NULL_STATE};
 
 NAT : TYPE = [0..N_];
 
-REG_STRING : TYPE = DATATYPE
-  null_string,
-  as_RegStr(as_String : STRING)
-END;
-                                                                 %%20
-REG_NAT : TYPE = DATATYPE
-  null_int,
-  as_RegNat(as_Nat : NAT)
-END;
+Value:CONTEXT = value {N_, STRING};
+Arithmetic:CONTEXT = arithmetic{N_, STRING};
+
+B_VALUE : TYPE =  Value ! B_VALUE;
+VALUE : TYPE =  {g : B_VALUE | g /= value {N_, STRING} ! VALUE_BB};
+ValueOption:CONTEXT = option {VALUE};
+
+
+B_VALUE_OPTION : TYPE = ValueOption ! B_OPTION;
+VALUE_OPTION : TYPE =  {g : B_VALUE_OPTION | g /= ValueOption ! OPTION_BB};
+BOOL_OPTION : TYPE = option {bool} ! OPTION;
+
+Some : [VALUE -> VALUE_OPTION] = ValueOption ! Some;
+NUM: [Value!NAT -> VALUE] = Value ! NUM;
+STR: [STRING -> VALUE] = Value ! STR;
+
+value_plus : [[VALUE_OPTION, VALUE_OPTION] -> VALUE_OPTION] = Arithmetic ! value_plus;
+value_minus : [[VALUE_OPTION, VALUE_OPTION] -> VALUE_OPTION] = Arithmetic ! value_minus;
+
+value_le : [[VALUE_OPTION, VALUE_OPTION] -> BOOL_OPTION] = Arithmetic ! value_le;
+value_ge : [[VALUE_OPTION, VALUE_OPTION] -> BOOL_OPTION] = Arithmetic ! value_ge;
+value_lt : [[VALUE_OPTION, VALUE_OPTION] -> BOOL_OPTION] = Arithmetic ! value_lt;
+value_gt : [[VALUE_OPTION, VALUE_OPTION] -> BOOL_OPTION] = Arithmetic ! value_gt;
+
+OutputSequence : CONTEXT = sequence {B_VALUE_OPTION; ValueOption ! OPTION_BB, 1};
+InputSequence : CONTEXT = sequence {B_VALUE; value {N_, STRING} ! VALUE_BB, 1};
+
+gval : [BOOL_OPTION -> bool] =
+LAMBDA(g:BOOL_OPTION): g = option {bool} !Some(TRUE);
 
 drinks : MODULE =
   BEGIN
     INPUT label : LABEL
     LOCAL cfstate : STATES
-    LOCAL r_1 : REG_STRING                                       %%30
-    LOCAL r_2 : REG_NAT
-    INPUT ip_1_coin_1 : NAT
-    INPUT ip_1_select_1 : STRING
-    OUTPUT op_1_coin_1 : NAT
-    OUTPUT op_1_vend_0 : STRING
+    LOCAL r_1 : VALUE_OPTION                                       %%30
+    LOCAL r_2 : VALUE_OPTION
+    INPUT I : InputSequence ! Sequence
+    OUTPUT O : OutputSequence ! Sequence
     INITIALIZATION [
         cfstate = State_0 AND
-        r_1 = null_string AND
-        r_2 = null_int
+        O = OutputSequence ! empty AND
+        r_1 = ValueOption ! None AND
+        r_2 = ValueOption ! None
       -->                                                        %%40
     ]
     TRANSITION [
       %% select
       SELECT :
-          cfstate = State_1 AND label = select
+          cfstate = State_1 AND
+          label = select AND
+          InputSequence ! size?(I) = 1
         -->
           cfstate' = State_2;
-          r_1' = as_RegStr (ip_1_select_1);
-          r_2' = as_RegNat (0)
+          O' = OutputSequence!empty;
+          r_1' = ValueOption ! Some(I(1));
+          r_2' = r_2;
       []                                                         %%50
       %% coin
       COIN :
-          cfstate = State_2 AND label = coin AND
-              as_Nat (r_2) + ip_1_coin_1 <= N_
+          cfstate = State_2 AND
+          label = coin AND
+          gval(value_le(value_plus(r_2, Some(I(1))), Some(NUM(N_)))) AND
+          InputSequence ! size?(I) = 1
         -->
           cfstate' = State_2;
           r_1' = r_1;
-          r_2' = as_RegNat (as_Nat (r_2) + ip_1_coin_1);
-          op_1_coin_1' = as_Nat (r_2) + ip_1_coin_1
+          r_2' = value_plus(r_2, Some(I(1)));
+          O' = OutputSequence!insert(value_plus(r_2, Some(I(1))), OutputSequence!empty)
       []                                                         %%60
       %% setup
       SETUP :
           cfstate = State_0 AND label = setup
         -->
           cfstate' = State_1;
-          r_2' = as_RegNat (0);
+          O' = OutputSequence!empty;
+          r_2' = ValueOption ! Some(NUM(0));
           r_1' = r_1
       []
       %% vend
       VEND :                                                     %%70
-          cfstate = State_2 AND label = vend AND
-              as_Nat (r_2) >= 100 AND as_Nat (r_2) - 100 <= N_ AND
-              as_Nat (r_2) - 100 >= 0
+        cfstate = State_2 AND label = vend
+        AND gval(value_ge(r_2, Some(NUM(100))))
+        AND InputSequence ! size?(I) = 0
         -->
           cfstate' = State_1;
           r_1' = r_1;
-          r_2' = as_RegNat (as_Nat (r_2) - 100);
-          op_1_vend_0' = as_String (r_1)
+          r_2' = value_minus(r_2, Some(NUM(100)));
+          O' = OutputSequence!insert(r_1, OutputSequence!empty)
       []
       SINK_HOLE :                                                %%80
           ELSE
         -->
           cfstate' = NULL_STATE;
+          O' = OutputSequence!empty;
           r_1' = r_1;
           r_2' = r_2
     ]
   END;
+  costsMoney: THEOREM drinks |- G(label=vend AND X(cfstate=State_1) => gval(value_ge(r_2, Some(NUM(120)))));
+  neverReachS1: THEOREM drinks |- label=setup AND I=InputSequence! empty AND
+                                  X(label=select AND I(1) = STR(String_coke)) AND
+                                  X(X(label=coin AND I(1) = NUM(110))) AND
+                                  X(X(X(label=vend AND I=InputSequence! empty))) =>
+                                  X(X(X(X(cfstate=State_1 AND r_2 = Some(NUM(10))))));
+
 END
