@@ -14,43 +14,52 @@ STATES : TYPE =
     {State_0, State_1, State_2, State_3, State_4, State_5,
     NULL_STATE};
 
-NAT : TYPE = [0..N_];
-
 Value:CONTEXT = value {N_, STRING};
 Arithmetic:CONTEXT = arithmetic{N_, STRING};
 
-B_VALUE : TYPE =  Value ! B_VALUE;
-VALUE : TYPE =  {g : B_VALUE | g /= value {N_, STRING} ! VALUE_BB};
+B_VALUE : TYPE =  Value ! B_VALUE;                               %%20
+VALUE : TYPE =  {g : B_VALUE | g /= value {N_, STRING} !
+    VALUE_BB};
 ValueOption:CONTEXT = option {VALUE};
 
-
 B_VALUE_OPTION : TYPE = ValueOption ! B_OPTION;
-VALUE_OPTION : TYPE =  {g : B_VALUE_OPTION | g /= ValueOption ! OPTION_BB};
+VALUE_OPTION : TYPE =  {g : B_VALUE_OPTION | g /= ValueOption !
+    OPTION_BB};
 BOOL_OPTION : TYPE = option {bool} ! OPTION;
 
-Some : [VALUE -> VALUE_OPTION] = ValueOption ! Some;
+Some : [VALUE -> VALUE_OPTION] = ValueOption ! Some;             %%30
 NUM: [Value!NAT -> VALUE] = Value ! NUM;
 STR: [STRING -> VALUE] = Value ! STR;
 
-value_plus : [[VALUE_OPTION, VALUE_OPTION] -> VALUE_OPTION] = Arithmetic ! value_plus;
-value_minus : [[VALUE_OPTION, VALUE_OPTION] -> VALUE_OPTION] = Arithmetic ! value_minus;
+value_plus : [[VALUE_OPTION, VALUE_OPTION] -> VALUE_OPTION] =
+    Arithmetic ! value_plus;
+value_minus : [[VALUE_OPTION, VALUE_OPTION] -> VALUE_OPTION] =
+    Arithmetic ! value_minus;
 
-value_le : [[VALUE_OPTION, VALUE_OPTION] -> BOOL_OPTION] = Arithmetic ! value_le;
-value_ge : [[VALUE_OPTION, VALUE_OPTION] -> BOOL_OPTION] = Arithmetic ! value_ge;
-value_lt : [[VALUE_OPTION, VALUE_OPTION] -> BOOL_OPTION] = Arithmetic ! value_lt;
-value_gt : [[VALUE_OPTION, VALUE_OPTION] -> BOOL_OPTION] = Arithmetic ! value_gt;
+value_le : [[VALUE_OPTION, VALUE_OPTION] -> BOOL_OPTION] =
+    Arithmetic ! value_le;                                         %%40
+value_ge : [[VALUE_OPTION, VALUE_OPTION] -> BOOL_OPTION] =
+    Arithmetic ! value_ge;
+value_lt : [[VALUE_OPTION, VALUE_OPTION] -> BOOL_OPTION] =
+    Arithmetic ! value_lt;
+value_gt : [[VALUE_OPTION, VALUE_OPTION] -> BOOL_OPTION] =
+    Arithmetic ! value_gt;
+value_eq : [[VALUE_OPTION, VALUE_OPTION] -> BOOL_OPTION] =
+    Arithmetic ! value_eq;
 
-OutputSequence : CONTEXT = sequence {B_VALUE_OPTION; ValueOption ! OPTION_BB, 3};
-InputSequence : CONTEXT = sequence {B_VALUE; value {N_, STRING} ! VALUE_BB, 3};
+OutputSequence : CONTEXT =
+    sequence {B_VALUE_OPTION; ValueOption ! OPTION_BB, 1};
+InputSequence : CONTEXT =                                        %%50
+    sequence {B_VALUE; value {N_, STRING} ! VALUE_BB, 1};
 
 gval : [BOOL_OPTION -> bool] =
 LAMBDA(g:BOOL_OPTION): g = option {bool} !Some(TRUE);
 
 linkedIn : MODULE =
-  BEGIN                                                          %%20
+  BEGIN
     INPUT label : LABEL
     LOCAL cfstate : STATES
-    INPUT I : InputSequence ! Sequence
+    INPUT I : InputSequence ! Sequence                           %%60
     OUTPUT O : OutputSequence ! Sequence
     INITIALIZATION [
         cfstate = State_0 AND
@@ -60,113 +69,124 @@ linkedIn : MODULE =
     TRANSITION [
       %% login
       LOGIN :
-          cfstate = State_0 AND
-          label = login AND                %%40
-          I(1) = STR(String_free)
+          cfstate = State_0 AND label = login AND                %%70
+              InputSequence ! size?(I) = 1 AND
+              Some(I(1)) = Some(STR(String_free))
         -->
-          cfstate' = State_1
+          cfstate' = State_1;
+          O' = OutputSequence ! empty
       []
       %% view
       VIEWFRIEND :
-          cfstate = State_1 AND
-          label = view AND
-          InputSequence ! size?(I) = 3 AND
-          I(1) = STR(String_friendID) AND
-          I(2) = STR(String_name) AND
-          I(3) = STR(String_HM8p)                            %%50
+          cfstate = State_1 AND label = view AND
+              InputSequence ! size?(I) = 3 AND                     %%80
+              (Some(I(1)) = Some(STR(String_friendID))) AND
+              (Some(I(2)) = Some(STR(String_name))) AND
+              (Some(I(3)) = Some(STR(String_HM8p)))
         -->
           cfstate' = State_2;
-          O' = OutputSequence!insert(Some(STR(String_friendID)),
-               OutputSequence!insert(Some(STR(String_name)),
-               OutputSequence!insert(Some(STR(String_HM8p)), OutputSequence!empty)))
-
+          O' = OutputSequence !
+              insert(Some(STR(String_friendID)), OutputSequence !
+              insert(Some(STR(String_name)), OutputSequence !
+              insert(Some(STR(String_HM8p)), OutputSequence !
+              empty)))                                             %%90
       []
       %% view
       VIEWOTHER :
           cfstate = State_1 AND label = view AND
-          InputSequence ! size?(I) = 3 AND
-          I(1) = STR(String_otherID) AND
-          I(2) = STR(String_name) AND
-          I(3) = STR(String_4Zof)
+              InputSequence ! size?(I) = 3 AND
+              (Some(I(1)) = Some(STR(String_otherID))) AND
+              (Some(I(2)) = Some(STR(String_name))) AND
+              (Some(I(3)) = Some(STR(String_4Zof)))
         -->
-          cfstate' = State_2;
-          O' = OutputSequence!insert(Some(STR(String_otherID)),
-               OutputSequence!insert(Some(STR(String_name)),
-               OutputSequence!insert(Some(STR(String_4Zof)), OutputSequence!empty)))
+          cfstate' = State_2;                                    %%100
+          O' = OutputSequence !
+              insert(Some(STR(String_otherID)), OutputSequence !
+              insert(Some(STR(String_name)), OutputSequence !
+              insert(Some(STR(String_4Zof)), OutputSequence !
+              empty)))
       []
       %% view
-      VIEWOTHEROON :                                             %%70
+      VIEWOTHEROON :
           cfstate = State_1 AND label = view AND
-              InputSequence ! size?(I) = 3 AND
-              I(1) = STR(String_otherID) AND
-              I(2) = STR(String_OUT_OF_NETWORK) AND
-              I(3) = STR(String_MNn5)
+              InputSequence ! size?(I) = 3 AND                     %%110
+              (Some(I(1)) = Some(STR(String_otherID))) AND
+              (Some(I(2)) =
+              Some(STR(String_OUT_OF_NETWORK))) AND
+              (Some(I(3)) = Some(STR(String_MNn5)))
         -->
           cfstate' = State_3;
-          O' = OutputSequence!insert(Some(STR(String_otherID)),
-               OutputSequence!insert(Some(STR(String_OUT_OF_NETWORK)),
-               OutputSequence!insert(Some(STR(String_MNn5)), OutputSequence!empty)))
-      []                                                         %%80
+          O' = OutputSequence !
+              insert(Some(STR(String_otherID)), OutputSequence !
+              insert(Some(STR(String_OUT_OF_NETWORK)),
+              OutputSequence !                                     %%120
+              insert(Some(STR(String_MNn5)), OutputSequence !
+              empty)))
+      []
       %% view
       VIEWOTHERFUZZ :
           cfstate = State_1 AND label = view AND
               InputSequence ! size?(I) = 3 AND
-              I(1) = STR(String_otherID) AND
-              I(2) = STR(String_name) AND
-              I(3) = STR(String_MNn5)
+              (Some(I(1)) = Some(STR(String_otherID))) AND
+              (Some(I(2)) = Some(STR(String_name))) AND
+              (Some(I(3)) = Some(STR(String_MNn5)))            %%130
         -->
           cfstate' = State_3;
-
-          O' = OutputSequence!insert(Some(STR(String_otherID)),
-               OutputSequence!insert(Some(STR(String_name)),
-               OutputSequence!insert(Some(STR(String_MNn5)), OutputSequence!empty)))
+          O' = OutputSequence !
+              insert(Some(STR(String_otherID)), OutputSequence !
+              insert(Some(STR(String_name)), OutputSequence !
+              insert(Some(STR(String_MNn5)), OutputSequence !
+              empty)))
       []
       %% pdf
-      PDFFRIEND :
+      PDFFRIEND :                                                %%140
           cfstate = State_2 AND label = pdf AND
               InputSequence ! size?(I) = 3 AND
-              I(1) = STR(String_friendID) AND
-              I(2) = STR(String_name) AND
-              I(3) = STR(String_HM8p)
-
-
+              (Some(I(1)) = Some(STR(String_friendID))) AND
+              (Some(I(2)) = Some(STR(String_name))) AND
+              (Some(I(3)) = Some(STR(String_HM8p)))
         -->
-          cfstate' = State_4
-      []                                                         %%100
-      %% pdf
+          cfstate' = State_4;
+          O' = OutputSequence ! empty
+      []
+      %% pdf                                                     %%150
       PDFOTHER_A :
           cfstate = State_3 AND label = pdf AND
               InputSequence ! size?(I) = 3 AND
-              I(1) = STR(String_otherID) AND
-              I(2) = STR(String_name) AND
-              I(3) = STR(String_4Zof)
+              (Some(I(1)) = Some(STR(String_otherID))) AND
+              (Some(I(2)) = Some(STR(String_name))) AND
+              (Some(I(3)) = Some(STR(String_4Zof)))
         -->
-          cfstate' = State_4
-      []
+          cfstate' = State_4;
+          O' = OutputSequence ! empty
+      []                                                         %%160
       %% pdf
-      PDFOTHER_B :                                               %%110
+      PDFOTHER_B :
           cfstate = State_2 AND label = pdf AND
               InputSequence ! size?(I) = 3 AND
-              I(1) = STR(String_otherID) AND
-              I(2) = STR(String_name) AND
-              I(3) = STR(String_4Zof)
+              (Some(I(1)) = Some(STR(String_otherID))) AND
+              (Some(I(2)) = Some(STR(String_name))) AND
+              (Some(I(3)) = Some(STR(String_4Zof)))
         -->
-          cfstate' = State_4
+          cfstate' = State_4;
+          O' = OutputSequence ! empty                            %%170
       []
       %% pdf
       PDFOTHEROON :
           cfstate = State_3 AND label = pdf AND
               InputSequence ! size?(I) = 3 AND
-              I(1) = STR(String_otherID) AND
-              I(2) = STR(String_OUT_OF_NETWORK) AND
-              I(3) = STR(String_MNn5)
-        -->
-          cfstate' = State_5
+              (Some(I(1)) = Some(STR(String_otherID))) AND
+              (Some(I(2)) =
+              Some(STR(String_OUT_OF_NETWORK))) AND
+              (Some(I(3)) = Some(STR(String_MNn5)))
+        -->                                                      %%180
+          cfstate' = State_5;
+          O' = OutputSequence ! empty
       []
       SINK_HOLE :
           ELSE
         -->
           cfstate' = NULL_STATE
-    ]                                                            %%130
+    ]
   END;
-END
+END                                                              %%190

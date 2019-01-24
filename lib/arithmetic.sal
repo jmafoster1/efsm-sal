@@ -41,6 +41,9 @@ arithmetic {N_ : nznat; STRING:TYPE} : CONTEXT = BEGIN
   value_le : [[a_value_option, a_value_option] -> bool_option] =
   LAMBDA(x:a_value_option, y:a_value_option): maybe_bool_int(LAMBDA(x:nznat, y:nznat): x <= y, x, y);
 
+  value_eq : [[a_value_option, a_value_option] -> bool_option] =
+  LAMBDA(x:a_value_option, y:a_value_option): option {bool} ! Some(x=y);
+
   maybe_bool_op : [[[[bool, bool] -> bool], bool_option, bool_option] -> bool_option] =
   LAMBDA(f:[[bool, bool] -> bool], x1 : bool_option, x2: bool_option):
     IF option {bool} !Some?(x1) AND option {bool} !Some?(x2) THEN

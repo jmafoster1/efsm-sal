@@ -11,10 +11,10 @@ digraph LinkedIn{
    State_5[label=<state_<sub>5</sub>>];
 
    State_0->State_1[label=<<i>login:1&#91;i<sub>1</sub> = free&#93;/</i>>];
-   State_1->State_2[label=<<i>view:3&#91;i<sub>1</sub> = friendid, i<sub>2</sub> = name, i<sub>3</sub> = hm8p&#93;/o<sub>1</sub> := friendid, o<sub>2</sub> := name, o<sub>3</sub> := hm8p</i>>];
-   State_1->State_2[label=<<i>view:3&#91;i<sub>1</sub> = otherid, i<sub>2</sub> = name, i<sub>3</sub> = 4zof&#93;/o<sub>1</sub> := otherid, o<sub>2</sub> := name, o<sub>3</sub> := 4zof</i>>];
-   State_1->State_3[label=<<i>view:3&#91;i<sub>1</sub> = otherid, i<sub>2</sub> = out_of_network, i<sub>3</sub> = mnn5&#93;/o<sub>1</sub> := otherid, o<sub>2</sub> := out_of_network, o<sub>3</sub> := mnn5</i>>];
-   State_1->State_3[label=<<i>view:3&#91;i<sub>1</sub> = otherid, i<sub>2</sub> = name, i<sub>3</sub> = mnn5&#93;/o<sub>1</sub> := otherid, o<sub>2</sub> := name, o<sub>3</sub> := mnn5</i>>];
+   State_1->State_2[label=<<i>view:3&#91;i<sub>1</sub> = friendid, i<sub>2</sub> = name, i<sub>3</sub> = hm8p&#93;/</i>>];
+   State_1->State_2[label=<<i>view:3&#91;i<sub>1</sub> = otherid, i<sub>2</sub> = name, i<sub>3</sub> = 4zof&#93;/</i>>];
+   State_1->State_3[label=<<i>view:3&#91;i<sub>1</sub> = otherid, i<sub>2</sub> = out_of_network, i<sub>3</sub> = mnn5&#93;/</i>>];
+   State_1->State_3[label=<<i>view:3&#91;i<sub>1</sub> = otherid, i<sub>2</sub> = name, i<sub>3</sub> = mnn5&#93;/</i>>];
    State_2->State_4[label=<<i>pdf:3&#91;i<sub>1</sub> = friendid, i<sub>2</sub> = name, i<sub>3</sub> = hm8p&#93;/</i>>];
    State_3->State_4[label=<<i>pdf:3&#91;i<sub>1</sub> = otherid, i<sub>2</sub> = name, i<sub>3</sub> = 4zof&#93;/</i>>];
    State_2->State_4[label=<<i>pdf:3&#91;i<sub>1</sub> = otherid, i<sub>2</sub> = name, i<sub>3</sub> = 4zof&#93;/</i>>];

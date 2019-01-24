@@ -8,12 +8,12 @@ digraph Lift{
    State_2[label=<state_<sub>2</sub>>];
    State_3[label=<state_<sub>3</sub>>];
 
-   State_0->State_1[label=<<i>goUp:1&#91;i<sub>1</sub> &gt; 0&#93;/o<sub>1</sub> := i<sub>1</sub></i>>];
-   State_1->State_1[label=<<i>goUp:1&#91;i<sub>1</sub> &gt; 0&#93;/o<sub>1</sub> := i<sub>1</sub> + -1</i>>];
-   State_1->State_0[label=<<i>goUp:1&#91;i<sub>1</sub> = 0&#93;/o<sub>1</sub> := 0</i>>];
-   State_0->State_2[label=<<i>goDown:1&#91;i<sub>1</sub> &gt; 0&#93;/o<sub>1</sub> := i<sub>1</sub></i>>];
-   State_2->State_2[label=<<i>goDown:1&#91;i<sub>1</sub> &gt; 0&#93;/o<sub>1</sub> := i<sub>1</sub> + -1</i>>];
-   State_2->State_0[label=<<i>goDown:1&#91;i<sub>1</sub> = 0&#93;/o<sub>1</sub> := 0</i>>];
-   State_0->State_3[label=<<i>open:0/o<sub>1</sub> := 1</i>>];
-   State_3->State_0[label=<<i>close:0/o<sub>1</sub> := 0</i>>];
+   State_0->State_1[label=<<i>goUp:1&#91;i<sub>1</sub> &gt; Some(NUM(0))&#93;/</i>>];
+   State_1->State_1[label=<<i>goUp:1&#91;i<sub>1</sub> &gt; Some(NUM(0))&#93;/</i>>];
+   State_1->State_0[label=<<i>goUp:1&#91;i<sub>1</sub> = Some(NUM(0))&#93;/</i>>];
+   State_0->State_2[label=<<i>goDown:1&#91;i<sub>1</sub> &gt; Some(NUM(0))&#93;/</i>>];
+   State_2->State_2[label=<<i>goDown:1&#91;i<sub>1</sub> &gt; Some(NUM(0))&#93;/</i>>];
+   State_2->State_0[label=<<i>goDown:1&#91;i<sub>1</sub> = Some(NUM(0))&#93;/</i>>];
+   State_0->State_3[label=<<i>open:0/</i>>];
+   State_3->State_0[label=<<i>close:0/</i>>];
 }
