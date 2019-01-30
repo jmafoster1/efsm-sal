@@ -8,7 +8,7 @@ END;
 
 STRING : TYPE =
     {String_4Zof, String_HM8p, String_MNn5, String_OUT_OF_NETWORK, %%10
-    String_free, String_friendID, String_name, String_otherID};
+    String_free, String_friendID, String_name, String_otherID, String_pdfDetailed};
 
 STATES : TYPE =
     {State_0, State_1, State_2, State_3, State_4, State_5,
@@ -189,4 +189,6 @@ linkedIn : MODULE =
           cfstate' = NULL_STATE
     ]
   END;
+  neverDetailed: THEOREM linkedIn |- G((label = login AND I(1) = STR(String_free) ) => X(G(((label = pdf AND I(1) = STR(String_otherID)) => X((not (O(1) = Some(STR(String_pdfDetailed)))))))));
+
 END                                                              %%190
