@@ -212,12 +212,21 @@ linkedIn : MODULE =
           cfstate' = NULL_STATE
     ]
   END;
+
+  neverDetailedHand: THEOREM linkedIn |-
+    G(label = login AND
+        gval(value_eq(Some(I(1)), Some(STR(String_free)))) =>
+        X(G(label = pdf AND
+        gval(value_eq(Some(I(1)), Some(STR(String_otherID)))) =>
+        X(NOT(gval(value_eq(O(1),
+        Some(STR(String_pdfDetailed)))))))));
+
   neverDetailed : THEOREM linkedIn |-
     G(label = login AND
-        gval(value_eq(Some(I(1)),(Some(STR(String_free))))) =>
+        gval(value_eq(Some(I(1)),Some(STR(String_free)))) =>
         X(G(label = pdf AND
-        gval(value_eq(Some(I(1)),(Some(STR(String_otherID))))) =>
-        X(NOT(gval(value_eq(O(1),                                   %%220
+        gval(value_eq(Some(I(1)),Some(STR(String_otherID)))) =>
+        X(NOT(gval(value_eq(O(1),                            %%220
         Some(STR(String_pdfDetailed)))))))));
 
   labelNotAlwaysLogin : THEOREM linkedIn |-
@@ -231,13 +240,14 @@ linkedIn : MODULE =
 
   testInputEq : THEOREM linkedIn |-
     cfstate = State_0 AND label = login AND
-        I = InputSequence ! insert(STR(String_free), InputSequence !
-        empty) => X(cfstate = State_1);
+        I = InputSequence !
+        insert(STR(String_free), InputSequence ! empty) =>
+        X(cfstate = State_1);
 
   testOutputEq : THEOREM linkedIn |-
     G(cfstate = State_3 AND
-        I = InputSequence !
-        insert(STR(String_otherID), InputSequence !                %%240
+        I = InputSequence !                                        %%240
+        insert(STR(String_otherID), InputSequence !
         insert(STR(String_OUT_OF_NETWORK), InputSequence !
         insert(STR(String_MNn5), InputSequence ! empty))) =>
         O = OutputSequence !

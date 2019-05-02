@@ -79,7 +79,7 @@ drinks : MODULE =
       COIN :
           cfstate = State_1 AND label = coin AND                 %%80
               InputSequence ! size?(I) = 1 AND
-              gval(value_le(value_plus(r_2, Some(I(1))),
+              Arithmetic ! SomeNUM?(value_plus(r_2, Some(I(1)))) => gval(value_le(value_plus(r_2, Some(I(1))),
               Some(NUM(N_))))
         -->
           cfstate' = State_1;
@@ -123,5 +123,7 @@ drinks : MODULE =
   costsMoney: THEOREM drinks |- G(X(cfstate=State_2) => gval(value_ge(r_2, Some(NUM(100)))));
   neverReachS2: THEOREM drinks |- label=select AND I(1) = STR(String_coke) AND
                                 X(label=coin AND I(1) = NUM(100)) AND
-                                X(X(label=vend AND I=InputSequence !empty)) => X(X(X(cfstate=State_2)));
+                                X(X(label=vend AND I=InputSequence ! empty)) => X(X(X(cfstate=State_2)));
+  someNum: THEOREM drinks |- FORALL(x:VALUE_OPTION):Arithmetic ! SomeNUM?(r_2) => Arithmetic ! SomeNUM?(x) => Arithmetic ! SomeNUM?(value_plus(r_2, x));
+  someNumGt: THEOREM drinks |- FORALL(x:VALUE_OPTION):gval(value_le(x, Some(NUM(N_)))) => Arithmetic ! SomeNUM?(x);
 END

@@ -1,0 +1,39 @@
+<html>
+<body style="max-width: 1200px; margin: 0 auto;">
+  <h1 id="ltltranslations">LTL Translations</h1>
+
+  <p>BNFs for LTL formulae in Isabelle are as follows:</p>
+  <p><code>L ::= (alw (L)) | (ev (L)) | (nxt (L)) | ((L) until (L)) | (L C L) | ((L) C (L)) | not (L) | (not (L) | Pred</code></p>
+  <p><code>C ::= aand | or | impl</code></p>
+  <p><code>Pred ::= LabelEq ''string'' | checkInx IOR nat Fun (Value Option) | StateEq (nat Option) | InputEq [Value list] | OutputEq [Value Option list] | InputLength nat | OutputLength nat</code></p>
+  <p><code>IOR ::= ip | op | rg</code></p>
+  <p><code>Value ::= Num nat | Str ''String''</code></p>
+  <p><code>'a Option ::= None | Some a</code></p>
+  <p><code>Fun = ValueEq | ValueGt | ValueLt | ValueGe | ValueLe</code></p>
+  <p>Normally, Isabelle is pretty lax with bracketing but the LTL package is really strict about it. We can always add more brackets (e.g. we could have (((alw (L)))) but obviously this is silly and we wouldn't do it) but we can't have less brackets unless specified (such as "(L C L)" and "((L) C (L))" are both allowed).</p>
+
+  <p>Translations to SAL are as follows:</p>
+  <p><code>L_t ::= G(Lt) | F(Lt) | X(Lt) | U(Lt, Lt) | Lt Ct Lt | NOT(Lt) | Pred_t</code></p>
+  <p><code>C_t ::= AND | OR | NOT</code></p>
+  <p><code>Value_t ::= NUM nat | STR ''String_t''</code></p>
+  <p><code>Fun_t = value_eq | value_gt | value_lt | value_ge | value_le</code></p>
+  <p><code>String_t = String_String</code></p>
+  <p>Translating the Preds is a little more complicated as there are a couple of special cases so I'll explain these manually rather than with straight BNFs:</p>
+  <p><code>LabelEq ''string''</code> goes to <code>label = String</code></p>
+  <p><code>checkInx IOR nat Fun (Value Option)</code> depends on the value of <code>IOR</code>. If it's <code>ip</code> then the translation is <code>gval(Fun_t(I(nat), (Value_t Option)))</code>. For <code>op</code>, the translation is similar but with <code>O</code> instead of <code>I</code>. If the value of <code>IOR</code> is <code>rg</code> then we need to index a register so we have <code>r_nat</code> in place of <code>I(nat)</code> or <code>O(nat)</code>.</p>
+  <p><code>StateEq (nat Option)</code> depends on whether <code>nat Option</code> is <code>None</code> or <code>Some n</code>. If it's <code>None</code>, we get <code>cfstate = NULL_STATE</code>. If it's <code>Some n</code> then we get <code>cfstate = State_n</code>.</p>
+  <p><code>InputEq [Value list]</code> involves recursively building a sequence from the <code>Value list</code>. The final translation will be <code>I = translateValueList</code>. Translating value lists proceeds as follows:</p>
+  <pre><code>translateValueList([]) = InputSequence ! empty
+    translateValueList((Num n)#t) = InputSequence ! insert(NUM n, translateValueList(t))
+    translateValueList((Str s)#t) = InputSequence ! insert(STR String_t, translateValueList(t))
+  </code></pre>
+  <p><code>OutputEq [Value Option list]</code> is similar to <code>InputEq</code>. The final translation will be <code>O = translateValueOptionList</code> where the translation of the argument proceeds as follows:</p>
+  <pre><code>translateValueOptionList([]) = OutputSequence ! empty
+    translateValueList((Some (Num n))#t) = OutputSequence ! insert(Some(NUM n), translateValueList(t))
+    translateValueList((Some (Str s))#t) = OutputSequence ! insert(Some(STR String_t), translateValueList(t))
+    translateValueList(None#t) = OutputSequence ! insert(None, translateValueList(t))
+  </code></pre>
+  <p><code>InputLength nat</code> goes to <code>InputSequence ! size?(I)</code></p>
+  <p><code>OutputLength nat</code> goes to <code>OutputSequence ! size?(O)</code></p>
+</body>
+</html>

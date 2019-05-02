@@ -16,6 +16,9 @@ arithmetic {N_ : nznat; STRING:TYPE} : CONTEXT = BEGIN
 
   bool_option:TYPE = option {bool} ! OPTION;
 
+  SomeNUM?: [a_value_option -> bool] =
+  LAMBDA(a:a_value_option): IF Some?(a) THEN NUM?(valueOf(a)) ELSE FALSE ENDIF;
+
   maybe_bool_int : [[[[nznat, nznat] -> bool], a_value_option, a_value_option] -> bool_option] =
   LAMBDA(f:[[nznat, nznat] -> bool], x1 : a_value_option, x2: a_value_option):
     IF Some?(x1) AND Some?(x2) THEN
@@ -65,6 +68,9 @@ arithmetic {N_ : nznat; STRING:TYPE} : CONTEXT = BEGIN
     ELSE
       option {bool} !None
     ENDIF;
+
+    maybe_nor : [[bool_option, bool_option] -> bool_option] =
+    LAMBDA(x1:bool_option, x2:bool_option):maybe_bool_op(LAMBDA(x:bool, y:bool):NOT(x OR y), x1, x2);
 
   maybe_arith_int : [[[[nznat, nznat] -> nznat], a_value_option, a_value_option] -> a_value_option] =
   LAMBDA(f:[[nznat, nznat] -> nznat], x1 : a_value_option, x2: a_value_option):
