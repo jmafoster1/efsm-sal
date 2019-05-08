@@ -40,14 +40,16 @@ value_lt : [[VALUE_OPTION, VALUE_OPTION] -> BOOL_OPTION] =
     Arithmetic ! value_lt;                                         %%40
 value_gt : [[VALUE_OPTION, VALUE_OPTION] -> BOOL_OPTION] =
     Arithmetic ! value_gt;
+value_eq : [[VALUE_OPTION, VALUE_OPTION] -> BOOL_OPTION] =
+    Arithmetic ! value_eq;
   
 OutputSequence : CONTEXT =
-    sequence {B_VALUE_OPTION; ValueOption ! OPTION_BB, 1};
-InputSequence : CONTEXT =
-    sequence {B_VALUE; value {N_, STRING} ! VALUE_BB, 1};
-  
+    sequence {B_VALUE_OPTION; ValueOption ! OPTION_BB, 0};
+InputSequence : CONTEXT = sequence {B_VALUE; Value !
+    VALUE_BB, 1};
+                                                                 %%50
 gval : [BOOL_OPTION -> bool] =
-LAMBDA(g:BOOL_OPTION): g = option {bool} !Some(TRUE);            %%50
+LAMBDA(g:BOOL_OPTION): g = option {bool} !Some(TRUE);
 
 h2 : MODULE =
   BEGIN
@@ -55,41 +57,47 @@ h2 : MODULE =
     LOCAL cfstate : STATES
     LOCAL r_1 : VALUE_OPTION
     INPUT I : InputSequence ! Sequence
+    OUTPUT O : OutputSequence ! Sequence                         %%60
     INITIALIZATION [
         cfstate = State_0 AND
-        r_1 = ValueOption ! None                                 %%60
+        I = InputSequence ! empty AND
+        O = OutputSequence ! empty AND
+        r_1 = ValueOption ! None
       -->
     ]
     TRANSITION [
       %% f
-      T1 :
+      T1 :                                                       %%70
           cfstate = State_0 AND label = f AND
               InputSequence ! size?(I) = 1
         -->
           cfstate' = State_1;
-          r_1' = Some(I(1))                                      %%70
+          r_1' = Some(I(1));
+          O' = OutputSequence ! empty
       []
       %% g
       T2 :
-          cfstate = State_1 AND label = g AND
+          cfstate = State_1 AND label = g AND                    %%80
               InputSequence ! size?(I) = 0 AND
               gval(value_gt(r_1, Some(NUM(5)))) AND
               gval(value_le(value_plus(r_1, Some(NUM(5))),
               Some(NUM(N_))))
         -->
-          cfstate' = State_1;                                    %%80
-          r_1' = value_plus(r_1, Some(NUM(5)))
+          cfstate' = State_1;
+          r_1' = value_plus(r_1, Some(NUM(5)));
+          O' = OutputSequence ! empty
       []
-      %% h
+      %% h                                                       %%90
       T3 :
           cfstate = State_1 AND label = h AND
               InputSequence ! size?(I) = 0
         -->
           cfstate' = State_2;
+          O' = OutputSequence ! empty;
           r_1' = r_1
-      []                                                         %%90
+      []
       SINK_HOLE :
-          ELSE
+          ELSE                                                   %%100
         -->
           cfstate' = NULL_STATE;
           r_1' = r_1

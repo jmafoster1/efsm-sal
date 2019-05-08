@@ -3,17 +3,17 @@ digraph Lift{
    node [color="black", fillcolor="white", shape="circle", style="filled", fontname="Latin Modern Math"];
    edge [fontname="Latin Modern Math"];
 
-   State_0[fillcolor="gray", label=<state_<sub>0</sub>>];
-   State_1[label=<state_<sub>1</sub>>];
-   State_2[label=<state_<sub>2</sub>>];
-   State_3[label=<state_<sub>3</sub>>];
+   s0[fillcolor="gray", label=<s<sub>0</sub>>];
+   s1[label=<s<sub>1</sub>>];
+   s2[label=<s<sub>2</sub>>];
+   s3[label=<s<sub>3</sub>>];
 
-   State_0->State_1[label=<<i>goUp:1&#91;i<sub>1</sub> &gt; Some(NUM(0))&#93;/</i>>];
-   State_1->State_1[label=<<i>goUp:1&#91;i<sub>1</sub> &gt; Some(NUM(0))&#93;/</i>>];
-   State_1->State_0[label=<<i>goUp:1&#91;i<sub>1</sub> = Some(NUM(0))&#93;/</i>>];
-   State_0->State_2[label=<<i>goDown:1&#91;i<sub>1</sub> &gt; Some(NUM(0))&#93;/</i>>];
-   State_2->State_2[label=<<i>goDown:1&#91;i<sub>1</sub> &gt; Some(NUM(0))&#93;/</i>>];
-   State_2->State_0[label=<<i>goDown:1&#91;i<sub>1</sub> = Some(NUM(0))&#93;/</i>>];
-   State_0->State_3[label=<<i>open:0/</i>>];
-   State_3->State_0[label=<<i>close:0/</i>>];
+   s0->s1[label=<<i>goUp:1&#91;i<sub>1</sub> &gt; 0&#93;/o<sub>1</sub> := i<sub>1</sub></i>>];
+   s1->s1[label=<<i>goUp:1&#91;i<sub>1</sub> &gt; 0&#93;/o<sub>1</sub> := i<sub>1</sub> + -1</i>>];
+   s1->s0[label=<<i>goUp:1&#91;i<sub>1</sub> = 0&#93;/o<sub>1</sub> := 0</i>>];
+   s0->s2[label=<<i>goDown:1&#91;i<sub>1</sub> &gt; 0&#93;/o<sub>1</sub> := i<sub>1</sub></i>>];
+   s2->s2[label=<<i>goDown:1&#91;i<sub>1</sub> &gt; 0&#93;/o<sub>1</sub> := i<sub>1</sub> + -1</i>>];
+   s2->s0[label=<<i>goDown:1&#91;i<sub>1</sub> = 0&#93;/o<sub>1</sub> := 0</i>>];
+   s0->s3[label=<<i>open:0/o<sub>1</sub> := 1</i>>];
+   s3->s0[label=<<i>close:0/o<sub>1</sub> := 0</i>>];
 }

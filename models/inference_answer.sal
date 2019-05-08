@@ -1,16 +1,16 @@
-drinks_machine_payforward {N_ : nznat} : CONTEXT = BEGIN
+inference_answer {N_ : nznat} : CONTEXT = BEGIN
 
 LABEL : TYPE = DATATYPE
   coin,
   select,
-  setup,
   vend
 END;
 
-STRING : TYPE = {String_coke, String_inaccepts, String_pepsi};   %%10
-
-STATES : TYPE = {State_0, State_1, State_2, NULL_STATE};
-
+STRING : TYPE = {String_dummy_};
+                                                                 %%10
+STATES : TYPE =
+    {State_0, State_1, State_2, State_3, State_4, NULL_STATE};
+  
 Value:CONTEXT = value {N_, STRING};
 Arithmetic:CONTEXT = arithmetic{N_, STRING};
 
@@ -71,60 +71,45 @@ drinks : MODULE =
     TRANSITION [
       %% select
       SELECT :
-          cfstate = State_1 AND label = select AND
+          cfstate = State_0 AND label = select AND
               InputSequence ! size?(I) = 1
         -->
-          cfstate' = State_2;
-          r_1' = Some(I(1));
+          cfstate' = State_1;
           r_2' = Some(NUM(0));
+          r_1' = Some(I(1));
           O' = OutputSequence ! empty                            %%80
       []
       %% coin
       COIN :
-          cfstate = State_2 AND label = coin AND
+          cfstate = State_1 AND label = coin AND
               InputSequence ! size?(I) = 1 AND
               gval(value_le(value_plus(r_2, Some(I(1))),
               Some(NUM(N_))))
         -->
-          cfstate' = State_2;
-          r_1' = r_1;                                            %%90
-          r_2' = value_plus(r_2, Some(I(1)));
+          cfstate' = State_1;
+          r_2' = value_plus(r_2, Some(I(1)));                    %%90
           O' = OutputSequence !
               insert(value_plus(r_2, Some(I(1))), OutputSequence !
-              empty)
-      []
-      %% setup
-      SETUP :
-          cfstate = State_0 AND label = setup AND
-              InputSequence ! size?(I) = 0
-        -->                                                      %%100
-          cfstate' = State_1;
-          r_2' = Some(NUM(0));
-          O' = OutputSequence ! empty;
+              empty);
           r_1' = r_1
       []
       %% vend
       VEND :
-          cfstate = State_2 AND label = vend AND
-              InputSequence ! size?(I) = 0 AND
-              gval(value_ge(r_2, Some(NUM(100)))) AND              %%110
-              gval(value_le(value_minus(r_2, Some(NUM(100))),
-              Some(NUM(N_)))) AND
-              gval(value_ge(value_minus(r_2, Some(NUM(100))),
-              Some(NUM(0))))
-        -->
-          cfstate' = State_1;
-          r_1' = r_1;
-          r_2' = value_minus(r_2, Some(NUM(100)));
+          cfstate = State_1 AND label = vend AND
+              InputSequence ! size?(I) = 0
+        -->                                                      %%100
+          cfstate' = State_4;
           O' = OutputSequence ! insert(r_1, OutputSequence !
-              empty)                                               %%120
+              empty);
+          r_1' = r_1;
+          r_2' = r_2
       []
       SINK_HOLE :
           ELSE
         -->
-          cfstate' = NULL_STATE;
+          cfstate' = NULL_STATE;                                 %%110
           r_1' = r_1;
           r_2' = r_2
     ]
   END;
-END                                                              %%130
+END

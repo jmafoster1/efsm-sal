@@ -3,20 +3,20 @@ digraph LinkedInLTL{
    node [color="black", fillcolor="white", shape="circle", style="filled", fontname="Latin Modern Math"];
    edge [fontname="Latin Modern Math"];
 
-   State_0[fillcolor="gray", label=<state_<sub>0</sub>>];
-   State_1[label=<state_<sub>1</sub>>];
-   State_2[label=<state_<sub>2</sub>>];
-   State_3[label=<state_<sub>3</sub>>];
-   State_4[label=<state_<sub>4</sub>>];
-   State_5[label=<state_<sub>5</sub>>];
+   s0[fillcolor="gray", label=<s<sub>0</sub>>];
+   s1[label=<s<sub>1</sub>>];
+   s2[label=<s<sub>2</sub>>];
+   s3[label=<s<sub>3</sub>>];
+   s4[label=<s<sub>4</sub>>];
+   s5[label=<s<sub>5</sub>>];
 
-   State_0->State_1[label=<<i>login:1&#91;i<sub>1</sub> = free&#93;/o<sub>null</sub> := ****Whatever no output is in dot****</i>>];
-   State_1->State_2[label=<<i>view:3&#91;i<sub>1</sub> = friendid, i<sub>2</sub> = name, i<sub>3</sub> = hm8p&#93;/o<sub>null</sub> := ****Siobhan doesn't know what this is in Dot****</i>>];
-   State_1->State_2[label=<<i>view:3&#91;i<sub>1</sub> = otherid, i<sub>2</sub> = name, i<sub>3</sub> = 4zof&#93;/o<sub>null</sub> := ****Siobhan doesn't know what this is in Dot****</i>>];
-   State_1->State_3[label=<<i>view:3&#91;i<sub>1</sub> = otherid, i<sub>2</sub> = out_of_network, i<sub>3</sub> = mnn5&#93;/o<sub>null</sub> := ****Siobhan doesn't know what this is in Dot****</i>>];
-   State_1->State_3[label=<<i>view:3&#91;i<sub>1</sub> = otherid, i<sub>2</sub> = name, i<sub>3</sub> = mnn5&#93;/o<sub>null</sub> := ****Siobhan doesn't know what this is in Dot****</i>>];
-   State_2->State_4[label=<<i>pdf:3&#91;i<sub>1</sub> = friendid, i<sub>2</sub> = name, i<sub>3</sub> = hm8p&#93;/o<sub>null</sub> := ****Whatever no output is in dot****</i>>];
-   State_3->State_4[label=<<i>pdf:3&#91;i<sub>1</sub> = otherid, i<sub>2</sub> = name, i<sub>3</sub> = 4zof&#93;/o<sub>null</sub> := ****Whatever no output is in dot****</i>>];
-   State_2->State_4[label=<<i>pdf:3&#91;i<sub>1</sub> = otherid, i<sub>2</sub> = name, i<sub>3</sub> = 4zof&#93;/o<sub>null</sub> := ****Whatever no output is in dot****</i>>];
-   State_3->State_5[label=<<i>pdf:3&#91;i<sub>1</sub> = otherid, i<sub>2</sub> = out_of_network, i<sub>3</sub> = mnn5&#93;/o<sub>null</sub> := ****Whatever no output is in dot****</i>>];
+   s0->s1[label=<<i>login:1&#91;i<sub>1</sub> = "free"&#93;/</i>>];
+   s1->s2[label=<<i>view:3&#91;i<sub>1</sub> = "friendID", i<sub>2</sub> = "name", i<sub>3</sub> = "HM8p"&#93;/o<sub>1</sub> := "friendID", o<sub>2</sub> := "name", o<sub>3</sub> := "HM8p"</i>>];
+   s1->s2[label=<<i>view:3&#91;i<sub>1</sub> = "otherID", i<sub>2</sub> = "name", i<sub>3</sub> = "4Zof"&#93;/o<sub>1</sub> := "otherID", o<sub>2</sub> := "name", o<sub>3</sub> := "4Zof"</i>>];
+   s1->s3[label=<<i>view:3&#91;i<sub>1</sub> = "otherID", i<sub>2</sub> = "OUT_OF_NETWORK", i<sub>3</sub> = "MNn5"&#93;/o<sub>1</sub> := "otherID", o<sub>2</sub> := "OUT_OF_NETWORK", o<sub>3</sub> := "MNn5"</i>>];
+   s1->s3[label=<<i>view:3&#91;i<sub>1</sub> = "otherID", i<sub>2</sub> = "name", i<sub>3</sub> = "MNn5"&#93;/o<sub>1</sub> := "otherID", o<sub>2</sub> := "name", o<sub>3</sub> := "MNn5"</i>>];
+   s2->s4[label=<<i>pdf:3&#91;i<sub>1</sub> = "friendID", i<sub>2</sub> = "name", i<sub>3</sub> = "HM8p"&#93;/o<sub>1</sub> := "detailedPDF"</i>>];
+   s3->s4[label=<<i>pdf:3&#91;i<sub>1</sub> = "otherID", i<sub>2</sub> = "name", i<sub>3</sub> = "4Zof"&#93;/o<sub>1</sub> := "detailedPDF"</i>>];
+   s2->s4[label=<<i>pdf:3&#91;i<sub>1</sub> = "otherID", i<sub>2</sub> = "name", i<sub>3</sub> = "4Zof"&#93;/o<sub>1</sub> := "detailedPDF"</i>>];
+   s3->s5[label=<<i>pdf:3&#91;i<sub>1</sub> = "otherID", i<sub>2</sub> = "OUT_OF_NETWORK", i<sub>3</sub> = "MNn5"&#93;/o<sub>1</sub> := "summaryPDF"</i>>];
 }

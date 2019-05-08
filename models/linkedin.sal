@@ -8,12 +8,12 @@ END;
 
 STRING : TYPE =
     {String_4Zof, String_HM8p, String_MNn5, String_OUT_OF_NETWORK, %%10
-    String_free, String_friendID, String_name, String_otherID, String_pdfDetailed};
-
+    String_free, String_friendID, String_name, String_otherID};
+  
 STATES : TYPE =
     {State_0, State_1, State_2, State_3, State_4, State_5,
     NULL_STATE};
-
+  
 Value:CONTEXT = value {N_, STRING};
 Arithmetic:CONTEXT = arithmetic{N_, STRING};
 
@@ -35,7 +35,7 @@ value_plus : [[VALUE_OPTION, VALUE_OPTION] -> VALUE_OPTION] =
     Arithmetic ! value_plus;
 value_minus : [[VALUE_OPTION, VALUE_OPTION] -> VALUE_OPTION] =
     Arithmetic ! value_minus;
-
+  
 value_le : [[VALUE_OPTION, VALUE_OPTION] -> BOOL_OPTION] =
     Arithmetic ! value_le;                                         %%40
 value_ge : [[VALUE_OPTION, VALUE_OPTION] -> BOOL_OPTION] =
@@ -46,90 +46,98 @@ value_gt : [[VALUE_OPTION, VALUE_OPTION] -> BOOL_OPTION] =
     Arithmetic ! value_gt;
 value_eq : [[VALUE_OPTION, VALUE_OPTION] -> BOOL_OPTION] =
     Arithmetic ! value_eq;
-
-OutputSequence : CONTEXT =
-    sequence {B_VALUE_OPTION; ValueOption ! OPTION_BB, 1};
-InputSequence : CONTEXT =                                        %%50
-    sequence {B_VALUE; value {N_, STRING} ! VALUE_BB, 1};
-
+  
+OutputSequence : CONTEXT =                                       %%50
+    sequence {B_VALUE_OPTION; ValueOption ! OPTION_BB, 3};
+InputSequence : CONTEXT = sequence {B_VALUE; Value !
+    VALUE_BB, 3};
+  
 gval : [BOOL_OPTION -> bool] =
 LAMBDA(g:BOOL_OPTION): g = option {bool} !Some(TRUE);
 
 linkedIn : MODULE =
   BEGIN
-    INPUT label : LABEL
+    INPUT label : LABEL                                          %%60
     LOCAL cfstate : STATES
-    INPUT I : InputSequence ! Sequence                           %%60
+    INPUT I : InputSequence ! Sequence
     OUTPUT O : OutputSequence ! Sequence
     INITIALIZATION [
         cfstate = State_0 AND
+        I = InputSequence ! empty AND
         O = OutputSequence ! empty
       -->
     ]
-    TRANSITION [
+    TRANSITION [                                                 %%70
       %% login
       LOGIN :
-          cfstate = State_0 AND label = login AND                %%70
+          cfstate = State_0 AND label = login AND
               InputSequence ! size?(I) = 1 AND
-              Some(I(1)) = Some(STR(String_free))
+              gval(value_eq(Some(I(1)), Some(STR(String_free))))
         -->
           cfstate' = State_1;
           O' = OutputSequence ! empty
       []
-      %% view
+      %% view                                                    %%80
       VIEWFRIEND :
           cfstate = State_1 AND label = view AND
-              InputSequence ! size?(I) = 3 AND                     %%80
-              (Some(I(1)) = Some(STR(String_friendID))) AND
-              (Some(I(2)) = Some(STR(String_name))) AND
-              (Some(I(3)) = Some(STR(String_HM8p)))
+              InputSequence ! size?(I) = 3 AND
+              gval(value_eq(Some(I(1)),
+              Some(STR(String_friendID)))) AND
+              gval(value_eq(Some(I(2)),
+              Some(STR(String_name)))) AND
+              gval(value_eq(Some(I(3)), Some(STR(String_HM8p))))
         -->
-          cfstate' = State_2;
+          cfstate' = State_2;                                    %%90
           O' = OutputSequence !
               insert(Some(STR(String_friendID)), OutputSequence !
               insert(Some(STR(String_name)), OutputSequence !
               insert(Some(STR(String_HM8p)), OutputSequence !
-              empty)))                                             %%90
+              empty)))
       []
       %% view
       VIEWOTHER :
           cfstate = State_1 AND label = view AND
-              InputSequence ! size?(I) = 3 AND
-              (Some(I(1)) = Some(STR(String_otherID))) AND
-              (Some(I(2)) = Some(STR(String_name))) AND
-              (Some(I(3)) = Some(STR(String_4Zof)))
+              InputSequence ! size?(I) = 3 AND                     %%100
+              gval(value_eq(Some(I(1)),
+              Some(STR(String_otherID)))) AND
+              gval(value_eq(Some(I(2)),
+              Some(STR(String_name)))) AND
+              gval(value_eq(Some(I(3)), Some(STR(String_4Zof))))
         -->
-          cfstate' = State_2;                                    %%100
+          cfstate' = State_2;
           O' = OutputSequence !
               insert(Some(STR(String_otherID)), OutputSequence !
-              insert(Some(STR(String_name)), OutputSequence !
+              insert(Some(STR(String_name)), OutputSequence !      %%110
               insert(Some(STR(String_4Zof)), OutputSequence !
               empty)))
       []
       %% view
       VIEWOTHEROON :
           cfstate = State_1 AND label = view AND
-              InputSequence ! size?(I) = 3 AND                     %%110
-              (Some(I(1)) = Some(STR(String_otherID))) AND
-              (Some(I(2)) =
-              Some(STR(String_OUT_OF_NETWORK))) AND
-              (Some(I(3)) = Some(STR(String_MNn5)))
+              InputSequence ! size?(I) = 3 AND
+              gval(value_eq(Some(I(1)),
+              Some(STR(String_otherID)))) AND
+              gval(value_eq(Some(I(2)),                            %%120
+              Some(STR(String_OUT_OF_NETWORK)))) AND
+              gval(value_eq(Some(I(3)), Some(STR(String_MNn5))))
         -->
           cfstate' = State_3;
           O' = OutputSequence !
               insert(Some(STR(String_otherID)), OutputSequence !
               insert(Some(STR(String_OUT_OF_NETWORK)),
-              OutputSequence !                                     %%120
+              OutputSequence !
               insert(Some(STR(String_MNn5)), OutputSequence !
-              empty)))
+              empty)))                                             %%130
       []
       %% view
       VIEWOTHERFUZZ :
           cfstate = State_1 AND label = view AND
               InputSequence ! size?(I) = 3 AND
-              (Some(I(1)) = Some(STR(String_otherID))) AND
-              (Some(I(2)) = Some(STR(String_name))) AND
-              (Some(I(3)) = Some(STR(String_MNn5)))            %%130
+              gval(value_eq(Some(I(1)),
+              Some(STR(String_otherID)))) AND
+              gval(value_eq(Some(I(2)),
+              Some(STR(String_name)))) AND
+              gval(value_eq(Some(I(3)), Some(STR(String_MNn5))))   %%140
         -->
           cfstate' = State_3;
           O' = OutputSequence !
@@ -139,56 +147,61 @@ linkedIn : MODULE =
               empty)))
       []
       %% pdf
-      PDFFRIEND :                                                %%140
+      PDFFRIEND :                                                %%150
           cfstate = State_2 AND label = pdf AND
               InputSequence ! size?(I) = 3 AND
-              (Some(I(1)) = Some(STR(String_friendID))) AND
-              (Some(I(2)) = Some(STR(String_name))) AND
-              (Some(I(3)) = Some(STR(String_HM8p)))
+              gval(value_eq(Some(I(1)),
+              Some(STR(String_friendID)))) AND
+              gval(value_eq(Some(I(2)),
+              Some(STR(String_name)))) AND
+              gval(value_eq(Some(I(3)), Some(STR(String_HM8p))))
+        -->
+          cfstate' = State_4;
+          O' = OutputSequence ! empty                            %%160
+      []
+      %% pdf
+      PDFOTHER_A :
+          cfstate = State_3 AND label = pdf AND
+              InputSequence ! size?(I) = 3 AND
+              gval(value_eq(Some(I(1)),
+              Some(STR(String_otherID)))) AND
+              gval(value_eq(Some(I(2)),
+              Some(STR(String_name)))) AND
+              gval(value_eq(Some(I(3)), Some(STR(String_4Zof))))   %%170
         -->
           cfstate' = State_4;
           O' = OutputSequence ! empty
       []
-      %% pdf                                                     %%150
-      PDFOTHER_A :
-          cfstate = State_3 AND label = pdf AND
-              InputSequence ! size?(I) = 3 AND
-              (Some(I(1)) = Some(STR(String_otherID))) AND
-              (Some(I(2)) = Some(STR(String_name))) AND
-              (Some(I(3)) = Some(STR(String_4Zof)))
-        -->
-          cfstate' = State_4;
-          O' = OutputSequence ! empty
-      []                                                         %%160
       %% pdf
       PDFOTHER_B :
           cfstate = State_2 AND label = pdf AND
               InputSequence ! size?(I) = 3 AND
-              (Some(I(1)) = Some(STR(String_otherID))) AND
-              (Some(I(2)) = Some(STR(String_name))) AND
-              (Some(I(3)) = Some(STR(String_4Zof)))
+              gval(value_eq(Some(I(1)),
+              Some(STR(String_otherID)))) AND                      %%180
+              gval(value_eq(Some(I(2)),
+              Some(STR(String_name)))) AND
+              gval(value_eq(Some(I(3)), Some(STR(String_4Zof))))
         -->
           cfstate' = State_4;
-          O' = OutputSequence ! empty                            %%170
+          O' = OutputSequence ! empty
       []
       %% pdf
       PDFOTHEROON :
-          cfstate = State_3 AND label = pdf AND
+          cfstate = State_3 AND label = pdf AND                  %%190
               InputSequence ! size?(I) = 3 AND
-              (Some(I(1)) = Some(STR(String_otherID))) AND
-              (Some(I(2)) =
-              Some(STR(String_OUT_OF_NETWORK))) AND
-              (Some(I(3)) = Some(STR(String_MNn5)))
-        -->                                                      %%180
+              gval(value_eq(Some(I(1)),
+              Some(STR(String_otherID)))) AND
+              gval(value_eq(Some(I(2)),
+              Some(STR(String_OUT_OF_NETWORK)))) AND
+              gval(value_eq(Some(I(3)), Some(STR(String_MNn5))))
+        -->
           cfstate' = State_5;
           O' = OutputSequence ! empty
-      []
+      []                                                         %%200
       SINK_HOLE :
           ELSE
         -->
           cfstate' = NULL_STATE
     ]
   END;
-  neverDetailed: THEOREM linkedIn |- G((label = login AND I(1) = STR(String_free) ) => X(G(((label = pdf AND I(1) = STR(String_otherID)) => X((not (O(1) = Some(STR(String_pdfDetailed)))))))));
-
-END                                                              %%190
+END
