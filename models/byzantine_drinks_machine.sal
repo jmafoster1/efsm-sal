@@ -1,0 +1,126 @@
+byzantine_drinks_machine {N_ : nznat} : CONTEXT = BEGIN
+
+LABEL : TYPE = DATATYPE
+  coin,
+  select,
+  vend
+END;
+
+STRING : TYPE = {String_dummy_};
+                                                                 %%10
+STATES : TYPE = {State_0, State_1, State_20, NULL_STATE};
+
+Value:CONTEXT = value {N_, STRING};
+Arithmetic:CONTEXT = arithmetic{N_, STRING};
+
+B_VALUE : TYPE =  Value ! B_VALUE;
+VALUE : TYPE =  {g : B_VALUE | g /= value {N_, STRING} !
+    VALUE_BB};
+ValueOption:CONTEXT = option {VALUE};
+                                                                 %%20
+B_VALUE_OPTION : TYPE = ValueOption ! B_OPTION;
+VALUE_OPTION : TYPE =  {g : B_VALUE_OPTION | g /= ValueOption !
+    OPTION_BB};
+BOOL_OPTION : TYPE = option {bool} ! OPTION;
+
+Some : [VALUE -> VALUE_OPTION] = ValueOption ! Some;
+NUM: [Value!NAT -> VALUE] = Value ! NUM;
+STR: [STRING -> VALUE] = Value ! STR;
+
+value_plus : [[VALUE_OPTION, VALUE_OPTION] -> VALUE_OPTION] =    %%30
+    Arithmetic ! value_plus;
+value_minus : [[VALUE_OPTION, VALUE_OPTION] -> VALUE_OPTION] =
+    Arithmetic ! value_minus;
+  
+value_le : [[VALUE_OPTION, VALUE_OPTION] -> BOOL_OPTION] =
+    Arithmetic ! value_le;
+value_ge : [[VALUE_OPTION, VALUE_OPTION] -> BOOL_OPTION] =
+    Arithmetic ! value_ge;
+value_lt : [[VALUE_OPTION, VALUE_OPTION] -> BOOL_OPTION] =
+    Arithmetic ! value_lt;                                         %%40
+value_gt : [[VALUE_OPTION, VALUE_OPTION] -> BOOL_OPTION] =
+    Arithmetic ! value_gt;
+value_eq : [[VALUE_OPTION, VALUE_OPTION] -> BOOL_OPTION] =
+    Arithmetic ! value_eq;
+  
+OutputSequence : CONTEXT =
+    sequence {B_VALUE_OPTION; ValueOption ! OPTION_BB, 1};
+InputSequence : CONTEXT = sequence {B_VALUE; Value !
+    VALUE_BB, 1};
+                                                                 %%50
+gval : [BOOL_OPTION -> bool] =
+LAMBDA(g:BOOL_OPTION): g = option {bool} !Some(TRUE);
+
+drinks : MODULE =
+  BEGIN
+    INPUT label : LABEL
+    LOCAL cfstate : STATES
+    LOCAL r_1 : VALUE_OPTION
+    LOCAL r_2 : VALUE_OPTION
+    INPUT I : InputSequence ! Sequence                           %%60
+    OUTPUT O : OutputSequence ! Sequence
+    INITIALIZATION [
+        cfstate = State_0 AND
+        I = InputSequence ! empty AND
+        O = OutputSequence ! empty AND
+        r_1 = ValueOption ! None AND
+        r_2 = ValueOption ! None
+      -->
+    ]
+    TRANSITION [                                                 %%70
+      %% select
+      SELECT :
+          cfstate = State_0 AND label = select AND
+              InputSequence ! size?(I) = 1
+        -->
+          cfstate' = State_1;
+          r_1' = Some(I(1));
+          r_2' = Some(NUM(0));
+          O' = OutputSequence ! empty
+      []                                                         %%80
+      %% coin
+      COIN :
+          cfstate = State_1 AND label = coin AND
+              InputSequence ! size?(I) = 1 AND
+              gval(value_le(value_plus(r_2, Some(I(1))),
+              Some(NUM(N_))))
+        -->
+          cfstate' = State_1;
+          r_1' = r_1;
+          r_2' = value_plus(r_2, Some(I(1)));                    %%90
+          O' = OutputSequence !
+              insert(value_plus(r_2, Some(I(1))), OutputSequence !
+              empty)
+      []
+      %% vend
+      VEND :
+          cfstate = State_1 AND label = vend AND
+              InputSequence ! size?(I) = 0 AND
+              gval(value_ge(r_2, Some(NUM(100))))
+        -->                                                      %%100
+          cfstate' = State_20;
+          r_1' = r_1;
+          r_2' = r_2;
+          O' = OutputSequence ! insert(r_1, OutputSequence !
+              empty)
+      []
+      %% vend
+      VEND_FAIL :
+          cfstate = State_1 AND label = vend AND
+              InputSequence ! size?(I) = 0 AND                     %%110
+              gval(value_lt(r_2, Some(NUM(100))))
+        -->
+          cfstate' = State_1;
+          r_1' = r_1;
+          r_2' = r_2;
+          O' = OutputSequence ! empty
+      []
+      SINK_HOLE :
+          ELSE
+        -->                                                      %%120
+          cfstate' = NULL_STATE;
+          r_1' = r_1;
+          r_2' = r_2
+    ]
+  END;
+END
