@@ -12,7 +12,7 @@ arithmetic {N_ : nznat; STRING:TYPE} : CONTEXT = BEGIN
   STR?: [b_value -> bool] = value {N_, STRING} ! STR?;
   NUM?: [b_value -> bool] = value {N_, STRING} ! NUM?;
   natOf: [b_value -> nznat] = value {N_, STRING} ! natOf;
-  NUM: [value{N_, STRING}!NAT -> a_value] = value {N_, STRING} ! NUM;
+  NUM: [value{N_, STRING}!INT -> a_value] = value {N_, STRING} ! NUM;
 
   bool_option:TYPE = option {bool} ! OPTION;
 
