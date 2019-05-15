@@ -3,12 +3,12 @@ digraph Drinks_Machine_Payforward{
    node [color="black", fillcolor="white", shape="circle", style="filled", fontname="Latin Modern Math"];
    edge [fontname="Latin Modern Math"];
 
-   State_0[fillcolor="gray", label=<state_<sub>0</sub>>];
-   State_1[label=<state_<sub>1</sub>>];
-   State_2[label=<state_<sub>2</sub>>];
+   s0[fillcolor="gray", label=<s<sub>0</sub>>];
+   s1[label=<s<sub>1</sub>>];
+   s2[label=<s<sub>2</sub>>];
 
-   State_1->State_2[label=<<i>select:1/&#91;r<sub>1</sub> := i<sub>1</sub>, r<sub>2</sub> := Some(NUM(0))&#93;</i>>];
-   State_2->State_2[label=<<i>coin:1/&#91;r<sub>1</sub> := r<sub>1</sub>, r<sub>2</sub> := r<sub>2</sub> + i<sub>1</sub>&#93;</i>>];
-   State_0->State_1[label=<<i>setup:0/&#91;r<sub>2</sub> := Some(NUM(0)), r<sub>1</sub> := r<sub>1</sub>&#93;</i>>];
-   State_2->State_1[label=<<i>vend:0&#91;r<sub>2</sub> &ge; Some(NUM(100))&#93;/&#91;r<sub>1</sub> := r<sub>1</sub>, r<sub>2</sub> := r<sub>2</sub> - Some(NUM(100))&#93;</i>>];
+   s1->s2[label=<<i>select:1/&#91;r<sub>1</sub> := i<sub>1</sub>, r<sub>2</sub> := 0&#93;</i>>];
+   s2->s2[label=<<i>coin:1/o<sub>1</sub> := r<sub>2</sub> + i<sub>1</sub>&#91;r<sub>1</sub> := r<sub>1</sub>, r<sub>2</sub> := r<sub>2</sub> + i<sub>1</sub>&#93;</i>>];
+   s0->s1[label=<<i>setup:0/&#91;r<sub>2</sub> := 0, r<sub>1</sub> := r<sub>1</sub>&#93;</i>>];
+   s2->s1[label=<<i>vend:0&#91;r<sub>2</sub> &ge; 100&#93;/o<sub>1</sub> := r<sub>1</sub>&#91;r<sub>1</sub> := r<sub>1</sub>, r<sub>2</sub> := r<sub>2</sub> - 100&#93;</i>>];
 }

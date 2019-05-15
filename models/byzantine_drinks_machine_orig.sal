@@ -1,4 +1,4 @@
-drinks_machine {N_ : nznat} : CONTEXT = BEGIN
+byzantine_drinks_machine {N_ : nznat} : CONTEXT = BEGIN
 
 LABEL : TYPE = DATATYPE
   coin,
@@ -6,9 +6,9 @@ LABEL : TYPE = DATATYPE
   vend
 END;
 
-STRING : TYPE = {String_coke, String_inaccepts};
+STRING : TYPE = {String_dummy_};
                                                                  %%10
-STATES : TYPE = {State_0, State_1, State_2, NULL_STATE};
+STATES : TYPE = {State_0, State_1, State_20, NULL_STATE};
 
 Value:CONTEXT = value {N_, STRING};
 Arithmetic:CONTEXT = arithmetic{N_, STRING};
@@ -40,6 +40,8 @@ value_lt : [[VALUE_OPTION, VALUE_OPTION] -> BOOL_OPTION] =
     Arithmetic ! value_lt;                                         %%40
 value_gt : [[VALUE_OPTION, VALUE_OPTION] -> BOOL_OPTION] =
     Arithmetic ! value_gt;
+value_eq : [[VALUE_OPTION, VALUE_OPTION] -> BOOL_OPTION] =
+    Arithmetic ! value_eq;
 
 OutputSequence : CONTEXT =
     sequence {B_VALUE_OPTION; ValueOption ! OPTION_BB, 1};
@@ -95,7 +97,7 @@ drinks : MODULE =
               InputSequence ! size?(I) = 0 AND
               gval(value_ge(r_2, Some(NUM(100))))
         -->
-          cfstate' = State_2;
+          cfstate' = State_20;
           r_1' = r_1;
           r_2' = r_2;                                            %%100
           O' = OutputSequence ! insert(r_1, OutputSequence !
@@ -120,12 +122,4 @@ drinks : MODULE =
           r_2' = r_2                                             %%120
     ]
   END;
-  costsMoney: THEOREM drinks |- G(X(cfstate=State_2) => gval(value_ge(r_2, Some(NUM(100)))));
-  neverReachS2: THEOREM drinks |- label=select AND I(1) = STR(String_coke) AND
-                                X(label=coin AND I(1) = NUM(100)) AND
-                                X(X(label=vend AND I=InputSequence ! empty)) => X(X(X(cfstate=State_2)));
-  someNum: THEOREM drinks |- FORALL(x:VALUE_OPTION):Arithmetic ! SomeNUM?(r_2) => Arithmetic ! SomeNUM?(x) => Arithmetic ! SomeNUM?(value_plus(r_2, x));
-  someNumGt: THEOREM drinks |- FORALL(x:VALUE_OPTION):gval(value_le(x, Some(NUM(N_)))) => Arithmetic ! SomeNUM?(x);
-    LTL_must_pay_correct : THEOREM drinks |-
-    F(cfstate = State_2) => NOT(U(label = vend, label = coin));
 END

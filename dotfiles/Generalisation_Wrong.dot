@@ -1,0 +1,36 @@
+digraph Generalisation{
+    graph [rankdir="LR", fontname="Latin Modern Math"];
+    node [color="black", fillcolor="white", shape="circle", style="filled", fontname="Latin Modern Math"];
+    edge [fontname="Latin Modern Math"];
+
+  subgraph cluster_1 {
+    label = "vend";
+
+    s0a[fillcolor="gray", label=<s<sub>0</sub>>];
+    s1a[label=<s<sub>1</sub>>];
+    s2a[label=<s<sub>2</sub>>];
+    s3a[label=<s<sub>3</sub>>];
+    s4a[label=<s<sub>4</sub>>];
+
+    s0a->s1a[label=<<i>select:1&#91;i<sub>1</sub> = "coke"&#93;/&#91;r<sub>1</sub> := r<sub>1</sub>, r<sub>2</sub> := r<sub>2</sub>&#93;</i>>];
+    s1a->s2a[label=<<i>coin:1&#91;i<sub>1</sub> = 50&#93;/&#91;r<sub>1</sub> := r<sub>1</sub>, r<sub>2</sub> := r<sub>2</sub>&#93;</i>>];
+    s2a->s3a[label=<<i>coin:1&#91;i<sub>1</sub> = 50&#93;/&#91;r<sub>1</sub> := r<sub>1</sub>, r<sub>2</sub> := r<sub>2</sub>&#93;</i>>];
+    s3a->s4a[label=<<i>vend:0/o<sub>1</sub> := 1&#91;r<sub>1</sub> := r<sub>1</sub>, r<sub>2</sub> := r<sub>2</sub>&#93;</i>>];
+    s2a->s2a[label=<<i>vend:0/&#91;r<sub>1</sub> := r<sub>1</sub>, r<sub>2</sub> := r<sub>2</sub>&#93;</i>>];
+  }
+
+  subgraph cluster_2 {
+    label = "vend_g";
+
+    s0b[fillcolor="gray", label=<s<sub>0</sub>>];
+    s1b[label=<s<sub>1</sub>>];
+    s2b[label=<s<sub>2</sub>>];
+    s3b[label=<s<sub>3</sub>>];
+
+    s0b->s1b[label=<<i>select:1&#91;i<sub>1</sub> = "coke"&#93;/&#91;r<sub>1</sub> := r<sub>1</sub>, r<sub>2</sub> := r<sub>2</sub>&#93;</i>>];
+    s1b->s2b[label=<<i>coin:1/&#91;r<sub>1</sub> := i<sub>1</sub>, r<sub>2</sub> := r<sub>2</sub>&#93;</i>>];
+    s2b->s2b[label=<<i>coin:1/&#91;r<sub>1</sub> := r<sub>1</sub> + i<sub>1</sub>, r<sub>2</sub> := r<sub>2</sub>&#93;</i>>];
+    s2b->s3b[label=<<i>vend:0&#91;r<sub>1</sub> &ge; 100&#93;/o<sub>1</sub> := 1&#91;r<sub>1</sub> := r<sub>1</sub>, r<sub>2</sub> := r<sub>2</sub>&#93;</i>>];
+    s2b->s2b[label=<<i>vend:0&#91;r<sub>1</sub> &lt; 100&#93;/o<sub>1</sub> := 1&#91;r<sub>1</sub> := r<sub>1</sub>, r<sub>2</sub> := r<sub>2</sub>&#93;</i>>];
+  }
+}
