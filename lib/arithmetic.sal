@@ -1,83 +1,84 @@
-arithmetic {N_ : nznat; STRING:TYPE} : CONTEXT = BEGIN
-  b_value : TYPE =  value {N_, STRING} ! B_VALUE;
-  a_value : TYPE =  {g : b_value | g /= value {N_, STRING} ! VALUE_BB};
-  b_value_option : TYPE =  option {a_value} ! B_OPTION;
-  a_value_option : TYPE =  {g : b_value_option | g /= option {a_value} ! OPTION_BB};
+arithmetic {N_ : INTEGER; string: TYPE} : CONTEXT = BEGIN
+  Value: CONTEXT = value {N_, string};
+  VALUE : TYPE =  Value ! VALUE;
 
-  valueOf : [b_value_option -> a_value] = option {a_value} ! valueOf;
-  None : a_value_option = option {a_value} ! None;
-  None? : [b_value_option -> bool] = option {a_value} ! None?;
-  Some? : [b_value_option -> bool] = option {a_value} ! Some?;
+  value_option: CONTEXT = option {VALUE};
+  VALUE_OPTION : TYPE =  value_option ! OPTION;
 
-  STR?: [b_value -> bool] = value {N_, STRING} ! STR?;
-  NUM?: [b_value -> bool] = value {N_, STRING} ! NUM?;
-  natOf: [b_value -> nznat] = value {N_, STRING} ! natOf;
-  NUM: [value{N_, STRING}!INT -> a_value] = value {N_, STRING} ! NUM;
+  valueOf : [value_option ! B_OPTION -> VALUE] = value_option ! valueOf;
+  None : VALUE_OPTION = value_option ! None;
 
-  bool_option:TYPE = option {bool} ! OPTION;
+  Some? : [value_option ! B_OPTION -> bool] = value_option ! Some?;
+  NUM?: [Value ! B_VALUE -> bool] = Value ! NUM?;
+  natOf: [Value ! B_VALUE -> INTEGER] = Value ! natOf;
+  NUM: [Value ! int -> VALUE] = Value ! NUM;
 
-  SomeNUM?: [a_value_option -> bool] =
-  LAMBDA(a:a_value_option): IF Some?(a) THEN NUM?(valueOf(a)) ELSE FALSE ENDIF;
+  TRILEAN: TYPE = {True, False, Invalid};
 
-  maybe_bool_int : [[[[nznat, nznat] -> bool], a_value_option, a_value_option] -> bool_option] =
-  LAMBDA(f:[[nznat, nznat] -> bool], x1 : a_value_option, x2: a_value_option):
+  maybe_bool_int : [[[[INTEGER, INTEGER] -> bool], VALUE_OPTION, VALUE_OPTION] -> TRILEAN] =
+  LAMBDA(f: [[INTEGER, INTEGER] -> bool], x1 : VALUE_OPTION, x2: VALUE_OPTION):
     IF Some?(x1) AND Some?(x2) THEN
       IF NUM?(valueOf(x1)) AND NUM?(valueOf(x2))
       THEN
-        option {bool} !Some(f(natOf(valueOf(x1)), natOf(valueOf(x2))))
+        IF f(natOf(valueOf(x1)), natOf(valueOf(x2))) THEN True ELSE False ENDIF
       ELSE
-        option {bool} ! None
+        Invalid
       ENDIF
     ELSE
-      option {bool} ! None
+      Invalid
     ENDIF;
 
-  value_gt : [[a_value_option, a_value_option] -> bool_option] =
-  LAMBDA(x:a_value_option, y:a_value_option): maybe_bool_int(LAMBDA(x:nznat, y:nznat): x > y, x, y);
+  value_gt : [[VALUE_OPTION, VALUE_OPTION] -> TRILEAN] =
+  LAMBDA(x: VALUE_OPTION, y: VALUE_OPTION): maybe_bool_int(LAMBDA(x: INTEGER, y: INTEGER): x > y, x, y);
 
-  value_lt : [[a_value_option, a_value_option] -> bool_option] =
-  LAMBDA(x:a_value_option, y:a_value_option): maybe_bool_int(LAMBDA(x:nznat, y:nznat): x < y, x, y);
+  value_lt : [[VALUE_OPTION, VALUE_OPTION] -> TRILEAN] =
+  LAMBDA(x: VALUE_OPTION, y: VALUE_OPTION): maybe_bool_int(LAMBDA(x: INTEGER, y: INTEGER): x < y, x, y);
 
-  value_ge : [[a_value_option, a_value_option] -> bool_option] =
-  LAMBDA(x:a_value_option, y:a_value_option): maybe_bool_int(LAMBDA(x:nznat, y:nznat): x >= y, x, y);
+  value_ge : [[VALUE_OPTION, VALUE_OPTION] -> TRILEAN] =
+  LAMBDA(x: VALUE_OPTION, y: VALUE_OPTION): maybe_bool_int(LAMBDA(x: INTEGER, y: INTEGER): x >= y, x, y);
 
-  value_le : [[a_value_option, a_value_option] -> bool_option] =
-  LAMBDA(x:a_value_option, y:a_value_option): maybe_bool_int(LAMBDA(x:nznat, y:nznat): x <= y, x, y);
+  value_le : [[VALUE_OPTION, VALUE_OPTION] -> TRILEAN] =
+  LAMBDA(x: VALUE_OPTION, y: VALUE_OPTION): maybe_bool_int(LAMBDA(x: INTEGER, y: INTEGER): x <= y, x, y);
 
-  value_eq : [[a_value_option, a_value_option] -> bool_option] =
-  LAMBDA(x:a_value_option, y:a_value_option): option {bool} ! Some(x=y);
+  value_eq : [[VALUE_OPTION, VALUE_OPTION] -> TRILEAN] =
+  LAMBDA(x: VALUE_OPTION, y: VALUE_OPTION): IF x = y THEN True ELSE False ENDIF;
 
-  maybe_bool_op : [[[[bool, bool] -> bool], bool_option, bool_option] -> bool_option] =
-  LAMBDA(f:[[bool, bool] -> bool], x1 : bool_option, x2: bool_option):
-    IF option {bool} !Some?(x1) AND option {bool} !Some?(x2) THEN
-      option {bool} !Some(f(option {bool} !valueOf(x1), option {bool} !valueOf(x2)))
+  maybe_and : [[TRILEAN, TRILEAN] -> TRILEAN] =
+  LAMBDA(x1 : TRILEAN, x2: TRILEAN):
+    IF x1 = Invalid OR x2 = Invalid THEN
+      Invalid
+    ELSIF x1 = True AND x2 = True THEN
+      True
     ELSE
-      option {bool} !None
+      False
     ENDIF;
 
-  maybe_and : [[bool_option, bool_option] -> bool_option] =
-  LAMBDA(x1:bool_option, x2:bool_option):maybe_bool_op(LAMBDA(x:bool, y:bool):x AND y, x1, x2);
-
-  maybe_or : [[bool_option, bool_option] -> bool_option] =
-  LAMBDA(x1:bool_option, x2:bool_option):maybe_bool_op(LAMBDA(x:bool, y:bool):x OR y, x1, x2);
-
-  maybe_not: [[bool_option, bool_option] -> bool_option] =
-  LAMBDA(x1 : bool_option, x2: bool_option):
-    IF option {bool} !Some?(x1) THEN
-      option {bool} !Some(NOT(option {bool} !valueOf(x1)))
+  maybe_or : [[TRILEAN, TRILEAN] -> TRILEAN] =
+  LAMBDA(x1 : TRILEAN, x2: TRILEAN):
+    IF x1 = Invalid OR x2 = Invalid THEN
+      Invalid
+    ELSIF x1 = True OR x2 = True THEN
+      True
     ELSE
-      option {bool} !None
+      False
     ENDIF;
 
-    maybe_nor : [[bool_option, bool_option] -> bool_option] =
-    LAMBDA(x1:bool_option, x2:bool_option):maybe_bool_op(LAMBDA(x:bool, y:bool):NOT(x OR y), x1, x2);
+  maybe_not: [TRILEAN -> TRILEAN] =
+  LAMBDA(x : TRILEAN):
+    IF x = True THEN
+      False
+    ELSIF x = False THEN
+      True
+    ELSE
+      Invalid
+    ENDIF;
 
-  maybe_arith_int : [[[[nznat, nznat] -> nznat], a_value_option, a_value_option] -> a_value_option] =
-  LAMBDA(f:[[nznat, nznat] -> nznat], x1 : a_value_option, x2: a_value_option):
+  maybe_arith_int : [[[[INTEGER, INTEGER] -> INTEGER], VALUE_OPTION, VALUE_OPTION] -> VALUE_OPTION] =
+  LAMBDA(f: [[INTEGER, INTEGER] -> INTEGER], x1 : VALUE_OPTION, x2: VALUE_OPTION):
     IF Some?(x1) AND Some?(x2) THEN
       IF NUM?(valueOf(x1)) AND NUM?(valueOf(x2))
       THEN
-        option {a_value} !Some(NUM(f(natOf(valueOf(x1)), natOf(valueOf(x2)))))
+        value_option ! Some(NUM(f(natOf(valueOf(x1)), natOf(valueOf(x2)))))
       ELSE
         None
       ENDIF
@@ -85,10 +86,10 @@ arithmetic {N_ : nznat; STRING:TYPE} : CONTEXT = BEGIN
       None
     ENDIF;
 
-  value_plus : [[a_value_option, a_value_option] -> a_value_option] =
-  LAMBDA(x:a_value_option, y:a_value_option): maybe_arith_int(LAMBDA(x:nznat, y:nznat): x + y, x, y);
+  value_plus : [[VALUE_OPTION, VALUE_OPTION] -> VALUE_OPTION] =
+  LAMBDA(x: VALUE_OPTION, y: VALUE_OPTION): maybe_arith_int(LAMBDA(x: INTEGER, y: INTEGER): x + y, x, y);
 
-  value_minus : [[a_value_option, a_value_option] -> a_value_option] =
-  LAMBDA(x:a_value_option, y:a_value_option): maybe_arith_int(LAMBDA(x:nznat, y:nznat): x - y, x, y);
+  value_minus : [[VALUE_OPTION, VALUE_OPTION] -> VALUE_OPTION] =
+  LAMBDA(x: VALUE_OPTION, y: VALUE_OPTION): maybe_arith_int(LAMBDA(x: INTEGER, y: INTEGER): x - y, x, y);
 
 END

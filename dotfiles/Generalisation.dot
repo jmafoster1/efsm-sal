@@ -1,7 +1,7 @@
 digraph Generalisation{
-  graph [rankdir="LR", fontname="Latin Modern Math"];
-  node [color="black", fillcolor="white", shape="circle", style="filled", fontname="Latin Modern Math"];
-  edge [fontname="Latin Modern Math"];
+    graph [rankdir="LR", fontname="Latin Modern Math"];
+    node [color="black", fillcolor="white", shape="circle", style="filled", fontname="Latin Modern Math"];
+    edge [fontname="Latin Modern Math"];
 
   subgraph cluster_1 {
     label = "vend";
