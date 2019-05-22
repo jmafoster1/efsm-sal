@@ -28,7 +28,7 @@ value_plus : [[VALUE_OPTION, VALUE_OPTION] -> VALUE_OPTION] =
     arithmetic ! value_plus;
 value_minus : [[VALUE_OPTION, VALUE_OPTION] -> VALUE_OPTION] =
     arithmetic ! value_minus;                                      %%30
-  
+
 value_le : [[VALUE_OPTION, VALUE_OPTION] -> TRILEAN] =
     arithmetic ! value_le;
 value_ge : [[VALUE_OPTION, VALUE_OPTION] -> TRILEAN] =
@@ -39,19 +39,19 @@ value_gt : [[VALUE_OPTION, VALUE_OPTION] -> TRILEAN] =
     arithmetic ! value_gt;
 value_eq : [[VALUE_OPTION, VALUE_OPTION] -> TRILEAN] =           %%40
     arithmetic ! value_eq;
-  
+
 output_sequence : CONTEXT = sequence {value_option !
     B_OPTION, value_option ! OPTION_BB, 1};
 input_sequence : CONTEXT = sequence {B_VALUE, value !
     VALUE_BB, 1};
 gval : [TRILEAN -> BOOLEAN] = LAMBDA(g : TRILEAN) : g =
     arithmetic ! True;
-  
+
 check_underflow : [VALUE_OPTION -> BOOLEAN] =                    %%50
     LAMBDA(v : VALUE_OPTION) : gval(value_ge(v, Some(NUM(0-N_))));
 check_overflow : [VALUE_OPTION -> BOOLEAN] =
     LAMBDA(v : VALUE_OPTION) : gval(value_le(v, Some(NUM(N_))));
-  
+
 drinks2 : MODULE =
   BEGIN
     INPUT label : LABEL
@@ -97,7 +97,7 @@ drinks2 : MODULE =
       COIN_B :
           cfstate = State_2 AND label = coin AND
               input_sequence ! size?(I) = 1 AND
-              check_overflow(value_plus(r_2, Some(I(1)))) AND       %%100
+              check_overflow(value_plus(r_2, Some(I(1)))) AND      %%100
               check_underflow(value_plus(r_2, Some(I(1))))
         -->
           cfstate' = State_2;

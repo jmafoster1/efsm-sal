@@ -8,6 +8,6 @@ digraph Drinks_Machine_Change{
     s2[label=<s<sub>2</sub>>];
 
     s0->s1[label=<<i>select:1/&#91;r<sub>1</sub> := i<sub>1</sub>, r<sub>2</sub> := 0&#93;</i>>];
-    s1->s1[label=<<i>coin:1&#91;r<sub>2</sub> + i<sub>1</sub> &le; N_ &amp; r<sub>2</sub> + i<sub>1</sub> &ge; -N_&#93;/o<sub>1</sub> := r<sub>2</sub> + i<sub>1</sub>&#91;r<sub>1</sub> := r<sub>1</sub>, r<sub>2</sub> := r<sub>2</sub> + i<sub>1</sub>&#93;</i>>];
+    s1->s1[label=<<i>coin:1/o<sub>1</sub> := r<sub>2</sub> + i<sub>1</sub>&#91;r<sub>1</sub> := r<sub>1</sub>, r<sub>2</sub> := r<sub>2</sub> + i<sub>1</sub>&#93;</i>>];
     s1->s2[label=<<i>vend:0&#91;r<sub>2</sub> &ge; 100&#93;/o<sub>1</sub> := r<sub>1</sub>, o<sub>2</sub> := r<sub>2</sub> - 100&#91;r<sub>1</sub> := r<sub>1</sub>, r<sub>2</sub> := r<sub>2</sub>&#93;</i>>];
 }

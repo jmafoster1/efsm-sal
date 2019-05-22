@@ -67,7 +67,7 @@ filesystem : MODULE =
         I = input_sequence ! empty AND
         O = output_sequence ! empty AND
         r_1 = value_option ! None AND
-        r_2 = value_option ! None AND                             %%70
+        r_2 = value_option ! None AND                            %%70
         r_3 = value_option ! None
       -->
     ]
@@ -108,7 +108,7 @@ filesystem : MODULE =
       %% write
       WRITE_FAIL :
           cfstate = State_1 AND label = write AND                %%110
-              input_sequence ! size?(I) = 1 AND NOT(gval(value_eq(r_3, r_1)))
+              input_sequence ! size?(I) = 1 AND r_3 /= r_1
         -->
           cfstate' = State_1;
           O' = output_sequence !
@@ -121,14 +121,13 @@ filesystem : MODULE =
       %% read
       READ_SUCCESS :
           cfstate = State_1 AND label = read AND
-              input_sequence ! size?(I) = 0 AND
-              gval(value_eq(r_1, r_3)) AND
+              input_sequence ! size?(I) = 0 AND r_1 = r_3 AND
               r_2 /= value_option ! None
         -->
           cfstate' = State_1;
           r_1' = r_1;
-          r_2' = r_2;                                            %%130
-          r_3' = r_3;
+          r_2' = r_2;
+          r_3' = r_3;                                            %%130
           O' = output_sequence ! insert(r_2, output_sequence !
               empty)
       []
@@ -136,9 +135,9 @@ filesystem : MODULE =
       READ_FAIL :
           cfstate = State_1 AND label = read AND
               input_sequence ! size?(I) = 0 AND
-              NOT(gval((value_eq(r_1, r_3)))) OR r_2 = value_option ! None
-        -->                                                      %%140
-          cfstate' = State_1;
+              (r_1 /= r_3 OR r_2 = value_option ! None)
+        -->
+          cfstate' = State_1;                                    %%140
           r_1' = r_1;
           r_2' = r_2;
           r_3' = r_3;
@@ -147,8 +146,8 @@ filesystem : MODULE =
               output_sequence ! empty)
       []
       SINK_HOLE :
-          ELSE                                                   %%150
-        -->
+          ELSE
+        -->                                                      %%150
           cfstate' = NULL_STATE;
           r_1' = r_1;
           r_2' = r_2;

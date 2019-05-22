@@ -11,7 +11,7 @@ STRING : TYPE = {String_coke, String_inaccepts};                 %%10
 
 STATES : TYPE =
     {State_0, State_1, State_2, State_3, State_4, NULL_STATE};
-  
+
 value : CONTEXT = value {N_, STRING};
 arithmetic : CONTEXT = arithmetic{N_, STRING};
 
@@ -30,7 +30,7 @@ value_plus : [[VALUE_OPTION, VALUE_OPTION] -> VALUE_OPTION] =
     arithmetic ! value_plus;                                       %%30
 value_minus : [[VALUE_OPTION, VALUE_OPTION] -> VALUE_OPTION] =
     arithmetic ! value_minus;
-  
+
 value_le : [[VALUE_OPTION, VALUE_OPTION] -> TRILEAN] =
     arithmetic ! value_le;
 value_ge : [[VALUE_OPTION, VALUE_OPTION] -> TRILEAN] =
@@ -41,19 +41,19 @@ value_gt : [[VALUE_OPTION, VALUE_OPTION] -> TRILEAN] =           %%40
     arithmetic ! value_gt;
 value_eq : [[VALUE_OPTION, VALUE_OPTION] -> TRILEAN] =
     arithmetic ! value_eq;
-  
+
 output_sequence : CONTEXT = sequence {value_option !
     B_OPTION, value_option ! OPTION_BB, 1};
 input_sequence : CONTEXT = sequence {B_VALUE, value !
     VALUE_BB, 1};
 gval : [TRILEAN -> BOOLEAN] = LAMBDA(g : TRILEAN) : g =
     arithmetic ! True;                                             %%50
-  
+
 check_underflow : [VALUE_OPTION -> BOOLEAN] =
     LAMBDA(v : VALUE_OPTION) : gval(value_ge(v, Some(NUM(0-N_))));
 check_overflow : [VALUE_OPTION -> BOOLEAN] =
     LAMBDA(v : VALUE_OPTION) : gval(value_le(v, Some(NUM(N_))));
-  
+
 vend : MODULE =
   BEGIN
     INPUT label : LABEL
@@ -67,7 +67,7 @@ vend : MODULE =
         I = input_sequence ! empty AND
         O = output_sequence ! empty AND
         r_1 = value_option ! None AND
-        r_2 = value_option ! None                                 %%70
+        r_2 = value_option ! None                                %%70
       -->
     ]
     TRANSITION [

@@ -107,10 +107,10 @@ drinks : MODULE =
     ]
   END;
   LTL_label_vend_not_2 : THEOREM drinks |-
-    label = vend => NOT(F(cfstate = State_2));                   %%110
+    label = vend => NOT (F(cfstate = State_2));                  %%110
     
   LTL_aux2 : THEOREM drinks |-
-    X(label = vend) => NOT(F(cfstate = State_2));
+    X(label = vend) => NOT (F(cfstate = State_2));
     
   LTL_init_makes_r_1_zero : THEOREM drinks |-
     label = init AND
@@ -118,18 +118,18 @@ drinks : MODULE =
         X(gval(value_eq(r_1,(Some(NUM(0))))));
       
   LTL_must_pay_wrong : THEOREM drinks |-                         %%120
-    U(NOT(U(label = vend, label = coin)), cfstate = NULL_STATE);
+    U(NOT (U(label = vend, label = coin)), cfstate = NULL_STATE);
     
   LTL_vend_no_coin : THEOREM drinks |-
     X(label = vend AND
-        I = input_sequence ! empty) => NOT(F(cfstate = State_2));
+        I = input_sequence ! empty) => NOT (F(cfstate = State_2));
       
   LTL_invalid_gets_stuck_2 : THEOREM drinks |-
-    X(NOT(label = coin AND I = input_sequence ! empty)) AND
-        X(NOT(label = vend AND
-        I = input_sequence ! empty)) => NOT(F(cfstate = State_2)); %%130
+    X(NOT (label = coin AND I = input_sequence ! empty)) AND
+        X(NOT (label = vend AND
+        I = input_sequence ! empty)) => NOT (F(cfstate = State_2));%%130
       
   LTL_must_pay_correct : THEOREM drinks |-
-    F(cfstate = State_2) => NOT(U(label = vend, label = coin));
+    F(cfstate = State_2) => NOT (U(label = vend, label = coin));
     
 END

@@ -1,4 +1,4 @@
-coin_choc {N_ : nznat} : CONTEXT = BEGIN
+coin_tea_broken {N_ : nznat} : CONTEXT = BEGIN
 
 LABEL : TYPE = DATATYPE
   coin,
@@ -6,7 +6,7 @@ LABEL : TYPE = DATATYPE
   vend
 END;
 
-STRING : TYPE = {String_dummy_};
+STRING : TYPE = {String_tea};
                                                                  %%10
 STATES : TYPE = {State_0, State_1, State_2, NULL_STATE};
 
@@ -91,13 +91,13 @@ drinks : MODULE =
       VEND :
           cfstate = State_1 AND label = vend AND
               input_sequence ! size?(I) = 0 AND
-              gval(value_gt(r_1, Some(NUM(0)))) AND
-              check_overflow(value_minus(r_1, Some(NUM(1)))) AND
-              check_underflow(value_minus(r_1, Some(NUM(1))))
+              gval(value_ge(r_1, Some(NUM(0))))
         -->
           cfstate' = State_2;
-          r_1' = value_minus(r_1, Some(NUM(1)));
-          O' = output_sequence ! empty                           %%100
+          O' = output_sequence !
+              insert(Some(STR(String_tea)), output_sequence !
+              empty);
+          r_1' = r_1                                             %%100
       []
       SINK_HOLE :
           ELSE

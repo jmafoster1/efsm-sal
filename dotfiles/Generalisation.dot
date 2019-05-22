@@ -29,7 +29,7 @@ digraph Generalisation{
 
     s0b->s1b[label=<<i>select:1&#91;i<sub>1</sub> = "coke"&#93;/&#91;r<sub>1</sub> := r<sub>1</sub>, r<sub>2</sub> := r<sub>2</sub>&#93;</i>>];
     s1b->s2b[label=<<i>coin:1/&#91;r<sub>1</sub> := i<sub>1</sub>, r<sub>2</sub> := r<sub>2</sub>&#93;</i>>];
-    s2b->s2b[label=<<i>coin:1&#91;r<sub>1</sub> + i<sub>1</sub> &le; N_ &amp; r<sub>1</sub> + i<sub>1</sub> &ge; -N_&#93;/&#91;r<sub>1</sub> := r<sub>1</sub> + i<sub>1</sub>, r<sub>2</sub> := r<sub>2</sub>&#93;</i>>];
+    s2b->s2b[label=<<i>coin:1/&#91;r<sub>1</sub> := r<sub>1</sub> + i<sub>1</sub>, r<sub>2</sub> := r<sub>2</sub>&#93;</i>>];
     s2b->s3b[label=<<i>vend:0&#91;r<sub>1</sub> &ge; 100&#93;/o<sub>1</sub> := 1&#91;r<sub>1</sub> := r<sub>1</sub>, r<sub>2</sub> := r<sub>2</sub>&#93;</i>>];
     s2b->s2b[label=<<i>vend:0&#91;r<sub>1</sub> &lt; 100&#93;/o<sub>1</sub> := 1&#91;r<sub>1</sub> := r<sub>1</sub>, r<sub>2</sub> := r<sub>2</sub>&#93;</i>>];
   }
