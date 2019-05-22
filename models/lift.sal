@@ -11,142 +11,144 @@ STRING : TYPE = {String_dummy_};                                 %%10
 
 STATES : TYPE = {State_0, State_1, State_2, State_3, NULL_STATE};
 
-Value:CONTEXT = value {N_, STRING};
-Arithmetic:CONTEXT = arithmetic{N_, STRING};
+value : CONTEXT = value {N_, STRING};
+arithmetic : CONTEXT = arithmetic{N_, STRING};
 
-B_VALUE : TYPE =  Value ! B_VALUE;
-VALUE : TYPE =  {g : B_VALUE | g /= value {N_, STRING} !
-    VALUE_BB};
-ValueOption:CONTEXT = option {VALUE};                            %%20
+TRILEAN : TYPE = arithmetic ! TRILEAN;
+B_VALUE : TYPE =  value ! B_VALUE;
+VALUE : TYPE =  value ! VALUE;
+value_option : CONTEXT = option {VALUE};                         %%20
 
-B_VALUE_OPTION : TYPE = ValueOption ! B_OPTION;
-VALUE_OPTION : TYPE =  {g : B_VALUE_OPTION | g /= ValueOption !
-    OPTION_BB};
-BOOL_OPTION : TYPE = option {bool} ! OPTION;
+VALUE_OPTION : TYPE =  value_option ! OPTION;
 
-Some : [VALUE -> VALUE_OPTION] = ValueOption ! Some;
-NUM: [Value!NAT -> VALUE] = Value ! NUM;
-STR: [STRING -> VALUE] = Value ! STR;
-                                                                 %%30
+Some : [VALUE -> VALUE_OPTION] = value_option ! Some;
+NUM : [value ! int -> VALUE] = value ! NUM;
+STR : [STRING -> VALUE] = value ! STR;
+
 value_plus : [[VALUE_OPTION, VALUE_OPTION] -> VALUE_OPTION] =
-    Arithmetic ! value_plus;
-value_minus : [[VALUE_OPTION, VALUE_OPTION] -> VALUE_OPTION] =
-    Arithmetic ! value_minus;
-
-value_le : [[VALUE_OPTION, VALUE_OPTION] -> BOOL_OPTION] =
-    Arithmetic ! value_le;
-value_ge : [[VALUE_OPTION, VALUE_OPTION] -> BOOL_OPTION] =
-    Arithmetic ! value_ge;
-value_lt : [[VALUE_OPTION, VALUE_OPTION] -> BOOL_OPTION] =       %%40
-    Arithmetic ! value_lt;
-value_gt : [[VALUE_OPTION, VALUE_OPTION] -> BOOL_OPTION] =
-    Arithmetic ! value_gt;
-value_eq : [[VALUE_OPTION, VALUE_OPTION] -> BOOL_OPTION] =
-    Arithmetic ! value_eq;
-
-OutputSequence : CONTEXT =
-    sequence {B_VALUE_OPTION; ValueOption ! OPTION_BB, 1};
-InputSequence : CONTEXT = sequence {B_VALUE; Value !
-    VALUE_BB, 1};                                                  %%50
-
-gval : [BOOL_OPTION -> bool] =
-LAMBDA(g:BOOL_OPTION): g = option {bool} !Some(TRUE);
-
+    arithmetic ! value_plus;
+value_minus : [[VALUE_OPTION, VALUE_OPTION] -> VALUE_OPTION] =   %%30
+    arithmetic ! value_minus;
+  
+value_le : [[VALUE_OPTION, VALUE_OPTION] -> TRILEAN] =
+    arithmetic ! value_le;
+value_ge : [[VALUE_OPTION, VALUE_OPTION] -> TRILEAN] =
+    arithmetic ! value_ge;
+value_lt : [[VALUE_OPTION, VALUE_OPTION] -> TRILEAN] =
+    arithmetic ! value_lt;
+value_gt : [[VALUE_OPTION, VALUE_OPTION] -> TRILEAN] =
+    arithmetic ! value_gt;                                         %%40
+value_eq : [[VALUE_OPTION, VALUE_OPTION] -> TRILEAN] =
+    arithmetic ! value_eq;
+  
+output_sequence : CONTEXT = sequence {value_option !
+    B_OPTION, value_option ! OPTION_BB, 1};
+input_sequence : CONTEXT = sequence {B_VALUE, value !
+    VALUE_BB, 1};
+gval : [TRILEAN -> BOOLEAN] = LAMBDA(g : TRILEAN) : g =
+    arithmetic ! True;
+                                                                 %%50
+check_underflow : [VALUE_OPTION -> BOOLEAN] =
+    LAMBDA(v : VALUE_OPTION) : gval(value_ge(v, Some(NUM(0-N_))));
+check_overflow : [VALUE_OPTION -> BOOLEAN] =
+    LAMBDA(v : VALUE_OPTION) : gval(value_le(v, Some(NUM(N_))));
+  
 lift : MODULE =
   BEGIN
     INPUT label : LABEL
     LOCAL cfstate : STATES
-    INPUT I : InputSequence ! Sequence
-    OUTPUT O : OutputSequence ! Sequence                         %%60
+    INPUT I : input_sequence ! Sequence                          %%60
+    OUTPUT O : output_sequence ! Sequence
     INITIALIZATION [
         cfstate = State_0 AND
-        I = InputSequence ! empty AND
-        O = OutputSequence ! empty
+        I = input_sequence ! empty AND
+        O = output_sequence ! empty
       -->
     ]
     TRANSITION [
       %% goUp
-      T1UP :
-          cfstate = State_0 AND label = goUp AND                 %%70
-              InputSequence ! size?(I) = 1 AND
+      T1UP :                                                     %%70
+          cfstate = State_0 AND label = goUp AND
+              input_sequence ! size?(I) = 1 AND
               gval(value_gt(Some(I(1)), Some(NUM(0))))
         -->
           cfstate' = State_1;
-          O' = OutputSequence ! insert(Some(I(1)), OutputSequence !
-              empty)
+          O' = output_sequence !
+              insert(Some(I(1)), output_sequence ! empty)
       []
       %% goUp
-      T2UP :
-          cfstate = State_1 AND label = goUp AND                 %%80
-              InputSequence ! size?(I) = 1 AND
-              gval(value_gt(Some(I(1)), Some(NUM(0))))
-        -->
-          cfstate' = State_1;
-          O' = OutputSequence !
-              insert(value_plus(Some(I(1)), Some(NUM(-1))),
-              OutputSequence ! empty)
-      []
-      %% goUp
-      T3UP :                                                     %%90
+      T2UP :                                                     %%80
           cfstate = State_1 AND label = goUp AND
-              InputSequence ! size?(I) = 1 AND
+              input_sequence ! size?(I) = 1 AND
+              gval(value_gt(Some(I(1)), Some(NUM(0))))
+        -->
+          cfstate' = State_1;
+          O' = output_sequence !
+              insert(value_plus(Some(I(1)), Some(NUM(-1))),
+              output_sequence ! empty)
+      []
+      %% goUp                                                    %%90
+      T3UP :
+          cfstate = State_1 AND label = goUp AND
+              input_sequence ! size?(I) = 1 AND
               gval(value_eq(Some(I(1)), Some(NUM(0))))
         -->
           cfstate' = State_0;
-          O' = OutputSequence !
-              insert(Some(NUM(0)), OutputSequence ! empty)
+          O' = output_sequence !
+              insert(Some(NUM(0)), output_sequence ! empty)
       []
-      %% goDown
-      T1DOWN :                                                   %%100
+      %% goDown                                                  %%100
+      T1DOWN :
           cfstate = State_0 AND label = goDown AND
-              InputSequence ! size?(I) = 1 AND
+              input_sequence ! size?(I) = 1 AND
               gval(value_gt(Some(I(1)), Some(NUM(0))))
         -->
           cfstate' = State_2;
-          O' = OutputSequence ! insert(Some(I(1)), OutputSequence ! empty)
+          O' = output_sequence !
+              insert(Some(I(1)), output_sequence ! empty)
       []
-      %% goDown
-      T2DOWN :                                                   %%110
+      %% goDown                                                  %%110
+      T2DOWN :
           cfstate = State_2 AND label = goDown AND
-              InputSequence ! size?(I) = 1 AND
+              input_sequence ! size?(I) = 1 AND
               gval(value_gt(Some(I(1)), Some(NUM(0))))
         -->
           cfstate' = State_2;
-          O' = OutputSequence !
+          O' = output_sequence !
               insert(value_plus(Some(I(1)), Some(NUM(-1))),
-              OutputSequence ! empty)
-      []
-      %% goDown                                                  %%120
+              output_sequence ! empty)
+      []                                                         %%120
+      %% goDown
       T3DOWN :
           cfstate = State_2 AND label = goDown AND
-              InputSequence ! size?(I) = 1 AND
+              input_sequence ! size?(I) = 1 AND
               gval(value_eq(Some(I(1)), Some(NUM(0))))
         -->
           cfstate' = State_0;
-          O' = OutputSequence !
-              insert(Some(NUM(0)), OutputSequence ! empty)
-      []
-      %% open                                                    %%130
+          O' = output_sequence !
+              insert(Some(NUM(0)), output_sequence ! empty)
+      []                                                         %%130
+      %% open
       OPENDOORS :
           cfstate = State_0 AND label = open AND
-              InputSequence ! size?(I) = 0
+              input_sequence ! size?(I) = 0
         -->
           cfstate' = State_3;
-          O' = OutputSequence !
-              insert(Some(NUM(1)), OutputSequence ! empty)
+          O' = output_sequence !
+              insert(Some(NUM(1)), output_sequence ! empty)
       []
-      %% close
-      CLOSEDOORS :                                               %%140
+      %% close                                                   %%140
+      CLOSEDOORS :
           cfstate = State_3 AND label = close AND
-              InputSequence ! size?(I) = 0
+              input_sequence ! size?(I) = 0
         -->
           cfstate' = State_0;
-          O' = OutputSequence !
-              insert(Some(NUM(0)), OutputSequence ! empty)
+          O' = output_sequence !
+              insert(Some(NUM(0)), output_sequence ! empty)
       []
       SINK_HOLE :
-          ELSE
-        -->                                                      %%150
+          ELSE                                                   %%150
+        -->
           cfstate' = NULL_STATE
     ]
   END;

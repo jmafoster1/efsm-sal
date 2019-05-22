@@ -1,4 +1,4 @@
-drinks_machine_change {N_ : nznat} : CONTEXT = BEGIN
+drinks_machine_2 {N_ : nznat} : CONTEXT = BEGIN
 
 LABEL : TYPE = DATATYPE
   coin,
@@ -6,9 +6,9 @@ LABEL : TYPE = DATATYPE
   vend
 END;
 
-STRING : TYPE = {String_coke, String_inaccepts, String_invalid};
+STRING : TYPE = {String_coke, String_inaccepts};
                                                                  %%10
-STATES : TYPE = {State_0, State_1, State_2, NULL_STATE};
+STATES : TYPE = {State_0, State_1, State_2, State_3, NULL_STATE};
 
 value : CONTEXT = value {N_, STRING};
 arithmetic : CONTEXT = arithmetic{N_, STRING};
@@ -52,7 +52,7 @@ check_underflow : [VALUE_OPTION -> BOOLEAN] =                    %%50
 check_overflow : [VALUE_OPTION -> BOOLEAN] =
     LAMBDA(v : VALUE_OPTION) : gval(value_le(v, Some(NUM(N_))));
   
-drinks : MODULE =
+drinks2 : MODULE =
   BEGIN
     INPUT label : LABEL
     LOCAL cfstate : STATES
@@ -80,38 +80,72 @@ drinks : MODULE =
           O' = output_sequence ! empty                           %%80
       []
       %% coin
-      COIN :
+      COIN_A :
           cfstate = State_1 AND label = coin AND
               input_sequence ! size?(I) = 1 AND
               check_overflow(value_plus(r_2, Some(I(1)))) AND
               check_underflow(value_plus(r_2, Some(I(1))))
         -->
-          cfstate' = State_1;
+          cfstate' = State_2;
           r_1' = r_1;                                            %%90
           r_2' = value_plus(r_2, Some(I(1)));
           O' = output_sequence !
               insert(value_plus(r_2, Some(I(1))),
               output_sequence ! empty)
       []
-      %% vend
-      VEND :
-          cfstate = State_1 AND label = vend AND
-              input_sequence ! size?(I) = 0 AND
-              gval(value_ge(r_2, Some(NUM(100))))                  %%100
+      %% coin
+      COIN_B :
+          cfstate = State_2 AND label = coin AND
+              input_sequence ! size?(I) = 1 AND
+              check_overflow(value_plus(r_2, Some(I(1)))) AND       %%100
+              check_underflow(value_plus(r_2, Some(I(1))))
         -->
           cfstate' = State_2;
           r_1' = r_1;
+          r_2' = value_plus(r_2, Some(I(1)));
+          O' = output_sequence !
+              insert(value_plus(r_2, Some(I(1))),
+              output_sequence ! empty)
+      []
+      %% vend                                                    %%110
+      VEND :
+          cfstate = State_2 AND label = vend AND
+              input_sequence ! size?(I) = 0 AND
+              gval(value_ge(r_2, Some(NUM(100))))
+        -->
+          cfstate' = State_3;
+          r_1' = r_1;
           r_2' = r_2;
           O' = output_sequence ! insert(r_1, output_sequence !
-              insert(value_minus(r_2, Some(NUM(100))),
-              output_sequence ! empty))
+              empty)                                               %%120
+      []
+      %% vend
+      VEND_FAIL :
+          cfstate = State_2 AND label = vend AND
+              input_sequence ! size?(I) = 0 AND
+              gval(value_lt(r_2, Some(NUM(100))))
+        -->
+          cfstate' = State_2;
+          r_1' = r_1;
+          r_2' = r_2;                                            %%130
+          O' = output_sequence ! empty
+      []
+      %% vend
+      VEND_NOTHING :
+          cfstate = State_1 AND label = vend AND
+              input_sequence ! size?(I) = 0
+        -->
+          cfstate' = State_1;
+          r_1' = r_1;
+          r_2' = r_2;                                            %%140
+          O' = output_sequence ! empty
       []
       SINK_HOLE :
-          ELSE                                                   %%110
+          ELSE
         -->
           cfstate' = NULL_STATE;
           r_1' = r_1;
           r_2' = r_2
     ]
-  END;
+  END;                                                           %%150
 END

@@ -1,13 +1,13 @@
 digraph Horrible_Example_2{
-   graph [rankdir="LR", fontname="Latin Modern Math"];
-   node [color="black", fillcolor="white", shape="circle", style="filled", fontname="Latin Modern Math"];
-   edge [fontname="Latin Modern Math"];
+    graph [rankdir="LR", fontname="Latin Modern Math"];
+    node [color="black", fillcolor="white", shape="circle", style="filled", fontname="Latin Modern Math"];
+    edge [fontname="Latin Modern Math"];
 
-   s0[fillcolor="gray", label=<s<sub>0</sub>>];
-   s1[label=<s<sub>1</sub>>];
-   s2[label=<s<sub>2</sub>>];
+    s0[fillcolor="gray", label=<s<sub>0</sub>>];
+    s1[label=<s<sub>1</sub>>];
+    s2[label=<s<sub>2</sub>>];
 
-   s0->s1[label=<<i>f:1/&#91;r<sub>1</sub> := i<sub>1</sub>&#93;</i>>];
-   s1->s1[label=<<i>g:0&#91;r<sub>1</sub> &gt; 5&#93;/&#91;r<sub>1</sub> := r<sub>1</sub> + 5&#93;</i>>];
-   s1->s2[label=<<i>h:0/&#91;r<sub>1</sub> := r<sub>1</sub>&#93;</i>>];
+    s0->s1[label=<<i>f:1/&#91;r<sub>1</sub> := i<sub>1</sub>&#93;</i>>];
+    s1->s1[label=<<i>g:0&#91;r<sub>1</sub> &gt; 5, r<sub>1</sub> + 5 &le; N_ &amp; r<sub>1</sub> + 5 &ge; -N_&#93;/&#91;r<sub>1</sub> := r<sub>1</sub> + 5&#93;</i>>];
+    s1->s2[label=<<i>h:0/&#91;r<sub>1</sub> := r<sub>1</sub>&#93;</i>>];
 }
