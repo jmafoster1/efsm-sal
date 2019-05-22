@@ -1,14 +1,14 @@
-horrible_example_1 {N_ : nznat} : CONTEXT = BEGIN
+byzantine_drinks_machine {N_ : nznat} : CONTEXT = BEGIN
 
 LABEL : TYPE = DATATYPE
-  f,
-  g,
-  h
+  coin,
+  select,
+  vend
 END;
 
 STRING : TYPE = {String_dummy_};
                                                                  %%10
-STATES : TYPE = {State_0, State_1, State_2, NULL_STATE};
+STATES : TYPE = {State_0, State_1, State_20, NULL_STATE};
 
 value : CONTEXT = value {N_, STRING};
 arithmetic : CONTEXT = arithmetic{N_, STRING};
@@ -52,67 +52,76 @@ check_underflow : [VALUE_OPTION -> BOOLEAN] =                    %%50
 check_overflow : [VALUE_OPTION -> BOOLEAN] =
     LAMBDA(v : VALUE_OPTION) : gval(value_le(v, Some(NUM(N_))));
   
-vend : MODULE =
+drinks : MODULE =
   BEGIN
     INPUT label : LABEL
     LOCAL cfstate : STATES
     LOCAL r_1 : VALUE_OPTION
-    INPUT I : input_sequence ! Sequence                          %%60
+    LOCAL r_2 : VALUE_OPTION                                     %%60
+    INPUT I : input_sequence ! Sequence
     OUTPUT O : output_sequence ! Sequence
     INITIALIZATION [
         cfstate = State_0 AND
         I = input_sequence ! empty AND
         O = output_sequence ! empty AND
-        r_1 = value_option ! None
+        r_1 = value_option ! None AND
+        r_2 = value_option ! None
       -->
-    ]
+    ]                                                            %%70
     TRANSITION [
-      %% f                                                       %%70
-      T1 :
-          cfstate = State_0 AND label = f AND
+      %% select
+      SELECT :
+          cfstate = State_0 AND label = select AND
               input_sequence ! size?(I) = 1
         -->
           cfstate' = State_1;
           r_1' = Some(I(1));
-          O' = output_sequence ! empty
+          r_2' = Some(NUM(0));
+          O' = output_sequence ! empty                           %%80
       []
-      %% g
-      T2 :                                                       %%80
-          cfstate = State_1 AND label = g AND
-              input_sequence ! size?(I) = 0 AND
-              gval(value_gt(r_1, Some(NUM(5)))) AND
-              check_overflow(value_plus(r_1, Some(NUM(5)))) AND
-              check_underflow(value_plus(r_1, Some(NUM(5))))
+      %% coin
+      COIN :
+          cfstate = State_1 AND label = coin AND
+              input_sequence ! size?(I) = 1 AND
+              check_overflow(value_plus(r_2, Some(I(1)))) AND
+              check_underflow(value_plus(r_2, Some(I(1))))
         -->
           cfstate' = State_1;
-          r_1' = value_plus(r_1, Some(NUM(5)));
+          r_1' = r_1;                                            %%90
+          r_2' = value_plus(r_2, Some(I(1)));
+          O' = output_sequence !
+              insert(value_plus(r_2, Some(I(1))),
+              output_sequence ! empty)
+      []
+      %% vend
+      VEND :
+          cfstate = State_1 AND label = vend AND
+              input_sequence ! size?(I) = 0 AND
+              value_ge(r_2, Some(NUM(100)))                        %%100
+        -->
+          cfstate' = State_20;
+          r_1' = r_1;
+          r_2' = r_2;
+          O' = output_sequence ! insert(r_1, output_sequence !
+              empty)
+      []
+      %% vend
+      VEND_FAIL :
+          cfstate = State_1 AND label = vend AND                 %%110
+              input_sequence ! size?(I) = 0 AND
+              value_lt(r_2, Some(NUM(100)))
+        -->
+          cfstate' = State_1;
+          r_1' = r_1;
+          r_2' = r_2;
           O' = output_sequence ! empty
-      []                                                         %%90
-      %% h
-      T3 :
-          cfstate = State_1 AND label = h AND
-              input_sequence ! size?(I) = 0 AND
-              gval(value_lt(r_1, Some(NUM(10))))
-        -->
-          cfstate' = State_2;
-          O' = output_sequence ! empty;
-          r_1' = r_1
-      []                                                         %%100
-      %% h
-      T4 :
-          cfstate = State_1 AND label = h AND
-              input_sequence ! size?(I) = 0 AND
-              gval(value_ge(r_1, Some(NUM(10))))
-        -->
-          cfstate' = State_2;
-          O' = output_sequence ! empty;
-          r_1' = r_1
-      []                                                         %%110
+      []
       SINK_HOLE :
-          ELSE
+          ELSE                                                   %%120
         -->
           cfstate' = NULL_STATE;
-          r_1' = r_1
+          r_1' = r_1;
+          r_2' = r_2
     ]
   END;
 END

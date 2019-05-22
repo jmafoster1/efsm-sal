@@ -12,122 +12,123 @@ STRING : TYPE = {String_coke, String_inaccepts};                 %%10
 STATES : TYPE =
     {State_0, State_1, State_2, State_3, State_4, NULL_STATE};
   
-Value:CONTEXT = value {N_, STRING};
-Arithmetic:CONTEXT = arithmetic{N_, STRING};
+value : CONTEXT = value {N_, STRING};
+arithmetic : CONTEXT = arithmetic{N_, STRING};
 
-B_VALUE : TYPE =  Value ! B_VALUE;
-VALUE : TYPE =  {g : B_VALUE | g /= value {N_, STRING} !
-    VALUE_BB};                                                     %%20
-ValueOption:CONTEXT = option {VALUE};
+TRILEAN : TYPE = arithmetic ! TRILEAN;
+B_VALUE : TYPE =  value ! B_VALUE;
+VALUE : TYPE =  value ! VALUE;                                   %%20
+value_option : CONTEXT = option {VALUE};
 
-B_VALUE_OPTION : TYPE = ValueOption ! B_OPTION;
-VALUE_OPTION : TYPE =  {g : B_VALUE_OPTION | g /= ValueOption !
-    OPTION_BB};
-BOOL_OPTION : TYPE = option {bool} ! OPTION;
+VALUE_OPTION : TYPE =  value_option ! OPTION;
 
-Some : [VALUE -> VALUE_OPTION] = ValueOption ! Some;
-NUM: [Value!NAT -> VALUE] = Value ! NUM;
-STR: [STRING -> VALUE] = Value ! STR;                            %%30
+Some : [VALUE -> VALUE_OPTION] = value_option ! Some;
+NUM : [value ! int -> VALUE] = value ! NUM;
+STR : [STRING -> VALUE] = value ! STR;
 
 value_plus : [[VALUE_OPTION, VALUE_OPTION] -> VALUE_OPTION] =
-    Arithmetic ! value_plus;
+    arithmetic ! value_plus;                                       %%30
 value_minus : [[VALUE_OPTION, VALUE_OPTION] -> VALUE_OPTION] =
-    Arithmetic ! value_minus;
+    arithmetic ! value_minus;
   
-value_le : [[VALUE_OPTION, VALUE_OPTION] -> BOOL_OPTION] =
-    Arithmetic ! value_le;
-value_ge : [[VALUE_OPTION, VALUE_OPTION] -> BOOL_OPTION] =
-    Arithmetic ! value_ge;                                         %%40
-value_lt : [[VALUE_OPTION, VALUE_OPTION] -> BOOL_OPTION] =
-    Arithmetic ! value_lt;
-value_gt : [[VALUE_OPTION, VALUE_OPTION] -> BOOL_OPTION] =
-    Arithmetic ! value_gt;
-value_eq : [[VALUE_OPTION, VALUE_OPTION] -> BOOL_OPTION] =
-    Arithmetic ! value_eq;
+value_le : [[VALUE_OPTION, VALUE_OPTION] -> TRILEAN] =
+    arithmetic ! value_le;
+value_ge : [[VALUE_OPTION, VALUE_OPTION] -> TRILEAN] =
+    arithmetic ! value_ge;
+value_lt : [[VALUE_OPTION, VALUE_OPTION] -> TRILEAN] =
+    arithmetic ! value_lt;
+value_gt : [[VALUE_OPTION, VALUE_OPTION] -> TRILEAN] =           %%40
+    arithmetic ! value_gt;
+value_eq : [[VALUE_OPTION, VALUE_OPTION] -> TRILEAN] =
+    arithmetic ! value_eq;
   
-OutputSequence : CONTEXT =
-    sequence {B_VALUE_OPTION; ValueOption ! OPTION_BB, 1};
-InputSequence : CONTEXT = sequence {B_VALUE; Value !             %%50
+output_sequence : CONTEXT = sequence {value_option !
+    B_OPTION, value_option ! OPTION_BB, 1};
+input_sequence : CONTEXT = sequence {B_VALUE, value !
     VALUE_BB, 1};
+gval : [TRILEAN -> BOOLEAN] = LAMBDA(g : TRILEAN) : g =
+    arithmetic ! True;                                             %%50
   
-gval : [BOOL_OPTION -> bool] =
-LAMBDA(g:BOOL_OPTION): g = option {bool} !Some(TRUE);
-
+check_underflow : [VALUE_OPTION -> BOOLEAN] =
+    LAMBDA(v : VALUE_OPTION) : gval(value_ge(v, Some(NUM(0-N_))));
+check_overflow : [VALUE_OPTION -> BOOLEAN] =
+    LAMBDA(v : VALUE_OPTION) : gval(value_le(v, Some(NUM(N_))));
+  
 vend : MODULE =
   BEGIN
     INPUT label : LABEL
-    LOCAL cfstate : STATES
-    LOCAL r_1 : VALUE_OPTION                                     %%60
+    LOCAL cfstate : STATES                                       %%60
+    LOCAL r_1 : VALUE_OPTION
     LOCAL r_2 : VALUE_OPTION
-    INPUT I : InputSequence ! Sequence
-    OUTPUT O : OutputSequence ! Sequence
+    INPUT I : input_sequence ! Sequence
+    OUTPUT O : output_sequence ! Sequence
     INITIALIZATION [
         cfstate = State_0 AND
-        I = InputSequence ! empty AND
-        O = OutputSequence ! empty AND
-        r_1 = ValueOption ! None AND
-        r_2 = ValueOption ! None
-      -->                                                        %%70
+        I = input_sequence ! empty AND
+        O = output_sequence ! empty AND
+        r_1 = value_option ! None AND
+        r_2 = value_option ! None                                %%70
+      -->
     ]
     TRANSITION [
       %% select
       SELECT :
           cfstate = State_0 AND label = select AND
-              InputSequence ! size?(I) = 1 AND
+              input_sequence ! size?(I) = 1 AND
               gval(value_eq(Some(I(1)), Some(STR(String_coke))))
         -->
-          cfstate' = State_1;
-          O' = OutputSequence ! empty;                           %%80
+          cfstate' = State_1;                                    %%80
+          O' = output_sequence ! empty;
           r_1' = r_1;
           r_2' = r_2
       []
       %% coin
       COIN50_A :
           cfstate = State_1 AND label = coin AND
-              InputSequence ! size?(I) = 1 AND
+              input_sequence ! size?(I) = 1 AND
               gval(value_eq(Some(I(1)), Some(NUM(50))))
-        -->
-          cfstate' = State_2;                                    %%90
-          O' = OutputSequence ! empty;
+        -->                                                      %%90
+          cfstate' = State_2;
+          O' = output_sequence ! empty;
           r_1' = r_1;
           r_2' = r_2
       []
       %% coin
       COIN50_B :
           cfstate = State_2 AND label = coin AND
-              InputSequence ! size?(I) = 1 AND
-              gval(value_eq(Some(I(1)), Some(NUM(50))))
-        -->                                                      %%100
+              input_sequence ! size?(I) = 1 AND
+              gval(value_eq(Some(I(1)), Some(NUM(50))))            %%100
+        -->
           cfstate' = State_3;
-          O' = OutputSequence ! empty;
+          O' = output_sequence ! empty;
           r_1' = r_1;
           r_2' = r_2
       []
       %% vend
       VENDS :
           cfstate = State_3 AND label = vend AND
-              InputSequence ! size?(I) = 0
-        -->                                                      %%110
+              input_sequence ! size?(I) = 0                        %%110
+        -->
           cfstate' = State_4;
-          O' = OutputSequence !
-              insert(Some(NUM(1)), OutputSequence ! empty);
+          O' = output_sequence !
+              insert(Some(NUM(1)), output_sequence ! empty);
           r_1' = r_1;
           r_2' = r_2
       []
       %% vend
       VENDERR :
-          cfstate = State_2 AND label = vend AND
-              InputSequence ! size?(I) = 0                         %%120
+          cfstate = State_2 AND label = vend AND                 %%120
+              input_sequence ! size?(I) = 0
         -->
           cfstate' = State_2;
-          O' = OutputSequence ! empty;
+          O' = output_sequence ! empty;
           r_1' = r_1;
           r_2' = r_2
       []
       SINK_HOLE :
           ELSE
-        -->
-          cfstate' = NULL_STATE;                                 %%130
+        -->                                                      %%130
+          cfstate' = NULL_STATE;
           r_1' = r_1;
           r_2' = r_2
     ]
@@ -136,78 +137,78 @@ vend_g : MODULE =
   BEGIN
     INPUT label : LABEL
     LOCAL cfstate : STATES
-    LOCAL r_1 : VALUE_OPTION
-    LOCAL r_2 : VALUE_OPTION                                     %%140
-    INPUT I : InputSequence ! Sequence
-    OUTPUT O : OutputSequence ! Sequence
+    LOCAL r_1 : VALUE_OPTION                                     %%140
+    LOCAL r_2 : VALUE_OPTION
+    INPUT I : input_sequence ! Sequence
+    OUTPUT O : output_sequence ! Sequence
     INITIALIZATION [
         cfstate = State_0 AND
-        I = InputSequence ! empty AND
-        O = OutputSequence ! empty AND
-        r_1 = ValueOption ! None AND
-        r_2 = ValueOption ! None
-      -->
-    ]                                                            %%150
+        I = input_sequence ! empty AND
+        O = output_sequence ! empty AND
+        r_1 = value_option ! None AND
+        r_2 = value_option ! None
+      -->                                                        %%150
+    ]
     TRANSITION [
       %% select
       SELECT :
           cfstate = State_0 AND label = select AND
-              InputSequence ! size?(I) = 1 AND
+              input_sequence ! size?(I) = 1 AND
               gval(value_eq(Some(I(1)), Some(STR(String_coke))))
         -->
           cfstate' = State_1;
-          O' = OutputSequence ! empty;
-          r_1' = r_1;                                            %%160
+          O' = output_sequence ! empty;                          %%160
+          r_1' = r_1;
           r_2' = r_2
       []
       %% coin
       COIN_INIT :
           cfstate = State_1 AND label = coin AND
-              InputSequence ! size?(I) = 1
+              input_sequence ! size?(I) = 1
         -->
           cfstate' = State_2;
-          r_1' = Some(I(1));
-          O' = OutputSequence ! empty;                           %%170
+          r_1' = Some(I(1));                                     %%170
+          O' = output_sequence ! empty;
           r_2' = r_2
       []
       %% coin
       COIN_INC :
           cfstate = State_2 AND label = coin AND
-              InputSequence ! size?(I) = 1 AND
-              gval(value_le(value_plus(r_1, Some(I(1))),
-              Some(NUM(N_))))
-        -->
-          cfstate' = State_2;                                    %%180
+              input_sequence ! size?(I) = 1 AND
+              check_overflow(value_plus(r_1, Some(I(1)))) AND
+              check_underflow(value_plus(r_1, Some(I(1))))
+        -->                                                      %%180
+          cfstate' = State_2;
           r_1' = value_plus(r_1, Some(I(1)));
-          O' = OutputSequence ! empty;
+          O' = output_sequence ! empty;
           r_2' = r_2
       []
       %% vend
       VENDS_G :
           cfstate = State_2 AND label = vend AND
-              InputSequence ! size?(I) = 0 AND
-              gval(value_ge(r_1, Some(NUM(100))))
-        -->                                                      %%190
+              input_sequence ! size?(I) = 0 AND
+              gval(value_ge(r_1, Some(NUM(100))))                  %%190
+        -->
           cfstate' = State_3;
-          O' = OutputSequence !
-              insert(Some(NUM(1)), OutputSequence ! empty);
+          O' = output_sequence !
+              insert(Some(NUM(1)), output_sequence ! empty);
           r_1' = r_1;
           r_2' = r_2
       []
       %% vend
       VENDERR_G :
-          cfstate = State_2 AND label = vend AND
-              InputSequence ! size?(I) = 0 AND                     %%200
+          cfstate = State_2 AND label = vend AND                 %%200
+              input_sequence ! size?(I) = 0 AND
               gval(value_lt(r_1, Some(NUM(100))))
         -->
           cfstate' = State_2;
-          O' = OutputSequence !
-              insert(Some(NUM(1)), OutputSequence ! empty);
+          O' = output_sequence !
+              insert(Some(NUM(1)), output_sequence ! empty);
           r_1' = r_1;
           r_2' = r_2
       []
-      SINK_HOLE :
-          ELSE                                                   %%210
+      SINK_HOLE :                                                %%210
+          ELSE
         -->
           cfstate' = NULL_STATE;
           r_1' = r_1;
