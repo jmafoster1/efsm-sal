@@ -1,4 +1,4 @@
-theory Drinks_MachineXXX
+theory Inference_AnswerXXX
 imports "../Contexts"
 begin
 
@@ -9,8 +9,8 @@ definition "select" :: "transition" where
       Guard = [],
       Outputs = [],
       Updates = [
-            (R 1, (V (I 1))),
-            (R 2, (L (Num 0)))
+            (R 2, (L (Num 0))),
+            (R 1, (V (I 1)))
       ]
 \<rparr>"
 
@@ -23,8 +23,8 @@ definition "coin" :: "transition" where
             Plus (V (R 2)) (V (I 1))
       ],
       Updates = [
-            (R 1, (V (R 1))),
-            (R 2, Plus (V (R 2)) (V (I 1)))
+            (R 2, Plus (V (R 2)) (V (I 1))),
+            (R 1, (V (R 1)))
       ]
 \<rparr>"
 
@@ -32,26 +32,10 @@ definition "vend" :: "transition" where
 "vend \<equiv> \<lparr>
       Label = STR ''vend'',
       Arity = 0,
-      Guard = [
-            GExp.Ge (V (R 2)) (L (Num 100))
-      ],
+      Guard = [],
       Outputs = [
             (V (R 1))
       ],
-      Updates = [
-            (R 1, (V (R 1))),
-            (R 2, (V (R 2)))
-      ]
-\<rparr>"
-
-definition "vend1" :: "transition" where
-"vend1 \<equiv> \<lparr>
-      Label = STR ''vend'',
-      Arity = 0,
-      Guard = [
-            GExp.Lt (V (R 2)) (L (Num 100))
-      ],
-      Outputs = [],
       Updates = [
             (R 1, (V (R 1))),
             (R 2, (V (R 2)))
@@ -62,8 +46,7 @@ definition "efsm" :: "transition_matrix" where
 "efsm \<equiv> {|
       ((0, 1), select),
       ((1, 1), coin),
-      ((1, 2), vend),
-      ((1, 1), vend1)
+      ((1, 4), vend)
 |}"
 
 end

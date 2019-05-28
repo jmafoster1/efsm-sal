@@ -1,8 +1,8 @@
-theory Drinks_Machine
+theory Drinks_Machine_ChangeXXX
 imports "../Contexts"
 begin
 
-definition select :: "transition" where
+definition "select" :: "transition" where
 "select \<equiv> \<lparr>
       Label = STR ''select'',
       Arity = 1,
@@ -14,7 +14,7 @@ definition select :: "transition" where
       ]
 \<rparr>"
 
-definition coin :: "transition" where
+definition "coin" :: "transition" where
 "coin \<equiv> \<lparr>
       Label = STR ''coin'',
       Arity = 1,
@@ -28,15 +28,16 @@ definition coin :: "transition" where
       ]
 \<rparr>"
 
-definition vend :: "transition" where
+definition "vend" :: "transition" where
 "vend \<equiv> \<lparr>
       Label = STR ''vend'',
       Arity = 0,
       Guard = [
-            Ge (V (R 2)) (L (Num 100))
+            GExp.Ge (V (R 2)) (L (Num 100))
       ],
       Outputs = [
-            (V (R 1))
+            (V (R 1)),
+            Minus (V (R 2)) (L (Num 100))
       ],
       Updates = [
             (R 1, (V (R 1))),
@@ -44,26 +45,11 @@ definition vend :: "transition" where
       ]
 \<rparr>"
 
-definition vend1 :: "transition" where
-"vend1 \<equiv> \<lparr>
-      Label = STR ''vend'',
-      Arity = 0,
-      Guard = [
-            Lt (V (R 2)) (L (Num 100))
-      ],
-      Outputs = [],
-      Updates = [
-            (R 1, (V (R 1))),
-            (R 2, (V (R 2)))
-      ]
-\<rparr>"
-
-definition efsm :: "transition_matrix" where
+definition "efsm" :: "transition_matrix" where
 "efsm \<equiv> {|
       ((0, 1), select),
       ((1, 1), coin),
-      ((1, 2), vend),
-      ((1, 1), vend1)
+      ((1, 2), vend)
 |}"
 
 end

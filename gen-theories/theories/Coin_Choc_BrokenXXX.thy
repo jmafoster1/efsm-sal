@@ -2,7 +2,7 @@ theory Coin_Choc_BrokenXXX
 imports "../Contexts"
 begin
 
-definition init :: "transition" where
+definition "init" :: "transition" where
 "init \<equiv> \<lparr>
       Label = STR ''init'',
       Arity = 0,
@@ -13,7 +13,7 @@ definition init :: "transition" where
       ]
 \<rparr>"
 
-definition coin :: "transition" where
+definition "coin" :: "transition" where
 "coin \<equiv> \<lparr>
       Label = STR ''coin'',
       Arity = 0,
@@ -24,7 +24,7 @@ definition coin :: "transition" where
       ]
 \<rparr>"
 
-definition vend :: "transition" where
+definition "vend" :: "transition" where
 "vend \<equiv> \<lparr>
       Label = STR ''vend'',
       Arity = 0,

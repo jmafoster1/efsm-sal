@@ -2,7 +2,7 @@ theory Drinks_Machine_PayforwardXXX
 imports "../Contexts"
 begin
 
-definition select :: "transition" where
+definition "select" :: "transition" where
 "select \<equiv> \<lparr>
       Label = STR ''select'',
       Arity = 1,
@@ -14,7 +14,7 @@ definition select :: "transition" where
       ]
 \<rparr>"
 
-definition coin :: "transition" where
+definition "coin" :: "transition" where
 "coin \<equiv> \<lparr>
       Label = STR ''coin'',
       Arity = 1,
@@ -40,7 +40,7 @@ definition "setup" :: "transition" where
       ]
 \<rparr>"
 
-definition vend :: "transition" where
+definition "vend" :: "transition" where
 "vend \<equiv> \<lparr>
       Label = STR ''vend'',
       Arity = 0,
@@ -56,7 +56,7 @@ definition vend :: "transition" where
       ]
 \<rparr>"
 
-definition efsm :: "transition_matrix" where
+definition "efsm" :: "transition_matrix" where
 "efsm \<equiv> {|
       ((1, 2), select),
       ((2, 2), coin),

@@ -2,7 +2,7 @@ theory Drinks_Machine_2XXX
 imports "../Contexts"
 begin
 
-definition select :: "transition" where
+definition "select" :: "transition" where
 "select \<equiv> \<lparr>
       Label = STR ''select'',
       Arity = 1,
@@ -14,7 +14,7 @@ definition select :: "transition" where
       ]
 \<rparr>"
 
-definition coin :: "transition" where
+definition "coin" :: "transition" where
 "coin \<equiv> \<lparr>
       Label = STR ''coin'',
       Arity = 1,
@@ -28,7 +28,7 @@ definition coin :: "transition" where
       ]
 \<rparr>"
 
-definition coin1 :: "transition" where
+definition "coin1" :: "transition" where
 "coin1 \<equiv> \<lparr>
       Label = STR ''coin'',
       Arity = 1,
@@ -42,12 +42,12 @@ definition coin1 :: "transition" where
       ]
 \<rparr>"
 
-definition vend :: "transition" where
+definition "vend" :: "transition" where
 "vend \<equiv> \<lparr>
       Label = STR ''vend'',
       Arity = 0,
       Guard = [
-            Ge (V (R 2)) (L (Num 100))
+            GExp.Ge (V (R 2)) (L (Num 100))
       ],
       Outputs = [
             (V (R 1))
@@ -58,7 +58,7 @@ definition vend :: "transition" where
       ]
 \<rparr>"
 
-definition vend1 :: "transition" where
+definition "vend1" :: "transition" where
 "vend1 \<equiv> \<lparr>
       Label = STR ''vend'',
       Arity = 0,
@@ -72,7 +72,7 @@ definition vend1 :: "transition" where
       ]
 \<rparr>"
 
-definition vend2 :: "transition" where
+definition "vend2" :: "transition" where
 "vend2 \<equiv> \<lparr>
       Label = STR ''vend'',
       Arity = 0,
@@ -84,7 +84,7 @@ definition vend2 :: "transition" where
       ]
 \<rparr>"
 
-definition efsm :: "transition_matrix" where
+definition "efsm" :: "transition_matrix" where
 "efsm \<equiv> {|
       ((0, 1), select),
       ((1, 2), coin),

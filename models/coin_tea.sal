@@ -133,6 +133,6 @@ drinks : MODULE =
     F(cfstate = State_2) => U(NOT (label = vend), label = coin);
     
   LTL_must_pay_correct : THEOREM drinks |-
-    F(cfstate = State_2) => NOT (U(label = vend, label = coin));
+    F(cfstate = State_2) => U(NOT (label = vend), label = coin);
     
 END
