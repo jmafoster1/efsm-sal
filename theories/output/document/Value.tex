@@ -1,0 +1,474 @@
+%
+\begin{isabellebody}%
+\setisabellecontext{Value}%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\isatagtheory
+\isacommand{theory}\isamarkupfalse%
+\ Value\isanewline
+\isakeyword{imports}\ Option{\isacharunderscore}Logic\isanewline
+\isakeyword{begin}%
+\endisatagtheory
+{\isafoldtheory}%
+%
+\isadelimtheory
+\isanewline
+%
+\endisadelimtheory
+\isacommand{datatype}\isamarkupfalse%
+\ {\isachardoublequoteopen}value{\isachardoublequoteclose}\ {\isacharequal}\ Num\ int\ {\isacharbar}\ Str\ String{\isachardot}literal\isanewline
+\isanewline
+\isacommand{fun}\isamarkupfalse%
+\ MaybeBoolInt\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}int\ {\isasymRightarrow}\ int\ {\isasymRightarrow}\ bool{\isacharparenright}\ {\isasymRightarrow}\ value\ option\ {\isasymRightarrow}\ value\ option\ {\isasymRightarrow}\ trilean{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+\ \ {\isachardoublequoteopen}MaybeBoolInt\ f\ {\isacharparenleft}Some\ {\isacharparenleft}Num\ a{\isacharparenright}{\isacharparenright}\ {\isacharparenleft}Some\ {\isacharparenleft}Num\ b{\isacharparenright}{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}if\ f\ a\ b\ then\ true\ else\ false{\isacharparenright}{\isachardoublequoteclose}\ {\isacharbar}\isanewline
+\ \ {\isachardoublequoteopen}MaybeBoolInt\ {\isacharunderscore}\ {\isacharunderscore}\ {\isacharunderscore}\ {\isacharequal}\ invalid{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{definition}\isamarkupfalse%
+\ ValueGt\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}value\ option\ {\isasymRightarrow}\ value\ option\ {\isasymRightarrow}\ trilean{\isachardoublequoteclose}\ \ \isakeyword{where}\isanewline
+\ \ {\isachardoublequoteopen}ValueGt\ a\ b\ {\isasymequiv}\ MaybeBoolInt\ {\isacharparenleft}{\isasymlambda}x{\isacharcolon}{\isacharcolon}int{\isachardot}{\isasymlambda}y{\isacharcolon}{\isacharcolon}int{\isachardot}{\isacharparenleft}x{\isachargreater}y{\isacharparenright}{\isacharparenright}\ a\ b{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{definition}\isamarkupfalse%
+\ ValueLt\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}value\ option\ {\isasymRightarrow}\ value\ option\ {\isasymRightarrow}\ trilean{\isachardoublequoteclose}\ \ \isakeyword{where}\isanewline
+\ \ {\isachardoublequoteopen}ValueLt\ a\ b\ {\isasymequiv}\ MaybeBoolInt\ {\isacharparenleft}{\isasymlambda}x{\isacharcolon}{\isacharcolon}int{\isachardot}{\isasymlambda}y{\isacharcolon}{\isacharcolon}int{\isachardot}{\isacharparenleft}x{\isacharless}y{\isacharparenright}{\isacharparenright}\ a\ b{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{definition}\isamarkupfalse%
+\ ValueEq\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}value\ option\ {\isasymRightarrow}\ value\ option\ {\isasymRightarrow}\ trilean{\isachardoublequoteclose}\ \ \isakeyword{where}\isanewline
+\ \ {\isachardoublequoteopen}ValueEq\ a\ b\ {\isasymequiv}\ {\isacharparenleft}if\ a\ {\isacharequal}\ b\ then\ true\ else\ false{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{instantiation}\isamarkupfalse%
+\ {\isachardoublequoteopen}value{\isachardoublequoteclose}\ {\isacharcolon}{\isacharcolon}\ linorder\ \isakeyword{begin}\isanewline
+\isacommand{fun}\isamarkupfalse%
+\ less{\isacharunderscore}eq{\isacharunderscore}value\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}value\ {\isasymRightarrow}\ value\ {\isasymRightarrow}\ bool{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+\ \ {\isachardoublequoteopen}less{\isacharunderscore}eq{\isacharunderscore}value\ {\isacharparenleft}Num\ n{\isacharparenright}\ {\isacharparenleft}Str\ s{\isacharparenright}\ {\isacharequal}\ True{\isachardoublequoteclose}\ {\isacharbar}\isanewline
+\ \ {\isachardoublequoteopen}less{\isacharunderscore}eq{\isacharunderscore}value\ {\isacharparenleft}Str\ s{\isacharparenright}\ {\isacharparenleft}Num\ n{\isacharparenright}\ {\isacharequal}\ False{\isachardoublequoteclose}\ {\isacharbar}\isanewline
+\ \ {\isachardoublequoteopen}less{\isacharunderscore}eq{\isacharunderscore}value\ {\isacharparenleft}Str\ n{\isacharparenright}\ {\isacharparenleft}Str\ s{\isacharparenright}\ {\isacharequal}\ less{\isacharunderscore}eq\ n\ s{\isachardoublequoteclose}\ {\isacharbar}\isanewline
+\ \ {\isachardoublequoteopen}less{\isacharunderscore}eq{\isacharunderscore}value\ {\isacharparenleft}Num\ n{\isacharparenright}\ {\isacharparenleft}Num\ s{\isacharparenright}\ {\isacharequal}\ less{\isacharunderscore}eq\ n\ s{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{fun}\isamarkupfalse%
+\ less{\isacharunderscore}value\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}value\ {\isasymRightarrow}\ value\ {\isasymRightarrow}\ bool{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+\ \ {\isachardoublequoteopen}less{\isacharunderscore}value\ {\isacharparenleft}Num\ n{\isacharparenright}\ {\isacharparenleft}Str\ s{\isacharparenright}\ {\isacharequal}\ True{\isachardoublequoteclose}\ {\isacharbar}\isanewline
+\ \ {\isachardoublequoteopen}less{\isacharunderscore}value\ {\isacharparenleft}Str\ s{\isacharparenright}\ {\isacharparenleft}Num\ n{\isacharparenright}\ {\isacharequal}\ False{\isachardoublequoteclose}\ {\isacharbar}\isanewline
+\ \ {\isachardoublequoteopen}less{\isacharunderscore}value\ {\isacharparenleft}Str\ n{\isacharparenright}\ {\isacharparenleft}Str\ s{\isacharparenright}\ {\isacharequal}\ less\ n\ s{\isachardoublequoteclose}\ {\isacharbar}\isanewline
+\ \ {\isachardoublequoteopen}less{\isacharunderscore}value\ {\isacharparenleft}Num\ n{\isacharparenright}\ {\isacharparenleft}Num\ s{\isacharparenright}\ {\isacharequal}\ less\ n\ s{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{instance}\isamarkupfalse%
+%
+\isadelimproof
+\ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{proof}\isamarkupfalse%
+\isanewline
+\ \ \isacommand{fix}\isamarkupfalse%
+\ x\ y{\isacharcolon}{\isacharcolon}{\isachardoublequoteopen}value{\isachardoublequoteclose}\isanewline
+\ \ \isacommand{show}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isacharparenleft}x\ {\isacharless}\ y{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}x\ {\isasymle}\ y\ {\isasymand}\ {\isasymnot}\ y\ {\isasymle}\ x{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ \isacommand{proof}\isamarkupfalse%
+\ {\isacharparenleft}induct\ x{\isacharparenright}\isanewline
+\ \ \ \ \isacommand{case}\isamarkupfalse%
+\ {\isacharparenleft}Num\ x{\isacharparenright}\isanewline
+\ \ \ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}case\isanewline
+\ \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}cases\ y{\isacharparenright}\isanewline
+\ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ auto\isanewline
+\ \ \isacommand{next}\isamarkupfalse%
+\isanewline
+\ \ \ \ \isacommand{case}\isamarkupfalse%
+\ {\isacharparenleft}Str\ x{\isacharparenright}\isanewline
+\ \ \ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}case\isanewline
+\ \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}cases\ y{\isacharparenright}\isanewline
+\ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ auto\isanewline
+\ \ \isacommand{qed}\isamarkupfalse%
+\isanewline
+\ \ \isacommand{fix}\isamarkupfalse%
+\ x\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}value{\isachardoublequoteclose}\isanewline
+\ \ \isacommand{show}\isamarkupfalse%
+\ {\isachardoublequoteopen}x\ {\isasymle}\ x{\isachardoublequoteclose}\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}cases\ x{\isacharparenright}\isanewline
+\ \ \ \ \isacommand{by}\isamarkupfalse%
+\ auto\isanewline
+\ \ \isacommand{fix}\isamarkupfalse%
+\ x\ y\ z{\isacharcolon}{\isacharcolon}{\isachardoublequoteopen}value{\isachardoublequoteclose}\isanewline
+\ \ \isacommand{show}\isamarkupfalse%
+\ {\isachardoublequoteopen}x\ {\isasymle}\ y\ {\isasymLongrightarrow}\ y\ {\isasymle}\ z\ {\isasymLongrightarrow}\ x\ {\isasymle}\ z{\isachardoublequoteclose}\isanewline
+\ \ \isacommand{proof}\isamarkupfalse%
+\ {\isacharparenleft}induct\ x{\isacharparenright}\isanewline
+\ \ \ \ \isacommand{case}\isamarkupfalse%
+\ {\isacharparenleft}Num\ n{\isacharparenright}\isanewline
+\ \ \ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}case\isanewline
+\ \ \ \ \isacommand{proof}\isamarkupfalse%
+\ {\isacharparenleft}induct\ y{\isacharparenright}\isanewline
+\ \ \ \ \ \ \isacommand{case}\isamarkupfalse%
+\ {\isacharparenleft}Num\ x{\isacharparenright}\isanewline
+\ \ \ \ \ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}case\isanewline
+\ \ \ \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}cases\ z{\isacharparenright}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ auto\isanewline
+\ \ \ \ \isacommand{next}\isamarkupfalse%
+\isanewline
+\ \ \ \ \ \ \isacommand{case}\isamarkupfalse%
+\ {\isacharparenleft}Str\ x{\isacharparenright}\isanewline
+\ \ \ \ \ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}case\isanewline
+\ \ \ \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}cases\ z{\isacharparenright}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ auto\isanewline
+\ \ \ \ \isacommand{qed}\isamarkupfalse%
+\isanewline
+\ \ \isacommand{next}\isamarkupfalse%
+\isanewline
+\ \ \ \ \isacommand{case}\isamarkupfalse%
+\ {\isacharparenleft}Str\ s{\isacharparenright}\isanewline
+\ \ \ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}case\isanewline
+\ \ \ \ \isacommand{proof}\isamarkupfalse%
+\ {\isacharparenleft}induct\ y{\isacharparenright}\isanewline
+\ \ \ \ \ \ \isacommand{case}\isamarkupfalse%
+\ {\isacharparenleft}Num\ x{\isacharparenright}\isanewline
+\ \ \ \ \ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}case\isanewline
+\ \ \ \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}cases\ z{\isacharparenright}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ auto\isanewline
+\ \ \ \ \isacommand{next}\isamarkupfalse%
+\isanewline
+\ \ \ \ \ \ \isacommand{case}\isamarkupfalse%
+\ {\isacharparenleft}Str\ x{\isacharparenright}\isanewline
+\ \ \ \ \ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}case\isanewline
+\ \ \ \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}cases\ z{\isacharparenright}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ auto\isanewline
+\ \ \ \ \isacommand{qed}\isamarkupfalse%
+\isanewline
+\ \ \isacommand{qed}\isamarkupfalse%
+\isanewline
+\isacommand{next}\isamarkupfalse%
+\isanewline
+\ \ \isacommand{fix}\isamarkupfalse%
+\ x\ y\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}value{\isachardoublequoteclose}\isanewline
+\ \ \isacommand{show}\isamarkupfalse%
+\ {\isachardoublequoteopen}x\ {\isasymle}\ y\ {\isasymLongrightarrow}\ y\ {\isasymle}\ x\ {\isasymLongrightarrow}\ x\ {\isacharequal}\ y{\isachardoublequoteclose}\isanewline
+\ \ \isacommand{proof}\isamarkupfalse%
+\ {\isacharparenleft}induct\ x{\isacharparenright}\isanewline
+\ \ \ \ \isacommand{case}\isamarkupfalse%
+\ {\isacharparenleft}Num\ x{\isacharparenright}\isanewline
+\ \ \ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}case\isanewline
+\ \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}cases\ y{\isacharparenright}\isanewline
+\ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ auto\isanewline
+\ \ \isacommand{next}\isamarkupfalse%
+\isanewline
+\ \ \ \ \isacommand{case}\isamarkupfalse%
+\ {\isacharparenleft}Str\ x{\isacharparenright}\isanewline
+\ \ \ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}case\isanewline
+\ \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}cases\ y{\isacharparenright}\isanewline
+\ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ auto\isanewline
+\ \ \isacommand{qed}\isamarkupfalse%
+\isanewline
+\isacommand{next}\isamarkupfalse%
+\isanewline
+\ \ \isacommand{fix}\isamarkupfalse%
+\ x\ y{\isacharcolon}{\isacharcolon}{\isachardoublequoteopen}value{\isachardoublequoteclose}\isanewline
+\ \ \isacommand{show}\isamarkupfalse%
+\ {\isachardoublequoteopen}x\ {\isasymle}\ y\ {\isasymor}\ y\ {\isasymle}\ x{\isachardoublequoteclose}\isanewline
+\ \ \isacommand{proof}\isamarkupfalse%
+\ {\isacharparenleft}induct\ x{\isacharparenright}\isanewline
+\ \ \ \ \isacommand{case}\isamarkupfalse%
+\ {\isacharparenleft}Num\ x{\isacharparenright}\isanewline
+\ \ \ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}case\isanewline
+\ \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}cases\ y{\isacharparenright}\isanewline
+\ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ auto\isanewline
+\ \ \isacommand{next}\isamarkupfalse%
+\isanewline
+\ \ \ \ \isacommand{case}\isamarkupfalse%
+\ {\isacharparenleft}Str\ x{\isacharparenright}\isanewline
+\ \ \ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}case\isanewline
+\ \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}cases\ y{\isacharparenright}\isanewline
+\ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ auto\isanewline
+\ \ \isacommand{qed}\isamarkupfalse%
+\isanewline
+\isacommand{qed}\isamarkupfalse%
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+%
+\endisadelimproof
+\isanewline
+\isacommand{end}\isamarkupfalse%
+\isanewline
+%
+\isadelimtheory
+\isanewline
+%
+\endisadelimtheory
+%
+\isatagtheory
+\isacommand{end}\isamarkupfalse%
+%
+\endisatagtheory
+{\isafoldtheory}%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\end{isabellebody}%
+\endinput
+%:%file=~/Documents/efsm-sal/theories/Value.thy%:%
+%:%10=1%:%
+%:%11=1%:%
+%:%12=2%:%
+%:%13=3%:%
+%:%18=3%:%
+%:%21=4%:%
+%:%22=4%:%
+%:%23=5%:%
+%:%24=6%:%
+%:%25=6%:%
+%:%26=7%:%
+%:%27=8%:%
+%:%28=9%:%
+%:%29=10%:%
+%:%30=10%:%
+%:%31=11%:%
+%:%32=12%:%
+%:%33=13%:%
+%:%34=13%:%
+%:%35=14%:%
+%:%36=15%:%
+%:%37=16%:%
+%:%38=16%:%
+%:%39=17%:%
+%:%40=18%:%
+%:%41=19%:%
+%:%42=19%:%
+%:%43=20%:%
+%:%44=20%:%
+%:%45=21%:%
+%:%46=22%:%
+%:%47=23%:%
+%:%48=24%:%
+%:%49=25%:%
+%:%50=26%:%
+%:%51=26%:%
+%:%52=27%:%
+%:%53=28%:%
+%:%54=29%:%
+%:%55=30%:%
+%:%56=31%:%
+%:%57=32%:%
+%:%60=32%:%
+%:%64=32%:%
+%:%65=32%:%
+%:%66=33%:%
+%:%67=33%:%
+%:%68=34%:%
+%:%69=34%:%
+%:%70=35%:%
+%:%71=35%:%
+%:%72=36%:%
+%:%73=36%:%
+%:%74=37%:%
+%:%75=37%:%
+%:%76=37%:%
+%:%77=38%:%
+%:%78=38%:%
+%:%79=39%:%
+%:%80=39%:%
+%:%81=40%:%
+%:%82=40%:%
+%:%83=41%:%
+%:%84=41%:%
+%:%85=42%:%
+%:%86=42%:%
+%:%87=42%:%
+%:%88=43%:%
+%:%89=43%:%
+%:%90=44%:%
+%:%91=44%:%
+%:%92=45%:%
+%:%93=45%:%
+%:%94=46%:%
+%:%95=46%:%
+%:%96=47%:%
+%:%97=47%:%
+%:%98=48%:%
+%:%99=48%:%
+%:%100=49%:%
+%:%101=49%:%
+%:%102=50%:%
+%:%103=50%:%
+%:%104=51%:%
+%:%105=51%:%
+%:%106=52%:%
+%:%107=52%:%
+%:%108=53%:%
+%:%109=53%:%
+%:%110=54%:%
+%:%111=54%:%
+%:%112=54%:%
+%:%113=55%:%
+%:%114=55%:%
+%:%115=56%:%
+%:%116=56%:%
+%:%117=57%:%
+%:%118=57%:%
+%:%119=57%:%
+%:%120=58%:%
+%:%121=58%:%
+%:%122=59%:%
+%:%123=59%:%
+%:%124=60%:%
+%:%125=60%:%
+%:%126=61%:%
+%:%127=61%:%
+%:%128=62%:%
+%:%129=62%:%
+%:%130=62%:%
+%:%131=63%:%
+%:%132=63%:%
+%:%133=64%:%
+%:%134=64%:%
+%:%135=65%:%
+%:%136=65%:%
+%:%137=66%:%
+%:%138=66%:%
+%:%139=67%:%
+%:%140=67%:%
+%:%141=68%:%
+%:%142=68%:%
+%:%143=68%:%
+%:%144=69%:%
+%:%145=69%:%
+%:%146=70%:%
+%:%147=70%:%
+%:%148=71%:%
+%:%149=71%:%
+%:%150=71%:%
+%:%151=72%:%
+%:%152=72%:%
+%:%153=73%:%
+%:%154=73%:%
+%:%155=74%:%
+%:%156=74%:%
+%:%157=75%:%
+%:%158=75%:%
+%:%159=76%:%
+%:%160=76%:%
+%:%161=76%:%
+%:%162=77%:%
+%:%163=77%:%
+%:%164=78%:%
+%:%165=78%:%
+%:%166=79%:%
+%:%167=79%:%
+%:%168=80%:%
+%:%169=80%:%
+%:%170=81%:%
+%:%171=81%:%
+%:%172=82%:%
+%:%173=82%:%
+%:%174=83%:%
+%:%175=83%:%
+%:%176=84%:%
+%:%177=84%:%
+%:%178=85%:%
+%:%179=85%:%
+%:%180=86%:%
+%:%181=86%:%
+%:%182=86%:%
+%:%183=87%:%
+%:%184=87%:%
+%:%185=88%:%
+%:%186=88%:%
+%:%187=89%:%
+%:%188=89%:%
+%:%189=90%:%
+%:%190=90%:%
+%:%191=91%:%
+%:%192=91%:%
+%:%193=91%:%
+%:%194=92%:%
+%:%195=92%:%
+%:%196=93%:%
+%:%197=93%:%
+%:%198=94%:%
+%:%199=94%:%
+%:%200=95%:%
+%:%201=95%:%
+%:%202=96%:%
+%:%203=96%:%
+%:%204=97%:%
+%:%205=97%:%
+%:%206=98%:%
+%:%207=98%:%
+%:%208=99%:%
+%:%209=99%:%
+%:%210=100%:%
+%:%211=100%:%
+%:%212=100%:%
+%:%213=101%:%
+%:%214=101%:%
+%:%215=102%:%
+%:%216=102%:%
+%:%217=103%:%
+%:%218=103%:%
+%:%219=104%:%
+%:%220=104%:%
+%:%221=105%:%
+%:%222=105%:%
+%:%223=105%:%
+%:%224=106%:%
+%:%225=106%:%
+%:%226=107%:%
+%:%227=107%:%
+%:%228=108%:%
+%:%229=108%:%
+%:%230=109%:%
+%:%238=109%:%
+%:%239=110%:%
+%:%240=110%:%
+%:%243=111%:%
+%:%248=112%:%

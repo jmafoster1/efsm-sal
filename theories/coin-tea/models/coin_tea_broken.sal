@@ -1,0 +1,131 @@
+coin_tea_broken {N_ : nznat} : CONTEXT = BEGIN
+
+LABEL : TYPE = DATATYPE
+  coin,
+  init,
+  vend
+END;
+
+STRING : TYPE = {String_tea};
+                                                                 %%10
+STATES : TYPE = {State_0, State_1, State_2, NULL_STATE};
+
+value : CONTEXT = value {N_, STRING};
+arithmetic : CONTEXT = arithmetic{N_, STRING};
+
+TRILEAN : TYPE = arithmetic ! TRILEAN;
+B_VALUE : TYPE =  value ! B_VALUE;
+VALUE : TYPE =  value ! VALUE;
+value_option : CONTEXT = option {VALUE};
+                                                                 %%20
+VALUE_OPTION : TYPE =  value_option ! OPTION;
+
+Some : [VALUE -> VALUE_OPTION] = value_option ! Some;
+NUM : [value ! int -> VALUE] = value ! NUM;
+STR : [STRING -> VALUE] = value ! STR;
+
+value_plus : [[VALUE_OPTION, VALUE_OPTION] -> VALUE_OPTION] =
+    arithmetic ! value_plus;
+value_minus : [[VALUE_OPTION, VALUE_OPTION] -> VALUE_OPTION] =
+    arithmetic ! value_minus;                                      %%30
+  
+value_le : [[VALUE_OPTION, VALUE_OPTION] -> TRILEAN] =
+    arithmetic ! value_le;
+value_ge : [[VALUE_OPTION, VALUE_OPTION] -> TRILEAN] =
+    arithmetic ! value_ge;
+value_lt : [[VALUE_OPTION, VALUE_OPTION] -> TRILEAN] =
+    arithmetic ! value_lt;
+value_gt : [[VALUE_OPTION, VALUE_OPTION] -> TRILEAN] =
+    arithmetic ! value_gt;
+value_eq : [[VALUE_OPTION, VALUE_OPTION] -> TRILEAN] =           %%40
+    arithmetic ! value_eq;
+  
+output_sequence : CONTEXT = sequence {value_option !
+    B_OPTION, value_option ! OPTION_BB, 1};
+input_sequence : CONTEXT = sequence {B_VALUE, value !
+    VALUE_BB, 1};
+gval : [TRILEAN -> BOOLEAN] = LAMBDA(g : TRILEAN) : g =
+    arithmetic ! True;
+  
+check_underflow : [VALUE_OPTION -> BOOLEAN] =                    %%50
+    LAMBDA(v : VALUE_OPTION) : gval(value_ge(v, Some(NUM(0-N_))));
+check_overflow : [VALUE_OPTION -> BOOLEAN] =
+    LAMBDA(v : VALUE_OPTION) : gval(value_le(v, Some(NUM(N_))));
+  
+drinks : MODULE =
+  BEGIN
+    INPUT label : LABEL
+    LOCAL cfstate : STATES
+    LOCAL r_1 : VALUE_OPTION
+    INPUT I : input_sequence ! Sequence                          %%60
+    OUTPUT O : output_sequence ! Sequence
+    INITIALIZATION [
+        cfstate = State_0 AND
+        O = output_sequence ! empty AND
+        r_1 = value_option ! None
+      -->
+    ]
+    TRANSITION [
+      INIT :
+          cfstate = State_0 AND label = init AND                 %%70
+              input_sequence ! size?(I) = 0
+        -->
+          cfstate' = State_1;
+          r_1' = Some(NUM(0));
+          O' = output_sequence ! empty
+      []
+      COIN :
+          cfstate = State_1 AND label = coin AND
+              input_sequence ! size?(I) = 0 AND
+              check_overflow(value_plus(r_1, Some(NUM(1)))) AND    %%80
+              check_underflow(value_plus(r_1, Some(NUM(1))))
+        -->
+          cfstate' = State_1;
+          r_1' = value_plus(r_1, Some(NUM(1)));
+          O' = output_sequence ! empty
+      []
+      VEND :
+          cfstate = State_1 AND label = vend AND
+              input_sequence ! size?(I) = 0 AND
+              gval(value_ge(r_1, Some(NUM(0))))                    %%90
+        -->
+          cfstate' = State_2;
+          O' = output_sequence !
+              insert(Some(STR(String_tea)), output_sequence !
+              empty);
+          r_1' = r_1
+      []
+      SINK_HOLE :
+          ELSE
+        -->                                                      %%100
+          cfstate' = NULL_STATE;
+          r_1' = r_1
+    ]
+  END;
+  LTL_label_vend_not_2 : THEOREM drinks |-
+    label = vend => NOT (F(cfstate = State_2));
+    
+  LTL_aux2 : THEOREM drinks |-
+    X(label = vend) => NOT (F(cfstate = State_2));
+                                                                 %%110
+  LTL_init_makes_r_1_zero : THEOREM drinks |-
+    label = init AND
+        I = input_sequence ! empty =>
+        X(gval(value_eq(r_1,(Some(NUM(0))))));
+      
+  LTL_must_pay_wrong : THEOREM drinks |-
+    U(NOT (U(label = vend, label = coin)), cfstate = NULL_STATE);
+    
+  LTL_vend_no_coin : THEOREM drinks |-
+    X(label = vend AND                                           %%120
+        I = input_sequence ! empty) => NOT (F(cfstate = State_2));
+      
+  LTL_invalid_gets_stuck_2 : THEOREM drinks |-
+    X(NOT (label = coin AND I = input_sequence ! empty)) AND
+        X(NOT (label = vend AND
+        I = input_sequence ! empty)) => NOT (F(cfstate = State_2));
+      
+  LTL_must_pay_correct : THEOREM drinks |-
+    F(cfstate = State_2) => U(NOT (label = vend), label = coin);
+                                                                 %%130
+END

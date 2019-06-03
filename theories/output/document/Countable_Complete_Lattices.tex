@@ -1,0 +1,1918 @@
+%
+\begin{isabellebody}%
+\setisabellecontext{Countable{\isacharunderscore}Complete{\isacharunderscore}Lattices}%
+%
+\isadelimdocument
+%
+\endisadelimdocument
+%
+\isatagdocument
+%
+\isamarkupsection{Countable Complete Lattices%
+}
+\isamarkuptrue%
+%
+\endisatagdocument
+{\isafolddocument}%
+%
+\isadelimdocument
+%
+\endisadelimdocument
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\isatagtheory
+\isacommand{theory}\isamarkupfalse%
+\ Countable{\isacharunderscore}Complete{\isacharunderscore}Lattices\isanewline
+\ \ \isakeyword{imports}\ Main\ Countable{\isacharunderscore}Set\isanewline
+\isakeyword{begin}%
+\endisatagtheory
+{\isafoldtheory}%
+%
+\isadelimtheory
+\isanewline
+%
+\endisadelimtheory
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ UNIV{\isacharunderscore}nat{\isacharunderscore}eq{\isacharcolon}\ {\isachardoublequoteopen}UNIV\ {\isacharequal}\ insert\ {\isadigit{0}}\ {\isacharparenleft}range\ Suc{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}metis\ UNIV{\isacharunderscore}eq{\isacharunderscore}I\ nat{\isachardot}nchotomy\ insertCI\ rangeI{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{class}\isamarkupfalse%
+\ countable{\isacharunderscore}complete{\isacharunderscore}lattice\ {\isacharequal}\ lattice\ {\isacharplus}\ Inf\ {\isacharplus}\ Sup\ {\isacharplus}\ bot\ {\isacharplus}\ top\ {\isacharplus}\isanewline
+\ \ \isakeyword{assumes}\ ccInf{\isacharunderscore}lower{\isacharcolon}\ {\isachardoublequoteopen}countable\ A\ {\isasymLongrightarrow}\ x\ {\isasymin}\ A\ {\isasymLongrightarrow}\ Inf\ A\ {\isasymle}\ x{\isachardoublequoteclose}\isanewline
+\ \ \isakeyword{assumes}\ ccInf{\isacharunderscore}greatest{\isacharcolon}\ {\isachardoublequoteopen}countable\ A\ {\isasymLongrightarrow}\ {\isacharparenleft}{\isasymAnd}x{\isachardot}\ x\ {\isasymin}\ A\ {\isasymLongrightarrow}\ z\ {\isasymle}\ x{\isacharparenright}\ {\isasymLongrightarrow}\ z\ {\isasymle}\ Inf\ A{\isachardoublequoteclose}\isanewline
+\ \ \isakeyword{assumes}\ ccSup{\isacharunderscore}upper{\isacharcolon}\ {\isachardoublequoteopen}countable\ A\ {\isasymLongrightarrow}\ x\ {\isasymin}\ A\ {\isasymLongrightarrow}\ x\ {\isasymle}\ Sup\ A{\isachardoublequoteclose}\isanewline
+\ \ \isakeyword{assumes}\ ccSup{\isacharunderscore}least{\isacharcolon}\ {\isachardoublequoteopen}countable\ A\ {\isasymLongrightarrow}\ {\isacharparenleft}{\isasymAnd}x{\isachardot}\ x\ {\isasymin}\ A\ {\isasymLongrightarrow}\ x\ {\isasymle}\ z{\isacharparenright}\ {\isasymLongrightarrow}\ Sup\ A\ {\isasymle}\ z{\isachardoublequoteclose}\isanewline
+\ \ \isakeyword{assumes}\ ccInf{\isacharunderscore}empty\ {\isacharbrackleft}simp{\isacharbrackright}{\isacharcolon}\ {\isachardoublequoteopen}Inf\ {\isacharbraceleft}{\isacharbraceright}\ {\isacharequal}\ top{\isachardoublequoteclose}\isanewline
+\ \ \isakeyword{assumes}\ ccSup{\isacharunderscore}empty\ {\isacharbrackleft}simp{\isacharbrackright}{\isacharcolon}\ {\isachardoublequoteopen}Sup\ {\isacharbraceleft}{\isacharbraceright}\ {\isacharequal}\ bot{\isachardoublequoteclose}\isanewline
+\isakeyword{begin}\isanewline
+\isanewline
+\isacommand{subclass}\isamarkupfalse%
+\ bounded{\isacharunderscore}lattice\isanewline
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\isatagproof
+\isacommand{proof}\isamarkupfalse%
+\isanewline
+\ \ \isacommand{fix}\isamarkupfalse%
+\ a\isanewline
+\ \ \isacommand{show}\isamarkupfalse%
+\ {\isachardoublequoteopen}bot\ {\isasymle}\ a{\isachardoublequoteclose}\ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}auto\ intro{\isacharcolon}\ ccSup{\isacharunderscore}least\ simp\ only{\isacharcolon}\ ccSup{\isacharunderscore}empty\ {\isacharbrackleft}symmetric{\isacharbrackright}{\isacharparenright}\isanewline
+\ \ \isacommand{show}\isamarkupfalse%
+\ {\isachardoublequoteopen}a\ {\isasymle}\ top{\isachardoublequoteclose}\ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}auto\ intro{\isacharcolon}\ ccInf{\isacharunderscore}greatest\ simp\ only{\isacharcolon}\ ccInf{\isacharunderscore}empty\ {\isacharbrackleft}symmetric{\isacharbrackright}{\isacharparenright}\isanewline
+\isacommand{qed}\isamarkupfalse%
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ ccINF{\isacharunderscore}lower{\isacharcolon}\ {\isachardoublequoteopen}countable\ A\ {\isasymLongrightarrow}\ i\ {\isasymin}\ A\ {\isasymLongrightarrow}\ {\isacharparenleft}INF\ i\ {\isacharcolon}A{\isachardot}\ f\ i{\isacharparenright}\ {\isasymle}\ f\ i{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{using}\isamarkupfalse%
+\ ccInf{\isacharunderscore}lower\ {\isacharbrackleft}of\ {\isachardoublequoteopen}f\ {\isacharbackquote}\ A{\isachardoublequoteclose}{\isacharbrackright}\ \isacommand{by}\isamarkupfalse%
+\ simp%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ ccINF{\isacharunderscore}greatest{\isacharcolon}\ {\isachardoublequoteopen}countable\ A\ {\isasymLongrightarrow}\ {\isacharparenleft}{\isasymAnd}i{\isachardot}\ i\ {\isasymin}\ A\ {\isasymLongrightarrow}\ u\ {\isasymle}\ f\ i{\isacharparenright}\ {\isasymLongrightarrow}\ u\ {\isasymle}\ {\isacharparenleft}INF\ i\ {\isacharcolon}A{\isachardot}\ f\ i{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{using}\isamarkupfalse%
+\ ccInf{\isacharunderscore}greatest\ {\isacharbrackleft}of\ {\isachardoublequoteopen}f\ {\isacharbackquote}\ A{\isachardoublequoteclose}{\isacharbrackright}\ \isacommand{by}\isamarkupfalse%
+\ auto%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ ccSUP{\isacharunderscore}upper{\isacharcolon}\ {\isachardoublequoteopen}countable\ A\ {\isasymLongrightarrow}\ i\ {\isasymin}\ A\ {\isasymLongrightarrow}\ f\ i\ {\isasymle}\ {\isacharparenleft}SUP\ i\ {\isacharcolon}A{\isachardot}\ f\ i{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{using}\isamarkupfalse%
+\ ccSup{\isacharunderscore}upper\ {\isacharbrackleft}of\ {\isachardoublequoteopen}f\ {\isacharbackquote}\ A{\isachardoublequoteclose}{\isacharbrackright}\ \isacommand{by}\isamarkupfalse%
+\ simp%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ ccSUP{\isacharunderscore}least{\isacharcolon}\ {\isachardoublequoteopen}countable\ A\ {\isasymLongrightarrow}\ {\isacharparenleft}{\isasymAnd}i{\isachardot}\ i\ {\isasymin}\ A\ {\isasymLongrightarrow}\ f\ i\ {\isasymle}\ u{\isacharparenright}\ {\isasymLongrightarrow}\ {\isacharparenleft}SUP\ i\ {\isacharcolon}A{\isachardot}\ f\ i{\isacharparenright}\ {\isasymle}\ u{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{using}\isamarkupfalse%
+\ ccSup{\isacharunderscore}least\ {\isacharbrackleft}of\ {\isachardoublequoteopen}f\ {\isacharbackquote}\ A{\isachardoublequoteclose}{\isacharbrackright}\ \isacommand{by}\isamarkupfalse%
+\ auto%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ ccInf{\isacharunderscore}lower{\isadigit{2}}{\isacharcolon}\ {\isachardoublequoteopen}countable\ A\ {\isasymLongrightarrow}\ u\ {\isasymin}\ A\ {\isasymLongrightarrow}\ u\ {\isasymle}\ v\ {\isasymLongrightarrow}\ Inf\ A\ {\isasymle}\ v{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{using}\isamarkupfalse%
+\ ccInf{\isacharunderscore}lower\ {\isacharbrackleft}of\ A\ u{\isacharbrackright}\ \isacommand{by}\isamarkupfalse%
+\ auto%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ ccINF{\isacharunderscore}lower{\isadigit{2}}{\isacharcolon}\ {\isachardoublequoteopen}countable\ A\ {\isasymLongrightarrow}\ i\ {\isasymin}\ A\ {\isasymLongrightarrow}\ f\ i\ {\isasymle}\ u\ {\isasymLongrightarrow}\ {\isacharparenleft}INF\ i\ {\isacharcolon}A{\isachardot}\ f\ i{\isacharparenright}\ {\isasymle}\ u{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{using}\isamarkupfalse%
+\ ccINF{\isacharunderscore}lower\ {\isacharbrackleft}of\ A\ i\ f{\isacharbrackright}\ \isacommand{by}\isamarkupfalse%
+\ auto%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ ccSup{\isacharunderscore}upper{\isadigit{2}}{\isacharcolon}\ {\isachardoublequoteopen}countable\ A\ {\isasymLongrightarrow}\ u\ {\isasymin}\ A\ {\isasymLongrightarrow}\ v\ {\isasymle}\ u\ {\isasymLongrightarrow}\ v\ {\isasymle}\ Sup\ A{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{using}\isamarkupfalse%
+\ ccSup{\isacharunderscore}upper\ {\isacharbrackleft}of\ A\ u{\isacharbrackright}\ \isacommand{by}\isamarkupfalse%
+\ auto%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ ccSUP{\isacharunderscore}upper{\isadigit{2}}{\isacharcolon}\ {\isachardoublequoteopen}countable\ A\ {\isasymLongrightarrow}\ i\ {\isasymin}\ A\ {\isasymLongrightarrow}\ u\ {\isasymle}\ f\ i\ {\isasymLongrightarrow}\ u\ {\isasymle}\ {\isacharparenleft}SUP\ i\ {\isacharcolon}A{\isachardot}\ f\ i{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{using}\isamarkupfalse%
+\ ccSUP{\isacharunderscore}upper\ {\isacharbrackleft}of\ A\ i\ f{\isacharbrackright}\ \isacommand{by}\isamarkupfalse%
+\ auto%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ le{\isacharunderscore}ccInf{\isacharunderscore}iff{\isacharcolon}\ {\isachardoublequoteopen}countable\ A\ {\isasymLongrightarrow}\ b\ {\isasymle}\ Inf\ A\ {\isasymlongleftrightarrow}\ {\isacharparenleft}{\isasymforall}a{\isasymin}A{\isachardot}\ b\ {\isasymle}\ a{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}auto\ intro{\isacharcolon}\ ccInf{\isacharunderscore}greatest\ dest{\isacharcolon}\ ccInf{\isacharunderscore}lower{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ le{\isacharunderscore}ccINF{\isacharunderscore}iff{\isacharcolon}\ {\isachardoublequoteopen}countable\ A\ {\isasymLongrightarrow}\ u\ {\isasymle}\ {\isacharparenleft}INF\ i\ {\isacharcolon}A{\isachardot}\ f\ i{\isacharparenright}\ {\isasymlongleftrightarrow}\ {\isacharparenleft}{\isasymforall}i{\isasymin}A{\isachardot}\ u\ {\isasymle}\ f\ i{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{using}\isamarkupfalse%
+\ le{\isacharunderscore}ccInf{\isacharunderscore}iff\ {\isacharbrackleft}of\ {\isachardoublequoteopen}f\ {\isacharbackquote}\ A{\isachardoublequoteclose}{\isacharbrackright}\ \isacommand{by}\isamarkupfalse%
+\ simp%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ ccSup{\isacharunderscore}le{\isacharunderscore}iff{\isacharcolon}\ {\isachardoublequoteopen}countable\ A\ {\isasymLongrightarrow}\ Sup\ A\ {\isasymle}\ b\ {\isasymlongleftrightarrow}\ {\isacharparenleft}{\isasymforall}a{\isasymin}A{\isachardot}\ a\ {\isasymle}\ b{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}auto\ intro{\isacharcolon}\ ccSup{\isacharunderscore}least\ dest{\isacharcolon}\ ccSup{\isacharunderscore}upper{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ ccSUP{\isacharunderscore}le{\isacharunderscore}iff{\isacharcolon}\ {\isachardoublequoteopen}countable\ A\ {\isasymLongrightarrow}\ {\isacharparenleft}SUP\ i\ {\isacharcolon}A{\isachardot}\ f\ i{\isacharparenright}\ {\isasymle}\ u\ {\isasymlongleftrightarrow}\ {\isacharparenleft}{\isasymforall}i{\isasymin}A{\isachardot}\ f\ i\ {\isasymle}\ u{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{using}\isamarkupfalse%
+\ ccSup{\isacharunderscore}le{\isacharunderscore}iff\ {\isacharbrackleft}of\ {\isachardoublequoteopen}f\ {\isacharbackquote}\ A{\isachardoublequoteclose}{\isacharbrackright}\ \isacommand{by}\isamarkupfalse%
+\ simp%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ ccInf{\isacharunderscore}insert\ {\isacharbrackleft}simp{\isacharbrackright}{\isacharcolon}\ {\isachardoublequoteopen}countable\ A\ {\isasymLongrightarrow}\ Inf\ {\isacharparenleft}insert\ a\ A{\isacharparenright}\ {\isacharequal}\ inf\ a\ {\isacharparenleft}Inf\ A{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}force\ intro{\isacharcolon}\ le{\isacharunderscore}infI\ le{\isacharunderscore}infI{\isadigit{1}}\ le{\isacharunderscore}infI{\isadigit{2}}\ antisym\ ccInf{\isacharunderscore}greatest\ ccInf{\isacharunderscore}lower{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ ccINF{\isacharunderscore}insert\ {\isacharbrackleft}simp{\isacharbrackright}{\isacharcolon}\ {\isachardoublequoteopen}countable\ A\ {\isasymLongrightarrow}\ {\isacharparenleft}INF\ x{\isacharcolon}insert\ a\ A{\isachardot}\ f\ x{\isacharparenright}\ {\isacharequal}\ inf\ {\isacharparenleft}f\ a{\isacharparenright}\ {\isacharparenleft}INFIMUM\ A\ f{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{unfolding}\isamarkupfalse%
+\ image{\isacharunderscore}insert\ \isacommand{by}\isamarkupfalse%
+\ simp%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ ccSup{\isacharunderscore}insert\ {\isacharbrackleft}simp{\isacharbrackright}{\isacharcolon}\ {\isachardoublequoteopen}countable\ A\ {\isasymLongrightarrow}\ Sup\ {\isacharparenleft}insert\ a\ A{\isacharparenright}\ {\isacharequal}\ sup\ a\ {\isacharparenleft}Sup\ A{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}force\ intro{\isacharcolon}\ le{\isacharunderscore}supI\ le{\isacharunderscore}supI{\isadigit{1}}\ le{\isacharunderscore}supI{\isadigit{2}}\ antisym\ ccSup{\isacharunderscore}least\ ccSup{\isacharunderscore}upper{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ ccSUP{\isacharunderscore}insert\ {\isacharbrackleft}simp{\isacharbrackright}{\isacharcolon}\ {\isachardoublequoteopen}countable\ A\ {\isasymLongrightarrow}\ {\isacharparenleft}SUP\ x{\isacharcolon}insert\ a\ A{\isachardot}\ f\ x{\isacharparenright}\ {\isacharequal}\ sup\ {\isacharparenleft}f\ a{\isacharparenright}\ {\isacharparenleft}SUPREMUM\ A\ f{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{unfolding}\isamarkupfalse%
+\ image{\isacharunderscore}insert\ \isacommand{by}\isamarkupfalse%
+\ simp%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ ccINF{\isacharunderscore}empty\ {\isacharbrackleft}simp{\isacharbrackright}{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}INF\ x{\isacharcolon}{\isacharbraceleft}{\isacharbraceright}{\isachardot}\ f\ x{\isacharparenright}\ {\isacharequal}\ top{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{unfolding}\isamarkupfalse%
+\ image{\isacharunderscore}empty\ \isacommand{by}\isamarkupfalse%
+\ simp%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ ccSUP{\isacharunderscore}empty\ {\isacharbrackleft}simp{\isacharbrackright}{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}SUP\ x{\isacharcolon}{\isacharbraceleft}{\isacharbraceright}{\isachardot}\ f\ x{\isacharparenright}\ {\isacharequal}\ bot{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{unfolding}\isamarkupfalse%
+\ image{\isacharunderscore}empty\ \isacommand{by}\isamarkupfalse%
+\ simp%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ ccInf{\isacharunderscore}superset{\isacharunderscore}mono{\isacharcolon}\ {\isachardoublequoteopen}countable\ A\ {\isasymLongrightarrow}\ B\ {\isasymsubseteq}\ A\ {\isasymLongrightarrow}\ Inf\ A\ {\isasymle}\ Inf\ B{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}auto\ intro{\isacharcolon}\ ccInf{\isacharunderscore}greatest\ ccInf{\isacharunderscore}lower\ countable{\isacharunderscore}subset{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ ccSup{\isacharunderscore}subset{\isacharunderscore}mono{\isacharcolon}\ {\isachardoublequoteopen}countable\ B\ {\isasymLongrightarrow}\ A\ {\isasymsubseteq}\ B\ {\isasymLongrightarrow}\ Sup\ A\ {\isasymle}\ Sup\ B{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}auto\ intro{\isacharcolon}\ ccSup{\isacharunderscore}least\ ccSup{\isacharunderscore}upper\ countable{\isacharunderscore}subset{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ ccInf{\isacharunderscore}mono{\isacharcolon}\isanewline
+\ \ \isakeyword{assumes}\ {\isacharbrackleft}intro{\isacharbrackright}{\isacharcolon}\ {\isachardoublequoteopen}countable\ B{\isachardoublequoteclose}\ {\isachardoublequoteopen}countable\ A{\isachardoublequoteclose}\isanewline
+\ \ \isakeyword{assumes}\ {\isachardoublequoteopen}{\isasymAnd}b{\isachardot}\ b\ {\isasymin}\ B\ {\isasymLongrightarrow}\ {\isasymexists}a{\isasymin}A{\isachardot}\ a\ {\isasymle}\ b{\isachardoublequoteclose}\isanewline
+\ \ \isakeyword{shows}\ {\isachardoublequoteopen}Inf\ A\ {\isasymle}\ Inf\ B{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\isatagproof
+\isacommand{proof}\isamarkupfalse%
+\ {\isacharparenleft}rule\ ccInf{\isacharunderscore}greatest{\isacharparenright}\isanewline
+\ \ \isacommand{fix}\isamarkupfalse%
+\ b\ \isacommand{assume}\isamarkupfalse%
+\ {\isachardoublequoteopen}b\ {\isasymin}\ B{\isachardoublequoteclose}\isanewline
+\ \ \isacommand{with}\isamarkupfalse%
+\ assms\ \isacommand{obtain}\isamarkupfalse%
+\ a\ \isakeyword{where}\ {\isachardoublequoteopen}a\ {\isasymin}\ A{\isachardoublequoteclose}\ \isakeyword{and}\ {\isachardoublequoteopen}a\ {\isasymle}\ b{\isachardoublequoteclose}\ \isacommand{by}\isamarkupfalse%
+\ blast\isanewline
+\ \ \isacommand{from}\isamarkupfalse%
+\ {\isacartoucheopen}a\ {\isasymin}\ A{\isacartoucheclose}\ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}Inf\ A\ {\isasymle}\ a{\isachardoublequoteclose}\ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}rule\ ccInf{\isacharunderscore}lower{\isacharbrackleft}rotated{\isacharbrackright}{\isacharparenright}\ auto\isanewline
+\ \ \isacommand{with}\isamarkupfalse%
+\ {\isacartoucheopen}a\ {\isasymle}\ b{\isacartoucheclose}\ \isacommand{show}\isamarkupfalse%
+\ {\isachardoublequoteopen}Inf\ A\ {\isasymle}\ b{\isachardoublequoteclose}\ \isacommand{by}\isamarkupfalse%
+\ auto\isanewline
+\isacommand{qed}\isamarkupfalse%
+\ auto%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ ccINF{\isacharunderscore}mono{\isacharcolon}\isanewline
+\ \ {\isachardoublequoteopen}countable\ A\ {\isasymLongrightarrow}\ countable\ B\ {\isasymLongrightarrow}\ {\isacharparenleft}{\isasymAnd}m{\isachardot}\ m\ {\isasymin}\ B\ {\isasymLongrightarrow}\ {\isasymexists}n{\isasymin}A{\isachardot}\ f\ n\ {\isasymle}\ g\ m{\isacharparenright}\ {\isasymLongrightarrow}\ {\isacharparenleft}INF\ n{\isacharcolon}A{\isachardot}\ f\ n{\isacharparenright}\ {\isasymle}\ {\isacharparenleft}INF\ n{\isacharcolon}B{\isachardot}\ g\ n{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{using}\isamarkupfalse%
+\ ccInf{\isacharunderscore}mono\ {\isacharbrackleft}of\ {\isachardoublequoteopen}g\ {\isacharbackquote}\ B{\isachardoublequoteclose}\ {\isachardoublequoteopen}f\ {\isacharbackquote}\ A{\isachardoublequoteclose}{\isacharbrackright}\ \isacommand{by}\isamarkupfalse%
+\ auto%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ ccSup{\isacharunderscore}mono{\isacharcolon}\isanewline
+\ \ \isakeyword{assumes}\ {\isacharbrackleft}intro{\isacharbrackright}{\isacharcolon}\ {\isachardoublequoteopen}countable\ B{\isachardoublequoteclose}\ {\isachardoublequoteopen}countable\ A{\isachardoublequoteclose}\isanewline
+\ \ \isakeyword{assumes}\ {\isachardoublequoteopen}{\isasymAnd}a{\isachardot}\ a\ {\isasymin}\ A\ {\isasymLongrightarrow}\ {\isasymexists}b{\isasymin}B{\isachardot}\ a\ {\isasymle}\ b{\isachardoublequoteclose}\isanewline
+\ \ \isakeyword{shows}\ {\isachardoublequoteopen}Sup\ A\ {\isasymle}\ Sup\ B{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\isatagproof
+\isacommand{proof}\isamarkupfalse%
+\ {\isacharparenleft}rule\ ccSup{\isacharunderscore}least{\isacharparenright}\isanewline
+\ \ \isacommand{fix}\isamarkupfalse%
+\ a\ \isacommand{assume}\isamarkupfalse%
+\ {\isachardoublequoteopen}a\ {\isasymin}\ A{\isachardoublequoteclose}\isanewline
+\ \ \isacommand{with}\isamarkupfalse%
+\ assms\ \isacommand{obtain}\isamarkupfalse%
+\ b\ \isakeyword{where}\ {\isachardoublequoteopen}b\ {\isasymin}\ B{\isachardoublequoteclose}\ \isakeyword{and}\ {\isachardoublequoteopen}a\ {\isasymle}\ b{\isachardoublequoteclose}\ \isacommand{by}\isamarkupfalse%
+\ blast\isanewline
+\ \ \isacommand{from}\isamarkupfalse%
+\ {\isacartoucheopen}b\ {\isasymin}\ B{\isacartoucheclose}\ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}b\ {\isasymle}\ Sup\ B{\isachardoublequoteclose}\ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}rule\ ccSup{\isacharunderscore}upper{\isacharbrackleft}rotated{\isacharbrackright}{\isacharparenright}\ auto\isanewline
+\ \ \isacommand{with}\isamarkupfalse%
+\ {\isacartoucheopen}a\ {\isasymle}\ b{\isacartoucheclose}\ \isacommand{show}\isamarkupfalse%
+\ {\isachardoublequoteopen}a\ {\isasymle}\ Sup\ B{\isachardoublequoteclose}\ \isacommand{by}\isamarkupfalse%
+\ auto\isanewline
+\isacommand{qed}\isamarkupfalse%
+\ auto%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ ccSUP{\isacharunderscore}mono{\isacharcolon}\isanewline
+\ \ {\isachardoublequoteopen}countable\ A\ {\isasymLongrightarrow}\ countable\ B\ {\isasymLongrightarrow}\ {\isacharparenleft}{\isasymAnd}n{\isachardot}\ n\ {\isasymin}\ A\ {\isasymLongrightarrow}\ {\isasymexists}m{\isasymin}B{\isachardot}\ f\ n\ {\isasymle}\ g\ m{\isacharparenright}\ {\isasymLongrightarrow}\ {\isacharparenleft}SUP\ n{\isacharcolon}A{\isachardot}\ f\ n{\isacharparenright}\ {\isasymle}\ {\isacharparenleft}SUP\ n{\isacharcolon}B{\isachardot}\ g\ n{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{using}\isamarkupfalse%
+\ ccSup{\isacharunderscore}mono\ {\isacharbrackleft}of\ {\isachardoublequoteopen}g\ {\isacharbackquote}\ B{\isachardoublequoteclose}\ {\isachardoublequoteopen}f\ {\isacharbackquote}\ A{\isachardoublequoteclose}{\isacharbrackright}\ \isacommand{by}\isamarkupfalse%
+\ auto%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ ccINF{\isacharunderscore}superset{\isacharunderscore}mono{\isacharcolon}\isanewline
+\ \ {\isachardoublequoteopen}countable\ A\ {\isasymLongrightarrow}\ B\ {\isasymsubseteq}\ A\ {\isasymLongrightarrow}\ {\isacharparenleft}{\isasymAnd}x{\isachardot}\ x\ {\isasymin}\ B\ {\isasymLongrightarrow}\ f\ x\ {\isasymle}\ g\ x{\isacharparenright}\ {\isasymLongrightarrow}\ {\isacharparenleft}INF\ x{\isacharcolon}A{\isachardot}\ f\ x{\isacharparenright}\ {\isasymle}\ {\isacharparenleft}INF\ x{\isacharcolon}B{\isachardot}\ g\ x{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}blast\ intro{\isacharcolon}\ ccINF{\isacharunderscore}mono\ countable{\isacharunderscore}subset\ dest{\isacharcolon}\ subsetD{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ ccSUP{\isacharunderscore}subset{\isacharunderscore}mono{\isacharcolon}\isanewline
+\ \ {\isachardoublequoteopen}countable\ B\ {\isasymLongrightarrow}\ A\ {\isasymsubseteq}\ B\ {\isasymLongrightarrow}\ {\isacharparenleft}{\isasymAnd}x{\isachardot}\ x\ {\isasymin}\ A\ {\isasymLongrightarrow}\ f\ x\ {\isasymle}\ g\ x{\isacharparenright}\ {\isasymLongrightarrow}\ {\isacharparenleft}SUP\ x{\isacharcolon}A{\isachardot}\ f\ x{\isacharparenright}\ {\isasymle}\ {\isacharparenleft}SUP\ x{\isacharcolon}B{\isachardot}\ g\ x{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}blast\ intro{\isacharcolon}\ ccSUP{\isacharunderscore}mono\ countable{\isacharunderscore}subset\ dest{\isacharcolon}\ subsetD{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ less{\isacharunderscore}eq{\isacharunderscore}ccInf{\isacharunderscore}inter{\isacharcolon}\ {\isachardoublequoteopen}countable\ A\ {\isasymLongrightarrow}\ countable\ B\ {\isasymLongrightarrow}\ sup\ {\isacharparenleft}Inf\ A{\isacharparenright}\ {\isacharparenleft}Inf\ B{\isacharparenright}\ {\isasymle}\ Inf\ {\isacharparenleft}A\ {\isasyminter}\ B{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}auto\ intro{\isacharcolon}\ ccInf{\isacharunderscore}greatest\ ccInf{\isacharunderscore}lower{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ ccSup{\isacharunderscore}inter{\isacharunderscore}less{\isacharunderscore}eq{\isacharcolon}\ {\isachardoublequoteopen}countable\ A\ {\isasymLongrightarrow}\ countable\ B\ {\isasymLongrightarrow}\ Sup\ {\isacharparenleft}A\ {\isasyminter}\ B{\isacharparenright}\ {\isasymle}\ inf\ {\isacharparenleft}Sup\ A{\isacharparenright}\ {\isacharparenleft}Sup\ B{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}auto\ intro{\isacharcolon}\ ccSup{\isacharunderscore}least\ ccSup{\isacharunderscore}upper{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ ccInf{\isacharunderscore}union{\isacharunderscore}distrib{\isacharcolon}\ {\isachardoublequoteopen}countable\ A\ {\isasymLongrightarrow}\ countable\ B\ {\isasymLongrightarrow}\ Inf\ {\isacharparenleft}A\ {\isasymunion}\ B{\isacharparenright}\ {\isacharequal}\ inf\ {\isacharparenleft}Inf\ A{\isacharparenright}\ {\isacharparenleft}Inf\ B{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}rule\ antisym{\isacharparenright}\ {\isacharparenleft}auto\ intro{\isacharcolon}\ ccInf{\isacharunderscore}greatest\ ccInf{\isacharunderscore}lower\ le{\isacharunderscore}infI{\isadigit{1}}\ le{\isacharunderscore}infI{\isadigit{2}}{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ ccINF{\isacharunderscore}union{\isacharcolon}\isanewline
+\ \ {\isachardoublequoteopen}countable\ A\ {\isasymLongrightarrow}\ countable\ B\ {\isasymLongrightarrow}\ {\isacharparenleft}INF\ i{\isacharcolon}A\ {\isasymunion}\ B{\isachardot}\ M\ i{\isacharparenright}\ {\isacharequal}\ inf\ {\isacharparenleft}INF\ i{\isacharcolon}A{\isachardot}\ M\ i{\isacharparenright}\ {\isacharparenleft}INF\ i{\isacharcolon}B{\isachardot}\ M\ i{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}auto\ intro{\isacharbang}{\isacharcolon}\ antisym\ ccINF{\isacharunderscore}mono\ intro{\isacharcolon}\ le{\isacharunderscore}infI{\isadigit{1}}\ le{\isacharunderscore}infI{\isadigit{2}}\ ccINF{\isacharunderscore}greatest\ ccINF{\isacharunderscore}lower{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ ccSup{\isacharunderscore}union{\isacharunderscore}distrib{\isacharcolon}\ {\isachardoublequoteopen}countable\ A\ {\isasymLongrightarrow}\ countable\ B\ {\isasymLongrightarrow}\ Sup\ {\isacharparenleft}A\ {\isasymunion}\ B{\isacharparenright}\ {\isacharequal}\ sup\ {\isacharparenleft}Sup\ A{\isacharparenright}\ {\isacharparenleft}Sup\ B{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}rule\ antisym{\isacharparenright}\ {\isacharparenleft}auto\ intro{\isacharcolon}\ ccSup{\isacharunderscore}least\ ccSup{\isacharunderscore}upper\ le{\isacharunderscore}supI{\isadigit{1}}\ le{\isacharunderscore}supI{\isadigit{2}}{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ ccSUP{\isacharunderscore}union{\isacharcolon}\isanewline
+\ \ {\isachardoublequoteopen}countable\ A\ {\isasymLongrightarrow}\ countable\ B\ {\isasymLongrightarrow}\ {\isacharparenleft}SUP\ i{\isacharcolon}A\ {\isasymunion}\ B{\isachardot}\ M\ i{\isacharparenright}\ {\isacharequal}\ sup\ {\isacharparenleft}SUP\ i{\isacharcolon}A{\isachardot}\ M\ i{\isacharparenright}\ {\isacharparenleft}SUP\ i{\isacharcolon}B{\isachardot}\ M\ i{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}auto\ intro{\isacharbang}{\isacharcolon}\ antisym\ ccSUP{\isacharunderscore}mono\ intro{\isacharcolon}\ le{\isacharunderscore}supI{\isadigit{1}}\ le{\isacharunderscore}supI{\isadigit{2}}\ ccSUP{\isacharunderscore}least\ ccSUP{\isacharunderscore}upper{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ ccINF{\isacharunderscore}inf{\isacharunderscore}distrib{\isacharcolon}\ {\isachardoublequoteopen}countable\ A\ {\isasymLongrightarrow}\ inf\ {\isacharparenleft}INF\ a{\isacharcolon}A{\isachardot}\ f\ a{\isacharparenright}\ {\isacharparenleft}INF\ a{\isacharcolon}A{\isachardot}\ g\ a{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}INF\ a{\isacharcolon}A{\isachardot}\ inf\ {\isacharparenleft}f\ a{\isacharparenright}\ {\isacharparenleft}g\ a{\isacharparenright}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}rule\ antisym{\isacharparenright}\ {\isacharparenleft}rule\ ccINF{\isacharunderscore}greatest{\isacharcomma}\ auto\ intro{\isacharcolon}\ le{\isacharunderscore}infI{\isadigit{1}}\ le{\isacharunderscore}infI{\isadigit{2}}\ ccINF{\isacharunderscore}lower\ ccINF{\isacharunderscore}mono{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ ccSUP{\isacharunderscore}sup{\isacharunderscore}distrib{\isacharcolon}\ {\isachardoublequoteopen}countable\ A\ {\isasymLongrightarrow}\ sup\ {\isacharparenleft}SUP\ a{\isacharcolon}A{\isachardot}\ f\ a{\isacharparenright}\ {\isacharparenleft}SUP\ a{\isacharcolon}A{\isachardot}\ g\ a{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}SUP\ a{\isacharcolon}A{\isachardot}\ sup\ {\isacharparenleft}f\ a{\isacharparenright}\ {\isacharparenleft}g\ a{\isacharparenright}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}rule\ antisym{\isacharbrackleft}rotated{\isacharbrackright}{\isacharparenright}\ {\isacharparenleft}rule\ ccSUP{\isacharunderscore}least{\isacharcomma}\ auto\ intro{\isacharcolon}\ le{\isacharunderscore}supI{\isadigit{1}}\ le{\isacharunderscore}supI{\isadigit{2}}\ ccSUP{\isacharunderscore}upper\ ccSUP{\isacharunderscore}mono{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ ccINF{\isacharunderscore}const\ {\isacharbrackleft}simp{\isacharbrackright}{\isacharcolon}\ {\isachardoublequoteopen}A\ {\isasymnoteq}\ {\isacharbraceleft}{\isacharbraceright}\ {\isasymLongrightarrow}\ {\isacharparenleft}INF\ i\ {\isacharcolon}A{\isachardot}\ f{\isacharparenright}\ {\isacharequal}\ f{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{unfolding}\isamarkupfalse%
+\ image{\isacharunderscore}constant{\isacharunderscore}conv\ \isacommand{by}\isamarkupfalse%
+\ auto%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ ccSUP{\isacharunderscore}const\ {\isacharbrackleft}simp{\isacharbrackright}{\isacharcolon}\ {\isachardoublequoteopen}A\ {\isasymnoteq}\ {\isacharbraceleft}{\isacharbraceright}\ {\isasymLongrightarrow}\ {\isacharparenleft}SUP\ i\ {\isacharcolon}A{\isachardot}\ f{\isacharparenright}\ {\isacharequal}\ f{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{unfolding}\isamarkupfalse%
+\ image{\isacharunderscore}constant{\isacharunderscore}conv\ \isacommand{by}\isamarkupfalse%
+\ auto%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ ccINF{\isacharunderscore}top\ {\isacharbrackleft}simp{\isacharbrackright}{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}INF\ x{\isacharcolon}A{\isachardot}\ top{\isacharparenright}\ {\isacharequal}\ top{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}cases\ {\isachardoublequoteopen}A\ {\isacharequal}\ {\isacharbraceleft}{\isacharbraceright}{\isachardoublequoteclose}{\isacharparenright}\ simp{\isacharunderscore}all%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ ccSUP{\isacharunderscore}bot\ {\isacharbrackleft}simp{\isacharbrackright}{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}SUP\ x{\isacharcolon}A{\isachardot}\ bot{\isacharparenright}\ {\isacharequal}\ bot{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}cases\ {\isachardoublequoteopen}A\ {\isacharequal}\ {\isacharbraceleft}{\isacharbraceright}{\isachardoublequoteclose}{\isacharparenright}\ simp{\isacharunderscore}all%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ ccINF{\isacharunderscore}commute{\isacharcolon}\ {\isachardoublequoteopen}countable\ A\ {\isasymLongrightarrow}\ countable\ B\ {\isasymLongrightarrow}\ {\isacharparenleft}INF\ i{\isacharcolon}A{\isachardot}\ INF\ j{\isacharcolon}B{\isachardot}\ f\ i\ j{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}INF\ j{\isacharcolon}B{\isachardot}\ INF\ i{\isacharcolon}A{\isachardot}\ f\ i\ j{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}iprover\ intro{\isacharcolon}\ ccINF{\isacharunderscore}lower\ ccINF{\isacharunderscore}greatest\ order{\isacharunderscore}trans\ antisym{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ ccSUP{\isacharunderscore}commute{\isacharcolon}\ {\isachardoublequoteopen}countable\ A\ {\isasymLongrightarrow}\ countable\ B\ {\isasymLongrightarrow}\ {\isacharparenleft}SUP\ i{\isacharcolon}A{\isachardot}\ SUP\ j{\isacharcolon}B{\isachardot}\ f\ i\ j{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}SUP\ j{\isacharcolon}B{\isachardot}\ SUP\ i{\isacharcolon}A{\isachardot}\ f\ i\ j{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}iprover\ intro{\isacharcolon}\ ccSUP{\isacharunderscore}upper\ ccSUP{\isacharunderscore}least\ order{\isacharunderscore}trans\ antisym{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{end}\isamarkupfalse%
+\isanewline
+\isanewline
+\isacommand{context}\isamarkupfalse%
+\isanewline
+\ \ \isakeyword{fixes}\ a\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}{\isacharprime}a{\isacharcolon}{\isacharcolon}{\isacharbraceleft}countable{\isacharunderscore}complete{\isacharunderscore}lattice{\isacharcomma}\ linorder{\isacharbraceright}{\isachardoublequoteclose}\isanewline
+\isakeyword{begin}\isanewline
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ less{\isacharunderscore}ccSup{\isacharunderscore}iff{\isacharcolon}\ {\isachardoublequoteopen}countable\ S\ {\isasymLongrightarrow}\ a\ {\isacharless}\ Sup\ S\ {\isasymlongleftrightarrow}\ {\isacharparenleft}{\isasymexists}x{\isasymin}S{\isachardot}\ a\ {\isacharless}\ x{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{unfolding}\isamarkupfalse%
+\ not{\isacharunderscore}le\ {\isacharbrackleft}symmetric{\isacharbrackright}\ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}subst\ ccSup{\isacharunderscore}le{\isacharunderscore}iff{\isacharparenright}\ auto%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ less{\isacharunderscore}ccSUP{\isacharunderscore}iff{\isacharcolon}\ {\isachardoublequoteopen}countable\ A\ {\isasymLongrightarrow}\ a\ {\isacharless}\ {\isacharparenleft}SUP\ i{\isacharcolon}A{\isachardot}\ f\ i{\isacharparenright}\ {\isasymlongleftrightarrow}\ {\isacharparenleft}{\isasymexists}x{\isasymin}A{\isachardot}\ a\ {\isacharless}\ f\ x{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{using}\isamarkupfalse%
+\ less{\isacharunderscore}ccSup{\isacharunderscore}iff\ {\isacharbrackleft}of\ {\isachardoublequoteopen}f\ {\isacharbackquote}\ A{\isachardoublequoteclose}{\isacharbrackright}\ \isacommand{by}\isamarkupfalse%
+\ simp%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ ccInf{\isacharunderscore}less{\isacharunderscore}iff{\isacharcolon}\ {\isachardoublequoteopen}countable\ S\ {\isasymLongrightarrow}\ Inf\ S\ {\isacharless}\ a\ {\isasymlongleftrightarrow}\ {\isacharparenleft}{\isasymexists}x{\isasymin}S{\isachardot}\ x\ {\isacharless}\ a{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{unfolding}\isamarkupfalse%
+\ not{\isacharunderscore}le\ {\isacharbrackleft}symmetric{\isacharbrackright}\ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}subst\ le{\isacharunderscore}ccInf{\isacharunderscore}iff{\isacharparenright}\ auto%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ ccINF{\isacharunderscore}less{\isacharunderscore}iff{\isacharcolon}\ {\isachardoublequoteopen}countable\ A\ {\isasymLongrightarrow}\ {\isacharparenleft}INF\ i{\isacharcolon}A{\isachardot}\ f\ i{\isacharparenright}\ {\isacharless}\ a\ {\isasymlongleftrightarrow}\ {\isacharparenleft}{\isasymexists}x{\isasymin}A{\isachardot}\ f\ x\ {\isacharless}\ a{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{using}\isamarkupfalse%
+\ ccInf{\isacharunderscore}less{\isacharunderscore}iff\ {\isacharbrackleft}of\ {\isachardoublequoteopen}f\ {\isacharbackquote}\ A{\isachardoublequoteclose}{\isacharbrackright}\ \isacommand{by}\isamarkupfalse%
+\ simp%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{end}\isamarkupfalse%
+\isanewline
+\isanewline
+\isacommand{class}\isamarkupfalse%
+\ countable{\isacharunderscore}complete{\isacharunderscore}distrib{\isacharunderscore}lattice\ {\isacharequal}\ countable{\isacharunderscore}complete{\isacharunderscore}lattice\ {\isacharplus}\isanewline
+\ \ \isakeyword{assumes}\ sup{\isacharunderscore}ccInf{\isacharcolon}\ {\isachardoublequoteopen}countable\ B\ {\isasymLongrightarrow}\ sup\ a\ {\isacharparenleft}Inf\ B{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}INF\ b{\isacharcolon}B{\isachardot}\ sup\ a\ b{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ \isakeyword{assumes}\ inf{\isacharunderscore}ccSup{\isacharcolon}\ {\isachardoublequoteopen}countable\ B\ {\isasymLongrightarrow}\ inf\ a\ {\isacharparenleft}Sup\ B{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}SUP\ b{\isacharcolon}B{\isachardot}\ inf\ a\ b{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\isakeyword{begin}\isanewline
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ sup{\isacharunderscore}ccINF{\isacharcolon}\isanewline
+\ \ {\isachardoublequoteopen}countable\ B\ {\isasymLongrightarrow}\ sup\ a\ {\isacharparenleft}INF\ b{\isacharcolon}B{\isachardot}\ f\ b{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}INF\ b{\isacharcolon}B{\isachardot}\ sup\ a\ {\isacharparenleft}f\ b{\isacharparenright}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}simp\ only{\isacharcolon}\ sup{\isacharunderscore}ccInf\ image{\isacharunderscore}image\ countable{\isacharunderscore}image{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ inf{\isacharunderscore}ccSUP{\isacharcolon}\isanewline
+\ \ {\isachardoublequoteopen}countable\ B\ {\isasymLongrightarrow}\ inf\ a\ {\isacharparenleft}SUP\ b{\isacharcolon}B{\isachardot}\ f\ b{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}SUP\ b{\isacharcolon}B{\isachardot}\ inf\ a\ {\isacharparenleft}f\ b{\isacharparenright}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}simp\ only{\isacharcolon}\ inf{\isacharunderscore}ccSup\ image{\isacharunderscore}image\ countable{\isacharunderscore}image{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{subclass}\isamarkupfalse%
+\ distrib{\isacharunderscore}lattice\isanewline
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\isatagproof
+\isacommand{proof}\isamarkupfalse%
+\isanewline
+\ \ \isacommand{fix}\isamarkupfalse%
+\ a\ b\ c\isanewline
+\ \ \isacommand{from}\isamarkupfalse%
+\ sup{\isacharunderscore}ccInf{\isacharbrackleft}of\ {\isachardoublequoteopen}{\isacharbraceleft}b{\isacharcomma}\ c{\isacharbraceright}{\isachardoublequoteclose}\ a{\isacharbrackright}\ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}sup\ a\ {\isacharparenleft}Inf\ {\isacharbraceleft}b{\isacharcomma}\ c{\isacharbraceright}{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}INF\ d{\isacharcolon}{\isacharbraceleft}b{\isacharcomma}\ c{\isacharbraceright}{\isachardot}\ sup\ a\ d{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \isacommand{by}\isamarkupfalse%
+\ simp\isanewline
+\ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isachardoublequoteopen}sup\ a\ {\isacharparenleft}inf\ b\ c{\isacharparenright}\ {\isacharequal}\ inf\ {\isacharparenleft}sup\ a\ b{\isacharparenright}\ {\isacharparenleft}sup\ a\ c{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \isacommand{by}\isamarkupfalse%
+\ simp\isanewline
+\isacommand{qed}\isamarkupfalse%
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ ccInf{\isacharunderscore}sup{\isacharcolon}\isanewline
+\ \ {\isachardoublequoteopen}countable\ B\ {\isasymLongrightarrow}\ sup\ {\isacharparenleft}Inf\ B{\isacharparenright}\ a\ {\isacharequal}\ {\isacharparenleft}INF\ b{\isacharcolon}B{\isachardot}\ sup\ b\ a{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ sup{\isacharunderscore}ccInf\ sup{\isacharunderscore}commute{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ ccSup{\isacharunderscore}inf{\isacharcolon}\isanewline
+\ \ {\isachardoublequoteopen}countable\ B\ {\isasymLongrightarrow}\ inf\ {\isacharparenleft}Sup\ B{\isacharparenright}\ a\ {\isacharequal}\ {\isacharparenleft}SUP\ b{\isacharcolon}B{\isachardot}\ inf\ b\ a{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ inf{\isacharunderscore}ccSup\ inf{\isacharunderscore}commute{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ ccINF{\isacharunderscore}sup{\isacharcolon}\isanewline
+\ \ {\isachardoublequoteopen}countable\ B\ {\isasymLongrightarrow}\ sup\ {\isacharparenleft}INF\ b{\isacharcolon}B{\isachardot}\ f\ b{\isacharparenright}\ a\ {\isacharequal}\ {\isacharparenleft}INF\ b{\isacharcolon}B{\isachardot}\ sup\ {\isacharparenleft}f\ b{\isacharparenright}\ a{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ sup{\isacharunderscore}ccINF\ sup{\isacharunderscore}commute{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ ccSUP{\isacharunderscore}inf{\isacharcolon}\isanewline
+\ \ {\isachardoublequoteopen}countable\ B\ {\isasymLongrightarrow}\ inf\ {\isacharparenleft}SUP\ b{\isacharcolon}B{\isachardot}\ f\ b{\isacharparenright}\ a\ {\isacharequal}\ {\isacharparenleft}SUP\ b{\isacharcolon}B{\isachardot}\ inf\ {\isacharparenleft}f\ b{\isacharparenright}\ a{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ inf{\isacharunderscore}ccSUP\ inf{\isacharunderscore}commute{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ ccINF{\isacharunderscore}sup{\isacharunderscore}distrib{\isadigit{2}}{\isacharcolon}\isanewline
+\ \ {\isachardoublequoteopen}countable\ A\ {\isasymLongrightarrow}\ countable\ B\ {\isasymLongrightarrow}\ sup\ {\isacharparenleft}INF\ a{\isacharcolon}A{\isachardot}\ f\ a{\isacharparenright}\ {\isacharparenleft}INF\ b{\isacharcolon}B{\isachardot}\ g\ b{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}INF\ a{\isacharcolon}A{\isachardot}\ INF\ b{\isacharcolon}B{\isachardot}\ sup\ {\isacharparenleft}f\ a{\isacharparenright}\ {\isacharparenleft}g\ b{\isacharparenright}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}subst\ ccINF{\isacharunderscore}commute{\isacharparenright}\ {\isacharparenleft}simp{\isacharunderscore}all\ add{\isacharcolon}\ sup{\isacharunderscore}ccINF\ ccINF{\isacharunderscore}sup{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ ccSUP{\isacharunderscore}inf{\isacharunderscore}distrib{\isadigit{2}}{\isacharcolon}\isanewline
+\ \ {\isachardoublequoteopen}countable\ A\ {\isasymLongrightarrow}\ countable\ B\ {\isasymLongrightarrow}\ inf\ {\isacharparenleft}SUP\ a{\isacharcolon}A{\isachardot}\ f\ a{\isacharparenright}\ {\isacharparenleft}SUP\ b{\isacharcolon}B{\isachardot}\ g\ b{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}SUP\ a{\isacharcolon}A{\isachardot}\ SUP\ b{\isacharcolon}B{\isachardot}\ inf\ {\isacharparenleft}f\ a{\isacharparenright}\ {\isacharparenleft}g\ b{\isacharparenright}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}subst\ ccSUP{\isacharunderscore}commute{\isacharparenright}\ {\isacharparenleft}simp{\isacharunderscore}all\ add{\isacharcolon}\ inf{\isacharunderscore}ccSUP\ ccSUP{\isacharunderscore}inf{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{context}\isamarkupfalse%
+\isanewline
+\ \ \isakeyword{fixes}\ f\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}{\isacharprime}a\ {\isasymRightarrow}\ {\isacharprime}b{\isacharcolon}{\isacharcolon}countable{\isacharunderscore}complete{\isacharunderscore}lattice{\isachardoublequoteclose}\isanewline
+\ \ \isakeyword{assumes}\ {\isachardoublequoteopen}mono\ f{\isachardoublequoteclose}\isanewline
+\isakeyword{begin}\isanewline
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ mono{\isacharunderscore}ccInf{\isacharcolon}\isanewline
+\ \ {\isachardoublequoteopen}countable\ A\ {\isasymLongrightarrow}\ f\ {\isacharparenleft}Inf\ A{\isacharparenright}\ {\isasymle}\ {\isacharparenleft}INF\ x{\isacharcolon}A{\isachardot}\ f\ x{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{using}\isamarkupfalse%
+\ {\isacartoucheopen}mono\ f{\isacartoucheclose}\isanewline
+\ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}auto\ intro{\isacharbang}{\isacharcolon}\ countable{\isacharunderscore}complete{\isacharunderscore}lattice{\isacharunderscore}class{\isachardot}ccINF{\isacharunderscore}greatest\ intro{\isacharcolon}\ ccInf{\isacharunderscore}lower\ dest{\isacharcolon}\ monoD{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ mono{\isacharunderscore}ccSup{\isacharcolon}\isanewline
+\ \ {\isachardoublequoteopen}countable\ A\ {\isasymLongrightarrow}\ {\isacharparenleft}SUP\ x{\isacharcolon}A{\isachardot}\ f\ x{\isacharparenright}\ {\isasymle}\ f\ {\isacharparenleft}Sup\ A{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{using}\isamarkupfalse%
+\ {\isacartoucheopen}mono\ f{\isacartoucheclose}\ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}auto\ intro{\isacharcolon}\ countable{\isacharunderscore}complete{\isacharunderscore}lattice{\isacharunderscore}class{\isachardot}ccSUP{\isacharunderscore}least\ ccSup{\isacharunderscore}upper\ dest{\isacharcolon}\ monoD{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ mono{\isacharunderscore}ccINF{\isacharcolon}\isanewline
+\ \ {\isachardoublequoteopen}countable\ I\ {\isasymLongrightarrow}\ f\ {\isacharparenleft}INF\ i\ {\isacharcolon}\ I{\isachardot}\ A\ i{\isacharparenright}\ {\isasymle}\ {\isacharparenleft}INF\ x\ {\isacharcolon}\ I{\isachardot}\ f\ {\isacharparenleft}A\ x{\isacharparenright}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}intro\ countable{\isacharunderscore}complete{\isacharunderscore}lattice{\isacharunderscore}class{\isachardot}ccINF{\isacharunderscore}greatest\ monoD{\isacharbrackleft}OF\ {\isacartoucheopen}mono\ f{\isacartoucheclose}{\isacharbrackright}\ ccINF{\isacharunderscore}lower{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ mono{\isacharunderscore}ccSUP{\isacharcolon}\isanewline
+\ \ {\isachardoublequoteopen}countable\ I\ {\isasymLongrightarrow}\ {\isacharparenleft}SUP\ x\ {\isacharcolon}\ I{\isachardot}\ f\ {\isacharparenleft}A\ x{\isacharparenright}{\isacharparenright}\ {\isasymle}\ f\ {\isacharparenleft}SUP\ i\ {\isacharcolon}\ I{\isachardot}\ A\ i{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}intro\ countable{\isacharunderscore}complete{\isacharunderscore}lattice{\isacharunderscore}class{\isachardot}ccSUP{\isacharunderscore}least\ monoD{\isacharbrackleft}OF\ {\isacartoucheopen}mono\ f{\isacartoucheclose}{\isacharbrackright}\ ccSUP{\isacharunderscore}upper{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{end}\isamarkupfalse%
+\isanewline
+\isanewline
+\isacommand{end}\isamarkupfalse%
+%
+\isadelimdocument
+%
+\endisadelimdocument
+%
+\isatagdocument
+%
+\isamarkupsubsubsection{Instances of countable complete lattices%
+}
+\isamarkuptrue%
+%
+\endisatagdocument
+{\isafolddocument}%
+%
+\isadelimdocument
+%
+\endisadelimdocument
+\isacommand{instance}\isamarkupfalse%
+\ {\isachardoublequoteopen}fun{\isachardoublequoteclose}\ {\isacharcolon}{\isacharcolon}\ {\isacharparenleft}type{\isacharcomma}\ countable{\isacharunderscore}complete{\isacharunderscore}lattice{\isacharparenright}\ countable{\isacharunderscore}complete{\isacharunderscore}lattice\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ standard\isanewline
+\ \ \ \ \ {\isacharparenleft}auto\ simp{\isacharcolon}\ le{\isacharunderscore}fun{\isacharunderscore}def\ intro{\isacharbang}{\isacharcolon}\ ccSUP{\isacharunderscore}upper\ ccSUP{\isacharunderscore}least\ ccINF{\isacharunderscore}lower\ ccINF{\isacharunderscore}greatest{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{subclass}\isamarkupfalse%
+\ {\isacharparenleft}\isakeyword{in}\ complete{\isacharunderscore}lattice{\isacharparenright}\ countable{\isacharunderscore}complete{\isacharunderscore}lattice\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ standard\ {\isacharparenleft}auto\ intro{\isacharcolon}\ Sup{\isacharunderscore}upper\ Sup{\isacharunderscore}least\ Inf{\isacharunderscore}lower\ Inf{\isacharunderscore}greatest{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{subclass}\isamarkupfalse%
+\ {\isacharparenleft}\isakeyword{in}\ complete{\isacharunderscore}distrib{\isacharunderscore}lattice{\isacharparenright}\ countable{\isacharunderscore}complete{\isacharunderscore}distrib{\isacharunderscore}lattice\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ standard\ {\isacharparenleft}auto\ intro{\isacharcolon}\ sup{\isacharunderscore}Inf\ inf{\isacharunderscore}Sup{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+%
+\isadelimtheory
+\isanewline
+%
+\endisadelimtheory
+%
+\isatagtheory
+\isacommand{end}\isamarkupfalse%
+%
+\endisatagtheory
+{\isafoldtheory}%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\end{isabellebody}%
+\endinput
+%:%file=~~/src/HOL/Library/Countable_Complete_Lattices.thy%:%
+%:%11=5%:%
+%:%27=7%:%
+%:%28=7%:%
+%:%29=8%:%
+%:%30=9%:%
+%:%35=9%:%
+%:%38=10%:%
+%:%39=11%:%
+%:%40=11%:%
+%:%43=12%:%
+%:%47=12%:%
+%:%48=12%:%
+%:%53=12%:%
+%:%56=13%:%
+%:%57=14%:%
+%:%58=14%:%
+%:%59=15%:%
+%:%60=16%:%
+%:%61=17%:%
+%:%62=18%:%
+%:%63=19%:%
+%:%64=20%:%
+%:%65=21%:%
+%:%66=22%:%
+%:%67=23%:%
+%:%68=23%:%
+%:%75=24%:%
+%:%76=24%:%
+%:%77=25%:%
+%:%78=25%:%
+%:%79=26%:%
+%:%80=26%:%
+%:%81=26%:%
+%:%82=27%:%
+%:%83=27%:%
+%:%84=27%:%
+%:%85=28%:%
+%:%91=28%:%
+%:%94=29%:%
+%:%95=30%:%
+%:%96=30%:%
+%:%99=31%:%
+%:%103=31%:%
+%:%104=31%:%
+%:%105=31%:%
+%:%110=31%:%
+%:%113=32%:%
+%:%114=33%:%
+%:%115=33%:%
+%:%118=34%:%
+%:%122=34%:%
+%:%123=34%:%
+%:%124=34%:%
+%:%129=34%:%
+%:%132=35%:%
+%:%133=36%:%
+%:%134=36%:%
+%:%137=37%:%
+%:%141=37%:%
+%:%142=37%:%
+%:%143=37%:%
+%:%148=37%:%
+%:%151=38%:%
+%:%152=39%:%
+%:%153=39%:%
+%:%156=40%:%
+%:%160=40%:%
+%:%161=40%:%
+%:%162=40%:%
+%:%167=40%:%
+%:%170=41%:%
+%:%171=42%:%
+%:%172=42%:%
+%:%175=43%:%
+%:%179=43%:%
+%:%180=43%:%
+%:%181=43%:%
+%:%186=43%:%
+%:%189=44%:%
+%:%190=45%:%
+%:%191=45%:%
+%:%194=46%:%
+%:%198=46%:%
+%:%199=46%:%
+%:%200=46%:%
+%:%205=46%:%
+%:%208=47%:%
+%:%209=48%:%
+%:%210=48%:%
+%:%213=49%:%
+%:%217=49%:%
+%:%218=49%:%
+%:%219=49%:%
+%:%224=49%:%
+%:%227=50%:%
+%:%228=51%:%
+%:%229=51%:%
+%:%232=52%:%
+%:%236=52%:%
+%:%237=52%:%
+%:%238=52%:%
+%:%243=52%:%
+%:%246=53%:%
+%:%247=54%:%
+%:%248=54%:%
+%:%251=55%:%
+%:%255=55%:%
+%:%256=55%:%
+%:%261=55%:%
+%:%264=56%:%
+%:%265=57%:%
+%:%266=57%:%
+%:%269=58%:%
+%:%273=58%:%
+%:%274=58%:%
+%:%275=58%:%
+%:%280=58%:%
+%:%283=59%:%
+%:%284=60%:%
+%:%285=60%:%
+%:%288=61%:%
+%:%292=61%:%
+%:%293=61%:%
+%:%298=61%:%
+%:%301=62%:%
+%:%302=63%:%
+%:%303=63%:%
+%:%306=64%:%
+%:%310=64%:%
+%:%311=64%:%
+%:%312=64%:%
+%:%317=64%:%
+%:%320=65%:%
+%:%321=66%:%
+%:%322=66%:%
+%:%325=67%:%
+%:%329=67%:%
+%:%330=67%:%
+%:%335=67%:%
+%:%338=68%:%
+%:%339=69%:%
+%:%340=69%:%
+%:%343=70%:%
+%:%347=70%:%
+%:%348=70%:%
+%:%349=70%:%
+%:%354=70%:%
+%:%357=71%:%
+%:%358=72%:%
+%:%359=72%:%
+%:%362=73%:%
+%:%366=73%:%
+%:%367=73%:%
+%:%372=73%:%
+%:%375=74%:%
+%:%376=75%:%
+%:%377=75%:%
+%:%380=76%:%
+%:%384=76%:%
+%:%385=76%:%
+%:%386=76%:%
+%:%391=76%:%
+%:%394=77%:%
+%:%395=78%:%
+%:%396=78%:%
+%:%399=79%:%
+%:%403=79%:%
+%:%404=79%:%
+%:%405=79%:%
+%:%410=79%:%
+%:%413=80%:%
+%:%414=81%:%
+%:%415=81%:%
+%:%418=82%:%
+%:%422=82%:%
+%:%423=82%:%
+%:%424=82%:%
+%:%429=82%:%
+%:%432=83%:%
+%:%433=84%:%
+%:%434=84%:%
+%:%437=85%:%
+%:%441=85%:%
+%:%442=85%:%
+%:%447=85%:%
+%:%450=86%:%
+%:%451=87%:%
+%:%452=87%:%
+%:%455=88%:%
+%:%459=88%:%
+%:%460=88%:%
+%:%465=88%:%
+%:%468=89%:%
+%:%469=90%:%
+%:%470=90%:%
+%:%471=91%:%
+%:%472=92%:%
+%:%473=93%:%
+%:%480=94%:%
+%:%481=94%:%
+%:%482=95%:%
+%:%483=95%:%
+%:%484=95%:%
+%:%485=96%:%
+%:%486=96%:%
+%:%487=96%:%
+%:%488=96%:%
+%:%489=97%:%
+%:%490=97%:%
+%:%491=97%:%
+%:%492=97%:%
+%:%493=98%:%
+%:%494=98%:%
+%:%495=98%:%
+%:%496=98%:%
+%:%497=99%:%
+%:%498=99%:%
+%:%503=99%:%
+%:%506=100%:%
+%:%507=101%:%
+%:%508=101%:%
+%:%509=102%:%
+%:%512=103%:%
+%:%516=103%:%
+%:%517=103%:%
+%:%518=103%:%
+%:%523=103%:%
+%:%526=104%:%
+%:%527=105%:%
+%:%528=105%:%
+%:%529=106%:%
+%:%530=107%:%
+%:%531=108%:%
+%:%538=109%:%
+%:%539=109%:%
+%:%540=110%:%
+%:%541=110%:%
+%:%542=110%:%
+%:%543=111%:%
+%:%544=111%:%
+%:%545=111%:%
+%:%546=111%:%
+%:%547=112%:%
+%:%548=112%:%
+%:%549=112%:%
+%:%550=112%:%
+%:%551=113%:%
+%:%552=113%:%
+%:%553=113%:%
+%:%554=113%:%
+%:%555=114%:%
+%:%556=114%:%
+%:%561=114%:%
+%:%564=115%:%
+%:%565=116%:%
+%:%566=116%:%
+%:%567=117%:%
+%:%570=118%:%
+%:%574=118%:%
+%:%575=118%:%
+%:%576=118%:%
+%:%581=118%:%
+%:%584=119%:%
+%:%585=120%:%
+%:%586=120%:%
+%:%587=121%:%
+%:%590=122%:%
+%:%594=122%:%
+%:%595=122%:%
+%:%600=122%:%
+%:%603=123%:%
+%:%604=124%:%
+%:%605=124%:%
+%:%606=125%:%
+%:%609=126%:%
+%:%613=126%:%
+%:%614=126%:%
+%:%619=126%:%
+%:%622=127%:%
+%:%623=128%:%
+%:%624=129%:%
+%:%625=129%:%
+%:%628=130%:%
+%:%632=130%:%
+%:%633=130%:%
+%:%638=130%:%
+%:%641=131%:%
+%:%642=132%:%
+%:%643=132%:%
+%:%646=133%:%
+%:%650=133%:%
+%:%651=133%:%
+%:%656=133%:%
+%:%659=134%:%
+%:%660=135%:%
+%:%661=135%:%
+%:%664=136%:%
+%:%668=136%:%
+%:%669=136%:%
+%:%674=136%:%
+%:%677=137%:%
+%:%678=138%:%
+%:%679=138%:%
+%:%680=139%:%
+%:%683=140%:%
+%:%687=140%:%
+%:%688=140%:%
+%:%693=140%:%
+%:%696=141%:%
+%:%697=142%:%
+%:%698=142%:%
+%:%701=143%:%
+%:%705=143%:%
+%:%706=143%:%
+%:%711=143%:%
+%:%714=144%:%
+%:%715=145%:%
+%:%716=145%:%
+%:%717=146%:%
+%:%720=147%:%
+%:%724=147%:%
+%:%725=147%:%
+%:%730=147%:%
+%:%733=148%:%
+%:%734=149%:%
+%:%735=149%:%
+%:%738=150%:%
+%:%742=150%:%
+%:%743=150%:%
+%:%748=150%:%
+%:%751=151%:%
+%:%752=152%:%
+%:%753=152%:%
+%:%756=153%:%
+%:%760=153%:%
+%:%761=153%:%
+%:%766=153%:%
+%:%769=154%:%
+%:%770=155%:%
+%:%771=155%:%
+%:%774=156%:%
+%:%778=156%:%
+%:%779=156%:%
+%:%780=156%:%
+%:%785=156%:%
+%:%788=157%:%
+%:%789=158%:%
+%:%790=158%:%
+%:%793=159%:%
+%:%797=159%:%
+%:%798=159%:%
+%:%799=159%:%
+%:%804=159%:%
+%:%807=160%:%
+%:%808=161%:%
+%:%809=161%:%
+%:%812=162%:%
+%:%816=162%:%
+%:%817=162%:%
+%:%822=162%:%
+%:%825=163%:%
+%:%826=164%:%
+%:%827=164%:%
+%:%830=165%:%
+%:%834=165%:%
+%:%835=165%:%
+%:%840=165%:%
+%:%843=166%:%
+%:%844=167%:%
+%:%845=167%:%
+%:%848=168%:%
+%:%852=168%:%
+%:%853=168%:%
+%:%858=168%:%
+%:%861=169%:%
+%:%862=170%:%
+%:%863=170%:%
+%:%866=171%:%
+%:%870=171%:%
+%:%871=171%:%
+%:%876=171%:%
+%:%879=172%:%
+%:%880=173%:%
+%:%881=173%:%
+%:%882=174%:%
+%:%883=175%:%
+%:%884=175%:%
+%:%885=176%:%
+%:%886=177%:%
+%:%887=178%:%
+%:%888=179%:%
+%:%889=179%:%
+%:%892=180%:%
+%:%896=180%:%
+%:%897=180%:%
+%:%898=180%:%
+%:%903=180%:%
+%:%906=181%:%
+%:%907=182%:%
+%:%908=182%:%
+%:%911=183%:%
+%:%915=183%:%
+%:%916=183%:%
+%:%917=183%:%
+%:%922=183%:%
+%:%925=184%:%
+%:%926=185%:%
+%:%927=185%:%
+%:%930=186%:%
+%:%934=186%:%
+%:%935=186%:%
+%:%936=186%:%
+%:%941=186%:%
+%:%944=187%:%
+%:%945=188%:%
+%:%946=188%:%
+%:%949=189%:%
+%:%953=189%:%
+%:%954=189%:%
+%:%955=189%:%
+%:%960=189%:%
+%:%963=190%:%
+%:%964=191%:%
+%:%965=191%:%
+%:%966=192%:%
+%:%967=193%:%
+%:%968=193%:%
+%:%969=194%:%
+%:%970=195%:%
+%:%971=196%:%
+%:%972=197%:%
+%:%973=198%:%
+%:%974=198%:%
+%:%975=199%:%
+%:%978=200%:%
+%:%982=200%:%
+%:%983=200%:%
+%:%988=200%:%
+%:%991=201%:%
+%:%992=202%:%
+%:%993=202%:%
+%:%994=203%:%
+%:%997=204%:%
+%:%1001=204%:%
+%:%1002=204%:%
+%:%1007=204%:%
+%:%1010=205%:%
+%:%1011=206%:%
+%:%1012=206%:%
+%:%1019=207%:%
+%:%1020=207%:%
+%:%1021=208%:%
+%:%1022=208%:%
+%:%1023=209%:%
+%:%1024=209%:%
+%:%1025=209%:%
+%:%1026=210%:%
+%:%1027=210%:%
+%:%1028=211%:%
+%:%1029=211%:%
+%:%1030=211%:%
+%:%1031=212%:%
+%:%1032=212%:%
+%:%1033=213%:%
+%:%1039=213%:%
+%:%1042=214%:%
+%:%1043=215%:%
+%:%1044=215%:%
+%:%1045=216%:%
+%:%1048=217%:%
+%:%1052=217%:%
+%:%1053=217%:%
+%:%1058=217%:%
+%:%1061=218%:%
+%:%1062=219%:%
+%:%1063=219%:%
+%:%1064=220%:%
+%:%1067=221%:%
+%:%1071=221%:%
+%:%1072=221%:%
+%:%1077=221%:%
+%:%1080=222%:%
+%:%1081=223%:%
+%:%1082=223%:%
+%:%1083=224%:%
+%:%1086=225%:%
+%:%1090=225%:%
+%:%1091=225%:%
+%:%1096=225%:%
+%:%1099=226%:%
+%:%1100=227%:%
+%:%1101=227%:%
+%:%1102=228%:%
+%:%1105=229%:%
+%:%1109=229%:%
+%:%1110=229%:%
+%:%1115=229%:%
+%:%1118=230%:%
+%:%1119=231%:%
+%:%1120=231%:%
+%:%1121=232%:%
+%:%1124=233%:%
+%:%1128=233%:%
+%:%1129=233%:%
+%:%1134=233%:%
+%:%1137=234%:%
+%:%1138=235%:%
+%:%1139=235%:%
+%:%1140=236%:%
+%:%1143=237%:%
+%:%1147=237%:%
+%:%1148=237%:%
+%:%1153=237%:%
+%:%1156=238%:%
+%:%1157=239%:%
+%:%1158=239%:%
+%:%1159=240%:%
+%:%1160=241%:%
+%:%1161=242%:%
+%:%1162=243%:%
+%:%1163=244%:%
+%:%1164=244%:%
+%:%1165=245%:%
+%:%1168=246%:%
+%:%1172=246%:%
+%:%1173=246%:%
+%:%1174=247%:%
+%:%1175=247%:%
+%:%1180=247%:%
+%:%1183=248%:%
+%:%1184=249%:%
+%:%1185=249%:%
+%:%1186=250%:%
+%:%1189=251%:%
+%:%1193=251%:%
+%:%1194=251%:%
+%:%1195=251%:%
+%:%1200=251%:%
+%:%1203=252%:%
+%:%1204=253%:%
+%:%1205=253%:%
+%:%1206=254%:%
+%:%1209=255%:%
+%:%1213=255%:%
+%:%1214=255%:%
+%:%1219=255%:%
+%:%1222=256%:%
+%:%1223=257%:%
+%:%1224=257%:%
+%:%1225=258%:%
+%:%1228=259%:%
+%:%1232=259%:%
+%:%1233=259%:%
+%:%1238=259%:%
+%:%1241=260%:%
+%:%1242=261%:%
+%:%1243=261%:%
+%:%1244=262%:%
+%:%1245=263%:%
+%:%1253=265%:%
+%:%1263=267%:%
+%:%1264=267%:%
+%:%1267=268%:%
+%:%1271=268%:%
+%:%1272=268%:%
+%:%1273=269%:%
+%:%1278=269%:%
+%:%1281=270%:%
+%:%1282=271%:%
+%:%1283=271%:%
+%:%1286=272%:%
+%:%1290=272%:%
+%:%1291=272%:%
+%:%1296=272%:%
+%:%1299=273%:%
+%:%1300=274%:%
+%:%1301=274%:%
+%:%1304=275%:%
+%:%1308=275%:%
+%:%1309=275%:%
+%:%1314=275%:%
+%:%1319=276%:%
+%:%1324=277%:%

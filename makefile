@@ -6,7 +6,6 @@ dot:
 	@ for b in $(basename $(DOT_FILES)) ; do \
 	  dot -T pdf -o $$b.pdf $$b.dot ; \
 	done
-	@ mv dotfiles/*.pdf pdfs/
 
 eod:
 	git add -A ; \

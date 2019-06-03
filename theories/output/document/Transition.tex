@@ -1,0 +1,225 @@
+%
+\begin{isabellebody}%
+\setisabellecontext{Transition}%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\isatagtheory
+\isacommand{theory}\isamarkupfalse%
+\ Transition\isanewline
+\isakeyword{imports}\ GExp\isanewline
+\isakeyword{begin}%
+\endisatagtheory
+{\isafoldtheory}%
+%
+\isadelimtheory
+\isanewline
+%
+\endisadelimtheory
+\isanewline
+\isacommand{type{\isacharunderscore}synonym}\isamarkupfalse%
+\ label\ {\isacharequal}\ String{\isachardot}literal\isanewline
+\isacommand{type{\isacharunderscore}synonym}\isamarkupfalse%
+\ arity\ {\isacharequal}\ nat\isanewline
+\isacommand{type{\isacharunderscore}synonym}\isamarkupfalse%
+\ inputs\ {\isacharequal}\ {\isachardoublequoteopen}value\ list{\isachardoublequoteclose}\isanewline
+\isacommand{type{\isacharunderscore}synonym}\isamarkupfalse%
+\ outputs\ {\isacharequal}\ {\isachardoublequoteopen}value\ option\ list{\isachardoublequoteclose}\isanewline
+\isacommand{type{\isacharunderscore}synonym}\isamarkupfalse%
+\ guard\ {\isacharequal}\ {\isachardoublequoteopen}gexp{\isachardoublequoteclose}\isanewline
+\isacommand{type{\isacharunderscore}synonym}\isamarkupfalse%
+\ output{\isacharunderscore}function\ {\isacharequal}\ {\isachardoublequoteopen}aexp{\isachardoublequoteclose}\isanewline
+\isacommand{type{\isacharunderscore}synonym}\isamarkupfalse%
+\ update{\isacharunderscore}function\ {\isacharequal}\ {\isachardoublequoteopen}{\isacharparenleft}vname\ {\isasymtimes}\ aexp{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\isacommand{type{\isacharunderscore}synonym}\isamarkupfalse%
+\ updates\ {\isacharequal}\ {\isachardoublequoteopen}update{\isacharunderscore}function\ list{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{record}\isamarkupfalse%
+\ transition\ {\isacharequal}\isanewline
+\ \ Label\ {\isacharcolon}{\isacharcolon}\ label\isanewline
+\ \ Arity\ {\isacharcolon}{\isacharcolon}\ nat\isanewline
+\ \ Guard\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}guard\ list{\isachardoublequoteclose}\isanewline
+\ \ Outputs\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}output{\isacharunderscore}function\ list{\isachardoublequoteclose}\isanewline
+\ \ Updates\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}update{\isacharunderscore}function\ list{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ transition{\isacharunderscore}equality{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}{\isacharparenleft}x{\isacharcolon}{\isacharcolon}transition{\isacharparenright}\ {\isacharequal}\ y{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}{\isacharparenleft}Label\ x{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}Label\ y{\isacharparenright}\ {\isasymand}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ {\isacharparenleft}Arity\ x{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}Arity\ y{\isacharparenright}\ {\isasymand}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ {\isacharparenleft}Guard\ x{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}Guard\ y{\isacharparenright}\ {\isasymand}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ {\isacharparenleft}Outputs\ x{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}Outputs\ y{\isacharparenright}\ {\isasymand}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ {\isacharparenleft}Updates\ x{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}Updates\ y{\isacharparenright}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\isatagproof
+\isacommand{proof}\isamarkupfalse%
+\isanewline
+\ \ \isacommand{fix}\isamarkupfalse%
+\ x\ y\ {\isacharcolon}{\isacharcolon}\ transition\isanewline
+\ \ \isacommand{assume}\isamarkupfalse%
+\ {\isachardoublequoteopen}x\ {\isacharequal}\ y{\isachardoublequoteclose}\isanewline
+\ \ \isacommand{show}\isamarkupfalse%
+\ {\isachardoublequoteopen}Label\ x\ {\isacharequal}\ Label\ y\ {\isasymand}\ Arity\ x\ {\isacharequal}\ Arity\ y\ {\isasymand}\ Guard\ x\ {\isacharequal}\ Guard\ y\ {\isasymand}\ Outputs\ x\ {\isacharequal}\ Outputs\ y\ {\isasymand}\ Updates\ x\ {\isacharequal}\ Updates\ y{\isachardoublequoteclose}\isanewline
+\ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ {\isacartoucheopen}x\ {\isacharequal}\ y{\isacartoucheclose}{\isacharparenright}\isanewline
+\isacommand{next}\isamarkupfalse%
+\isanewline
+\ \ \isacommand{fix}\isamarkupfalse%
+\ x\ y\ {\isacharcolon}{\isacharcolon}\ transition\isanewline
+\ \ \isacommand{assume}\isamarkupfalse%
+\ {\isachardoublequoteopen}Label\ x\ {\isacharequal}\ Label\ y\ {\isasymand}\ Arity\ x\ {\isacharequal}\ Arity\ y\ {\isasymand}\ Guard\ x\ {\isacharequal}\ Guard\ y\ {\isasymand}\ Outputs\ x\ {\isacharequal}\ Outputs\ y\ {\isasymand}\ Updates\ x\ {\isacharequal}\ Updates\ y{\isachardoublequoteclose}\isanewline
+\ \ \isacommand{show}\isamarkupfalse%
+\ {\isachardoublequoteopen}x\ {\isacharequal}\ y{\isachardoublequoteclose}\isanewline
+\ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ {\isacartoucheopen}Label\ x\ {\isacharequal}\ Label\ y\ {\isasymand}\ Arity\ x\ {\isacharequal}\ Arity\ y\ {\isasymand}\ Guard\ x\ {\isacharequal}\ Guard\ y\ {\isasymand}\ Outputs\ x\ {\isacharequal}\ Outputs\ y\ {\isasymand}\ Updates\ x\ {\isacharequal}\ Updates\ y{\isacartoucheclose}{\isacharparenright}\isanewline
+\isacommand{qed}\isamarkupfalse%
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ unequal{\isacharunderscore}labels{\isacharbrackleft}simp{\isacharbrackright}{\isacharcolon}\ {\isachardoublequoteopen}Label\ t{\isadigit{1}}\ {\isasymnoteq}\ Label\ t{\isadigit{2}}\ {\isasymLongrightarrow}\ t{\isadigit{1}}\ {\isasymnoteq}\ t{\isadigit{2}}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ auto%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ unequal{\isacharunderscore}arities{\isacharbrackleft}simp{\isacharbrackright}{\isacharcolon}\ {\isachardoublequoteopen}Arity\ t{\isadigit{1}}\ {\isasymnoteq}\ Arity\ t{\isadigit{2}}\ {\isasymLongrightarrow}\ t{\isadigit{1}}\ {\isasymnoteq}\ t{\isadigit{2}}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ auto%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{definition}\isamarkupfalse%
+\ same{\isacharunderscore}structure\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}transition\ {\isasymRightarrow}\ transition\ {\isasymRightarrow}\ bool{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+\ \ {\isachardoublequoteopen}same{\isacharunderscore}structure\ t{\isadigit{1}}\ t{\isadigit{2}}\ {\isacharequal}\ {\isacharparenleft}Label\ t{\isadigit{1}}\ {\isacharequal}\ Label\ t{\isadigit{2}}\ {\isasymand}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Arity\ t{\isadigit{1}}\ {\isacharequal}\ Arity\ t{\isadigit{2}}\ {\isasymand}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ list{\isacharunderscore}all\ {\isacharparenleft}{\isasymlambda}{\isacharparenleft}g{\isadigit{1}}{\isacharcomma}\ g{\isadigit{2}}{\isacharparenright}{\isachardot}\ gexp{\isacharunderscore}same{\isacharunderscore}structure\ g{\isadigit{1}}\ g{\isadigit{2}}{\isacharparenright}\ {\isacharparenleft}zip\ {\isacharparenleft}Guard\ t{\isadigit{1}}{\isacharparenright}\ {\isacharparenleft}Guard\ t{\isadigit{2}}{\isacharparenright}{\isacharparenright}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimtheory
+\isanewline
+%
+\endisadelimtheory
+%
+\isatagtheory
+\isacommand{end}\isamarkupfalse%
+%
+\endisatagtheory
+{\isafoldtheory}%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\end{isabellebody}%
+\endinput
+%:%file=~/Documents/efsm-sal/theories/Transition.thy%:%
+%:%10=1%:%
+%:%11=1%:%
+%:%12=2%:%
+%:%13=3%:%
+%:%18=3%:%
+%:%21=4%:%
+%:%22=5%:%
+%:%23=5%:%
+%:%24=6%:%
+%:%25=6%:%
+%:%26=7%:%
+%:%27=7%:%
+%:%28=8%:%
+%:%29=8%:%
+%:%30=9%:%
+%:%31=9%:%
+%:%32=10%:%
+%:%33=10%:%
+%:%34=11%:%
+%:%35=11%:%
+%:%36=12%:%
+%:%37=12%:%
+%:%38=13%:%
+%:%39=14%:%
+%:%40=14%:%
+%:%41=15%:%
+%:%42=16%:%
+%:%43=17%:%
+%:%44=18%:%
+%:%45=19%:%
+%:%46=20%:%
+%:%47=21%:%
+%:%48=21%:%
+%:%52=25%:%
+%:%59=26%:%
+%:%60=26%:%
+%:%61=27%:%
+%:%62=27%:%
+%:%63=28%:%
+%:%64=28%:%
+%:%65=29%:%
+%:%66=29%:%
+%:%67=30%:%
+%:%68=30%:%
+%:%69=31%:%
+%:%70=31%:%
+%:%71=32%:%
+%:%72=32%:%
+%:%73=33%:%
+%:%74=33%:%
+%:%75=34%:%
+%:%76=34%:%
+%:%77=35%:%
+%:%78=35%:%
+%:%79=36%:%
+%:%85=36%:%
+%:%88=37%:%
+%:%89=38%:%
+%:%90=38%:%
+%:%93=39%:%
+%:%97=39%:%
+%:%98=39%:%
+%:%103=39%:%
+%:%106=40%:%
+%:%107=41%:%
+%:%108=41%:%
+%:%111=42%:%
+%:%115=42%:%
+%:%116=42%:%
+%:%121=42%:%
+%:%124=43%:%
+%:%125=44%:%
+%:%126=44%:%
+%:%127=45%:%
+%:%129=47%:%
+%:%132=48%:%
+%:%137=49%:%

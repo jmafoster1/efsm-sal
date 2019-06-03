@@ -1,0 +1,22 @@
+[
+  [
+    {"label":"login", "inputs":["free"], "outputs":[]}
+    {"label":"view","inputs":["friendID", "name", "HM8p"],"outputs":[]},
+    {"label":"pdf","inputs":["friendID", "name", "HM8p"],"outputs":["detailed_pdf_of(283222986)"]}
+  ],
+  [
+    {"label":"login", "inputs":["free"], "outputs":[]}
+    {"label":"view","inputs":["otherID", "OUT_OF_NETWORK", "MNn5"],"outputs":[]},
+    {"label":"pdf","inputs":["otherID", "OUT_OF_NETWORK", "MNn5"],"outputs":["summary_pdf_of(283222986)"]}
+  ],
+  [
+    {"label":"login", "inputs":["free"], "outputs":[]}
+    {"label":"view","inputs":["otherID", "name", "MNn5"],"outputs":[]},
+    {"label":"pdf","inputs":["otherID", "name", "4zoF"],"outputs":["detailed_pdf_of(283222986)"]}
+  ],
+  [
+    {"label":"login", "inputs":["free"], "outputs":[]}
+    {"label":"view","inputs":["otherID", "name", "4zoF"],"outputs":[]},
+    {"label":"pdf","inputs":["otherID", "name", "4zoF"],"outputs":["detailed_pdf_of(283222986)"]}
+  ]
+]
