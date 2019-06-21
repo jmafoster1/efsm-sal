@@ -6,7 +6,7 @@ datatype ior = ip | op | rg
 
 record state =
   statename :: "nat option"
-  datastate :: datastate
+  datastate :: registers
   event :: event
   "output" :: outputs
 
@@ -18,7 +18,7 @@ abbreviation label :: "state \<Rightarrow> String.literal" where
 abbreviation inputs :: "state \<Rightarrow> value list" where
   "inputs s \<equiv> snd (event s)"
 
-fun ltl_step :: "transition_matrix \<Rightarrow> nat option \<Rightarrow> datastate \<Rightarrow> event \<Rightarrow> (nat option \<times> outputs \<times> datastate)" where
+fun ltl_step :: "transition_matrix \<Rightarrow> nat option \<Rightarrow> registers \<Rightarrow> event \<Rightarrow> (nat option \<times> outputs \<times> registers)" where
   "ltl_step _ None r _ = (None, [], r)" |
   "ltl_step e (Some s) r (l, i) = (let possibilities = possible_steps e s r l i in
                    if possibilities = {||} then (None, [], r)
@@ -27,7 +27,7 @@ fun ltl_step :: "transition_matrix \<Rightarrow> nat option \<Rightarrow> datast
                      (Some s', (apply_outputs (Outputs t) (join_ir i r)), (apply_updates (Updates t) (join_ir i r) r))
                   )"
 
-primcorec make_full_observation :: "transition_matrix \<Rightarrow> nat option \<Rightarrow> datastate \<Rightarrow> event stream \<Rightarrow> state stream" where
+primcorec make_full_observation :: "transition_matrix \<Rightarrow> nat option \<Rightarrow> registers \<Rightarrow> event stream \<Rightarrow> state stream" where
   "make_full_observation e s d i = (let (s', o', d') = ltl_step e s d (shd i) in \<lparr>statename = s, datastate = d, event=(shd i), output = o'\<rparr>##(make_full_observation e s' d' (stl i)))"
 
 lemma make_full_observation_unfold: "make_full_observation e s d i = (let (s', o', d') = ltl_step e s d (shd i) in \<lparr>statename = s, datastate = d, event=(shd i), output = o'\<rparr>##(make_full_observation e s' d' (stl i)))"
@@ -43,7 +43,7 @@ definition Inputs :: "nat \<Rightarrow> state stream \<Rightarrow> value" where
   "Inputs n s \<equiv> nth (inputs (shd s)) (n-1)"
 
 definition Registers :: "nat \<Rightarrow> state stream \<Rightarrow> value option" where
-  "Registers n s \<equiv> datastate (shd s) (R n)"
+  "Registers n s \<equiv> datastate (shd s) n"
 
 definition StateEq :: "nat option \<Rightarrow> state stream \<Rightarrow> bool" where
   "StateEq v s \<equiv> statename (shd s) = v"
@@ -72,7 +72,7 @@ definition OutputLength :: "nat \<Rightarrow> state stream \<Rightarrow> bool" w
 fun "checkInx" :: "ior \<Rightarrow> nat \<Rightarrow> (value option \<Rightarrow> value option \<Rightarrow> trilean) \<Rightarrow> value option \<Rightarrow> state stream \<Rightarrow> bool" where
   "checkInx ior.ip n f v s = (f (Some (Inputs (n-1) s)) v = trilean.true)" |
   "checkInx ior.op n f v s = (f (Outputs n s) v = trilean.true)" |
-  "checkInx ior.rg n f v s = (f (datastate (shd s) (vname.R n)) v = trilean.true)"
+  "checkInx ior.rg n f v s = (f (datastate (shd s) n) v = trilean.true)"
 
 lemma shd_state_is_none: "(StateEq None) (make_full_observation e None r t)"
   by (simp add: StateEq_def)
@@ -107,7 +107,7 @@ proof -
     by (simp add: all_imp_alw)
 qed
 
-lemma no_updates_none_individual: "alw (checkInx rg n ValueEq (r (R n))) (make_full_observation e None r t)"
+lemma no_updates_none_individual: "alw (checkInx rg n ValueEq (r n)) (make_full_observation e None r t)"
 proof -
   obtain ss :: "((String.literal \<times> value list) stream \<Rightarrow> state stream) \<Rightarrow> (String.literal \<times> value list) stream" where
     "\<forall>f p s. f (stl (ss f)) \<noteq> stl (f (ss f)) \<or> alw p (f s) = alw (\<lambda>s. p (f s)) s"
