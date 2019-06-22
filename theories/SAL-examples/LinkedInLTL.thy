@@ -1,5 +1,5 @@
 theory LinkedInLTL
-imports EFSM_LTL
+imports "../EFSM_LTL"
 
 begin
 
@@ -101,11 +101,6 @@ lemma implode_pdf: "String.implode ''pdf'' = STR ''pdf''"
 lemma possible_steps_login: "possible_steps linkedIn 0 Map.empty STR ''login'' [EFSM.Str ''free''] = {|(1, login)|}"
   by eval
 
-lemma apply_updates_login: "apply_updates (Updates login) (case_vname (\<lambda>n. if n = 1 then Some (EFSM.Str ''free'') else input2state [] (1 + 1) (I n)) Map.empty)
-         Map.empty = <>"
-  apply (rule ext)
-  by (simp add: login_def)
-
 lemma possible_steps_1_pdf: "possible_steps linkedIn 1 Map.empty STR ''pdf'' [EFSM.Str ''otherID'', type, token] = {||}"
   apply (simp add: possible_steps_def ffilter_def fset_both_sides Abs_fset_inverse Set.filter_def linkedIn_def)
   apply safe
@@ -114,14 +109,7 @@ lemma possible_steps_1_pdf: "possible_steps linkedIn 1 Map.empty STR ''pdf'' [EF
 lemma "alw (\<lambda>xs. event (shd xs) = (String.implode ''pdf'', [EFSM.Str ''otherID'', type, token]) \<longrightarrow>
               ValueEq (EFSM_LTL.Outputs 1 (stl xs)) (Some (EFSM.Str ''detailedPDF'')) \<noteq> trilean.true)
      (make_full_observation linkedIn (Some 1) Map.empty (stl i))"
-proof(coinduction)
-  case alw
-  then show ?case
-    apply (simp add: event_components implode_pdf possible_steps_1_pdf)
-    apply standard
-    apply (simp add: ValueEq_def)
-     
-qed
+  oops
 
 (*neverDetailed: THEOREM linkedIn |- G(
 (label=login AND ip_1_login_1=String_free) => X(G(
@@ -134,17 +122,7 @@ lemma LTL_neverDetailed:
           (nxt (alw ((LabelEq ''pdf'' aand InputEq [(Str ''otherID''), type, token]) impl
           (nxt (not (checkInx op 1 ValueEq (Some (Str ''detailedPDF''))))))))))
      (watch linkedIn i)"
-proof(coinduction)
-  case alw
-  then show ?case
-    apply simp
-    apply standard
-     apply (simp add: event_components implode_login)
-     apply clarify
-     apply (simp add: watch_def possible_steps_login apply_updates_login)
-
-
-qed
+  oops
 
 lemma LTL_testStateEqNone: "(ev (StateEq None)) (watch linkedIn i)"
   oops

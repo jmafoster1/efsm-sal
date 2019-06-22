@@ -48,6 +48,9 @@ definition Registers :: "nat \<Rightarrow> state stream \<Rightarrow> value opti
 definition StateEq :: "nat option \<Rightarrow> state stream \<Rightarrow> bool" where
   "StateEq v s \<equiv> statename (shd s) = v"
 
+lemma StateEq_None_not_Some: "StateEq None s \<Longrightarrow> \<not> StateEq (Some n) s"
+  by (simp add: StateEq_def)
+
 definition LabelEq :: "string \<Rightarrow> state stream \<Rightarrow> bool" where
   "LabelEq v s \<equiv> fst (event (shd s)) = (String.implode v)"
 

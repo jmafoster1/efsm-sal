@@ -7,7 +7,7 @@ definition t1 :: "transition" where
         Arity = 1,
         Guard = [],
         Outputs = [],
-        Updates = [(R 1, (V (I 1)))]
+        Updates = [(1, (V (I 1)))]
       \<rparr>"
 
 definition t2 :: "transition" where
@@ -16,7 +16,7 @@ definition t2 :: "transition" where
         Arity = 0,
         Guard = [(gexp.Gt (V (R 1)) (L (Num 5)))],
         Outputs = [],
-        Updates = [(R 1, (Plus (V (R 1)) (L (Num 5))))]
+        Updates = [(1, (Plus (V (R 1)) (L (Num 5))))]
       \<rparr>"
 
 definition t3 :: "transition" where
@@ -46,5 +46,6 @@ definition vend :: transition_matrix where
          |}"
 
 lemma "\<forall> i r. \<not> (apply_guards (Guard t3) (join_ir i r) \<and> apply_guards (Guard t4) (join_ir i r))"
-  by (simp add: t3_def t4_def gval.simps)
+  by (simp add: apply_guards t3_def t4_def)
+
 end

@@ -10,7 +10,7 @@ definition login :: "transition" where
         Guard = [],
         Outputs = [],
         Updates = [
-                    (R 1, (V (I 1))) \<comment> \<open> Store the user ID in r1 \<close>
+                    (1, (V (I 1))) \<comment> \<open> Store the user ID in r1 \<close>
                   ]
       \<rparr>"
 
@@ -22,9 +22,9 @@ definition logout :: "transition" where
         Guard = [], \<comment> \<open> No guards \<close>
         Outputs = [],
         Updates = [ \<comment> \<open> Two updates: \<close>
-                    (R 1, (V (R 1))), \<comment> \<open> Value of r1 remains unchanged \<close>
-                    (R 2, (V (R 2))), \<comment> \<open> Value of r2 remains unchanged \<close>
-                    (R 3, (V (R 3)))  \<comment> \<open> Value of r3 remains unchanged \<close>
+                    (1, (V (R 1))), \<comment> \<open> Value of r1 remains unchanged \<close>
+                    (2, (V (R 2))), \<comment> \<open> Value of r2 remains unchanged \<close>
+                    (3, (V (R 3)))  \<comment> \<open> Value of r3 remains unchanged \<close>
                   ]
       \<rparr>"
 
@@ -35,9 +35,9 @@ definition "write" :: "transition" where
         Guard = [], \<comment> \<open> No guards \<close>
         Outputs = [],
         Updates = [
-                    (R 1, (V (R 1))), \<comment> \<open> Value of r1 remains unchanged \<close>
-                    (R 2, (V (I 1))), \<comment> \<open> Write the input to r2 \<close>
-                    (R 3, (V (R 1)))  \<comment> \<open> Store the writer in r3 \<close>
+                    (1, (V (R 1))), \<comment> \<open> Value of r1 remains unchanged \<close>
+                    (2, (V (I 1))), \<comment> \<open> Write the input to r2 \<close>
+                    (3, (V (R 1)))  \<comment> \<open> Store the writer in r3 \<close>
                   ]
       \<rparr>"
 
@@ -57,9 +57,9 @@ definition read_success :: "transition" where
         Guard = [gexp.Eq (V (R 1)) (V (R 3)), (gNot (Null (V (R 2))))], \<comment> \<open> No guards \<close>
         Outputs = [(V (R 2))],
         Updates = [ \<comment> \<open> Two updates: \<close>
-                    (R 1, (V (R 1))), \<comment> \<open> Value of r1 remains unchanged \<close>
-                    (R 2, (V (R 2))), \<comment> \<open> Value of r2 remains unchanged \<close>
-                    (R 3, (V (R 3)))  \<comment> \<open> Value of r3 remains unchanged \<close>
+                    (1, (V (R 1))), \<comment> \<open> Value of r1 remains unchanged \<close>
+                    (2, (V (R 2))), \<comment> \<open> Value of r2 remains unchanged \<close>
+                    (3, (V (R 3)))  \<comment> \<open> Value of r3 remains unchanged \<close>
                   ]
       \<rparr>"
 
@@ -70,9 +70,9 @@ definition read_fail :: "transition" where
         Guard = [(gOr (Ne (V (R 1)) (V (R 3))) (Null (V (R 2))))],
         Outputs = [(L (Str ''accessDenied''))],
         Updates = [
-                    (R 1, (V (R 1))), \<comment> \<open> Value of r1 remains unchanged \<close>
-                    (R 2, (V (R 2))), \<comment> \<open> Value of r2 remains unchanged \<close>
-                    (R 3, (V (R 3)))  \<comment> \<open> Value of r3 remains unchanged \<close>
+                    (1, (V (R 1))), \<comment> \<open> Value of r1 remains unchanged \<close>
+                    (2, (V (R 2))), \<comment> \<open> Value of r2 remains unchanged \<close>
+                    (3, (V (R 3)))  \<comment> \<open> Value of r3 remains unchanged \<close>
                   ]
       \<rparr>"
 
@@ -97,35 +97,18 @@ primrec all :: "'a list \<Rightarrow> ('a \<Rightarrow> bool) \<Rightarrow> bool
 
 \<comment> \<open> noChangeOwner: THEOREM filesystem |- G(cfstate /= NULL_STATE) => FORALL (owner : UID): G((label=write AND r_1=owner) => F(G((label=read AND r_1/=owner) => X(op_1_read_0 = accessDenied)))); \<close>
 
-lemma r_equals_r [simp]: "<R 1:=user, R 2:=content, R 3:=owner> = (\<lambda>a. if a = R 3 then Some owner else if a = R 2 then Some content else if a = R 1 then Some user else None)"
-  apply (rule ext)
-  by simp
+lemma possible_steps_1_read: "r 1 = user \<and> r 3 = owner \<Longrightarrow> owner \<noteq> user \<Longrightarrow> possible_steps filesystem 1 r (STR ''read'') [] = {|(1, read_fail)|}"
+  apply (simp add: possible_steps_singleton filesystem_def)
+  apply safe
+  by (simp_all add: transitions apply_guards)
 
-declare One_nat_def [simp del]
-
-lemma possible_steps_1_read: "r (R 1) = user \<and> r (R 3) = owner \<Longrightarrow> owner \<noteq> user \<Longrightarrow> possible_steps filesystem 1 r (STR ''read'') [] = {|(1, read_fail)|}"
-proof-
-  assume premise1: "r (R 1) = user \<and> r (R 3) = owner"
-  assume premise2: "owner \<noteq> user"
-  have filter: "ffilter
-     (\<lambda>((origin, dest), t).
-         origin = 1 \<and>
-         Label t = STR ''read'' \<and> Arity t = 0 \<and> apply_guards (Guard t) (\<lambda>x. case x of I n \<Rightarrow> input2state [] 1 (I n) | R n \<Rightarrow> r (R n)))
-     filesystem =
-    {|((1, 1), read_fail)|}"
-    using premise1 premise2
-    apply (simp add: ffilter_def fset_both_sides Abs_fset_inverse Set.filter_def filesystem_def)
-    apply safe
-    by (simp_all add: transitions gval.simps ValueEq_def)
-  show ?thesis
-    by (simp add: possible_steps_def filter)
-qed
-
-lemma read_2:  "r = <R 1:= user, R 2:= content, R 3:= owner> \<Longrightarrow>
+lemma read_2:  "r = <1:= user, 2:= content, 3:= owner> \<Longrightarrow>
     owner \<noteq> user \<Longrightarrow>
     step filesystem 1 r (STR ''read'') [] = Some (read_fail, 1, [Some (Str ''accessDenied'')], r)"
-  apply (simp add: step_def possible_steps_1_read)
-  apply (simp add: transitions filesystem_def)
+  apply (rule one_possible_step)
+    apply (simp add: possible_steps_singleton filesystem_def)
+    apply safe
+            apply (simp_all add: transitions apply_guards apply_outputs)
   apply (rule ext)
   by simp
 
@@ -133,11 +116,13 @@ lemma possible_steps_1_logout: "possible_steps filesystem 1 r (STR ''logout'') [
   apply (simp add: possible_steps_def transitions filesystem_def)
   by force
 
-lemma logout_2:  "r = <R 1:= user, R 2:= content, R 3:= owner> \<Longrightarrow>
+lemma logout_2:  "r = <1:= user, 2:= content, 3:= owner> \<Longrightarrow>
     owner \<noteq> user \<Longrightarrow>
     step filesystem 1 r (STR ''logout'') [] = Some (logout, 0, [], r)"
-  apply (simp add: step_def possible_steps_1_logout)
-  apply (simp add: filesystem_def transitions)
+  apply (rule one_possible_step)
+    apply (simp add: possible_steps_singleton filesystem_def)
+    apply safe
+            apply (simp_all add: transitions apply_guards apply_outputs)
   apply (rule ext)
   by simp
 end

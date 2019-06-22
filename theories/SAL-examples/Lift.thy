@@ -99,44 +99,33 @@ definition lift :: transition_matrix where
               ((3,0), closeDoors)
          |}"
 
+lemma possible_steps_0: "possible_steps lift 0 r STR ''goUp'' [Num 1] = {|(1, t1up)|}"
+  apply (simp add: possible_steps_singleton lift_def)
+  apply safe
+  by (simp_all add: transitions apply_guards)
+
+lemma possible_steps_1_up0: "possible_steps lift 1 <> STR ''goUp'' [Num 0] = {|(0, t3up)|}"
+  apply (simp add: possible_steps_singleton lift_def)
+  apply safe
+  by (simp_all add: transitions apply_guards)
+
+lemma open_doors: "possible_steps lift 0 <> STR ''open'' [] = {|(3, openDoors)|}"
+  apply (simp add: possible_steps_singleton lift_def)
+  apply safe
+  by (simp_all add: transitions apply_guards)
+
 lemma "observe_trace lift 0 <> [((STR ''goUp''), [Num 1]), ((STR ''goUp''), [Num 0]), ((STR ''open''), [])] = [[Some (Num 1)], [Some (Num 0)], [Some (Num 1)]]"
-proof-
-  have possible_steps_0_goup: "possible_steps lift 0 Map.empty (STR ''goUp'') [Num 1] = {|(1, t1up)|}"
-  proof-
-    have filter: " ffilter
-     (\<lambda>((origin, dest), t).
-         origin = 0 \<and>
-         Label t = STR ''goUp'' \<and>
-         Suc 0 = Arity t \<and> apply_guards (Guard t) (\<lambda>x. case x of I n \<Rightarrow> input2state [Num 1] 1 (I n) | R x \<Rightarrow> Map.empty x))
-     lift =
-    {|((0, 1), t1up)|}"
-      apply (simp add: Abs_ffilter Set.filter_def lift_def)
-      apply safe
-      by (simp_all add: transitions gval.simps ValueGt_def)
-    show ?thesis
-      by (simp add: possible_steps_def filter)
-  qed
-  have possible_steps_1_goup: "possible_steps lift 1 Map.empty (STR ''goUp'') [Num 0] = {|(0, t3up)|}"
-  proof-
-    have filter: "ffilter
-     (\<lambda>((origin, dest), t).
-         origin = 1 \<and>
-         Label t = STR ''goUp'' \<and>
-         Suc 0 = Arity t \<and> apply_guards (Guard t) (\<lambda>x. case x of I n \<Rightarrow> input2state [Num 0] 1 (I n) | R x \<Rightarrow> Map.empty x))
-     lift =
-    {|((1, 0), t3up)|}"
-      apply (simp add: Abs_ffilter Set.filter_def lift_def)
-      apply safe
-      by (simp_all add: transitions gval.simps ValueEq_def ValueGt_def)
-    show ?thesis
-      by (simp add: possible_steps_def filter)
-  qed
-  have possible_steps_open_0: "possible_steps lift 0 Map.empty (STR ''open'') [] = {|(3, openDoors)|}"
-    apply (simp add: possible_steps_def lift_def transitions)
-    by force
-  show ?thesis
-    apply (simp add: observe_trace_def observe_all_def step_def)
-    apply (simp add: possible_steps_0_goup possible_steps_1_goup possible_steps_open_0)
-    by (simp add: transitions)
-qed
+  apply (rule observe_trace_possible_step)
+     apply (simp add: possible_steps_0)
+    apply (simp add: t1up_def apply_outputs)
+   apply simp
+  apply (rule observe_trace_possible_step)
+     apply (simp add: possible_steps_1_up0)
+    apply (simp add: t3up_def apply_outputs)
+   apply simp
+  apply (rule observe_trace_possible_step)
+     apply (simp add: open_doors)
+    apply (simp add: openDoors_def apply_outputs)
+  by auto
+
 end

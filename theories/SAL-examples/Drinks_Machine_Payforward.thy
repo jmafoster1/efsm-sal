@@ -1,5 +1,5 @@
 theory Drinks_Machine_Payforward
-  imports "../examples/Drinks_Machine"
+  imports "Drinks_Machine"
 begin
 
 definition "setup" :: "transition" where
@@ -8,7 +8,7 @@ definition "setup" :: "transition" where
         Arity = 0,
         Guard = [], \<comment>\<open> No guards \<close>
         Outputs = [],
-        Updates = [(R 2, (L (Num 0)))]
+        Updates = [(2, (L (Num 0)))]
       \<rparr>"
 
 definition "select" :: transition where
@@ -18,8 +18,8 @@ definition "select" :: transition where
         Guard = [], \<comment>\<open> No guards \<close>
         Outputs = [],
         Updates = [
-                    (R 1, (V (I 1))), \<comment>\<open>  Firstly set value of r1 to value of i1 \<close>
-                    (R 2, (V (R 2)))
+                    (1, (V (I 1))), \<comment>\<open>  Firstly set value of r1 to value of i1 \<close>
+                    (2, (V (R 2)))
                   ]
       \<rparr>"
 
@@ -30,8 +30,8 @@ definition vend :: "transition" where
         Guard = [(Ge (V (R 2)) (L (Num 100)))], \<comment>\<open> This is syntactic sugar for ''Not (Lt (V (R 2)) (N 100))'' which could also appear \<close>
         Outputs =  [(V (R 1))], \<comment>\<open> This has one output o1:=r1 where (STR ''r1'') is a variable with a value \<close>
         Updates = [
-                    (R 1, (V (R 1))),
-                    (R 2, Minus (V (R 2)) (L (Num 100)))
+                    (1, (V (R 1))),
+                    (2, Minus (V (R 2)) (L (Num 100)))
                   ]
       \<rparr>"
 
@@ -57,31 +57,45 @@ lemma possible_steps_2_coin: "possible_steps drinks 2 d (STR ''coin'') [Num n] =
   apply (simp add: possible_steps_def drinks_def transitions)
   by force
 
-lemma possible_steps_2_vend: "r (R 2) = Some (Num n) \<Longrightarrow> n \<ge> 100 \<Longrightarrow> possible_steps drinks 2 r (STR ''vend'') [] = {|(1, vend)|}"
-proof-
-  assume premise1: "r (R 2) = Some (Num n)"
-  assume premise2: "n \<ge> 100"
-  have filter: "ffilter
-     (\<lambda>((origin, dest), t).
-         origin = 2 \<and>
-         Label t = STR ''vend'' \<and> Arity t = 0 \<and> apply_guards (Guard t) (\<lambda>x. case x of I n \<Rightarrow> input2state [] 1 (I n) | R n \<Rightarrow> r (R n)))
-     Drinks_Machine_Payforward.drinks =
-    {|((2, 1), Drinks_Machine_Payforward.vend)|}"
-    using premise1 premise2
-    apply (simp add: ffilter_def fset_both_sides Abs_fset_inverse Set.filter_def drinks_def)
-    apply safe
-    by (simp_all add: transitions gval.simps ValueGt_def)
-  show ?thesis
-    by (simp add: possible_steps_def filter)
-qed
+lemma possible_steps_2_vend: "r 2 = Some (Num n) \<Longrightarrow> n \<ge> 100 \<Longrightarrow> possible_steps drinks 2 r (STR ''vend'') [] = {|(1, vend)|}"
+  apply (simp add: possible_steps_singleton drinks_def)
+  apply safe
+  by (simp_all add: transitions apply_guards)
 
 lemma "observe_trace drinks 0 <> [((STR ''setup''), []), ((STR ''select''), [Str ''coke'']), ((STR ''coin''),[Num 110]), ((STR ''vend''), []), ((STR ''select''), [Str ''pepsi'']), ((STR ''coin''),[Num 90]), ((STR ''vend''), [])] = [[],[],[Some (Num 110)],[Some (Str ''coke'')],[],[Some (Num 100)],[Some (Str ''pepsi'')]]"
-  unfolding observe_trace_def observe_all_def step_def
-  apply (simp add: possible_steps_0 setup_def)
-  apply (simp add: possible_steps_1 select_def)
-  apply (simp add: possible_steps_2_coin coin_def)
-  apply (simp add: possible_steps_2_vend vend_def)
-  apply (simp add: possible_steps_1 select_def)
-  apply (simp add: possible_steps_2_coin coin_def)
-  by (simp add: possible_steps_2_vend vend_def)
+  apply (rule observe_trace_possible_step)
+     apply (simp add: possible_steps_0)
+    apply (simp add: setup_def)
+   apply simp
+  apply (rule observe_trace_possible_step)
+     apply (simp add: possible_steps_1)
+    apply (simp add: select_def)
+   apply simp
+  apply (rule observe_trace_possible_step)
+     apply (simp add: possible_steps_2_coin)
+    apply (simp add: coin_def apply_outputs select_def setup_def)
+   apply simp
+  apply (rule observe_trace_possible_step)
+     apply simp
+     apply (rule possible_steps_2_vend)
+      apply (simp add: datastate coin_def select_def setup_def)
+     apply simp
+    apply (simp add: vend_def apply_outputs coin_def select_def setup_def)
+   apply simp
+  apply (rule observe_trace_possible_step)
+     apply (simp add: possible_steps_1)
+    apply (simp add: select_def)
+   apply simp
+  apply (rule observe_trace_possible_step)
+     apply (simp add: possible_steps_2_coin)
+    apply (simp add: coin_def apply_outputs select_def setup_def vend_def)
+   apply simp
+  apply (rule observe_trace_possible_step)
+     apply simp
+     apply (rule possible_steps_2_vend)
+      apply (simp add: datastate coin_def select_def setup_def vend_def)
+     apply simp
+    apply (simp add: vend_def apply_outputs coin_def select_def setup_def)
+   apply simp
+  by simp
 end

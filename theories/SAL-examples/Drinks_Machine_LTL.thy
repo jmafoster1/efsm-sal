@@ -1,5 +1,5 @@
 theory Drinks_Machine_LTL
-imports "../examples/Drinks_Machine" EFSM_LTL
+imports Drinks_Machine "../EFSM_LTL"
 begin
 
 declare One_nat_def [simp del]
@@ -8,10 +8,6 @@ lemma LTL_r2_not_always_gt_100: "not (alw (checkInx rg 2 ValueGt (Some (Num 100)
   apply (simp add: not_alw_iff watch_def)
   apply (rule ev.base)
   by (simp add: ValueGt_def)
-
-lemma apply_updates_select: "length b = 1 \<Longrightarrow> EFSM.apply_updates (Updates select) (case_vname (\<lambda>n. input2state b 1 (I n)) Map.empty) Map.empty = <R 1 := hd b, R 2 := Num 0>"
-  apply (rule ext)
-  by (simp add: select_def hd_input2state)
 
 lemma possible_steps_select_wrong_arity: "a = STR ''select'' \<Longrightarrow>
        length b \<noteq> 1 \<Longrightarrow>
@@ -35,7 +31,7 @@ proof(coinduction)
     apply simp
     apply (case_tac "a = STR ''select''")
      apply (case_tac "length b = 1")
-      apply (simp add: possible_steps_0 apply_updates_select)
+      apply (simp add: possible_steps_0)
       defer
       apply (simp add: possible_steps_select_wrong_arity)
       apply (metis (no_types, lifting) once_none_always_none StateEq_def alw.cases alw.coinduct option.distinct(1))

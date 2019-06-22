@@ -19,7 +19,7 @@ definition all_syntax :: transition where
                              V (R 2),
                              V (I 2),
                              Plus (L (Num 5)) (V (R 2)), Minus (Plus (L (Num 5)) (V (R 2))) (L (Num 5))],
-                  Updates = [(R 1, Plus (L (Num 5)) (V (R 2))), (R 2, L (Str ''hello''))]
+                  Updates = [(1, Plus (L (Num 5)) (V (R 2))), (2, L (Str ''hello''))]
                 \<rparr>"
 
 end
