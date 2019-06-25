@@ -470,6 +470,8 @@ proof(coinduction)
      apply standard
       apply (case_tac "shd (stl i)")
       apply (simp add: state_1_pdf)
+     apply clarify
+     apply simp
      apply (simp add: aux1_aux1)
     by (simp add: not_login_free OutputEq_def none_never_detailed)
 qed

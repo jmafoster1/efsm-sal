@@ -1,1 +1,0 @@
-/home/michael/Documents/efsm-inference/formal/CExp.thy

@@ -27,6 +27,15 @@ fun ltl_step :: "transition_matrix \<Rightarrow> nat option \<Rightarrow> regist
                      (Some s', (apply_outputs (Outputs t) (join_ir i r)), (apply_updates (Updates t) (join_ir i r) r))
                   )"
 
+lemma ltl_step_alt:  "ltl_step e (Some s) r t = (let possibilities = possible_steps e s r (fst t) (snd t) in
+                   if possibilities = {||} then (None, [], r)
+                   else
+                     let (s', t') = Eps (\<lambda>x. x |\<in>| possibilities) in
+                     (Some s', (apply_outputs (Transition.Outputs t') (join_ir (snd t) r)), (apply_updates (Updates t') (join_ir (snd t) r) r))
+                  )"
+  apply (case_tac t)
+  by (simp add: Let_def)
+
 primcorec make_full_observation :: "transition_matrix \<Rightarrow> nat option \<Rightarrow> registers \<Rightarrow> event stream \<Rightarrow> state stream" where
   "make_full_observation e s d i = (let (s', o', d') = ltl_step e s d (shd i) in \<lparr>statename = s, datastate = d, event=(shd i), output = o'\<rparr>##(make_full_observation e s' d' (stl i)))"
 
