@@ -190,7 +190,9 @@ proof(coinduction)
     by (simp add: possible_steps_2 once_none_remains_not_lt_zero)
 qed
 
-lemma next_not_lt_zero: "n \<ge> 0 \<Longrightarrow> nxt (\<lambda>xs. MaybeBoolInt (<) (datastate (shd xs) (1)) (Some (Num 0)) \<noteq> trilean.true) (make_full_observation drinks (Some 1) <1 := Num n> t)"
+lemma next_not_lt_zero:
+  "n \<ge> 0 \<Longrightarrow>
+   (nxt (not (checkInx rg 1 ValueLt (Some (Num 0))))) (make_full_observation drinks (Some 1) <1 := Num n> t)"
     apply simp
     apply (case_tac "shd t = (STR ''vend'', [])")
     apply (case_tac "n = 0")

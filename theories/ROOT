@@ -1,9 +1,9 @@
-session "sal-snips" = "efsm" +
+session "snippets" = "efsm" +
   options [document = pdf, document_output = "output"]
   theories
-    Contexts
-    "SAL-examples/Coin_Tea"
-    "SAL-examples/Coin_Tea_Broken"
+    "coin-tea/theories/Coin_Tea"
+    "linkedin/theories/XXXlinkedin_ext"
+    "linkedin/theories/XXXlinkedin_ext_fixed"
   document_files
     "root.tex"
     "root.bib"

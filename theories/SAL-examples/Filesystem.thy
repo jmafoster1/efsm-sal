@@ -108,9 +108,9 @@ lemma read_2:  "r = <1:= user, 2:= content, 3:= owner> \<Longrightarrow>
   apply (rule one_possible_step)
     apply (simp add: possible_steps_singleton filesystem_def)
     apply safe
-            apply (simp_all add: transitions apply_guards apply_outputs)
-  apply (rule ext)
-  by simp
+            prefer 11
+            apply (rule ext)
+  by (simp_all add: transitions apply_guards apply_outputs)
 
 lemma possible_steps_1_logout: "possible_steps filesystem 1 r (STR ''logout'') [] = {|(0, logout)|}"
   apply (simp add: possible_steps_def transitions filesystem_def)

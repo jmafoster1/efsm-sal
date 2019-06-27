@@ -12,11 +12,11 @@ STRING : TYPE =
     String_detailed_pdf_of_otherID, String_free, String_friendID,
     String_name, String_otherID, String_paid,
     String_summary_pdf_of_otherID};
-  
+
 STATES : TYPE =
     {State_0, State_1, State_2, State_3, State_4, State_5,
     State_6, State_7, NULL_STATE};
-  
+
 value : CONTEXT = value {N_, STRING};                            %%20
 arithmetic : CONTEXT = arithmetic{N_, STRING};
 
@@ -35,7 +35,7 @@ value_plus : [[VALUE_OPTION, VALUE_OPTION] -> VALUE_OPTION] =
     arithmetic ! value_plus;
 value_minus : [[VALUE_OPTION, VALUE_OPTION] -> VALUE_OPTION] =
     arithmetic ! value_minus;
-  
+
 value_le : [[VALUE_OPTION, VALUE_OPTION] -> TRILEAN] =
     arithmetic ! value_le;                                         %%40
 value_ge : [[VALUE_OPTION, VALUE_OPTION] -> TRILEAN] =
@@ -46,19 +46,19 @@ value_gt : [[VALUE_OPTION, VALUE_OPTION] -> TRILEAN] =
     arithmetic ! value_gt;
 value_eq : [[VALUE_OPTION, VALUE_OPTION] -> TRILEAN] =
     arithmetic ! value_eq;
-  
+
 output_sequence : CONTEXT = sequence {value_option !             %%50
     B_OPTION, value_option ! OPTION_BB, 1};
 input_sequence : CONTEXT = sequence {B_VALUE, value !
     VALUE_BB, 3};
 gval : [TRILEAN -> BOOLEAN] = LAMBDA(g : TRILEAN) : g =
     arithmetic ! True;
-  
+
 check_underflow : [VALUE_OPTION -> BOOLEAN] =
     LAMBDA(v : VALUE_OPTION) : gval(value_ge(v, Some(NUM(0-N_))));
 check_overflow : [VALUE_OPTION -> BOOLEAN] =
     LAMBDA(v : VALUE_OPTION) : gval(value_le(v, Some(NUM(N_))));   %%60
-  
+
 linkedIn : MODULE =
   BEGIN
     INPUT label : LABEL
@@ -185,11 +185,12 @@ linkedIn : MODULE =
   END;
   LTL_neverDetailed : THEOREM linkedIn |-
     label = login AND
-        gval(value_eq(Some(I(1)),(Some(STR(String_free))))) =>
-        X(G(label = pdf AND
-        gval(value_eq(Some(I(1)),(Some(STR(String_otherID))))) =>  %%190
-        X(NOT (O = output_sequence !
+        I = input_sequence !
+        insert(STR(String_free), input_sequence ! empty) =>
+        X(G(label = pdf AND                                        %%190
+        gval(value_eq(Some(I(1)),(Some(STR(String_otherID))))) =>
+        NOT (O = output_sequence !
         insert(Some(STR(String_detailed_pdf_of_otherID)),
-        output_sequence ! empty)))));
-      
+        output_sequence ! empty))));
+
 END

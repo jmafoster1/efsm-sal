@@ -1,124 +1,119 @@
 \babel@toc {USenglish}{}
-\contentsline {section}{\numberline {1}Introduction}{7}{section.1}% 
-\contentsline {section}{\numberline {2}Old Datatype package: constructing datatypes from Cartesian Products and Disjoint Sums}{8}{section.2}% 
-\contentsline {subsection}{\numberline {2.1}The datatype universe}{8}{subsection.2.1}% 
-\contentsline {subsection}{\numberline {2.2}Freeness: Distinctness of Constructors}{10}{subsection.2.2}% 
-\contentsline {subsection}{\numberline {2.3}Set Constructions}{12}{subsection.2.3}% 
-\contentsline {section}{\numberline {3}Bijections between natural numbers and other types}{16}{section.3}% 
-\contentsline {subsection}{\numberline {3.1}Type \emph {\sfcode 42 1000 \sfcode 63 1000 \sfcode 33 1000 \sfcode 58 1000 \sfcode 59 1000 \sfcode 44 1000 \relax \fontsize {9}{11}\selectfont \abovedisplayskip 8.5\p@ plus3\p@ minus4\p@ \abovedisplayshortskip \z@ plus2\p@ \belowdisplayshortskip 4\p@ plus2\p@ minus2\p@ \def \leftmargin \leftmargini \topsep 4\p@ plus2\p@ minus2\p@ \parsep 2\p@ plus\p@ minus\p@ \itemsep \parsep {\leftmargin \leftmargini \topsep 4\p@ plus2\p@ minus2\p@ \parsep 2\p@ plus\p@ minus\p@ \itemsep \parsep }\belowdisplayskip \abovedisplayskip \add@extra@listi {sml}\normalfont \ttfamily \slshape nat\ {\emph {$\times $}}\ nat}}{16}{subsection.3.1}% 
-\contentsline {subsection}{\numberline {3.2}Type \emph {\sfcode 42 1000 \sfcode 63 1000 \sfcode 33 1000 \sfcode 58 1000 \sfcode 59 1000 \sfcode 44 1000 \relax \fontsize {9}{11}\selectfont \abovedisplayskip 8.5\p@ plus3\p@ minus4\p@ \abovedisplayshortskip \z@ plus2\p@ \belowdisplayshortskip 4\p@ plus2\p@ minus2\p@ \def \leftmargin \leftmargini \topsep 4\p@ plus2\p@ minus2\p@ \parsep 2\p@ plus\p@ minus\p@ \itemsep \parsep {\leftmargin \leftmargini \topsep 4\p@ plus2\p@ minus2\p@ \parsep 2\p@ plus\p@ minus\p@ \itemsep \parsep }\belowdisplayskip \abovedisplayskip \add@extra@listi {sml}\normalfont \ttfamily \slshape nat\ {\isacharplus }\ nat}}{17}{subsection.3.2}% 
-\contentsline {subsection}{\numberline {3.3}Type \emph {\sfcode 42 1000 \sfcode 63 1000 \sfcode 33 1000 \sfcode 58 1000 \sfcode 59 1000 \sfcode 44 1000 \relax \fontsize {9}{11}\selectfont \abovedisplayskip 8.5\p@ plus3\p@ minus4\p@ \abovedisplayshortskip \z@ plus2\p@ \belowdisplayshortskip 4\p@ plus2\p@ minus2\p@ \def \leftmargin \leftmargini \topsep 4\p@ plus2\p@ minus2\p@ \parsep 2\p@ plus\p@ minus\p@ \itemsep \parsep {\leftmargin \leftmargini \topsep 4\p@ plus2\p@ minus2\p@ \parsep 2\p@ plus\p@ minus\p@ \itemsep \parsep }\belowdisplayskip \abovedisplayskip \add@extra@listi {sml}\normalfont \ttfamily \slshape int}}{18}{subsection.3.3}% 
-\contentsline {subsection}{\numberline {3.4}Type \emph {\sfcode 42 1000 \sfcode 63 1000 \sfcode 33 1000 \sfcode 58 1000 \sfcode 59 1000 \sfcode 44 1000 \relax \fontsize {9}{11}\selectfont \abovedisplayskip 8.5\p@ plus3\p@ minus4\p@ \abovedisplayshortskip \z@ plus2\p@ \belowdisplayshortskip 4\p@ plus2\p@ minus2\p@ \def \leftmargin \leftmargini \topsep 4\p@ plus2\p@ minus2\p@ \parsep 2\p@ plus\p@ minus\p@ \itemsep \parsep {\leftmargin \leftmargini \topsep 4\p@ plus2\p@ minus2\p@ \parsep 2\p@ plus\p@ minus\p@ \itemsep \parsep }\belowdisplayskip \abovedisplayskip \add@extra@listi {sml}\normalfont \ttfamily \slshape nat\ list}}{19}{subsection.3.4}% 
-\contentsline {subsection}{\numberline {3.5}Finite sets of naturals}{19}{subsection.3.5}% 
-\contentsline {subsubsection}{\numberline {3.5.1}Preliminaries}{19}{subsubsection.3.5.1}% 
-\contentsline {subsubsection}{\numberline {3.5.2}From sets to naturals}{20}{subsubsection.3.5.2}% 
-\contentsline {subsubsection}{\numberline {3.5.3}From naturals to sets}{21}{subsubsection.3.5.3}% 
-\contentsline {subsubsection}{\numberline {3.5.4}Proof of isomorphism}{21}{subsubsection.3.5.4}% 
-\contentsline {section}{\numberline {4}Encoding (almost) everything into natural numbers}{22}{section.4}% 
-\contentsline {subsection}{\numberline {4.1}The class of countable types}{22}{subsection.4.1}% 
-\contentsline {subsection}{\numberline {4.2}Conversion functions}{22}{subsection.4.2}% 
-\contentsline {subsection}{\numberline {4.3}Finite types are countable}{23}{subsection.4.3}% 
-\contentsline {subsection}{\numberline {4.4}Automatically proving countability of old-style datatypes}{23}{subsection.4.4}% 
-\contentsline {subsection}{\numberline {4.5}Automatically proving countability of datatypes}{25}{subsection.4.5}% 
-\contentsline {subsection}{\numberline {4.6}More Countable types}{25}{subsection.4.6}% 
-\contentsline {subsection}{\numberline {4.7}The rationals are countably infinite}{26}{subsection.4.7}% 
-\contentsline {section}{\numberline {5}Type of finite sets defined as a subtype of sets}{27}{section.5}% 
-\contentsline {subsection}{\numberline {5.1}Definition of the type}{27}{subsection.5.1}% 
-\contentsline {subsection}{\numberline {5.2}Basic operations and type class instantiations}{27}{subsection.5.2}% 
-\contentsline {subsection}{\numberline {5.3}Other operations}{30}{subsection.5.3}% 
-\contentsline {subsection}{\numberline {5.4}Transferred lemmas from Set.thy}{30}{subsection.5.4}% 
-\contentsline {subsection}{\numberline {5.5}Additional lemmas}{35}{subsection.5.5}% 
-\contentsline {subsubsection}{\numberline {5.5.1}\emph {\sfcode 42 1000 \sfcode 63 1000 \sfcode 33 1000 \sfcode 58 1000 \sfcode 59 1000 \sfcode 44 1000 \relax \fontsize {9}{11}\selectfont \abovedisplayskip 8.5\p@ plus3\p@ minus4\p@ \abovedisplayshortskip \z@ plus2\p@ \belowdisplayshortskip 4\p@ plus2\p@ minus2\p@ \def \leftmargin \leftmargini \topsep 4\p@ plus2\p@ minus2\p@ \parsep 2\p@ plus\p@ minus\p@ \itemsep \parsep {\leftmargin \leftmargini \topsep 4\p@ plus2\p@ minus2\p@ \parsep 2\p@ plus\p@ minus\p@ \itemsep \parsep }\belowdisplayskip \abovedisplayskip \add@extra@listi {sml}\normalfont \ttfamily \slshape ffUnion}}{35}{subsubsection.5.5.1}% 
-\contentsline {subsubsection}{\numberline {5.5.2}\emph {\sfcode 42 1000 \sfcode 63 1000 \sfcode 33 1000 \sfcode 58 1000 \sfcode 59 1000 \sfcode 44 1000 \relax \fontsize {9}{11}\selectfont \abovedisplayskip 8.5\p@ plus3\p@ minus4\p@ \abovedisplayshortskip \z@ plus2\p@ \belowdisplayshortskip 4\p@ plus2\p@ minus2\p@ \def \leftmargin \leftmargini \topsep 4\p@ plus2\p@ minus2\p@ \parsep 2\p@ plus\p@ minus\p@ \itemsep \parsep {\leftmargin \leftmargini \topsep 4\p@ plus2\p@ minus2\p@ \parsep 2\p@ plus\p@ minus\p@ \itemsep \parsep }\belowdisplayskip \abovedisplayskip \add@extra@listi {sml}\normalfont \ttfamily \slshape fbind}}{35}{subsubsection.5.5.2}% 
-\contentsline {subsubsection}{\numberline {5.5.3}\emph {\sfcode 42 1000 \sfcode 63 1000 \sfcode 33 1000 \sfcode 58 1000 \sfcode 59 1000 \sfcode 44 1000 \relax \fontsize {9}{11}\selectfont \abovedisplayskip 8.5\p@ plus3\p@ minus4\p@ \abovedisplayshortskip \z@ plus2\p@ \belowdisplayshortskip 4\p@ plus2\p@ minus2\p@ \def \leftmargin \leftmargini \topsep 4\p@ plus2\p@ minus2\p@ \parsep 2\p@ plus\p@ minus\p@ \itemsep \parsep {\leftmargin \leftmargini \topsep 4\p@ plus2\p@ minus2\p@ \parsep 2\p@ plus\p@ minus\p@ \itemsep \parsep }\belowdisplayskip \abovedisplayskip \add@extra@listi {sml}\normalfont \ttfamily \slshape fsingleton}}{35}{subsubsection.5.5.3}% 
-\contentsline {subsubsection}{\numberline {5.5.4}\emph {\sfcode 42 1000 \sfcode 63 1000 \sfcode 33 1000 \sfcode 58 1000 \sfcode 59 1000 \sfcode 44 1000 \relax \fontsize {9}{11}\selectfont \abovedisplayskip 8.5\p@ plus3\p@ minus4\p@ \abovedisplayshortskip \z@ plus2\p@ \belowdisplayshortskip 4\p@ plus2\p@ minus2\p@ \def \leftmargin \leftmargini \topsep 4\p@ plus2\p@ minus2\p@ \parsep 2\p@ plus\p@ minus\p@ \itemsep \parsep {\leftmargin \leftmargini \topsep 4\p@ plus2\p@ minus2\p@ \parsep 2\p@ plus\p@ minus\p@ \itemsep \parsep }\belowdisplayskip \abovedisplayskip \add@extra@listi {sml}\normalfont \ttfamily \slshape femepty}}{35}{subsubsection.5.5.4}% 
-\contentsline {subsubsection}{\numberline {5.5.5}\emph {\sfcode 42 1000 \sfcode 63 1000 \sfcode 33 1000 \sfcode 58 1000 \sfcode 59 1000 \sfcode 44 1000 \relax \fontsize {9}{11}\selectfont \abovedisplayskip 8.5\p@ plus3\p@ minus4\p@ \abovedisplayshortskip \z@ plus2\p@ \belowdisplayshortskip 4\p@ plus2\p@ minus2\p@ \def \leftmargin \leftmargini \topsep 4\p@ plus2\p@ minus2\p@ \parsep 2\p@ plus\p@ minus\p@ \itemsep \parsep {\leftmargin \leftmargini \topsep 4\p@ plus2\p@ minus2\p@ \parsep 2\p@ plus\p@ minus\p@ \itemsep \parsep }\belowdisplayskip \abovedisplayskip \add@extra@listi {sml}\normalfont \ttfamily \slshape fset}}{35}{subsubsection.5.5.5}% 
-\contentsline {subsubsection}{\numberline {5.5.6}\emph {\sfcode 42 1000 \sfcode 63 1000 \sfcode 33 1000 \sfcode 58 1000 \sfcode 59 1000 \sfcode 44 1000 \relax \fontsize {9}{11}\selectfont \abovedisplayskip 8.5\p@ plus3\p@ minus4\p@ \abovedisplayshortskip \z@ plus2\p@ \belowdisplayshortskip 4\p@ plus2\p@ minus2\p@ \def \leftmargin \leftmargini \topsep 4\p@ plus2\p@ minus2\p@ \parsep 2\p@ plus\p@ minus\p@ \itemsep \parsep {\leftmargin \leftmargini \topsep 4\p@ plus2\p@ minus2\p@ \parsep 2\p@ plus\p@ minus\p@ \itemsep \parsep }\belowdisplayskip \abovedisplayskip \add@extra@listi {sml}\normalfont \ttfamily \slshape ffilter}}{35}{subsubsection.5.5.6}% 
-\contentsline {subsubsection}{\numberline {5.5.7}\emph {\sfcode 42 1000 \sfcode 63 1000 \sfcode 33 1000 \sfcode 58 1000 \sfcode 59 1000 \sfcode 44 1000 \relax \fontsize {9}{11}\selectfont \abovedisplayskip 8.5\p@ plus3\p@ minus4\p@ \abovedisplayshortskip \z@ plus2\p@ \belowdisplayshortskip 4\p@ plus2\p@ minus2\p@ \def \leftmargin \leftmargini \topsep 4\p@ plus2\p@ minus2\p@ \parsep 2\p@ plus\p@ minus\p@ \itemsep \parsep {\leftmargin \leftmargini \topsep 4\p@ plus2\p@ minus2\p@ \parsep 2\p@ plus\p@ minus\p@ \itemsep \parsep }\belowdisplayskip \abovedisplayskip \add@extra@listi {sml}\normalfont \ttfamily \slshape fset{\isacharunderscore }of{\isacharunderscore }list}}{36}{subsubsection.5.5.7}% 
-\contentsline {subsubsection}{\numberline {5.5.8}\emph {\sfcode 42 1000 \sfcode 63 1000 \sfcode 33 1000 \sfcode 58 1000 \sfcode 59 1000 \sfcode 44 1000 \relax \fontsize {9}{11}\selectfont \abovedisplayskip 8.5\p@ plus3\p@ minus4\p@ \abovedisplayshortskip \z@ plus2\p@ \belowdisplayshortskip 4\p@ plus2\p@ minus2\p@ \def \leftmargin \leftmargini \topsep 4\p@ plus2\p@ minus2\p@ \parsep 2\p@ plus\p@ minus\p@ \itemsep \parsep {\leftmargin \leftmargini \topsep 4\p@ plus2\p@ minus2\p@ \parsep 2\p@ plus\p@ minus\p@ \itemsep \parsep }\belowdisplayskip \abovedisplayskip \add@extra@listi {sml}\normalfont \ttfamily \slshape finsert}}{36}{subsubsection.5.5.8}% 
-\contentsline {subsubsection}{\numberline {5.5.9}\emph {\sfcode 42 1000 \sfcode 63 1000 \sfcode 33 1000 \sfcode 58 1000 \sfcode 59 1000 \sfcode 44 1000 \relax \fontsize {9}{11}\selectfont \abovedisplayskip 8.5\p@ plus3\p@ minus4\p@ \abovedisplayshortskip \z@ plus2\p@ \belowdisplayshortskip 4\p@ plus2\p@ minus2\p@ \def \leftmargin \leftmargini \topsep 4\p@ plus2\p@ minus2\p@ \parsep 2\p@ plus\p@ minus\p@ \itemsep \parsep {\leftmargin \leftmargini \topsep 4\p@ plus2\p@ minus2\p@ \parsep 2\p@ plus\p@ minus\p@ \itemsep \parsep }\belowdisplayskip \abovedisplayskip \add@extra@listi {sml}\normalfont \ttfamily \slshape fimage}}{36}{subsubsection.5.5.9}% 
-\contentsline {subsubsection}{\numberline {5.5.10}bounded quantification}{36}{subsubsection.5.5.10}% 
-\contentsline {subsubsection}{\numberline {5.5.11}\emph {\sfcode 42 1000 \sfcode 63 1000 \sfcode 33 1000 \sfcode 58 1000 \sfcode 59 1000 \sfcode 44 1000 \relax \fontsize {9}{11}\selectfont \abovedisplayskip 8.5\p@ plus3\p@ minus4\p@ \abovedisplayshortskip \z@ plus2\p@ \belowdisplayshortskip 4\p@ plus2\p@ minus2\p@ \def \leftmargin \leftmargini \topsep 4\p@ plus2\p@ minus2\p@ \parsep 2\p@ plus\p@ minus\p@ \itemsep \parsep {\leftmargin \leftmargini \topsep 4\p@ plus2\p@ minus2\p@ \parsep 2\p@ plus\p@ minus\p@ \itemsep \parsep }\belowdisplayskip \abovedisplayskip \add@extra@listi {sml}\normalfont \ttfamily \slshape fcard}}{37}{subsubsection.5.5.11}% 
-\contentsline {subsubsection}{\numberline {5.5.12}\emph {\sfcode 42 1000 \sfcode 63 1000 \sfcode 33 1000 \sfcode 58 1000 \sfcode 59 1000 \sfcode 44 1000 \relax \fontsize {9}{11}\selectfont \abovedisplayskip 8.5\p@ plus3\p@ minus4\p@ \abovedisplayshortskip \z@ plus2\p@ \belowdisplayshortskip 4\p@ plus2\p@ minus2\p@ \def \leftmargin \leftmargini \topsep 4\p@ plus2\p@ minus2\p@ \parsep 2\p@ plus\p@ minus\p@ \itemsep \parsep {\leftmargin \leftmargini \topsep 4\p@ plus2\p@ minus2\p@ \parsep 2\p@ plus\p@ minus\p@ \itemsep \parsep }\belowdisplayskip \abovedisplayskip \add@extra@listi {sml}\normalfont \ttfamily \slshape sorted{\isacharunderscore }list{\isacharunderscore }of{\isacharunderscore }fset}}{38}{subsubsection.5.5.12}% 
-\contentsline {subsubsection}{\numberline {5.5.13}\emph {\sfcode 42 1000 \sfcode 63 1000 \sfcode 33 1000 \sfcode 58 1000 \sfcode 59 1000 \sfcode 44 1000 \relax \fontsize {9}{11}\selectfont \abovedisplayskip 8.5\p@ plus3\p@ minus4\p@ \abovedisplayshortskip \z@ plus2\p@ \belowdisplayshortskip 4\p@ plus2\p@ minus2\p@ \def \leftmargin \leftmargini \topsep 4\p@ plus2\p@ minus2\p@ \parsep 2\p@ plus\p@ minus\p@ \itemsep \parsep {\leftmargin \leftmargini \topsep 4\p@ plus2\p@ minus2\p@ \parsep 2\p@ plus\p@ minus\p@ \itemsep \parsep }\belowdisplayskip \abovedisplayskip \add@extra@listi {sml}\normalfont \ttfamily \slshape ffold}}{38}{subsubsection.5.5.13}% 
-\contentsline {subsubsection}{\numberline {5.5.14}Group operations}{39}{subsubsection.5.5.14}% 
-\contentsline {subsubsection}{\numberline {5.5.15}Semilattice operations}{40}{subsubsection.5.5.15}% 
-\contentsline {subsection}{\numberline {5.6}Choice in fsets}{41}{subsection.5.6}% 
-\contentsline {subsection}{\numberline {5.7}Induction and Cases rules for fsets}{41}{subsection.5.7}% 
-\contentsline {subsection}{\numberline {5.8}Setup for Lifting/Transfer}{43}{subsection.5.8}% 
-\contentsline {subsubsection}{\numberline {5.8.1}Relator and predicator properties}{43}{subsubsection.5.8.1}% 
-\contentsline {subsubsection}{\numberline {5.8.2}Transfer rules for the Transfer package}{43}{subsubsection.5.8.2}% 
-\contentsline {subsection}{\numberline {5.9}BNF setup}{45}{subsection.5.9}% 
-\contentsline {subsection}{\numberline {5.10}Size setup}{46}{subsection.5.10}% 
-\contentsline {subsection}{\numberline {5.11}Advanced relator customization}{47}{subsection.5.11}% 
-\contentsline {subsubsection}{\numberline {5.11.1}Countability}{48}{subsubsection.5.11.1}% 
-\contentsline {subsection}{\numberline {5.12}Quickcheck setup}{48}{subsection.5.12}% 
-\contentsline {subsection}{\numberline {5.13}Option Logic}{49}{subsection.5.13}% 
-\contentsline {section}{\numberline {6}Extended Finite State Machines}{57}{section.6}% 
-\contentsline {subsection}{\numberline {6.1}Arithmetic Expressions}{57}{subsection.6.1}% 
-\contentsline {subsection}{\numberline {6.2}Guard Expressions}{59}{subsection.6.2}% 
-\contentsline {subsection}{\numberline {6.3}Extended Finite State Machines}{65}{subsection.6.3}% 
-\contentsline {section}{\numberline {7}Subsumption and Generalisation}{72}{section.7}% 
-\contentsline {subsection}{\numberline {7.1}Constraint Expressions}{72}{subsection.7.1}% 
-\contentsline {subsection}{\numberline {7.2}A Linear Ordering for Constraint Expressions}{82}{subsection.7.2}% 
-\contentsline {subsection}{\numberline {7.3}Contexts}{88}{subsection.7.3}% 
-\contentsline {section}{\numberline {8}Infinite Streams}{97}{section.8}% 
-\contentsline {subsection}{\numberline {8.1}prepend list to stream}{98}{subsection.8.1}% 
-\contentsline {subsection}{\numberline {8.2}set of streams with elements in some fixed set}{98}{subsection.8.2}% 
-\contentsline {subsection}{\numberline {8.3}nth, take, drop for streams}{99}{subsection.8.3}% 
-\contentsline {subsection}{\numberline {8.4}unary predicates lifted to streams}{102}{subsection.8.4}% 
-\contentsline {subsection}{\numberline {8.5}recurring stream out of a list}{102}{subsection.8.5}% 
-\contentsline {subsection}{\numberline {8.6}iterated application of a function}{103}{subsection.8.6}% 
-\contentsline {subsection}{\numberline {8.7}stream repeating a single element}{103}{subsection.8.7}% 
-\contentsline {subsection}{\numberline {8.8}stream of natural numbers}{104}{subsection.8.8}% 
-\contentsline {subsection}{\numberline {8.9}flatten a stream of lists}{104}{subsection.8.9}% 
-\contentsline {subsection}{\numberline {8.10}merge a stream of streams}{105}{subsection.8.10}% 
-\contentsline {subsection}{\numberline {8.11}product of two streams}{106}{subsection.8.11}% 
-\contentsline {subsection}{\numberline {8.12}interleave two streams}{106}{subsection.8.12}% 
-\contentsline {subsection}{\numberline {8.13}zip}{106}{subsection.8.13}% 
-\contentsline {subsection}{\numberline {8.14}zip via function}{107}{subsection.8.14}% 
-\contentsline {section}{\numberline {9}List prefixes, suffixes, and homeomorphic embedding}{107}{section.9}% 
-\contentsline {subsection}{\numberline {9.1}Prefix order on lists}{107}{subsection.9.1}% 
-\contentsline {subsection}{\numberline {9.2}Basic properties of prefixes}{108}{subsection.9.2}% 
-\contentsline {subsection}{\numberline {9.3}Prefixes}{111}{subsection.9.3}% 
-\contentsline {subsection}{\numberline {9.4}Longest Common Prefix}{112}{subsection.9.4}% 
-\contentsline {subsection}{\numberline {9.5}Parallel lists}{114}{subsection.9.5}% 
-\contentsline {subsection}{\numberline {9.6}Suffix order on lists}{115}{subsection.9.6}% 
-\contentsline {subsection}{\numberline {9.7}Suffixes}{119}{subsection.9.7}% 
-\contentsline {subsection}{\numberline {9.8}Homeomorphic embedding on lists}{120}{subsection.9.8}% 
-\contentsline {subsection}{\numberline {9.9}Subsequences (special case of homeomorphic embedding)}{122}{subsection.9.9}% 
-\contentsline {subsection}{\numberline {9.10}Appending elements}{124}{subsection.9.10}% 
-\contentsline {subsection}{\numberline {9.11}Relation to standard list operations}{125}{subsection.9.11}% 
-\contentsline {subsection}{\numberline {9.12}Contiguous sublists}{126}{subsection.9.12}% 
-\contentsline {subsection}{\numberline {9.13}Parametricity}{128}{subsection.9.13}% 
-\contentsline {section}{\numberline {10}Infinite Sets and Related Concepts}{130}{section.10}% 
-\contentsline {subsection}{\numberline {10.1}The set of natural numbers is infinite}{130}{subsection.10.1}% 
-\contentsline {subsection}{\numberline {10.2}The set of integers is also infinite}{131}{subsection.10.2}% 
-\contentsline {subsection}{\numberline {10.3}Infinitely Many and Almost All}{131}{subsection.10.3}% 
-\contentsline {subsection}{\numberline {10.4}Enumeration of an Infinite Set}{133}{subsection.10.4}% 
-\contentsline {section}{\numberline {11}Countable sets}{136}{section.11}% 
-\contentsline {subsection}{\numberline {11.1}Predicate for countable sets}{136}{subsection.11.1}% 
-\contentsline {subsection}{\numberline {11.2}Enumerate a countable set}{136}{subsection.11.2}% 
-\contentsline {subsection}{\numberline {11.3}Closure properties of countability}{138}{subsection.11.3}% 
-\contentsline {subsection}{\numberline {11.4}Misc lemmas}{141}{subsection.11.4}% 
-\contentsline {subsection}{\numberline {11.5}Uncountable}{141}{subsection.11.5}% 
-\contentsline {section}{\numberline {12}Countable Complete Lattices}{142}{section.12}% 
-\contentsline {subsubsection}{\numberline {12.0.1}Instances of countable complete lattices}{146}{subsubsection.12.0.1}% 
-\contentsline {section}{\numberline {13}Continuity and iterations}{146}{section.13}% 
-\contentsline {subsection}{\numberline {13.1}Continuity for complete lattices}{147}{subsection.13.1}% 
-\contentsline {subsubsection}{\numberline {13.1.1}Least fixed points in countable complete lattices}{153}{subsubsection.13.1.1}% 
-\contentsline {section}{\numberline {14}Extended natural numbers (i.e. with infinity)}{154}{section.14}% 
-\contentsline {subsection}{\numberline {14.1}Type definition}{154}{subsection.14.1}% 
-\contentsline {subsection}{\numberline {14.2}Constructors and numbers}{155}{subsection.14.2}% 
-\contentsline {subsection}{\numberline {14.3}Addition}{156}{subsection.14.3}% 
-\contentsline {subsection}{\numberline {14.4}Multiplication}{157}{subsection.14.4}% 
-\contentsline {subsection}{\numberline {14.5}Numerals}{158}{subsection.14.5}% 
-\contentsline {subsection}{\numberline {14.6}Subtraction}{158}{subsection.14.6}% 
-\contentsline {subsection}{\numberline {14.7}Ordering}{159}{subsection.14.7}% 
-\contentsline {subsection}{\numberline {14.8}Cancellation simprocs}{162}{subsection.14.8}% 
-\contentsline {subsection}{\numberline {14.9}Well-ordering}{163}{subsection.14.9}% 
-\contentsline {subsection}{\numberline {14.10}Complete Lattice}{164}{subsection.14.10}% 
-\contentsline {subsection}{\numberline {14.11}Traditional theorem names}{164}{subsection.14.11}% 
-\contentsline {section}{\numberline {15}Linear Temporal Logic on Streams}{165}{section.15}% 
-\contentsline {section}{\numberline {16}Preliminaries}{165}{section.16}% 
-\contentsline {section}{\numberline {17}Linear temporal logic}{165}{section.17}% 
+\contentsline {section}{\numberline {1}Introduction}{5}{section.1}% 
+\contentsline {section}{\numberline {2}Old Datatype package: constructing datatypes from Cartesian Products and Disjoint Sums}{6}{section.2}% 
+\contentsline {subsection}{\numberline {2.1}The datatype universe}{6}{subsection.2.1}% 
+\contentsline {subsection}{\numberline {2.2}Freeness: Distinctness of Constructors}{8}{subsection.2.2}% 
+\contentsline {subsection}{\numberline {2.3}Set Constructions}{10}{subsection.2.3}% 
+\contentsline {section}{\numberline {3}Bijections between natural numbers and other types}{14}{section.3}% 
+\contentsline {subsection}{\numberline {3.1}Type \emph {\sfcode 42 1000 \sfcode 63 1000 \sfcode 33 1000 \sfcode 58 1000 \sfcode 59 1000 \sfcode 44 1000 \relax \fontsize {9}{11}\selectfont \abovedisplayskip 8.5\p@ plus3\p@ minus4\p@ \abovedisplayshortskip \z@ plus2\p@ \belowdisplayshortskip 4\p@ plus2\p@ minus2\p@ \def \leftmargin \leftmargini \topsep 4\p@ plus2\p@ minus2\p@ \parsep 2\p@ plus\p@ minus\p@ \itemsep \parsep {\leftmargin \leftmargini \topsep 4\p@ plus2\p@ minus2\p@ \parsep 2\p@ plus\p@ minus\p@ \itemsep \parsep }\belowdisplayskip \abovedisplayskip \add@extra@listi {sml}\normalfont \ttfamily \slshape nat\ {\emph {$\times $}}\ nat}}{14}{subsection.3.1}% 
+\contentsline {subsection}{\numberline {3.2}Type \emph {\sfcode 42 1000 \sfcode 63 1000 \sfcode 33 1000 \sfcode 58 1000 \sfcode 59 1000 \sfcode 44 1000 \relax \fontsize {9}{11}\selectfont \abovedisplayskip 8.5\p@ plus3\p@ minus4\p@ \abovedisplayshortskip \z@ plus2\p@ \belowdisplayshortskip 4\p@ plus2\p@ minus2\p@ \def \leftmargin \leftmargini \topsep 4\p@ plus2\p@ minus2\p@ \parsep 2\p@ plus\p@ minus\p@ \itemsep \parsep {\leftmargin \leftmargini \topsep 4\p@ plus2\p@ minus2\p@ \parsep 2\p@ plus\p@ minus\p@ \itemsep \parsep }\belowdisplayskip \abovedisplayskip \add@extra@listi {sml}\normalfont \ttfamily \slshape nat\ {\isacharplus }\ nat}}{15}{subsection.3.2}% 
+\contentsline {subsection}{\numberline {3.3}Type \emph {\sfcode 42 1000 \sfcode 63 1000 \sfcode 33 1000 \sfcode 58 1000 \sfcode 59 1000 \sfcode 44 1000 \relax \fontsize {9}{11}\selectfont \abovedisplayskip 8.5\p@ plus3\p@ minus4\p@ \abovedisplayshortskip \z@ plus2\p@ \belowdisplayshortskip 4\p@ plus2\p@ minus2\p@ \def \leftmargin \leftmargini \topsep 4\p@ plus2\p@ minus2\p@ \parsep 2\p@ plus\p@ minus\p@ \itemsep \parsep {\leftmargin \leftmargini \topsep 4\p@ plus2\p@ minus2\p@ \parsep 2\p@ plus\p@ minus\p@ \itemsep \parsep }\belowdisplayskip \abovedisplayskip \add@extra@listi {sml}\normalfont \ttfamily \slshape int}}{16}{subsection.3.3}% 
+\contentsline {subsection}{\numberline {3.4}Type \emph {\sfcode 42 1000 \sfcode 63 1000 \sfcode 33 1000 \sfcode 58 1000 \sfcode 59 1000 \sfcode 44 1000 \relax \fontsize {9}{11}\selectfont \abovedisplayskip 8.5\p@ plus3\p@ minus4\p@ \abovedisplayshortskip \z@ plus2\p@ \belowdisplayshortskip 4\p@ plus2\p@ minus2\p@ \def \leftmargin \leftmargini \topsep 4\p@ plus2\p@ minus2\p@ \parsep 2\p@ plus\p@ minus\p@ \itemsep \parsep {\leftmargin \leftmargini \topsep 4\p@ plus2\p@ minus2\p@ \parsep 2\p@ plus\p@ minus\p@ \itemsep \parsep }\belowdisplayskip \abovedisplayskip \add@extra@listi {sml}\normalfont \ttfamily \slshape nat\ list}}{17}{subsection.3.4}% 
+\contentsline {subsection}{\numberline {3.5}Finite sets of naturals}{17}{subsection.3.5}% 
+\contentsline {subsubsection}{\numberline {3.5.1}Preliminaries}{17}{subsubsection.3.5.1}% 
+\contentsline {subsubsection}{\numberline {3.5.2}From sets to naturals}{18}{subsubsection.3.5.2}% 
+\contentsline {subsubsection}{\numberline {3.5.3}From naturals to sets}{19}{subsubsection.3.5.3}% 
+\contentsline {subsubsection}{\numberline {3.5.4}Proof of isomorphism}{19}{subsubsection.3.5.4}% 
+\contentsline {section}{\numberline {4}Encoding (almost) everything into natural numbers}{20}{section.4}% 
+\contentsline {subsection}{\numberline {4.1}The class of countable types}{20}{subsection.4.1}% 
+\contentsline {subsection}{\numberline {4.2}Conversion functions}{20}{subsection.4.2}% 
+\contentsline {subsection}{\numberline {4.3}Finite types are countable}{21}{subsection.4.3}% 
+\contentsline {subsection}{\numberline {4.4}Automatically proving countability of old-style datatypes}{21}{subsection.4.4}% 
+\contentsline {subsection}{\numberline {4.5}Automatically proving countability of datatypes}{23}{subsection.4.5}% 
+\contentsline {subsection}{\numberline {4.6}More Countable types}{23}{subsection.4.6}% 
+\contentsline {subsection}{\numberline {4.7}The rationals are countably infinite}{24}{subsection.4.7}% 
+\contentsline {section}{\numberline {5}Type of finite sets defined as a subtype of sets}{25}{section.5}% 
+\contentsline {subsection}{\numberline {5.1}Definition of the type}{25}{subsection.5.1}% 
+\contentsline {subsection}{\numberline {5.2}Basic operations and type class instantiations}{25}{subsection.5.2}% 
+\contentsline {subsection}{\numberline {5.3}Other operations}{28}{subsection.5.3}% 
+\contentsline {subsection}{\numberline {5.4}Transferred lemmas from Set.thy}{28}{subsection.5.4}% 
+\contentsline {subsection}{\numberline {5.5}Additional lemmas}{33}{subsection.5.5}% 
+\contentsline {subsubsection}{\numberline {5.5.1}\emph {\sfcode 42 1000 \sfcode 63 1000 \sfcode 33 1000 \sfcode 58 1000 \sfcode 59 1000 \sfcode 44 1000 \relax \fontsize {9}{11}\selectfont \abovedisplayskip 8.5\p@ plus3\p@ minus4\p@ \abovedisplayshortskip \z@ plus2\p@ \belowdisplayshortskip 4\p@ plus2\p@ minus2\p@ \def \leftmargin \leftmargini \topsep 4\p@ plus2\p@ minus2\p@ \parsep 2\p@ plus\p@ minus\p@ \itemsep \parsep {\leftmargin \leftmargini \topsep 4\p@ plus2\p@ minus2\p@ \parsep 2\p@ plus\p@ minus\p@ \itemsep \parsep }\belowdisplayskip \abovedisplayskip \add@extra@listi {sml}\normalfont \ttfamily \slshape ffUnion}}{33}{subsubsection.5.5.1}% 
+\contentsline {subsubsection}{\numberline {5.5.2}\emph {\sfcode 42 1000 \sfcode 63 1000 \sfcode 33 1000 \sfcode 58 1000 \sfcode 59 1000 \sfcode 44 1000 \relax \fontsize {9}{11}\selectfont \abovedisplayskip 8.5\p@ plus3\p@ minus4\p@ \abovedisplayshortskip \z@ plus2\p@ \belowdisplayshortskip 4\p@ plus2\p@ minus2\p@ \def \leftmargin \leftmargini \topsep 4\p@ plus2\p@ minus2\p@ \parsep 2\p@ plus\p@ minus\p@ \itemsep \parsep {\leftmargin \leftmargini \topsep 4\p@ plus2\p@ minus2\p@ \parsep 2\p@ plus\p@ minus\p@ \itemsep \parsep }\belowdisplayskip \abovedisplayskip \add@extra@listi {sml}\normalfont \ttfamily \slshape fbind}}{33}{subsubsection.5.5.2}% 
+\contentsline {subsubsection}{\numberline {5.5.3}\emph {\sfcode 42 1000 \sfcode 63 1000 \sfcode 33 1000 \sfcode 58 1000 \sfcode 59 1000 \sfcode 44 1000 \relax \fontsize {9}{11}\selectfont \abovedisplayskip 8.5\p@ plus3\p@ minus4\p@ \abovedisplayshortskip \z@ plus2\p@ \belowdisplayshortskip 4\p@ plus2\p@ minus2\p@ \def \leftmargin \leftmargini \topsep 4\p@ plus2\p@ minus2\p@ \parsep 2\p@ plus\p@ minus\p@ \itemsep \parsep {\leftmargin \leftmargini \topsep 4\p@ plus2\p@ minus2\p@ \parsep 2\p@ plus\p@ minus\p@ \itemsep \parsep }\belowdisplayskip \abovedisplayskip \add@extra@listi {sml}\normalfont \ttfamily \slshape fsingleton}}{33}{subsubsection.5.5.3}% 
+\contentsline {subsubsection}{\numberline {5.5.4}\emph {\sfcode 42 1000 \sfcode 63 1000 \sfcode 33 1000 \sfcode 58 1000 \sfcode 59 1000 \sfcode 44 1000 \relax \fontsize {9}{11}\selectfont \abovedisplayskip 8.5\p@ plus3\p@ minus4\p@ \abovedisplayshortskip \z@ plus2\p@ \belowdisplayshortskip 4\p@ plus2\p@ minus2\p@ \def \leftmargin \leftmargini \topsep 4\p@ plus2\p@ minus2\p@ \parsep 2\p@ plus\p@ minus\p@ \itemsep \parsep {\leftmargin \leftmargini \topsep 4\p@ plus2\p@ minus2\p@ \parsep 2\p@ plus\p@ minus\p@ \itemsep \parsep }\belowdisplayskip \abovedisplayskip \add@extra@listi {sml}\normalfont \ttfamily \slshape femepty}}{33}{subsubsection.5.5.4}% 
+\contentsline {subsubsection}{\numberline {5.5.5}\emph {\sfcode 42 1000 \sfcode 63 1000 \sfcode 33 1000 \sfcode 58 1000 \sfcode 59 1000 \sfcode 44 1000 \relax \fontsize {9}{11}\selectfont \abovedisplayskip 8.5\p@ plus3\p@ minus4\p@ \abovedisplayshortskip \z@ plus2\p@ \belowdisplayshortskip 4\p@ plus2\p@ minus2\p@ \def \leftmargin \leftmargini \topsep 4\p@ plus2\p@ minus2\p@ \parsep 2\p@ plus\p@ minus\p@ \itemsep \parsep {\leftmargin \leftmargini \topsep 4\p@ plus2\p@ minus2\p@ \parsep 2\p@ plus\p@ minus\p@ \itemsep \parsep }\belowdisplayskip \abovedisplayskip \add@extra@listi {sml}\normalfont \ttfamily \slshape fset}}{33}{subsubsection.5.5.5}% 
+\contentsline {subsubsection}{\numberline {5.5.6}\emph {\sfcode 42 1000 \sfcode 63 1000 \sfcode 33 1000 \sfcode 58 1000 \sfcode 59 1000 \sfcode 44 1000 \relax \fontsize {9}{11}\selectfont \abovedisplayskip 8.5\p@ plus3\p@ minus4\p@ \abovedisplayshortskip \z@ plus2\p@ \belowdisplayshortskip 4\p@ plus2\p@ minus2\p@ \def \leftmargin \leftmargini \topsep 4\p@ plus2\p@ minus2\p@ \parsep 2\p@ plus\p@ minus\p@ \itemsep \parsep {\leftmargin \leftmargini \topsep 4\p@ plus2\p@ minus2\p@ \parsep 2\p@ plus\p@ minus\p@ \itemsep \parsep }\belowdisplayskip \abovedisplayskip \add@extra@listi {sml}\normalfont \ttfamily \slshape ffilter}}{33}{subsubsection.5.5.6}% 
+\contentsline {subsubsection}{\numberline {5.5.7}\emph {\sfcode 42 1000 \sfcode 63 1000 \sfcode 33 1000 \sfcode 58 1000 \sfcode 59 1000 \sfcode 44 1000 \relax \fontsize {9}{11}\selectfont \abovedisplayskip 8.5\p@ plus3\p@ minus4\p@ \abovedisplayshortskip \z@ plus2\p@ \belowdisplayshortskip 4\p@ plus2\p@ minus2\p@ \def \leftmargin \leftmargini \topsep 4\p@ plus2\p@ minus2\p@ \parsep 2\p@ plus\p@ minus\p@ \itemsep \parsep {\leftmargin \leftmargini \topsep 4\p@ plus2\p@ minus2\p@ \parsep 2\p@ plus\p@ minus\p@ \itemsep \parsep }\belowdisplayskip \abovedisplayskip \add@extra@listi {sml}\normalfont \ttfamily \slshape fset{\isacharunderscore }of{\isacharunderscore }list}}{34}{subsubsection.5.5.7}% 
+\contentsline {subsubsection}{\numberline {5.5.8}\emph {\sfcode 42 1000 \sfcode 63 1000 \sfcode 33 1000 \sfcode 58 1000 \sfcode 59 1000 \sfcode 44 1000 \relax \fontsize {9}{11}\selectfont \abovedisplayskip 8.5\p@ plus3\p@ minus4\p@ \abovedisplayshortskip \z@ plus2\p@ \belowdisplayshortskip 4\p@ plus2\p@ minus2\p@ \def \leftmargin \leftmargini \topsep 4\p@ plus2\p@ minus2\p@ \parsep 2\p@ plus\p@ minus\p@ \itemsep \parsep {\leftmargin \leftmargini \topsep 4\p@ plus2\p@ minus2\p@ \parsep 2\p@ plus\p@ minus\p@ \itemsep \parsep }\belowdisplayskip \abovedisplayskip \add@extra@listi {sml}\normalfont \ttfamily \slshape finsert}}{34}{subsubsection.5.5.8}% 
+\contentsline {subsubsection}{\numberline {5.5.9}\emph {\sfcode 42 1000 \sfcode 63 1000 \sfcode 33 1000 \sfcode 58 1000 \sfcode 59 1000 \sfcode 44 1000 \relax \fontsize {9}{11}\selectfont \abovedisplayskip 8.5\p@ plus3\p@ minus4\p@ \abovedisplayshortskip \z@ plus2\p@ \belowdisplayshortskip 4\p@ plus2\p@ minus2\p@ \def \leftmargin \leftmargini \topsep 4\p@ plus2\p@ minus2\p@ \parsep 2\p@ plus\p@ minus\p@ \itemsep \parsep {\leftmargin \leftmargini \topsep 4\p@ plus2\p@ minus2\p@ \parsep 2\p@ plus\p@ minus\p@ \itemsep \parsep }\belowdisplayskip \abovedisplayskip \add@extra@listi {sml}\normalfont \ttfamily \slshape fimage}}{34}{subsubsection.5.5.9}% 
+\contentsline {subsubsection}{\numberline {5.5.10}bounded quantification}{34}{subsubsection.5.5.10}% 
+\contentsline {subsubsection}{\numberline {5.5.11}\emph {\sfcode 42 1000 \sfcode 63 1000 \sfcode 33 1000 \sfcode 58 1000 \sfcode 59 1000 \sfcode 44 1000 \relax \fontsize {9}{11}\selectfont \abovedisplayskip 8.5\p@ plus3\p@ minus4\p@ \abovedisplayshortskip \z@ plus2\p@ \belowdisplayshortskip 4\p@ plus2\p@ minus2\p@ \def \leftmargin \leftmargini \topsep 4\p@ plus2\p@ minus2\p@ \parsep 2\p@ plus\p@ minus\p@ \itemsep \parsep {\leftmargin \leftmargini \topsep 4\p@ plus2\p@ minus2\p@ \parsep 2\p@ plus\p@ minus\p@ \itemsep \parsep }\belowdisplayskip \abovedisplayskip \add@extra@listi {sml}\normalfont \ttfamily \slshape fcard}}{35}{subsubsection.5.5.11}% 
+\contentsline {subsubsection}{\numberline {5.5.12}\emph {\sfcode 42 1000 \sfcode 63 1000 \sfcode 33 1000 \sfcode 58 1000 \sfcode 59 1000 \sfcode 44 1000 \relax \fontsize {9}{11}\selectfont \abovedisplayskip 8.5\p@ plus3\p@ minus4\p@ \abovedisplayshortskip \z@ plus2\p@ \belowdisplayshortskip 4\p@ plus2\p@ minus2\p@ \def \leftmargin \leftmargini \topsep 4\p@ plus2\p@ minus2\p@ \parsep 2\p@ plus\p@ minus\p@ \itemsep \parsep {\leftmargin \leftmargini \topsep 4\p@ plus2\p@ minus2\p@ \parsep 2\p@ plus\p@ minus\p@ \itemsep \parsep }\belowdisplayskip \abovedisplayskip \add@extra@listi {sml}\normalfont \ttfamily \slshape sorted{\isacharunderscore }list{\isacharunderscore }of{\isacharunderscore }fset}}{36}{subsubsection.5.5.12}% 
+\contentsline {subsubsection}{\numberline {5.5.13}\emph {\sfcode 42 1000 \sfcode 63 1000 \sfcode 33 1000 \sfcode 58 1000 \sfcode 59 1000 \sfcode 44 1000 \relax \fontsize {9}{11}\selectfont \abovedisplayskip 8.5\p@ plus3\p@ minus4\p@ \abovedisplayshortskip \z@ plus2\p@ \belowdisplayshortskip 4\p@ plus2\p@ minus2\p@ \def \leftmargin \leftmargini \topsep 4\p@ plus2\p@ minus2\p@ \parsep 2\p@ plus\p@ minus\p@ \itemsep \parsep {\leftmargin \leftmargini \topsep 4\p@ plus2\p@ minus2\p@ \parsep 2\p@ plus\p@ minus\p@ \itemsep \parsep }\belowdisplayskip \abovedisplayskip \add@extra@listi {sml}\normalfont \ttfamily \slshape ffold}}{36}{subsubsection.5.5.13}% 
+\contentsline {subsubsection}{\numberline {5.5.14}Group operations}{37}{subsubsection.5.5.14}% 
+\contentsline {subsubsection}{\numberline {5.5.15}Semilattice operations}{38}{subsubsection.5.5.15}% 
+\contentsline {subsection}{\numberline {5.6}Choice in fsets}{39}{subsection.5.6}% 
+\contentsline {subsection}{\numberline {5.7}Induction and Cases rules for fsets}{39}{subsection.5.7}% 
+\contentsline {subsection}{\numberline {5.8}Setup for Lifting/Transfer}{41}{subsection.5.8}% 
+\contentsline {subsubsection}{\numberline {5.8.1}Relator and predicator properties}{41}{subsubsection.5.8.1}% 
+\contentsline {subsubsection}{\numberline {5.8.2}Transfer rules for the Transfer package}{41}{subsubsection.5.8.2}% 
+\contentsline {subsection}{\numberline {5.9}BNF setup}{43}{subsection.5.9}% 
+\contentsline {subsection}{\numberline {5.10}Size setup}{44}{subsection.5.10}% 
+\contentsline {subsection}{\numberline {5.11}Advanced relator customization}{45}{subsection.5.11}% 
+\contentsline {subsubsection}{\numberline {5.11.1}Countability}{46}{subsubsection.5.11.1}% 
+\contentsline {subsection}{\numberline {5.12}Quickcheck setup}{46}{subsection.5.12}% 
+\contentsline {section}{\numberline {6}Extended Finite State Machines}{56}{section.6}% 
+\contentsline {subsection}{\numberline {6.1}Arithmetic Expressions}{56}{subsection.6.1}% 
+\contentsline {subsection}{\numberline {6.2}Guard Expressions}{62}{subsection.6.2}% 
+\contentsline {subsection}{\numberline {6.3}Extended Finite State Machines}{73}{subsection.6.3}% 
+\contentsline {section}{\numberline {7}Infinite Streams}{81}{section.7}% 
+\contentsline {subsection}{\numberline {7.1}prepend list to stream}{81}{subsection.7.1}% 
+\contentsline {subsection}{\numberline {7.2}set of streams with elements in some fixed set}{82}{subsection.7.2}% 
+\contentsline {subsection}{\numberline {7.3}nth, take, drop for streams}{83}{subsection.7.3}% 
+\contentsline {subsection}{\numberline {7.4}unary predicates lifted to streams}{85}{subsection.7.4}% 
+\contentsline {subsection}{\numberline {7.5}recurring stream out of a list}{85}{subsection.7.5}% 
+\contentsline {subsection}{\numberline {7.6}iterated application of a function}{86}{subsection.7.6}% 
+\contentsline {subsection}{\numberline {7.7}stream repeating a single element}{87}{subsection.7.7}% 
+\contentsline {subsection}{\numberline {7.8}stream of natural numbers}{87}{subsection.7.8}% 
+\contentsline {subsection}{\numberline {7.9}flatten a stream of lists}{88}{subsection.7.9}% 
+\contentsline {subsection}{\numberline {7.10}merge a stream of streams}{88}{subsection.7.10}% 
+\contentsline {subsection}{\numberline {7.11}product of two streams}{89}{subsection.7.11}% 
+\contentsline {subsection}{\numberline {7.12}interleave two streams}{89}{subsection.7.12}% 
+\contentsline {subsection}{\numberline {7.13}zip}{90}{subsection.7.13}% 
+\contentsline {subsection}{\numberline {7.14}zip via function}{90}{subsection.7.14}% 
+\contentsline {section}{\numberline {8}List prefixes, suffixes, and homeomorphic embedding}{91}{section.8}% 
+\contentsline {subsection}{\numberline {8.1}Prefix order on lists}{91}{subsection.8.1}% 
+\contentsline {subsection}{\numberline {8.2}Basic properties of prefixes}{92}{subsection.8.2}% 
+\contentsline {subsection}{\numberline {8.3}Prefixes}{94}{subsection.8.3}% 
+\contentsline {subsection}{\numberline {8.4}Longest Common Prefix}{95}{subsection.8.4}% 
+\contentsline {subsection}{\numberline {8.5}Parallel lists}{97}{subsection.8.5}% 
+\contentsline {subsection}{\numberline {8.6}Suffix order on lists}{98}{subsection.8.6}% 
+\contentsline {subsection}{\numberline {8.7}Suffixes}{102}{subsection.8.7}% 
+\contentsline {subsection}{\numberline {8.8}Homeomorphic embedding on lists}{104}{subsection.8.8}% 
+\contentsline {subsection}{\numberline {8.9}Subsequences (special case of homeomorphic embedding)}{106}{subsection.8.9}% 
+\contentsline {subsection}{\numberline {8.10}Appending elements}{107}{subsection.8.10}% 
+\contentsline {subsection}{\numberline {8.11}Relation to standard list operations}{108}{subsection.8.11}% 
+\contentsline {subsection}{\numberline {8.12}Contiguous sublists}{109}{subsection.8.12}% 
+\contentsline {subsection}{\numberline {8.13}Parametricity}{112}{subsection.8.13}% 
+\contentsline {section}{\numberline {9}Infinite Sets and Related Concepts}{113}{section.9}% 
+\contentsline {subsection}{\numberline {9.1}The set of natural numbers is infinite}{113}{subsection.9.1}% 
+\contentsline {subsection}{\numberline {9.2}The set of integers is also infinite}{114}{subsection.9.2}% 
+\contentsline {subsection}{\numberline {9.3}Infinitely Many and Almost All}{115}{subsection.9.3}% 
+\contentsline {subsection}{\numberline {9.4}Enumeration of an Infinite Set}{116}{subsection.9.4}% 
+\contentsline {section}{\numberline {10}Countable sets}{119}{section.10}% 
+\contentsline {subsection}{\numberline {10.1}Predicate for countable sets}{119}{subsection.10.1}% 
+\contentsline {subsection}{\numberline {10.2}Enumerate a countable set}{120}{subsection.10.2}% 
+\contentsline {subsection}{\numberline {10.3}Closure properties of countability}{122}{subsection.10.3}% 
+\contentsline {subsection}{\numberline {10.4}Misc lemmas}{124}{subsection.10.4}% 
+\contentsline {subsection}{\numberline {10.5}Uncountable}{125}{subsection.10.5}% 
+\contentsline {section}{\numberline {11}Countable Complete Lattices}{125}{section.11}% 
+\contentsline {subsubsection}{\numberline {11.0.1}Instances of countable complete lattices}{130}{subsubsection.11.0.1}% 
+\contentsline {section}{\numberline {12}Continuity and iterations}{130}{section.12}% 
+\contentsline {subsection}{\numberline {12.1}Continuity for complete lattices}{130}{subsection.12.1}% 
+\contentsline {subsubsection}{\numberline {12.1.1}Least fixed points in countable complete lattices}{136}{subsubsection.12.1.1}% 
+\contentsline {section}{\numberline {13}Extended natural numbers (i.e. with infinity)}{137}{section.13}% 
+\contentsline {subsection}{\numberline {13.1}Type definition}{137}{subsection.13.1}% 
+\contentsline {subsection}{\numberline {13.2}Constructors and numbers}{138}{subsection.13.2}% 
+\contentsline {subsection}{\numberline {13.3}Addition}{139}{subsection.13.3}% 
+\contentsline {subsection}{\numberline {13.4}Multiplication}{140}{subsection.13.4}% 
+\contentsline {subsection}{\numberline {13.5}Numerals}{141}{subsection.13.5}% 
+\contentsline {subsection}{\numberline {13.6}Subtraction}{141}{subsection.13.6}% 
+\contentsline {subsection}{\numberline {13.7}Ordering}{142}{subsection.13.7}% 
+\contentsline {subsection}{\numberline {13.8}Cancellation simprocs}{145}{subsection.13.8}% 
+\contentsline {subsection}{\numberline {13.9}Well-ordering}{146}{subsection.13.9}% 
+\contentsline {subsection}{\numberline {13.10}Complete Lattice}{147}{subsection.13.10}% 
+\contentsline {subsection}{\numberline {13.11}Traditional theorem names}{148}{subsection.13.11}% 
+\contentsline {section}{\numberline {14}Linear Temporal Logic on Streams}{148}{section.14}% 
+\contentsline {section}{\numberline {15}Preliminaries}{148}{section.15}% 
+\contentsline {section}{\numberline {16}Linear temporal logic}{149}{section.16}% 

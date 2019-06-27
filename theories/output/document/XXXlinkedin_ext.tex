@@ -1,0 +1,238 @@
+%
+\begin{isabellebody}%
+\setisabellecontext{XXXlinkedin{\isacharunderscore}ext}%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\isatagtheory
+\isacommand{theory}\isamarkupfalse%
+\ XXXlinkedin{\isacharunderscore}ext\isanewline
+\isakeyword{imports}\ {\isachardoublequoteopen}{\isachardot}{\isachardot}{\isacharslash}{\isachardot}{\isachardot}{\isacharslash}EFSM{\isacharunderscore}LTL{\isachardoublequoteclose}\isanewline
+\isakeyword{begin}%
+\endisatagtheory
+{\isafoldtheory}%
+%
+\isadelimtheory
+\isanewline
+%
+\endisadelimtheory
+\isanewline
+\isacommand{definition}\isamarkupfalse%
+\ {\isachardoublequoteopen}login{\isachardoublequoteclose}\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}transition{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+{\isachardoublequoteopen}login\ {\isasymequiv}\ {\isasymlparr}\isanewline
+\ \ \ \ \ \ Label\ {\isacharequal}\ STR\ {\isacharprime}{\isacharprime}login{\isacharprime}{\isacharprime}{\isacharcomma}\isanewline
+\ \ \ \ \ \ Arity\ {\isacharequal}\ {\isadigit{1}}{\isacharcomma}\isanewline
+\ \ \ \ \ \ Guard\ {\isacharequal}\ {\isacharbrackleft}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ GExp{\isachardot}Eq\ {\isacharparenleft}V\ {\isacharparenleft}I\ {\isadigit{1}}{\isacharparenright}{\isacharparenright}\ {\isacharparenleft}L\ {\isacharparenleft}Str\ {\isacharprime}{\isacharprime}free{\isacharprime}{\isacharprime}{\isacharparenright}{\isacharparenright}\isanewline
+\ \ \ \ \ \ {\isacharbrackright}{\isacharcomma}\isanewline
+\ \ \ \ \ \ Outputs\ {\isacharequal}\ {\isacharbrackleft}{\isacharbrackright}{\isacharcomma}\isanewline
+\ \ \ \ \ \ Updates\ {\isacharequal}\ {\isacharbrackleft}{\isacharbrackright}\isanewline
+{\isasymrparr}{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{definition}\isamarkupfalse%
+\ {\isachardoublequoteopen}login{\isadigit{1}}{\isachardoublequoteclose}\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}transition{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+{\isachardoublequoteopen}login{\isadigit{1}}\ {\isasymequiv}\ {\isasymlparr}\isanewline
+\ \ \ \ \ \ Label\ {\isacharequal}\ STR\ {\isacharprime}{\isacharprime}login{\isacharprime}{\isacharprime}{\isacharcomma}\isanewline
+\ \ \ \ \ \ Arity\ {\isacharequal}\ {\isadigit{1}}{\isacharcomma}\isanewline
+\ \ \ \ \ \ Guard\ {\isacharequal}\ {\isacharbrackleft}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ GExp{\isachardot}Eq\ {\isacharparenleft}V\ {\isacharparenleft}I\ {\isadigit{1}}{\isacharparenright}{\isacharparenright}\ {\isacharparenleft}L\ {\isacharparenleft}Str\ {\isacharprime}{\isacharprime}paid{\isacharprime}{\isacharprime}{\isacharparenright}{\isacharparenright}\isanewline
+\ \ \ \ \ \ {\isacharbrackright}{\isacharcomma}\isanewline
+\ \ \ \ \ \ Outputs\ {\isacharequal}\ {\isacharbrackleft}{\isacharbrackright}{\isacharcomma}\isanewline
+\ \ \ \ \ \ Updates\ {\isacharequal}\ {\isacharbrackleft}{\isacharbrackright}\isanewline
+{\isasymrparr}{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{definition}\isamarkupfalse%
+\ {\isachardoublequoteopen}view{\isachardoublequoteclose}\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}transition{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+{\isachardoublequoteopen}view\ {\isasymequiv}\ {\isasymlparr}\isanewline
+\ \ \ \ \ \ Label\ {\isacharequal}\ STR\ {\isacharprime}{\isacharprime}view{\isacharprime}{\isacharprime}{\isacharcomma}\isanewline
+\ \ \ \ \ \ Arity\ {\isacharequal}\ {\isadigit{3}}{\isacharcomma}\isanewline
+\ \ \ \ \ \ Guard\ {\isacharequal}\ {\isacharbrackleft}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ GExp{\isachardot}Eq\ {\isacharparenleft}V\ {\isacharparenleft}I\ {\isadigit{1}}{\isacharparenright}{\isacharparenright}\ {\isacharparenleft}L\ {\isacharparenleft}Str\ {\isacharprime}{\isacharprime}friendID{\isacharprime}{\isacharprime}{\isacharparenright}{\isacharparenright}{\isacharcomma}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ GExp{\isachardot}Eq\ {\isacharparenleft}V\ {\isacharparenleft}I\ {\isadigit{2}}{\isacharparenright}{\isacharparenright}\ {\isacharparenleft}L\ {\isacharparenleft}Str\ {\isacharprime}{\isacharprime}name{\isacharprime}{\isacharprime}{\isacharparenright}{\isacharparenright}{\isacharcomma}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ GExp{\isachardot}Eq\ {\isacharparenleft}V\ {\isacharparenleft}I\ {\isadigit{3}}{\isacharparenright}{\isacharparenright}\ {\isacharparenleft}L\ {\isacharparenleft}Str\ {\isacharprime}{\isacharprime}HM{\isadigit{8}}p{\isacharprime}{\isacharprime}{\isacharparenright}{\isacharparenright}\isanewline
+\ \ \ \ \ \ {\isacharbrackright}{\isacharcomma}\isanewline
+\ \ \ \ \ \ Outputs\ {\isacharequal}\ {\isacharbrackleft}{\isacharbrackright}{\isacharcomma}\isanewline
+\ \ \ \ \ \ Updates\ {\isacharequal}\ {\isacharbrackleft}{\isacharbrackright}\isanewline
+{\isasymrparr}{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{definition}\isamarkupfalse%
+\ {\isachardoublequoteopen}view{\isadigit{1}}{\isachardoublequoteclose}\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}transition{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+{\isachardoublequoteopen}view{\isadigit{1}}\ {\isasymequiv}\ {\isasymlparr}\isanewline
+\ \ \ \ \ \ Label\ {\isacharequal}\ STR\ {\isacharprime}{\isacharprime}view{\isacharprime}{\isacharprime}{\isacharcomma}\isanewline
+\ \ \ \ \ \ Arity\ {\isacharequal}\ {\isadigit{3}}{\isacharcomma}\isanewline
+\ \ \ \ \ \ Guard\ {\isacharequal}\ {\isacharbrackleft}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ GExp{\isachardot}Eq\ {\isacharparenleft}V\ {\isacharparenleft}I\ {\isadigit{1}}{\isacharparenright}{\isacharparenright}\ {\isacharparenleft}L\ {\isacharparenleft}Str\ {\isacharprime}{\isacharprime}otherID{\isacharprime}{\isacharprime}{\isacharparenright}{\isacharparenright}{\isacharcomma}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ GExp{\isachardot}Eq\ {\isacharparenleft}V\ {\isacharparenleft}I\ {\isadigit{2}}{\isacharparenright}{\isacharparenright}\ {\isacharparenleft}L\ {\isacharparenleft}Str\ {\isacharprime}{\isacharprime}OUT{\isacharunderscore}OF{\isacharunderscore}NETWORK{\isacharprime}{\isacharprime}{\isacharparenright}{\isacharparenright}{\isacharcomma}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ GExp{\isachardot}Eq\ {\isacharparenleft}V\ {\isacharparenleft}I\ {\isadigit{3}}{\isacharparenright}{\isacharparenright}\ {\isacharparenleft}L\ {\isacharparenleft}Str\ {\isacharprime}{\isacharprime}MNn{\isadigit{5}}{\isacharprime}{\isacharprime}{\isacharparenright}{\isacharparenright}\isanewline
+\ \ \ \ \ \ {\isacharbrackright}{\isacharcomma}\isanewline
+\ \ \ \ \ \ Outputs\ {\isacharequal}\ {\isacharbrackleft}{\isacharbrackright}{\isacharcomma}\isanewline
+\ \ \ \ \ \ Updates\ {\isacharequal}\ {\isacharbrackleft}{\isacharbrackright}\isanewline
+{\isasymrparr}{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{definition}\isamarkupfalse%
+\ {\isachardoublequoteopen}view{\isadigit{2}}{\isachardoublequoteclose}\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}transition{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+{\isachardoublequoteopen}view{\isadigit{2}}\ {\isasymequiv}\ {\isasymlparr}\isanewline
+\ \ \ \ \ \ Label\ {\isacharequal}\ STR\ {\isacharprime}{\isacharprime}view{\isacharprime}{\isacharprime}{\isacharcomma}\isanewline
+\ \ \ \ \ \ Arity\ {\isacharequal}\ {\isadigit{3}}{\isacharcomma}\isanewline
+\ \ \ \ \ \ Guard\ {\isacharequal}\ {\isacharbrackleft}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ GExp{\isachardot}Eq\ {\isacharparenleft}V\ {\isacharparenleft}I\ {\isadigit{1}}{\isacharparenright}{\isacharparenright}\ {\isacharparenleft}L\ {\isacharparenleft}Str\ {\isacharprime}{\isacharprime}otherID{\isacharprime}{\isacharprime}{\isacharparenright}{\isacharparenright}{\isacharcomma}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ GExp{\isachardot}Eq\ {\isacharparenleft}V\ {\isacharparenleft}I\ {\isadigit{2}}{\isacharparenright}{\isacharparenright}\ {\isacharparenleft}L\ {\isacharparenleft}Str\ {\isacharprime}{\isacharprime}name{\isacharprime}{\isacharprime}{\isacharparenright}{\isacharparenright}{\isacharcomma}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ GExp{\isachardot}Eq\ {\isacharparenleft}V\ {\isacharparenleft}I\ {\isadigit{3}}{\isacharparenright}{\isacharparenright}\ {\isacharparenleft}L\ {\isacharparenleft}Str\ {\isacharprime}{\isacharprime}{\isadigit{4}}zoF{\isacharprime}{\isacharprime}{\isacharparenright}{\isacharparenright}\isanewline
+\ \ \ \ \ \ {\isacharbrackright}{\isacharcomma}\isanewline
+\ \ \ \ \ \ Outputs\ {\isacharequal}\ {\isacharbrackleft}{\isacharbrackright}{\isacharcomma}\isanewline
+\ \ \ \ \ \ Updates\ {\isacharequal}\ {\isacharbrackleft}{\isacharbrackright}\isanewline
+{\isasymrparr}{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{definition}\isamarkupfalse%
+\ {\isachardoublequoteopen}view{\isadigit{3}}{\isachardoublequoteclose}\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}transition{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+{\isachardoublequoteopen}view{\isadigit{3}}\ {\isasymequiv}\ {\isasymlparr}\isanewline
+\ \ \ \ \ \ Label\ {\isacharequal}\ STR\ {\isacharprime}{\isacharprime}view{\isacharprime}{\isacharprime}{\isacharcomma}\isanewline
+\ \ \ \ \ \ Arity\ {\isacharequal}\ {\isadigit{3}}{\isacharcomma}\isanewline
+\ \ \ \ \ \ Guard\ {\isacharequal}\ {\isacharbrackleft}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ GExp{\isachardot}Eq\ {\isacharparenleft}V\ {\isacharparenleft}I\ {\isadigit{1}}{\isacharparenright}{\isacharparenright}\ {\isacharparenleft}L\ {\isacharparenleft}Str\ {\isacharprime}{\isacharprime}otherID{\isacharprime}{\isacharprime}{\isacharparenright}{\isacharparenright}{\isacharcomma}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ GExp{\isachardot}Eq\ {\isacharparenleft}V\ {\isacharparenleft}I\ {\isadigit{2}}{\isacharparenright}{\isacharparenright}\ {\isacharparenleft}L\ {\isacharparenleft}Str\ {\isacharprime}{\isacharprime}name{\isacharprime}{\isacharprime}{\isacharparenright}{\isacharparenright}{\isacharcomma}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ GExp{\isachardot}Eq\ {\isacharparenleft}V\ {\isacharparenleft}I\ {\isadigit{3}}{\isacharparenright}{\isacharparenright}\ {\isacharparenleft}L\ {\isacharparenleft}Str\ {\isacharprime}{\isacharprime}MNn{\isadigit{5}}{\isacharprime}{\isacharprime}{\isacharparenright}{\isacharparenright}\isanewline
+\ \ \ \ \ \ {\isacharbrackright}{\isacharcomma}\isanewline
+\ \ \ \ \ \ Outputs\ {\isacharequal}\ {\isacharbrackleft}{\isacharbrackright}{\isacharcomma}\isanewline
+\ \ \ \ \ \ Updates\ {\isacharequal}\ {\isacharbrackleft}{\isacharbrackright}\isanewline
+{\isasymrparr}{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{definition}\isamarkupfalse%
+\ {\isachardoublequoteopen}pdf{\isachardoublequoteclose}\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}transition{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+{\isachardoublequoteopen}pdf\ {\isasymequiv}\ {\isasymlparr}\isanewline
+\ \ \ \ \ \ Label\ {\isacharequal}\ STR\ {\isacharprime}{\isacharprime}pdf{\isacharprime}{\isacharprime}{\isacharcomma}\isanewline
+\ \ \ \ \ \ Arity\ {\isacharequal}\ {\isadigit{3}}{\isacharcomma}\isanewline
+\ \ \ \ \ \ Guard\ {\isacharequal}\ {\isacharbrackleft}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ GExp{\isachardot}Eq\ {\isacharparenleft}V\ {\isacharparenleft}I\ {\isadigit{1}}{\isacharparenright}{\isacharparenright}\ {\isacharparenleft}L\ {\isacharparenleft}Str\ {\isacharprime}{\isacharprime}friendID{\isacharprime}{\isacharprime}{\isacharparenright}{\isacharparenright}{\isacharcomma}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ GExp{\isachardot}Eq\ {\isacharparenleft}V\ {\isacharparenleft}I\ {\isadigit{2}}{\isacharparenright}{\isacharparenright}\ {\isacharparenleft}L\ {\isacharparenleft}Str\ {\isacharprime}{\isacharprime}name{\isacharprime}{\isacharprime}{\isacharparenright}{\isacharparenright}{\isacharcomma}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ GExp{\isachardot}Eq\ {\isacharparenleft}V\ {\isacharparenleft}I\ {\isadigit{3}}{\isacharparenright}{\isacharparenright}\ {\isacharparenleft}L\ {\isacharparenleft}Str\ {\isacharprime}{\isacharprime}HM{\isadigit{8}}p{\isacharprime}{\isacharprime}{\isacharparenright}{\isacharparenright}\isanewline
+\ \ \ \ \ \ {\isacharbrackright}{\isacharcomma}\isanewline
+\ \ \ \ \ \ Outputs\ {\isacharequal}\ {\isacharbrackleft}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ {\isacharparenleft}L\ {\isacharparenleft}Str\ {\isacharprime}{\isacharprime}detailed{\isacharunderscore}pdf{\isacharunderscore}of{\isacharunderscore}friendID{\isacharprime}{\isacharprime}{\isacharparenright}{\isacharparenright}\isanewline
+\ \ \ \ \ \ {\isacharbrackright}{\isacharcomma}\isanewline
+\ \ \ \ \ \ Updates\ {\isacharequal}\ {\isacharbrackleft}{\isacharbrackright}\isanewline
+{\isasymrparr}{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{definition}\isamarkupfalse%
+\ {\isachardoublequoteopen}pdf{\isadigit{1}}{\isachardoublequoteclose}\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}transition{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+{\isachardoublequoteopen}pdf{\isadigit{1}}\ {\isasymequiv}\ {\isasymlparr}\isanewline
+\ \ \ \ \ \ Label\ {\isacharequal}\ STR\ {\isacharprime}{\isacharprime}pdf{\isacharprime}{\isacharprime}{\isacharcomma}\isanewline
+\ \ \ \ \ \ Arity\ {\isacharequal}\ {\isadigit{3}}{\isacharcomma}\isanewline
+\ \ \ \ \ \ Guard\ {\isacharequal}\ {\isacharbrackleft}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ GExp{\isachardot}Eq\ {\isacharparenleft}V\ {\isacharparenleft}I\ {\isadigit{1}}{\isacharparenright}{\isacharparenright}\ {\isacharparenleft}L\ {\isacharparenleft}Str\ {\isacharprime}{\isacharprime}otherID{\isacharprime}{\isacharprime}{\isacharparenright}{\isacharparenright}{\isacharcomma}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ GExp{\isachardot}Eq\ {\isacharparenleft}V\ {\isacharparenleft}I\ {\isadigit{2}}{\isacharparenright}{\isacharparenright}\ {\isacharparenleft}L\ {\isacharparenleft}Str\ {\isacharprime}{\isacharprime}OUT{\isacharunderscore}OF{\isacharunderscore}NETWORK{\isacharprime}{\isacharprime}{\isacharparenright}{\isacharparenright}{\isacharcomma}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ GExp{\isachardot}Eq\ {\isacharparenleft}V\ {\isacharparenleft}I\ {\isadigit{3}}{\isacharparenright}{\isacharparenright}\ {\isacharparenleft}L\ {\isacharparenleft}Str\ {\isacharprime}{\isacharprime}MNn{\isadigit{5}}{\isacharprime}{\isacharprime}{\isacharparenright}{\isacharparenright}\isanewline
+\ \ \ \ \ \ {\isacharbrackright}{\isacharcomma}\isanewline
+\ \ \ \ \ \ Outputs\ {\isacharequal}\ {\isacharbrackleft}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ {\isacharparenleft}L\ {\isacharparenleft}Str\ {\isacharprime}{\isacharprime}summary{\isacharunderscore}pdf{\isacharunderscore}of{\isacharunderscore}otherID{\isacharprime}{\isacharprime}{\isacharparenright}{\isacharparenright}\isanewline
+\ \ \ \ \ \ {\isacharbrackright}{\isacharcomma}\isanewline
+\ \ \ \ \ \ Updates\ {\isacharequal}\ {\isacharbrackleft}{\isacharbrackright}\isanewline
+{\isasymrparr}{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{definition}\isamarkupfalse%
+\ {\isachardoublequoteopen}pdf{\isadigit{2}}{\isachardoublequoteclose}\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}transition{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+{\isachardoublequoteopen}pdf{\isadigit{2}}\ {\isasymequiv}\ {\isasymlparr}\isanewline
+\ \ \ \ \ \ Label\ {\isacharequal}\ STR\ {\isacharprime}{\isacharprime}pdf{\isacharprime}{\isacharprime}{\isacharcomma}\isanewline
+\ \ \ \ \ \ Arity\ {\isacharequal}\ {\isadigit{3}}{\isacharcomma}\isanewline
+\ \ \ \ \ \ Guard\ {\isacharequal}\ {\isacharbrackleft}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ GExp{\isachardot}Eq\ {\isacharparenleft}V\ {\isacharparenleft}I\ {\isadigit{1}}{\isacharparenright}{\isacharparenright}\ {\isacharparenleft}L\ {\isacharparenleft}Str\ {\isacharprime}{\isacharprime}otherID{\isacharprime}{\isacharprime}{\isacharparenright}{\isacharparenright}{\isacharcomma}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ GExp{\isachardot}Eq\ {\isacharparenleft}V\ {\isacharparenleft}I\ {\isadigit{2}}{\isacharparenright}{\isacharparenright}\ {\isacharparenleft}L\ {\isacharparenleft}Str\ {\isacharprime}{\isacharprime}name{\isacharprime}{\isacharprime}{\isacharparenright}{\isacharparenright}{\isacharcomma}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ GExp{\isachardot}Eq\ {\isacharparenleft}V\ {\isacharparenleft}I\ {\isadigit{3}}{\isacharparenright}{\isacharparenright}\ {\isacharparenleft}L\ {\isacharparenleft}Str\ {\isacharprime}{\isacharprime}{\isadigit{4}}zoF{\isacharprime}{\isacharprime}{\isacharparenright}{\isacharparenright}\isanewline
+\ \ \ \ \ \ {\isacharbrackright}{\isacharcomma}\isanewline
+\ \ \ \ \ \ Outputs\ {\isacharequal}\ {\isacharbrackleft}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ {\isacharparenleft}L\ {\isacharparenleft}Str\ {\isacharprime}{\isacharprime}detailed{\isacharunderscore}pdf{\isacharunderscore}of{\isacharunderscore}otherID{\isacharprime}{\isacharprime}{\isacharparenright}{\isacharparenright}\isanewline
+\ \ \ \ \ \ {\isacharbrackright}{\isacharcomma}\isanewline
+\ \ \ \ \ \ Updates\ {\isacharequal}\ {\isacharbrackleft}{\isacharbrackright}\isanewline
+{\isasymrparr}{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{definition}\isamarkupfalse%
+\ {\isachardoublequoteopen}linkedIn{\isachardoublequoteclose}\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}transition{\isacharunderscore}matrix{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+{\isachardoublequoteopen}linkedIn\ {\isasymequiv}\ {\isacharbraceleft}{\isacharbar}\isanewline
+\ \ \ \ \ \ {\isacharparenleft}{\isacharparenleft}{\isadigit{0}}{\isacharcomma}\ {\isadigit{1}}{\isacharparenright}{\isacharcomma}\ login{\isacharparenright}{\isacharcomma}\isanewline
+\ \ \ \ \ \ {\isacharparenleft}{\isacharparenleft}{\isadigit{0}}{\isacharcomma}\ {\isadigit{1}}{\isacharparenright}{\isacharcomma}\ login{\isadigit{1}}{\isacharparenright}{\isacharcomma}\isanewline
+\ \ \ \ \ \ {\isacharparenleft}{\isacharparenleft}{\isadigit{1}}{\isacharcomma}\ {\isadigit{2}}{\isacharparenright}{\isacharcomma}\ view{\isacharparenright}{\isacharcomma}\isanewline
+\ \ \ \ \ \ {\isacharparenleft}{\isacharparenleft}{\isadigit{1}}{\isacharcomma}\ {\isadigit{4}}{\isacharparenright}{\isacharcomma}\ view{\isadigit{1}}{\isacharparenright}{\isacharcomma}\isanewline
+\ \ \ \ \ \ {\isacharparenleft}{\isacharparenleft}{\isadigit{1}}{\isacharcomma}\ {\isadigit{6}}{\isacharparenright}{\isacharcomma}\ view{\isadigit{2}}{\isacharparenright}{\isacharcomma}\isanewline
+\ \ \ \ \ \ {\isacharparenleft}{\isacharparenleft}{\isadigit{1}}{\isacharcomma}\ {\isadigit{6}}{\isacharparenright}{\isacharcomma}\ view{\isadigit{3}}{\isacharparenright}{\isacharcomma}\isanewline
+\ \ \ \ \ \ {\isacharparenleft}{\isacharparenleft}{\isadigit{2}}{\isacharcomma}\ {\isadigit{3}}{\isacharparenright}{\isacharcomma}\ pdf{\isacharparenright}{\isacharcomma}\isanewline
+\ \ \ \ \ \ {\isacharparenleft}{\isacharparenleft}{\isadigit{4}}{\isacharcomma}\ {\isadigit{5}}{\isacharparenright}{\isacharcomma}\ pdf{\isadigit{1}}{\isacharparenright}{\isacharcomma}\isanewline
+\ \ \ \ \ \ {\isacharparenleft}{\isacharparenleft}{\isadigit{6}}{\isacharcomma}\ {\isadigit{7}}{\isacharparenright}{\isacharcomma}\ pdf{\isadigit{2}}{\isacharparenright}\isanewline
+{\isacharbar}{\isacharbraceright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimtheory
+\isanewline
+%
+\endisadelimtheory
+%
+\isatagtheory
+\isacommand{end}\isamarkupfalse%
+%
+\endisatagtheory
+{\isafoldtheory}%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\end{isabellebody}%
+\endinput
+%:%file=~/Documents/efsm-sal/theories/linkedin/theories/XXXlinkedin_ext.thy%:%
+%:%10=1%:%
+%:%11=1%:%
+%:%12=2%:%
+%:%13=3%:%
+%:%18=3%:%
+%:%21=4%:%
+%:%22=5%:%
+%:%23=5%:%
+%:%24=6%:%
+%:%32=14%:%
+%:%33=15%:%
+%:%34=16%:%
+%:%35=16%:%
+%:%36=17%:%
+%:%44=25%:%
+%:%45=26%:%
+%:%46=27%:%
+%:%47=27%:%
+%:%48=28%:%
+%:%58=38%:%
+%:%59=39%:%
+%:%60=40%:%
+%:%61=40%:%
+%:%62=41%:%
+%:%72=51%:%
+%:%73=52%:%
+%:%74=53%:%
+%:%75=53%:%
+%:%76=54%:%
+%:%86=64%:%
+%:%87=65%:%
+%:%88=66%:%
+%:%89=66%:%
+%:%90=67%:%
+%:%100=77%:%
+%:%101=78%:%
+%:%102=79%:%
+%:%103=79%:%
+%:%104=80%:%
+%:%116=92%:%
+%:%117=93%:%
+%:%118=94%:%
+%:%119=94%:%
+%:%120=95%:%
+%:%132=107%:%
+%:%133=108%:%
+%:%134=109%:%
+%:%135=109%:%
+%:%136=110%:%
+%:%148=122%:%
+%:%149=123%:%
+%:%150=124%:%
+%:%151=124%:%
+%:%152=125%:%
+%:%162=135%:%
+%:%165=136%:%
+%:%170=137%:%

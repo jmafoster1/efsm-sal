@@ -7,8 +7,8 @@ LABEL : TYPE = DATATYPE
 END;
 
 STRING : TYPE =
-    {String_4z0F, String_4zoF, String_HM8p, String_MNn5,           %%10
-    String_OUT_OF_NETWORK, String_detailed_pdf_of_friendID,
+    {String_4zoF, String_HM8p, String_MNn5, String_OUT_OF_NETWORK, %%10
+    String_detailed_pdf_of_friendID,
     String_detailed_pdf_of_otherID, String_free, String_friendID,
     String_name, String_otherID, String_paid,
     String_summary_pdf_of_otherID};
@@ -190,11 +190,12 @@ linkedIn : MODULE =
   END;                                                           %%190
   LTL_neverDetailed : THEOREM linkedIn |-
     label = login AND
-        gval(value_eq(Some(I(1)),(Some(STR(String_free))))) =>
+        I = input_sequence !
+        insert(STR(String_free), input_sequence ! empty) =>
         X(G(label = pdf AND
         gval(value_eq(Some(I(1)),(Some(STR(String_otherID))))) =>
-        X(NOT (O = output_sequence !
+        NOT (O = output_sequence !
         insert(Some(STR(String_detailed_pdf_of_otherID)),
-        output_sequence ! empty)))));
-      
-END                                                              %%200
+        output_sequence ! empty))));
+                                                                 %%200
+END

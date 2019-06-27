@@ -28,22 +28,20 @@
 \isacommand{type{\isacharunderscore}synonym}\isamarkupfalse%
 \ outputs\ {\isacharequal}\ {\isachardoublequoteopen}value\ option\ list{\isachardoublequoteclose}\isanewline
 \isacommand{type{\isacharunderscore}synonym}\isamarkupfalse%
-\ guard\ {\isacharequal}\ {\isachardoublequoteopen}gexp{\isachardoublequoteclose}\isanewline
-\isacommand{type{\isacharunderscore}synonym}\isamarkupfalse%
 \ output{\isacharunderscore}function\ {\isacharequal}\ {\isachardoublequoteopen}aexp{\isachardoublequoteclose}\isanewline
 \isacommand{type{\isacharunderscore}synonym}\isamarkupfalse%
-\ update{\isacharunderscore}function\ {\isacharequal}\ {\isachardoublequoteopen}{\isacharparenleft}vname\ {\isasymtimes}\ aexp{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ update{\isacharunderscore}function\ {\isacharequal}\ {\isachardoublequoteopen}{\isacharparenleft}nat\ {\isasymtimes}\ aexp{\isacharparenright}{\isachardoublequoteclose}\isanewline
 \isacommand{type{\isacharunderscore}synonym}\isamarkupfalse%
-\ updates\ {\isacharequal}\ {\isachardoublequoteopen}update{\isacharunderscore}function\ list{\isachardoublequoteclose}\isanewline
-\isanewline
+\ updates\ {\isacharequal}\ {\isachardoublequoteopen}update{\isacharunderscore}function\ list{\isachardoublequoteclose}%
+\snip{transitiontype}{1}{2}{%
 \isacommand{record}\isamarkupfalse%
 \ transition\ {\isacharequal}\isanewline
 \ \ Label\ {\isacharcolon}{\isacharcolon}\ label\isanewline
 \ \ Arity\ {\isacharcolon}{\isacharcolon}\ nat\isanewline
-\ \ Guard\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}guard\ list{\isachardoublequoteclose}\isanewline
-\ \ Outputs\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}output{\isacharunderscore}function\ list{\isachardoublequoteclose}\isanewline
-\ \ Updates\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}update{\isacharunderscore}function\ list{\isachardoublequoteclose}\isanewline
-\isanewline
+\ \ Guard\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}gexp\ list{\isachardoublequoteclose}\isanewline
+\ \ Outputs\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}aexp\ list{\isachardoublequoteclose}\isanewline
+\ \ Updates\ {\isacharcolon}{\isacharcolon}\ updates%
+}%endsnip
 \isacommand{lemma}\isamarkupfalse%
 \ transition{\isacharunderscore}equality{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}{\isacharparenleft}x{\isacharcolon}{\isacharcolon}transition{\isacharparenright}\ {\isacharequal}\ y{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}{\isacharparenleft}Label\ x{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}Label\ y{\isacharparenright}\ {\isasymand}\isanewline
 \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ {\isacharparenleft}Arity\ x{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}Arity\ y{\isacharparenright}\ {\isasymand}\isanewline
@@ -52,32 +50,12 @@
 \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ {\isacharparenleft}Updates\ x{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}Updates\ y{\isacharparenright}{\isacharparenright}{\isachardoublequoteclose}\isanewline
 %
 \isadelimproof
-%
+\ \ %
 \endisadelimproof
 %
 \isatagproof
-\isacommand{proof}\isamarkupfalse%
-\isanewline
-\ \ \isacommand{fix}\isamarkupfalse%
-\ x\ y\ {\isacharcolon}{\isacharcolon}\ transition\isanewline
-\ \ \isacommand{assume}\isamarkupfalse%
-\ {\isachardoublequoteopen}x\ {\isacharequal}\ y{\isachardoublequoteclose}\isanewline
-\ \ \isacommand{show}\isamarkupfalse%
-\ {\isachardoublequoteopen}Label\ x\ {\isacharequal}\ Label\ y\ {\isasymand}\ Arity\ x\ {\isacharequal}\ Arity\ y\ {\isasymand}\ Guard\ x\ {\isacharequal}\ Guard\ y\ {\isasymand}\ Outputs\ x\ {\isacharequal}\ Outputs\ y\ {\isasymand}\ Updates\ x\ {\isacharequal}\ Updates\ y{\isachardoublequoteclose}\isanewline
-\ \ \ \ \isacommand{by}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ {\isacartoucheopen}x\ {\isacharequal}\ y{\isacartoucheclose}{\isacharparenright}\isanewline
-\isacommand{next}\isamarkupfalse%
-\isanewline
-\ \ \isacommand{fix}\isamarkupfalse%
-\ x\ y\ {\isacharcolon}{\isacharcolon}\ transition\isanewline
-\ \ \isacommand{assume}\isamarkupfalse%
-\ {\isachardoublequoteopen}Label\ x\ {\isacharequal}\ Label\ y\ {\isasymand}\ Arity\ x\ {\isacharequal}\ Arity\ y\ {\isasymand}\ Guard\ x\ {\isacharequal}\ Guard\ y\ {\isasymand}\ Outputs\ x\ {\isacharequal}\ Outputs\ y\ {\isasymand}\ Updates\ x\ {\isacharequal}\ Updates\ y{\isachardoublequoteclose}\isanewline
-\ \ \isacommand{show}\isamarkupfalse%
-\ {\isachardoublequoteopen}x\ {\isacharequal}\ y{\isachardoublequoteclose}\isanewline
-\ \ \ \ \isacommand{by}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ {\isacartoucheopen}Label\ x\ {\isacharequal}\ Label\ y\ {\isasymand}\ Arity\ x\ {\isacharequal}\ Arity\ y\ {\isasymand}\ Guard\ x\ {\isacharequal}\ Guard\ y\ {\isasymand}\ Outputs\ x\ {\isacharequal}\ Outputs\ y\ {\isasymand}\ Updates\ x\ {\isacharequal}\ Updates\ y{\isacartoucheclose}{\isacharparenright}\isanewline
-\isacommand{qed}\isamarkupfalse%
-%
+\isacommand{by}\isamarkupfalse%
+\ auto%
 \endisatagproof
 {\isafoldproof}%
 %
@@ -127,6 +105,370 @@
 \ \ {\isachardoublequoteopen}same{\isacharunderscore}structure\ t{\isadigit{1}}\ t{\isadigit{2}}\ {\isacharequal}\ {\isacharparenleft}Label\ t{\isadigit{1}}\ {\isacharequal}\ Label\ t{\isadigit{2}}\ {\isasymand}\isanewline
 \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Arity\ t{\isadigit{1}}\ {\isacharequal}\ Arity\ t{\isadigit{2}}\ {\isasymand}\isanewline
 \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ list{\isacharunderscore}all\ {\isacharparenleft}{\isasymlambda}{\isacharparenleft}g{\isadigit{1}}{\isacharcomma}\ g{\isadigit{2}}{\isacharparenright}{\isachardot}\ gexp{\isacharunderscore}same{\isacharunderscore}structure\ g{\isadigit{1}}\ g{\isadigit{2}}{\isacharparenright}\ {\isacharparenleft}zip\ {\isacharparenleft}Guard\ t{\isadigit{1}}{\isacharparenright}\ {\isacharparenleft}Guard\ t{\isadigit{2}}{\isacharparenright}{\isacharparenright}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{definition}\isamarkupfalse%
+\ enumerate{\isacharunderscore}inputs\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}transition\ {\isasymRightarrow}\ nat\ set{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+\ \ {\isachardoublequoteopen}enumerate{\isacharunderscore}inputs\ t\ {\isacharequal}\ {\isacharparenleft}{\isasymUnion}\ set\ {\isacharparenleft}map\ enumerate{\isacharunderscore}gexp{\isacharunderscore}inputs\ {\isacharparenleft}Guard\ t{\isacharparenright}{\isacharparenright}{\isacharparenright}\ {\isasymunion}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ {\isacharparenleft}{\isasymUnion}\ set\ {\isacharparenleft}map\ enumerate{\isacharunderscore}aexp{\isacharunderscore}inputs\ {\isacharparenleft}Outputs\ t{\isacharparenright}{\isacharparenright}{\isacharparenright}\ {\isasymunion}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ {\isacharparenleft}{\isasymUnion}\ set\ {\isacharparenleft}map\ {\isacharparenleft}{\isasymlambda}{\isacharparenleft}{\isacharunderscore}{\isacharcomma}\ u{\isacharparenright}{\isachardot}\ enumerate{\isacharunderscore}aexp{\isacharunderscore}inputs\ u{\isacharparenright}\ {\isacharparenleft}Updates\ t{\isacharparenright}{\isacharparenright}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{definition}\isamarkupfalse%
+\ enumerate{\isacharunderscore}inputs{\isacharunderscore}list\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}transition\ {\isasymRightarrow}\ nat\ list{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+\ \ {\isachardoublequoteopen}enumerate{\isacharunderscore}inputs{\isacharunderscore}list\ t\ {\isacharequal}\ {\isacharparenleft}fold\ {\isacharparenleft}{\isacharat}{\isacharparenright}\ {\isacharparenleft}map\ enumerate{\isacharunderscore}gexp{\isacharunderscore}inputs{\isacharunderscore}list\ {\isacharparenleft}Guard\ t{\isacharparenright}{\isacharparenright}\ {\isacharbrackleft}{\isacharbrackright}{\isacharparenright}\ {\isacharat}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ {\isacharparenleft}fold\ {\isacharparenleft}{\isacharat}{\isacharparenright}\ {\isacharparenleft}map\ enumerate{\isacharunderscore}aexp{\isacharunderscore}inputs{\isacharunderscore}list\ {\isacharparenleft}Outputs\ t{\isacharparenright}{\isacharparenright}\ {\isacharbrackleft}{\isacharbrackright}{\isacharparenright}\ {\isacharat}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ {\isacharparenleft}fold\ {\isacharparenleft}{\isacharat}{\isacharparenright}\ {\isacharparenleft}map\ {\isacharparenleft}{\isasymlambda}{\isacharparenleft}{\isacharunderscore}{\isacharcomma}\ u{\isacharparenright}{\isachardot}\ enumerate{\isacharunderscore}aexp{\isacharunderscore}inputs{\isacharunderscore}list\ u{\isacharparenright}\ {\isacharparenleft}Updates\ t{\isacharparenright}{\isacharparenright}\ {\isacharbrackleft}{\isacharbrackright}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ fold{\isacharunderscore}enumerate{\isacharunderscore}aexp{\isacharunderscore}inputs{\isacharunderscore}list{\isacharunderscore}pairs{\isacharcolon}\ {\isachardoublequoteopen}set\ {\isacharparenleft}fold\ {\isacharparenleft}{\isacharat}{\isacharparenright}\ {\isacharparenleft}map\ {\isacharparenleft}{\isasymlambda}{\isacharparenleft}uu{\isacharcomma}\ y{\isacharparenright}{\isachardot}\ enumerate{\isacharunderscore}aexp{\isacharunderscore}inputs{\isacharunderscore}list\ y{\isacharparenright}\ U{\isacharparenright}\ {\isacharbrackleft}{\isacharbrackright}{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}{\isasymUnion}{\isacharparenleft}uu{\isacharcomma}\ y{\isacharparenright}{\isasymin}set\ U{\isachardot}\ enumerate{\isacharunderscore}aexp{\isacharunderscore}inputs\ y{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ enumerate{\isacharunderscore}aexp{\isacharunderscore}inputs{\isacharunderscore}list\ fold{\isacharunderscore}append{\isacharunderscore}concat{\isacharunderscore}rev\ inf{\isacharunderscore}sup{\isacharunderscore}aci{\isacharparenleft}{\isadigit{5}}{\isacharparenright}\ split{\isacharunderscore}def{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ fold{\isacharunderscore}enumerate{\isacharunderscore}aexp{\isacharunderscore}inputs{\isacharunderscore}list{\isacharcolon}\ {\isachardoublequoteopen}set\ {\isacharparenleft}fold\ {\isacharparenleft}{\isacharat}{\isacharparenright}\ {\isacharparenleft}map\ enumerate{\isacharunderscore}aexp{\isacharunderscore}inputs{\isacharunderscore}list\ P{\isacharparenright}\ {\isacharbrackleft}{\isacharbrackright}{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}{\isasymUnion}x{\isasymin}set\ P{\isachardot}\ enumerate{\isacharunderscore}aexp{\isacharunderscore}inputs\ x{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ enumerate{\isacharunderscore}aexp{\isacharunderscore}inputs{\isacharunderscore}list\ fold{\isacharunderscore}append{\isacharunderscore}concat{\isacharunderscore}rev\ inf{\isacharunderscore}sup{\isacharunderscore}aci{\isacharparenleft}{\isadigit{5}}{\isacharparenright}\ split{\isacharunderscore}def{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ fold{\isacharunderscore}enumerate{\isacharunderscore}gexp{\isacharunderscore}inputs{\isacharunderscore}list{\isacharcolon}\ {\isachardoublequoteopen}set\ {\isacharparenleft}fold\ {\isacharparenleft}{\isacharat}{\isacharparenright}\ {\isacharparenleft}map\ enumerate{\isacharunderscore}gexp{\isacharunderscore}inputs{\isacharunderscore}list\ G{\isacharparenright}\ {\isacharbrackleft}{\isacharbrackright}{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}{\isasymUnion}x{\isasymin}set\ G{\isachardot}\ enumerate{\isacharunderscore}gexp{\isacharunderscore}inputs\ x{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ \ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ enumerate{\isacharunderscore}gexp{\isacharunderscore}inputs{\isacharunderscore}list\ fold{\isacharunderscore}append{\isacharunderscore}concat{\isacharunderscore}rev\ inf{\isacharunderscore}sup{\isacharunderscore}aci{\isacharparenleft}{\isadigit{5}}{\isacharparenright}\ split{\isacharunderscore}def{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ set{\isacharunderscore}enumerate{\isacharunderscore}inputs{\isacharunderscore}list{\isacharcolon}\ {\isachardoublequoteopen}enumerate{\isacharunderscore}inputs\ t\ {\isacharequal}\ set\ {\isacharparenleft}enumerate{\isacharunderscore}inputs{\isacharunderscore}list\ t{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ enumerate{\isacharunderscore}inputs{\isacharunderscore}list{\isacharunderscore}def\ enumerate{\isacharunderscore}inputs{\isacharunderscore}def{\isacharparenright}\isanewline
+\ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ fold{\isacharunderscore}enumerate{\isacharunderscore}aexp{\isacharunderscore}inputs{\isacharunderscore}list\ fold{\isacharunderscore}enumerate{\isacharunderscore}aexp{\isacharunderscore}inputs{\isacharunderscore}list{\isacharunderscore}pairs{\isacharparenright}\isanewline
+\ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ fold{\isacharunderscore}enumerate{\isacharunderscore}gexp{\isacharunderscore}inputs{\isacharunderscore}list{\isacharparenright}\isanewline
+\ \ \isacommand{by}\isamarkupfalse%
+\ auto%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ set{\isacharunderscore}list{\isacharunderscore}not{\isacharunderscore}empty{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}set\ l\ {\isasymnoteq}\ {\isacharbraceleft}{\isacharbraceright}{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}l\ {\isasymnoteq}\ {\isacharbrackleft}{\isacharbrackright}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ simp%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ max{\isacharunderscore}set{\isacharunderscore}nat{\isacharunderscore}list{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}l{\isacharcolon}{\isacharcolon}\ nat\ list{\isacharparenright}\ {\isasymnoteq}\ {\isacharbrackleft}{\isacharbrackright}\ {\isasymLongrightarrow}\ Max\ {\isacharparenleft}set\ l{\isacharparenright}\ {\isacharequal}\ foldr\ max\ l\ {\isadigit{0}}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\isatagproof
+\isacommand{proof}\isamarkupfalse%
+{\isacharparenleft}induct\ l{\isacharparenright}\isanewline
+\isacommand{case}\isamarkupfalse%
+\ Nil\isanewline
+\ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}case\isanewline
+\ \ \ \ \isacommand{by}\isamarkupfalse%
+\ simp\isanewline
+\isacommand{next}\isamarkupfalse%
+\isanewline
+\isacommand{case}\isamarkupfalse%
+\ {\isacharparenleft}Cons\ a\ l{\isacharparenright}\isanewline
+\ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}case\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ simp\isanewline
+\ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}metis\ List{\isachardot}finite{\isacharunderscore}set\ Max{\isacharunderscore}insert\ Max{\isacharunderscore}singleton\ fold{\isachardot}simps{\isacharparenleft}{\isadigit{1}}{\isacharparenright}\ fold{\isacharunderscore}simps{\isacharparenleft}{\isadigit{1}}{\isacharparenright}\ foldr{\isachardot}simps{\isacharparenleft}{\isadigit{1}}{\isacharparenright}\ max{\isacharunderscore}{\isadigit{0}}R\ set{\isacharunderscore}empty{\isacharparenright}\isanewline
+\isacommand{qed}\isamarkupfalse%
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{definition}\isamarkupfalse%
+\ max{\isacharunderscore}input\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}transition\ {\isasymRightarrow}\ nat\ option{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+\ \ {\isachardoublequoteopen}max{\isacharunderscore}input\ t\ {\isacharequal}\ {\isacharparenleft}if\ enumerate{\isacharunderscore}inputs\ t\ {\isacharequal}\ {\isacharbraceleft}{\isacharbraceright}\ then\ None\ else\ Some\ {\isacharparenleft}Max\ {\isacharparenleft}enumerate{\isacharunderscore}inputs\ t{\isacharparenright}{\isacharparenright}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{definition}\isamarkupfalse%
+\ enumerate{\isacharunderscore}registers\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}transition\ {\isasymRightarrow}\ nat\ set{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+\ \ {\isachardoublequoteopen}enumerate{\isacharunderscore}registers\ t\ {\isacharequal}\ {\isacharparenleft}{\isasymUnion}\ set\ {\isacharparenleft}map\ enumerate{\isacharunderscore}gexp{\isacharunderscore}regs\ {\isacharparenleft}Guard\ t{\isacharparenright}{\isacharparenright}{\isacharparenright}\ {\isasymunion}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ {\isacharparenleft}{\isasymUnion}\ set\ {\isacharparenleft}map\ enumerate{\isacharunderscore}aexp{\isacharunderscore}regs\ {\isacharparenleft}Outputs\ t{\isacharparenright}{\isacharparenright}{\isacharparenright}\ {\isasymunion}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ {\isacharparenleft}{\isasymUnion}\ set\ {\isacharparenleft}map\ {\isacharparenleft}{\isasymlambda}{\isacharparenleft}{\isacharunderscore}{\isacharcomma}\ u{\isacharparenright}{\isachardot}\ enumerate{\isacharunderscore}aexp{\isacharunderscore}regs\ u{\isacharparenright}\ {\isacharparenleft}Updates\ t{\isacharparenright}{\isacharparenright}{\isacharparenright}\ {\isasymunion}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ {\isacharparenleft}{\isasymUnion}\ set\ {\isacharparenleft}map\ {\isacharparenleft}{\isasymlambda}{\isacharparenleft}r{\isacharcomma}\ {\isacharunderscore}{\isacharparenright}{\isachardot}\ enumerate{\isacharunderscore}aexp{\isacharunderscore}regs\ {\isacharparenleft}V\ {\isacharparenleft}R\ r{\isacharparenright}{\isacharparenright}{\isacharparenright}\ {\isacharparenleft}Updates\ t{\isacharparenright}{\isacharparenright}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{definition}\isamarkupfalse%
+\ enumerate{\isacharunderscore}registers{\isacharunderscore}list\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}transition\ {\isasymRightarrow}\ nat\ list{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+\ \ {\isachardoublequoteopen}enumerate{\isacharunderscore}registers{\isacharunderscore}list\ t\ {\isacharequal}\ {\isacharparenleft}fold\ {\isacharparenleft}{\isacharat}{\isacharparenright}\ {\isacharparenleft}map\ enumerate{\isacharunderscore}gexp{\isacharunderscore}regs{\isacharunderscore}list\ {\isacharparenleft}Guard\ t{\isacharparenright}{\isacharparenright}\ {\isacharbrackleft}{\isacharbrackright}{\isacharparenright}\ {\isacharat}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ {\isacharparenleft}fold\ {\isacharparenleft}{\isacharat}{\isacharparenright}\ {\isacharparenleft}map\ enumerate{\isacharunderscore}aexp{\isacharunderscore}regs{\isacharunderscore}list\ {\isacharparenleft}Outputs\ t{\isacharparenright}{\isacharparenright}\ {\isacharbrackleft}{\isacharbrackright}{\isacharparenright}\ {\isacharat}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ {\isacharparenleft}fold\ {\isacharparenleft}{\isacharat}{\isacharparenright}\ {\isacharparenleft}map\ {\isacharparenleft}{\isasymlambda}{\isacharparenleft}{\isacharunderscore}{\isacharcomma}\ u{\isacharparenright}{\isachardot}\ enumerate{\isacharunderscore}aexp{\isacharunderscore}regs{\isacharunderscore}list\ u{\isacharparenright}\ {\isacharparenleft}Updates\ t{\isacharparenright}{\isacharparenright}\ {\isacharbrackleft}{\isacharbrackright}{\isacharparenright}\ {\isacharat}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ {\isacharparenleft}fold\ {\isacharparenleft}{\isacharat}{\isacharparenright}\ {\isacharparenleft}map\ {\isacharparenleft}{\isasymlambda}{\isacharparenleft}r{\isacharcomma}\ {\isacharunderscore}{\isacharparenright}{\isachardot}\ enumerate{\isacharunderscore}aexp{\isacharunderscore}regs{\isacharunderscore}list\ {\isacharparenleft}V\ {\isacharparenleft}R\ r{\isacharparenright}{\isacharparenright}{\isacharparenright}\ {\isacharparenleft}Updates\ t{\isacharparenright}{\isacharparenright}\ {\isacharbrackleft}{\isacharbrackright}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ fold{\isacharunderscore}enumerate{\isacharunderscore}aexp{\isacharunderscore}regs{\isacharunderscore}list{\isacharunderscore}pairs{\isacharcolon}\ {\isachardoublequoteopen}set\ {\isacharparenleft}fold\ {\isacharparenleft}{\isacharat}{\isacharparenright}\ {\isacharparenleft}map\ {\isacharparenleft}{\isasymlambda}{\isacharparenleft}uu{\isacharcomma}\ y{\isacharparenright}{\isachardot}\ enumerate{\isacharunderscore}aexp{\isacharunderscore}regs{\isacharunderscore}list\ y{\isacharparenright}\ U{\isacharparenright}\ {\isacharbrackleft}{\isacharbrackright}{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}{\isasymUnion}{\isacharparenleft}uu{\isacharcomma}\ y{\isacharparenright}{\isasymin}set\ U{\isachardot}\ enumerate{\isacharunderscore}aexp{\isacharunderscore}regs\ y{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ enumerate{\isacharunderscore}aexp{\isacharunderscore}regs{\isacharunderscore}list\ fold{\isacharunderscore}append{\isacharunderscore}concat{\isacharunderscore}rev\ inf{\isacharunderscore}sup{\isacharunderscore}aci{\isacharparenleft}{\isadigit{5}}{\isacharparenright}\ split{\isacharunderscore}def{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ fold{\isacharunderscore}enumerate{\isacharunderscore}aexp{\isacharunderscore}regs{\isacharunderscore}list{\isacharunderscore}pairs{\isacharunderscore}{\isadigit{2}}{\isacharcolon}\ {\isachardoublequoteopen}set\ {\isacharparenleft}fold\ {\isacharparenleft}{\isacharat}{\isacharparenright}\ {\isacharparenleft}map\ {\isacharparenleft}{\isasymlambda}{\isacharparenleft}r{\isacharcomma}\ uu{\isacharparenright}{\isachardot}\ {\isacharbrackleft}r{\isacharbrackright}{\isacharparenright}\ {\isacharparenleft}Updates\ t{\isacharparenright}{\isacharparenright}\ {\isacharbrackleft}{\isacharbrackright}{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}{\isasymUnion}x{\isasymin}set\ {\isacharparenleft}Updates\ t{\isacharparenright}{\isachardot}\ case\ x\ of\ {\isacharparenleft}r{\isacharcomma}\ uu{\isacharparenright}\ {\isasymRightarrow}\ {\isacharbraceleft}r{\isacharbraceright}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ \ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ enumerate{\isacharunderscore}aexp{\isacharunderscore}regs{\isacharunderscore}list\ fold{\isacharunderscore}append{\isacharunderscore}concat{\isacharunderscore}rev\ inf{\isacharunderscore}sup{\isacharunderscore}aci{\isacharparenleft}{\isadigit{5}}{\isacharparenright}\ split{\isacharunderscore}def{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ fold{\isacharunderscore}enumerate{\isacharunderscore}aexp{\isacharunderscore}regs{\isacharunderscore}list{\isacharcolon}\ {\isachardoublequoteopen}set\ {\isacharparenleft}fold\ {\isacharparenleft}{\isacharat}{\isacharparenright}\ {\isacharparenleft}map\ enumerate{\isacharunderscore}aexp{\isacharunderscore}regs{\isacharunderscore}list\ P{\isacharparenright}\ {\isacharbrackleft}{\isacharbrackright}{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}{\isasymUnion}x{\isasymin}set\ P{\isachardot}\ enumerate{\isacharunderscore}aexp{\isacharunderscore}regs\ x{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ \ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ enumerate{\isacharunderscore}aexp{\isacharunderscore}regs{\isacharunderscore}list\ fold{\isacharunderscore}append{\isacharunderscore}concat{\isacharunderscore}rev\ inf{\isacharunderscore}sup{\isacharunderscore}aci{\isacharparenleft}{\isadigit{5}}{\isacharparenright}\ split{\isacharunderscore}def{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ fold{\isacharunderscore}enumerate{\isacharunderscore}gexp{\isacharunderscore}regs{\isacharunderscore}list{\isacharcolon}\ {\isachardoublequoteopen}set\ {\isacharparenleft}fold\ {\isacharparenleft}{\isacharat}{\isacharparenright}\ {\isacharparenleft}map\ enumerate{\isacharunderscore}gexp{\isacharunderscore}regs{\isacharunderscore}list\ G{\isacharparenright}\ {\isacharbrackleft}{\isacharbrackright}{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}{\isasymUnion}x{\isasymin}set\ G{\isachardot}\ enumerate{\isacharunderscore}gexp{\isacharunderscore}regs\ x{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ \ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ enumerate{\isacharunderscore}gexp{\isacharunderscore}regs{\isacharunderscore}list\ fold{\isacharunderscore}append{\isacharunderscore}concat{\isacharunderscore}rev\ inf{\isacharunderscore}sup{\isacharunderscore}aci{\isacharparenleft}{\isadigit{5}}{\isacharparenright}\ split{\isacharunderscore}def{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ set{\isacharunderscore}enumerate{\isacharunderscore}registers{\isacharunderscore}list{\isacharcolon}\ {\isachardoublequoteopen}enumerate{\isacharunderscore}registers\ t\ {\isacharequal}\ set\ {\isacharparenleft}enumerate{\isacharunderscore}registers{\isacharunderscore}list\ t{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ enumerate{\isacharunderscore}registers{\isacharunderscore}list{\isacharunderscore}def\ enumerate{\isacharunderscore}registers{\isacharunderscore}def{\isacharparenright}\isanewline
+\ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ fold{\isacharunderscore}enumerate{\isacharunderscore}aexp{\isacharunderscore}regs{\isacharunderscore}list\ fold{\isacharunderscore}enumerate{\isacharunderscore}aexp{\isacharunderscore}regs{\isacharunderscore}list{\isacharunderscore}pairs\ fold{\isacharunderscore}enumerate{\isacharunderscore}aexp{\isacharunderscore}regs{\isacharunderscore}list{\isacharunderscore}pairs{\isacharunderscore}{\isadigit{2}}{\isacharparenright}\isanewline
+\ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ fold{\isacharunderscore}enumerate{\isacharunderscore}gexp{\isacharunderscore}regs{\isacharunderscore}list{\isacharparenright}\isanewline
+\ \ \isacommand{by}\isamarkupfalse%
+\ auto%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{definition}\isamarkupfalse%
+\ max{\isacharunderscore}reg\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}transition\ {\isasymRightarrow}\ nat\ option{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+\ \ {\isachardoublequoteopen}max{\isacharunderscore}reg\ t\ {\isacharequal}\ {\isacharparenleft}if\ enumerate{\isacharunderscore}registers\ t\ {\isacharequal}\ {\isacharbraceleft}{\isacharbraceright}\ then\ None\ else\ Some\ {\isacharparenleft}Max\ {\isacharparenleft}enumerate{\isacharunderscore}registers\ t{\isacharparenright}{\isacharparenright}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{definition}\isamarkupfalse%
+\ valid{\isacharunderscore}transition\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}transition\ {\isasymRightarrow}\ bool{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+\ \ {\isachardoublequoteopen}valid{\isacharunderscore}transition\ t\ {\isacharequal}\ {\isacharparenleft}case\ max{\isacharunderscore}input\ t\ of\ None\ {\isasymRightarrow}\ Arity\ t\ {\isacharequal}\ {\isadigit{0}}\ {\isacharbar}\ Some\ x\ {\isasymRightarrow}\ x\ {\isacharless}\ Arity\ t{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ not{\isacharunderscore}leq{\isacharunderscore}gt{\isacharunderscore}set{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}{\isasymforall}x{\isasymin}{\isacharparenleft}s{\isacharcolon}{\isacharcolon}{\isacharparenleft}{\isacharprime}a{\isacharcolon}{\isacharcolon}linorder{\isacharparenright}\ set{\isacharparenright}{\isachardot}\ {\isasymnot}\ a\ {\isasymle}\ x{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}{\isasymforall}x{\isasymin}s{\isachardot}\ a\ {\isachargreater}\ x{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ auto%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ fold{\isacharunderscore}append{\isacharunderscore}Union{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}{\isasymUnion}x{\isasymin}set\ G{\isachardot}\ set\ {\isacharparenleft}enumerate{\isacharunderscore}gexp{\isacharunderscore}inputs{\isacharunderscore}list\ x{\isacharparenright}{\isacharparenright}\ {\isacharequal}\ set\ {\isacharparenleft}fold\ {\isacharparenleft}{\isacharat}{\isacharparenright}\ {\isacharparenleft}map\ enumerate{\isacharunderscore}gexp{\isacharunderscore}inputs{\isacharunderscore}list\ G{\isacharparenright}\ {\isacharbrackleft}{\isacharbrackright}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\isatagproof
+\isacommand{proof}\isamarkupfalse%
+{\isacharparenleft}induct\ G{\isacharparenright}\isanewline
+\ \ \isacommand{case}\isamarkupfalse%
+\ Nil\isanewline
+\ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}case\isanewline
+\ \ \ \ \isacommand{by}\isamarkupfalse%
+\ simp\isanewline
+\isacommand{next}\isamarkupfalse%
+\isanewline
+\ \ \isacommand{case}\isamarkupfalse%
+\ {\isacharparenleft}Cons\ a\ G{\isacharparenright}\isanewline
+\ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}case\isanewline
+\ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ fold{\isacharunderscore}append{\isacharunderscore}concat{\isacharunderscore}rev\ inf{\isacharunderscore}sup{\isacharunderscore}aci{\isacharparenleft}{\isadigit{5}}{\isacharparenright}{\isacharparenright}\isanewline
+\isacommand{qed}\isamarkupfalse%
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ map{\isacharunderscore}enumerate{\isacharunderscore}gexp{\isacharunderscore}inputs{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}Max\ {\isacharparenleft}{\isasymUnion}\ set\ {\isacharparenleft}map\ enumerate{\isacharunderscore}gexp{\isacharunderscore}inputs\ G{\isacharparenright}{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}fold\ {\isacharparenleft}max{\isacharparenright}\ {\isacharparenleft}fold\ {\isacharparenleft}{\isacharat}{\isacharparenright}\ {\isacharparenleft}map\ enumerate{\isacharunderscore}gexp{\isacharunderscore}inputs{\isacharunderscore}list\ G{\isacharparenright}\ {\isacharbrackleft}{\isacharbrackright}{\isacharparenright}\ {\isadigit{0}}{\isacharparenright}{\isacharparenright}\ {\isasymor}\ {\isacharparenleft}{\isacharparenleft}{\isasymUnion}\ set\ {\isacharparenleft}map\ enumerate{\isacharunderscore}gexp{\isacharunderscore}inputs\ G{\isacharparenright}{\isacharparenright}\ {\isacharequal}\ {\isacharbraceleft}{\isacharbraceright}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\isatagproof
+\isacommand{proof}\isamarkupfalse%
+{\isacharparenleft}induct\ G{\isacharparenright}\isanewline
+\ \ \isacommand{case}\isamarkupfalse%
+\ Nil\isanewline
+\ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}case\isanewline
+\ \ \ \ \isacommand{by}\isamarkupfalse%
+\ simp\isanewline
+\isacommand{next}\isamarkupfalse%
+\isanewline
+\ \ \isacommand{case}\isamarkupfalse%
+\ {\isacharparenleft}Cons\ a\ G{\isacharparenright}\isanewline
+\ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}case\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ simp\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ enumerate{\isacharunderscore}gexp{\isacharunderscore}inputs{\isacharunderscore}list{\isacharparenright}\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ fold{\isacharunderscore}append{\isacharunderscore}Union{\isacharparenright}\isanewline
+\ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}metis\ {\isacharparenleft}no{\isacharunderscore}types{\isacharcomma}\ lifting{\isacharparenright}\ List{\isachardot}finite{\isacharunderscore}set\ Max{\isachardot}set{\isacharunderscore}eq{\isacharunderscore}fold\ Max{\isacharunderscore}insert\ fold{\isacharunderscore}append{\isacharunderscore}concat{\isacharunderscore}rev\ inf{\isacharunderscore}sup{\isacharunderscore}aci{\isacharparenleft}{\isadigit{5}}{\isacharparenright}\ list{\isachardot}simps{\isacharparenleft}{\isadigit{1}}{\isadigit{5}}{\isacharparenright}\ max{\isacharunderscore}{\isadigit{0}}L\ set{\isacharunderscore}append\ set{\isacharunderscore}empty\ sup{\isachardot}left{\isacharunderscore}idem\ sup{\isacharunderscore}bot{\isachardot}right{\isacharunderscore}neutral{\isacharparenright}\isanewline
+\isacommand{qed}\isamarkupfalse%
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
 %
 \isadelimtheory
 \isanewline
@@ -166,60 +508,238 @@
 %:%33=10%:%
 %:%34=11%:%
 %:%35=11%:%
-%:%36=12%:%
-%:%37=12%:%
-%:%38=13%:%
-%:%39=14%:%
-%:%40=14%:%
-%:%41=15%:%
-%:%42=16%:%
-%:%43=17%:%
-%:%44=18%:%
-%:%45=19%:%
-%:%46=20%:%
-%:%47=21%:%
-%:%48=21%:%
-%:%52=25%:%
-%:%59=26%:%
-%:%60=26%:%
-%:%61=27%:%
-%:%62=27%:%
-%:%63=28%:%
-%:%64=28%:%
-%:%65=29%:%
-%:%66=29%:%
-%:%67=30%:%
-%:%68=30%:%
-%:%69=31%:%
-%:%70=31%:%
-%:%71=32%:%
-%:%72=32%:%
-%:%73=33%:%
-%:%74=33%:%
-%:%75=34%:%
-%:%76=34%:%
-%:%77=35%:%
-%:%78=35%:%
-%:%79=36%:%
-%:%85=36%:%
-%:%88=37%:%
-%:%89=38%:%
-%:%90=38%:%
-%:%93=39%:%
-%:%97=39%:%
-%:%98=39%:%
-%:%103=39%:%
-%:%106=40%:%
-%:%107=41%:%
-%:%108=41%:%
-%:%111=42%:%
-%:%115=42%:%
-%:%116=42%:%
-%:%121=42%:%
-%:%124=43%:%
-%:%125=44%:%
-%:%126=44%:%
-%:%127=45%:%
-%:%129=47%:%
-%:%132=48%:%
-%:%137=49%:%
+%:%36=13%:%
+%:%37=14%:%
+%:%38=14%:%
+%:%39=15%:%
+%:%40=16%:%
+%:%41=17%:%
+%:%42=18%:%
+%:%43=19%:%
+%:%44=20%:%
+%:%45=22%:%
+%:%46=22%:%
+%:%50=26%:%
+%:%53=27%:%
+%:%57=27%:%
+%:%58=27%:%
+%:%63=27%:%
+%:%66=28%:%
+%:%67=29%:%
+%:%68=29%:%
+%:%71=30%:%
+%:%75=30%:%
+%:%76=30%:%
+%:%81=30%:%
+%:%84=31%:%
+%:%85=32%:%
+%:%86=32%:%
+%:%89=33%:%
+%:%93=33%:%
+%:%94=33%:%
+%:%99=33%:%
+%:%102=34%:%
+%:%103=35%:%
+%:%104=35%:%
+%:%105=36%:%
+%:%107=38%:%
+%:%108=39%:%
+%:%109=40%:%
+%:%110=40%:%
+%:%111=41%:%
+%:%113=43%:%
+%:%114=44%:%
+%:%115=45%:%
+%:%116=45%:%
+%:%117=46%:%
+%:%119=48%:%
+%:%120=49%:%
+%:%121=50%:%
+%:%122=50%:%
+%:%125=51%:%
+%:%129=51%:%
+%:%130=51%:%
+%:%135=51%:%
+%:%138=52%:%
+%:%139=53%:%
+%:%140=53%:%
+%:%143=54%:%
+%:%147=54%:%
+%:%148=54%:%
+%:%153=54%:%
+%:%156=55%:%
+%:%157=56%:%
+%:%158=56%:%
+%:%161=57%:%
+%:%165=57%:%
+%:%166=57%:%
+%:%171=57%:%
+%:%174=58%:%
+%:%175=59%:%
+%:%176=59%:%
+%:%179=60%:%
+%:%183=60%:%
+%:%184=60%:%
+%:%185=61%:%
+%:%186=61%:%
+%:%187=62%:%
+%:%188=62%:%
+%:%189=63%:%
+%:%190=63%:%
+%:%195=63%:%
+%:%198=64%:%
+%:%199=65%:%
+%:%200=65%:%
+%:%203=66%:%
+%:%207=66%:%
+%:%208=66%:%
+%:%213=66%:%
+%:%216=67%:%
+%:%217=68%:%
+%:%218=68%:%
+%:%225=69%:%
+%:%226=69%:%
+%:%227=70%:%
+%:%228=70%:%
+%:%229=71%:%
+%:%230=71%:%
+%:%231=71%:%
+%:%232=72%:%
+%:%233=72%:%
+%:%234=73%:%
+%:%235=73%:%
+%:%236=74%:%
+%:%237=74%:%
+%:%238=75%:%
+%:%239=75%:%
+%:%240=75%:%
+%:%241=76%:%
+%:%242=76%:%
+%:%243=77%:%
+%:%244=77%:%
+%:%245=78%:%
+%:%251=78%:%
+%:%254=79%:%
+%:%255=80%:%
+%:%256=80%:%
+%:%257=81%:%
+%:%258=82%:%
+%:%259=83%:%
+%:%260=83%:%
+%:%261=84%:%
+%:%264=87%:%
+%:%265=88%:%
+%:%266=89%:%
+%:%267=89%:%
+%:%268=90%:%
+%:%271=93%:%
+%:%272=94%:%
+%:%273=95%:%
+%:%274=95%:%
+%:%277=96%:%
+%:%281=96%:%
+%:%282=96%:%
+%:%287=96%:%
+%:%290=97%:%
+%:%291=98%:%
+%:%292=98%:%
+%:%295=99%:%
+%:%299=99%:%
+%:%300=99%:%
+%:%305=99%:%
+%:%308=100%:%
+%:%309=101%:%
+%:%310=101%:%
+%:%313=102%:%
+%:%317=102%:%
+%:%318=102%:%
+%:%323=102%:%
+%:%326=103%:%
+%:%327=104%:%
+%:%328=104%:%
+%:%331=105%:%
+%:%335=105%:%
+%:%336=105%:%
+%:%341=105%:%
+%:%344=106%:%
+%:%345=107%:%
+%:%346=107%:%
+%:%349=108%:%
+%:%353=108%:%
+%:%354=108%:%
+%:%355=109%:%
+%:%356=109%:%
+%:%357=110%:%
+%:%358=110%:%
+%:%359=111%:%
+%:%360=111%:%
+%:%365=111%:%
+%:%368=112%:%
+%:%369=113%:%
+%:%370=113%:%
+%:%371=114%:%
+%:%372=115%:%
+%:%373=116%:%
+%:%374=116%:%
+%:%375=117%:%
+%:%376=118%:%
+%:%377=119%:%
+%:%378=119%:%
+%:%381=120%:%
+%:%385=120%:%
+%:%386=120%:%
+%:%391=120%:%
+%:%394=121%:%
+%:%395=122%:%
+%:%396=122%:%
+%:%403=123%:%
+%:%404=123%:%
+%:%405=124%:%
+%:%406=124%:%
+%:%407=125%:%
+%:%408=125%:%
+%:%409=125%:%
+%:%410=126%:%
+%:%411=126%:%
+%:%412=127%:%
+%:%413=127%:%
+%:%414=128%:%
+%:%415=128%:%
+%:%416=129%:%
+%:%417=129%:%
+%:%418=129%:%
+%:%419=130%:%
+%:%420=130%:%
+%:%421=131%:%
+%:%427=131%:%
+%:%430=132%:%
+%:%431=133%:%
+%:%432=133%:%
+%:%439=134%:%
+%:%440=134%:%
+%:%441=135%:%
+%:%442=135%:%
+%:%443=136%:%
+%:%444=136%:%
+%:%445=136%:%
+%:%446=137%:%
+%:%447=137%:%
+%:%448=138%:%
+%:%449=138%:%
+%:%450=139%:%
+%:%451=139%:%
+%:%452=140%:%
+%:%453=140%:%
+%:%454=140%:%
+%:%455=141%:%
+%:%456=141%:%
+%:%457=142%:%
+%:%458=142%:%
+%:%459=143%:%
+%:%460=143%:%
+%:%461=144%:%
+%:%462=144%:%
+%:%463=145%:%
+%:%469=145%:%
+%:%474=146%:%
+%:%479=147%:%

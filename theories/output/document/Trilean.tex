@@ -1,0 +1,1357 @@
+%
+\begin{isabellebody}%
+\setisabellecontext{Trilean}%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\isatagtheory
+\isacommand{theory}\isamarkupfalse%
+\ Trilean\isanewline
+\isakeyword{imports}\ Main\isanewline
+\isakeyword{begin}%
+\endisatagtheory
+{\isafoldtheory}%
+%
+\isadelimtheory
+\isanewline
+%
+\endisadelimtheory
+\isanewline
+\isacommand{datatype}\isamarkupfalse%
+\ trilean\ {\isacharequal}\ true\ {\isacharbar}\ false\ {\isacharbar}\ invalid\isanewline
+\isanewline
+\isacommand{instantiation}\isamarkupfalse%
+\ trilean\ {\isacharcolon}{\isacharcolon}\ semiring\ \isakeyword{begin}\isanewline
+\isacommand{fun}\isamarkupfalse%
+\ times{\isacharunderscore}trilean\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}trilean\ {\isasymRightarrow}\ trilean\ {\isasymRightarrow}\ trilean{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+\ \ {\isachardoublequoteopen}times{\isacharunderscore}trilean\ {\isacharunderscore}\ invalid\ {\isacharequal}\ invalid{\isachardoublequoteclose}\ {\isacharbar}\isanewline
+\ \ {\isachardoublequoteopen}times{\isacharunderscore}trilean\ invalid\ {\isacharunderscore}\ {\isacharequal}\ invalid{\isachardoublequoteclose}\ {\isacharbar}\isanewline
+\ \ {\isachardoublequoteopen}times{\isacharunderscore}trilean\ true\ true\ {\isacharequal}\ true{\isachardoublequoteclose}\ {\isacharbar}\isanewline
+\ \ {\isachardoublequoteopen}times{\isacharunderscore}trilean\ {\isacharunderscore}\ false\ {\isacharequal}\ false{\isachardoublequoteclose}\ {\isacharbar}\isanewline
+\ \ {\isachardoublequoteopen}times{\isacharunderscore}trilean\ false\ {\isacharunderscore}\ {\isacharequal}\ false{\isachardoublequoteclose}\ \isanewline
+\isanewline
+\isacommand{fun}\isamarkupfalse%
+\ plus{\isacharunderscore}trilean\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}trilean\ {\isasymRightarrow}\ trilean\ {\isasymRightarrow}\ trilean{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+\ \ {\isachardoublequoteopen}plus{\isacharunderscore}trilean\ invalid\ {\isacharunderscore}\ {\isacharequal}\ invalid{\isachardoublequoteclose}\ {\isacharbar}\isanewline
+\ \ {\isachardoublequoteopen}plus{\isacharunderscore}trilean\ {\isacharunderscore}\ invalid\ {\isacharequal}\ invalid{\isachardoublequoteclose}\ {\isacharbar}\isanewline
+\ \ {\isachardoublequoteopen}plus{\isacharunderscore}trilean\ true\ {\isacharunderscore}\ {\isacharequal}\ true{\isachardoublequoteclose}\ {\isacharbar}\isanewline
+\ \ {\isachardoublequoteopen}plus{\isacharunderscore}trilean\ {\isacharunderscore}\ true\ {\isacharequal}\ true{\isachardoublequoteclose}\ {\isacharbar}\isanewline
+\ \ {\isachardoublequoteopen}plus{\isacharunderscore}trilean\ false\ false\ {\isacharequal}\ false{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{abbreviation}\isamarkupfalse%
+\ maybe{\isacharunderscore}and\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}trilean\ {\isasymRightarrow}\ trilean\ {\isasymRightarrow}\ trilean{\isachardoublequoteclose}\ {\isacharparenleft}\isakeyword{infixl}\ {\isachardoublequoteopen}{\isasymand}\isactrlsub {\isacharquery}{\isachardoublequoteclose}\ {\isadigit{7}}{\isadigit{0}}{\isacharparenright}\ \isakeyword{where}\isanewline
+\ \ {\isachardoublequoteopen}maybe{\isacharunderscore}and\ x\ y\ {\isasymequiv}\ x\ {\isacharasterisk}\ y{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{abbreviation}\isamarkupfalse%
+\ maybe{\isacharunderscore}or\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}trilean\ {\isasymRightarrow}\ trilean\ {\isasymRightarrow}\ trilean{\isachardoublequoteclose}\ {\isacharparenleft}\isakeyword{infixl}\ {\isachardoublequoteopen}{\isasymor}\isactrlsub {\isacharquery}{\isachardoublequoteclose}\ {\isadigit{6}}{\isadigit{5}}{\isacharparenright}\ \isakeyword{where}\isanewline
+\ \ {\isachardoublequoteopen}maybe{\isacharunderscore}or\ x\ y\ {\isasymequiv}\ x\ {\isacharplus}\ y{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ plus{\isacharunderscore}trilean{\isacharunderscore}assoc{\isacharcolon}\ {\isachardoublequoteopen}a\ {\isasymor}\isactrlsub {\isacharquery}\ b\ {\isasymor}\isactrlsub {\isacharquery}\ c\ {\isacharequal}\ a\ {\isasymor}\isactrlsub {\isacharquery}\ {\isacharparenleft}b\ {\isasymor}\isactrlsub {\isacharquery}\ c{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\isatagproof
+\isacommand{proof}\isamarkupfalse%
+{\isacharparenleft}induct\ a\ b\ \ arbitrary{\isacharcolon}\ c\ rule{\isacharcolon}\ plus{\isacharunderscore}trilean{\isachardot}induct{\isacharparenright}\isanewline
+\isacommand{case}\isamarkupfalse%
+\ {\isacharparenleft}{\isadigit{1}}\ uu{\isacharparenright}\isanewline
+\ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}case\isanewline
+\ \ \ \ \isacommand{by}\isamarkupfalse%
+\ simp\isanewline
+\isacommand{next}\isamarkupfalse%
+\isanewline
+\ \ \isacommand{case}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isadigit{2}}{\isacharunderscore}{\isadigit{1}}{\isachardoublequoteclose}\isanewline
+\ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}case\isanewline
+\ \ \ \ \isacommand{by}\isamarkupfalse%
+\ simp\isanewline
+\isacommand{next}\isamarkupfalse%
+\isanewline
+\ \ \isacommand{case}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isadigit{2}}{\isacharunderscore}{\isadigit{2}}{\isachardoublequoteclose}\isanewline
+\ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}case\isanewline
+\ \ \ \ \isacommand{by}\isamarkupfalse%
+\ simp\isanewline
+\isacommand{next}\isamarkupfalse%
+\isanewline
+\ \ \isacommand{case}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isadigit{3}}{\isacharunderscore}{\isadigit{1}}{\isachardoublequoteclose}\isanewline
+\ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}case\isanewline
+\ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}metis\ plus{\isacharunderscore}trilean{\isachardot}simps{\isacharparenleft}{\isadigit{2}}{\isacharparenright}\ plus{\isacharunderscore}trilean{\isachardot}simps{\isacharparenleft}{\isadigit{4}}{\isacharparenright}\ trilean{\isachardot}exhaust{\isacharparenright}\isanewline
+\isacommand{next}\isamarkupfalse%
+\isanewline
+\ \ \isacommand{case}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isadigit{3}}{\isacharunderscore}{\isadigit{2}}{\isachardoublequoteclose}\isanewline
+\ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}case\isanewline
+\ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}metis\ plus{\isacharunderscore}trilean{\isachardot}simps{\isacharparenleft}{\isadigit{3}}{\isacharparenright}\ plus{\isacharunderscore}trilean{\isachardot}simps{\isacharparenleft}{\isadigit{5}}{\isacharparenright}\ plus{\isacharunderscore}trilean{\isachardot}simps{\isacharparenleft}{\isadigit{6}}{\isacharparenright}\ plus{\isacharunderscore}trilean{\isachardot}simps{\isacharparenleft}{\isadigit{7}}{\isacharparenright}\ trilean{\isachardot}exhaust{\isacharparenright}\isanewline
+\isacommand{next}\isamarkupfalse%
+\isanewline
+\ \ \isacommand{case}\isamarkupfalse%
+\ {\isadigit{4}}\isanewline
+\ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}case\isanewline
+\ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}metis\ plus{\isacharunderscore}trilean{\isachardot}simps{\isacharparenleft}{\isadigit{2}}{\isacharparenright}\ plus{\isacharunderscore}trilean{\isachardot}simps{\isacharparenleft}{\isadigit{3}}{\isacharparenright}\ plus{\isacharunderscore}trilean{\isachardot}simps{\isacharparenleft}{\isadigit{4}}{\isacharparenright}\ plus{\isacharunderscore}trilean{\isachardot}simps{\isacharparenleft}{\isadigit{5}}{\isacharparenright}\ plus{\isacharunderscore}trilean{\isachardot}simps{\isacharparenleft}{\isadigit{6}}{\isacharparenright}\ trilean{\isachardot}exhaust{\isacharparenright}\isanewline
+\isacommand{next}\isamarkupfalse%
+\isanewline
+\ \ \isacommand{case}\isamarkupfalse%
+\ {\isadigit{5}}\isanewline
+\ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}case\isanewline
+\ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}metis\ plus{\isacharunderscore}trilean{\isachardot}simps{\isacharparenleft}{\isadigit{6}}{\isacharparenright}\ plus{\isacharunderscore}trilean{\isachardot}simps{\isacharparenleft}{\isadigit{7}}{\isacharparenright}\ trilean{\isachardot}exhaust{\isacharparenright}\isanewline
+\isacommand{qed}\isamarkupfalse%
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ plus{\isacharunderscore}trilean{\isacharunderscore}commutative{\isacharcolon}\ {\isachardoublequoteopen}a\ {\isasymor}\isactrlsub {\isacharquery}\ b\ {\isacharequal}\ b\ {\isasymor}\isactrlsub {\isacharquery}\ a{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\isatagproof
+\isacommand{proof}\isamarkupfalse%
+{\isacharparenleft}induct\ a\ b\ rule{\isacharcolon}\ plus{\isacharunderscore}trilean{\isachardot}induct{\isacharparenright}\isanewline
+\ \ \isacommand{case}\isamarkupfalse%
+\ {\isacharparenleft}{\isadigit{1}}\ uu{\isacharparenright}\isanewline
+\ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}case\isanewline
+\ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}metis\ plus{\isacharunderscore}trilean{\isachardot}simps{\isacharparenleft}{\isadigit{1}}{\isacharparenright}\ plus{\isacharunderscore}trilean{\isachardot}simps{\isacharparenleft}{\isadigit{2}}{\isacharparenright}\ plus{\isacharunderscore}trilean{\isachardot}simps{\isacharparenleft}{\isadigit{3}}{\isacharparenright}\ trilean{\isachardot}exhaust{\isacharparenright}\isanewline
+\isacommand{next}\isamarkupfalse%
+\isanewline
+\ \ \isacommand{case}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isadigit{2}}{\isacharunderscore}{\isadigit{1}}{\isachardoublequoteclose}\isanewline
+\ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}case\isanewline
+\ \ \ \ \isacommand{by}\isamarkupfalse%
+\ simp\isanewline
+\isacommand{next}\isamarkupfalse%
+\isanewline
+\ \ \isacommand{case}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isadigit{2}}{\isacharunderscore}{\isadigit{2}}{\isachardoublequoteclose}\isanewline
+\ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}case\isanewline
+\ \ \ \ \isacommand{by}\isamarkupfalse%
+\ simp\isanewline
+\isacommand{next}\isamarkupfalse%
+\isanewline
+\ \ \isacommand{case}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isadigit{3}}{\isacharunderscore}{\isadigit{1}}{\isachardoublequoteclose}\isanewline
+\ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}case\isanewline
+\ \ \ \ \isacommand{by}\isamarkupfalse%
+\ simp\isanewline
+\isacommand{next}\isamarkupfalse%
+\isanewline
+\ \ \isacommand{case}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isadigit{3}}{\isacharunderscore}{\isadigit{2}}{\isachardoublequoteclose}\isanewline
+\ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}case\isanewline
+\ \ \ \ \isacommand{by}\isamarkupfalse%
+\ simp\isanewline
+\isacommand{next}\isamarkupfalse%
+\isanewline
+\ \ \isacommand{case}\isamarkupfalse%
+\ {\isadigit{4}}\isanewline
+\ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}case\isanewline
+\ \ \ \ \isacommand{by}\isamarkupfalse%
+\ simp\isanewline
+\isacommand{next}\isamarkupfalse%
+\isanewline
+\ \ \isacommand{case}\isamarkupfalse%
+\ {\isadigit{5}}\isanewline
+\ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}case\isanewline
+\ \ \ \ \isacommand{by}\isamarkupfalse%
+\ simp\isanewline
+\isacommand{qed}\isamarkupfalse%
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ times{\isacharunderscore}trilean{\isacharunderscore}commutative{\isacharcolon}\ {\isachardoublequoteopen}a\ {\isasymand}\isactrlsub {\isacharquery}\ b\ {\isacharequal}\ b\ {\isasymand}\isactrlsub {\isacharquery}\ a{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}metis\ {\isacharparenleft}mono{\isacharunderscore}tags{\isacharparenright}\ times{\isacharunderscore}trilean{\isachardot}simps\ trilean{\isachardot}distinct{\isacharparenleft}{\isadigit{5}}{\isacharparenright}\ trilean{\isachardot}exhaust{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ times{\isacharunderscore}trilean{\isacharunderscore}assoc{\isacharcolon}\ {\isachardoublequoteopen}a\ {\isasymand}\isactrlsub {\isacharquery}\ b\ {\isasymand}\isactrlsub {\isacharquery}\ c\ {\isacharequal}\ a\ {\isasymand}\isactrlsub {\isacharquery}\ {\isacharparenleft}b\ {\isasymand}\isactrlsub {\isacharquery}\ c{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\isatagproof
+\isacommand{proof}\isamarkupfalse%
+{\isacharparenleft}induct\ a\ b\ \ arbitrary{\isacharcolon}\ c\ rule{\isacharcolon}\ plus{\isacharunderscore}trilean{\isachardot}induct{\isacharparenright}\isanewline
+\ \ \isacommand{case}\isamarkupfalse%
+\ {\isacharparenleft}{\isadigit{1}}\ uu{\isacharparenright}\isanewline
+\ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}case\isanewline
+\ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}metis\ {\isacharparenleft}mono{\isacharunderscore}tags{\isacharcomma}\ lifting{\isacharparenright}\ times{\isacharunderscore}trilean{\isachardot}simps{\isacharparenleft}{\isadigit{1}}{\isacharparenright}\ times{\isacharunderscore}trilean{\isacharunderscore}commutative{\isacharparenright}\isanewline
+\isacommand{next}\isamarkupfalse%
+\isanewline
+\isacommand{case}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isadigit{2}}{\isacharunderscore}{\isadigit{1}}{\isachardoublequoteclose}\isanewline
+\ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}case\isanewline
+\ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}metis\ {\isacharparenleft}mono{\isacharunderscore}tags{\isacharcomma}\ lifting{\isacharparenright}\ times{\isacharunderscore}trilean{\isachardot}simps{\isacharparenleft}{\isadigit{1}}{\isacharparenright}\ times{\isacharunderscore}trilean{\isacharunderscore}commutative{\isacharparenright}\isanewline
+\isacommand{next}\isamarkupfalse%
+\isanewline
+\ \ \isacommand{case}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isadigit{2}}{\isacharunderscore}{\isadigit{2}}{\isachardoublequoteclose}\isanewline
+\ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}case\isanewline
+\ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}metis\ {\isacharparenleft}mono{\isacharunderscore}tags{\isacharcomma}\ lifting{\isacharparenright}\ times{\isacharunderscore}trilean{\isachardot}simps{\isacharparenleft}{\isadigit{1}}{\isacharparenright}\ times{\isacharunderscore}trilean{\isacharunderscore}commutative{\isacharparenright}\isanewline
+\isacommand{next}\isamarkupfalse%
+\isanewline
+\ \ \isacommand{case}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isadigit{3}}{\isacharunderscore}{\isadigit{1}}{\isachardoublequoteclose}\isanewline
+\ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}case\isanewline
+\ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}metis\ times{\isacharunderscore}trilean{\isachardot}simps{\isacharparenleft}{\isadigit{1}}{\isacharparenright}\ times{\isacharunderscore}trilean{\isachardot}simps{\isacharparenleft}{\isadigit{4}}{\isacharparenright}\ times{\isacharunderscore}trilean{\isachardot}simps{\isacharparenleft}{\isadigit{5}}{\isacharparenright}\ trilean{\isachardot}exhaust{\isacharparenright}\isanewline
+\isacommand{next}\isamarkupfalse%
+\isanewline
+\ \ \isacommand{case}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isadigit{3}}{\isacharunderscore}{\isadigit{2}}{\isachardoublequoteclose}\isanewline
+\ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}case\isanewline
+\ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}metis\ times{\isacharunderscore}trilean{\isachardot}simps{\isacharparenleft}{\isadigit{1}}{\isacharparenright}\ times{\isacharunderscore}trilean{\isachardot}simps{\isacharparenleft}{\isadigit{5}}{\isacharparenright}\ times{\isacharunderscore}trilean{\isachardot}simps{\isacharparenleft}{\isadigit{6}}{\isacharparenright}\ times{\isacharunderscore}trilean{\isachardot}simps{\isacharparenleft}{\isadigit{7}}{\isacharparenright}\ trilean{\isachardot}exhaust{\isacharparenright}\isanewline
+\isacommand{next}\isamarkupfalse%
+\isanewline
+\ \ \isacommand{case}\isamarkupfalse%
+\ {\isadigit{4}}\isanewline
+\ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}case\isanewline
+\ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}metis\ times{\isacharunderscore}trilean{\isachardot}simps{\isacharparenleft}{\isadigit{1}}{\isacharparenright}\ times{\isacharunderscore}trilean{\isachardot}simps{\isacharparenleft}{\isadigit{4}}{\isacharparenright}\ times{\isacharunderscore}trilean{\isachardot}simps{\isacharparenleft}{\isadigit{5}}{\isacharparenright}\ times{\isacharunderscore}trilean{\isachardot}simps{\isacharparenleft}{\isadigit{7}}{\isacharparenright}\ trilean{\isachardot}exhaust{\isacharparenright}\isanewline
+\isacommand{next}\isamarkupfalse%
+\isanewline
+\isacommand{case}\isamarkupfalse%
+\ {\isadigit{5}}\isanewline
+\ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}case\isanewline
+\ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}metis\ {\isacharparenleft}full{\isacharunderscore}types{\isacharparenright}\ times{\isacharunderscore}trilean{\isachardot}simps{\isacharparenleft}{\isadigit{1}}{\isacharparenright}\ times{\isacharunderscore}trilean{\isachardot}simps{\isacharparenleft}{\isadigit{6}}{\isacharparenright}\ times{\isacharunderscore}trilean{\isachardot}simps{\isacharparenleft}{\isadigit{7}}{\isacharparenright}\ trilean{\isachardot}exhaust{\isacharparenright}\isanewline
+\isacommand{qed}\isamarkupfalse%
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ trilean{\isacharunderscore}distributivity{\isacharunderscore}{\isadigit{1}}{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}a\ {\isasymor}\isactrlsub {\isacharquery}\ b{\isacharparenright}\ {\isasymand}\isactrlsub {\isacharquery}\ c\ {\isacharequal}\ a\ {\isasymand}\isactrlsub {\isacharquery}\ c\ {\isasymor}\isactrlsub {\isacharquery}\ b\ {\isasymand}\isactrlsub {\isacharquery}\ c{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\isatagproof
+\isacommand{proof}\isamarkupfalse%
+{\isacharparenleft}induct\ a\ b\ rule{\isacharcolon}\ times{\isacharunderscore}trilean{\isachardot}induct{\isacharparenright}\isanewline
+\isacommand{case}\isamarkupfalse%
+\ {\isacharparenleft}{\isadigit{1}}\ uu{\isacharparenright}\isanewline
+\ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}case\isanewline
+\ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}metis\ {\isacharparenleft}mono{\isacharunderscore}tags{\isacharcomma}\ lifting{\isacharparenright}\ plus{\isacharunderscore}trilean{\isachardot}simps{\isacharparenleft}{\isadigit{1}}{\isacharparenright}\ plus{\isacharunderscore}trilean{\isacharunderscore}commutative\ times{\isacharunderscore}trilean{\isachardot}simps{\isacharparenleft}{\isadigit{1}}{\isacharparenright}\ times{\isacharunderscore}trilean{\isacharunderscore}commutative{\isacharparenright}\isanewline
+\isacommand{next}\isamarkupfalse%
+\isanewline
+\ \ \isacommand{case}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isadigit{2}}{\isacharunderscore}{\isadigit{1}}{\isachardoublequoteclose}\isanewline
+\ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}case\isanewline
+\ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}metis\ {\isacharparenleft}mono{\isacharunderscore}tags{\isacharcomma}\ lifting{\isacharparenright}\ plus{\isacharunderscore}trilean{\isachardot}simps{\isacharparenleft}{\isadigit{1}}{\isacharparenright}\ times{\isacharunderscore}trilean{\isachardot}simps{\isacharparenleft}{\isadigit{1}}{\isacharparenright}\ times{\isacharunderscore}trilean{\isacharunderscore}commutative{\isacharparenright}\isanewline
+\isacommand{next}\isamarkupfalse%
+\isanewline
+\ \ \isacommand{case}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isadigit{2}}{\isacharunderscore}{\isadigit{2}}{\isachardoublequoteclose}\isanewline
+\ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}case\isanewline
+\ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}metis\ {\isacharparenleft}mono{\isacharunderscore}tags{\isacharcomma}\ lifting{\isacharparenright}\ plus{\isacharunderscore}trilean{\isachardot}simps{\isacharparenleft}{\isadigit{1}}{\isacharparenright}\ times{\isacharunderscore}trilean{\isachardot}simps{\isacharparenleft}{\isadigit{1}}{\isacharparenright}\ times{\isacharunderscore}trilean{\isacharunderscore}commutative{\isacharparenright}\isanewline
+\isacommand{next}\isamarkupfalse%
+\isanewline
+\ \ \isacommand{case}\isamarkupfalse%
+\ {\isadigit{3}}\isanewline
+\ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}case\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ simp\isanewline
+\ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}metis\ {\isacharparenleft}no{\isacharunderscore}types{\isacharcomma}\ hide{\isacharunderscore}lams{\isacharparenright}\ plus{\isacharunderscore}trilean{\isachardot}simps{\isacharparenleft}{\isadigit{1}}{\isacharparenright}\ plus{\isacharunderscore}trilean{\isachardot}simps{\isacharparenleft}{\isadigit{4}}{\isacharparenright}\ plus{\isacharunderscore}trilean{\isachardot}simps{\isacharparenleft}{\isadigit{7}}{\isacharparenright}\ times{\isacharunderscore}trilean{\isachardot}simps{\isacharparenleft}{\isadigit{1}}{\isacharparenright}\ times{\isacharunderscore}trilean{\isachardot}simps{\isacharparenleft}{\isadigit{4}}{\isacharparenright}\ times{\isacharunderscore}trilean{\isachardot}simps{\isacharparenleft}{\isadigit{5}}{\isacharparenright}\ trilean{\isachardot}exhaust{\isacharparenright}\isanewline
+\isacommand{next}\isamarkupfalse%
+\isanewline
+\ \ \isacommand{case}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isadigit{4}}{\isacharunderscore}{\isadigit{1}}{\isachardoublequoteclose}\isanewline
+\ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}case\ \isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ simp\isanewline
+\ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}metis\ {\isacharparenleft}no{\isacharunderscore}types{\isacharcomma}\ hide{\isacharunderscore}lams{\isacharparenright}\ plus{\isacharunderscore}trilean{\isachardot}simps{\isacharparenleft}{\isadigit{1}}{\isacharparenright}\ plus{\isacharunderscore}trilean{\isachardot}simps{\isacharparenleft}{\isadigit{5}}{\isacharparenright}\ plus{\isacharunderscore}trilean{\isachardot}simps{\isacharparenleft}{\isadigit{7}}{\isacharparenright}\ times{\isacharunderscore}trilean{\isachardot}simps{\isacharparenleft}{\isadigit{1}}{\isacharparenright}\ times{\isacharunderscore}trilean{\isachardot}simps{\isacharparenleft}{\isadigit{4}}{\isacharparenright}\ times{\isacharunderscore}trilean{\isachardot}simps{\isacharparenleft}{\isadigit{5}}{\isacharparenright}\ times{\isacharunderscore}trilean{\isachardot}simps{\isacharparenleft}{\isadigit{6}}{\isacharparenright}\ times{\isacharunderscore}trilean{\isachardot}simps{\isacharparenleft}{\isadigit{7}}{\isacharparenright}\ trilean{\isachardot}exhaust{\isacharparenright}\isanewline
+\isacommand{next}\isamarkupfalse%
+\isanewline
+\ \ \isacommand{case}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isadigit{4}}{\isacharunderscore}{\isadigit{2}}{\isachardoublequoteclose}\isanewline
+\ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}case\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ simp\isanewline
+\ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}metis\ {\isacharparenleft}no{\isacharunderscore}types{\isacharcomma}\ hide{\isacharunderscore}lams{\isacharparenright}\ plus{\isacharunderscore}trilean{\isachardot}simps{\isacharparenleft}{\isadigit{1}}{\isacharparenright}\ plus{\isacharunderscore}trilean{\isachardot}simps{\isacharparenleft}{\isadigit{7}}{\isacharparenright}\ times{\isacharunderscore}trilean{\isachardot}simps{\isacharparenleft}{\isadigit{1}}{\isacharparenright}\ times{\isacharunderscore}trilean{\isachardot}simps{\isacharparenleft}{\isadigit{6}}{\isacharparenright}\ times{\isacharunderscore}trilean{\isachardot}simps{\isacharparenleft}{\isadigit{7}}{\isacharparenright}\ trilean{\isachardot}exhaust{\isacharparenright}\isanewline
+\isacommand{next}\isamarkupfalse%
+\isanewline
+\ \ \isacommand{case}\isamarkupfalse%
+\ {\isadigit{5}}\isanewline
+\ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}case\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ simp\isanewline
+\ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}metis\ {\isacharparenleft}no{\isacharunderscore}types{\isacharcomma}\ hide{\isacharunderscore}lams{\isacharparenright}\ plus{\isacharunderscore}trilean{\isachardot}simps{\isacharparenleft}{\isadigit{1}}{\isacharparenright}\ plus{\isacharunderscore}trilean{\isachardot}simps{\isacharparenleft}{\isadigit{6}}{\isacharparenright}\ plus{\isacharunderscore}trilean{\isachardot}simps{\isacharparenleft}{\isadigit{7}}{\isacharparenright}\ times{\isacharunderscore}trilean{\isachardot}simps{\isacharparenleft}{\isadigit{1}}{\isacharparenright}\ times{\isacharunderscore}trilean{\isachardot}simps{\isacharparenleft}{\isadigit{4}}{\isacharparenright}\ times{\isacharunderscore}trilean{\isachardot}simps{\isacharparenleft}{\isadigit{5}}{\isacharparenright}\ times{\isacharunderscore}trilean{\isachardot}simps{\isacharparenleft}{\isadigit{6}}{\isacharparenright}\ times{\isacharunderscore}trilean{\isachardot}simps{\isacharparenleft}{\isadigit{7}}{\isacharparenright}\ trilean{\isachardot}exhaust{\isacharparenright}\isanewline
+\isacommand{qed}\isamarkupfalse%
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{instance}\isamarkupfalse%
+\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{apply}\isamarkupfalse%
+\ standard\isanewline
+\ \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ plus{\isacharunderscore}trilean{\isacharunderscore}assoc{\isacharparenright}\isanewline
+\ \ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ plus{\isacharunderscore}trilean{\isacharunderscore}commutative{\isacharparenright}\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ times{\isacharunderscore}trilean{\isacharunderscore}assoc{\isacharparenright}\isanewline
+\ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ trilean{\isacharunderscore}distributivity{\isacharunderscore}{\isadigit{1}}{\isacharparenright}\isanewline
+\ \ \isacommand{using}\isamarkupfalse%
+\ times{\isacharunderscore}trilean{\isacharunderscore}commutative\ trilean{\isacharunderscore}distributivity{\isacharunderscore}{\isadigit{1}}\ \isacommand{by}\isamarkupfalse%
+\ auto%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isacommand{end}\isamarkupfalse%
+\isanewline
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ maybe{\isacharunderscore}or{\isacharunderscore}idempotent{\isacharcolon}\ {\isachardoublequoteopen}a\ {\isasymor}\isactrlsub {\isacharquery}\ a\ {\isacharequal}\ a{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}cases\ a{\isacharparenright}\isanewline
+\ \ \isacommand{by}\isamarkupfalse%
+\ auto%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ maybe{\isacharunderscore}and{\isacharunderscore}idempotent{\isacharcolon}\ {\isachardoublequoteopen}a\ {\isasymand}\isactrlsub {\isacharquery}\ a\ {\isacharequal}\ a{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}cases\ a{\isacharparenright}\isanewline
+\ \ \isacommand{by}\isamarkupfalse%
+\ auto%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{instantiation}\isamarkupfalse%
+\ trilean\ {\isacharcolon}{\isacharcolon}\ ord\ \isakeyword{begin}\isanewline
+\isacommand{definition}\isamarkupfalse%
+\ less{\isacharunderscore}eq{\isacharunderscore}trilean\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}trilean\ {\isasymRightarrow}\ trilean\ {\isasymRightarrow}\ bool{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+\ \ {\isachardoublequoteopen}less{\isacharunderscore}eq{\isacharunderscore}trilean\ a\ b\ {\isacharequal}\ {\isacharparenleft}a\ {\isacharplus}\ b\ {\isacharequal}\ b{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{definition}\isamarkupfalse%
+\ less{\isacharunderscore}trilean\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}trilean\ {\isasymRightarrow}\ trilean\ {\isasymRightarrow}\ bool{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+\ \ {\isachardoublequoteopen}less{\isacharunderscore}trilean\ a\ b\ {\isacharequal}\ {\isacharparenleft}a\ {\isasymle}\ b\ {\isasymand}\ a\ {\isasymnoteq}\ b{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{declare}\isamarkupfalse%
+\ less{\isacharunderscore}trilean{\isacharunderscore}def\ less{\isacharunderscore}eq{\isacharunderscore}trilean{\isacharunderscore}def\ {\isacharbrackleft}simp{\isacharbrackright}\isanewline
+\isanewline
+\isacommand{instance}\isamarkupfalse%
+\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ standard%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isacommand{end}\isamarkupfalse%
+\isanewline
+\isanewline
+\isacommand{instantiation}\isamarkupfalse%
+\ trilean\ {\isacharcolon}{\isacharcolon}\ uminus\ \isakeyword{begin}\isanewline
+\ \ \isacommand{fun}\isamarkupfalse%
+\ maybe{\isacharunderscore}not\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}trilean\ {\isasymRightarrow}\ trilean{\isachardoublequoteclose}\ {\isacharparenleft}{\isachardoublequoteopen}{\isasymnot}\isactrlsub {\isacharquery}\ {\isacharunderscore}{\isachardoublequoteclose}\ {\isacharbrackleft}{\isadigit{6}}{\isadigit{0}}{\isacharbrackright}\ {\isadigit{6}}{\isadigit{0}}{\isacharparenright}\ \isakeyword{where}\isanewline
+\ \ \ \ {\isachardoublequoteopen}{\isasymnot}\isactrlsub {\isacharquery}\ true\ {\isacharequal}\ false{\isachardoublequoteclose}\ {\isacharbar}\isanewline
+\ \ \ \ {\isachardoublequoteopen}{\isasymnot}\isactrlsub {\isacharquery}\ false\ {\isacharequal}\ true{\isachardoublequoteclose}\ {\isacharbar}\isanewline
+\ \ \ \ {\isachardoublequoteopen}{\isasymnot}\isactrlsub {\isacharquery}\ invalid\ {\isacharequal}\ invalid{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{instance}\isamarkupfalse%
+\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ standard%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isacommand{end}\isamarkupfalse%
+\isanewline
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ maybe{\isacharunderscore}and{\isacharunderscore}one{\isacharcolon}\ {\isachardoublequoteopen}true\ {\isasymand}\isactrlsub {\isacharquery}\ x\ {\isacharequal}\ x{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}cases\ x{\isacharparenright}\isanewline
+\ \ \isacommand{by}\isamarkupfalse%
+\ auto%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ maybe{\isacharunderscore}or{\isacharunderscore}zero{\isacharcolon}\ {\isachardoublequoteopen}false\ {\isasymor}\isactrlsub {\isacharquery}\ x\ {\isacharequal}\ x{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}cases\ x{\isacharparenright}\isanewline
+\ \ \isacommand{by}\isamarkupfalse%
+\ auto%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ maybe{\isacharunderscore}double{\isacharunderscore}negation{\isacharcolon}\ {\isachardoublequoteopen}{\isasymnot}\isactrlsub {\isacharquery}\ {\isasymnot}\isactrlsub {\isacharquery}\ x\ {\isacharequal}\ x{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}cases\ x{\isacharparenright}\isanewline
+\ \ \isacommand{by}\isamarkupfalse%
+\ auto%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ maybe{\isacharunderscore}negate{\isacharunderscore}true{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}{\isasymnot}\isactrlsub {\isacharquery}\ x\ {\isacharequal}\ true{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}x\ {\isacharequal}\ false{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}cases\ x{\isacharparenright}\isanewline
+\ \ \isacommand{by}\isamarkupfalse%
+\ auto%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ maybe{\isacharunderscore}negate{\isacharunderscore}false{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}{\isasymnot}\isactrlsub {\isacharquery}\ x\ {\isacharequal}\ false{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}x\ {\isacharequal}\ true{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}cases\ x{\isacharparenright}\isanewline
+\ \ \isacommand{by}\isamarkupfalse%
+\ auto%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ maybe{\isacharunderscore}and{\isacharunderscore}true{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}x\ {\isasymand}\isactrlsub {\isacharquery}\ y\ {\isacharequal}\ true{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}x\ {\isacharequal}\ true\ {\isasymand}\ y\ {\isacharequal}\ true{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{using}\isamarkupfalse%
+\ times{\isacharunderscore}trilean{\isachardot}elims\ \isacommand{by}\isamarkupfalse%
+\ blast%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ maybe{\isacharunderscore}and{\isacharunderscore}not{\isacharunderscore}true{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}x\ {\isasymand}\isactrlsub {\isacharquery}\ y\ {\isasymnoteq}\ true{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}x\ {\isasymnoteq}\ true\ {\isasymor}\ y\ {\isasymnoteq}\ true{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ maybe{\isacharunderscore}and{\isacharunderscore}true{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ maybe{\isacharunderscore}and{\isacharunderscore}valid{\isacharcolon}\ {\isachardoublequoteopen}x\ {\isasymand}\isactrlsub {\isacharquery}\ y\ {\isasymnoteq}\ invalid\ {\isasymLongrightarrow}\ x\ {\isasymnoteq}\ invalid\ {\isasymand}\ y\ {\isasymnoteq}\ invalid{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{using}\isamarkupfalse%
+\ times{\isacharunderscore}trilean{\isachardot}elims\ \isacommand{by}\isamarkupfalse%
+\ blast%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ maybe{\isacharunderscore}or{\isacharunderscore}valid{\isacharcolon}\ {\isachardoublequoteopen}x\ {\isasymor}\isactrlsub {\isacharquery}\ y\ {\isasymnoteq}\ invalid\ {\isasymLongrightarrow}\ x\ {\isasymnoteq}\ invalid\ {\isasymand}\ y\ {\isasymnoteq}\ invalid{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{using}\isamarkupfalse%
+\ plus{\isacharunderscore}trilean{\isachardot}elims\ \isacommand{by}\isamarkupfalse%
+\ blast%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ maybe{\isacharunderscore}or{\isacharunderscore}false{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}x\ {\isasymor}\isactrlsub {\isacharquery}\ y\ {\isacharequal}\ false{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}x\ {\isacharequal}\ false\ {\isasymand}\ y\ {\isacharequal}\ false{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{using}\isamarkupfalse%
+\ plus{\isacharunderscore}trilean{\isachardot}elims\ \isacommand{by}\isamarkupfalse%
+\ blast%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ maybe{\isacharunderscore}not{\isacharunderscore}invalid{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}{\isasymnot}\isactrlsub {\isacharquery}\ x\ {\isacharequal}\ invalid{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}x\ {\isacharequal}\ invalid{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}metis\ maybe{\isacharunderscore}double{\isacharunderscore}negation\ maybe{\isacharunderscore}not{\isachardot}simps{\isacharparenleft}{\isadigit{3}}{\isacharparenright}{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ maybe{\isacharunderscore}or{\isacharunderscore}invalid{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}x\ {\isasymor}\isactrlsub {\isacharquery}\ y\ {\isacharequal}\ invalid{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}x\ {\isacharequal}\ invalid\ {\isasymor}\ y\ {\isacharequal}\ invalid{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{using}\isamarkupfalse%
+\ plus{\isacharunderscore}trilean{\isachardot}elims\ \isacommand{by}\isamarkupfalse%
+\ blast%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ maybe{\isacharunderscore}and{\isacharunderscore}invalid{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}x\ {\isasymand}\isactrlsub {\isacharquery}\ y\ {\isacharequal}\ invalid{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}x\ {\isacharequal}\ invalid\ {\isasymor}\ y\ {\isacharequal}\ invalid{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{using}\isamarkupfalse%
+\ times{\isacharunderscore}trilean{\isachardot}elims\ \isacommand{by}\isamarkupfalse%
+\ blast%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ invalid{\isacharunderscore}maybe{\isacharunderscore}and{\isacharcolon}\ {\isachardoublequoteopen}invalid\ {\isasymand}\isactrlsub {\isacharquery}\ x\ {\isacharequal}\ invalid{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{using}\isamarkupfalse%
+\ maybe{\isacharunderscore}and{\isacharunderscore}valid\ \isacommand{by}\isamarkupfalse%
+\ blast%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ maybe{\isacharunderscore}not{\isacharunderscore}eq{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}{\isasymnot}\isactrlsub {\isacharquery}\ x\ {\isacharequal}\ {\isasymnot}\isactrlsub {\isacharquery}\ y{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}x\ {\isacharequal}\ y{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}metis\ maybe{\isacharunderscore}double{\isacharunderscore}negation{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\isatagtheory
+\isacommand{end}\isamarkupfalse%
+%
+\endisatagtheory
+{\isafoldtheory}%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\end{isabellebody}%
+\endinput
+%:%file=~/Documents/efsm-sal/theories/Trilean.thy%:%
+%:%10=1%:%
+%:%11=1%:%
+%:%12=2%:%
+%:%13=3%:%
+%:%18=3%:%
+%:%21=4%:%
+%:%22=5%:%
+%:%23=5%:%
+%:%24=6%:%
+%:%25=7%:%
+%:%26=7%:%
+%:%27=8%:%
+%:%28=8%:%
+%:%29=9%:%
+%:%30=10%:%
+%:%31=11%:%
+%:%32=12%:%
+%:%33=13%:%
+%:%34=14%:%
+%:%35=15%:%
+%:%36=15%:%
+%:%37=16%:%
+%:%38=17%:%
+%:%39=18%:%
+%:%40=19%:%
+%:%41=20%:%
+%:%42=21%:%
+%:%43=22%:%
+%:%44=22%:%
+%:%45=23%:%
+%:%46=24%:%
+%:%47=25%:%
+%:%48=25%:%
+%:%49=26%:%
+%:%50=27%:%
+%:%51=28%:%
+%:%52=28%:%
+%:%59=29%:%
+%:%60=29%:%
+%:%61=30%:%
+%:%62=30%:%
+%:%63=31%:%
+%:%64=31%:%
+%:%65=31%:%
+%:%66=32%:%
+%:%67=32%:%
+%:%68=33%:%
+%:%69=33%:%
+%:%70=34%:%
+%:%71=34%:%
+%:%72=35%:%
+%:%73=35%:%
+%:%74=35%:%
+%:%75=36%:%
+%:%76=36%:%
+%:%77=37%:%
+%:%78=37%:%
+%:%79=38%:%
+%:%80=38%:%
+%:%81=39%:%
+%:%82=39%:%
+%:%83=39%:%
+%:%84=40%:%
+%:%85=40%:%
+%:%86=41%:%
+%:%87=41%:%
+%:%88=42%:%
+%:%89=42%:%
+%:%90=43%:%
+%:%91=43%:%
+%:%92=43%:%
+%:%93=44%:%
+%:%94=44%:%
+%:%95=45%:%
+%:%96=45%:%
+%:%97=46%:%
+%:%98=46%:%
+%:%99=47%:%
+%:%100=47%:%
+%:%101=47%:%
+%:%102=48%:%
+%:%103=48%:%
+%:%104=49%:%
+%:%105=49%:%
+%:%106=50%:%
+%:%107=50%:%
+%:%108=51%:%
+%:%109=51%:%
+%:%110=51%:%
+%:%111=52%:%
+%:%112=52%:%
+%:%113=53%:%
+%:%114=53%:%
+%:%115=54%:%
+%:%116=54%:%
+%:%117=55%:%
+%:%118=55%:%
+%:%119=55%:%
+%:%120=56%:%
+%:%121=56%:%
+%:%122=57%:%
+%:%128=57%:%
+%:%131=58%:%
+%:%132=59%:%
+%:%133=59%:%
+%:%140=60%:%
+%:%141=60%:%
+%:%142=61%:%
+%:%143=61%:%
+%:%144=62%:%
+%:%145=62%:%
+%:%146=62%:%
+%:%147=63%:%
+%:%148=63%:%
+%:%149=64%:%
+%:%150=64%:%
+%:%151=65%:%
+%:%152=65%:%
+%:%153=66%:%
+%:%154=66%:%
+%:%155=66%:%
+%:%156=67%:%
+%:%157=67%:%
+%:%158=68%:%
+%:%159=68%:%
+%:%160=69%:%
+%:%161=69%:%
+%:%162=70%:%
+%:%163=70%:%
+%:%164=70%:%
+%:%165=71%:%
+%:%166=71%:%
+%:%167=72%:%
+%:%168=72%:%
+%:%169=73%:%
+%:%170=73%:%
+%:%171=74%:%
+%:%172=74%:%
+%:%173=74%:%
+%:%174=75%:%
+%:%175=75%:%
+%:%176=76%:%
+%:%177=76%:%
+%:%178=77%:%
+%:%179=77%:%
+%:%180=78%:%
+%:%181=78%:%
+%:%182=78%:%
+%:%183=79%:%
+%:%184=79%:%
+%:%185=80%:%
+%:%186=80%:%
+%:%187=81%:%
+%:%188=81%:%
+%:%189=82%:%
+%:%190=82%:%
+%:%191=82%:%
+%:%192=83%:%
+%:%193=83%:%
+%:%194=84%:%
+%:%195=84%:%
+%:%196=85%:%
+%:%197=85%:%
+%:%198=86%:%
+%:%199=86%:%
+%:%200=86%:%
+%:%201=87%:%
+%:%202=87%:%
+%:%203=88%:%
+%:%209=88%:%
+%:%212=89%:%
+%:%213=90%:%
+%:%214=90%:%
+%:%217=91%:%
+%:%221=91%:%
+%:%222=91%:%
+%:%227=91%:%
+%:%230=92%:%
+%:%231=93%:%
+%:%232=93%:%
+%:%239=94%:%
+%:%240=94%:%
+%:%241=95%:%
+%:%242=95%:%
+%:%243=96%:%
+%:%244=96%:%
+%:%245=96%:%
+%:%246=97%:%
+%:%247=97%:%
+%:%248=98%:%
+%:%249=98%:%
+%:%250=99%:%
+%:%251=99%:%
+%:%252=100%:%
+%:%253=100%:%
+%:%254=100%:%
+%:%255=101%:%
+%:%256=101%:%
+%:%257=102%:%
+%:%258=102%:%
+%:%259=103%:%
+%:%260=103%:%
+%:%261=104%:%
+%:%262=104%:%
+%:%263=104%:%
+%:%264=105%:%
+%:%265=105%:%
+%:%266=106%:%
+%:%267=106%:%
+%:%268=107%:%
+%:%269=107%:%
+%:%270=108%:%
+%:%271=108%:%
+%:%272=108%:%
+%:%273=109%:%
+%:%274=109%:%
+%:%275=110%:%
+%:%276=110%:%
+%:%277=111%:%
+%:%278=111%:%
+%:%279=112%:%
+%:%280=112%:%
+%:%281=112%:%
+%:%282=113%:%
+%:%283=113%:%
+%:%284=114%:%
+%:%285=114%:%
+%:%286=115%:%
+%:%287=115%:%
+%:%288=116%:%
+%:%289=116%:%
+%:%290=116%:%
+%:%291=117%:%
+%:%292=117%:%
+%:%293=118%:%
+%:%294=118%:%
+%:%295=119%:%
+%:%296=119%:%
+%:%297=120%:%
+%:%298=120%:%
+%:%299=120%:%
+%:%300=121%:%
+%:%301=121%:%
+%:%302=122%:%
+%:%308=122%:%
+%:%311=123%:%
+%:%312=124%:%
+%:%313=124%:%
+%:%320=125%:%
+%:%321=125%:%
+%:%322=126%:%
+%:%323=126%:%
+%:%324=127%:%
+%:%325=127%:%
+%:%326=127%:%
+%:%327=128%:%
+%:%328=128%:%
+%:%329=129%:%
+%:%330=129%:%
+%:%331=130%:%
+%:%332=130%:%
+%:%333=131%:%
+%:%334=131%:%
+%:%335=131%:%
+%:%336=132%:%
+%:%337=132%:%
+%:%338=133%:%
+%:%339=133%:%
+%:%340=134%:%
+%:%341=134%:%
+%:%342=135%:%
+%:%343=135%:%
+%:%344=135%:%
+%:%345=136%:%
+%:%346=136%:%
+%:%347=137%:%
+%:%348=137%:%
+%:%349=138%:%
+%:%350=138%:%
+%:%351=139%:%
+%:%352=139%:%
+%:%353=139%:%
+%:%354=140%:%
+%:%355=140%:%
+%:%356=141%:%
+%:%357=141%:%
+%:%358=142%:%
+%:%359=142%:%
+%:%360=143%:%
+%:%361=143%:%
+%:%362=144%:%
+%:%363=144%:%
+%:%364=144%:%
+%:%365=145%:%
+%:%366=145%:%
+%:%367=146%:%
+%:%368=146%:%
+%:%369=147%:%
+%:%370=147%:%
+%:%371=148%:%
+%:%372=148%:%
+%:%373=149%:%
+%:%374=149%:%
+%:%375=149%:%
+%:%376=150%:%
+%:%377=150%:%
+%:%378=151%:%
+%:%379=151%:%
+%:%380=152%:%
+%:%381=152%:%
+%:%382=153%:%
+%:%383=153%:%
+%:%384=154%:%
+%:%385=154%:%
+%:%386=154%:%
+%:%387=155%:%
+%:%388=155%:%
+%:%389=156%:%
+%:%390=156%:%
+%:%391=157%:%
+%:%397=157%:%
+%:%400=158%:%
+%:%401=159%:%
+%:%402=159%:%
+%:%405=160%:%
+%:%409=160%:%
+%:%410=160%:%
+%:%411=161%:%
+%:%412=161%:%
+%:%413=162%:%
+%:%414=162%:%
+%:%415=163%:%
+%:%416=163%:%
+%:%417=164%:%
+%:%418=164%:%
+%:%419=165%:%
+%:%420=165%:%
+%:%421=165%:%
+%:%426=165%:%
+%:%429=166%:%
+%:%430=166%:%
+%:%431=167%:%
+%:%432=168%:%
+%:%433=168%:%
+%:%436=169%:%
+%:%440=169%:%
+%:%441=169%:%
+%:%442=170%:%
+%:%443=170%:%
+%:%448=170%:%
+%:%451=171%:%
+%:%452=172%:%
+%:%453=172%:%
+%:%456=173%:%
+%:%460=173%:%
+%:%461=173%:%
+%:%462=174%:%
+%:%463=174%:%
+%:%468=174%:%
+%:%471=175%:%
+%:%472=176%:%
+%:%473=176%:%
+%:%474=177%:%
+%:%475=177%:%
+%:%476=178%:%
+%:%477=179%:%
+%:%478=180%:%
+%:%479=180%:%
+%:%480=181%:%
+%:%481=182%:%
+%:%482=183%:%
+%:%483=183%:%
+%:%484=184%:%
+%:%485=185%:%
+%:%486=185%:%
+%:%489=186%:%
+%:%493=186%:%
+%:%494=186%:%
+%:%499=186%:%
+%:%502=187%:%
+%:%503=187%:%
+%:%504=188%:%
+%:%505=189%:%
+%:%506=189%:%
+%:%507=190%:%
+%:%508=190%:%
+%:%509=191%:%
+%:%510=192%:%
+%:%511=193%:%
+%:%512=194%:%
+%:%513=195%:%
+%:%514=195%:%
+%:%517=196%:%
+%:%521=196%:%
+%:%522=196%:%
+%:%527=196%:%
+%:%530=197%:%
+%:%531=197%:%
+%:%532=198%:%
+%:%533=199%:%
+%:%534=199%:%
+%:%537=200%:%
+%:%541=200%:%
+%:%542=200%:%
+%:%543=201%:%
+%:%544=201%:%
+%:%549=201%:%
+%:%552=202%:%
+%:%553=203%:%
+%:%554=203%:%
+%:%557=204%:%
+%:%561=204%:%
+%:%562=204%:%
+%:%563=205%:%
+%:%564=205%:%
+%:%569=205%:%
+%:%572=206%:%
+%:%573=207%:%
+%:%574=207%:%
+%:%577=208%:%
+%:%581=208%:%
+%:%582=208%:%
+%:%583=209%:%
+%:%584=209%:%
+%:%589=209%:%
+%:%592=210%:%
+%:%593=211%:%
+%:%594=211%:%
+%:%597=212%:%
+%:%601=212%:%
+%:%602=212%:%
+%:%603=213%:%
+%:%604=213%:%
+%:%609=213%:%
+%:%612=214%:%
+%:%613=215%:%
+%:%614=215%:%
+%:%617=216%:%
+%:%621=216%:%
+%:%622=216%:%
+%:%623=217%:%
+%:%624=217%:%
+%:%629=217%:%
+%:%632=218%:%
+%:%633=219%:%
+%:%634=219%:%
+%:%637=220%:%
+%:%641=220%:%
+%:%642=220%:%
+%:%643=220%:%
+%:%648=220%:%
+%:%651=221%:%
+%:%652=222%:%
+%:%653=222%:%
+%:%656=223%:%
+%:%660=223%:%
+%:%661=223%:%
+%:%666=223%:%
+%:%669=224%:%
+%:%670=225%:%
+%:%671=225%:%
+%:%674=226%:%
+%:%678=226%:%
+%:%679=226%:%
+%:%680=226%:%
+%:%685=226%:%
+%:%688=227%:%
+%:%689=228%:%
+%:%690=228%:%
+%:%693=229%:%
+%:%697=229%:%
+%:%698=229%:%
+%:%699=229%:%
+%:%704=229%:%
+%:%707=230%:%
+%:%708=231%:%
+%:%709=231%:%
+%:%712=232%:%
+%:%716=232%:%
+%:%717=232%:%
+%:%718=232%:%
+%:%723=232%:%
+%:%726=233%:%
+%:%727=234%:%
+%:%728=234%:%
+%:%731=235%:%
+%:%735=235%:%
+%:%736=235%:%
+%:%741=235%:%
+%:%744=236%:%
+%:%745=237%:%
+%:%746=237%:%
+%:%749=238%:%
+%:%753=238%:%
+%:%754=238%:%
+%:%755=238%:%
+%:%760=238%:%
+%:%763=239%:%
+%:%764=240%:%
+%:%765=240%:%
+%:%768=241%:%
+%:%772=241%:%
+%:%773=241%:%
+%:%774=241%:%
+%:%779=241%:%
+%:%782=242%:%
+%:%783=243%:%
+%:%784=243%:%
+%:%787=244%:%
+%:%791=244%:%
+%:%792=244%:%
+%:%793=244%:%
+%:%798=244%:%
+%:%801=245%:%
+%:%802=246%:%
+%:%803=246%:%
+%:%806=247%:%
+%:%810=247%:%
+%:%811=247%:%
+%:%816=247%:%
+%:%825=248%:%
