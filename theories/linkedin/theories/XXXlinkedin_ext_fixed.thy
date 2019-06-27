@@ -373,15 +373,16 @@ proof(coinduction)
 qed
 
 (* SAL thinks this is true so we should be able to prove it *)
-text_raw{*\snip{neverDetailed}{1}{2}{%*}
+text_raw{*\snip{neverDetailedProof}{1}{2}{%*}
 lemma LTL_neverDetailed:
     "(((LabelEq  ''login'' aand InputEq [Str ''free'']) impl
      (nxt (alw ((LabelEq ''pdf'' aand
      checkInx ip 1 ValueEq (Some (Str ''otherID''))) impl 
      (not (OutputEq [Some (Str ''detailed_pdf_of_otherID'')])))))))
      (watch linkedIn i)"
-text_raw{*}%endsnip*}
   apply (simp add: watch_def ltl_step_alt)
-  apply (simp add: InputEq_def LabelEq_def implode login_user apply_updates_login)
+  apply (simp add: InputEq_def LabelEq_def)
+  apply (simp add: implode login_user apply_updates_login)
   by (simp add: after_login)
+text_raw{*}%endsnip*}
 end

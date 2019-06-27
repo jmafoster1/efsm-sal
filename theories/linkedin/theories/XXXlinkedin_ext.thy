@@ -208,6 +208,12 @@ lemma pdf_fuzz: "possible_steps linkedIn 6 <> STR ''pdf'' [EFSM.Str ''otherID'',
   apply safe
   by (simp_all add: pdf2_def apply_guards)
 
+text_raw{*\snip{contradiction}{1}{2}{%*}
+lemma contradiction: "fst (shd (stl (stl i))) = STR ''pdf'' \<Longrightarrow>
+    snd (shd (stl (stl i))) = [value.Str STR ''otherID'', value.Str STR ''name'', value.Str STR ''4zoF''] \<Longrightarrow> False"
+  oops
+text_raw{*}%endsnip*}
+
 (* This should be where the wheels fall off *)
 lemma "alw (\<lambda>xs. label (shd xs) = STR ''pdf'' \<and> ValueEq (Some (Inputs 0 xs)) (Some (value.Str STR ''otherID'')) = trilean.true \<longrightarrow>
               output (shd xs) \<noteq> [Some (value.Str STR ''detailed_pdf_of_otherID'')])

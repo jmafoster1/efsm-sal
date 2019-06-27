@@ -154,6 +154,9 @@
 \ \ \ \ \ \ {\isacharparenleft}{\isacharparenleft}{\isadigit{6}}{\isacharcomma}\ {\isadigit{7}}{\isacharparenright}{\isacharcomma}\ pdf{\isadigit{2}}{\isacharparenright}\isanewline
 {\isacharbar}{\isacharbraceright}{\isachardoublequoteclose}\isanewline
 \isanewline
+\isacommand{lemmas}\isamarkupfalse%
+\ transitions\ {\isacharequal}\ login{\isacharunderscore}def\ view{\isacharunderscore}def\ view{\isadigit{1}}{\isacharunderscore}def\ view{\isadigit{2}}{\isacharunderscore}def\ view{\isadigit{3}}{\isacharunderscore}def\ pdf{\isacharunderscore}def\ pdf{\isadigit{1}}{\isacharunderscore}def\ pdf{\isadigit{2}}{\isacharunderscore}def\isanewline
+\isanewline
 \isacommand{lemma}\isamarkupfalse%
 \ implode{\isacharunderscore}login{\isacharcolon}\ {\isachardoublequoteopen}String{\isachardot}implode\ {\isacharprime}{\isacharprime}login{\isacharprime}{\isacharprime}\ {\isacharequal}\ STR\ {\isacharprime}{\isacharprime}login{\isacharprime}{\isacharprime}{\isachardoublequoteclose}\isanewline
 %
@@ -182,206 +185,6 @@
 \isatagproof
 \isacommand{by}\isamarkupfalse%
 \ {\isacharparenleft}metis\ Literal{\isachardot}rep{\isacharunderscore}eq\ String{\isachardot}implode{\isacharunderscore}explode{\isacharunderscore}eq\ zero{\isacharunderscore}literal{\isachardot}rep{\isacharunderscore}eq{\isacharparenright}%
-\endisatagproof
-{\isafoldproof}%
-%
-\isadelimproof
-\isanewline
-%
-\endisadelimproof
-\isanewline
-\isacommand{lemma}\isamarkupfalse%
-\ log{\isacharunderscore}in{\isacharcolon}\ {\isachardoublequoteopen}length\ b\ {\isacharequal}\ {\isadigit{1}}\ {\isasymLongrightarrow}\ possible{\isacharunderscore}steps\ linkedIn\ {\isadigit{0}}\ r\ STR\ {\isacharprime}{\isacharprime}login{\isacharprime}{\isacharprime}\ b\ {\isacharequal}\ {\isacharbraceleft}{\isacharbar}{\isacharparenleft}{\isadigit{1}}{\isacharcomma}\ login{\isacharparenright}{\isacharbar}{\isacharbraceright}{\isachardoublequoteclose}\isanewline
-%
-\isadelimproof
-\ \ %
-\endisadelimproof
-%
-\isatagproof
-\isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ possible{\isacharunderscore}steps{\isacharunderscore}alt\ ffilter{\isacharunderscore}def\ fset{\isacharunderscore}both{\isacharunderscore}sides\ Abs{\isacharunderscore}fset{\isacharunderscore}inverse\ Set{\isachardot}filter{\isacharunderscore}def\ linkedIn{\isacharunderscore}def{\isacharparenright}\isanewline
-\ \ \isacommand{apply}\isamarkupfalse%
-\ safe\isanewline
-\ \ \isacommand{by}\isamarkupfalse%
-\ {\isacharparenleft}simp{\isacharunderscore}all\ add{\isacharcolon}\ login{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def{\isacharparenright}%
-\endisatagproof
-{\isafoldproof}%
-%
-\isadelimproof
-\isanewline
-%
-\endisadelimproof
-\isanewline
-\isacommand{lemma}\isamarkupfalse%
-\ apply{\isacharunderscore}updates{\isacharunderscore}login{\isacharcolon}\ {\isachardoublequoteopen}apply{\isacharunderscore}updates\ {\isacharparenleft}Updates\ login{\isacharparenright}\ {\isacharparenleft}join{\isacharunderscore}ir\ {\isacharbrackleft}EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}free{\isacharprime}{\isacharprime}{\isacharbrackright}\ Map{\isachardot}empty{\isacharparenright}\ Map{\isachardot}empty\ {\isacharequal}\ {\isacharless}{\isadigit{1}}\ {\isacharcolon}{\isacharequal}\ Str\ {\isacharprime}{\isacharprime}free{\isacharprime}{\isacharprime}{\isachargreater}{\isachardoublequoteclose}\isanewline
-%
-\isadelimproof
-\ \ %
-\endisadelimproof
-%
-\isatagproof
-\isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}rule\ ext{\isacharparenright}\isanewline
-\ \ \isacommand{by}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ login{\isacharunderscore}def\ apply{\isacharunderscore}updates{\isacharunderscore}def\ join{\isacharunderscore}ir{\isacharunderscore}def\ input{\isadigit{2}}state{\isacharunderscore}def{\isacharparenright}%
-\endisatagproof
-{\isafoldproof}%
-%
-\isadelimproof
-\isanewline
-%
-\endisadelimproof
-\isanewline
-\isacommand{lemma}\isamarkupfalse%
-\ input{\isacharunderscore}get{\isacharunderscore}length{\isacharcolon}\ {\isachardoublequoteopen}b\ {\isacharbang}\ {\isadigit{0}}\ {\isacharequal}\ Str\ {\isacharprime}{\isacharprime}free{\isacharprime}{\isacharprime}\ {\isasymLongrightarrow}\isanewline
-\ \ \ \ \ \ \ length\ b\ {\isacharequal}\ {\isadigit{1}}\ {\isasymLongrightarrow}\isanewline
-\ \ \ \ \ \ \ hd\ b\ {\isacharequal}\ Str\ {\isacharprime}{\isacharprime}free{\isacharprime}{\isacharprime}{\isachardoublequoteclose}\isanewline
-%
-\isadelimproof
-%
-\endisadelimproof
-%
-\isatagproof
-\isacommand{proof}\isamarkupfalse%
-{\isacharparenleft}induction\ b{\isacharparenright}\isanewline
-\ \ \isacommand{case}\isamarkupfalse%
-\ Nil\isanewline
-\ \ \isacommand{then}\isamarkupfalse%
-\ \isacommand{show}\isamarkupfalse%
-\ {\isacharquery}case\ \isacommand{by}\isamarkupfalse%
-\ simp\isanewline
-\isacommand{next}\isamarkupfalse%
-\isanewline
-\ \ \isacommand{case}\isamarkupfalse%
-\ {\isacharparenleft}Cons\ a\ b{\isacharparenright}\isanewline
-\ \ \isacommand{then}\isamarkupfalse%
-\ \isacommand{show}\isamarkupfalse%
-\ {\isacharquery}case\isanewline
-\ \ \ \ \isacommand{by}\isamarkupfalse%
-\ simp\isanewline
-\isacommand{qed}\isamarkupfalse%
-%
-\endisatagproof
-{\isafoldproof}%
-%
-\isadelimproof
-\isanewline
-%
-\endisadelimproof
-\isanewline
-\isacommand{lemma}\isamarkupfalse%
-\ not{\isacharunderscore}view{\isacharcolon}\ {\isachardoublequoteopen}a\ {\isasymnoteq}\ STR\ {\isacharprime}{\isacharprime}view{\isacharprime}{\isacharprime}\ {\isasymLongrightarrow}\ possible{\isacharunderscore}steps\ linkedIn\ {\isadigit{1}}\ {\isacharless}{\isadigit{1}}\ {\isacharcolon}{\isacharequal}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}free{\isacharprime}{\isacharprime}{\isachargreater}\ a\ b\ {\isacharequal}\ {\isacharbraceleft}{\isacharbar}{\isacharbar}{\isacharbraceright}{\isachardoublequoteclose}\isanewline
-%
-\isadelimproof
-\ \ %
-\endisadelimproof
-%
-\isatagproof
-\isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ possible{\isacharunderscore}steps{\isacharunderscore}def\ ffilter{\isacharunderscore}def\ fset{\isacharunderscore}both{\isacharunderscore}sides\ Abs{\isacharunderscore}fset{\isacharunderscore}inverse\ Set{\isachardot}filter{\isacharunderscore}def\ linkedIn{\isacharunderscore}def{\isacharparenright}\isanewline
-\ \ \isacommand{apply}\isamarkupfalse%
-\ safe\isanewline
-\ \ \isacommand{by}\isamarkupfalse%
-\ {\isacharparenleft}simp{\isacharunderscore}all\ add{\isacharcolon}\ view{\isacharunderscore}def\ view{\isadigit{1}}{\isacharunderscore}def\ view{\isadigit{2}}{\isacharunderscore}def\ view{\isadigit{3}}{\isacharunderscore}def{\isacharparenright}%
-\endisatagproof
-{\isafoldproof}%
-%
-\isadelimproof
-\isanewline
-%
-\endisadelimproof
-\isanewline
-\isacommand{lemma}\isamarkupfalse%
-\ test{\isacharcolon}\ {\isachardoublequoteopen}snd\ {\isacharparenleft}shd\ i{\isacharparenright}\ {\isacharbang}\ {\isadigit{0}}\ {\isacharequal}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}otherID{\isacharprime}{\isacharprime}\ {\isasymlongrightarrow}\isanewline
-\ \ \ \ \ \ \ \ \ \ \ fst\ {\isacharparenleft}shd\ i{\isacharparenright}\ {\isacharequal}\ STR\ {\isacharprime}{\isacharprime}pdf{\isacharprime}{\isacharprime}\ {\isasymlongrightarrow}\isanewline
-\ \ \ \ \ \ \ \ \ \ \ {\isasymnot}\ OutputEq\ {\isacharbrackleft}Some\ {\isacharparenleft}EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}detailed{\isacharunderscore}pdf{\isacharunderscore}of{\isacharunderscore}otherID{\isacharprime}{\isacharprime}{\isacharparenright}{\isacharbrackright}\isanewline
-\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ {\isacharparenleft}make{\isacharunderscore}full{\isacharunderscore}observation\ linkedIn\ {\isacharparenleft}fst\ {\isacharparenleft}ltl{\isacharunderscore}step\ linkedIn\ {\isacharparenleft}Some\ {\isadigit{1}}{\isacharparenright}\ {\isacharless}{\isadigit{1}}\ {\isacharcolon}{\isacharequal}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}free{\isacharprime}{\isacharprime}{\isachargreater}\ {\isacharparenleft}shd\ i{\isacharparenright}{\isacharparenright}{\isacharparenright}\isanewline
-\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ {\isacharparenleft}snd\ {\isacharparenleft}snd\ {\isacharparenleft}ltl{\isacharunderscore}step\ linkedIn\ {\isacharparenleft}Some\ {\isadigit{1}}{\isacharparenright}\ {\isacharless}{\isadigit{1}}\ {\isacharcolon}{\isacharequal}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}free{\isacharprime}{\isacharprime}{\isachargreater}\ {\isacharparenleft}shd\ i{\isacharparenright}{\isacharparenright}{\isacharparenright}{\isacharparenright}\ {\isacharparenleft}stl\ i{\isacharparenright}{\isacharparenright}{\isachardoublequoteclose}\isanewline
-%
-\isadelimproof
-\ \ %
-\endisadelimproof
-%
-\isatagproof
-\isacommand{apply}\isamarkupfalse%
-\ standard\isanewline
-\ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}shd\ i{\isachardoublequoteclose}{\isacharparenright}\isanewline
-\ \ \isacommand{apply}\isamarkupfalse%
-\ simp\isanewline
-\ \ \isacommand{by}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ not{\isacharunderscore}view\ OutputEq{\isacharunderscore}def{\isacharparenright}%
-\endisatagproof
-{\isafoldproof}%
-%
-\isadelimproof
-\isanewline
-%
-\endisadelimproof
-\isanewline
-\isacommand{lemma}\isamarkupfalse%
-\ not{\isacharunderscore}login{\isacharcolon}\ {\isachardoublequoteopen}length\ b\ {\isasymnoteq}\ {\isadigit{1}}\ {\isasymLongrightarrow}\isanewline
-\ \ \ \ \ \ \ \ possible{\isacharunderscore}steps\ linkedIn\ {\isadigit{0}}\ Map{\isachardot}empty\ STR\ {\isacharprime}{\isacharprime}login{\isacharprime}{\isacharprime}\ b\ {\isacharequal}\ {\isacharbraceleft}{\isacharbar}{\isacharbar}{\isacharbraceright}{\isachardoublequoteclose}\isanewline
-%
-\isadelimproof
-\ \ %
-\endisadelimproof
-%
-\isatagproof
-\isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ possible{\isacharunderscore}steps{\isacharunderscore}def\ ffilter{\isacharunderscore}def\ fset{\isacharunderscore}both{\isacharunderscore}sides\ Abs{\isacharunderscore}fset{\isacharunderscore}inverse\ Set{\isachardot}filter{\isacharunderscore}def\ linkedIn{\isacharunderscore}def{\isacharparenright}\isanewline
-\ \ \isacommand{apply}\isamarkupfalse%
-\ safe\isanewline
-\ \ \isacommand{by}\isamarkupfalse%
-\ {\isacharparenleft}simp{\isacharunderscore}all\ add{\isacharcolon}\ login{\isacharunderscore}def{\isacharparenright}%
-\endisatagproof
-{\isafoldproof}%
-%
-\isadelimproof
-\isanewline
-%
-\endisadelimproof
-\isanewline
-\isacommand{lemma}\isamarkupfalse%
-\ not{\isacharunderscore}login{\isacharunderscore}free{\isacharcolon}\ {\isachardoublequoteopen}b\ {\isacharbang}\ {\isadigit{0}}\ {\isacharequal}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}free{\isacharprime}{\isacharprime}\ {\isasymLongrightarrow}\isanewline
-\ \ \ \ \ \ \ b\ {\isasymnoteq}\ {\isacharbrackleft}EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}free{\isacharprime}{\isacharprime}{\isacharbrackright}\ {\isasymLongrightarrow}\isanewline
-\ \ \ \ \ \ \ possible{\isacharunderscore}steps\ linkedIn\ {\isadigit{0}}\ Map{\isachardot}empty\ STR\ {\isacharprime}{\isacharprime}login{\isacharprime}{\isacharprime}\ b\ {\isacharequal}\ {\isacharbraceleft}{\isacharbar}{\isacharbar}{\isacharbraceright}{\isachardoublequoteclose}\isanewline
-%
-\isadelimproof
-\ \ %
-\endisadelimproof
-%
-\isatagproof
-\isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ possible{\isacharunderscore}steps{\isacharunderscore}def\ ffilter{\isacharunderscore}def\ fset{\isacharunderscore}both{\isacharunderscore}sides\ Abs{\isacharunderscore}fset{\isacharunderscore}inverse\ Set{\isachardot}filter{\isacharunderscore}def\ linkedIn{\isacharunderscore}def{\isacharparenright}\isanewline
-\ \ \isacommand{apply}\isamarkupfalse%
-\ safe\isanewline
-\ \ \ \ \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp{\isacharunderscore}all\ add{\isacharcolon}\ login{\isacharunderscore}def{\isacharparenright}\isanewline
-\ \ \isacommand{by}\isamarkupfalse%
-\ {\isacharparenleft}metis\ One{\isacharunderscore}nat{\isacharunderscore}def\ length{\isacharunderscore}{\isadigit{0}}{\isacharunderscore}conv\ length{\isacharunderscore}Suc{\isacharunderscore}conv\ nth{\isacharunderscore}Cons{\isacharunderscore}{\isadigit{0}}{\isacharparenright}%
-\endisatagproof
-{\isafoldproof}%
-%
-\isadelimproof
-\isanewline
-%
-\endisadelimproof
-\isanewline
-\isacommand{lemma}\isamarkupfalse%
-\ state{\isacharunderscore}{\isadigit{1}}{\isacharunderscore}pdf{\isacharcolon}\ {\isachardoublequoteopen}possible{\isacharunderscore}steps\ linkedIn\ {\isadigit{1}}\ {\isacharless}{\isadigit{1}}\ {\isacharcolon}{\isacharequal}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}free{\isacharprime}{\isacharprime}{\isachargreater}\ STR\ {\isacharprime}{\isacharprime}pdf{\isacharprime}{\isacharprime}\ ba\ {\isacharequal}\ {\isacharbraceleft}{\isacharbar}{\isacharbar}{\isacharbraceright}{\isachardoublequoteclose}\isanewline
-%
-\isadelimproof
-\ \ %
-\endisadelimproof
-%
-\isatagproof
-\isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ possible{\isacharunderscore}steps{\isacharunderscore}def\ ffilter{\isacharunderscore}def\ fset{\isacharunderscore}both{\isacharunderscore}sides\ Abs{\isacharunderscore}fset{\isacharunderscore}inverse\ Set{\isachardot}filter{\isacharunderscore}def\ linkedIn{\isacharunderscore}def{\isacharparenright}\isanewline
-\ \ \isacommand{apply}\isamarkupfalse%
-\ safe\isanewline
-\ \ \isacommand{by}\isamarkupfalse%
-\ {\isacharparenleft}simp{\isacharunderscore}all\ add{\isacharcolon}\ view{\isacharunderscore}def\ view{\isadigit{1}}{\isacharunderscore}def\ view{\isadigit{2}}{\isacharunderscore}def\ view{\isadigit{3}}{\isacharunderscore}def{\isacharparenright}%
 \endisatagproof
 {\isafoldproof}%
 %
@@ -427,212 +230,6 @@
 \endisadelimproof
 \isanewline
 \isacommand{lemma}\isamarkupfalse%
-\ viewFriend{\isacharcolon}\ {\isachardoublequoteopen}possible{\isacharunderscore}steps\ linkedIn\ {\isadigit{1}}\ {\isacharless}{\isadigit{1}}\ {\isacharcolon}{\isacharequal}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}free{\isacharprime}{\isacharprime}{\isachargreater}\ STR\ {\isacharprime}{\isacharprime}view{\isacharprime}{\isacharprime}\isanewline
-\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ {\isacharbrackleft}EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}friendID{\isacharprime}{\isacharprime}{\isacharcomma}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}name{\isacharprime}{\isacharprime}{\isacharcomma}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}HM{\isadigit{8}}p{\isacharprime}{\isacharprime}{\isacharbrackright}\ {\isacharequal}\ {\isacharbraceleft}{\isacharbar}{\isacharparenleft}{\isadigit{2}}{\isacharcomma}\ view{\isacharparenright}{\isacharbar}{\isacharbraceright}{\isachardoublequoteclose}\isanewline
-%
-\isadelimproof
-\ \ %
-\endisadelimproof
-%
-\isatagproof
-\isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ possible{\isacharunderscore}steps{\isacharunderscore}alt\ ffilter{\isacharunderscore}def\ fset{\isacharunderscore}both{\isacharunderscore}sides\ Abs{\isacharunderscore}fset{\isacharunderscore}inverse\ Set{\isachardot}filter{\isacharunderscore}def\ linkedIn{\isacharunderscore}def{\isacharparenright}\isanewline
-\ \ \isacommand{apply}\isamarkupfalse%
-\ safe\isanewline
-\ \ \isacommand{by}\isamarkupfalse%
-\ {\isacharparenleft}simp{\isacharunderscore}all\ add{\isacharcolon}\ view{\isadigit{1}}{\isacharunderscore}def\ gval{\isachardot}simps\ ValueEq{\isacharunderscore}def\ implode{\isacharunderscore}friendID\ implode{\isacharunderscore}otherID\isanewline
-\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ view{\isadigit{2}}{\isacharunderscore}def\ view{\isadigit{3}}{\isacharunderscore}def\ view{\isacharunderscore}def\ Str{\isacharunderscore}def\ I{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ input{\isadigit{2}}state{\isacharunderscore}def{\isacharparenright}%
-\endisatagproof
-{\isafoldproof}%
-%
-\isadelimproof
-\isanewline
-%
-\endisadelimproof
-\isanewline
-\isacommand{lemma}\isamarkupfalse%
-\ apply{\isacharunderscore}updates{\isacharunderscore}view{\isacharcolon}\ {\isachardoublequoteopen}apply{\isacharunderscore}updates\ {\isacharparenleft}Updates\ view{\isacharparenright}\ i\ r\ {\isacharequal}\ r{\isachardoublequoteclose}\isanewline
-%
-\isadelimproof
-\ \ %
-\endisadelimproof
-%
-\isatagproof
-\isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}rule\ ext{\isacharparenright}\isanewline
-\ \ \isacommand{by}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ view{\isacharunderscore}def{\isacharparenright}%
-\endisatagproof
-{\isafoldproof}%
-%
-\isadelimproof
-\isanewline
-%
-\endisadelimproof
-\isanewline
-\isacommand{lemma}\isamarkupfalse%
-\ pdfFriend{\isacharcolon}\ {\isachardoublequoteopen}possible{\isacharunderscore}steps\ linkedIn\ {\isadigit{2}}\ {\isacharless}{\isadigit{1}}\ {\isacharcolon}{\isacharequal}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}free{\isacharprime}{\isacharprime}{\isachargreater}\ STR\ {\isacharprime}{\isacharprime}pdf{\isacharprime}{\isacharprime}\ {\isacharbrackleft}EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}friendID{\isacharprime}{\isacharprime}{\isacharcomma}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}name{\isacharprime}{\isacharprime}{\isacharcomma}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}HM{\isadigit{8}}p{\isacharprime}{\isacharprime}{\isacharbrackright}\ {\isacharequal}\ {\isacharbraceleft}{\isacharbar}{\isacharparenleft}{\isadigit{3}}{\isacharcomma}\ pdf{\isacharparenright}{\isacharbar}{\isacharbraceright}{\isachardoublequoteclose}\isanewline
-%
-\isadelimproof
-\ \ %
-\endisadelimproof
-%
-\isatagproof
-\isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ possible{\isacharunderscore}steps{\isacharunderscore}alt\ ffilter{\isacharunderscore}def\ fset{\isacharunderscore}both{\isacharunderscore}sides\ Abs{\isacharunderscore}fset{\isacharunderscore}inverse\ Set{\isachardot}filter{\isacharunderscore}def\ linkedIn{\isacharunderscore}def{\isacharparenright}\isanewline
-\ \ \isacommand{apply}\isamarkupfalse%
-\ safe\isanewline
-\ \ \isacommand{by}\isamarkupfalse%
-\ {\isacharparenleft}simp{\isacharunderscore}all\ add{\isacharcolon}\ pdf{\isacharunderscore}def\ gval{\isachardot}simps\ ValueEq{\isacharunderscore}def\ I{\isacharunderscore}def\ input{\isadigit{2}}state{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def{\isacharparenright}%
-\endisatagproof
-{\isafoldproof}%
-%
-\isadelimproof
-\isanewline
-%
-\endisadelimproof
-\isanewline
-\isacommand{lemma}\isamarkupfalse%
-\ apply{\isacharunderscore}updates{\isacharunderscore}pdf{\isacharcolon}\ {\isachardoublequoteopen}apply{\isacharunderscore}updates\ {\isacharparenleft}Updates\ pdf{\isacharparenright}\ i\ r\ {\isacharequal}\ r{\isachardoublequoteclose}\isanewline
-%
-\isadelimproof
-\ \ %
-\endisadelimproof
-%
-\isatagproof
-\isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}rule\ ext{\isacharparenright}\isanewline
-\ \ \isacommand{by}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ pdf{\isacharunderscore}def{\isacharparenright}%
-\endisatagproof
-{\isafoldproof}%
-%
-\isadelimproof
-\isanewline
-%
-\endisadelimproof
-\isanewline
-\isacommand{lemma}\isamarkupfalse%
-\ pdfOther{\isacharunderscore}s{\isadigit{2}}{\isacharcolon}\ {\isachardoublequoteopen}possible{\isacharunderscore}steps\ linkedIn\ {\isadigit{2}}\ {\isacharless}{\isadigit{1}}\ {\isacharcolon}{\isacharequal}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}free{\isacharprime}{\isacharprime}{\isachargreater}\ STR\ {\isacharprime}{\isacharprime}pdf{\isacharprime}{\isacharprime}\isanewline
-\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ {\isacharbrackleft}EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}otherID{\isacharprime}{\isacharprime}{\isacharcomma}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}name{\isacharprime}{\isacharprime}{\isacharcomma}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}HM{\isadigit{8}}p{\isacharprime}{\isacharprime}{\isacharbrackright}\ {\isacharequal}\ {\isacharbraceleft}{\isacharbar}{\isacharbar}{\isacharbraceright}{\isachardoublequoteclose}\isanewline
-%
-\isadelimproof
-\ \ %
-\endisadelimproof
-%
-\isatagproof
-\isacommand{by}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ possible{\isacharunderscore}steps{\isacharunderscore}def\ ffilter{\isacharunderscore}def\ fset{\isacharunderscore}both{\isacharunderscore}sides\ Abs{\isacharunderscore}fset{\isacharunderscore}inverse\ Set{\isachardot}filter{\isacharunderscore}def\isanewline
-\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ linkedIn{\isacharunderscore}def\ pdf{\isacharunderscore}def\ gval{\isachardot}simps\ ValueEq{\isacharunderscore}def\ implode{\isacharunderscore}friendID\ implode{\isacharunderscore}otherID\ Str{\isacharunderscore}def\isanewline
-\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ I{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ join{\isacharunderscore}ir{\isacharunderscore}def\ input{\isadigit{2}}state{\isacharunderscore}def{\isacharparenright}%
-\endisatagproof
-{\isafoldproof}%
-%
-\isadelimproof
-\isanewline
-%
-\endisadelimproof
-\isanewline
-\isacommand{lemma}\isamarkupfalse%
-\ possible{\isacharunderscore}steps{\isacharunderscore}s{\isadigit{3}}{\isacharcolon}\ {\isachardoublequoteopen}possible{\isacharunderscore}steps\ linkedIn\ {\isadigit{3}}\ r\ l\ i\ {\isacharequal}\ {\isacharbraceleft}{\isacharbar}{\isacharbar}{\isacharbraceright}{\isachardoublequoteclose}\isanewline
-%
-\isadelimproof
-\ \ %
-\endisadelimproof
-%
-\isatagproof
-\isacommand{by}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ possible{\isacharunderscore}steps{\isacharunderscore}def\ ffilter{\isacharunderscore}def\ fset{\isacharunderscore}both{\isacharunderscore}sides\ Abs{\isacharunderscore}fset{\isacharunderscore}inverse\ Set{\isachardot}filter{\isacharunderscore}def\ linkedIn{\isacharunderscore}def{\isacharparenright}%
-\endisatagproof
-{\isafoldproof}%
-%
-\isadelimproof
-\isanewline
-%
-\endisadelimproof
-\isanewline
-\isacommand{lemma}\isamarkupfalse%
-\ none{\isacharunderscore}never{\isacharunderscore}detailed{\isacharcolon}\ {\isachardoublequoteopen}alw\ {\isacharparenleft}{\isasymlambda}xs{\isachardot}\ inputs\ {\isacharparenleft}shd\ xs{\isacharparenright}\ {\isacharbang}\ {\isadigit{0}}\ {\isacharequal}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}otherID{\isacharprime}{\isacharprime}\ {\isasymlongrightarrow}\isanewline
-\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ label\ {\isacharparenleft}shd\ xs{\isacharparenright}\ {\isacharequal}\ STR\ {\isacharprime}{\isacharprime}pdf{\isacharprime}{\isacharprime}\ {\isasymlongrightarrow}\ output\ {\isacharparenleft}shd\ {\isacharparenleft}stl\ xs{\isacharparenright}{\isacharparenright}\ {\isasymnoteq}\ {\isacharbrackleft}Some\ {\isacharparenleft}EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}detailed{\isacharunderscore}pdf{\isacharunderscore}of{\isacharunderscore}otherID{\isacharprime}{\isacharprime}{\isacharparenright}{\isacharbrackright}{\isacharparenright}\isanewline
-\ \ \ \ \ \ \ \ \ \ \ \ {\isacharparenleft}make{\isacharunderscore}full{\isacharunderscore}observation\ linkedIn\ None\ r\ i{\isacharparenright}{\isachardoublequoteclose}\isanewline
-%
-\isadelimproof
-%
-\endisadelimproof
-%
-\isatagproof
-\isacommand{proof}\isamarkupfalse%
-\ {\isacharminus}\isanewline
-\ \ \isacommand{obtain}\isamarkupfalse%
-\ ss\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}{\isacharparenleft}String{\isachardot}literal\ {\isasymtimes}\ value\ list{\isacharparenright}\ stream\ {\isasymRightarrow}\ state\ stream{\isacharparenright}\ {\isasymRightarrow}\ {\isacharparenleft}String{\isachardot}literal\ {\isasymtimes}\ value\ list{\isacharparenright}\ stream{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
-\ \ \ \ {\isachardoublequoteopen}{\isasymforall}f\ p\ s{\isachardot}\ f\ {\isacharparenleft}stl\ {\isacharparenleft}ss\ f{\isacharparenright}{\isacharparenright}\ {\isasymnoteq}\ stl\ {\isacharparenleft}f\ {\isacharparenleft}ss\ f{\isacharparenright}{\isacharparenright}\ {\isasymor}\ alw\ p\ {\isacharparenleft}f\ s{\isacharparenright}\ {\isacharequal}\ alw\ {\isacharparenleft}{\isasymlambda}s{\isachardot}\ p\ {\isacharparenleft}f\ s{\isacharparenright}{\isacharparenright}\ s{\isachardoublequoteclose}\isanewline
-\ \ \ \ \isacommand{by}\isamarkupfalse%
-\ {\isacharparenleft}metis\ {\isacharparenleft}no{\isacharunderscore}types{\isacharparenright}\ alw{\isacharunderscore}inv{\isacharparenright}\isanewline
-\ \ \isacommand{then}\isamarkupfalse%
-\ \isacommand{show}\isamarkupfalse%
-\ {\isacharquery}thesis\isanewline
-\ \ \ \ \isacommand{by}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ all{\isacharunderscore}imp{\isacharunderscore}alw\ OutputEq{\isacharunderscore}def{\isacharparenright}\isanewline
-\isacommand{qed}\isamarkupfalse%
-%
-\endisatagproof
-{\isafoldproof}%
-%
-\isadelimproof
-\isanewline
-%
-\endisadelimproof
-\isanewline
-\isacommand{lemma}\isamarkupfalse%
-\ aux{\isadigit{1}}{\isacharunderscore}aux{\isadigit{1}}{\isacharunderscore}aux{\isadigit{1}}{\isacharcolon}\ {\isachardoublequoteopen}alw\ {\isacharparenleft}{\isasymlambda}xs{\isachardot}\ inputs\ {\isacharparenleft}shd\ xs{\isacharparenright}\ {\isacharbang}\ {\isadigit{0}}\ {\isacharequal}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}otherID{\isacharprime}{\isacharprime}\ {\isasymlongrightarrow}\isanewline
-\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ label\ {\isacharparenleft}shd\ xs{\isacharparenright}\ {\isacharequal}\ STR\ {\isacharprime}{\isacharprime}pdf{\isacharprime}{\isacharprime}\ {\isasymlongrightarrow}\ output\ {\isacharparenleft}shd\ {\isacharparenleft}stl\ xs{\isacharparenright}{\isacharparenright}\ {\isasymnoteq}\ {\isacharbrackleft}Some\ {\isacharparenleft}EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}detailed{\isacharunderscore}pdf{\isacharunderscore}of{\isacharunderscore}otherID{\isacharprime}{\isacharprime}{\isacharparenright}{\isacharbrackright}{\isacharparenright}\isanewline
-\ \ \ \ \ \ \ \ \ \ \ \ {\isacharparenleft}make{\isacharunderscore}full{\isacharunderscore}observation\ linkedIn\ {\isacharparenleft}Some\ {\isadigit{3}}{\isacharparenright}\ {\isacharless}{\isadigit{1}}\ {\isacharcolon}{\isacharequal}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}free{\isacharprime}{\isacharprime}{\isachargreater}\ i{\isacharparenright}{\isachardoublequoteclose}\isanewline
-%
-\isadelimproof
-%
-\endisadelimproof
-%
-\isatagproof
-\isacommand{proof}\isamarkupfalse%
-{\isacharparenleft}coinduction{\isacharparenright}\isanewline
-\ \ \isacommand{case}\isamarkupfalse%
-\ alw\isanewline
-\ \ \isacommand{then}\isamarkupfalse%
-\ \isacommand{show}\isamarkupfalse%
-\ {\isacharquery}case\isanewline
-\ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}shd\ i{\isachardoublequoteclose}{\isacharparenright}\isanewline
-\ \ \ \ \isacommand{by}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ possible{\isacharunderscore}steps{\isacharunderscore}s{\isadigit{3}}\ none{\isacharunderscore}never{\isacharunderscore}detailed{\isacharparenright}\isanewline
-\isacommand{qed}\isamarkupfalse%
-%
-\endisatagproof
-{\isafoldproof}%
-%
-\isadelimproof
-\isanewline
-%
-\endisadelimproof
-\isanewline
-\isacommand{lemma}\isamarkupfalse%
-\ implode{\isacharunderscore}name{\isacharcolon}\ {\isachardoublequoteopen}String{\isachardot}implode\ {\isacharprime}{\isacharprime}name{\isacharprime}{\isacharprime}\ {\isacharequal}\ STR\ {\isacharprime}{\isacharprime}name{\isacharprime}{\isacharprime}{\isachardoublequoteclose}\isanewline
-%
-\isadelimproof
-\ \ %
-\endisadelimproof
-%
-\isatagproof
-\isacommand{by}\isamarkupfalse%
-\ {\isacharparenleft}metis\ Literal{\isachardot}rep{\isacharunderscore}eq\ String{\isachardot}implode{\isacharunderscore}explode{\isacharunderscore}eq\ zero{\isacharunderscore}literal{\isachardot}rep{\isacharunderscore}eq{\isacharparenright}%
-\endisatagproof
-{\isafoldproof}%
-%
-\isadelimproof
-\isanewline
-%
-\endisadelimproof
-\isanewline
-\isacommand{lemma}\isamarkupfalse%
 \ implode{\isacharunderscore}HM{\isadigit{8}}p{\isacharcolon}\ {\isachardoublequoteopen}String{\isachardot}implode\ {\isacharprime}{\isacharprime}HM{\isadigit{8}}p{\isacharprime}{\isacharprime}\ {\isacharequal}\ STR\ {\isacharprime}{\isacharprime}HM{\isadigit{8}}p{\isacharprime}{\isacharprime}{\isachardoublequoteclose}\isanewline
 %
 \isadelimproof
@@ -642,62 +239,6 @@
 \isatagproof
 \isacommand{by}\isamarkupfalse%
 \ {\isacharparenleft}metis\ Literal{\isachardot}rep{\isacharunderscore}eq\ String{\isachardot}implode{\isacharunderscore}explode{\isacharunderscore}eq\ zero{\isacharunderscore}literal{\isachardot}rep{\isacharunderscore}eq{\isacharparenright}%
-\endisatagproof
-{\isafoldproof}%
-%
-\isadelimproof
-\isanewline
-%
-\endisadelimproof
-\isanewline
-\isacommand{lemma}\isamarkupfalse%
-\ not{\isacharunderscore}pdfFriend{\isacharcolon}\ {\isachardoublequoteopen}ba\ {\isasymnoteq}\ {\isacharbrackleft}EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}friendID{\isacharprime}{\isacharprime}{\isacharcomma}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}name{\isacharprime}{\isacharprime}{\isacharcomma}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}HM{\isadigit{8}}p{\isacharprime}{\isacharprime}{\isacharbrackright}\ {\isasymLongrightarrow}\isanewline
-possible{\isacharunderscore}steps\ linkedIn\ {\isadigit{2}}\ {\isacharless}{\isadigit{1}}\ {\isacharcolon}{\isacharequal}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}free{\isacharprime}{\isacharprime}{\isachargreater}\ STR\ {\isacharprime}{\isacharprime}pdf{\isacharprime}{\isacharprime}\ ba\ {\isacharequal}\ {\isacharbraceleft}{\isacharbar}{\isacharbar}{\isacharbraceright}{\isachardoublequoteclose}\isanewline
-%
-\isadelimproof
-\ \ %
-\endisadelimproof
-%
-\isatagproof
-\isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ possible{\isacharunderscore}steps{\isacharunderscore}def\ ffilter{\isacharunderscore}def\ fset{\isacharunderscore}both{\isacharunderscore}sides\ Abs{\isacharunderscore}fset{\isacharunderscore}inverse\ Set{\isachardot}filter{\isacharunderscore}def\ \isanewline
-\ \ \ \ \ \ \ \ \ linkedIn{\isacharunderscore}def\ pdf{\isacharunderscore}def\ gval{\isachardot}simps\ ValueEq{\isacharunderscore}def\ Str{\isacharunderscore}def\ implode{\isacharunderscore}friendID\ implode{\isacharunderscore}otherID\ implode{\isacharunderscore}name\ implode{\isacharunderscore}HM{\isadigit{8}}p{\isacharparenright}\isanewline
-\ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}case{\isacharunderscore}tac\ ba{\isacharparenright}\isanewline
-\ \ \ \isacommand{apply}\isamarkupfalse%
-\ simp\isanewline
-\ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}case{\isacharunderscore}tac\ list{\isacharparenright}\isanewline
-\ \ \ \isacommand{apply}\isamarkupfalse%
-\ simp\isanewline
-\ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}case{\isacharunderscore}tac\ lista{\isacharparenright}\isanewline
-\ \ \ \isacommand{apply}\isamarkupfalse%
-\ simp\isanewline
-\ \ \isacommand{apply}\isamarkupfalse%
-\ clarify\isanewline
-\ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ apply{\isacharunderscore}guards{\isacharunderscore}def\ gval{\isachardot}simps\ join{\isacharunderscore}ir{\isacharunderscore}def\ ValueEq{\isacharunderscore}def\ input{\isadigit{2}}state{\isacharunderscore}def{\isacharparenright}\isanewline
-\ \ \isacommand{by}\isamarkupfalse%
-\ auto%
-\endisatagproof
-{\isafoldproof}%
-%
-\isadelimproof
-\isanewline
-%
-\endisadelimproof
-\isanewline
-\isacommand{lemma}\isamarkupfalse%
-\ not{\isacharunderscore}pdfFriend{\isacharunderscore}{\isadigit{2}}{\isacharcolon}\ {\isachardoublequoteopen}aa\ {\isasymnoteq}\ STR\ {\isacharprime}{\isacharprime}pdf{\isacharprime}{\isacharprime}\ {\isasymLongrightarrow}\ possible{\isacharunderscore}steps\ linkedIn\ {\isadigit{2}}\ {\isacharless}{\isadigit{1}}\ {\isacharcolon}{\isacharequal}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}free{\isacharprime}{\isacharprime}{\isachargreater}\ aa\ ba\ {\isacharequal}\ {\isacharbraceleft}{\isacharbar}{\isacharbar}{\isacharbraceright}{\isachardoublequoteclose}\isanewline
-%
-\isadelimproof
-\ \ %
-\endisadelimproof
-%
-\isatagproof
-\isacommand{by}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ possible{\isacharunderscore}steps{\isacharunderscore}def\ ffilter{\isacharunderscore}def\ fset{\isacharunderscore}both{\isacharunderscore}sides\ Abs{\isacharunderscore}fset{\isacharunderscore}inverse\ Set{\isachardot}filter{\isacharunderscore}def\ linkedIn{\isacharunderscore}def\ pdf{\isacharunderscore}def{\isacharparenright}%
 \endisatagproof
 {\isafoldproof}%
 %
@@ -725,7 +266,25 @@ possible{\isacharunderscore}steps\ linkedIn\ {\isadigit{2}}\ {\isacharless}{\isa
 \endisadelimproof
 \isanewline
 \isacommand{lemma}\isamarkupfalse%
-\ implode{\isacharunderscore}{\isadigit{4}}z{\isadigit{0}}f{\isacharcolon}\ {\isachardoublequoteopen}String{\isachardot}implode\ {\isacharprime}{\isacharprime}{\isadigit{4}}z{\isadigit{0}}F{\isacharprime}{\isacharprime}\ {\isacharequal}\ STR\ {\isacharprime}{\isacharprime}{\isadigit{4}}z{\isadigit{0}}F{\isacharprime}{\isacharprime}{\isachardoublequoteclose}\isanewline
+\ implode{\isacharunderscore}{\isadigit{4}}zoF{\isacharcolon}\ {\isachardoublequoteopen}String{\isachardot}implode\ {\isacharprime}{\isacharprime}{\isadigit{4}}zoF{\isacharprime}{\isacharprime}\ {\isacharequal}\ STR\ {\isacharprime}{\isacharprime}{\isadigit{4}}zoF{\isacharprime}{\isacharprime}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}metis\ Literal{\isachardot}rep{\isacharunderscore}eq\ String{\isachardot}implode{\isacharunderscore}explode{\isacharunderscore}eq\ zero{\isacharunderscore}literal{\isachardot}rep{\isacharunderscore}eq{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ implode{\isacharunderscore}name{\isacharcolon}\ {\isachardoublequoteopen}String{\isachardot}implode\ {\isacharprime}{\isacharprime}name{\isacharprime}{\isacharprime}\ {\isacharequal}\ STR\ {\isacharprime}{\isacharprime}name{\isacharprime}{\isacharprime}{\isachardoublequoteclose}\isanewline
 %
 \isadelimproof
 \ \ %
@@ -761,22 +320,15 @@ possible{\isacharunderscore}steps\ linkedIn\ {\isadigit{2}}\ {\isacharless}{\isa
 \endisadelimproof
 \isanewline
 \isacommand{lemma}\isamarkupfalse%
-\ view{\isacharunderscore}other{\isacharunderscore}OON{\isacharcolon}\ {\isachardoublequoteopen}possible{\isacharunderscore}steps\ linkedIn\ {\isadigit{1}}\ {\isacharless}{\isadigit{1}}\ {\isacharcolon}{\isacharequal}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}free{\isacharprime}{\isacharprime}{\isachargreater}\ STR\ {\isacharprime}{\isacharprime}view{\isacharprime}{\isacharprime}\isanewline
-\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ {\isacharbrackleft}EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}otherID{\isacharprime}{\isacharprime}{\isacharcomma}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}OUT{\isacharunderscore}OF{\isacharunderscore}NETWORK{\isacharprime}{\isacharprime}{\isacharcomma}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}MNn{\isadigit{5}}{\isacharprime}{\isacharprime}{\isacharbrackright}\ {\isacharequal}\ {\isacharbraceleft}{\isacharbar}{\isacharparenleft}{\isadigit{4}}{\isacharcomma}\ view{\isadigit{1}}{\isacharparenright}{\isacharbar}{\isacharbraceright}{\isachardoublequoteclose}\isanewline
+\ implode{\isacharunderscore}detailedPDF{\isacharcolon}\ {\isachardoublequoteopen}String{\isachardot}implode\ {\isacharprime}{\isacharprime}detailed{\isacharunderscore}pdf{\isacharunderscore}of{\isacharunderscore}otherID{\isacharprime}{\isacharprime}\ {\isacharequal}\ STR\ {\isacharprime}{\isacharprime}detailed{\isacharunderscore}pdf{\isacharunderscore}of{\isacharunderscore}otherID{\isacharprime}{\isacharprime}{\isachardoublequoteclose}\isanewline
 %
 \isadelimproof
 \ \ %
 \endisadelimproof
 %
 \isatagproof
-\isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ possible{\isacharunderscore}steps{\isacharunderscore}alt\ ffilter{\isacharunderscore}def\ fset{\isacharunderscore}both{\isacharunderscore}sides\ Abs{\isacharunderscore}fset{\isacharunderscore}inverse\ Set{\isachardot}filter{\isacharunderscore}def\ linkedIn{\isacharunderscore}def{\isacharparenright}\isanewline
-\ \ \isacommand{apply}\isamarkupfalse%
-\ safe\isanewline
-\ \ \isacommand{by}\isamarkupfalse%
-\ {\isacharparenleft}simp{\isacharunderscore}all\ add{\isacharcolon}\ view{\isacharunderscore}def\ gval{\isachardot}simps\ ValueEq{\isacharunderscore}def\ implode{\isacharunderscore}otherID\ implode{\isacharunderscore}friendID\ implode{\isacharunderscore}MNn{\isadigit{5}}\ \isanewline
-\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ implode{\isacharunderscore}HM{\isadigit{8}}p\ implode{\isacharunderscore}name\ implode{\isacharunderscore}OON\ Str{\isacharunderscore}def\ view{\isadigit{2}}{\isacharunderscore}def\ view{\isadigit{3}}{\isacharunderscore}def\ view{\isadigit{1}}{\isacharunderscore}def\isanewline
-\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ apply{\isacharunderscore}guards{\isacharunderscore}def\ input{\isadigit{2}}state{\isacharunderscore}def{\isacharparenright}%
+\isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}metis\ Literal{\isachardot}rep{\isacharunderscore}eq\ String{\isachardot}implode{\isacharunderscore}explode{\isacharunderscore}eq\ zero{\isacharunderscore}literal{\isachardot}rep{\isacharunderscore}eq{\isacharparenright}%
 \endisatagproof
 {\isafoldproof}%
 %
@@ -786,17 +338,15 @@ possible{\isacharunderscore}steps\ linkedIn\ {\isadigit{2}}\ {\isacharless}{\isa
 \endisadelimproof
 \isanewline
 \isacommand{lemma}\isamarkupfalse%
-\ apply{\isacharunderscore}update{\isacharunderscore}view{\isadigit{1}}{\isacharcolon}\ {\isachardoublequoteopen}apply{\isacharunderscore}updates\ {\isacharparenleft}Updates\ view{\isadigit{1}}{\isacharparenright}\ i\ r\ {\isacharequal}\ r{\isachardoublequoteclose}\isanewline
+\ implode{\isacharunderscore}summaryPDF{\isacharcolon}\ {\isachardoublequoteopen}String{\isachardot}implode\ {\isacharprime}{\isacharprime}summary{\isacharunderscore}pdf{\isacharunderscore}of{\isacharunderscore}otherID{\isacharprime}{\isacharprime}\ {\isacharequal}\ STR\ {\isacharprime}{\isacharprime}summary{\isacharunderscore}pdf{\isacharunderscore}of{\isacharunderscore}otherID{\isacharprime}{\isacharprime}{\isachardoublequoteclose}\isanewline
 %
 \isadelimproof
 \ \ %
 \endisadelimproof
 %
 \isatagproof
-\isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}rule\ ext{\isacharparenright}\isanewline
-\ \ \isacommand{by}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ view{\isadigit{1}}{\isacharunderscore}def{\isacharparenright}%
+\isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}metis\ Literal{\isachardot}rep{\isacharunderscore}eq\ String{\isachardot}implode{\isacharunderscore}explode{\isacharunderscore}eq\ zero{\isacharunderscore}literal{\isachardot}rep{\isacharunderscore}eq{\isacharparenright}%
 \endisatagproof
 {\isafoldproof}%
 %
@@ -806,7 +356,7 @@ possible{\isacharunderscore}steps\ linkedIn\ {\isadigit{2}}\ {\isacharless}{\isa
 \endisadelimproof
 \isanewline
 \isacommand{lemma}\isamarkupfalse%
-\ implode{\isacharunderscore}free{\isacharcolon}\ {\isachardoublequoteopen}String{\isachardot}implode\ {\isacharprime}{\isacharprime}free{\isacharprime}{\isacharprime}\ {\isacharequal}\ STR\ {\isacharprime}{\isacharprime}free{\isacharprime}{\isacharprime}{\isachardoublequoteclose}\isanewline
+\ implode{\isacharunderscore}detailedPDF{\isacharunderscore}friend{\isacharcolon}\ {\isachardoublequoteopen}String{\isachardot}implode\ {\isacharprime}{\isacharprime}detailed{\isacharunderscore}pdf{\isacharunderscore}of{\isacharunderscore}friendID{\isacharprime}{\isacharprime}\ {\isacharequal}\ STR\ {\isacharprime}{\isacharprime}detailed{\isacharunderscore}pdf{\isacharunderscore}of{\isacharunderscore}friendID{\isacharprime}{\isacharprime}{\isachardoublequoteclose}\isanewline
 %
 \isadelimproof
 \ \ %
@@ -842,8 +392,30 @@ possible{\isacharunderscore}steps\ linkedIn\ {\isadigit{2}}\ {\isacharless}{\isa
 \endisadelimproof
 \isanewline
 \isacommand{lemma}\isamarkupfalse%
-\ pdf{\isacharunderscore}other{\isacharunderscore}OON{\isacharcolon}\ {\isachardoublequoteopen}possible{\isacharunderscore}steps\ linkedIn\ {\isadigit{4}}\ {\isacharless}{\isadigit{1}}\ {\isacharcolon}{\isacharequal}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}free{\isacharprime}{\isacharprime}{\isachargreater}\ STR\ {\isacharprime}{\isacharprime}pdf{\isacharprime}{\isacharprime}\isanewline
-\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ {\isacharbrackleft}EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}otherID{\isacharprime}{\isacharprime}{\isacharcomma}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}OUT{\isacharunderscore}OF{\isacharunderscore}NETWORK{\isacharprime}{\isacharprime}{\isacharcomma}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}MNn{\isadigit{5}}{\isacharprime}{\isacharprime}{\isacharbrackright}\ {\isacharequal}\ {\isacharbraceleft}{\isacharbar}{\isacharparenleft}{\isadigit{5}}{\isacharcomma}\ pdf{\isadigit{1}}{\isacharparenright}{\isacharbar}{\isacharbraceright}{\isachardoublequoteclose}\isanewline
+\ implode{\isacharunderscore}free{\isacharcolon}\ {\isachardoublequoteopen}String{\isachardot}implode\ {\isacharprime}{\isacharprime}free{\isacharprime}{\isacharprime}\ {\isacharequal}\ STR\ {\isacharprime}{\isacharprime}free{\isacharprime}{\isacharprime}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}metis\ Literal{\isachardot}rep{\isacharunderscore}eq\ String{\isachardot}implode{\isacharunderscore}explode{\isacharunderscore}eq\ zero{\isacharunderscore}literal{\isachardot}rep{\isacharunderscore}eq{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemmas}\isamarkupfalse%
+\ implode\ {\isacharequal}\ implode{\isacharunderscore}summaryPDF\ implode{\isacharunderscore}detailedPDF{\isacharunderscore}friend\ implode{\isacharunderscore}detailedPDF\ \isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ implode{\isacharunderscore}OON\ implode{\isacharunderscore}name\ implode{\isacharunderscore}{\isadigit{4}}zoF\ implode{\isacharunderscore}MNn{\isadigit{5}}\ implode{\isacharunderscore}HM{\isadigit{8}}p\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ implode{\isacharunderscore}friendID\ implode{\isacharunderscore}otherID\ implode{\isacharunderscore}pdf\ implode{\isacharunderscore}login\ implode{\isacharunderscore}paid\ implode{\isacharunderscore}free\isanewline
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ login{\isacharunderscore}user{\isacharcolon}\ {\isachardoublequoteopen}possible{\isacharunderscore}steps\ linkedIn\ {\isadigit{0}}\ {\isacharless}{\isachargreater}\ STR\ {\isacharprime}{\isacharprime}login{\isacharprime}{\isacharprime}\ {\isacharbrackleft}u{\isacharbrackright}\ {\isacharequal}\ {\isacharbraceleft}{\isacharbar}{\isacharparenleft}{\isadigit{1}}{\isacharcomma}\ login{\isacharparenright}{\isacharbar}{\isacharbraceright}{\isachardoublequoteclose}\isanewline
 %
 \isadelimproof
 \ \ %
@@ -851,12 +423,11 @@ possible{\isacharunderscore}steps\ linkedIn\ {\isadigit{2}}\ {\isacharless}{\isa
 %
 \isatagproof
 \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ possible{\isacharunderscore}steps{\isacharunderscore}alt\ ffilter{\isacharunderscore}def\ fset{\isacharunderscore}both{\isacharunderscore}sides\ Abs{\isacharunderscore}fset{\isacharunderscore}inverse\ Set{\isachardot}filter{\isacharunderscore}def\ linkedIn{\isacharunderscore}def{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ possible{\isacharunderscore}steps{\isacharunderscore}singleton\ linkedIn{\isacharunderscore}def{\isacharparenright}\isanewline
 \ \ \isacommand{apply}\isamarkupfalse%
 \ safe\isanewline
 \ \ \isacommand{by}\isamarkupfalse%
-\ {\isacharparenleft}simp{\isacharunderscore}all\ add{\isacharcolon}\ pdf{\isacharunderscore}def\ pdf{\isadigit{1}}{\isacharunderscore}def\ gval{\isachardot}simps\ ValueEq{\isacharunderscore}def\ implode{\isacharunderscore}otherID\ implode{\isacharunderscore}friendID\isanewline
-\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ implode{\isacharunderscore}MNn{\isadigit{5}}\ implode{\isacharunderscore}HM{\isadigit{8}}p\ implode{\isacharunderscore}name\ implode{\isacharunderscore}OON\ Str{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ input{\isadigit{2}}state{\isacharunderscore}def{\isacharparenright}%
+\ {\isacharparenleft}simp{\isacharunderscore}all\ add{\isacharcolon}\ login{\isacharunderscore}def{\isacharparenright}%
 \endisatagproof
 {\isafoldproof}%
 %
@@ -866,7 +437,7 @@ possible{\isacharunderscore}steps\ linkedIn\ {\isadigit{2}}\ {\isacharless}{\isa
 \endisadelimproof
 \isanewline
 \isacommand{lemma}\isamarkupfalse%
-\ apply{\isacharunderscore}updates{\isacharunderscore}pdf{\isadigit{1}}{\isacharcolon}\ {\isachardoublequoteopen}apply{\isacharunderscore}updates\ {\isacharparenleft}Updates\ pdf{\isadigit{1}}{\isacharparenright}\ i\ r\ {\isacharequal}\ r{\isachardoublequoteclose}\isanewline
+\ apply{\isacharunderscore}updates{\isacharunderscore}login{\isacharcolon}\ {\isachardoublequoteopen}apply{\isacharunderscore}updates\ {\isacharparenleft}Updates\ XXXlinkedin{\isacharunderscore}ext{\isacharunderscore}fixed{\isachardot}login{\isacharparenright}\ {\isacharparenleft}join{\isacharunderscore}ir\ {\isacharbrackleft}EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}free{\isacharprime}{\isacharprime}{\isacharbrackright}\ {\isacharless}{\isachargreater}{\isacharparenright}\ {\isacharless}{\isachargreater}\ {\isacharequal}\ {\isacharless}{\isadigit{1}}\ {\isacharcolon}{\isacharequal}\ Str\ {\isacharprime}{\isacharprime}free{\isacharprime}{\isacharprime}{\isachargreater}{\isachardoublequoteclose}\isanewline
 %
 \isadelimproof
 \ \ %
@@ -876,7 +447,7 @@ possible{\isacharunderscore}steps\ linkedIn\ {\isadigit{2}}\ {\isacharless}{\isa
 \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}rule\ ext{\isacharparenright}\isanewline
 \ \ \isacommand{by}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ pdf{\isadigit{1}}{\isacharunderscore}def{\isacharparenright}%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ login{\isacharunderscore}def\ datastate{\isacharparenright}%
 \endisatagproof
 {\isafoldproof}%
 %
@@ -886,7 +457,7 @@ possible{\isacharunderscore}steps\ linkedIn\ {\isadigit{2}}\ {\isacharless}{\isa
 \endisadelimproof
 \isanewline
 \isacommand{lemma}\isamarkupfalse%
-\ possible{\isacharunderscore}steps{\isacharunderscore}{\isadigit{5}}{\isacharcolon}\ {\isachardoublequoteopen}possible{\isacharunderscore}steps\ linkedIn\ {\isadigit{5}}\ r\ l\ i\ {\isacharequal}\ {\isacharbraceleft}{\isacharbar}{\isacharbar}{\isacharbraceright}{\isachardoublequoteclose}\isanewline
+\ not{\isacharunderscore}view{\isacharunderscore}{\isadigit{1}}{\isacharcolon}\ {\isachardoublequoteopen}l\ {\isasymnoteq}\ STR\ {\isacharprime}{\isacharprime}view{\isacharprime}{\isacharprime}\ {\isasymLongrightarrow}\ possible{\isacharunderscore}steps\ linkedIn\ {\isadigit{1}}\ r\ l\ i\ {\isacharequal}\ {\isacharbraceleft}{\isacharbar}{\isacharbar}{\isacharbraceright}{\isachardoublequoteclose}\isanewline
 %
 \isadelimproof
 \ \ %
@@ -894,7 +465,7 @@ possible{\isacharunderscore}steps\ linkedIn\ {\isadigit{2}}\ {\isacharless}{\isa
 %
 \isatagproof
 \isacommand{by}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ possible{\isacharunderscore}steps{\isacharunderscore}def\ ffilter{\isacharunderscore}def\ fset{\isacharunderscore}both{\isacharunderscore}sides\ Abs{\isacharunderscore}fset{\isacharunderscore}inverse\ Set{\isachardot}filter{\isacharunderscore}def\ linkedIn{\isacharunderscore}def{\isacharparenright}%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ possible{\isacharunderscore}steps{\isacharunderscore}empty\ linkedIn{\isacharunderscore}def\ transitions{\isacharparenright}%
 \endisatagproof
 {\isafoldproof}%
 %
@@ -904,9 +475,162 @@ possible{\isacharunderscore}steps\ linkedIn\ {\isadigit{2}}\ {\isacharless}{\isa
 \endisadelimproof
 \isanewline
 \isacommand{lemma}\isamarkupfalse%
-\ aux{\isadigit{1}}{\isacharunderscore}aux{\isadigit{1}}{\isacharunderscore}aux{\isadigit{2}}{\isacharcolon}\ {\isachardoublequoteopen}alw\ {\isacharparenleft}{\isasymlambda}xs{\isachardot}\ inputs\ {\isacharparenleft}shd\ xs{\isacharparenright}\ {\isacharbang}\ {\isadigit{0}}\ {\isacharequal}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}otherID{\isacharprime}{\isacharprime}\ {\isasymlongrightarrow}\isanewline
-\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ label\ {\isacharparenleft}shd\ xs{\isacharparenright}\ {\isacharequal}\ STR\ {\isacharprime}{\isacharprime}pdf{\isacharprime}{\isacharprime}\ {\isasymlongrightarrow}\ output\ {\isacharparenleft}shd\ {\isacharparenleft}stl\ xs{\isacharparenright}{\isacharparenright}\ {\isasymnoteq}\ {\isacharbrackleft}Some\ {\isacharparenleft}EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}detailed{\isacharunderscore}pdf{\isacharunderscore}of{\isacharunderscore}otherID{\isacharprime}{\isacharprime}{\isacharparenright}{\isacharbrackright}{\isacharparenright}\isanewline
-\ \ \ \ \ \ \ \ \ \ \ \ \ {\isacharparenleft}make{\isacharunderscore}full{\isacharunderscore}observation\ linkedIn\ {\isacharparenleft}Some\ {\isadigit{5}}{\isacharparenright}\ {\isacharless}{\isadigit{1}}\ {\isacharcolon}{\isacharequal}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}free{\isacharprime}{\isacharprime}{\isachargreater}\ i{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ view{\isacharunderscore}friend{\isacharcolon}\ {\isachardoublequoteopen}possible{\isacharunderscore}steps\ linkedIn\ {\isadigit{1}}\ {\isacharless}{\isadigit{1}}\ {\isacharcolon}{\isacharequal}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}free{\isacharprime}{\isacharprime}{\isachargreater}\ STR\ {\isacharprime}{\isacharprime}view{\isacharprime}{\isacharprime}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ {\isacharbrackleft}EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}friendID{\isacharprime}{\isacharprime}{\isacharcomma}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}name{\isacharprime}{\isacharprime}{\isacharcomma}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}HM{\isadigit{8}}p{\isacharprime}{\isacharprime}{\isacharbrackright}\ {\isacharequal}\ {\isacharbraceleft}{\isacharbar}{\isacharparenleft}{\isadigit{2}}{\isacharcomma}\ view{\isacharparenright}{\isacharbar}{\isacharbraceright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ possible{\isacharunderscore}steps{\isacharunderscore}singleton\ linkedIn{\isacharunderscore}def{\isacharparenright}\isanewline
+\ \ \isacommand{apply}\isamarkupfalse%
+\ safe\isanewline
+\ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}simp{\isacharunderscore}all\ add{\isacharcolon}\ transitions\ apply{\isacharunderscore}guards\ implode\ Str{\isacharunderscore}def{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ not{\isacharunderscore}pdf{\isacharunderscore}{\isadigit{2}}{\isacharcolon}\ {\isachardoublequoteopen}l\ {\isasymnoteq}\ STR\ {\isacharprime}{\isacharprime}pdf{\isacharprime}{\isacharprime}\ {\isasymLongrightarrow}\ possible{\isacharunderscore}steps\ linkedIn\ {\isadigit{2}}\ r\ l\ i\ {\isacharequal}\ {\isacharbraceleft}{\isacharbar}{\isacharbar}{\isacharbraceright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ possible{\isacharunderscore}steps{\isacharunderscore}empty\ linkedIn{\isacharunderscore}def\ transitions{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ pdf{\isacharunderscore}friend{\isacharcolon}\ {\isachardoublequoteopen}possible{\isacharunderscore}steps\ linkedIn\ {\isadigit{2}}\ {\isacharless}{\isadigit{1}}\ {\isacharcolon}{\isacharequal}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}free{\isacharprime}{\isacharprime}{\isachargreater}\ STR\ {\isacharprime}{\isacharprime}pdf{\isacharprime}{\isacharprime}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ {\isacharbrackleft}EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}friendID{\isacharprime}{\isacharprime}{\isacharcomma}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}name{\isacharprime}{\isacharprime}{\isacharcomma}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}HM{\isadigit{8}}p{\isacharprime}{\isacharprime}{\isacharbrackright}\ {\isacharequal}\ {\isacharbraceleft}{\isacharbar}{\isacharparenleft}{\isadigit{3}}{\isacharcomma}\ pdf{\isacharparenright}{\isacharbar}{\isacharbraceright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ possible{\isacharunderscore}steps{\isacharunderscore}singleton\ linkedIn{\isacharunderscore}def{\isacharparenright}\isanewline
+\ \ \isacommand{apply}\isamarkupfalse%
+\ safe\isanewline
+\ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}simp{\isacharunderscore}all\ add{\isacharcolon}\ transitions\ apply{\isacharunderscore}guards\ implode\ Str{\isacharunderscore}def{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ pdf{\isacharunderscore}{\isadigit{2}}{\isacharunderscore}invalid{\isacharcolon}\ {\isachardoublequoteopen}i\ {\isasymnoteq}\ {\isacharbrackleft}Str\ {\isacharprime}{\isacharprime}friendID{\isacharprime}{\isacharprime}{\isacharcomma}\ Str\ {\isacharprime}{\isacharprime}name{\isacharprime}{\isacharprime}{\isacharcomma}\ Str\ {\isacharprime}{\isacharprime}HM{\isadigit{8}}p{\isacharprime}{\isacharprime}{\isacharbrackright}\ {\isasymLongrightarrow}\ \isanewline
+possible{\isacharunderscore}steps\ linkedIn\ {\isadigit{2}}\ {\isacharless}{\isadigit{1}}\ {\isacharcolon}{\isacharequal}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}free{\isacharprime}{\isacharprime}{\isachargreater}\ STR\ {\isacharprime}{\isacharprime}pdf{\isacharprime}{\isacharprime}\ i\ {\isacharequal}\ {\isacharbraceleft}{\isacharbar}{\isacharbar}{\isacharbraceright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}case{\isacharunderscore}tac\ i{\isacharparenright}\isanewline
+\ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ possible{\isacharunderscore}steps{\isacharunderscore}empty\ linkedIn{\isacharunderscore}def\ pdf{\isacharunderscore}def{\isacharparenright}\isanewline
+\ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}case{\isacharunderscore}tac\ list{\isacharparenright}\isanewline
+\ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ possible{\isacharunderscore}steps{\isacharunderscore}empty\ linkedIn{\isacharunderscore}def\ pdf{\isacharunderscore}def{\isacharparenright}\isanewline
+\ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}case{\isacharunderscore}tac\ lista{\isacharparenright}\isanewline
+\ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ possible{\isacharunderscore}steps{\isacharunderscore}empty\ linkedIn{\isacharunderscore}def\ pdf{\isacharunderscore}def{\isacharparenright}\isanewline
+\ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}case{\isacharunderscore}tac\ listb{\isacharparenright}\isanewline
+\ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ possible{\isacharunderscore}steps{\isacharunderscore}empty\ linkedIn{\isacharunderscore}def\ pdf{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharparenright}\isanewline
+\ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ possible{\isacharunderscore}steps{\isacharunderscore}empty\ linkedIn{\isacharunderscore}def\ pdf{\isacharunderscore}def{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ stop{\isacharunderscore}at{\isacharunderscore}{\isadigit{3}}{\isacharcolon}\ {\isachardoublequoteopen}possible{\isacharunderscore}steps\ linkedIn\ {\isadigit{3}}\ r\ l\ i\ {\isacharequal}\ {\isacharbraceleft}{\isacharbar}{\isacharbar}{\isacharbraceright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ possible{\isacharunderscore}steps{\isacharunderscore}empty\ linkedIn{\isacharunderscore}def{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ stop{\isacharunderscore}at{\isacharunderscore}{\isadigit{5}}{\isacharcolon}\ {\isachardoublequoteopen}possible{\isacharunderscore}steps\ linkedIn\ {\isadigit{5}}\ r\ l\ i\ {\isacharequal}\ {\isacharbraceleft}{\isacharbar}{\isacharbar}{\isacharbraceright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ possible{\isacharunderscore}steps{\isacharunderscore}empty\ linkedIn{\isacharunderscore}def{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ stop{\isacharunderscore}at{\isacharunderscore}{\isadigit{7}}{\isacharcolon}\ {\isachardoublequoteopen}possible{\isacharunderscore}steps\ linkedIn\ {\isadigit{7}}\ r\ l\ i\ {\isacharequal}\ {\isacharbraceleft}{\isacharbar}{\isacharbar}{\isacharbraceright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ possible{\isacharunderscore}steps{\isacharunderscore}empty\ linkedIn{\isacharunderscore}def{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ s{\isadigit{2}}{\isacharunderscore}ok{\isacharcolon}\ {\isachardoublequoteopen}alw\ {\isacharparenleft}{\isasymlambda}xs{\isachardot}\ label\ {\isacharparenleft}shd\ xs{\isacharparenright}\ {\isacharequal}\ STR\ {\isacharprime}{\isacharprime}pdf{\isacharprime}{\isacharprime}\ {\isasymand}\ ValueEq\ {\isacharparenleft}Some\ {\isacharparenleft}Inputs\ {\isadigit{0}}\ xs{\isacharparenright}{\isacharparenright}\ {\isacharparenleft}Some\ {\isacharparenleft}EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}otherID{\isacharprime}{\isacharprime}{\isacharparenright}{\isacharparenright}\ {\isacharequal}\ trilean{\isachardot}true\ {\isasymlongrightarrow}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ output\ {\isacharparenleft}shd\ xs{\isacharparenright}\ {\isasymnoteq}\ {\isacharbrackleft}Some\ {\isacharparenleft}EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}detailed{\isacharunderscore}pdf{\isacharunderscore}of{\isacharunderscore}otherID{\isacharprime}{\isacharprime}{\isacharparenright}{\isacharbrackright}{\isacharparenright}\isanewline
+\ \ \ \ \ {\isacharparenleft}make{\isacharunderscore}full{\isacharunderscore}observation\ linkedIn\ {\isacharparenleft}Some\ {\isadigit{2}}{\isacharparenright}\ {\isacharless}{\isadigit{1}}\ {\isacharcolon}{\isacharequal}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}free{\isacharprime}{\isacharprime}{\isachargreater}\ i{\isacharparenright}{\isachardoublequoteclose}\isanewline
 %
 \isadelimproof
 %
@@ -921,336 +645,58 @@ possible{\isacharunderscore}steps\ linkedIn\ {\isadigit{2}}\ {\isacharless}{\isa
 \ \isacommand{show}\isamarkupfalse%
 \ {\isacharquery}case\isanewline
 \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}shd\ i{\isachardoublequoteclose}{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ ltl{\isacharunderscore}step{\isacharunderscore}alt{\isacharparenright}\isanewline
 \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ simp\isanewline
-\ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ possible{\isacharunderscore}steps{\isacharunderscore}{\isadigit{5}}{\isacharparenright}\isanewline
+\ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}{\isacharparenleft}fst\ {\isacharparenleft}shd\ i{\isacharparenright}{\isacharparenright}\ {\isacharequal}\ STR\ {\isacharprime}{\isacharprime}pdf{\isacharprime}{\isacharprime}{\isachardoublequoteclose}{\isacharparenright}\isanewline
+\ \ \ \ \ \isacommand{defer}\isamarkupfalse%
+\isanewline
+\ \ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ not{\isacharunderscore}pdf{\isacharunderscore}{\isadigit{2}}{\isacharparenright}\isanewline
 \ \ \ \ \isacommand{using}\isamarkupfalse%
-\ none{\isacharunderscore}never{\isacharunderscore}detailed\ \isacommand{by}\isamarkupfalse%
-\ blast\isanewline
-\isacommand{qed}\isamarkupfalse%
-%
-\endisatagproof
-{\isafoldproof}%
-%
-\isadelimproof
-\isanewline
-%
-\endisadelimproof
-\isanewline
-\isacommand{lemma}\isamarkupfalse%
-\ not{\isacharunderscore}pdf{\isacharunderscore}other{\isacharcolon}\ {\isachardoublequoteopen}ba\ {\isasymnoteq}\ {\isacharbrackleft}EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}otherID{\isacharprime}{\isacharprime}{\isacharcomma}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}OUT{\isacharunderscore}OF{\isacharunderscore}NETWORK{\isacharprime}{\isacharprime}{\isacharcomma}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}MNn{\isadigit{5}}{\isacharprime}{\isacharprime}{\isacharbrackright}\ {\isasymLongrightarrow}\isanewline
-\ \ \ \ \ \ \ \ possible{\isacharunderscore}steps\ linkedIn\ {\isadigit{4}}\ {\isacharless}{\isadigit{1}}\ {\isacharcolon}{\isacharequal}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}free{\isacharprime}{\isacharprime}{\isachargreater}\ STR\ {\isacharprime}{\isacharprime}pdf{\isacharprime}{\isacharprime}\ ba\ {\isacharequal}\ {\isacharbraceleft}{\isacharbar}{\isacharbar}{\isacharbraceright}{\isachardoublequoteclose}\isanewline
-%
-\isadelimproof
-\ \ %
-\endisadelimproof
-%
-\isatagproof
-\isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ possible{\isacharunderscore}steps{\isacharunderscore}def\ ffilter{\isacharunderscore}def\ fset{\isacharunderscore}both{\isacharunderscore}sides\ Abs{\isacharunderscore}fset{\isacharunderscore}inverse\ Set{\isachardot}filter{\isacharunderscore}def\ \isanewline
-\ \ \ \ \ \ \ \ \ linkedIn{\isacharunderscore}def\ pdf{\isadigit{1}}{\isacharunderscore}def\ gval{\isachardot}simps\ ValueEq{\isacharunderscore}def\ Str{\isacharunderscore}def\ implode{\isacharunderscore}friendID\ implode{\isacharunderscore}otherID\ implode{\isacharunderscore}name\ implode{\isacharunderscore}HM{\isadigit{8}}p{\isacharparenright}\isanewline
-\ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}case{\isacharunderscore}tac\ ba{\isacharparenright}\isanewline
-\ \ \ \isacommand{apply}\isamarkupfalse%
-\ simp\isanewline
-\ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}case{\isacharunderscore}tac\ list{\isacharparenright}\isanewline
-\ \ \ \isacommand{apply}\isamarkupfalse%
-\ simp\isanewline
-\ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}case{\isacharunderscore}tac\ lista{\isacharparenright}\isanewline
-\ \ \ \isacommand{apply}\isamarkupfalse%
-\ simp\isanewline
-\ \ \isacommand{apply}\isamarkupfalse%
-\ clarify\isanewline
-\ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ apply{\isacharunderscore}guards{\isacharunderscore}def\ gval{\isachardot}simps\ ValueEq{\isacharunderscore}def\ join{\isacharunderscore}ir{\isacharunderscore}def\ input{\isadigit{2}}state{\isacharunderscore}def{\isacharparenright}\isanewline
-\ \ \isacommand{by}\isamarkupfalse%
-\ auto%
-\endisatagproof
-{\isafoldproof}%
-%
-\isadelimproof
-\isanewline
-%
-\endisadelimproof
-\isanewline
-\isacommand{lemma}\isamarkupfalse%
-\ not{\isacharunderscore}pdfOther{\isacharunderscore}{\isadigit{2}}{\isacharcolon}\ {\isachardoublequoteopen}aa\ {\isasymnoteq}\ STR\ {\isacharprime}{\isacharprime}pdf{\isacharprime}{\isacharprime}\ {\isasymLongrightarrow}\ possible{\isacharunderscore}steps\ linkedIn\ {\isadigit{4}}\ {\isacharless}{\isadigit{1}}\ {\isacharcolon}{\isacharequal}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}free{\isacharprime}{\isacharprime}{\isachargreater}\ aa\ ba\ {\isacharequal}\ {\isacharbraceleft}{\isacharbar}{\isacharbar}{\isacharbraceright}{\isachardoublequoteclose}\isanewline
-%
-\isadelimproof
-\ \ %
-\endisadelimproof
-%
-\isatagproof
-\isacommand{by}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ possible{\isacharunderscore}steps{\isacharunderscore}def\ ffilter{\isacharunderscore}def\ fset{\isacharunderscore}both{\isacharunderscore}sides\ Abs{\isacharunderscore}fset{\isacharunderscore}inverse\ Set{\isachardot}filter{\isacharunderscore}def\ linkedIn{\isacharunderscore}def\ pdf{\isadigit{1}}{\isacharunderscore}def{\isacharparenright}%
-\endisatagproof
-{\isafoldproof}%
-%
-\isadelimproof
-\isanewline
-%
-\endisadelimproof
-\isanewline
-\isacommand{lemma}\isamarkupfalse%
-\ viewOther{\isacharunderscore}fuzz{\isacharcolon}\ {\isachardoublequoteopen}possible{\isacharunderscore}steps\ linkedIn\ {\isadigit{1}}\ {\isacharless}{\isadigit{1}}\ {\isacharcolon}{\isacharequal}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}free{\isacharprime}{\isacharprime}{\isachargreater}\ STR\ {\isacharprime}{\isacharprime}view{\isacharprime}{\isacharprime}\isanewline
-\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ {\isacharbrackleft}EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}otherID{\isacharprime}{\isacharprime}{\isacharcomma}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}name{\isacharprime}{\isacharprime}{\isacharcomma}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}{\isadigit{4}}zoF{\isacharprime}{\isacharprime}{\isacharbrackright}\ {\isacharequal}\ {\isacharbraceleft}{\isacharbar}{\isacharparenleft}{\isadigit{4}}{\isacharcomma}\ view{\isadigit{2}}{\isacharparenright}{\isacharbar}{\isacharbraceright}{\isachardoublequoteclose}\isanewline
-%
-\isadelimproof
-\ %
-\endisadelimproof
-%
-\isatagproof
-\isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ possible{\isacharunderscore}steps{\isacharunderscore}alt\ ffilter{\isacharunderscore}def\ fset{\isacharunderscore}both{\isacharunderscore}sides\ Abs{\isacharunderscore}fset{\isacharunderscore}inverse\ Set{\isachardot}filter{\isacharunderscore}def\ linkedIn{\isacharunderscore}def{\isacharparenright}\isanewline
-\ \ \isacommand{apply}\isamarkupfalse%
-\ safe\isanewline
-\ \ \isacommand{by}\isamarkupfalse%
-\ {\isacharparenleft}simp{\isacharunderscore}all\ add{\isacharcolon}\ view{\isacharunderscore}def\ gval{\isachardot}simps\ ValueEq{\isacharunderscore}def\ implode{\isacharunderscore}free\ implode{\isacharunderscore}paid\ implode{\isacharunderscore}otherID\isanewline
-\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ implode{\isacharunderscore}friendID\ implode{\isacharunderscore}MNn{\isadigit{5}}\ implode{\isacharunderscore}HM{\isadigit{8}}p\ implode{\isacharunderscore}name\ implode{\isacharunderscore}OON\ Str{\isacharunderscore}def\isanewline
-\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ view{\isadigit{2}}{\isacharunderscore}def\ view{\isadigit{3}}{\isacharunderscore}def\ view{\isadigit{1}}{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ input{\isadigit{2}}state{\isacharunderscore}def{\isacharparenright}%
-\endisatagproof
-{\isafoldproof}%
-%
-\isadelimproof
-\isanewline
-%
-\endisadelimproof
-\isanewline
-\isacommand{lemma}\isamarkupfalse%
-\ apply{\isacharunderscore}updates{\isacharunderscore}view{\isadigit{2}}{\isacharcolon}\ {\isachardoublequoteopen}apply{\isacharunderscore}updates\ {\isacharparenleft}Updates\ view{\isadigit{2}}{\isacharparenright}\ i\ r\ {\isacharequal}\ r{\isachardoublequoteclose}\isanewline
-%
-\isadelimproof
-\ \ %
-\endisadelimproof
-%
-\isatagproof
-\isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}rule\ ext{\isacharparenright}\isanewline
-\ \ \isacommand{by}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ view{\isadigit{2}}{\isacharunderscore}def{\isacharparenright}%
-\endisatagproof
-{\isafoldproof}%
-%
-\isadelimproof
-\isanewline
-%
-\endisadelimproof
-\isanewline
-\isacommand{lemma}\isamarkupfalse%
-\ invalid{\isacharcolon}\ {\isachardoublequoteopen}b\ {\isasymnoteq}\ {\isacharbrackleft}EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}friendID{\isacharprime}{\isacharprime}{\isacharcomma}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}name{\isacharprime}{\isacharprime}{\isacharcomma}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}HM{\isadigit{8}}p{\isacharprime}{\isacharprime}{\isacharbrackright}\ {\isasymLongrightarrow}\isanewline
-\ \ \ \ \ \ \ \ b\ {\isasymnoteq}\ {\isacharbrackleft}EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}otherID{\isacharprime}{\isacharprime}{\isacharcomma}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}OUT{\isacharunderscore}OF{\isacharunderscore}NETWORK{\isacharprime}{\isacharprime}{\isacharcomma}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}MNn{\isadigit{5}}{\isacharprime}{\isacharprime}{\isacharbrackright}\ {\isasymLongrightarrow}\isanewline
-\ \ \ \ \ \ \ \ b\ {\isasymnoteq}\ {\isacharbrackleft}EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}otherID{\isacharprime}{\isacharprime}{\isacharcomma}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}name{\isacharprime}{\isacharprime}{\isacharcomma}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}{\isadigit{4}}zoF{\isacharprime}{\isacharprime}{\isacharbrackright}\ {\isasymLongrightarrow}\isanewline
-\ \ \ \ \ \ \ \ possible{\isacharunderscore}steps\ linkedIn\ {\isadigit{1}}\ {\isacharless}{\isadigit{1}}\ {\isacharcolon}{\isacharequal}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}free{\isacharprime}{\isacharprime}{\isachargreater}\ STR\ {\isacharprime}{\isacharprime}view{\isacharprime}{\isacharprime}\ b\ {\isacharequal}\ {\isacharbraceleft}{\isacharbar}{\isacharbar}{\isacharbraceright}{\isachardoublequoteclose}\isanewline
-%
-\isadelimproof
-\ \ %
-\endisadelimproof
-%
-\isatagproof
-\isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ possible{\isacharunderscore}steps{\isacharunderscore}def\ ffilter{\isacharunderscore}def\ fset{\isacharunderscore}both{\isacharunderscore}sides\ Abs{\isacharunderscore}fset{\isacharunderscore}inverse\ Set{\isachardot}filter{\isacharunderscore}def\ linkedIn{\isacharunderscore}def{\isacharparenright}\isanewline
-\ \ \isacommand{apply}\isamarkupfalse%
-\ safe\isanewline
+\ no{\isacharunderscore}output{\isacharunderscore}none{\isacharbrackleft}of\ linkedIn\ {\isachardoublequoteopen}{\isacharless}{\isadigit{1}}\ {\isacharcolon}{\isacharequal}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}free{\isacharprime}{\isacharprime}{\isachargreater}{\isachardoublequoteclose}\ {\isachardoublequoteopen}{\isacharparenleft}stl\ i{\isacharparenright}{\isachardoublequoteclose}{\isacharbrackright}\isanewline
+\ \ \ \ \isacommand{unfolding}\isamarkupfalse%
+\ OutputEq{\isacharunderscore}def\isanewline
 \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp{\isacharunderscore}all\ add{\isacharcolon}\ view{\isacharunderscore}def\ gval{\isachardot}simps\ ValueEq{\isacharunderscore}def\ view{\isadigit{1}}{\isacharunderscore}def\ view{\isadigit{2}}{\isacharunderscore}def\ view{\isadigit{3}}{\isacharunderscore}def\ Str{\isacharunderscore}def\ input{\isadigit{2}}state{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ join{\isacharunderscore}ir{\isacharunderscore}def\ implode{\isacharunderscore}free\ implode{\isacharunderscore}paid\ implode{\isacharunderscore}friendID\ implode{\isacharunderscore}otherID\ implode{\isacharunderscore}name\ implode{\isacharunderscore}OON\ implode{\isacharunderscore}MNn{\isadigit{5}}\ implode{\isacharunderscore}HM{\isadigit{8}}p\ implode{\isacharunderscore}{\isadigit{4}}z{\isadigit{0}}f{\isacharparenright}\isanewline
-\ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}case{\isacharunderscore}tac\ b{\isacharparenright}\isanewline
-\ \ \ \isacommand{apply}\isamarkupfalse%
-\ simp\isanewline
-\ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}case{\isacharunderscore}tac\ list{\isacharparenright}\isanewline
-\ \ \ \isacommand{apply}\isamarkupfalse%
-\ simp\isanewline
-\ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}case{\isacharunderscore}tac\ lista{\isacharparenright}\isanewline
-\ \ \ \isacommand{apply}\isamarkupfalse%
-\ simp\isanewline
-\ \ \isacommand{apply}\isamarkupfalse%
-\ clarify\isanewline
-\ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ {\isacharparenright}\isanewline
-\ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ auto{\isacharbrackleft}{\isadigit{1}}{\isacharbrackright}\isanewline
-\ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}case{\isacharunderscore}tac\ b{\isacharparenright}\isanewline
-\ \ \ \isacommand{apply}\isamarkupfalse%
-\ simp\isanewline
-\ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}case{\isacharunderscore}tac\ list{\isacharparenright}\isanewline
-\ \ \ \isacommand{apply}\isamarkupfalse%
-\ simp\isanewline
-\ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}case{\isacharunderscore}tac\ lista{\isacharparenright}\isanewline
-\ \ \ \isacommand{apply}\isamarkupfalse%
-\ simp\isanewline
-\ \ \isacommand{apply}\isamarkupfalse%
-\ clarify\isanewline
-\ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ input{\isadigit{2}}state{\isacharunderscore}def{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ alw{\isacharunderscore}mono{\isacharparenright}\isanewline
 \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ auto{\isacharbrackleft}{\isadigit{1}}{\isacharbrackright}\isanewline
-\ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}case{\isacharunderscore}tac\ b{\isacharparenright}\isanewline
-\ \ \ \isacommand{apply}\isamarkupfalse%
-\ simp\isanewline
-\ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}case{\isacharunderscore}tac\ list{\isacharparenright}\isanewline
-\ \ \ \isacommand{apply}\isamarkupfalse%
-\ simp\isanewline
-\ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}case{\isacharunderscore}tac\ lista{\isacharparenright}\isanewline
-\ \ \ \isacommand{apply}\isamarkupfalse%
-\ simp\isanewline
-\ \ \isacommand{apply}\isamarkupfalse%
-\ clarify\isanewline
-\ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ input{\isadigit{2}}state{\isacharunderscore}def{\isacharparenright}\isanewline
-\ \ \isacommand{using}\isamarkupfalse%
-\ trilean{\isachardot}distinct{\isacharparenleft}{\isadigit{1}}{\isacharparenright}\ \isacommand{by}\isamarkupfalse%
-\ presburger%
-\endisatagproof
-{\isafoldproof}%
-%
-\isadelimproof
+\ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}{\isacharparenleft}snd\ {\isacharparenleft}shd\ i{\isacharparenright}{\isacharparenright}\ {\isacharequal}\ {\isacharbrackleft}Str\ {\isacharprime}{\isacharprime}friendID{\isacharprime}{\isacharprime}{\isacharcomma}\ Str\ {\isacharprime}{\isacharprime}name{\isacharprime}{\isacharprime}{\isacharcomma}\ Str\ {\isacharprime}{\isacharprime}HM{\isadigit{8}}p{\isacharprime}{\isacharprime}{\isacharbrackright}{\isachardoublequoteclose}{\isacharparenright}\isanewline
+\ \ \ \ \ \isacommand{defer}\isamarkupfalse%
 \isanewline
-%
-\endisadelimproof
-\isanewline
-\isacommand{lemma}\isamarkupfalse%
-\ aux{\isadigit{1}}{\isacharunderscore}aux{\isadigit{1}}{\isacharcolon}\ {\isachardoublequoteopen}alw\ {\isacharparenleft}{\isasymlambda}xs{\isachardot}\ inputs\ {\isacharparenleft}shd\ xs{\isacharparenright}\ {\isacharbang}\ {\isadigit{0}}\ {\isacharequal}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}otherID{\isacharprime}{\isacharprime}\ {\isasymlongrightarrow}\isanewline
-\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ label\ {\isacharparenleft}shd\ xs{\isacharparenright}\ {\isacharequal}\ STR\ {\isacharprime}{\isacharprime}pdf{\isacharprime}{\isacharprime}\ {\isasymlongrightarrow}\ output\ {\isacharparenleft}shd\ {\isacharparenleft}stl\ xs{\isacharparenright}{\isacharparenright}\ {\isasymnoteq}\ {\isacharbrackleft}Some\ {\isacharparenleft}EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}detailed{\isacharunderscore}pdf{\isacharunderscore}of{\isacharunderscore}otherID{\isacharprime}{\isacharprime}{\isacharparenright}{\isacharbrackright}{\isacharparenright}\isanewline
-\ \ \ \ \ \ \ \ \ \ \ \ {\isacharparenleft}make{\isacharunderscore}full{\isacharunderscore}observation\ linkedIn\ {\isacharparenleft}fst\ {\isacharparenleft}ltl{\isacharunderscore}step\ linkedIn\ {\isacharparenleft}Some\ {\isadigit{1}}{\isacharparenright}\ {\isacharless}{\isadigit{1}}\ {\isacharcolon}{\isacharequal}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}free{\isacharprime}{\isacharprime}{\isachargreater}\ {\isacharparenleft}shd\ i{\isacharparenright}{\isacharparenright}{\isacharparenright}\isanewline
-\ \ \ \ \ \ \ \ \ \ \ \ \ \ {\isacharparenleft}snd\ {\isacharparenleft}snd\ {\isacharparenleft}ltl{\isacharunderscore}step\ linkedIn\ {\isacharparenleft}Some\ {\isadigit{1}}{\isacharparenright}\ {\isacharless}{\isadigit{1}}\ {\isacharcolon}{\isacharequal}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}free{\isacharprime}{\isacharprime}{\isachargreater}\ {\isacharparenleft}shd\ i{\isacharparenright}{\isacharparenright}{\isacharparenright}{\isacharparenright}\ {\isacharparenleft}stl\ i{\isacharparenright}{\isacharparenright}{\isachardoublequoteclose}\isanewline
-%
-\isadelimproof
-%
-\endisadelimproof
-%
-\isatagproof
-\isacommand{proof}\isamarkupfalse%
+\ \ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ pdf{\isacharunderscore}{\isadigit{2}}{\isacharunderscore}invalid{\isacharparenright}\isanewline
+\ \ \ \ \isacommand{using}\isamarkupfalse%
+\ no{\isacharunderscore}output{\isacharunderscore}none{\isacharbrackleft}of\ linkedIn\ {\isachardoublequoteopen}{\isacharless}{\isadigit{1}}\ {\isacharcolon}{\isacharequal}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}free{\isacharprime}{\isacharprime}{\isachargreater}{\isachardoublequoteclose}\ {\isachardoublequoteopen}{\isacharparenleft}stl\ i{\isacharparenright}{\isachardoublequoteclose}{\isacharbrackright}\isanewline
+\ \ \ \ \isacommand{unfolding}\isamarkupfalse%
+\ OutputEq{\isacharunderscore}def\isanewline
+\ \ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ alw{\isacharunderscore}mono{\isacharparenright}\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ pdf{\isacharunderscore}friend{\isacharparenright}\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ standard\isanewline
+\ \ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ pdf{\isacharunderscore}def\ apply{\isacharunderscore}outputs\ Str{\isacharunderscore}def\ implode{\isacharparenright}\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}rule\ disjI{\isadigit{2}}{\isacharparenright}\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ pdf{\isacharunderscore}def{\isacharparenright}\isanewline
+\ \ \isacommand{proof}\isamarkupfalse%
 {\isacharparenleft}coinduction{\isacharparenright}\isanewline
-\ \ \isacommand{have}\isamarkupfalse%
-\ OON{\isacharunderscore}neq{\isacharunderscore}name{\isacharcolon}\ {\isachardoublequoteopen}EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}OUT{\isacharunderscore}OF{\isacharunderscore}NETWORK{\isacharprime}{\isacharprime}\ {\isasymnoteq}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}name{\isacharprime}{\isacharprime}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \isacommand{case}\isamarkupfalse%
+\ alw\isanewline
+\ \ \ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}case\isanewline
+\ \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ ltl{\isacharunderscore}step{\isacharunderscore}alt\ stop{\isacharunderscore}at{\isacharunderscore}{\isadigit{3}}{\isacharparenright}\isanewline
+\ \ \ \ \isacommand{using}\isamarkupfalse%
+\ no{\isacharunderscore}output{\isacharunderscore}none{\isacharbrackleft}of\ linkedIn\ {\isachardoublequoteopen}{\isacharless}{\isadigit{1}}\ {\isacharcolon}{\isacharequal}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}free{\isacharprime}{\isacharprime}{\isachargreater}{\isachardoublequoteclose}\ {\isachardoublequoteopen}stl\ {\isacharparenleft}stl\ i{\isacharparenright}{\isachardoublequoteclose}{\isacharbrackright}\isanewline
+\ \ \ \ \isacommand{unfolding}\isamarkupfalse%
+\ OutputEq{\isacharunderscore}def\isanewline
 \ \ \ \ \isacommand{by}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ Str{\isacharunderscore}def\ implode{\isacharunderscore}OON\ implode{\isacharunderscore}name{\isacharparenright}\isanewline
-\ \ \isacommand{case}\isamarkupfalse%
-\ alw\isanewline
-\ \ \isacommand{then}\isamarkupfalse%
-\ \isacommand{show}\isamarkupfalse%
-\ {\isacharquery}case\isanewline
-\ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ simp\isanewline
-\ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}shd\ i{\isachardoublequoteclose}{\isacharparenright}\isanewline
-\ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ simp\isanewline
-\ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}a\ {\isacharequal}\ STR\ {\isacharprime}{\isacharprime}view{\isacharprime}{\isacharprime}{\isachardoublequoteclose}{\isacharparenright}\isanewline
-\ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ simp\isanewline
-\ \ \ \ \ \isanewline
-\ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}b\ {\isacharequal}\ {\isacharbrackleft}Str\ {\isacharprime}{\isacharprime}friendID{\isacharprime}{\isacharprime}{\isacharcomma}\ Str\ {\isacharprime}{\isacharprime}name{\isacharprime}{\isacharprime}{\isacharcomma}\ Str\ {\isacharprime}{\isacharprime}HM{\isadigit{8}}p{\isacharprime}{\isacharprime}{\isacharbrackright}{\isachardoublequoteclose}{\isacharparenright}\isanewline
-\ \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ viewFriend\ apply{\isacharunderscore}updates{\isacharunderscore}view{\isacharparenright}\isanewline
-\ \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}shd\ {\isacharparenleft}stl\ i{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}STR\ {\isacharprime}{\isacharprime}pdf{\isacharprime}{\isacharprime}{\isacharcomma}\ {\isacharbrackleft}Str\ {\isacharprime}{\isacharprime}friendID{\isacharprime}{\isacharprime}{\isacharcomma}\ Str\ {\isacharprime}{\isacharprime}name{\isacharprime}{\isacharprime}{\isacharcomma}\ Str\ {\isacharprime}{\isacharprime}HM{\isadigit{8}}p{\isacharprime}{\isacharprime}{\isacharbrackright}{\isacharparenright}{\isachardoublequoteclose}{\isacharparenright}\isanewline
-\ \ \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ simp\isanewline
-\ \ \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ pdfFriend\ apply{\isacharunderscore}updates{\isacharunderscore}pdf\ implode{\isacharunderscore}friendID\ implode{\isacharunderscore}otherID\ pdfOther{\isacharunderscore}s{\isadigit{2}}\ aux{\isadigit{1}}{\isacharunderscore}aux{\isadigit{1}}{\isacharunderscore}aux{\isadigit{1}}{\isacharparenright}\isanewline
-\ \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}shd\ {\isacharparenleft}stl\ i{\isacharparenright}{\isachardoublequoteclose}{\isacharparenright}\isanewline
-\ \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ simp\isanewline
-\ \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}aa\ {\isacharequal}\ STR\ {\isacharprime}{\isacharprime}pdf{\isacharprime}{\isacharprime}{\isachardoublequoteclose}{\isacharparenright}\isanewline
-\ \ \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ not{\isacharunderscore}pdfFriend{\isacharparenright}\isanewline
-\ \ \ \ \isacommand{using}\isamarkupfalse%
-\ none{\isacharunderscore}never{\isacharunderscore}detailed\ \isacommand{apply}\isamarkupfalse%
-\ blast\isanewline
-\ \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ not{\isacharunderscore}pdfFriend{\isacharunderscore}{\isadigit{2}}{\isacharparenright}\isanewline
-\ \ \ \ \isacommand{using}\isamarkupfalse%
-\ none{\isacharunderscore}never{\isacharunderscore}detailed\ \isacommand{apply}\isamarkupfalse%
-\ blast\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ alw{\isacharunderscore}mono{\isacharparenright}\isanewline
+\ \ \isacommand{qed}\isamarkupfalse%
 \isanewline
-\ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}b\ {\isacharequal}\ {\isacharbrackleft}Str\ {\isacharprime}{\isacharprime}otherID{\isacharprime}{\isacharprime}{\isacharcomma}\ Str\ {\isacharprime}{\isacharprime}OUT{\isacharunderscore}OF{\isacharunderscore}NETWORK{\isacharprime}{\isacharprime}{\isacharcomma}\ Str\ {\isacharprime}{\isacharprime}MNn{\isadigit{5}}{\isacharprime}{\isacharprime}{\isacharbrackright}{\isachardoublequoteclose}{\isacharparenright}\isanewline
-\ \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ view{\isacharunderscore}other{\isacharunderscore}OON\ apply{\isacharunderscore}update{\isacharunderscore}view{\isadigit{1}}\ OON{\isacharunderscore}neq{\isacharunderscore}name{\isacharparenright}\isanewline
-\ \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}shd\ {\isacharparenleft}stl\ i{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}STR\ {\isacharprime}{\isacharprime}pdf{\isacharprime}{\isacharprime}{\isacharcomma}\ {\isacharbrackleft}Str\ {\isacharprime}{\isacharprime}otherID{\isacharprime}{\isacharprime}{\isacharcomma}\ Str\ {\isacharprime}{\isacharprime}OUT{\isacharunderscore}OF{\isacharunderscore}NETWORK{\isacharprime}{\isacharprime}{\isacharcomma}\ Str\ {\isacharprime}{\isacharprime}MNn{\isadigit{5}}{\isacharprime}{\isacharprime}{\isacharbrackright}{\isacharparenright}{\isachardoublequoteclose}{\isacharparenright}\isanewline
-\ \ \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ pdf{\isacharunderscore}other{\isacharunderscore}OON\ apply{\isacharunderscore}updates{\isacharunderscore}pdf{\isadigit{1}}\ aux{\isadigit{1}}{\isacharunderscore}aux{\isadigit{1}}{\isacharunderscore}aux{\isadigit{2}}{\isacharparenright}\isanewline
-\ \ \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}shd\ {\isacharparenleft}stl\ {\isacharparenleft}stl\ i{\isacharparenright}{\isacharparenright}{\isachardoublequoteclose}{\isacharparenright}\isanewline
-\ \ \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ possible{\isacharunderscore}steps{\isacharunderscore}{\isadigit{5}}{\isacharparenright}\isanewline
-\isanewline
-\ \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}shd\ {\isacharparenleft}stl\ i{\isacharparenright}{\isachardoublequoteclose}{\isacharparenright}\isanewline
-\ \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ simp\isanewline
-\ \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}aa\ {\isacharequal}\ STR\ {\isacharprime}{\isacharprime}pdf{\isacharprime}{\isacharprime}{\isachardoublequoteclose}{\isacharparenright}\isanewline
-\ \ \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ not{\isacharunderscore}pdf{\isacharunderscore}other{\isacharparenright}\isanewline
-\ \ \ \ \isacommand{using}\isamarkupfalse%
-\ none{\isacharunderscore}never{\isacharunderscore}detailed\ \isacommand{apply}\isamarkupfalse%
-\ blast\isanewline
-\ \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ not{\isacharunderscore}pdfOther{\isacharunderscore}{\isadigit{2}}{\isacharparenright}\isanewline
-\ \ \ \ \isacommand{using}\isamarkupfalse%
-\ none{\isacharunderscore}never{\isacharunderscore}detailed\ \isacommand{apply}\isamarkupfalse%
-\ blast\isanewline
-\isanewline
-\ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}b\ {\isacharequal}\ {\isacharbrackleft}Str\ {\isacharprime}{\isacharprime}otherID{\isacharprime}{\isacharprime}{\isacharcomma}\ Str\ {\isacharprime}{\isacharprime}name{\isacharprime}{\isacharprime}{\isacharcomma}\ Str\ {\isacharprime}{\isacharprime}{\isadigit{4}}zoF{\isacharprime}{\isacharprime}{\isacharbrackright}{\isachardoublequoteclose}{\isacharparenright}\isanewline
-\ \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ viewOther{\isacharunderscore}fuzz\ apply{\isacharunderscore}updates{\isacharunderscore}view{\isadigit{2}}\ OON{\isacharunderscore}neq{\isacharunderscore}name{\isacharparenright}\isanewline
-\ \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}shd\ {\isacharparenleft}stl\ i{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}STR\ {\isacharprime}{\isacharprime}pdf{\isacharprime}{\isacharprime}{\isacharcomma}\ {\isacharbrackleft}Str\ {\isacharprime}{\isacharprime}otherID{\isacharprime}{\isacharprime}{\isacharcomma}\ Str\ {\isacharprime}{\isacharprime}OUT{\isacharunderscore}OF{\isacharunderscore}NETWORK{\isacharprime}{\isacharprime}{\isacharcomma}\ Str\ {\isacharprime}{\isacharprime}MNn{\isadigit{5}}{\isacharprime}{\isacharprime}{\isacharbrackright}{\isacharparenright}{\isachardoublequoteclose}{\isacharparenright}\isanewline
-\ \ \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ pdf{\isacharunderscore}other{\isacharunderscore}OON\ apply{\isacharunderscore}updates{\isacharunderscore}pdf{\isadigit{1}}\ aux{\isadigit{1}}{\isacharunderscore}aux{\isadigit{1}}{\isacharunderscore}aux{\isadigit{2}}{\isacharparenright}\isanewline
-\ \ \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}shd\ {\isacharparenleft}stl\ {\isacharparenleft}stl\ i{\isacharparenright}{\isacharparenright}{\isachardoublequoteclose}{\isacharparenright}\isanewline
-\ \ \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ possible{\isacharunderscore}steps{\isacharunderscore}{\isadigit{5}}{\isacharparenright}\isanewline
-\isanewline
-\ \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}shd\ {\isacharparenleft}stl\ i{\isacharparenright}{\isachardoublequoteclose}{\isacharparenright}\isanewline
-\ \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ simp\isanewline
-\ \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}aa\ {\isacharequal}\ STR\ {\isacharprime}{\isacharprime}pdf{\isacharprime}{\isacharprime}{\isachardoublequoteclose}{\isacharparenright}\isanewline
-\ \ \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ not{\isacharunderscore}pdf{\isacharunderscore}other{\isacharparenright}\isanewline
-\ \ \ \ \isacommand{using}\isamarkupfalse%
-\ none{\isacharunderscore}never{\isacharunderscore}detailed\ \isacommand{apply}\isamarkupfalse%
-\ blast\isanewline
-\ \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ not{\isacharunderscore}pdfOther{\isacharunderscore}{\isadigit{2}}{\isacharparenright}\isanewline
-\ \ \ \ \isacommand{using}\isamarkupfalse%
-\ none{\isacharunderscore}never{\isacharunderscore}detailed\ \isacommand{apply}\isamarkupfalse%
-\ blast\isanewline
-\isanewline
-\ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ invalid{\isacharparenright}\isanewline
-\ \ \ \ \isacommand{using}\isamarkupfalse%
-\ none{\isacharunderscore}never{\isacharunderscore}detailed\ \isacommand{apply}\isamarkupfalse%
-\ blast\isanewline
-\isanewline
-\ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ not{\isacharunderscore}view{\isacharparenright}\isanewline
-\ \ \ \ \isacommand{using}\isamarkupfalse%
-\ none{\isacharunderscore}never{\isacharunderscore}detailed\ \isacommand{by}\isamarkupfalse%
-\ blast\isanewline
 \isacommand{qed}\isamarkupfalse%
 %
 \endisatagproof
@@ -1262,15 +708,20 @@ possible{\isacharunderscore}steps\ linkedIn\ {\isadigit{2}}\ {\isacharless}{\isa
 \endisadelimproof
 \isanewline
 \isacommand{lemma}\isamarkupfalse%
-\ nxt{\isacharunderscore}no{\isacharunderscore}output{\isacharunderscore}none{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}nxt\ {\isacharparenleft}OutputEq\ {\isacharbrackleft}{\isacharbrackright}{\isacharparenright}{\isacharparenright}\ {\isacharparenleft}make{\isacharunderscore}full{\isacharunderscore}observation\ e\ None\ r\ i{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ view{\isacharunderscore}other{\isacharcolon}\ {\isachardoublequoteopen}possible{\isacharunderscore}steps\ linkedIn\ {\isadigit{1}}\ {\isacharless}{\isadigit{1}}\ {\isacharcolon}{\isacharequal}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}free{\isacharprime}{\isacharprime}{\isachargreater}\ STR\ {\isacharprime}{\isacharprime}view{\isacharprime}{\isacharprime}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ {\isacharbrackleft}EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}otherID{\isacharprime}{\isacharprime}{\isacharcomma}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}OUT{\isacharunderscore}OF{\isacharunderscore}NETWORK{\isacharprime}{\isacharprime}{\isacharcomma}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}MNn{\isadigit{5}}{\isacharprime}{\isacharprime}{\isacharbrackright}\ {\isacharequal}\ {\isacharbraceleft}{\isacharbar}{\isacharparenleft}{\isadigit{4}}{\isacharcomma}\ view{\isadigit{1}}{\isacharparenright}{\isacharbar}{\isacharbraceright}{\isachardoublequoteclose}\isanewline
 %
 \isadelimproof
 \ \ %
 \endisadelimproof
 %
 \isatagproof
-\isacommand{by}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ OutputEq{\isacharunderscore}def{\isacharparenright}%
+\isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ possible{\isacharunderscore}steps{\isacharunderscore}singleton\ linkedIn{\isacharunderscore}def{\isacharparenright}\isanewline
+\ \ \isacommand{apply}\isamarkupfalse%
+\ safe\isanewline
+\ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}simp{\isacharunderscore}all\ add{\isacharcolon}\ transitions\ apply{\isacharunderscore}guards\ implode\ Str{\isacharunderscore}def{\isacharparenright}%
 \endisatagproof
 {\isafoldproof}%
 %
@@ -1280,12 +731,108 @@ possible{\isacharunderscore}steps\ linkedIn\ {\isadigit{2}}\ {\isacharless}{\isa
 \endisadelimproof
 \isanewline
 \isacommand{lemma}\isamarkupfalse%
-\ aux{\isadigit{1}}{\isacharcolon}\ {\isachardoublequoteopen}fst\ {\isacharparenleft}shd\ i{\isacharparenright}\ {\isacharequal}\ STR\ {\isacharprime}{\isacharprime}login{\isacharprime}{\isacharprime}\ {\isasymLongrightarrow}\isanewline
-\ \ \ \ snd\ {\isacharparenleft}shd\ i{\isacharparenright}\ {\isacharbang}\ {\isadigit{0}}\ {\isacharequal}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}free{\isacharprime}{\isacharprime}\ {\isasymLongrightarrow}\isanewline
-\ \ \ \ alw\ {\isacharparenleft}{\isasymlambda}xs{\isachardot}\ inputs\ {\isacharparenleft}shd\ xs{\isacharparenright}\ {\isacharbang}\ {\isadigit{0}}\ {\isacharequal}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}otherID{\isacharprime}{\isacharprime}\ {\isasymlongrightarrow}\isanewline
-\ \ \ \ \ \ \ \ \ \ \ \ \ \ label\ {\isacharparenleft}shd\ xs{\isacharparenright}\ {\isacharequal}\ STR\ {\isacharprime}{\isacharprime}pdf{\isacharprime}{\isacharprime}\ {\isasymlongrightarrow}\ {\isasymnot}\ OutputEq\ {\isacharbrackleft}Some\ {\isacharparenleft}EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}detailed{\isacharunderscore}pdf{\isacharunderscore}of{\isacharunderscore}otherID{\isacharprime}{\isacharprime}{\isacharparenright}{\isacharbrackright}\ {\isacharparenleft}stl\ xs{\isacharparenright}{\isacharparenright}\isanewline
-\ \ \ \ \ {\isacharparenleft}make{\isacharunderscore}full{\isacharunderscore}observation\ linkedIn\ {\isacharparenleft}fst\ {\isacharparenleft}ltl{\isacharunderscore}step\ linkedIn\ {\isacharparenleft}Some\ {\isadigit{0}}{\isacharparenright}\ Map{\isachardot}empty\ {\isacharparenleft}shd\ i{\isacharparenright}{\isacharparenright}{\isacharparenright}\isanewline
-\ \ \ \ \ \ \ {\isacharparenleft}snd\ {\isacharparenleft}snd\ {\isacharparenleft}ltl{\isacharunderscore}step\ linkedIn\ {\isacharparenleft}Some\ {\isadigit{0}}{\isacharparenright}\ Map{\isachardot}empty\ {\isacharparenleft}shd\ i{\isacharparenright}{\isacharparenright}{\isacharparenright}{\isacharparenright}\ {\isacharparenleft}stl\ i{\isacharparenright}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ view{\isacharunderscore}other{\isacharunderscore}fuzz{\isacharunderscore}foiled{\isacharcolon}\ {\isachardoublequoteopen}\ possible{\isacharunderscore}steps\ linkedIn\ {\isadigit{1}}\ {\isacharless}{\isadigit{1}}\ {\isacharcolon}{\isacharequal}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}free{\isacharprime}{\isacharprime}{\isachargreater}\ STR\ {\isacharprime}{\isacharprime}view{\isacharprime}{\isacharprime}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ {\isacharbrackleft}EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}otherID{\isacharprime}{\isacharprime}{\isacharcomma}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}name{\isacharprime}{\isacharprime}{\isacharcomma}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}{\isadigit{4}}zoF{\isacharprime}{\isacharprime}{\isacharbrackright}\ {\isacharequal}\ {\isacharbraceleft}{\isacharbar}{\isacharparenleft}{\isadigit{4}}{\isacharcomma}\ view{\isadigit{2}}{\isacharparenright}{\isacharbar}{\isacharbraceright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ possible{\isacharunderscore}steps{\isacharunderscore}singleton\ linkedIn{\isacharunderscore}def{\isacharparenright}\isanewline
+\ \ \isacommand{apply}\isamarkupfalse%
+\ safe\isanewline
+\ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}simp{\isacharunderscore}all\ add{\isacharcolon}\ transitions\ apply{\isacharunderscore}guards\ implode\ Str{\isacharunderscore}def{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ pdf{\isacharunderscore}summary{\isacharcolon}\ {\isachardoublequoteopen}possible{\isacharunderscore}steps\ linkedIn\ {\isadigit{4}}\ {\isacharless}{\isadigit{1}}\ {\isacharcolon}{\isacharequal}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}free{\isacharprime}{\isacharprime}{\isachargreater}\ STR\ {\isacharprime}{\isacharprime}pdf{\isacharprime}{\isacharprime}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ {\isacharbrackleft}EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}otherID{\isacharprime}{\isacharprime}{\isacharcomma}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}OUT{\isacharunderscore}OF{\isacharunderscore}NETWORK{\isacharprime}{\isacharprime}{\isacharcomma}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}MNn{\isadigit{5}}{\isacharprime}{\isacharprime}{\isacharbrackright}\ {\isacharequal}\ {\isacharbraceleft}{\isacharbar}{\isacharparenleft}{\isadigit{5}}{\isacharcomma}\ pdf{\isadigit{1}}{\isacharparenright}{\isacharbar}{\isacharbraceright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ possible{\isacharunderscore}steps{\isacharunderscore}singleton\ linkedIn{\isacharunderscore}def{\isacharparenright}\isanewline
+\ \ \isacommand{apply}\isamarkupfalse%
+\ safe\isanewline
+\ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}simp{\isacharunderscore}all\ add{\isacharcolon}\ transitions\ apply{\isacharunderscore}guards\ implode\ Str{\isacharunderscore}def{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ not{\isacharunderscore}pdf{\isacharunderscore}{\isadigit{4}}{\isacharcolon}\ {\isachardoublequoteopen}l\ {\isasymnoteq}\ STR\ {\isacharprime}{\isacharprime}pdf{\isacharprime}{\isacharprime}\ {\isasymLongrightarrow}\ possible{\isacharunderscore}steps\ linkedIn\ {\isadigit{4}}\ r\ l\ i\ {\isacharequal}\ {\isacharbraceleft}{\isacharbar}{\isacharbar}{\isacharbraceright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ possible{\isacharunderscore}steps{\isacharunderscore}empty\ linkedIn{\isacharunderscore}def\ transitions{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ pdf{\isacharunderscore}{\isadigit{4}}{\isacharunderscore}invalid{\isacharunderscore}inputs{\isacharcolon}\ {\isachardoublequoteopen}i\ {\isasymnoteq}\ {\isacharbrackleft}EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}otherID{\isacharprime}{\isacharprime}{\isacharcomma}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}OUT{\isacharunderscore}OF{\isacharunderscore}NETWORK{\isacharprime}{\isacharprime}{\isacharcomma}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}MNn{\isadigit{5}}{\isacharprime}{\isacharprime}{\isacharbrackright}\ {\isasymLongrightarrow}\isanewline
+possible{\isacharunderscore}steps\ linkedIn\ {\isadigit{4}}\ r\ l\ i\ {\isacharequal}\ {\isacharbraceleft}{\isacharbar}{\isacharbar}{\isacharbraceright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}case{\isacharunderscore}tac\ i{\isacharparenright}\isanewline
+\ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ possible{\isacharunderscore}steps{\isacharunderscore}empty\ linkedIn{\isacharunderscore}def\ pdf{\isadigit{1}}{\isacharunderscore}def{\isacharparenright}\isanewline
+\ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}case{\isacharunderscore}tac\ list{\isacharparenright}\isanewline
+\ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ possible{\isacharunderscore}steps{\isacharunderscore}empty\ linkedIn{\isacharunderscore}def\ pdf{\isadigit{1}}{\isacharunderscore}def{\isacharparenright}\isanewline
+\ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}case{\isacharunderscore}tac\ lista{\isacharparenright}\isanewline
+\ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ possible{\isacharunderscore}steps{\isacharunderscore}empty\ linkedIn{\isacharunderscore}def\ pdf{\isadigit{1}}{\isacharunderscore}def{\isacharparenright}\isanewline
+\ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}case{\isacharunderscore}tac\ listb{\isacharparenright}\isanewline
+\ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ possible{\isacharunderscore}steps{\isacharunderscore}empty\ linkedIn{\isacharunderscore}def\ pdf{\isadigit{1}}{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharparenright}\isanewline
+\ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ possible{\isacharunderscore}steps{\isacharunderscore}empty\ linkedIn{\isacharunderscore}def\ pdf{\isadigit{1}}{\isacharunderscore}def{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ s{\isadigit{4}}{\isacharunderscore}ok{\isacharcolon}\ {\isachardoublequoteopen}alw\ {\isacharparenleft}{\isasymlambda}xs{\isachardot}\ label\ {\isacharparenleft}shd\ xs{\isacharparenright}\ {\isacharequal}\ STR\ {\isacharprime}{\isacharprime}pdf{\isacharprime}{\isacharprime}\ {\isasymand}\ ValueEq\ {\isacharparenleft}Some\ {\isacharparenleft}Inputs\ {\isadigit{0}}\ xs{\isacharparenright}{\isacharparenright}\ {\isacharparenleft}Some\ {\isacharparenleft}EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}otherID{\isacharprime}{\isacharprime}{\isacharparenright}{\isacharparenright}\ {\isacharequal}\ trilean{\isachardot}true\ {\isasymlongrightarrow}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ output\ {\isacharparenleft}shd\ xs{\isacharparenright}\ {\isasymnoteq}\ {\isacharbrackleft}Some\ {\isacharparenleft}EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}detailed{\isacharunderscore}pdf{\isacharunderscore}of{\isacharunderscore}otherID{\isacharprime}{\isacharprime}{\isacharparenright}{\isacharbrackright}{\isacharparenright}\isanewline
+\ \ \ \ \ {\isacharparenleft}make{\isacharunderscore}full{\isacharunderscore}observation\ linkedIn\ {\isacharparenleft}Some\ {\isadigit{4}}{\isacharparenright}\ {\isacharless}{\isadigit{1}}\ {\isacharcolon}{\isacharequal}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}free{\isacharprime}{\isacharprime}{\isachargreater}\ i{\isacharparenright}{\isachardoublequoteclose}\isanewline
 %
 \isadelimproof
 %
@@ -1300,31 +847,173 @@ possible{\isacharunderscore}steps\ linkedIn\ {\isadigit{2}}\ {\isacharless}{\isa
 \ \isacommand{show}\isamarkupfalse%
 \ {\isacharquery}case\isanewline
 \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ simp\isanewline
-\ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}shd\ i{\isachardoublequoteclose}{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ ltl{\isacharunderscore}step{\isacharunderscore}alt{\isacharparenright}\isanewline
 \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ simp\isanewline
+\ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}fst\ {\isacharparenleft}shd\ i{\isacharparenright}\ {\isacharequal}\ STR\ {\isacharprime}{\isacharprime}pdf{\isacharprime}{\isacharprime}{\isachardoublequoteclose}{\isacharparenright}\isanewline
+\ \ \ \ \ \isacommand{defer}\isamarkupfalse%
+\isanewline
+\ \ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ not{\isacharunderscore}pdf{\isacharunderscore}{\isadigit{4}}\ {\isacharparenright}\isanewline
+\ \ \ \ \isacommand{using}\isamarkupfalse%
+\ no{\isacharunderscore}output{\isacharunderscore}none{\isacharbrackleft}of\ linkedIn\ {\isachardoublequoteopen}{\isacharless}{\isadigit{1}}\ {\isacharcolon}{\isacharequal}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}free{\isacharprime}{\isacharprime}{\isachargreater}{\isachardoublequoteclose}\ {\isachardoublequoteopen}{\isacharparenleft}stl\ i{\isacharparenright}{\isachardoublequoteclose}{\isacharbrackright}\isanewline
+\ \ \ \ \isacommand{unfolding}\isamarkupfalse%
+\ OutputEq{\isacharunderscore}def\isanewline
+\ \ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ alw{\isacharunderscore}mono{\isacharparenright}\isanewline
 \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}b\ {\isacharequal}\ {\isacharbrackleft}Str\ {\isacharprime}{\isacharprime}free{\isacharprime}{\isacharprime}{\isacharbrackright}{\isachardoublequoteclose}{\isacharparenright}\isanewline
+\ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}{\isacharparenleft}snd\ {\isacharparenleft}shd\ i{\isacharparenright}{\isacharparenright}\ {\isacharequal}\ {\isacharbrackleft}EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}otherID{\isacharprime}{\isacharprime}{\isacharcomma}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}OUT{\isacharunderscore}OF{\isacharunderscore}NETWORK{\isacharprime}{\isacharprime}{\isacharcomma}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}MNn{\isadigit{5}}{\isacharprime}{\isacharprime}{\isacharbrackright}{\isachardoublequoteclose}{\isacharparenright}\isanewline
+\ \ \ \ \ \isacommand{defer}\isamarkupfalse%
+\isanewline
 \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ log{\isacharunderscore}in\ apply{\isacharunderscore}updates{\isacharunderscore}login{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ pdf{\isacharunderscore}{\isadigit{4}}{\isacharunderscore}invalid{\isacharunderscore}inputs{\isacharparenright}\isanewline
+\ \ \ \ \isacommand{using}\isamarkupfalse%
+\ no{\isacharunderscore}output{\isacharunderscore}none{\isacharbrackleft}of\ linkedIn\ {\isachardoublequoteopen}{\isacharless}{\isadigit{1}}\ {\isacharcolon}{\isacharequal}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}free{\isacharprime}{\isacharprime}{\isachargreater}{\isachardoublequoteclose}\ {\isachardoublequoteopen}{\isacharparenleft}stl\ i{\isacharparenright}{\isachardoublequoteclose}{\isacharbrackright}\isanewline
+\ \ \ \ \isacommand{unfolding}\isamarkupfalse%
+\ OutputEq{\isacharunderscore}def\isanewline
 \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ OutputEq{\isacharunderscore}def{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ alw{\isacharunderscore}mono{\isacharparenright}\isanewline
+\ \ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ pdf{\isacharunderscore}summary{\isacharparenright}\isanewline
 \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
 \ standard\isanewline
 \ \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}shd\ {\isacharparenleft}stl\ i{\isacharparenright}{\isachardoublequoteclose}{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ pdf{\isadigit{1}}{\isacharunderscore}def\ apply{\isacharunderscore}outputs\ Str{\isacharunderscore}def\ implode{\isacharparenright}\isanewline
+\ \ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ pdf{\isadigit{1}}{\isacharunderscore}def{\isacharparenright}\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}rule\ disjI{\isadigit{2}}{\isacharparenright}\isanewline
+\ \ \isacommand{proof}\isamarkupfalse%
+{\isacharparenleft}coinduction{\isacharparenright}\isanewline
+\ \ \ \ \isacommand{case}\isamarkupfalse%
+\ alw\isanewline
+\ \ \ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}case\isanewline
 \ \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ state{\isacharunderscore}{\isadigit{1}}{\isacharunderscore}pdf{\isacharparenright}\isanewline
-\ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ clarify\isanewline
-\ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ simp\isanewline
-\ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ aux{\isadigit{1}}{\isacharunderscore}aux{\isadigit{1}}{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ ltl{\isacharunderscore}step{\isacharunderscore}alt\ stop{\isacharunderscore}at{\isacharunderscore}{\isadigit{5}}{\isacharparenright}\isanewline
+\ \ \ \ \isacommand{using}\isamarkupfalse%
+\ no{\isacharunderscore}output{\isacharunderscore}none{\isacharbrackleft}of\ linkedIn\ {\isachardoublequoteopen}{\isacharless}{\isadigit{1}}\ {\isacharcolon}{\isacharequal}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}free{\isacharprime}{\isacharprime}{\isachargreater}{\isachardoublequoteclose}\ {\isachardoublequoteopen}stl\ {\isacharparenleft}stl\ i{\isacharparenright}{\isachardoublequoteclose}{\isacharbrackright}\isanewline
+\ \ \ \ \isacommand{unfolding}\isamarkupfalse%
+\ OutputEq{\isacharunderscore}def\isanewline
 \ \ \ \ \isacommand{by}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ not{\isacharunderscore}login{\isacharunderscore}free\ OutputEq{\isacharunderscore}def\ none{\isacharunderscore}never{\isacharunderscore}detailed{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ alw{\isacharunderscore}mono{\isacharparenright}\isanewline
+\ \ \isacommand{qed}\isamarkupfalse%
+\isanewline
+\isacommand{qed}\isamarkupfalse%
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ invalid{\isacharunderscore}input{\isacharunderscore}{\isadigit{1}}{\isacharcolon}\ \isanewline
+\ \ \ \ \ \ {\isachardoublequoteopen}i\ {\isasymnoteq}\ {\isacharbrackleft}EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}friendID{\isacharprime}{\isacharprime}{\isacharcomma}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}name{\isacharprime}{\isacharprime}{\isacharcomma}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}HM{\isadigit{8}}p{\isacharprime}{\isacharprime}{\isacharbrackright}\ {\isasymLongrightarrow}\isanewline
+\ \ \ \ \ \ \ i\ {\isasymnoteq}\ {\isacharbrackleft}EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}otherID{\isacharprime}{\isacharprime}{\isacharcomma}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}OUT{\isacharunderscore}OF{\isacharunderscore}NETWORK{\isacharprime}{\isacharprime}{\isacharcomma}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}MNn{\isadigit{5}}{\isacharprime}{\isacharprime}{\isacharbrackright}\ {\isasymLongrightarrow}\isanewline
+\ \ \ \ \ \ \ i\ {\isasymnoteq}\ {\isacharbrackleft}EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}otherID{\isacharprime}{\isacharprime}{\isacharcomma}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}name{\isacharprime}{\isacharprime}{\isacharcomma}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}{\isadigit{4}}zoF{\isacharprime}{\isacharprime}{\isacharbrackright}\ {\isasymLongrightarrow}\isanewline
+\ \ \ \ \ \ \ possible{\isacharunderscore}steps\ linkedIn\ {\isadigit{1}}\ {\isacharless}{\isadigit{1}}\ {\isacharcolon}{\isacharequal}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}free{\isacharprime}{\isacharprime}{\isachargreater}\ l\ i\ {\isacharequal}\ {\isacharbraceleft}{\isacharbar}{\isacharbar}{\isacharbraceright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}case{\isacharunderscore}tac\ i{\isacharparenright}\isanewline
+\ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ possible{\isacharunderscore}steps{\isacharunderscore}empty\ linkedIn{\isacharunderscore}def{\isacharparenright}\isanewline
+\ \ \ \isacommand{apply}\isamarkupfalse%
+\ safe{\isacharbrackleft}{\isadigit{1}}{\isacharbrackright}\isanewline
+\ \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions{\isacharparenright}{\isacharplus}\isanewline
+\ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}case{\isacharunderscore}tac\ list{\isacharparenright}\isanewline
+\ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ possible{\isacharunderscore}steps{\isacharunderscore}empty\ linkedIn{\isacharunderscore}def{\isacharparenright}\isanewline
+\ \ \ \isacommand{apply}\isamarkupfalse%
+\ safe{\isacharbrackleft}{\isadigit{1}}{\isacharbrackright}\isanewline
+\ \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions{\isacharparenright}{\isacharplus}\isanewline
+\ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}case{\isacharunderscore}tac\ lista{\isacharparenright}\isanewline
+\ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ possible{\isacharunderscore}steps{\isacharunderscore}empty\ linkedIn{\isacharunderscore}def{\isacharparenright}\isanewline
+\ \ \ \isacommand{apply}\isamarkupfalse%
+\ safe{\isacharbrackleft}{\isadigit{1}}{\isacharbrackright}\isanewline
+\ \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions{\isacharparenright}{\isacharplus}\isanewline
+\ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}case{\isacharunderscore}tac\ listb{\isacharparenright}\isanewline
+\ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ possible{\isacharunderscore}steps{\isacharunderscore}empty\ linkedIn{\isacharunderscore}def{\isacharparenright}\isanewline
+\ \ \ \isacommand{apply}\isamarkupfalse%
+\ safe{\isacharbrackleft}{\isadigit{1}}{\isacharbrackright}\isanewline
+\ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}simp{\isacharunderscore}all\ add{\isacharcolon}\ transitions\ apply{\isacharunderscore}guards\ Str{\isacharunderscore}def\ implode\ possible{\isacharunderscore}steps{\isacharunderscore}empty\ linkedIn{\isacharunderscore}def{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ after{\isacharunderscore}login{\isacharcolon}\ {\isachardoublequoteopen}alw\ {\isacharparenleft}{\isasymlambda}xs{\isachardot}\ label\ {\isacharparenleft}shd\ xs{\isacharparenright}\ {\isacharequal}\ STR\ {\isacharprime}{\isacharprime}pdf{\isacharprime}{\isacharprime}\ {\isasymand}\ ValueEq\ {\isacharparenleft}Some\ {\isacharparenleft}Inputs\ {\isadigit{0}}\ xs{\isacharparenright}{\isacharparenright}\ {\isacharparenleft}Some\ {\isacharparenleft}EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}otherID{\isacharprime}{\isacharprime}{\isacharparenright}{\isacharparenright}\ {\isacharequal}\ trilean{\isachardot}true\ {\isasymlongrightarrow}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ {\isasymnot}\ OutputEq\ {\isacharbrackleft}Some\ {\isacharparenleft}EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}detailed{\isacharunderscore}pdf{\isacharunderscore}of{\isacharunderscore}otherID{\isacharprime}{\isacharprime}{\isacharparenright}{\isacharbrackright}\ xs{\isacharparenright}\isanewline
+\ \ \ \ \ {\isacharparenleft}make{\isacharunderscore}full{\isacharunderscore}observation\ XXXlinkedin{\isacharunderscore}ext{\isacharunderscore}fixed{\isachardot}linkedIn\ {\isacharparenleft}Some\ {\isadigit{1}}{\isacharparenright}\ {\isacharless}{\isadigit{1}}\ {\isacharcolon}{\isacharequal}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}free{\isacharprime}{\isacharprime}{\isachargreater}\ i{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\isatagproof
+\isacommand{proof}\isamarkupfalse%
+{\isacharparenleft}coinduction{\isacharparenright}\isanewline
+\ \ \isacommand{case}\isamarkupfalse%
+\ alw\isanewline
+\ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}case\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ ltl{\isacharunderscore}step{\isacharunderscore}alt{\isacharparenright}\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}{\isacharparenleft}fst\ {\isacharparenleft}shd\ i{\isacharparenright}{\isacharparenright}\ {\isacharequal}\ STR\ {\isacharprime}{\isacharprime}view{\isacharprime}{\isacharprime}{\isachardoublequoteclose}{\isacharparenright}\isanewline
+\ \ \ \ \ \isacommand{defer}\isamarkupfalse%
+\isanewline
+\ \ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ not{\isacharunderscore}view{\isacharunderscore}{\isadigit{1}}{\isacharparenright}\isanewline
+\ \ \ \ \isacommand{using}\isamarkupfalse%
+\ no{\isacharunderscore}output{\isacharunderscore}none{\isacharbrackleft}of\ linkedIn\ {\isachardoublequoteopen}{\isacharless}{\isadigit{1}}\ {\isacharcolon}{\isacharequal}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}free{\isacharprime}{\isacharprime}{\isachargreater}{\isachardoublequoteclose}\ {\isachardoublequoteopen}{\isacharparenleft}stl\ i{\isacharparenright}{\isachardoublequoteclose}{\isacharbrackright}\isanewline
+\ \ \ \ \isacommand{unfolding}\isamarkupfalse%
+\ OutputEq{\isacharunderscore}def\isanewline
+\ \ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ alw{\isacharunderscore}mono\ ValueEq{\isacharunderscore}def\ ltl{\isacharunderscore}step{\isacharunderscore}alt\ not{\isacharunderscore}view{\isacharunderscore}{\isadigit{1}}{\isacharparenright}\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ simp\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}{\isacharparenleft}snd\ {\isacharparenleft}shd\ i{\isacharparenright}{\isacharparenright}\ {\isacharequal}\ {\isacharbrackleft}Str\ {\isacharprime}{\isacharprime}friendID{\isacharprime}{\isacharprime}{\isacharcomma}\ Str\ {\isacharprime}{\isacharprime}name{\isacharprime}{\isacharprime}{\isacharcomma}\ Str\ {\isacharprime}{\isacharprime}HM{\isadigit{8}}p{\isacharprime}{\isacharprime}{\isacharbrackright}{\isachardoublequoteclose}{\isacharparenright}\isanewline
+\ \ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ view{\isacharunderscore}friend\ view{\isacharunderscore}def\ s{\isadigit{2}}{\isacharunderscore}ok{\isacharparenright}\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}{\isacharparenleft}snd\ {\isacharparenleft}shd\ i{\isacharparenright}{\isacharparenright}\ {\isacharequal}\ {\isacharbrackleft}Str\ {\isacharprime}{\isacharprime}otherID{\isacharprime}{\isacharprime}{\isacharcomma}\ Str\ {\isacharprime}{\isacharprime}OUT{\isacharunderscore}OF{\isacharunderscore}NETWORK{\isacharprime}{\isacharprime}{\isacharcomma}\ Str\ {\isacharprime}{\isacharprime}MNn{\isadigit{5}}{\isacharprime}{\isacharprime}{\isacharbrackright}{\isachardoublequoteclose}{\isacharparenright}\isanewline
+\ \ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ view{\isacharunderscore}other\ view{\isadigit{1}}{\isacharunderscore}def\ s{\isadigit{4}}{\isacharunderscore}ok{\isacharparenright}\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}{\isacharparenleft}snd\ {\isacharparenleft}shd\ i{\isacharparenright}{\isacharparenright}\ {\isacharequal}\ {\isacharbrackleft}Str\ {\isacharprime}{\isacharprime}otherID{\isacharprime}{\isacharprime}{\isacharcomma}\ Str\ {\isacharprime}{\isacharprime}name{\isacharprime}{\isacharprime}{\isacharcomma}\ Str\ {\isacharprime}{\isacharprime}{\isadigit{4}}zoF{\isacharprime}{\isacharprime}{\isacharbrackright}{\isachardoublequoteclose}{\isacharparenright}\isanewline
+\ \ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ view{\isacharunderscore}other{\isacharunderscore}fuzz{\isacharunderscore}foiled\ view{\isadigit{2}}{\isacharunderscore}def\ s{\isadigit{4}}{\isacharunderscore}ok{\isacharparenright}\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ invalid{\isacharunderscore}input{\isacharunderscore}{\isadigit{1}}{\isacharparenright}\isanewline
+\ \ \ \ \isacommand{using}\isamarkupfalse%
+\ no{\isacharunderscore}output{\isacharunderscore}none{\isacharbrackleft}of\ linkedIn\ {\isachardoublequoteopen}{\isacharless}{\isadigit{1}}\ {\isacharcolon}{\isacharequal}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}free{\isacharprime}{\isacharprime}{\isachargreater}{\isachardoublequoteclose}\ {\isachardoublequoteopen}{\isacharparenleft}stl\ i{\isacharparenright}{\isachardoublequoteclose}{\isacharbrackright}\isanewline
+\ \ \ \ \isacommand{unfolding}\isamarkupfalse%
+\ OutputEq{\isacharunderscore}def\isanewline
+\ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ alw{\isacharunderscore}mono{\isacharparenright}\isanewline
 \isacommand{qed}\isamarkupfalse%
 %
 \endisatagproof
@@ -1334,15 +1023,14 @@ possible{\isacharunderscore}steps\ linkedIn\ {\isadigit{2}}\ {\isacharless}{\isa
 %
 \endisadelimproof
 %
-\snip{neverDetailed}{1}{2}{%
+\snip{neverDetailedProof}{1}{2}{%
 \isacommand{lemma}\isamarkupfalse%
 \ LTL{\isacharunderscore}neverDetailed{\isacharcolon}\isanewline
-\ \ \ \ {\isachardoublequoteopen}{\isacharparenleft}{\isacharparenleft}{\isacharparenleft}LabelEq\ {\isacharprime}{\isacharprime}login{\isacharprime}{\isacharprime}\ aand\ checkInx\ ip\ {\isadigit{1}}\ ValueEq\ {\isacharparenleft}Some\ {\isacharparenleft}Str\ {\isacharprime}{\isacharprime}free{\isacharprime}{\isacharprime}{\isacharparenright}{\isacharparenright}{\isacharparenright}\ impl\isanewline
+\ \ \ \ {\isachardoublequoteopen}{\isacharparenleft}{\isacharparenleft}{\isacharparenleft}LabelEq\ \ {\isacharprime}{\isacharprime}login{\isacharprime}{\isacharprime}\ aand\ InputEq\ {\isacharbrackleft}Str\ {\isacharprime}{\isacharprime}free{\isacharprime}{\isacharprime}{\isacharbrackright}{\isacharparenright}\ impl\isanewline
 \ \ \ \ \ {\isacharparenleft}nxt\ {\isacharparenleft}alw\ {\isacharparenleft}{\isacharparenleft}LabelEq\ {\isacharprime}{\isacharprime}pdf{\isacharprime}{\isacharprime}\ aand\isanewline
 \ \ \ \ \ checkInx\ ip\ {\isadigit{1}}\ ValueEq\ {\isacharparenleft}Some\ {\isacharparenleft}Str\ {\isacharprime}{\isacharprime}otherID{\isacharprime}{\isacharprime}{\isacharparenright}{\isacharparenright}{\isacharparenright}\ impl\ \isanewline
-\ \ \ \ \ {\isacharparenleft}nxt\ {\isacharparenleft}not\ {\isacharparenleft}OutputEq\ {\isacharbrackleft}Some\ {\isacharparenleft}Str\ {\isacharprime}{\isacharprime}detailed{\isacharunderscore}pdf{\isacharunderscore}of{\isacharunderscore}otherID{\isacharprime}{\isacharprime}{\isacharparenright}{\isacharbrackright}{\isacharparenright}{\isacharparenright}{\isacharparenright}{\isacharparenright}{\isacharparenright}{\isacharparenright}{\isacharparenright}{\isacharparenright}\isanewline
-\ \ \ \ \ {\isacharparenleft}watch\ linkedIn\ i{\isacharparenright}{\isachardoublequoteclose}%
-}%endsnip
+\ \ \ \ \ {\isacharparenleft}not\ {\isacharparenleft}OutputEq\ {\isacharbrackleft}Some\ {\isacharparenleft}Str\ {\isacharprime}{\isacharprime}detailed{\isacharunderscore}pdf{\isacharunderscore}of{\isacharunderscore}otherID{\isacharprime}{\isacharprime}{\isacharparenright}{\isacharbrackright}{\isacharparenright}{\isacharparenright}{\isacharparenright}{\isacharparenright}{\isacharparenright}{\isacharparenright}{\isacharparenright}\isanewline
+\ \ \ \ \ {\isacharparenleft}watch\ linkedIn\ i{\isacharparenright}{\isachardoublequoteclose}\isanewline
 %
 \isadelimproof
 \ \ %
@@ -1350,28 +1038,21 @@ possible{\isacharunderscore}steps\ linkedIn\ {\isadigit{2}}\ {\isacharless}{\isa
 %
 \isatagproof
 \isacommand{apply}\isamarkupfalse%
-\ standard\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ watch{\isacharunderscore}def\ ltl{\isacharunderscore}step{\isacharunderscore}alt{\isacharparenright}\isanewline
 \ \ \isacommand{apply}\isamarkupfalse%
-\ simp\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ InputEq{\isacharunderscore}def\ LabelEq{\isacharunderscore}def{\isacharparenright}\isanewline
 \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ LabelEq{\isacharunderscore}def\ implode{\isacharunderscore}login{\isacharparenright}\isanewline
-\ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ ValueEq{\isacharunderscore}def\ implode{\isacharunderscore}pdf{\isacharparenright}\isanewline
-\ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}Inputs\ {\isadigit{0}}\ {\isacharparenleft}watch\ linkedIn\ i{\isacharparenright}\ {\isacharequal}\ EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}free{\isacharprime}{\isacharprime}{\isachardoublequoteclose}{\isacharparenright}\isanewline
-\ \ \ \isacommand{defer}\isamarkupfalse%
-\isanewline
-\ \ \ \isacommand{apply}\isamarkupfalse%
-\ simp\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ implode\ login{\isacharunderscore}user\ apply{\isacharunderscore}updates{\isacharunderscore}login{\isacharparenright}\isanewline
 \ \ \isacommand{by}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ Inputs{\isacharunderscore}def\ watch{\isacharunderscore}def\ aux{\isadigit{1}}{\isacharparenright}%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ after{\isacharunderscore}login{\isacharparenright}%
 \endisatagproof
 {\isafoldproof}%
 %
 \isadelimproof
 %
 \endisadelimproof
-\isanewline
+%
+}%endsnip
 %
 \isadelimtheory
 %
@@ -1446,703 +1127,511 @@ possible{\isacharunderscore}steps\ linkedIn\ {\isadigit{2}}\ {\isacharless}{\isa
 %:%156=129%:%
 %:%157=130%:%
 %:%158=130%:%
-%:%161=131%:%
-%:%165=131%:%
-%:%166=131%:%
-%:%171=131%:%
-%:%174=132%:%
-%:%175=133%:%
-%:%176=133%:%
-%:%179=134%:%
-%:%183=134%:%
-%:%184=134%:%
-%:%189=134%:%
-%:%192=135%:%
-%:%193=136%:%
-%:%194=136%:%
-%:%197=137%:%
-%:%201=137%:%
-%:%202=137%:%
-%:%203=138%:%
-%:%204=138%:%
+%:%159=131%:%
+%:%160=132%:%
+%:%161=132%:%
+%:%164=133%:%
+%:%168=133%:%
+%:%169=133%:%
+%:%174=133%:%
+%:%177=134%:%
+%:%178=135%:%
+%:%179=135%:%
+%:%182=136%:%
+%:%186=136%:%
+%:%187=136%:%
+%:%192=136%:%
+%:%195=137%:%
+%:%196=138%:%
+%:%197=138%:%
+%:%200=139%:%
+%:%204=139%:%
 %:%205=139%:%
-%:%206=139%:%
-%:%211=139%:%
-%:%214=140%:%
+%:%210=139%:%
+%:%213=140%:%
+%:%214=141%:%
 %:%215=141%:%
-%:%216=141%:%
-%:%219=142%:%
+%:%218=142%:%
+%:%222=142%:%
 %:%223=142%:%
-%:%224=142%:%
-%:%225=143%:%
-%:%226=143%:%
+%:%228=142%:%
 %:%231=143%:%
-%:%234=144%:%
-%:%235=145%:%
+%:%232=144%:%
+%:%233=144%:%
 %:%236=145%:%
-%:%238=147%:%
-%:%245=148%:%
-%:%246=148%:%
-%:%247=149%:%
-%:%248=149%:%
-%:%249=150%:%
-%:%250=150%:%
-%:%251=150%:%
-%:%252=150%:%
-%:%253=151%:%
-%:%254=151%:%
-%:%255=152%:%
-%:%256=152%:%
-%:%257=153%:%
-%:%258=153%:%
-%:%259=153%:%
-%:%260=154%:%
-%:%261=154%:%
-%:%262=155%:%
-%:%268=155%:%
-%:%271=156%:%
-%:%272=157%:%
-%:%273=157%:%
-%:%276=158%:%
-%:%280=158%:%
-%:%281=158%:%
-%:%282=159%:%
-%:%283=159%:%
-%:%284=160%:%
-%:%285=160%:%
-%:%290=160%:%
-%:%293=161%:%
-%:%294=162%:%
-%:%295=162%:%
-%:%299=166%:%
-%:%302=167%:%
-%:%306=167%:%
-%:%307=167%:%
-%:%308=168%:%
-%:%309=168%:%
-%:%310=169%:%
-%:%311=169%:%
-%:%312=170%:%
-%:%313=170%:%
-%:%318=170%:%
-%:%321=171%:%
-%:%322=172%:%
-%:%323=172%:%
-%:%324=173%:%
-%:%327=174%:%
-%:%331=174%:%
-%:%332=174%:%
-%:%333=175%:%
-%:%334=175%:%
-%:%335=176%:%
-%:%336=176%:%
-%:%341=176%:%
-%:%344=177%:%
-%:%345=178%:%
-%:%346=178%:%
-%:%348=180%:%
-%:%351=181%:%
-%:%355=181%:%
-%:%356=181%:%
-%:%357=182%:%
-%:%358=182%:%
-%:%359=183%:%
-%:%360=183%:%
-%:%361=184%:%
-%:%362=184%:%
-%:%367=184%:%
-%:%370=185%:%
-%:%371=186%:%
-%:%372=186%:%
-%:%375=187%:%
-%:%379=187%:%
-%:%380=187%:%
-%:%381=188%:%
-%:%382=188%:%
-%:%383=189%:%
-%:%384=189%:%
-%:%389=189%:%
-%:%392=190%:%
-%:%393=191%:%
-%:%394=191%:%
-%:%397=192%:%
-%:%401=192%:%
-%:%402=192%:%
-%:%407=192%:%
-%:%410=193%:%
-%:%411=194%:%
-%:%412=194%:%
-%:%415=195%:%
-%:%419=195%:%
-%:%420=195%:%
-%:%425=195%:%
-%:%428=196%:%
-%:%429=197%:%
-%:%430=197%:%
-%:%431=198%:%
-%:%434=199%:%
-%:%438=199%:%
-%:%439=199%:%
-%:%440=200%:%
-%:%441=200%:%
-%:%442=201%:%
-%:%443=201%:%
-%:%444=202%:%
-%:%449=202%:%
-%:%452=203%:%
-%:%453=204%:%
-%:%454=204%:%
-%:%457=205%:%
-%:%461=205%:%
-%:%462=205%:%
-%:%463=206%:%
-%:%464=206%:%
-%:%469=206%:%
-%:%472=207%:%
-%:%473=208%:%
-%:%474=208%:%
-%:%477=209%:%
-%:%481=209%:%
-%:%482=209%:%
-%:%483=210%:%
-%:%484=210%:%
-%:%485=211%:%
-%:%486=211%:%
-%:%491=211%:%
-%:%494=212%:%
-%:%495=213%:%
-%:%496=213%:%
-%:%499=214%:%
-%:%503=214%:%
-%:%504=214%:%
-%:%505=215%:%
-%:%506=215%:%
-%:%511=215%:%
-%:%514=216%:%
-%:%515=217%:%
-%:%516=217%:%
-%:%517=218%:%
-%:%520=219%:%
-%:%524=219%:%
-%:%525=219%:%
-%:%526=220%:%
-%:%527=221%:%
-%:%532=221%:%
-%:%535=222%:%
-%:%536=223%:%
-%:%537=223%:%
-%:%540=224%:%
-%:%544=224%:%
-%:%545=224%:%
-%:%550=224%:%
-%:%553=225%:%
-%:%554=226%:%
-%:%555=226%:%
-%:%557=228%:%
-%:%564=229%:%
-%:%565=229%:%
-%:%566=230%:%
-%:%567=230%:%
-%:%568=231%:%
-%:%569=232%:%
-%:%570=232%:%
-%:%571=233%:%
-%:%572=233%:%
-%:%573=233%:%
-%:%574=234%:%
-%:%575=234%:%
-%:%576=235%:%
-%:%582=235%:%
-%:%585=236%:%
-%:%586=237%:%
-%:%587=237%:%
-%:%589=239%:%
-%:%596=240%:%
-%:%597=240%:%
-%:%598=241%:%
-%:%599=241%:%
-%:%600=242%:%
-%:%601=242%:%
-%:%602=242%:%
-%:%603=243%:%
-%:%604=243%:%
-%:%605=244%:%
-%:%606=244%:%
-%:%607=245%:%
-%:%613=245%:%
-%:%616=246%:%
-%:%617=247%:%
-%:%618=247%:%
-%:%621=248%:%
-%:%625=248%:%
-%:%626=248%:%
-%:%631=248%:%
-%:%634=249%:%
-%:%635=250%:%
-%:%636=250%:%
-%:%639=251%:%
-%:%643=251%:%
-%:%644=251%:%
-%:%649=251%:%
-%:%652=252%:%
-%:%653=253%:%
-%:%654=253%:%
-%:%655=254%:%
-%:%658=255%:%
-%:%662=255%:%
-%:%663=255%:%
-%:%664=256%:%
-%:%665=257%:%
-%:%666=257%:%
-%:%667=258%:%
-%:%668=258%:%
-%:%669=259%:%
-%:%670=259%:%
-%:%671=260%:%
-%:%672=260%:%
-%:%673=261%:%
-%:%674=261%:%
-%:%675=262%:%
-%:%676=262%:%
-%:%677=263%:%
-%:%678=263%:%
-%:%679=264%:%
-%:%680=264%:%
-%:%681=265%:%
-%:%682=265%:%
-%:%687=265%:%
-%:%690=266%:%
-%:%691=267%:%
-%:%692=267%:%
-%:%695=268%:%
-%:%699=268%:%
-%:%700=268%:%
-%:%705=268%:%
-%:%708=269%:%
-%:%709=270%:%
-%:%710=270%:%
-%:%713=271%:%
-%:%717=271%:%
-%:%718=271%:%
-%:%723=271%:%
-%:%726=272%:%
-%:%727=273%:%
-%:%728=273%:%
-%:%731=274%:%
-%:%735=274%:%
-%:%736=274%:%
-%:%741=274%:%
-%:%744=275%:%
-%:%745=276%:%
-%:%746=276%:%
-%:%749=277%:%
-%:%753=277%:%
-%:%754=277%:%
-%:%759=277%:%
-%:%762=278%:%
-%:%763=279%:%
-%:%764=279%:%
-%:%765=280%:%
-%:%768=281%:%
-%:%772=281%:%
-%:%773=281%:%
-%:%774=282%:%
-%:%775=282%:%
-%:%776=283%:%
-%:%777=283%:%
-%:%778=284%:%
-%:%779=285%:%
-%:%784=285%:%
-%:%787=286%:%
-%:%788=287%:%
-%:%789=287%:%
-%:%792=288%:%
-%:%796=288%:%
-%:%797=288%:%
-%:%798=289%:%
-%:%799=289%:%
-%:%804=289%:%
-%:%807=290%:%
-%:%808=291%:%
-%:%809=291%:%
-%:%812=292%:%
-%:%816=292%:%
-%:%817=292%:%
-%:%822=292%:%
-%:%825=293%:%
-%:%826=294%:%
-%:%827=294%:%
-%:%830=295%:%
-%:%834=295%:%
+%:%240=145%:%
+%:%241=145%:%
+%:%246=145%:%
+%:%249=146%:%
+%:%250=147%:%
+%:%251=147%:%
+%:%254=148%:%
+%:%258=148%:%
+%:%259=148%:%
+%:%264=148%:%
+%:%267=149%:%
+%:%268=150%:%
+%:%269=150%:%
+%:%272=151%:%
+%:%276=151%:%
+%:%277=151%:%
+%:%282=151%:%
+%:%285=152%:%
+%:%286=153%:%
+%:%287=153%:%
+%:%290=154%:%
+%:%294=154%:%
+%:%295=154%:%
+%:%300=154%:%
+%:%303=155%:%
+%:%304=156%:%
+%:%305=156%:%
+%:%308=157%:%
+%:%312=157%:%
+%:%313=157%:%
+%:%318=157%:%
+%:%321=158%:%
+%:%322=159%:%
+%:%323=159%:%
+%:%326=160%:%
+%:%330=160%:%
+%:%331=160%:%
+%:%336=160%:%
+%:%339=161%:%
+%:%340=162%:%
+%:%341=162%:%
+%:%344=163%:%
+%:%348=163%:%
+%:%349=163%:%
+%:%354=163%:%
+%:%357=164%:%
+%:%358=165%:%
+%:%359=165%:%
+%:%362=166%:%
+%:%366=166%:%
+%:%367=166%:%
+%:%372=166%:%
+%:%375=167%:%
+%:%376=168%:%
+%:%377=168%:%
+%:%380=169%:%
+%:%384=169%:%
+%:%385=169%:%
+%:%390=169%:%
+%:%393=170%:%
+%:%394=171%:%
+%:%395=171%:%
+%:%398=172%:%
+%:%402=172%:%
+%:%403=172%:%
+%:%408=172%:%
+%:%411=173%:%
+%:%412=174%:%
+%:%413=174%:%
+%:%414=175%:%
+%:%415=176%:%
+%:%416=177%:%
+%:%417=178%:%
+%:%418=178%:%
+%:%421=179%:%
+%:%425=179%:%
+%:%426=179%:%
+%:%427=180%:%
+%:%428=180%:%
+%:%429=181%:%
+%:%430=181%:%
+%:%435=181%:%
+%:%438=182%:%
+%:%439=183%:%
+%:%440=183%:%
+%:%443=184%:%
+%:%447=184%:%
+%:%448=184%:%
+%:%449=185%:%
+%:%450=185%:%
+%:%455=185%:%
+%:%458=186%:%
+%:%459=187%:%
+%:%460=187%:%
+%:%463=188%:%
+%:%467=188%:%
+%:%468=188%:%
+%:%473=188%:%
+%:%476=189%:%
+%:%477=190%:%
+%:%478=190%:%
+%:%479=191%:%
+%:%482=192%:%
+%:%486=192%:%
+%:%487=192%:%
+%:%488=193%:%
+%:%489=193%:%
+%:%490=194%:%
+%:%491=194%:%
+%:%496=194%:%
+%:%499=195%:%
+%:%500=196%:%
+%:%501=196%:%
+%:%504=197%:%
+%:%508=197%:%
+%:%509=197%:%
+%:%514=197%:%
+%:%517=198%:%
+%:%518=199%:%
+%:%519=199%:%
+%:%520=200%:%
+%:%523=201%:%
+%:%527=201%:%
+%:%528=201%:%
+%:%529=202%:%
+%:%530=202%:%
+%:%531=203%:%
+%:%532=203%:%
+%:%537=203%:%
+%:%540=204%:%
+%:%541=205%:%
+%:%542=205%:%
+%:%543=206%:%
+%:%546=207%:%
+%:%550=207%:%
+%:%551=207%:%
+%:%552=208%:%
+%:%553=208%:%
+%:%554=209%:%
+%:%555=209%:%
+%:%556=210%:%
+%:%557=210%:%
+%:%558=211%:%
+%:%559=211%:%
+%:%560=212%:%
+%:%561=212%:%
+%:%562=213%:%
+%:%563=213%:%
+%:%564=214%:%
+%:%565=214%:%
+%:%566=215%:%
+%:%567=215%:%
+%:%572=215%:%
+%:%575=216%:%
+%:%576=217%:%
+%:%577=217%:%
+%:%580=218%:%
+%:%584=218%:%
+%:%585=218%:%
+%:%590=218%:%
+%:%593=219%:%
+%:%594=220%:%
+%:%595=220%:%
+%:%598=221%:%
+%:%602=221%:%
+%:%603=221%:%
+%:%608=221%:%
+%:%611=222%:%
+%:%612=223%:%
+%:%613=223%:%
+%:%616=224%:%
+%:%620=224%:%
+%:%621=224%:%
+%:%626=224%:%
+%:%629=225%:%
+%:%630=226%:%
+%:%631=226%:%
+%:%633=228%:%
+%:%640=229%:%
+%:%641=229%:%
+%:%642=230%:%
+%:%643=230%:%
+%:%644=231%:%
+%:%645=231%:%
+%:%646=231%:%
+%:%647=232%:%
+%:%648=232%:%
+%:%649=233%:%
+%:%650=233%:%
+%:%651=234%:%
+%:%652=234%:%
+%:%653=235%:%
+%:%654=235%:%
+%:%655=236%:%
+%:%656=236%:%
+%:%657=237%:%
+%:%658=237%:%
+%:%659=238%:%
+%:%660=238%:%
+%:%661=239%:%
+%:%662=239%:%
+%:%663=240%:%
+%:%664=240%:%
+%:%665=241%:%
+%:%666=241%:%
+%:%667=242%:%
+%:%668=242%:%
+%:%669=243%:%
+%:%670=243%:%
+%:%671=244%:%
+%:%672=244%:%
+%:%673=245%:%
+%:%674=245%:%
+%:%675=246%:%
+%:%676=246%:%
+%:%677=247%:%
+%:%678=247%:%
+%:%679=248%:%
+%:%680=248%:%
+%:%681=249%:%
+%:%682=249%:%
+%:%683=250%:%
+%:%684=250%:%
+%:%685=251%:%
+%:%686=251%:%
+%:%687=252%:%
+%:%688=252%:%
+%:%689=252%:%
+%:%690=253%:%
+%:%691=253%:%
+%:%692=254%:%
+%:%693=254%:%
+%:%694=255%:%
+%:%695=255%:%
+%:%696=256%:%
+%:%697=256%:%
+%:%698=257%:%
+%:%699=257%:%
+%:%700=258%:%
+%:%706=258%:%
+%:%709=259%:%
+%:%710=260%:%
+%:%711=260%:%
+%:%712=261%:%
+%:%715=262%:%
+%:%719=262%:%
+%:%720=262%:%
+%:%721=263%:%
+%:%722=263%:%
+%:%723=264%:%
+%:%724=264%:%
+%:%729=264%:%
+%:%732=265%:%
+%:%733=266%:%
+%:%734=266%:%
+%:%735=267%:%
+%:%738=268%:%
+%:%742=268%:%
+%:%743=268%:%
+%:%744=269%:%
+%:%745=269%:%
+%:%746=270%:%
+%:%747=270%:%
+%:%752=270%:%
+%:%755=271%:%
+%:%756=272%:%
+%:%757=272%:%
+%:%758=273%:%
+%:%761=274%:%
+%:%765=274%:%
+%:%766=274%:%
+%:%767=275%:%
+%:%768=275%:%
+%:%769=276%:%
+%:%770=276%:%
+%:%775=276%:%
+%:%778=277%:%
+%:%779=278%:%
+%:%780=278%:%
+%:%783=279%:%
+%:%787=279%:%
+%:%788=279%:%
+%:%793=279%:%
+%:%796=280%:%
+%:%797=281%:%
+%:%798=281%:%
+%:%799=282%:%
+%:%802=283%:%
+%:%806=283%:%
+%:%807=283%:%
+%:%808=284%:%
+%:%809=284%:%
+%:%810=285%:%
+%:%811=285%:%
+%:%812=286%:%
+%:%813=286%:%
+%:%814=287%:%
+%:%815=287%:%
+%:%816=288%:%
+%:%817=288%:%
+%:%818=289%:%
+%:%819=289%:%
+%:%820=290%:%
+%:%821=290%:%
+%:%822=291%:%
+%:%823=291%:%
+%:%828=291%:%
+%:%831=292%:%
+%:%832=293%:%
+%:%833=293%:%
 %:%835=295%:%
-%:%840=295%:%
+%:%842=296%:%
 %:%843=296%:%
 %:%844=297%:%
 %:%845=297%:%
 %:%846=298%:%
+%:%847=298%:%
+%:%848=298%:%
 %:%849=299%:%
-%:%853=299%:%
-%:%854=299%:%
-%:%855=300%:%
-%:%856=300%:%
-%:%857=301%:%
-%:%858=301%:%
-%:%859=302%:%
-%:%864=302%:%
-%:%867=303%:%
-%:%868=304%:%
-%:%869=304%:%
-%:%872=305%:%
-%:%876=305%:%
-%:%877=305%:%
-%:%878=306%:%
-%:%879=306%:%
-%:%884=306%:%
-%:%887=307%:%
-%:%888=308%:%
-%:%889=308%:%
-%:%892=309%:%
-%:%896=309%:%
-%:%897=309%:%
-%:%902=309%:%
-%:%905=310%:%
-%:%906=311%:%
-%:%907=311%:%
-%:%909=313%:%
-%:%916=314%:%
-%:%917=314%:%
-%:%918=315%:%
-%:%919=315%:%
-%:%920=316%:%
-%:%921=316%:%
-%:%922=316%:%
-%:%923=317%:%
-%:%924=317%:%
-%:%925=318%:%
-%:%926=318%:%
-%:%927=319%:%
-%:%928=319%:%
-%:%929=320%:%
-%:%930=320%:%
-%:%931=320%:%
-%:%932=321%:%
-%:%938=321%:%
-%:%941=322%:%
-%:%942=323%:%
-%:%943=323%:%
-%:%944=324%:%
-%:%947=325%:%
-%:%951=325%:%
-%:%952=325%:%
-%:%953=326%:%
-%:%954=327%:%
-%:%955=327%:%
-%:%956=328%:%
-%:%957=328%:%
-%:%958=329%:%
-%:%959=329%:%
-%:%960=330%:%
-%:%961=330%:%
-%:%962=331%:%
-%:%963=331%:%
-%:%964=332%:%
-%:%965=332%:%
-%:%966=333%:%
-%:%967=333%:%
-%:%968=334%:%
-%:%969=334%:%
-%:%970=335%:%
-%:%971=335%:%
-%:%976=335%:%
-%:%979=336%:%
-%:%980=337%:%
-%:%981=337%:%
-%:%984=338%:%
-%:%988=338%:%
-%:%989=338%:%
-%:%994=338%:%
-%:%997=339%:%
-%:%998=340%:%
-%:%999=340%:%
-%:%1000=341%:%
-%:%1003=342%:%
-%:%1007=342%:%
-%:%1008=342%:%
-%:%1009=343%:%
-%:%1010=343%:%
-%:%1011=344%:%
-%:%1012=344%:%
-%:%1013=345%:%
-%:%1014=346%:%
-%:%1019=346%:%
-%:%1022=347%:%
-%:%1023=348%:%
-%:%1024=348%:%
-%:%1027=349%:%
-%:%1031=349%:%
-%:%1032=349%:%
-%:%1033=350%:%
-%:%1034=350%:%
-%:%1039=350%:%
-%:%1042=351%:%
-%:%1043=352%:%
-%:%1044=352%:%
-%:%1047=355%:%
-%:%1050=356%:%
-%:%1054=356%:%
-%:%1055=356%:%
-%:%1056=357%:%
-%:%1057=357%:%
-%:%1058=358%:%
-%:%1059=358%:%
-%:%1060=359%:%
-%:%1061=359%:%
-%:%1062=360%:%
-%:%1063=360%:%
-%:%1064=361%:%
-%:%1065=361%:%
-%:%1066=362%:%
-%:%1067=362%:%
-%:%1068=363%:%
-%:%1069=363%:%
-%:%1070=364%:%
-%:%1071=364%:%
-%:%1072=365%:%
-%:%1073=365%:%
-%:%1074=366%:%
-%:%1075=366%:%
-%:%1076=367%:%
-%:%1077=367%:%
-%:%1078=368%:%
-%:%1079=368%:%
-%:%1080=369%:%
-%:%1081=369%:%
-%:%1082=370%:%
-%:%1083=370%:%
-%:%1084=371%:%
-%:%1085=371%:%
-%:%1086=372%:%
-%:%1087=372%:%
-%:%1088=373%:%
-%:%1089=373%:%
-%:%1090=374%:%
-%:%1091=374%:%
-%:%1092=375%:%
-%:%1093=375%:%
-%:%1094=376%:%
-%:%1095=376%:%
-%:%1096=377%:%
-%:%1097=377%:%
-%:%1098=378%:%
-%:%1099=378%:%
-%:%1100=379%:%
-%:%1101=379%:%
-%:%1102=380%:%
-%:%1103=380%:%
-%:%1104=381%:%
-%:%1105=381%:%
-%:%1106=382%:%
-%:%1107=382%:%
-%:%1108=383%:%
-%:%1109=383%:%
-%:%1110=384%:%
-%:%1111=384%:%
-%:%1112=385%:%
-%:%1113=385%:%
-%:%1114=385%:%
-%:%1119=385%:%
-%:%1122=386%:%
-%:%1123=387%:%
-%:%1124=387%:%
-%:%1127=390%:%
-%:%1134=391%:%
-%:%1135=391%:%
-%:%1136=392%:%
-%:%1137=392%:%
-%:%1138=393%:%
-%:%1139=393%:%
-%:%1140=394%:%
-%:%1141=394%:%
-%:%1142=395%:%
-%:%1143=395%:%
-%:%1144=395%:%
-%:%1145=396%:%
-%:%1146=396%:%
-%:%1147=397%:%
-%:%1148=397%:%
-%:%1149=398%:%
-%:%1150=398%:%
-%:%1151=399%:%
-%:%1152=399%:%
-%:%1153=400%:%
-%:%1154=400%:%
-%:%1155=401%:%
-%:%1156=402%:%
-%:%1157=402%:%
-%:%1158=403%:%
-%:%1159=403%:%
-%:%1160=404%:%
-%:%1161=404%:%
-%:%1162=405%:%
-%:%1163=405%:%
-%:%1164=406%:%
-%:%1165=406%:%
-%:%1166=407%:%
-%:%1167=407%:%
-%:%1168=408%:%
-%:%1169=408%:%
-%:%1170=409%:%
-%:%1171=409%:%
-%:%1172=410%:%
-%:%1173=410%:%
-%:%1174=411%:%
-%:%1175=411%:%
-%:%1176=411%:%
-%:%1177=412%:%
-%:%1178=412%:%
-%:%1179=413%:%
-%:%1180=413%:%
-%:%1181=413%:%
-%:%1182=414%:%
-%:%1183=415%:%
-%:%1184=415%:%
-%:%1185=416%:%
-%:%1186=416%:%
-%:%1187=417%:%
-%:%1188=417%:%
-%:%1189=418%:%
-%:%1190=418%:%
-%:%1191=419%:%
-%:%1192=419%:%
-%:%1193=420%:%
-%:%1194=420%:%
-%:%1195=421%:%
-%:%1196=422%:%
-%:%1197=422%:%
-%:%1198=423%:%
-%:%1199=423%:%
-%:%1200=424%:%
-%:%1201=424%:%
-%:%1202=425%:%
-%:%1203=425%:%
-%:%1204=426%:%
-%:%1205=426%:%
-%:%1206=426%:%
-%:%1207=427%:%
-%:%1208=427%:%
-%:%1209=428%:%
-%:%1210=428%:%
-%:%1211=428%:%
-%:%1212=429%:%
-%:%1213=430%:%
-%:%1214=430%:%
-%:%1215=431%:%
-%:%1216=431%:%
-%:%1217=432%:%
-%:%1218=432%:%
-%:%1219=433%:%
-%:%1220=433%:%
-%:%1221=434%:%
-%:%1222=434%:%
-%:%1223=435%:%
-%:%1224=435%:%
-%:%1225=436%:%
-%:%1226=437%:%
-%:%1227=437%:%
-%:%1228=438%:%
-%:%1229=438%:%
-%:%1230=439%:%
-%:%1231=439%:%
-%:%1232=440%:%
-%:%1233=440%:%
-%:%1234=441%:%
-%:%1235=441%:%
-%:%1236=441%:%
-%:%1237=442%:%
-%:%1238=442%:%
-%:%1239=443%:%
-%:%1240=443%:%
-%:%1241=443%:%
-%:%1242=444%:%
-%:%1243=445%:%
-%:%1244=445%:%
-%:%1245=446%:%
-%:%1246=446%:%
-%:%1247=446%:%
-%:%1248=447%:%
-%:%1249=448%:%
-%:%1250=448%:%
-%:%1251=449%:%
-%:%1252=449%:%
-%:%1253=449%:%
-%:%1254=450%:%
-%:%1260=450%:%
-%:%1263=451%:%
-%:%1264=452%:%
-%:%1265=452%:%
-%:%1268=453%:%
-%:%1272=453%:%
-%:%1273=453%:%
-%:%1278=453%:%
-%:%1281=454%:%
-%:%1282=455%:%
-%:%1283=455%:%
-%:%1288=460%:%
-%:%1295=461%:%
-%:%1296=461%:%
-%:%1297=462%:%
-%:%1298=462%:%
-%:%1299=463%:%
-%:%1300=463%:%
-%:%1301=463%:%
-%:%1302=464%:%
-%:%1303=464%:%
-%:%1304=465%:%
-%:%1305=465%:%
-%:%1306=466%:%
-%:%1307=466%:%
-%:%1308=467%:%
-%:%1309=467%:%
-%:%1310=468%:%
-%:%1311=468%:%
-%:%1312=469%:%
-%:%1313=469%:%
-%:%1314=470%:%
-%:%1315=470%:%
-%:%1316=471%:%
-%:%1317=471%:%
-%:%1318=472%:%
-%:%1319=472%:%
-%:%1320=473%:%
-%:%1321=473%:%
-%:%1322=474%:%
-%:%1323=474%:%
-%:%1324=475%:%
-%:%1325=475%:%
-%:%1326=476%:%
-%:%1327=476%:%
-%:%1328=477%:%
-%:%1337=480%:%
-%:%1338=481%:%
-%:%1339=481%:%
-%:%1340=482%:%
-%:%1345=487%:%
-%:%1348=488%:%
-%:%1352=488%:%
-%:%1353=488%:%
-%:%1354=489%:%
-%:%1355=489%:%
-%:%1356=490%:%
-%:%1357=490%:%
-%:%1358=491%:%
-%:%1359=491%:%
-%:%1360=492%:%
-%:%1361=492%:%
-%:%1362=493%:%
-%:%1363=493%:%
-%:%1364=494%:%
-%:%1365=494%:%
-%:%1366=495%:%
-%:%1367=495%:%
-%:%1374=495%:%
-%:%1381=496%:%
+%:%850=299%:%
+%:%851=300%:%
+%:%852=300%:%
+%:%853=301%:%
+%:%854=301%:%
+%:%855=302%:%
+%:%856=302%:%
+%:%857=303%:%
+%:%858=303%:%
+%:%859=304%:%
+%:%860=304%:%
+%:%861=305%:%
+%:%862=305%:%
+%:%863=306%:%
+%:%864=306%:%
+%:%865=307%:%
+%:%866=307%:%
+%:%867=308%:%
+%:%868=308%:%
+%:%869=309%:%
+%:%870=309%:%
+%:%871=310%:%
+%:%872=310%:%
+%:%873=311%:%
+%:%874=311%:%
+%:%875=312%:%
+%:%876=312%:%
+%:%877=313%:%
+%:%878=313%:%
+%:%879=314%:%
+%:%880=314%:%
+%:%881=315%:%
+%:%882=315%:%
+%:%883=316%:%
+%:%884=316%:%
+%:%885=317%:%
+%:%886=317%:%
+%:%887=318%:%
+%:%888=318%:%
+%:%889=319%:%
+%:%890=319%:%
+%:%891=319%:%
+%:%892=320%:%
+%:%893=320%:%
+%:%894=321%:%
+%:%895=321%:%
+%:%896=322%:%
+%:%897=322%:%
+%:%898=323%:%
+%:%899=323%:%
+%:%900=324%:%
+%:%901=324%:%
+%:%902=325%:%
+%:%908=325%:%
+%:%911=326%:%
+%:%912=327%:%
+%:%913=327%:%
+%:%914=328%:%
+%:%917=331%:%
+%:%920=332%:%
+%:%924=332%:%
+%:%925=332%:%
+%:%926=333%:%
+%:%927=333%:%
+%:%928=334%:%
+%:%929=334%:%
+%:%930=335%:%
+%:%931=335%:%
+%:%932=336%:%
+%:%933=336%:%
+%:%934=337%:%
+%:%935=337%:%
+%:%936=338%:%
+%:%937=338%:%
+%:%938=339%:%
+%:%939=339%:%
+%:%940=340%:%
+%:%941=340%:%
+%:%942=341%:%
+%:%943=341%:%
+%:%944=342%:%
+%:%945=342%:%
+%:%946=343%:%
+%:%947=343%:%
+%:%948=344%:%
+%:%949=344%:%
+%:%950=345%:%
+%:%951=345%:%
+%:%952=346%:%
+%:%953=346%:%
+%:%954=347%:%
+%:%955=347%:%
+%:%960=347%:%
+%:%963=348%:%
+%:%964=349%:%
+%:%965=349%:%
+%:%967=351%:%
+%:%974=352%:%
+%:%975=352%:%
+%:%976=353%:%
+%:%977=353%:%
+%:%978=354%:%
+%:%979=354%:%
+%:%980=354%:%
+%:%981=355%:%
+%:%982=355%:%
+%:%983=356%:%
+%:%984=356%:%
+%:%985=357%:%
+%:%986=357%:%
+%:%987=358%:%
+%:%988=358%:%
+%:%989=359%:%
+%:%990=359%:%
+%:%991=360%:%
+%:%992=360%:%
+%:%993=361%:%
+%:%994=361%:%
+%:%995=362%:%
+%:%996=362%:%
+%:%997=363%:%
+%:%998=363%:%
+%:%999=364%:%
+%:%1000=364%:%
+%:%1001=365%:%
+%:%1002=365%:%
+%:%1003=366%:%
+%:%1004=366%:%
+%:%1005=367%:%
+%:%1006=367%:%
+%:%1007=368%:%
+%:%1008=368%:%
+%:%1009=369%:%
+%:%1010=369%:%
+%:%1011=370%:%
+%:%1012=370%:%
+%:%1013=371%:%
+%:%1014=371%:%
+%:%1015=372%:%
+%:%1016=372%:%
+%:%1017=373%:%
+%:%1026=376%:%
+%:%1027=377%:%
+%:%1028=377%:%
+%:%1029=378%:%
+%:%1033=382%:%
+%:%1036=383%:%
+%:%1040=383%:%
+%:%1041=383%:%
+%:%1042=384%:%
+%:%1043=384%:%
+%:%1044=385%:%
+%:%1045=385%:%
+%:%1046=386%:%
+%:%1047=386%:%
+%:%1055=387%:%
+%:%1062=388%:%
