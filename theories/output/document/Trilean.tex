@@ -816,8 +816,45 @@
 \isanewline
 %
 \endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ de{\isacharunderscore}morgans{\isacharunderscore}{\isadigit{1}}{\isacharcolon}\ {\isachardoublequoteopen}{\isasymnot}\isactrlsub {\isacharquery}\ {\isacharparenleft}a\ {\isasymor}\isactrlsub {\isacharquery}\ b{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}{\isasymnot}\isactrlsub {\isacharquery}a{\isacharparenright}\ {\isasymand}\isactrlsub {\isacharquery}\ {\isacharparenleft}{\isasymnot}\isactrlsub {\isacharquery}b{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}metis\ {\isacharparenleft}no{\isacharunderscore}types{\isacharcomma}\ hide{\isacharunderscore}lams{\isacharparenright}\ add{\isachardot}commute\ invalid{\isacharunderscore}maybe{\isacharunderscore}and\ maybe{\isacharunderscore}and{\isacharunderscore}idempotent\ maybe{\isacharunderscore}and{\isacharunderscore}one\ maybe{\isacharunderscore}not{\isachardot}elims\ maybe{\isacharunderscore}not{\isachardot}simps{\isacharparenleft}{\isadigit{1}}{\isacharparenright}\ maybe{\isacharunderscore}not{\isachardot}simps{\isacharparenleft}{\isadigit{3}}{\isacharparenright}\ maybe{\isacharunderscore}not{\isacharunderscore}invalid\ maybe{\isacharunderscore}or{\isacharunderscore}zero\ plus{\isacharunderscore}trilean{\isachardot}simps{\isacharparenleft}{\isadigit{1}}{\isacharparenright}\ plus{\isacharunderscore}trilean{\isachardot}simps{\isacharparenleft}{\isadigit{4}}{\isacharparenright}\ times{\isacharunderscore}trilean{\isachardot}simps{\isacharparenleft}{\isadigit{1}}{\isacharparenright}\ times{\isacharunderscore}trilean{\isacharunderscore}commutative\ trilean{\isachardot}exhaust\ trilean{\isachardot}simps{\isacharparenleft}{\isadigit{6}}{\isacharparenright}{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ de{\isacharunderscore}morgans{\isacharunderscore}{\isadigit{2}}{\isacharcolon}\ {\isachardoublequoteopen}{\isasymnot}\isactrlsub {\isacharquery}\ {\isacharparenleft}a\ {\isasymand}\isactrlsub {\isacharquery}\ b{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}{\isasymnot}\isactrlsub {\isacharquery}a{\isacharparenright}\ {\isasymor}\isactrlsub {\isacharquery}\ {\isacharparenleft}{\isasymnot}\isactrlsub {\isacharquery}b{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}metis\ de{\isacharunderscore}morgans{\isacharunderscore}{\isadigit{1}}\ maybe{\isacharunderscore}double{\isacharunderscore}negation{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
 %
 \isadelimtheory
+\isanewline
 %
 \endisadelimtheory
 %
@@ -1354,4 +1391,19 @@
 %:%810=247%:%
 %:%811=247%:%
 %:%816=247%:%
-%:%825=248%:%
+%:%819=248%:%
+%:%820=249%:%
+%:%821=249%:%
+%:%824=250%:%
+%:%828=250%:%
+%:%829=250%:%
+%:%834=250%:%
+%:%837=251%:%
+%:%838=252%:%
+%:%839=252%:%
+%:%842=253%:%
+%:%846=253%:%
+%:%847=253%:%
+%:%852=253%:%
+%:%857=254%:%
+%:%862=255%:%

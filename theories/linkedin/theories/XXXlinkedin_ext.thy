@@ -2,6 +2,10 @@ theory XXXlinkedin_ext
 imports "../../EFSM_LTL"
 begin
 
+definition I :: "nat \<Rightarrow> vname" where
+  "I n = vname.I (n-1)"
+declare I_def [simp]
+
 declare One_nat_def [simp del]
 
 definition "login" :: "transition" where
@@ -184,7 +188,7 @@ lemma not_view: "l \<noteq> STR ''view'' \<Longrightarrow>
 lemma view_fuzz: "possible_steps linkedIn 1 <> STR ''view'' [EFSM.Str ''otherID'', EFSM.Str ''name'', EFSM.Str ''MNn5''] = {|(6, view3)|}"
   apply (simp add: possible_steps_singleton linkedIn_def)
   apply safe
-  by (simp_all add: view_def view1_def view2_def view3_def apply_guards Str_def implode_otherID implode_friendID implode_name implode_OON implode_MNn5 implode_4zoF)
+  by (simp_all add: view_def view1_def view2_def view3_def apply_guards Str_def implode_otherID implode_friendID implode_name implode_OON implode_MNn5 implode_4zoF numeral_2_eq_2)
 
 lemma not_pdf_6: "l \<noteq> STR ''pdf'' \<Longrightarrow> possible_steps linkedIn 6 <> l i = {||}"
   apply (simp add: possible_steps_empty linkedIn_def)
@@ -200,13 +204,13 @@ lemma pdf_6_invalid_inputs: "i \<noteq> [EFSM.Str ''otherID'', EFSM.Str ''name''
   apply (case_tac lista)
    apply (simp add: possible_steps_empty pdf2_def linkedIn_def)
   apply (case_tac listb)
-   apply (simp add: possible_steps_empty pdf2_def linkedIn_def apply_guards)
+   apply (simp add: possible_steps_empty pdf2_def linkedIn_def apply_guards numeral_2_eq_2)
   by (simp add: possible_steps_empty pdf2_def linkedIn_def)
 
 lemma pdf_fuzz: "possible_steps linkedIn 6 <> STR ''pdf'' [EFSM.Str ''otherID'', EFSM.Str ''name'', EFSM.Str ''4zoF''] = {|(7, pdf2)|}"
   apply (simp add: possible_steps_singleton linkedIn_def)
   apply safe
-  by (simp_all add: pdf2_def apply_guards)
+  by (simp_all add: pdf2_def apply_guards numeral_2_eq_2)
 
 text_raw{*\snip{contradiction}{1}{2}{%*}
 lemma contradiction: "fst (shd (stl (stl i))) = STR ''pdf'' \<Longrightarrow>

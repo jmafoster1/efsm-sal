@@ -1,0 +1,59 @@
+%
+\begin{isabellebody}%
+\setisabellecontext{Coin}%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\isatagtheory
+\isacommand{theory}\isamarkupfalse%
+\ Coin\isanewline
+\isakeyword{imports}\ {\isachardoublequoteopen}{\isachardot}{\isachardot}{\isacharslash}{\isachardot}{\isachardot}{\isacharslash}EFSM{\isachardoublequoteclose}\isanewline
+\isakeyword{begin}%
+\endisatagtheory
+{\isafoldtheory}%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\snip{coin}{1}{2}{%
+\isacommand{definition}\isamarkupfalse%
+\ coin\ {\isacharcolon}{\isacharcolon}\ transition\ \isakeyword{where}\isanewline
+{\isachardoublequoteopen}coin\ {\isasymequiv}\ {\isasymlparr}\isanewline
+\ \ \ \ \ \ \ \ \ \ Label\ {\isacharequal}\ {\isacharparenleft}STR\ {\isacharprime}{\isacharprime}coin{\isacharprime}{\isacharprime}{\isacharparenright}{\isacharcomma}\isanewline
+\ \ \ \ \ \ \ \ \ \ Arity\ {\isacharequal}\ {\isadigit{0}}{\isacharcomma}\isanewline
+\ \ \ \ \ \ \ \ \ \ Guard\ {\isacharequal}\ {\isacharbrackleft}{\isacharbrackright}{\isacharcomma}\isanewline
+\ \ \ \ \ \ \ \ \ \ Outputs\ {\isacharequal}\ {\isacharbrackleft}{\isacharbrackright}{\isacharcomma}\isanewline
+\ \ \ \ \ \ \ \ \ \ Updates\ {\isacharequal}\ {\isacharbrackleft}{\isacharparenleft}{\isadigit{1}}{\isacharcomma}\ {\isacharparenleft}Plus\ {\isacharparenleft}V\ {\isacharparenleft}R\ {\isadigit{1}}{\isacharparenright}{\isacharparenright}\ {\isacharparenleft}L\ {\isacharparenleft}Num\ {\isadigit{1}}{\isacharparenright}{\isacharparenright}{\isacharparenright}{\isacharparenright}{\isacharbrackright}\isanewline
+\ \ \ \ \ \ \ \ {\isasymrparr}{\isachardoublequoteclose}%
+}%endsnip
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\isatagtheory
+\isacommand{end}\isamarkupfalse%
+%
+\endisatagtheory
+{\isafoldtheory}%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\end{isabellebody}%
+\endinput
+%:%file=~/Documents/efsm-sal/theories/coin-tea/theories/Coin.thy%:%
+%:%10=1%:%
+%:%11=1%:%
+%:%12=2%:%
+%:%13=3%:%
+%:%21=5%:%
+%:%22=6%:%
+%:%23=6%:%
+%:%24=7%:%
+%:%31=14%:%
+%:%38=16%:%

@@ -6,6 +6,10 @@ declare One_nat_def [simp del]
 declare ValueLt_def [simp]
 declare ltl_step_alt [simp]
 
+definition I :: "nat \<Rightarrow> vname" where
+  "I n = vname.I (n-1)"
+declare I_def [simp]
+
 text_raw{*\snip{cointeabroken}{1}{2}{%*}
 definition init :: transition where
 "init \<equiv> \<lparr>
@@ -42,19 +46,19 @@ definition drinks :: "transition_matrix" where
           |}"
 text_raw{*}%endsnip*}
 
-lemma possible_steps_init: "possible_steps drinks 0 Map.empty STR ''init'' [] = {|(1, init)|}"
+lemma possible_steps_init: "possible_steps drinks 0 <> STR ''init'' [] = {|(1, init)|}"
     apply (simp add: possible_steps_alt Abs_ffilter Set.filter_def drinks_def)
     apply safe
   by (simp_all add: init_def)
 
-lemma possible_steps_not_init: "\<not> (a = STR ''init'' \<and> b = []) \<Longrightarrow> possible_steps drinks 0 Map.empty a b = {||}"
+lemma possible_steps_not_init: "\<not> (a = STR ''init'' \<and> b = []) \<Longrightarrow> possible_steps drinks 0 <> a b = {||}"
     apply (simp add: possible_steps_def Abs_ffilter Set.filter_def drinks_def)
     apply clarify
     by (simp add: init_def)
 
 lemma aux1: "\<not> StateEq (Some 2)
-        (make_full_observation drinks (fst (ltl_step drinks (Some 0) Map.empty (shd t)))
-          (snd (snd (ltl_step drinks (Some 0) Map.empty (shd t)))) (stl t))"
+        (make_full_observation drinks (fst (ltl_step drinks (Some 0) <> (shd t)))
+          (snd (snd (ltl_step drinks (Some 0) <> (shd t)))) (stl t))"
 proof-
   show ?thesis
     apply (case_tac "shd t")
@@ -64,10 +68,10 @@ proof-
     by (simp add: StateEq_def possible_steps_not_init)
 qed
 
-lemma make_full_obs_neq: "make_full_observation drinks (fst (ltl_step drinks (Some 0) Map.empty (shd t))) (snd (snd (ltl_step drinks (Some 0) Map.empty (shd t))))
+lemma make_full_obs_neq: "make_full_observation drinks (fst (ltl_step drinks (Some 0) <> (shd t))) (snd (snd (ltl_step drinks (Some 0) <> (shd t))))
      (stl t) \<noteq>
-    make_full_observation drinks (Some 0) Map.empty t"
-  apply (case_tac "ltl_step drinks (Some 0) Map.empty (shd t)")
+    make_full_observation drinks (Some 0) <> t"
+  apply (case_tac "ltl_step drinks (Some 0) <> (shd t)")
   apply (case_tac "shd t")
     apply simp
     apply (case_tac "aa = STR ''init'' \<and> ba = []")
@@ -96,7 +100,7 @@ lemma StateEq_alt: "alw (StateEq s) s' = alw (\<lambda>x. shd x = s) (smap (\<la
 lemma test: "statename (shd (make_full_observation e None r t)) = None"
   by simp
 
-lemma "alw (\<lambda>s. StateEq None (stl s)) (make_full_observation drinks None Map.empty t)"
+lemma "alw (\<lambda>s. StateEq None (stl s)) (make_full_observation drinks None <> t)"
   by (metis alw_iff_sdrop once_none_always_none sdrop_simps(2))
 
 lemma no_possible_steps: "possible_steps e s r (fst t) (snd t) = {||} \<Longrightarrow> ltl_step e (Some s) r t = (None, [], r)"
@@ -130,7 +134,7 @@ lemma possible_steps_coin: "possible_steps drinks 1 r STR ''coin'' [] = {|(1, co
   apply safe
   by (simp_all add: vend_def coin_def)
 
-lemma possible_steps_vend_sufficient: "n > 0 \<Longrightarrow> possible_steps drinks 1 <1 := Num n> STR ''vend'' [] = {|(2, vend)|}"
+lemma possible_steps_vend_sufficient: "n > 0 \<Longrightarrow> possible_steps drinks 1 (<>(1 := Num n)) STR ''vend'' [] = {|(2, vend)|}"
   apply (simp add: possible_steps_alt ffilter_def fset_both_sides Abs_fset_inverse Set.filter_def drinks_def)
   apply safe
   by (simp_all add: vend_def coin_def apply_guards)
@@ -171,18 +175,17 @@ proof(coinduction)
     by (simp add: alw_iff_sdrop)
 qed
 
-lemma possible_steps_0: "possible_steps drinks 0 Map.empty l i = finsert x S' \<Longrightarrow> finsert x S' = {|(1, init)|}"
+lemma possible_steps_0: "possible_steps drinks 0 <> l i = finsert x S' \<Longrightarrow> finsert x S' = {|(1, init)|}"
   apply (case_tac "l = STR ''init''")
    apply (case_tac "i = []")
     apply (simp add: possible_steps_init)
   using possible_steps_not_init
   by auto
 
-lemma apply_updates_init: "apply_updates (Updates init) <> <> = <1 := Num 0>"
-  apply (rule ext)
+lemma apply_updates_init: "apply_updates (Updates init) (\<lambda>x. None) <> = (<>(1 := Num 0))"
   by (simp add: init_def)
 
-lemma vend_insufficient: "possible_steps drinks 1 <1 := Num 0> STR ''vend'' i = {||}"
+lemma vend_insufficient: "possible_steps drinks 1 (<>(1 := Num 0)) STR ''vend'' i = {||}"
   apply (simp add: possible_steps_def ffilter_def fset_both_sides Abs_fset_inverse Set.filter_def drinks_def)
   apply safe
    apply (simp add: coin_def)
@@ -195,7 +198,7 @@ lemma LTL_init_makes_r_1_zero: "((LabelEq ''init'' aand InputEq []) impl nxt (ch
   using not_init
   by simp
 
-lemma shd_not_init: "shd t \<noteq> (STR ''init'', []) \<Longrightarrow> \<not> ev (\<lambda>s. statename (shd s) = Some 2) (make_full_observation drinks (Some 0) Map.empty t)"
+lemma shd_not_init: "shd t \<noteq> (STR ''init'', []) \<Longrightarrow> \<not> ev (\<lambda>s. statename (shd s) = Some 2) (make_full_observation drinks (Some 0) <> t)"
   apply (simp add: not_ev_iff)
 proof(coinduction)
   case alw
@@ -209,7 +212,7 @@ qed
 lemma possible_steps_1_invalid:
   "x1 \<noteq> (STR ''coin'', []) \<Longrightarrow>
    x1 \<noteq> (STR ''vend'', []) \<Longrightarrow>
-   possible_steps drinks 1 <1 := Num 0> (fst x1) (snd x1) = {||}"
+   possible_steps drinks 1 (<>(1 := Num 0)) (fst x1) (snd x1) = {||}"
   apply (simp add: possible_steps_empty drinks_def)
   apply safe
    apply (simp add: coin_def)
@@ -219,7 +222,7 @@ lemma possible_steps_1_invalid:
 
 lemma invalid_gets_stuck: "x1 \<noteq> (STR ''coin'', []) \<Longrightarrow>
                            x1 \<noteq> (STR ''vend'', []) \<Longrightarrow>
-                           \<not>ev (\<lambda>s. statename (shd s) = Some 2) (make_full_observation drinks (Some 1) <1 := Num 0> (x1 ## x2))"
+                           \<not>ev (\<lambda>s. statename (shd s) = Some 2) (make_full_observation drinks (Some 1) (<>(1 := Num 0)) (x1 ## x2))"
   apply (simp add: not_ev_iff)
 proof(coinduction)
   case alw

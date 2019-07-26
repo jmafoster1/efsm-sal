@@ -112,7 +112,7 @@
 \isanewline
 \isacommand{definition}\isamarkupfalse%
 \ Registers\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}nat\ {\isasymRightarrow}\ state\ stream\ {\isasymRightarrow}\ value\ option{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
-\ \ {\isachardoublequoteopen}Registers\ n\ s\ {\isasymequiv}\ datastate\ {\isacharparenleft}shd\ s{\isacharparenright}\ n{\isachardoublequoteclose}\isanewline
+\ \ {\isachardoublequoteopen}Registers\ n\ s\ {\isasymequiv}\ datastate\ {\isacharparenleft}shd\ s{\isacharparenright}\ {\isachardollar}\ n{\isachardoublequoteclose}\isanewline
 \isanewline
 \isacommand{definition}\isamarkupfalse%
 \ StateEq\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}nat\ option\ {\isasymRightarrow}\ state\ stream\ {\isasymRightarrow}\ bool{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
@@ -182,7 +182,7 @@
 \ {\isachardoublequoteopen}checkInx{\isachardoublequoteclose}\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}ior\ {\isasymRightarrow}\ nat\ {\isasymRightarrow}\ {\isacharparenleft}value\ option\ {\isasymRightarrow}\ value\ option\ {\isasymRightarrow}\ trilean{\isacharparenright}\ {\isasymRightarrow}\ value\ option\ {\isasymRightarrow}\ state\ stream\ {\isasymRightarrow}\ bool{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
 \ \ {\isachardoublequoteopen}checkInx\ ior{\isachardot}ip\ n\ f\ v\ s\ {\isacharequal}\ {\isacharparenleft}f\ {\isacharparenleft}Some\ {\isacharparenleft}Inputs\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}\ s{\isacharparenright}{\isacharparenright}\ v\ {\isacharequal}\ trilean{\isachardot}true{\isacharparenright}{\isachardoublequoteclose}\ {\isacharbar}\isanewline
 \ \ {\isachardoublequoteopen}checkInx\ ior{\isachardot}op\ n\ f\ v\ s\ {\isacharequal}\ {\isacharparenleft}f\ {\isacharparenleft}Outputs\ n\ s{\isacharparenright}\ v\ {\isacharequal}\ trilean{\isachardot}true{\isacharparenright}{\isachardoublequoteclose}\ {\isacharbar}\isanewline
-\ \ {\isachardoublequoteopen}checkInx\ ior{\isachardot}rg\ n\ f\ v\ s\ {\isacharequal}\ {\isacharparenleft}f\ {\isacharparenleft}datastate\ {\isacharparenleft}shd\ s{\isacharparenright}\ n{\isacharparenright}\ v\ {\isacharequal}\ trilean{\isachardot}true{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ {\isachardoublequoteopen}checkInx\ ior{\isachardot}rg\ n\ f\ v\ s\ {\isacharequal}\ {\isacharparenleft}f\ {\isacharparenleft}datastate\ {\isacharparenleft}shd\ s{\isacharparenright}\ {\isachardollar}\ n{\isacharparenright}\ v\ {\isacharequal}\ trilean{\isachardot}true{\isacharparenright}{\isachardoublequoteclose}\isanewline
 \isanewline
 \isacommand{lemma}\isamarkupfalse%
 \ shd{\isacharunderscore}state{\isacharunderscore}is{\isacharunderscore}none{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}StateEq\ None{\isacharparenright}\ {\isacharparenleft}make{\isacharunderscore}full{\isacharunderscore}observation\ e\ None\ r\ t{\isacharparenright}{\isachardoublequoteclose}\isanewline
@@ -311,7 +311,7 @@
 \endisadelimproof
 \isanewline
 \isacommand{lemma}\isamarkupfalse%
-\ no{\isacharunderscore}updates{\isacharunderscore}none{\isacharunderscore}individual{\isacharcolon}\ {\isachardoublequoteopen}alw\ {\isacharparenleft}checkInx\ rg\ n\ ValueEq\ {\isacharparenleft}r\ n{\isacharparenright}{\isacharparenright}\ {\isacharparenleft}make{\isacharunderscore}full{\isacharunderscore}observation\ e\ None\ r\ t{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ no{\isacharunderscore}updates{\isacharunderscore}none{\isacharunderscore}individual{\isacharcolon}\ {\isachardoublequoteopen}alw\ {\isacharparenleft}checkInx\ rg\ n\ ValueEq\ {\isacharparenleft}r\ {\isachardollar}\ n{\isacharparenright}{\isacharparenright}\ {\isacharparenleft}make{\isacharunderscore}full{\isacharunderscore}observation\ e\ None\ r\ t{\isacharparenright}{\isachardoublequoteclose}\isanewline
 %
 \isadelimproof
 %

@@ -535,7 +535,7 @@
 \ \ \ \ \ \ let\isanewline
 \ \ \ \ \ \ \ \ val\ ty{\isacharunderscore}name\ {\isacharequal}\isanewline
 \ \ \ \ \ \ \ \ \ \ {\isacharparenleft}case\ goal\ of\isanewline
-\ \ \ \ \ \ \ \ \ \ \ \ {\isacharparenleft}{\isacharunderscore}\ {\isachardollar}\ Const\ {\isacharparenleft}{\isacharat}{\isacharbraceleft}const{\isacharunderscore}name\ Pure{\isachardot}type{\isacharbraceright}{\isacharcomma}\ Type\ {\isacharparenleft}{\isacharat}{\isacharbraceleft}type{\isacharunderscore}name\ itself{\isacharbraceright}{\isacharcomma}\ {\isacharbrackleft}Type\ {\isacharparenleft}n{\isacharcomma}\ {\isacharunderscore}{\isacharparenright}{\isacharbrackright}{\isacharparenright}{\isacharparenright}{\isacharparenright}\ {\isacharequal}{\isachargreater}\ n\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ {\isacharparenleft}{\isacharunderscore}\ {\isachardollar}\ Const\ {\isacharparenleft}\isactrlconstUNDERSCOREname {\isasymopen}Pure{\isachardot}type{\isasymclose}{\isacharcomma}\ Type\ {\isacharparenleft}\isactrltypeUNDERSCOREname {\isasymopen}itself{\isasymclose}{\isacharcomma}\ {\isacharbrackleft}Type\ {\isacharparenleft}n{\isacharcomma}\ {\isacharunderscore}{\isacharparenright}{\isacharbrackright}{\isacharparenright}{\isacharparenright}{\isacharparenright}\ {\isacharequal}{\isachargreater}\ n\isanewline
 \ \ \ \ \ \ \ \ \ \ {\isacharbar}\ {\isacharunderscore}\ {\isacharequal}{\isachargreater}\ raise\ Match{\isacharparenright}\isanewline
 \ \ \ \ \ \ \ \ val\ typedef{\isacharunderscore}info\ {\isacharequal}\ hd\ {\isacharparenleft}Typedef{\isachardot}get{\isacharunderscore}info\ ctxt\ ty{\isacharunderscore}name{\isacharparenright}\isanewline
 \ \ \ \ \ \ \ \ val\ typedef{\isacharunderscore}thm\ {\isacharequal}\ {\isacharhash}type{\isacharunderscore}definition\ {\isacharparenleft}snd\ typedef{\isacharunderscore}info{\isacharparenright}\isanewline
@@ -550,7 +550,7 @@
 \ \ \ \ \ \ \ \ val\ induct{\isacharunderscore}thm\ {\isacharequal}\ the\ {\isacharparenleft}AList{\isachardot}lookup\ {\isacharparenleft}op\ {\isacharequal}{\isacharparenright}\ alist\ pred{\isacharunderscore}name{\isacharparenright}\isanewline
 \ \ \ \ \ \ \ \ val\ vars\ {\isacharequal}\ rev\ {\isacharparenleft}Term{\isachardot}add{\isacharunderscore}vars\ {\isacharparenleft}Thm{\isachardot}prop{\isacharunderscore}of\ induct{\isacharunderscore}thm{\isacharparenright}\ {\isacharbrackleft}{\isacharbrackright}{\isacharparenright}\isanewline
 \ \ \ \ \ \ \ \ val\ insts\ {\isacharequal}\ vars\ {\isacharbar}{\isachargreater}\ map\ {\isacharparenleft}fn\ {\isacharparenleft}{\isacharunderscore}{\isacharcomma}\ T{\isacharparenright}\ {\isacharequal}{\isachargreater}\ try\ {\isacharparenleft}Thm{\isachardot}cterm{\isacharunderscore}of\ ctxt{\isacharparenright}\isanewline
-\ \ \ \ \ \ \ \ \ \ {\isacharparenleft}Const\ {\isacharparenleft}{\isacharat}{\isacharbraceleft}const{\isacharunderscore}name\ Countable{\isachardot}finite{\isacharunderscore}item{\isacharbraceright}{\isacharcomma}\ T{\isacharparenright}{\isacharparenright}{\isacharparenright}\isanewline
+\ \ \ \ \ \ \ \ \ \ {\isacharparenleft}Const\ {\isacharparenleft}\isactrlconstUNDERSCOREname {\isasymopen}Countable{\isachardot}finite{\isacharunderscore}item{\isasymclose}{\isacharcomma}\ T{\isacharparenright}{\isacharparenright}{\isacharparenright}\isanewline
 \ \ \ \ \ \ \ \ val\ induct{\isacharunderscore}thm{\isacharprime}\ {\isacharequal}\ Thm{\isachardot}instantiate{\isacharprime}\ {\isacharbrackleft}{\isacharbrackright}\ insts\ induct{\isacharunderscore}thm\isanewline
 \ \ \ \ \ \ \ \ val\ rules\ {\isacharequal}\ {\isacharat}{\isacharbraceleft}thms\ finite{\isacharunderscore}item{\isachardot}intros{\isacharbraceright}\isanewline
 \ \ \ \ \ \ in\isanewline
@@ -594,7 +594,7 @@
 %
 \isatagML
 \isacommand{ML{\isacharunderscore}file}\isamarkupfalse%
-\ {\isachardoublequoteopen}{\isachardot}{\isachardot}{\isacharslash}Tools{\isacharslash}BNF{\isacharslash}bnf{\isacharunderscore}lfp{\isacharunderscore}countable{\isachardot}ML{\isachardoublequoteclose}\isanewline
+\ {\isacartoucheopen}{\isachardot}{\isachardot}{\isacharslash}Tools{\isacharslash}BNF{\isacharslash}bnf{\isacharunderscore}lfp{\isacharunderscore}countable{\isachardot}ML{\isacartoucheclose}\isanewline
 \isanewline
 \isacommand{ML}\isamarkupfalse%
 \ {\isacartoucheopen}\isanewline

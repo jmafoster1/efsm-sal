@@ -2,6 +2,10 @@ theory XXXlinkedin_ext_fixed
 imports "../../EFSM_LTL"
 begin
 
+definition I :: "nat \<Rightarrow> vname" where
+  "I n = vname.I (n-1)"
+declare I_def [simp]
+
 declare One_nat_def [simp del]
 
 definition "login" :: "transition" where
@@ -171,7 +175,7 @@ lemma implode_paid: "String.implode ''paid'' = STR ''paid''"
 lemma implode_free: "String.implode ''free'' = STR ''free''"
   by (metis Literal.rep_eq String.implode_explode_eq zero_literal.rep_eq)
 
-lemmas implode = implode_summaryPDF implode_detailedPDF_friend implode_detailedPDF 
+lemmas implode = implode_summaryPDF implode_detailedPDF_friend implode_detailedPDF
                  implode_OON implode_name implode_4zoF implode_MNn5 implode_HM8p
                  implode_friendID implode_otherID implode_pdf implode_login implode_paid implode_free
 
@@ -180,30 +184,29 @@ lemma login_user: "possible_steps linkedIn 0 <> STR ''login'' [u] = {|(1, login)
   apply safe
   by (simp_all add: login_def)
 
-lemma apply_updates_login: "apply_updates (Updates XXXlinkedin_ext_fixed.login) (join_ir [EFSM.Str ''free''] <>) <> = <1 := Str ''free''>"
-  apply (rule ext)
+lemma apply_updates_login: "apply_updates (Updates XXXlinkedin_ext_fixed.login) (join_ir [EFSM.Str ''free''] <>) <> = (<>(1 := Str ''free''))"
   by (simp add: login_def datastate)
 
 lemma not_view_1: "l \<noteq> STR ''view'' \<Longrightarrow> possible_steps linkedIn 1 r l i = {||}"
   by (simp add: possible_steps_empty linkedIn_def transitions)
 
-lemma view_friend: "possible_steps linkedIn 1 <1 := EFSM.Str ''free''> STR ''view''
+lemma view_friend: "possible_steps linkedIn 1 (<>(1 := EFSM.Str ''free'')) STR ''view''
                   [EFSM.Str ''friendID'', EFSM.Str ''name'', EFSM.Str ''HM8p''] = {|(2, view)|}"
   apply (simp add: possible_steps_singleton linkedIn_def)
   apply safe
-  by (simp_all add: transitions apply_guards implode Str_def)
+  by (simp_all add: transitions apply_guards implode Str_def numeral_2_eq_2)
 
 lemma not_pdf_2: "l \<noteq> STR ''pdf'' \<Longrightarrow> possible_steps linkedIn 2 r l i = {||}"
   by (simp add: possible_steps_empty linkedIn_def transitions)
 
-lemma pdf_friend: "possible_steps linkedIn 2 <1 := EFSM.Str ''free''> STR ''pdf''
+lemma pdf_friend: "possible_steps linkedIn 2 (<>(1 := EFSM.Str ''free'')) STR ''pdf''
                       [EFSM.Str ''friendID'', EFSM.Str ''name'', EFSM.Str ''HM8p''] = {|(3, pdf)|}"
   apply (simp add: possible_steps_singleton linkedIn_def)
   apply safe
-  by (simp_all add: transitions apply_guards implode Str_def)
+  by (simp_all add: transitions apply_guards implode Str_def numeral_2_eq_2)
 
-lemma pdf_2_invalid: "i \<noteq> [Str ''friendID'', Str ''name'', Str ''HM8p''] \<Longrightarrow> 
-possible_steps linkedIn 2 <1 := EFSM.Str ''free''> STR ''pdf'' i = {||}"
+lemma pdf_2_invalid: "i \<noteq> [Str ''friendID'', Str ''name'', Str ''HM8p''] \<Longrightarrow>
+possible_steps linkedIn 2 (<>(1 := EFSM.Str ''free'')) STR ''pdf'' i = {||}"
   apply (case_tac i)
    apply (simp add: possible_steps_empty linkedIn_def pdf_def)
   apply (case_tac list)
@@ -211,7 +214,7 @@ possible_steps linkedIn 2 <1 := EFSM.Str ''free''> STR ''pdf'' i = {||}"
   apply (case_tac lista)
    apply (simp add: possible_steps_empty linkedIn_def pdf_def)
   apply (case_tac listb)
-  apply (simp add: possible_steps_empty linkedIn_def pdf_def apply_guards)
+  apply (simp add: possible_steps_empty linkedIn_def pdf_def apply_guards numeral_2_eq_2)
   by (simp add: possible_steps_empty linkedIn_def pdf_def)
 
 lemma stop_at_3: "possible_steps linkedIn 3 r l i = {||}"
@@ -225,7 +228,7 @@ lemma stop_at_7: "possible_steps linkedIn 7 r l i = {||}"
 
 lemma s2_ok: "alw (\<lambda>xs. label (shd xs) = STR ''pdf'' \<and> ValueEq (Some (Inputs 0 xs)) (Some (EFSM.Str ''otherID'')) = trilean.true \<longrightarrow>
               output (shd xs) \<noteq> [Some (EFSM.Str ''detailed_pdf_of_otherID'')])
-     (make_full_observation linkedIn (Some 2) <1 := EFSM.Str ''free''> i)"
+     (make_full_observation linkedIn (Some 2) (<>(1 := EFSM.Str ''free'')) i)"
 proof(coinduction)
   case alw
   then show ?case
@@ -233,13 +236,13 @@ proof(coinduction)
     apply (case_tac "(fst (shd i)) = STR ''pdf''")
      defer
      apply (simp add: not_pdf_2)
-    using no_output_none[of linkedIn "<1 := EFSM.Str ''free''>" "(stl i)"]
+    using no_output_none[of linkedIn "(<>(1 := EFSM.Str ''free''))" "(stl i)"]
     unfolding OutputEq_def
      apply (simp add: alw_mono)
     apply (case_tac "(snd (shd i)) = [Str ''friendID'', Str ''name'', Str ''HM8p'']")
      defer
      apply (simp add: pdf_2_invalid)
-    using no_output_none[of linkedIn "<1 := EFSM.Str ''free''>" "(stl i)"]
+    using no_output_none[of linkedIn "(<>(1 := EFSM.Str ''free''))" "(stl i)"]
     unfolding OutputEq_def
      apply (simp add: alw_mono)
     apply (simp add: pdf_friend)
@@ -251,32 +254,32 @@ proof(coinduction)
     case alw
     then show ?case
       apply (simp add: ltl_step_alt stop_at_3)
-    using no_output_none[of linkedIn "<1 := EFSM.Str ''free''>" "stl (stl i)"]
+    using no_output_none[of linkedIn "(<>(1 := EFSM.Str ''free''))" "stl (stl i)"]
     unfolding OutputEq_def
     by (simp add: alw_mono)
   qed
 qed
 
-lemma view_other: "possible_steps linkedIn 1 <1 := EFSM.Str ''free''> STR ''view''
+lemma view_other: "possible_steps linkedIn 1 (<>(1 := EFSM.Str ''free'')) STR ''view''
                   [EFSM.Str ''otherID'', EFSM.Str ''OUT_OF_NETWORK'', EFSM.Str ''MNn5''] = {|(4, view1)|}"
   apply (simp add: possible_steps_singleton linkedIn_def)
   apply safe
-  by (simp_all add: transitions apply_guards implode Str_def)
+  by (simp_all add: transitions apply_guards implode Str_def numeral_2_eq_2)
 
-lemma view_other_fuzz_foiled: " possible_steps linkedIn 1 <1 := EFSM.Str ''free''> STR ''view''
+lemma view_other_fuzz_foiled: " possible_steps linkedIn 1 (<>(1 := EFSM.Str ''free'')) STR ''view''
                   [EFSM.Str ''otherID'', EFSM.Str ''name'', EFSM.Str ''4zoF''] = {|(4, view2)|}"
   apply (simp add: possible_steps_singleton linkedIn_def)
   apply safe
-  by (simp_all add: transitions apply_guards implode Str_def)
+  by (simp_all add: transitions apply_guards implode Str_def numeral_2_eq_2)
 
-lemma pdf_summary: "possible_steps linkedIn 4 <1 := EFSM.Str ''free''> STR ''pdf''
+lemma pdf_summary: "possible_steps linkedIn 4 (<>(1 := EFSM.Str ''free'')) STR ''pdf''
                       [EFSM.Str ''otherID'', EFSM.Str ''OUT_OF_NETWORK'', EFSM.Str ''MNn5''] = {|(5, pdf1)|}"
   apply (simp add: possible_steps_singleton linkedIn_def)
   apply safe
-  by (simp_all add: transitions apply_guards implode Str_def)
+  by (simp_all add: transitions apply_guards implode Str_def numeral_2_eq_2)
 
 lemma not_pdf_4: "l \<noteq> STR ''pdf'' \<Longrightarrow> possible_steps linkedIn 4 r l i = {||}"
-  by (simp add: possible_steps_empty linkedIn_def transitions)
+  by (simp add: possible_steps_empty linkedIn_def transitions numeral_2_eq_2)
 
 lemma pdf_4_invalid_inputs: "i \<noteq> [EFSM.Str ''otherID'', EFSM.Str ''OUT_OF_NETWORK'', EFSM.Str ''MNn5''] \<Longrightarrow>
 possible_steps linkedIn 4 r l i = {||}"
@@ -287,12 +290,12 @@ possible_steps linkedIn 4 r l i = {||}"
   apply (case_tac lista)
    apply (simp add: possible_steps_empty linkedIn_def pdf1_def)
   apply (case_tac listb)
-  apply (simp add: possible_steps_empty linkedIn_def pdf1_def apply_guards)
+  apply (simp add: possible_steps_empty linkedIn_def pdf1_def apply_guards numeral_2_eq_2)
   by (simp add: possible_steps_empty linkedIn_def pdf1_def)
 
 lemma s4_ok: "alw (\<lambda>xs. label (shd xs) = STR ''pdf'' \<and> ValueEq (Some (Inputs 0 xs)) (Some (EFSM.Str ''otherID'')) = trilean.true \<longrightarrow>
               output (shd xs) \<noteq> [Some (EFSM.Str ''detailed_pdf_of_otherID'')])
-     (make_full_observation linkedIn (Some 4) <1 := EFSM.Str ''free''> i)"
+     (make_full_observation linkedIn (Some 4) (<>(1 := EFSM.Str ''free'')) i)"
 proof(coinduction)
   case alw
   then show ?case
@@ -300,13 +303,13 @@ proof(coinduction)
     apply (case_tac "fst (shd i) = STR ''pdf''")
      defer
      apply (simp add: not_pdf_4 )
-    using no_output_none[of linkedIn "<1 := EFSM.Str ''free''>" "(stl i)"]
+    using no_output_none[of linkedIn "(<>(1 := EFSM.Str ''free''))" "(stl i)"]
     unfolding OutputEq_def
      apply (simp add: alw_mono)
     apply (case_tac "(snd (shd i)) = [EFSM.Str ''otherID'', EFSM.Str ''OUT_OF_NETWORK'', EFSM.Str ''MNn5'']")
      defer
      apply (simp add: pdf_4_invalid_inputs)
-    using no_output_none[of linkedIn "<1 := EFSM.Str ''free''>" "(stl i)"]
+    using no_output_none[of linkedIn "(<>(1 := EFSM.Str ''free''))" "(stl i)"]
     unfolding OutputEq_def
      apply (simp add: alw_mono)
      apply (simp add: pdf_summary)
@@ -318,17 +321,17 @@ proof(coinduction)
     case alw
     then show ?case
       apply (simp add: ltl_step_alt stop_at_5)
-    using no_output_none[of linkedIn "<1 := EFSM.Str ''free''>" "stl (stl i)"]
+    using no_output_none[of linkedIn "(<>(1 := EFSM.Str ''free''))" "stl (stl i)"]
     unfolding OutputEq_def
     by (simp add: alw_mono)
   qed
 qed
 
-lemma invalid_input_1: 
+lemma invalid_input_1:
       "i \<noteq> [EFSM.Str ''friendID'', EFSM.Str ''name'', EFSM.Str ''HM8p''] \<Longrightarrow>
        i \<noteq> [EFSM.Str ''otherID'', EFSM.Str ''OUT_OF_NETWORK'', EFSM.Str ''MNn5''] \<Longrightarrow>
        i \<noteq> [EFSM.Str ''otherID'', EFSM.Str ''name'', EFSM.Str ''4zoF''] \<Longrightarrow>
-       possible_steps linkedIn 1 <1 := EFSM.Str ''free''> l i = {||}"
+       possible_steps linkedIn 1 (<>(1 := EFSM.Str ''free'')) l i = {||}"
   apply (case_tac i)
    apply (simp add: possible_steps_empty linkedIn_def)
    apply safe[1]
@@ -344,11 +347,11 @@ lemma invalid_input_1:
   apply (case_tac listb)
    apply (simp add: possible_steps_empty linkedIn_def)
    apply safe[1]
-  by (simp_all add: transitions apply_guards Str_def implode possible_steps_empty linkedIn_def)
+  by (simp_all add: transitions apply_guards Str_def implode possible_steps_empty linkedIn_def numeral_2_eq_2)
 
 lemma after_login: "alw (\<lambda>xs. label (shd xs) = STR ''pdf'' \<and> ValueEq (Some (Inputs 0 xs)) (Some (EFSM.Str ''otherID'')) = trilean.true \<longrightarrow>
               \<not> OutputEq [Some (EFSM.Str ''detailed_pdf_of_otherID'')] xs)
-     (make_full_observation XXXlinkedin_ext_fixed.linkedIn (Some 1) <1 := EFSM.Str ''free''> i)"
+     (make_full_observation XXXlinkedin_ext_fixed.linkedIn (Some 1) (<>(1 := EFSM.Str ''free'')) i)"
 proof(coinduction)
   case alw
   then show ?case
@@ -356,7 +359,7 @@ proof(coinduction)
     apply (case_tac "(fst (shd i)) = STR ''view''")
      defer
      apply (simp add: not_view_1)
-    using no_output_none[of linkedIn "<1 := EFSM.Str ''free''>" "(stl i)"]
+    using no_output_none[of linkedIn "(<>(1 := EFSM.Str ''free''))" "(stl i)"]
     unfolding OutputEq_def
      apply (simp add: alw_mono ValueEq_def ltl_step_alt not_view_1)
     apply simp
@@ -367,7 +370,7 @@ proof(coinduction)
     apply (case_tac "(snd (shd i)) = [Str ''otherID'', Str ''name'', Str ''4zoF'']")
      apply (simp add: view_other_fuzz_foiled view2_def s4_ok)
     apply (simp add: invalid_input_1)
-    using no_output_none[of linkedIn "<1 := EFSM.Str ''free''>" "(stl i)"]
+    using no_output_none[of linkedIn "(<>(1 := EFSM.Str ''free''))" "(stl i)"]
     unfolding OutputEq_def
     by (simp add: alw_mono)
 qed
@@ -377,7 +380,7 @@ text_raw{*\snip{neverDetailedProof}{1}{2}{%*}
 lemma LTL_neverDetailed:
     "(((LabelEq  ''login'' aand InputEq [Str ''free'']) impl
      (nxt (alw ((LabelEq ''pdf'' aand
-     checkInx ip 1 ValueEq (Some (Str ''otherID''))) impl 
+     checkInx ip 1 ValueEq (Some (Str ''otherID''))) impl
      (not (OutputEq [Some (Str ''detailed_pdf_of_otherID'')])))))))
      (watch linkedIn i)"
   apply (simp add: watch_def ltl_step_alt)

@@ -38,7 +38,7 @@
 \isanewline
 \isacommand{codatatype}\isamarkupfalse%
 \ {\isacharparenleft}sset{\isacharcolon}\ {\isacharprime}a{\isacharparenright}\ stream\ {\isacharequal}\isanewline
-\ \ SCons\ {\isacharparenleft}shd{\isacharcolon}\ {\isacharprime}a{\isacharparenright}\ {\isacharparenleft}stl{\isacharcolon}\ {\isachardoublequoteopen}{\isacharprime}a\ stream{\isachardoublequoteclose}{\isacharparenright}\ {\isacharparenleft}\isakeyword{infixr}\ {\isachardoublequoteopen}{\isacharhash}{\isacharhash}{\isachardoublequoteclose}\ {\isadigit{6}}{\isadigit{5}}{\isacharparenright}\isanewline
+\ \ SCons\ {\isacharparenleft}shd{\isacharcolon}\ {\isacharprime}a{\isacharparenright}\ {\isacharparenleft}stl{\isacharcolon}\ {\isachardoublequoteopen}{\isacharprime}a\ stream{\isachardoublequoteclose}{\isacharparenright}\ {\isacharparenleft}\isakeyword{infixr}\ {\isacartoucheopen}{\isacharhash}{\isacharhash}{\isacartoucheclose}\ {\isadigit{6}}{\isadigit{5}}{\isacharparenright}\isanewline
 \isakeyword{for}\isanewline
 \ \ map{\isacharcolon}\ smap\isanewline
 \ \ rel{\isacharcolon}\ stream{\isacharunderscore}all{\isadigit{2}}\isanewline
@@ -138,7 +138,7 @@
 %
 \endisadelimdocument
 \isacommand{primrec}\isamarkupfalse%
-\ shift\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}{\isacharprime}a\ list\ {\isasymRightarrow}\ {\isacharprime}a\ stream\ {\isasymRightarrow}\ {\isacharprime}a\ stream{\isachardoublequoteclose}\ {\isacharparenleft}\isakeyword{infixr}\ {\isachardoublequoteopen}{\isacharat}{\isacharminus}{\isachardoublequoteclose}\ {\isadigit{6}}{\isadigit{5}}{\isacharparenright}\ \isakeyword{where}\isanewline
+\ shift\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}{\isacharprime}a\ list\ {\isasymRightarrow}\ {\isacharprime}a\ stream\ {\isasymRightarrow}\ {\isacharprime}a\ stream{\isachardoublequoteclose}\ {\isacharparenleft}\isakeyword{infixr}\ {\isacartoucheopen}{\isacharat}{\isacharminus}{\isacartoucheclose}\ {\isadigit{6}}{\isadigit{5}}{\isacharparenright}\ \isakeyword{where}\isanewline
 \ \ {\isachardoublequoteopen}shift\ {\isacharbrackleft}{\isacharbrackright}\ s\ {\isacharequal}\ s{\isachardoublequoteclose}\isanewline
 {\isacharbar}\ {\isachardoublequoteopen}shift\ {\isacharparenleft}x\ {\isacharhash}\ xs{\isacharparenright}\ s\ {\isacharequal}\ x\ {\isacharhash}{\isacharhash}\ shift\ xs\ s{\isachardoublequoteclose}\isanewline
 \isanewline
@@ -573,7 +573,7 @@
 %
 \endisadelimdocument
 \isacommand{primrec}\isamarkupfalse%
-\ snth\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}{\isacharprime}a\ stream\ {\isasymRightarrow}\ nat\ {\isasymRightarrow}\ {\isacharprime}a{\isachardoublequoteclose}\ {\isacharparenleft}\isakeyword{infixl}\ {\isachardoublequoteopen}{\isacharbang}{\isacharbang}{\isachardoublequoteclose}\ {\isadigit{1}}{\isadigit{0}}{\isadigit{0}}{\isacharparenright}\ \isakeyword{where}\isanewline
+\ snth\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}{\isacharprime}a\ stream\ {\isasymRightarrow}\ nat\ {\isasymRightarrow}\ {\isacharprime}a{\isachardoublequoteclose}\ {\isacharparenleft}\isakeyword{infixl}\ {\isacartoucheopen}{\isacharbang}{\isacharbang}{\isacartoucheclose}\ {\isadigit{1}}{\isadigit{0}}{\isadigit{0}}{\isacharparenright}\ \isakeyword{where}\isanewline
 \ \ {\isachardoublequoteopen}s\ {\isacharbang}{\isacharbang}\ {\isadigit{0}}\ {\isacharequal}\ shd\ s{\isachardoublequoteclose}\isanewline
 {\isacharbar}\ {\isachardoublequoteopen}s\ {\isacharbang}{\isacharbang}\ Suc\ n\ {\isacharequal}\ stl\ s\ {\isacharbang}{\isacharbang}\ n{\isachardoublequoteclose}\isanewline
 \isanewline
@@ -2196,7 +2196,7 @@
 \endisadelimproof
 \isanewline
 \isacommand{lemma}\isamarkupfalse%
-\ sset{\isacharunderscore}smerge{\isacharcolon}\ {\isachardoublequoteopen}sset\ {\isacharparenleft}smerge\ ss{\isacharparenright}\ {\isacharequal}\ UNION\ {\isacharparenleft}sset\ ss{\isacharparenright}\ sset{\isachardoublequoteclose}\isanewline
+\ sset{\isacharunderscore}smerge{\isacharcolon}\ {\isachardoublequoteopen}sset\ {\isacharparenleft}smerge\ ss{\isacharparenright}\ {\isacharequal}\ {\isasymUnion}{\isacharparenleft}sset\ {\isacharbackquote}\ {\isacharparenleft}sset\ ss{\isacharparenright}{\isacharparenright}{\isachardoublequoteclose}\isanewline
 %
 \isadelimproof
 %
@@ -2209,7 +2209,7 @@
 \ x\ \isacommand{assume}\isamarkupfalse%
 \ {\isachardoublequoteopen}x\ {\isasymin}\ sset\ {\isacharparenleft}smerge\ ss{\isacharparenright}{\isachardoublequoteclose}\isanewline
 \ \ \isacommand{thus}\isamarkupfalse%
-\ {\isachardoublequoteopen}x\ {\isasymin}\ UNION\ {\isacharparenleft}sset\ ss{\isacharparenright}\ sset{\isachardoublequoteclose}\isanewline
+\ {\isachardoublequoteopen}x\ {\isasymin}\ {\isasymUnion}{\isacharparenleft}sset\ {\isacharbackquote}\ {\isacharparenleft}sset\ ss{\isacharparenright}{\isacharparenright}{\isachardoublequoteclose}\isanewline
 \ \ \ \ \isacommand{unfolding}\isamarkupfalse%
 \ smerge{\isacharunderscore}def\ \isacommand{by}\isamarkupfalse%
 \ {\isacharparenleft}subst\ {\isacharparenleft}asm{\isacharparenright}\ sset{\isacharunderscore}flat{\isacharparenright}\isanewline

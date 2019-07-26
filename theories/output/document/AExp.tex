@@ -61,7 +61,7 @@ limit ourselves to a simple arithmetic of plus and minus as a proof of concept.%
 \isatagtheory
 \isacommand{theory}\isamarkupfalse%
 \ AExp\isanewline
-\ \ \isakeyword{imports}\ Value\ VName\isanewline
+\ \ \isakeyword{imports}\ Value\ VName\ FinFun{\isachardot}FinFun\ Option{\isacharunderscore}Lexorder\isanewline
 \isakeyword{begin}%
 \endisatagtheory
 {\isafoldtheory}%
@@ -73,27 +73,92 @@ limit ourselves to a simple arithmetic of plus and minus as a proof of concept.%
 \isanewline
 \isacommand{declare}\isamarkupfalse%
 \ One{\isacharunderscore}nat{\isacharunderscore}def\ {\isacharbrackleft}simp\ del{\isacharbrackright}\isanewline
+\isacommand{unbundle}\isamarkupfalse%
+\ finfun{\isacharunderscore}syntax\isanewline
 \isanewline
 \isacommand{type{\isacharunderscore}synonym}\isamarkupfalse%
-\ registers\ {\isacharequal}\ {\isachardoublequoteopen}nat\ {\isasymRightarrow}\ value\ option{\isachardoublequoteclose}\isanewline
+\ registers\ {\isacharequal}\ {\isachardoublequoteopen}nat\ {\isasymRightarrow}f\ value\ option{\isachardoublequoteclose}\isanewline
 \isacommand{type{\isacharunderscore}synonym}\isamarkupfalse%
 \ datastate\ {\isacharequal}\ {\isachardoublequoteopen}vname\ {\isasymRightarrow}\ value\ option{\isachardoublequoteclose}%
 \snip{aexptype}{1}{2}{%
 \isacommand{datatype}\isamarkupfalse%
 \ aexp\ {\isacharequal}\ L\ {\isachardoublequoteopen}value{\isachardoublequoteclose}\ {\isacharbar}\ V\ vname\ {\isacharbar}\ Plus\ aexp\ aexp\ {\isacharbar}\ Minus\ aexp\ aexp%
 }%endsnip
-\isacommand{syntax}\isamarkupfalse%
-\ {\isacharparenleft}xsymbols{\isacharparenright}\isanewline
-\ \ Plus\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}aexp\ {\isasymRightarrow}\ aexp\ {\isasymRightarrow}\ aexp{\isachardoublequoteclose}\ \isanewline
-\ \ Minus\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}aexp\ {\isasymRightarrow}\ aexp\ {\isasymRightarrow}\ aexp{\isachardoublequoteclose}\ \isanewline
-\isanewline
 \isacommand{fun}\isamarkupfalse%
-\ value{\isacharunderscore}plus\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}value\ option\ {\isasymRightarrow}\ value\ option\ {\isasymRightarrow}\ value\ option{\isachardoublequoteclose}\ \ \isakeyword{where}\isanewline
-\ \ {\isachardoublequoteopen}value{\isacharunderscore}plus\ {\isacharparenleft}Some\ {\isacharparenleft}Num\ x{\isacharparenright}{\isacharparenright}\ {\isacharparenleft}Some\ {\isacharparenleft}Num\ y{\isacharparenright}{\isacharparenright}\ {\isacharequal}\ Some\ {\isacharparenleft}Num\ {\isacharparenleft}x{\isacharplus}y{\isacharparenright}{\isacharparenright}{\isachardoublequoteclose}\ {\isacharbar}\isanewline
-\ \ {\isachardoublequoteopen}value{\isacharunderscore}plus\ {\isacharunderscore}\ {\isacharunderscore}\ {\isacharequal}\ None{\isachardoublequoteclose}\isanewline
+\ MaybeArithInt\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}int\ {\isasymRightarrow}\ int\ {\isasymRightarrow}\ int{\isacharparenright}\ {\isasymRightarrow}\ value\ option\ {\isasymRightarrow}\ value\ option\ {\isasymRightarrow}\ value\ option{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+\ \ {\isachardoublequoteopen}MaybeArithInt\ f\ {\isacharparenleft}Some\ {\isacharparenleft}Num\ x{\isacharparenright}{\isacharparenright}\ {\isacharparenleft}Some\ {\isacharparenleft}Num\ y{\isacharparenright}{\isacharparenright}\ {\isacharequal}\ Some\ {\isacharparenleft}Num\ {\isacharparenleft}f\ x\ y{\isacharparenright}{\isacharparenright}{\isachardoublequoteclose}\ {\isacharbar}\isanewline
+\ \ {\isachardoublequoteopen}MaybeArithInt\ {\isacharunderscore}\ {\isacharunderscore}\ {\isacharunderscore}\ {\isacharequal}\ None{\isachardoublequoteclose}\isanewline
 \isanewline
 \isacommand{lemma}\isamarkupfalse%
-\ plus{\isacharunderscore}no{\isacharunderscore}string\ {\isacharbrackleft}simp{\isacharbrackright}{\isacharcolon}{\isachardoublequoteopen}value{\isacharunderscore}plus\ a\ b\ {\isasymnoteq}\ Some\ {\isacharparenleft}Str\ x{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ MaybeArithInt{\isacharunderscore}not{\isacharunderscore}None{\isacharcolon}\ {\isachardoublequoteopen}MaybeArithInt\ f\ a\ b\ {\isasymnoteq}\ None\ {\isacharequal}\ {\isacharparenleft}{\isasymexists}n\ n{\isacharprime}{\isachardot}\ a\ {\isacharequal}\ Some\ {\isacharparenleft}Num\ n{\isacharparenright}\ {\isasymand}\ b\ {\isacharequal}\ Some\ {\isacharparenleft}Num\ n{\isacharprime}{\isacharparenright}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}cases\ a{\isacharparenright}\isanewline
+\ \ \isacommand{apply}\isamarkupfalse%
+\ simp\isanewline
+\ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}cases\ b{\isacharparenright}\isanewline
+\ \ \ \isacommand{apply}\isamarkupfalse%
+\ simp\isanewline
+\ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}case{\isacharunderscore}tac\ aa{\isacharparenright}\isanewline
+\ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}metis\ MaybeArithInt{\isachardot}elims\ MaybeArithInt{\isachardot}simps{\isacharparenleft}{\isadigit{1}}{\isacharparenright}\ option{\isachardot}distinct{\isacharparenleft}{\isadigit{1}}{\isacharparenright}{\isacharparenright}\isanewline
+\ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}case{\isacharunderscore}tac\ aaa{\isacharparenright}\isanewline
+\ \ \ \isacommand{apply}\isamarkupfalse%
+\ simp\isanewline
+\ \ \isacommand{by}\isamarkupfalse%
+\ simp%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ MaybeArithInt{\isacharunderscore}Some{\isacharcolon}\ {\isachardoublequoteopen}MaybeArithInt\ f\ a\ b\ {\isacharequal}\ Some\ {\isacharparenleft}Num\ x{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}{\isasymexists}n\ n{\isacharprime}{\isachardot}\ a\ {\isacharequal}\ Some\ {\isacharparenleft}Num\ n{\isacharparenright}\ {\isasymand}\ b\ {\isacharequal}\ Some\ {\isacharparenleft}Num\ n{\isacharprime}{\isacharparenright}\ {\isasymand}\ f\ n\ n{\isacharprime}\ {\isacharequal}\ x{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}cases\ a{\isacharparenright}\isanewline
+\ \ \isacommand{apply}\isamarkupfalse%
+\ simp\isanewline
+\ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}cases\ b{\isacharparenright}\isanewline
+\ \ \ \isacommand{apply}\isamarkupfalse%
+\ simp\isanewline
+\ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}case{\isacharunderscore}tac\ aa{\isacharparenright}\isanewline
+\ \ \ \isacommand{apply}\isamarkupfalse%
+\ simp\isanewline
+\ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}metis\ MaybeArithInt{\isachardot}simps{\isacharparenleft}{\isadigit{1}}{\isacharparenright}\ MaybeArithInt{\isacharunderscore}not{\isacharunderscore}None\ option{\isachardot}inject\ option{\isachardot}simps{\isacharparenleft}{\isadigit{3}}{\isacharparenright}\ value{\isachardot}inject{\isacharparenleft}{\isadigit{1}}{\isacharparenright}{\isacharparenright}\isanewline
+\ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}case{\isacharunderscore}tac\ aaa{\isacharparenright}\isanewline
+\ \ \isacommand{by}\isamarkupfalse%
+\ auto%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ MaybeArithInt{\isacharunderscore}None{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}MaybeArithInt\ f\ a{\isadigit{1}}\ a{\isadigit{2}}\ {\isacharequal}\ None{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}{\isasymnexists}n\ n{\isacharprime}{\isachardot}\ a{\isadigit{1}}\ {\isacharequal}\ Some\ {\isacharparenleft}Num\ n{\isacharparenright}\ {\isasymand}\ a{\isadigit{2}}\ {\isacharequal}\ Some\ {\isacharparenleft}Num\ n{\isacharprime}{\isacharparenright}{\isacharparenright}{\isachardoublequoteclose}\isanewline
 %
 \isadelimproof
 \ \ %
@@ -101,7 +166,47 @@ limit ourselves to a simple arithmetic of plus and minus as a proof of concept.%
 %
 \isatagproof
 \isacommand{using}\isamarkupfalse%
-\ value{\isacharunderscore}plus{\isachardot}elims\ \isacommand{by}\isamarkupfalse%
+\ MaybeArithInt{\isacharunderscore}not{\isacharunderscore}None\ \isacommand{by}\isamarkupfalse%
+\ blast%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ MaybeArithInt{\isacharunderscore}Not{\isacharunderscore}Num{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}{\isasymforall}n{\isachardot}\ MaybeArithInt\ f\ a{\isadigit{1}}\ a{\isadigit{2}}\ {\isasymnoteq}\ Some\ {\isacharparenleft}Num\ n{\isacharparenright}{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}MaybeArithInt\ f\ a{\isadigit{1}}\ a{\isadigit{2}}\ {\isacharequal}\ None{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}metis\ MaybeArithInt{\isachardot}elims\ option{\isachardot}distinct{\isacharparenleft}{\isadigit{1}}{\isacharparenright}{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{definition}\isamarkupfalse%
+\ {\isachardoublequoteopen}value{\isacharunderscore}plus\ {\isacharequal}\ MaybeArithInt\ {\isacharparenleft}{\isacharplus}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ plus{\isacharunderscore}no{\isacharunderscore}string\ {\isacharbrackleft}simp{\isacharbrackright}{\isacharcolon}{\isachardoublequoteopen}MaybeArithInt\ f\ a\ b\ {\isasymnoteq}\ Some\ {\isacharparenleft}Str\ x{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{using}\isamarkupfalse%
+\ MaybeArithInt{\isachardot}elims\ \isacommand{by}\isamarkupfalse%
 \ blast%
 \endisatagproof
 {\isafoldproof}%
@@ -119,39 +224,10 @@ limit ourselves to a simple arithmetic of plus and minus as a proof of concept.%
 \endisadelimproof
 %
 \isatagproof
-\isacommand{proof}\isamarkupfalse%
-\ {\isacharparenleft}cases\ x{\isacharparenright}\isanewline
-\ \ \ \ \isacommand{case}\isamarkupfalse%
-\ None\isanewline
-\ \ \ \ \isacommand{then}\isamarkupfalse%
-\ \isacommand{show}\isamarkupfalse%
-\ {\isacharquery}thesis\ \isacommand{by}\isamarkupfalse%
-\ simp\isanewline
-\ \ \isacommand{next}\isamarkupfalse%
-\isanewline
-\ \ \ \ \isacommand{case}\isamarkupfalse%
-\ {\isacharparenleft}Some\ a{\isacharparenright}\isanewline
-\ \ \ \ \isacommand{then}\isamarkupfalse%
-\ \isacommand{show}\isamarkupfalse%
-\ {\isacharquery}thesis\isanewline
-\ \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}cases\ y{\isacharparenright}\isanewline
-\ \ \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ simp\isanewline
-\ \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}case{\isacharunderscore}tac\ a{\isacharparenright}\isanewline
-\ \ \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}case{\isacharunderscore}tac\ aa{\isacharparenright}\isanewline
-\ \ \ \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ simp\isanewline
-\ \ \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ simp\isanewline
-\ \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}case{\isacharunderscore}tac\ aa{\isacharparenright}\isanewline
-\ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
-\ simp{\isacharunderscore}all\isanewline
-\ \ \isacommand{qed}\isamarkupfalse%
-%
+\isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}induct\ x\ y\ rule{\isacharcolon}\ MaybeArithInt{\isachardot}induct{\isacharparenright}\isanewline
+\ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}simp{\isacharunderscore}all\ add{\isacharcolon}\ value{\isacharunderscore}plus{\isacharunderscore}def{\isacharparenright}%
 \endisatagproof
 {\isafoldproof}%
 %
@@ -160,10 +236,8 @@ limit ourselves to a simple arithmetic of plus and minus as a proof of concept.%
 %
 \endisadelimproof
 \isanewline
-\isacommand{fun}\isamarkupfalse%
-\ value{\isacharunderscore}minus\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}value\ option\ {\isasymRightarrow}\ value\ option\ {\isasymRightarrow}\ value\ option{\isachardoublequoteclose}\ \ \isakeyword{where}\isanewline
-\ \ {\isachardoublequoteopen}value{\isacharunderscore}minus\ {\isacharparenleft}Some\ {\isacharparenleft}Num\ x{\isacharparenright}{\isacharparenright}\ {\isacharparenleft}Some\ {\isacharparenleft}Num\ y{\isacharparenright}{\isacharparenright}\ {\isacharequal}\ Some\ {\isacharparenleft}Num\ {\isacharparenleft}x{\isacharminus}y{\isacharparenright}{\isacharparenright}{\isachardoublequoteclose}\ {\isacharbar}\isanewline
-\ \ {\isachardoublequoteopen}value{\isacharunderscore}minus\ {\isacharunderscore}\ {\isacharunderscore}\ {\isacharequal}\ None{\isachardoublequoteclose}\isanewline
+\isacommand{definition}\isamarkupfalse%
+\ {\isachardoublequoteopen}value{\isacharunderscore}minus\ {\isacharequal}\ MaybeArithInt\ {\isacharparenleft}{\isacharminus}{\isacharparenright}{\isachardoublequoteclose}\isanewline
 \isanewline
 \isacommand{lemma}\isamarkupfalse%
 \ minus{\isacharunderscore}no{\isacharunderscore}string\ {\isacharbrackleft}simp{\isacharbrackright}{\isacharcolon}{\isachardoublequoteopen}value{\isacharunderscore}minus\ a\ b\ {\isasymnoteq}\ Some\ {\isacharparenleft}Str\ x{\isacharparenright}{\isachardoublequoteclose}\isanewline
@@ -173,9 +247,8 @@ limit ourselves to a simple arithmetic of plus and minus as a proof of concept.%
 \endisadelimproof
 %
 \isatagproof
-\isacommand{using}\isamarkupfalse%
-\ value{\isacharunderscore}minus{\isachardot}elims\ \isacommand{by}\isamarkupfalse%
-\ blast%
+\isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ value{\isacharunderscore}minus{\isacharunderscore}def{\isacharparenright}%
 \endisatagproof
 {\isafoldproof}%
 %
@@ -211,13 +284,30 @@ limit ourselves to a simple arithmetic of plus and minus as a proof of concept.%
 \isanewline
 \isacommand{abbreviation}\isamarkupfalse%
 \ null{\isacharunderscore}state\ {\isacharparenleft}{\isachardoublequoteopen}{\isacharless}{\isachargreater}{\isachardoublequoteclose}{\isacharparenright}\ \isakeyword{where}\isanewline
-\ \ {\isachardoublequoteopen}null{\isacharunderscore}state\ {\isasymequiv}\ {\isasymlambda}x{\isachardot}\ None{\isachardoublequoteclose}\isanewline
+\ \ {\isachardoublequoteopen}null{\isacharunderscore}state\ {\isasymequiv}\ {\isacharparenleft}K{\isachardollar}\ None{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{nonterminal}\isamarkupfalse%
+\ maplets\ \isakeyword{and}\ maplet\isanewline
 \isanewline
 \isacommand{syntax}\isamarkupfalse%
 \isanewline
 \ \ {\isachardoublequoteopen}{\isacharunderscore}maplet{\isachardoublequoteclose}\ \ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}{\isacharbrackleft}{\isacharprime}a{\isacharcomma}\ {\isacharprime}a{\isacharbrackright}\ {\isasymRightarrow}\ maplet{\isachardoublequoteclose}\ \ \ \ \ \ \ \ \ \ \ \ \ {\isacharparenleft}{\isachardoublequoteopen}{\isacharunderscore}\ {\isacharslash}{\isacharcolon}{\isacharequal}{\isacharslash}\ {\isacharunderscore}{\isachardoublequoteclose}{\isacharparenright}\isanewline
 \ \ {\isachardoublequoteopen}{\isacharunderscore}maplets{\isachardoublequoteclose}\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}{\isacharbrackleft}{\isacharprime}a{\isacharcomma}\ {\isacharprime}a{\isacharbrackright}\ {\isasymRightarrow}\ maplet{\isachardoublequoteclose}\ \ \ \ \ \ \ \ \ \ \ \ \ {\isacharparenleft}{\isachardoublequoteopen}{\isacharunderscore}\ {\isacharslash}{\isacharbrackleft}{\isacharcolon}{\isacharequal}{\isacharbrackright}{\isacharslash}\ {\isacharunderscore}{\isachardoublequoteclose}{\isacharparenright}\isanewline
+\ \ {\isachardoublequoteopen}{\isachardoublequoteclose}\ \ \ \ \ \ \ \ \ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}maplet\ {\isasymRightarrow}\ maplets{\isachardoublequoteclose}\ \ \ \ \ \ \ \ \ \ \ \ \ {\isacharparenleft}{\isachardoublequoteopen}{\isacharunderscore}{\isachardoublequoteclose}{\isacharparenright}\isanewline
+\ \ {\isachardoublequoteopen}{\isacharunderscore}Maplets{\isachardoublequoteclose}\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}{\isacharbrackleft}maplet{\isacharcomma}\ maplets{\isacharbrackright}\ {\isasymRightarrow}\ maplets{\isachardoublequoteclose}\ {\isacharparenleft}{\isachardoublequoteopen}{\isacharunderscore}{\isacharcomma}{\isacharslash}\ {\isacharunderscore}{\isachardoublequoteclose}{\isacharparenright}\isanewline
+\ \ {\isachardoublequoteopen}{\isacharunderscore}MapUpd{\isachardoublequoteclose}\ \ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}{\isacharbrackleft}{\isacharprime}a\ {\isasymrightharpoonup}\ {\isacharprime}b{\isacharcomma}\ maplets{\isacharbrackright}\ {\isasymRightarrow}\ {\isacharprime}a\ {\isasymrightharpoonup}\ {\isacharprime}b{\isachardoublequoteclose}\ {\isacharparenleft}{\isachardoublequoteopen}{\isacharunderscore}{\isacharslash}{\isacharprime}{\isacharparenleft}{\isacharunderscore}{\isacharprime}{\isacharparenright}{\isachardoublequoteclose}\ {\isacharbrackleft}{\isadigit{9}}{\isadigit{0}}{\isadigit{0}}{\isacharcomma}\ {\isadigit{0}}{\isacharbrackright}\ {\isadigit{9}}{\isadigit{0}}{\isadigit{0}}{\isacharparenright}\isanewline
+\ \ {\isachardoublequoteopen}{\isacharunderscore}Map{\isachardoublequoteclose}\ \ \ \ \ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}maplets\ {\isasymRightarrow}\ {\isacharprime}a\ {\isasymrightharpoonup}\ {\isacharprime}b{\isachardoublequoteclose}\ \ \ \ \ \ \ \ \ \ \ \ {\isacharparenleft}{\isachardoublequoteopen}{\isacharparenleft}{\isadigit{1}}{\isacharbrackleft}{\isacharunderscore}{\isacharbrackright}{\isacharparenright}{\isachardoublequoteclose}{\isacharparenright}\isanewline
 \ \ {\isachardoublequoteopen}{\isacharunderscore}Map{\isachardoublequoteclose}\ \ \ \ \ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}maplets\ {\isasymRightarrow}\ {\isacharprime}a\ {\isasymrightharpoonup}\ {\isacharprime}b{\isachardoublequoteclose}\ \ \ \ \ \ \ \ \ \ \ \ {\isacharparenleft}{\isachardoublequoteopen}{\isacharparenleft}{\isadigit{1}}{\isacharless}{\isacharunderscore}{\isachargreater}{\isacharparenright}{\isachardoublequoteclose}{\isacharparenright}\isanewline
+\isanewline
+\isacommand{translations}\isamarkupfalse%
+\isanewline
+\ \ {\isachardoublequoteopen}{\isacharunderscore}MapUpd\ m\ {\isacharparenleft}{\isacharunderscore}Maplets\ xy\ ms{\isacharparenright}{\isachardoublequoteclose}\ \ {\isasymrightleftharpoons}\ {\isachardoublequoteopen}{\isacharunderscore}MapUpd\ {\isacharparenleft}{\isacharunderscore}MapUpd\ m\ xy{\isacharparenright}\ ms{\isachardoublequoteclose}\isanewline
+\ \ {\isachardoublequoteopen}{\isacharunderscore}MapUpd\ m\ {\isacharparenleft}{\isacharunderscore}maplet\ \ x\ y{\isacharparenright}{\isachardoublequoteclose}\ \ \ \ {\isasymrightleftharpoons}\ {\isachardoublequoteopen}m{\isacharparenleft}x\ {\isachardollar}{\isacharcolon}{\isacharequal}\ CONST\ Some\ y{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ {\isachardoublequoteopen}{\isacharunderscore}Map\ ms{\isachardoublequoteclose}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ {\isasymrightleftharpoons}\ {\isachardoublequoteopen}{\isacharunderscore}MapUpd\ {\isacharparenleft}CONST\ empty{\isacharparenright}\ ms{\isachardoublequoteclose}\isanewline
+\ \ {\isachardoublequoteopen}{\isacharunderscore}Map\ {\isacharparenleft}{\isacharunderscore}Maplets\ ms{\isadigit{1}}\ ms{\isadigit{2}}{\isacharparenright}{\isachardoublequoteclose}\ \ \ \ \ {\isasymleftharpoondown}\ {\isachardoublequoteopen}{\isacharunderscore}MapUpd\ {\isacharparenleft}{\isacharunderscore}Map\ ms{\isadigit{1}}{\isacharparenright}\ ms{\isadigit{2}}{\isachardoublequoteclose}\isanewline
+\ \ {\isachardoublequoteopen}{\isacharunderscore}Maplets\ ms{\isadigit{1}}\ {\isacharparenleft}{\isacharunderscore}Maplets\ ms{\isadigit{2}}\ ms{\isadigit{3}}{\isacharparenright}{\isachardoublequoteclose}\ {\isasymleftharpoondown}\ {\isachardoublequoteopen}{\isacharunderscore}Maplets\ {\isacharparenleft}{\isacharunderscore}Maplets\ ms{\isadigit{1}}\ ms{\isadigit{2}}{\isacharparenright}\ ms{\isadigit{3}}{\isachardoublequoteclose}\isanewline
+\isanewline
+\isanewline
 \isanewline
 \isacommand{instantiation}\isamarkupfalse%
 \ aexp\ {\isacharcolon}{\isacharcolon}\ plus\ \isakeyword{begin}\isanewline
@@ -273,10 +363,73 @@ limit ourselves to a simple arithmetic of plus and minus as a proof of concept.%
 \isanewline
 \isacommand{definition}\isamarkupfalse%
 \ input{\isadigit{2}}state\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}value\ list\ {\isasymRightarrow}\ registers{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
-\ \ {\isachardoublequoteopen}input{\isadigit{2}}state\ n\ {\isacharequal}\ map{\isacharunderscore}of\ {\isacharparenleft}enumerate\ {\isadigit{0}}\ n{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ {\isachardoublequoteopen}input{\isadigit{2}}state\ n\ {\isacharequal}\ fold\ {\isacharparenleft}{\isasymlambda}{\isacharparenleft}k{\isacharcomma}\ v{\isacharparenright}\ f{\isachardot}\ f{\isacharparenleft}k\ {\isachardollar}{\isacharcolon}{\isacharequal}\ Some\ v{\isacharparenright}{\isacharparenright}\ {\isacharparenleft}enumerate\ {\isadigit{0}}\ n{\isacharparenright}\ {\isacharparenleft}K{\isachardollar}\ None{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{primrec}\isamarkupfalse%
+\ input{\isadigit{2}}state{\isacharunderscore}prim\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}value\ list\ {\isasymRightarrow}\ nat\ {\isasymRightarrow}\ registers{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+\ \ {\isachardoublequoteopen}input{\isadigit{2}}state{\isacharunderscore}prim\ {\isacharbrackleft}{\isacharbrackright}\ {\isacharunderscore}\ {\isacharequal}\ {\isacharparenleft}K{\isachardollar}\ None{\isacharparenright}{\isachardoublequoteclose}\ {\isacharbar}\isanewline
+\ \ {\isachardoublequoteopen}input{\isadigit{2}}state{\isacharunderscore}prim\ {\isacharparenleft}v{\isacharhash}t{\isacharparenright}\ k\ {\isacharequal}\ {\isacharparenleft}input{\isadigit{2}}state{\isacharunderscore}prim\ t\ {\isacharparenleft}k{\isacharplus}{\isadigit{1}}{\isacharparenright}{\isacharparenright}{\isacharparenleft}k\ {\isachardollar}{\isacharcolon}{\isacharequal}\ Some\ v{\isacharparenright}{\isachardoublequoteclose}\isanewline
 \isanewline
 \isacommand{lemma}\isamarkupfalse%
-\ input{\isadigit{2}}state{\isacharunderscore}out{\isacharunderscore}of{\isacharunderscore}bounds{\isacharcolon}\ {\isachardoublequoteopen}i\ {\isasymge}\ length\ ia\ {\isasymLongrightarrow}\ input{\isadigit{2}}state\ ia\ i\ {\isacharequal}\ None{\isachardoublequoteclose}\isanewline
+\ input{\isadigit{2}}state{\isacharunderscore}append{\isacharcolon}\ {\isachardoublequoteopen}input{\isadigit{2}}state\ {\isacharparenleft}i\ {\isacharat}\ {\isacharbrackleft}a{\isacharbrackright}{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}input{\isadigit{2}}state\ i{\isacharparenright}{\isacharparenleft}length\ i\ {\isachardollar}{\isacharcolon}{\isacharequal}\ Some\ a{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ eq{\isacharunderscore}finfun{\isacharunderscore}All{\isacharunderscore}ext\ finfun{\isacharunderscore}All{\isacharunderscore}def\ finfun{\isacharunderscore}All{\isacharunderscore}except{\isacharunderscore}def{\isacharparenright}\isanewline
+\ \ \isacommand{apply}\isamarkupfalse%
+\ clarify\isanewline
+\ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ input{\isadigit{2}}state{\isacharunderscore}def\ enumerate{\isacharunderscore}eq{\isacharunderscore}zip{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ fold{\isacharunderscore}conv{\isacharunderscore}foldr{\isacharcolon}\ {\isachardoublequoteopen}fold\ f\ xs\ {\isacharequal}\ foldr\ f\ {\isacharparenleft}rev\ xs{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ foldr{\isacharunderscore}conv{\isacharunderscore}fold{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ length{\isacharunderscore}map{\isacharcolon}\ {\isachardoublequoteopen}length\ i\ {\isachargreater}\ {\isadigit{0}}\ {\isasymLongrightarrow}\ {\isacharbrackleft}Suc\ {\isadigit{0}}{\isachardot}{\isachardot}{\isacharless}length\ i{\isacharbrackright}\ {\isacharat}\ {\isacharbrackleft}length\ i{\isacharbrackright}\ {\isacharequal}\ map\ Suc\ {\isacharbrackleft}{\isadigit{0}}{\isachardot}{\isachardot}{\isacharless}length\ i{\isacharbrackright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ Suc{\isacharunderscore}leI\ map{\isacharunderscore}Suc{\isacharunderscore}upt{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ input{\isadigit{2}}state{\isacharunderscore}out{\isacharunderscore}of{\isacharunderscore}bounds{\isacharcolon}\ {\isachardoublequoteopen}i\ {\isasymge}\ length\ ia\ {\isasymLongrightarrow}\ input{\isadigit{2}}state\ ia\ {\isachardollar}\ i\ {\isacharequal}\ None{\isachardoublequoteclose}\isanewline
 %
 \isadelimproof
 %
@@ -284,7 +437,7 @@ limit ourselves to a simple arithmetic of plus and minus as a proof of concept.%
 %
 \isatagproof
 \isacommand{proof}\isamarkupfalse%
-{\isacharparenleft}induct\ {\isachardoublequoteopen}ia{\isachardoublequoteclose}{\isacharparenright}\isanewline
+{\isacharparenleft}induct\ ia\ rule{\isacharcolon}\ rev{\isacharunderscore}induct{\isacharparenright}\isanewline
 \ \ \isacommand{case}\isamarkupfalse%
 \ Nil\isanewline
 \ \ \isacommand{then}\isamarkupfalse%
@@ -295,14 +448,12 @@ limit ourselves to a simple arithmetic of plus and minus as a proof of concept.%
 \isacommand{next}\isamarkupfalse%
 \isanewline
 \ \ \isacommand{case}\isamarkupfalse%
-\ {\isacharparenleft}Cons\ a\ ia{\isacharparenright}\isanewline
+\ {\isacharparenleft}snoc\ a\ as{\isacharparenright}\isanewline
 \ \ \isacommand{then}\isamarkupfalse%
 \ \isacommand{show}\isamarkupfalse%
 \ {\isacharquery}case\isanewline
-\ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ input{\isadigit{2}}state{\isacharunderscore}def{\isacharparenright}\isanewline
 \ \ \ \ \isacommand{by}\isamarkupfalse%
-\ {\isacharparenleft}metis\ {\isacharparenleft}mono{\isacharunderscore}tags{\isacharcomma}\ lifting{\isacharparenright}\ imageE\ in{\isacharunderscore}set{\isacharunderscore}enumerate{\isacharunderscore}eq\ length{\isacharunderscore}Cons\ linorder{\isacharunderscore}not{\isacharunderscore}le\ list{\isachardot}size{\isacharparenleft}{\isadigit{4}}{\isacharparenright}\ map{\isacharunderscore}of{\isacharunderscore}eq{\isacharunderscore}None{\isacharunderscore}iff{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ input{\isadigit{2}}state{\isacharunderscore}def\ enumerate{\isacharunderscore}eq{\isacharunderscore}zip{\isacharparenright}\isanewline
 \isacommand{qed}\isamarkupfalse%
 %
 \endisatagproof
@@ -314,7 +465,25 @@ limit ourselves to a simple arithmetic of plus and minus as a proof of concept.%
 \endisadelimproof
 \isanewline
 \isacommand{lemma}\isamarkupfalse%
-\ input{\isadigit{2}}state{\isacharunderscore}empty{\isacharcolon}\ {\isachardoublequoteopen}input{\isadigit{2}}state\ {\isacharbrackleft}{\isacharbrackright}\ x{\isadigit{1}}\ {\isacharequal}\ None{\isachardoublequoteclose}\isanewline
+\ input{\isadigit{2}}state{\isacharunderscore}within{\isacharunderscore}bounds{\isacharcolon}\ {\isachardoublequoteopen}input{\isadigit{2}}state\ i\ {\isachardollar}\ x\ {\isacharequal}\ Some\ a\ {\isasymLongrightarrow}\ x\ {\isacharless}\ length\ i{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}metis\ input{\isadigit{2}}state{\isacharunderscore}out{\isacharunderscore}of{\isacharunderscore}bounds\ not{\isacharunderscore}le{\isacharunderscore}imp{\isacharunderscore}less\ option{\isachardot}distinct{\isacharparenleft}{\isadigit{1}}{\isacharparenright}{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ input{\isadigit{2}}state{\isacharunderscore}empty{\isacharcolon}\ {\isachardoublequoteopen}input{\isadigit{2}}state\ {\isacharbrackleft}{\isacharbrackright}\ {\isachardollar}\ x{\isadigit{1}}\ {\isacharequal}\ None{\isachardoublequoteclose}\isanewline
 %
 \isadelimproof
 \ \ %
@@ -332,7 +501,7 @@ limit ourselves to a simple arithmetic of plus and minus as a proof of concept.%
 \endisadelimproof
 \isanewline
 \isacommand{lemma}\isamarkupfalse%
-\ input{\isadigit{2}}state{\isacharunderscore}nth{\isacharcolon}\ {\isachardoublequoteopen}i\ {\isacharless}\ length\ ia\ {\isasymLongrightarrow}\ input{\isadigit{2}}state\ ia\ i\ {\isacharequal}\ Some\ {\isacharparenleft}ia\ {\isacharbang}\ i{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ input{\isadigit{2}}state{\isacharunderscore}nth{\isacharcolon}\ {\isachardoublequoteopen}i\ {\isacharless}\ length\ ia\ {\isasymLongrightarrow}\ input{\isadigit{2}}state\ ia\ {\isachardollar}\ i\ {\isacharequal}\ Some\ {\isacharparenleft}ia\ {\isacharbang}\ i{\isacharparenright}{\isachardoublequoteclose}\isanewline
 %
 \isadelimproof
 %
@@ -340,7 +509,7 @@ limit ourselves to a simple arithmetic of plus and minus as a proof of concept.%
 %
 \isatagproof
 \isacommand{proof}\isamarkupfalse%
-{\isacharparenleft}induct\ ia{\isacharparenright}\isanewline
+{\isacharparenleft}induct\ ia\ rule{\isacharcolon}\ rev{\isacharunderscore}induct{\isacharparenright}\isanewline
 \ \ \isacommand{case}\isamarkupfalse%
 \ Nil\isanewline
 \ \ \isacommand{then}\isamarkupfalse%
@@ -351,18 +520,81 @@ limit ourselves to a simple arithmetic of plus and minus as a proof of concept.%
 \isacommand{next}\isamarkupfalse%
 \isanewline
 \ \ \isacommand{case}\isamarkupfalse%
-\ {\isacharparenleft}Cons\ a\ ia{\isacharparenright}\isanewline
+\ {\isacharparenleft}snoc\ a\ ia{\isacharparenright}\isanewline
 \ \ \isacommand{then}\isamarkupfalse%
 \ \isacommand{show}\isamarkupfalse%
 \ {\isacharquery}case\isanewline
 \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ input{\isadigit{2}}state{\isacharunderscore}def{\isacharparenright}\isanewline
-\ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ clarify\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ input{\isadigit{2}}state{\isacharunderscore}def\ enumerate{\isacharunderscore}eq{\isacharunderscore}zip{\isacharparenright}\isanewline
 \ \ \ \ \isacommand{by}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ add{\isachardot}commute\ in{\isacharunderscore}set{\isacharunderscore}enumerate{\isacharunderscore}eq\ plus{\isacharunderscore}{\isadigit{1}}{\isacharunderscore}eq{\isacharunderscore}Suc\ One{\isacharunderscore}nat{\isacharunderscore}def{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ finfun{\isacharunderscore}upd{\isacharunderscore}apply\ nth{\isacharunderscore}append{\isacharparenright}\isanewline
 \isacommand{qed}\isamarkupfalse%
 %
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ input{\isadigit{2}}state{\isacharunderscore}not{\isacharunderscore}None{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}input{\isadigit{2}}state\ i\ {\isachardollar}\ x\ {\isasymnoteq}\ None{\isacharparenright}\ {\isasymLongrightarrow}\ {\isacharparenleft}x\ {\isacharless}\ length\ i{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{using}\isamarkupfalse%
+\ input{\isadigit{2}}state{\isacharunderscore}within{\isacharunderscore}bounds\ \isacommand{by}\isamarkupfalse%
+\ blast%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ input{\isadigit{2}}state{\isacharunderscore}not{\isacharunderscore}None{\isacharunderscore}equiv{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}input{\isadigit{2}}state\ i\ {\isachardollar}\ x\ {\isasymnoteq}\ None{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}x\ {\isacharless}\ length\ i{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{apply}\isamarkupfalse%
+\ standard\isanewline
+\ \ \isacommand{using}\isamarkupfalse%
+\ input{\isadigit{2}}state{\isacharunderscore}within{\isacharunderscore}bounds\ \isacommand{apply}\isamarkupfalse%
+\ blast\isanewline
+\ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ input{\isadigit{2}}state{\isacharunderscore}nth{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ input{\isadigit{2}}state{\isacharunderscore}Some{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}{\isasymexists}v{\isachardot}\ input{\isadigit{2}}state\ i\ {\isachardollar}\ x\ {\isacharequal}\ Some\ v{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}x\ {\isacharless}\ length\ i{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{apply}\isamarkupfalse%
+\ standard\isanewline
+\ \ \isacommand{using}\isamarkupfalse%
+\ input{\isadigit{2}}state{\isacharunderscore}within{\isacharunderscore}bounds\ \isacommand{apply}\isamarkupfalse%
+\ blast\isanewline
+\ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ input{\isadigit{2}}state{\isacharunderscore}nth{\isacharparenright}%
 \endisatagproof
 {\isafoldproof}%
 %
@@ -375,7 +607,7 @@ limit ourselves to a simple arithmetic of plus and minus as a proof of concept.%
 \ input{\isadigit{2}}state{\isacharunderscore}cons{\isacharcolon}\isanewline
 \ \ {\isachardoublequoteopen}x{\isadigit{1}}\ {\isachargreater}\ {\isadigit{0}}\ {\isasymLongrightarrow}\isanewline
 \ \ \ x{\isadigit{1}}\ {\isacharless}\ length\ ia\ {\isasymLongrightarrow}\isanewline
-\ \ \ input{\isadigit{2}}state\ {\isacharparenleft}a\ {\isacharhash}\ ia{\isacharparenright}\ x{\isadigit{1}}\ {\isacharequal}\ input{\isadigit{2}}state\ ia\ {\isacharparenleft}x{\isadigit{1}}{\isacharminus}{\isadigit{1}}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ \ input{\isadigit{2}}state\ {\isacharparenleft}a\ {\isacharhash}\ ia{\isacharparenright}\ {\isachardollar}\ x{\isadigit{1}}\ {\isacharequal}\ input{\isadigit{2}}state\ ia\ {\isachardollar}\ {\isacharparenleft}x{\isadigit{1}}{\isacharminus}{\isadigit{1}}{\isacharparenright}{\isachardoublequoteclose}\isanewline
 %
 \isadelimproof
 \ \ %
@@ -392,18 +624,251 @@ limit ourselves to a simple arithmetic of plus and minus as a proof of concept.%
 %
 \endisadelimproof
 \isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ input{\isadigit{2}}state{\isacharunderscore}cons{\isacharunderscore}shift{\isacharcolon}\ {\isachardoublequoteopen}input{\isadigit{2}}state\ i\ {\isachardollar}\ x{\isadigit{1}}\ {\isacharequal}\ Some\ a\ {\isasymLongrightarrow}\ input{\isadigit{2}}state\ {\isacharparenleft}b\ {\isacharhash}\ i{\isacharparenright}\ {\isachardollar}\ {\isacharparenleft}Suc\ x{\isadigit{1}}{\isacharparenright}\ {\isacharequal}\ Some\ a{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\isatagproof
+\isacommand{proof}\isamarkupfalse%
+{\isacharparenleft}induct\ i\ rule{\isacharcolon}\ rev{\isacharunderscore}induct{\isacharparenright}\isanewline
+\ \ \isacommand{case}\isamarkupfalse%
+\ Nil\isanewline
+\ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}case\isanewline
+\ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ input{\isadigit{2}}state{\isacharunderscore}def{\isacharparenright}\isanewline
+\isacommand{next}\isamarkupfalse%
+\isanewline
+\ \ \isacommand{case}\isamarkupfalse%
+\ {\isacharparenleft}snoc\ x\ xs{\isacharparenright}\isanewline
+\ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}case\isanewline
+\ \ \ \ \isacommand{using}\isamarkupfalse%
+\ input{\isadigit{2}}state{\isacharunderscore}within{\isacharunderscore}bounds{\isacharbrackleft}of\ xs\ x{\isadigit{1}}\ a{\isacharbrackright}\isanewline
+\ \ \ \ \isacommand{using}\isamarkupfalse%
+\ input{\isadigit{2}}state{\isacharunderscore}cons{\isacharbrackleft}of\ {\isachardoublequoteopen}Suc\ x{\isadigit{1}}{\isachardoublequoteclose}\ {\isachardoublequoteopen}xs\ {\isacharat}\ {\isacharbrackleft}x{\isacharbrackright}{\isachardoublequoteclose}\ b{\isacharbrackright}\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ simp\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}x{\isadigit{1}}\ {\isacharless}\ length\ xs{\isachardoublequoteclose}{\isacharparenright}\isanewline
+\ \ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ simp\isanewline
+\ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}metis\ finfun{\isacharunderscore}upd{\isacharunderscore}apply\ input{\isadigit{2}}state{\isacharunderscore}append\ input{\isadigit{2}}state{\isacharunderscore}nth\ length{\isacharunderscore}Cons\ length{\isacharunderscore}append{\isacharunderscore}singleton\ lessI\ list{\isachardot}sel{\isacharparenleft}{\isadigit{3}}{\isacharparenright}\ nth{\isacharunderscore}tl{\isacharparenright}\isanewline
+\isacommand{qed}\isamarkupfalse%
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ input{\isadigit{2}}state{\isacharunderscore}exists{\isacharcolon}\ {\isachardoublequoteopen}{\isasymexists}i{\isachardot}\ input{\isadigit{2}}state\ i\ {\isachardollar}\ x{\isadigit{1}}\ {\isacharequal}\ Some\ a{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\isatagproof
+\isacommand{proof}\isamarkupfalse%
+{\isacharparenleft}induct\ x{\isadigit{1}}{\isacharparenright}\isanewline
+\ \ \isacommand{case}\isamarkupfalse%
+\ {\isadigit{0}}\isanewline
+\ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}case\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}rule{\isacharunderscore}tac\ x{\isacharequal}{\isachardoublequoteopen}{\isacharbrackleft}a{\isacharbrackright}{\isachardoublequoteclose}\ \isakeyword{in}\ exI{\isacharparenright}\isanewline
+\ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ input{\isadigit{2}}state{\isacharunderscore}def{\isacharparenright}\isanewline
+\isacommand{next}\isamarkupfalse%
+\isanewline
+\ \ \isacommand{case}\isamarkupfalse%
+\ {\isacharparenleft}Suc\ x{\isadigit{1}}{\isacharparenright}\isanewline
+\ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}case\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ clarify\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}rule{\isacharunderscore}tac\ x{\isacharequal}{\isachardoublequoteopen}a{\isacharhash}i{\isachardoublequoteclose}\ \isakeyword{in}\ exI{\isacharparenright}\isanewline
+\ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ input{\isadigit{2}}state{\isacharunderscore}cons{\isacharunderscore}shift{\isacharparenright}\isanewline
+\isacommand{qed}\isamarkupfalse%
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{primrec}\isamarkupfalse%
+\ repeat\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}nat\ {\isasymRightarrow}\ {\isacharprime}a\ {\isasymRightarrow}\ {\isacharprime}a\ list{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+\ \ {\isachardoublequoteopen}repeat\ {\isadigit{0}}\ {\isacharunderscore}\ {\isacharequal}\ {\isacharbrackleft}{\isacharbrackright}{\isachardoublequoteclose}\ {\isacharbar}\isanewline
+\ \ {\isachardoublequoteopen}repeat\ {\isacharparenleft}Suc\ m{\isacharparenright}\ a\ {\isacharequal}\ a{\isacharhash}{\isacharparenleft}repeat\ m\ a{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ length{\isacharunderscore}repeat{\isacharcolon}\ {\isachardoublequoteopen}length\ {\isacharparenleft}repeat\ n\ a{\isacharparenright}\ {\isacharequal}\ n{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\isatagproof
+\isacommand{proof}\isamarkupfalse%
+{\isacharparenleft}induct\ n{\isacharparenright}\isanewline
+\ \ \isacommand{case}\isamarkupfalse%
+\ {\isadigit{0}}\isanewline
+\ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}case\isanewline
+\ \ \ \ \isacommand{by}\isamarkupfalse%
+\ simp\isanewline
+\isacommand{next}\isamarkupfalse%
+\isanewline
+\ \ \isacommand{case}\isamarkupfalse%
+\ {\isacharparenleft}Suc\ a{\isacharparenright}\isanewline
+\ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}case\isanewline
+\ \ \ \ \isacommand{by}\isamarkupfalse%
+\ simp\isanewline
+\isacommand{qed}\isamarkupfalse%
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ length{\isacharunderscore}append{\isacharunderscore}repeat{\isacharcolon}\ {\isachardoublequoteopen}length\ {\isacharparenleft}i{\isacharat}{\isacharparenleft}repeat\ a\ y{\isacharparenright}{\isacharparenright}\ {\isasymge}\ length\ i{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ simp%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ length{\isacharunderscore}input{\isadigit{2}}state{\isacharunderscore}repeat{\isacharcolon}\ {\isachardoublequoteopen}input{\isadigit{2}}state\ i\ {\isachardollar}\ x\ {\isacharequal}\ Some\ a\ {\isasymLongrightarrow}\ y\ {\isacharless}\ length\ {\isacharparenleft}i\ {\isacharat}\ repeat\ y\ a{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}metis\ append{\isachardot}simps{\isacharparenleft}{\isadigit{1}}{\isacharparenright}\ append{\isacharunderscore}eq{\isacharunderscore}append{\isacharunderscore}conv\ input{\isadigit{2}}state{\isacharunderscore}within{\isacharunderscore}bounds\ length{\isacharunderscore}append\ length{\isacharunderscore}repeat\ list{\isachardot}size{\isacharparenleft}{\isadigit{3}}{\isacharparenright}\ neqE\ not{\isacharunderscore}add{\isacharunderscore}less{\isadigit{2}}\ zero{\isacharunderscore}order{\isacharparenleft}{\isadigit{3}}{\isacharparenright}{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ input{\isadigit{2}}state{\isacharunderscore}double{\isacharunderscore}exists{\isacharcolon}\ {\isachardoublequoteopen}{\isasymexists}i{\isachardot}\ input{\isadigit{2}}state\ i\ {\isachardollar}\ x\ {\isacharequal}\ Some\ a\ {\isasymand}\ input{\isadigit{2}}state\ i\ {\isachardollar}\ y\ {\isacharequal}\ Some\ a{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}insert\ input{\isadigit{2}}state{\isacharunderscore}exists{\isacharbrackleft}of\ x\ a{\isacharbrackright}{\isacharparenright}\isanewline
+\ \ \isacommand{apply}\isamarkupfalse%
+\ clarify\isanewline
+\ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}x\ {\isasymge}\ y{\isachardoublequoteclose}{\isacharparenright}\isanewline
+\ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}rule{\isacharunderscore}tac\ x{\isacharequal}{\isachardoublequoteopen}list{\isacharunderscore}update\ i\ y\ a{\isachardoublequoteclose}\ \isakeyword{in}\ exI{\isacharparenright}\isanewline
+\ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}metis\ {\isacharparenleft}no{\isacharunderscore}types{\isacharcomma}\ lifting{\isacharparenright}\ input{\isadigit{2}}state{\isacharunderscore}within{\isacharunderscore}bounds\ input{\isadigit{2}}state{\isacharunderscore}nth\ input{\isadigit{2}}state{\isacharunderscore}out{\isacharunderscore}of{\isacharunderscore}bounds\ le{\isacharunderscore}trans\ length{\isacharunderscore}list{\isacharunderscore}update\ not{\isacharunderscore}le{\isacharunderscore}imp{\isacharunderscore}less\ nth{\isacharunderscore}list{\isacharunderscore}update{\isacharunderscore}eq\ nth{\isacharunderscore}list{\isacharunderscore}update{\isacharunderscore}neq{\isacharparenright}\isanewline
+\ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}rule{\isacharunderscore}tac\ x{\isacharequal}{\isachardoublequoteopen}list{\isacharunderscore}update\ {\isacharparenleft}i{\isacharat}{\isacharparenleft}repeat\ y\ a{\isacharparenright}{\isacharparenright}\ y\ a{\isachardoublequoteclose}\ \isakeyword{in}\ exI{\isacharparenright}\isanewline
+\ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ not{\isacharunderscore}le{\isacharparenright}\isanewline
+\ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}metis\ length{\isacharunderscore}input{\isadigit{2}}state{\isacharunderscore}repeat\ input{\isadigit{2}}state{\isacharunderscore}nth\ input{\isadigit{2}}state{\isacharunderscore}out{\isacharunderscore}of{\isacharunderscore}bounds\ le{\isacharunderscore}trans\ length{\isacharunderscore}append{\isacharunderscore}repeat\ length{\isacharunderscore}list{\isacharunderscore}update\ not{\isacharunderscore}le{\isacharunderscore}imp{\isacharunderscore}less\ nth{\isacharunderscore}append\ nth{\isacharunderscore}list{\isacharunderscore}update{\isacharunderscore}eq\ nth{\isacharunderscore}list{\isacharunderscore}update{\isacharunderscore}neq\ option{\isachardot}distinct{\isacharparenleft}{\isadigit{1}}{\isacharparenright}{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ input{\isadigit{2}}state{\isacharunderscore}double{\isacharunderscore}exists{\isacharunderscore}{\isadigit{2}}{\isacharcolon}\ {\isachardoublequoteopen}x\ {\isasymnoteq}\ y\ {\isasymLongrightarrow}\ {\isasymexists}i{\isachardot}\ input{\isadigit{2}}state\ i\ {\isachardollar}\ x\ {\isacharequal}\ Some\ a\ {\isasymand}\ input{\isadigit{2}}state\ i\ {\isachardollar}\ y\ {\isacharequal}\ Some\ a{\isacharprime}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}insert\ input{\isadigit{2}}state{\isacharunderscore}exists{\isacharbrackleft}of\ x\ a{\isacharbrackright}{\isacharparenright}\isanewline
+\ \ \isacommand{apply}\isamarkupfalse%
+\ clarify\isanewline
+\ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}x\ {\isasymge}\ y{\isachardoublequoteclose}{\isacharparenright}\isanewline
+\ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}rule{\isacharunderscore}tac\ x{\isacharequal}{\isachardoublequoteopen}list{\isacharunderscore}update\ i\ y\ a{\isacharprime}{\isachardoublequoteclose}\ \isakeyword{in}\ exI{\isacharparenright}\isanewline
+\ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}metis\ {\isacharparenleft}no{\isacharunderscore}types{\isacharcomma}\ lifting{\isacharparenright}\ input{\isadigit{2}}state{\isacharunderscore}within{\isacharunderscore}bounds\ input{\isadigit{2}}state{\isacharunderscore}nth\ input{\isadigit{2}}state{\isacharunderscore}out{\isacharunderscore}of{\isacharunderscore}bounds\ le{\isacharunderscore}trans\ length{\isacharunderscore}list{\isacharunderscore}update\ not{\isacharunderscore}le{\isacharunderscore}imp{\isacharunderscore}less\ nth{\isacharunderscore}list{\isacharunderscore}update{\isacharunderscore}eq\ nth{\isacharunderscore}list{\isacharunderscore}update{\isacharunderscore}neq{\isacharparenright}\isanewline
+\ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}rule{\isacharunderscore}tac\ x{\isacharequal}{\isachardoublequoteopen}list{\isacharunderscore}update\ {\isacharparenleft}i{\isacharat}{\isacharparenleft}repeat\ y\ a{\isacharprime}{\isacharparenright}{\isacharparenright}\ y\ a{\isacharprime}{\isachardoublequoteclose}\ \isakeyword{in}\ exI{\isacharparenright}\isanewline
+\ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ not{\isacharunderscore}le{\isacharparenright}\isanewline
+\ \ \isacommand{apply}\isamarkupfalse%
+\ standard\isanewline
+\ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}metis\ input{\isadigit{2}}state{\isacharunderscore}nth\ input{\isadigit{2}}state{\isacharunderscore}within{\isacharunderscore}bounds\ le{\isacharunderscore}trans\ length{\isacharunderscore}append{\isacharunderscore}repeat\ length{\isacharunderscore}list{\isacharunderscore}update\ linorder{\isacharunderscore}not{\isacharunderscore}le\ nth{\isacharunderscore}append\ nth{\isacharunderscore}list{\isacharunderscore}update{\isacharunderscore}neq\ order{\isacharunderscore}refl{\isacharparenright}\isanewline
+\ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}metis\ input{\isadigit{2}}state{\isacharunderscore}nth\ length{\isacharunderscore}append\ length{\isacharunderscore}input{\isadigit{2}}state{\isacharunderscore}repeat\ length{\isacharunderscore}list{\isacharunderscore}update\ length{\isacharunderscore}repeat\ nth{\isacharunderscore}list{\isacharunderscore}update{\isacharunderscore}eq{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
 \isacommand{definition}\isamarkupfalse%
 \ join{\isacharunderscore}ir\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}value\ list\ {\isasymRightarrow}\ registers\ {\isasymRightarrow}\ datastate{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
 \ \ {\isachardoublequoteopen}join{\isacharunderscore}ir\ i\ r\ {\isasymequiv}\ {\isacharparenleft}{\isasymlambda}x{\isachardot}\ case\ x\ of\isanewline
-\ \ \ \ R\ n\ {\isasymRightarrow}\ r\ n\ {\isacharbar}\isanewline
-\ \ \ \ I\ n\ {\isasymRightarrow}\ {\isacharparenleft}input{\isadigit{2}}state\ i{\isacharparenright}\ n\isanewline
+\ \ \ \ R\ n\ {\isasymRightarrow}\ r\ {\isachardollar}\ n\ {\isacharbar}\isanewline
+\ \ \ \ I\ n\ {\isasymRightarrow}\ {\isacharparenleft}input{\isadigit{2}}state\ i{\isacharparenright}\ {\isachardollar}\ n\isanewline
 \ \ {\isacharparenright}{\isachardoublequoteclose}\isanewline
 \isanewline
 \isacommand{lemmas}\isamarkupfalse%
 \ datastate\ {\isacharequal}\ join{\isacharunderscore}ir{\isacharunderscore}def\ input{\isadigit{2}}state{\isacharunderscore}def\isanewline
 \isanewline
 \isacommand{lemma}\isamarkupfalse%
-\ join{\isacharunderscore}ir{\isacharunderscore}empty{\isacharbrackleft}simp{\isacharbrackright}{\isacharcolon}\ {\isachardoublequoteopen}join{\isacharunderscore}ir\ {\isacharbrackleft}{\isacharbrackright}\ {\isacharless}{\isachargreater}\ {\isacharequal}\ {\isacharless}{\isachargreater}{\isachardoublequoteclose}\isanewline
+\ join{\isacharunderscore}ir{\isacharunderscore}empty{\isacharbrackleft}simp{\isacharbrackright}{\isacharcolon}\ {\isachardoublequoteopen}join{\isacharunderscore}ir\ {\isacharbrackleft}{\isacharbrackright}\ {\isacharless}{\isachargreater}\ {\isacharequal}\ {\isacharparenleft}{\isasymlambda}x{\isachardot}\ None{\isacharparenright}{\isachardoublequoteclose}\isanewline
 %
 \isadelimproof
 \ \ %
@@ -429,6 +894,117 @@ limit ourselves to a simple arithmetic of plus and minus as a proof of concept.%
 \endisadelimproof
 \isanewline
 \isacommand{lemma}\isamarkupfalse%
+\ join{\isacharunderscore}ir{\isacharunderscore}double{\isacharunderscore}exists{\isacharcolon}\ {\isachardoublequoteopen}{\isasymexists}i\ r{\isachardot}\ join{\isacharunderscore}ir\ i\ r\ v\ {\isacharequal}\ Some\ a\ {\isasymand}\ join{\isacharunderscore}ir\ i\ r\ v{\isacharprime}\ {\isacharequal}\ Some\ a{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\isatagproof
+\isacommand{proof}\isamarkupfalse%
+{\isacharparenleft}cases\ v{\isacharparenright}\isanewline
+\ \ \isacommand{case}\isamarkupfalse%
+\ {\isacharparenleft}I\ x{\isadigit{1}}{\isacharparenright}\isanewline
+\ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}thesis\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ join{\isacharunderscore}ir{\isacharunderscore}def{\isacharparenright}\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}cases\ v{\isacharprime}{\isacharparenright}\isanewline
+\ \ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ input{\isadigit{2}}state{\isacharunderscore}double{\isacharunderscore}exists\ input{\isadigit{2}}state{\isacharunderscore}exists{\isacharparenright}\isanewline
+\ \ \ \ \isacommand{using}\isamarkupfalse%
+\ input{\isadigit{2}}state{\isacharunderscore}exists\ \isacommand{by}\isamarkupfalse%
+\ auto\isanewline
+\isacommand{next}\isamarkupfalse%
+\isanewline
+\ \ \isacommand{case}\isamarkupfalse%
+\ {\isacharparenleft}R\ x{\isadigit{2}}{\isacharparenright}\isanewline
+\ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}thesis\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ join{\isacharunderscore}ir{\isacharunderscore}def{\isacharparenright}\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}cases\ v{\isacharprime}{\isacharparenright}\isanewline
+\ \ \ \ \isacommand{using}\isamarkupfalse%
+\ input{\isadigit{2}}state{\isacharunderscore}exists\ \isacommand{apply}\isamarkupfalse%
+\ force\isanewline
+\ \ \ \ \isacommand{using}\isamarkupfalse%
+\ input{\isadigit{2}}state{\isacharunderscore}double{\isacharunderscore}exists\ \isacommand{by}\isamarkupfalse%
+\ fastforce\isanewline
+\isacommand{qed}\isamarkupfalse%
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ join{\isacharunderscore}ir{\isacharunderscore}double{\isacharunderscore}exists{\isacharunderscore}{\isadigit{2}}{\isacharcolon}\ {\isachardoublequoteopen}v\ {\isasymnoteq}\ v{\isacharprime}\ {\isasymLongrightarrow}\ {\isasymexists}i\ r{\isachardot}\ join{\isacharunderscore}ir\ i\ r\ v\ {\isacharequal}\ Some\ a\ {\isasymand}\ join{\isacharunderscore}ir\ i\ r\ v{\isacharprime}\ {\isacharequal}\ Some\ a{\isacharprime}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\isatagproof
+\isacommand{proof}\isamarkupfalse%
+{\isacharparenleft}cases\ v{\isacharparenright}\isanewline
+\ \ \isacommand{case}\isamarkupfalse%
+\ {\isacharparenleft}I\ x{\isadigit{1}}{\isacharparenright}\isanewline
+\ \ \isacommand{assume}\isamarkupfalse%
+\ {\isachardoublequoteopen}v\ {\isasymnoteq}\ v{\isacharprime}{\isachardoublequoteclose}\isanewline
+\ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}thesis\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ join{\isacharunderscore}ir{\isacharunderscore}def{\isacharparenright}\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}cases\ v{\isacharprime}{\isacharparenright}\isanewline
+\ \ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ I\ input{\isadigit{2}}state{\isacharunderscore}double{\isacharunderscore}exists{\isacharunderscore}{\isadigit{2}}{\isacharparenright}\isanewline
+\ \ \ \ \isacommand{using}\isamarkupfalse%
+\ I\ input{\isadigit{2}}state{\isacharunderscore}exists\ \isacommand{by}\isamarkupfalse%
+\ auto\isanewline
+\isacommand{next}\isamarkupfalse%
+\isanewline
+\ \ \isacommand{case}\isamarkupfalse%
+\ {\isacharparenleft}R\ x{\isadigit{2}}{\isacharparenright}\isanewline
+\ \ \isacommand{assume}\isamarkupfalse%
+\ {\isachardoublequoteopen}v\ {\isasymnoteq}\ v{\isacharprime}{\isachardoublequoteclose}\isanewline
+\ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}thesis\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ join{\isacharunderscore}ir{\isacharunderscore}def{\isacharparenright}\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}cases\ v{\isacharprime}{\isacharparenright}\isanewline
+\ \ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ simp\isanewline
+\ \ \ \ \isacommand{using}\isamarkupfalse%
+\ R\ input{\isadigit{2}}state{\isacharunderscore}exists\ \isacommand{apply}\isamarkupfalse%
+\ auto{\isacharbrackleft}{\isadigit{1}}{\isacharbrackright}\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ R{\isacharparenright}\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}rule{\isacharunderscore}tac\ x{\isacharequal}{\isachardoublequoteopen}{\isacharparenleft}K{\isachardollar}\ None{\isacharparenright}{\isacharparenleft}x{\isadigit{2}}\ {\isachardollar}{\isacharcolon}{\isacharequal}\ Some\ a{\isacharparenright}{\isacharparenleft}x{\isadigit{2}}a\ {\isachardollar}{\isacharcolon}{\isacharequal}\ Some\ a{\isacharprime}{\isacharparenright}{\isachardoublequoteclose}\ \isakeyword{in}\ exI{\isacharparenright}\isanewline
+\ \ \ \ \isacommand{by}\isamarkupfalse%
+\ simp\isanewline
+\isacommand{qed}\isamarkupfalse%
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
 \ aval{\isacharunderscore}plus{\isacharunderscore}aexp{\isacharcolon}\ {\isachardoublequoteopen}aval\ {\isacharparenleft}a{\isacharplus}b{\isacharparenright}\ s\ {\isacharequal}\ aval\ {\isacharparenleft}Plus\ a\ b{\isacharparenright}\ s{\isachardoublequoteclose}\isanewline
 %
 \isadelimproof
@@ -437,15 +1013,9 @@ limit ourselves to a simple arithmetic of plus and minus as a proof of concept.%
 %
 \isatagproof
 \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}case{\isacharunderscore}tac\ a{\isacharparenright}\isanewline
-\ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}case{\isacharunderscore}tac\ x{\isadigit{1}}{\isacharparenright}\isanewline
-\ \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}case{\isacharunderscore}tac\ b{\isacharparenright}\isanewline
-\ \ \ \ \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}case{\isacharunderscore}tac\ x{\isadigit{1}}b{\isacharparenright}\isanewline
+{\isacharparenleft}induct\ a\ b\ rule{\isacharcolon}\ plus{\isacharunderscore}aexp{\isachardot}induct{\isacharparenright}\isanewline
 \ \ \isacommand{by}\isamarkupfalse%
-\ auto%
+\ {\isacharparenleft}simp{\isacharunderscore}all\ add{\isacharcolon}\ value{\isacharunderscore}plus{\isacharunderscore}def{\isacharparenright}%
 \endisatagproof
 {\isafoldproof}%
 %
@@ -463,15 +1033,9 @@ limit ourselves to a simple arithmetic of plus and minus as a proof of concept.%
 %
 \isatagproof
 \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}case{\isacharunderscore}tac\ a{\isacharparenright}\isanewline
-\ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}case{\isacharunderscore}tac\ x{\isadigit{1}}{\isacharparenright}\isanewline
-\ \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}case{\isacharunderscore}tac\ b{\isacharparenright}\isanewline
-\ \ \ \ \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}case{\isacharunderscore}tac\ x{\isadigit{1}}b{\isacharparenright}\isanewline
+{\isacharparenleft}induct\ a\ b\ rule{\isacharcolon}\ minus{\isacharunderscore}aexp{\isachardot}induct{\isacharparenright}\isanewline
 \ \ \isacommand{by}\isamarkupfalse%
-\ auto%
+\ {\isacharparenleft}simp{\isacharunderscore}all\ add{\isacharcolon}\ value{\isacharunderscore}minus{\isacharunderscore}def{\isacharparenright}%
 \endisatagproof
 {\isafoldproof}%
 %
@@ -547,7 +1111,7 @@ limit ourselves to a simple arithmetic of plus and minus as a proof of concept.%
 \ \ {\isachardoublequoteopen}enumerate{\isacharunderscore}aexp{\isacharunderscore}regs{\isacharunderscore}list\ {\isacharparenleft}Minus\ v\ va{\isacharparenright}\ {\isacharequal}\ enumerate{\isacharunderscore}aexp{\isacharunderscore}regs{\isacharunderscore}list\ v\ {\isacharat}\ enumerate{\isacharunderscore}aexp{\isacharunderscore}regs{\isacharunderscore}list\ va{\isachardoublequoteclose}\isanewline
 \isanewline
 \isacommand{lemma}\isamarkupfalse%
-\ enumerate{\isacharunderscore}aexp{\isacharunderscore}inputs{\isacharunderscore}list{\isacharcolon}\ {\isachardoublequoteopen}set\ {\isacharparenleft}enumerate{\isacharunderscore}aexp{\isacharunderscore}inputs{\isacharunderscore}list\ l{\isacharparenright}\ {\isacharequal}\ enumerate{\isacharunderscore}aexp{\isacharunderscore}inputs\ l{\isachardoublequoteclose}\isanewline
+\ enumerate{\isacharunderscore}aexp{\isacharunderscore}inputs{\isacharunderscore}list{\isacharcolon}\ {\isachardoublequoteopen}enumerate{\isacharunderscore}aexp{\isacharunderscore}inputs\ l\ {\isacharequal}\ set\ {\isacharparenleft}enumerate{\isacharunderscore}aexp{\isacharunderscore}inputs{\isacharunderscore}list\ l{\isacharparenright}{\isachardoublequoteclose}\isanewline
 %
 \isadelimproof
 %
@@ -602,6 +1166,10 @@ limit ourselves to a simple arithmetic of plus and minus as a proof of concept.%
 %
 \endisadelimproof
 \isanewline
+\isacommand{definition}\isamarkupfalse%
+\ max{\isacharunderscore}input\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}aexp\ {\isasymRightarrow}\ nat\ option{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+\ \ {\isachardoublequoteopen}max{\isacharunderscore}input\ g\ {\isacharequal}\ {\isacharparenleft}let\ inputs\ {\isacharequal}\ {\isacharparenleft}enumerate{\isacharunderscore}aexp{\isacharunderscore}inputs\ g{\isacharparenright}\ in\ if\ inputs\ {\isacharequal}\ {\isacharbraceleft}{\isacharbraceright}\ then\ None\ else\ Some\ {\isacharparenleft}Max\ inputs{\isacharparenright}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\isanewline
 \isacommand{lemma}\isamarkupfalse%
 \ enumerate{\isacharunderscore}aexp{\isacharunderscore}regs{\isacharunderscore}list{\isacharcolon}\ {\isachardoublequoteopen}set\ {\isacharparenleft}enumerate{\isacharunderscore}aexp{\isacharunderscore}regs{\isacharunderscore}list\ l{\isacharparenright}\ {\isacharequal}\ enumerate{\isacharunderscore}aexp{\isacharunderscore}regs\ l{\isachardoublequoteclose}\isanewline
 %
@@ -648,6 +1216,149 @@ limit ourselves to a simple arithmetic of plus and minus as a proof of concept.%
 \ {\isacharquery}case\ \isanewline
 \ \ \ \ \isacommand{by}\isamarkupfalse%
 \ simp\isanewline
+\isacommand{qed}\isamarkupfalse%
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{definition}\isamarkupfalse%
+\ max{\isacharunderscore}reg\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}aexp\ {\isasymRightarrow}\ nat\ option{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+\ \ {\isachardoublequoteopen}max{\isacharunderscore}reg\ g\ {\isacharequal}\ {\isacharparenleft}let\ regs\ {\isacharequal}\ {\isacharparenleft}enumerate{\isacharunderscore}aexp{\isacharunderscore}regs\ g{\isacharparenright}\ in\ if\ regs\ {\isacharequal}\ {\isacharbraceleft}{\isacharbraceright}\ then\ None\ else\ Some\ {\isacharparenleft}Max\ regs{\isacharparenright}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ max{\isacharunderscore}reg{\isacharunderscore}V{\isacharunderscore}I{\isacharcolon}\ {\isachardoublequoteopen}max{\isacharunderscore}reg\ {\isacharparenleft}V\ {\isacharparenleft}I\ n{\isacharparenright}{\isacharparenright}\ {\isacharequal}\ None{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ max{\isacharunderscore}reg{\isacharunderscore}def{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ max{\isacharunderscore}reg{\isacharunderscore}V{\isacharunderscore}R{\isacharcolon}\ {\isachardoublequoteopen}max{\isacharunderscore}reg\ {\isacharparenleft}V\ {\isacharparenleft}R\ n{\isacharparenright}{\isacharparenright}\ {\isacharequal}\ Some\ n{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ max{\isacharunderscore}reg{\isacharunderscore}def{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemmas}\isamarkupfalse%
+\ max{\isacharunderscore}reg{\isacharunderscore}V\ {\isacharequal}\ max{\isacharunderscore}reg{\isacharunderscore}V{\isacharunderscore}I\ max{\isacharunderscore}reg{\isacharunderscore}V{\isacharunderscore}R\isanewline
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ max{\isacharunderscore}reg{\isacharunderscore}Plus{\isacharcolon}\ {\isachardoublequoteopen}max{\isacharunderscore}reg\ {\isacharparenleft}Plus\ a{\isadigit{1}}\ a{\isadigit{2}}{\isacharparenright}\ {\isacharequal}\ max\ {\isacharparenleft}max{\isacharunderscore}reg\ a{\isadigit{1}}{\isacharparenright}\ {\isacharparenleft}max{\isacharunderscore}reg\ a{\isadigit{2}}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ max{\isacharunderscore}reg{\isacharunderscore}def\ Let{\isacharunderscore}def\ max{\isacharunderscore}None\ max{\isacharunderscore}Some{\isacharunderscore}Some{\isacharparenright}\isanewline
+\ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}metis\ List{\isachardot}finite{\isacharunderscore}set\ Max{\isachardot}union\ enumerate{\isacharunderscore}aexp{\isacharunderscore}regs{\isacharunderscore}list{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ max{\isacharunderscore}reg{\isacharunderscore}Minus{\isacharcolon}\ {\isachardoublequoteopen}max{\isacharunderscore}reg\ {\isacharparenleft}Minus\ a{\isadigit{1}}\ a{\isadigit{2}}{\isacharparenright}\ {\isacharequal}\ max\ {\isacharparenleft}max{\isacharunderscore}reg\ a{\isadigit{1}}{\isacharparenright}\ {\isacharparenleft}max{\isacharunderscore}reg\ a{\isadigit{2}}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ max{\isacharunderscore}reg{\isacharunderscore}def\ Let{\isacharunderscore}def\ max{\isacharunderscore}None\ max{\isacharunderscore}Some{\isacharunderscore}Some{\isacharparenright}\isanewline
+\ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}metis\ List{\isachardot}finite{\isacharunderscore}set\ Max{\isachardot}union\ enumerate{\isacharunderscore}aexp{\isacharunderscore}regs{\isacharunderscore}list{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ no{\isacharunderscore}reg{\isacharunderscore}aval{\isacharunderscore}swap{\isacharunderscore}regs{\isacharcolon}\ {\isachardoublequoteopen}AExp{\isachardot}max{\isacharunderscore}reg\ a\ {\isacharequal}\ None\ {\isasymLongrightarrow}\ aval\ a\ {\isacharparenleft}join{\isacharunderscore}ir\ i\ r{\isacharparenright}\ {\isacharequal}\ aval\ a\ {\isacharparenleft}join{\isacharunderscore}ir\ i\ r{\isacharprime}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\isatagproof
+\isacommand{proof}\isamarkupfalse%
+{\isacharparenleft}induct\ a{\isacharparenright}\isanewline
+\isacommand{case}\isamarkupfalse%
+\ {\isacharparenleft}L\ x{\isacharparenright}\isanewline
+\isacommand{then}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}case\isanewline
+\ \ \isacommand{by}\isamarkupfalse%
+\ simp\isanewline
+\isacommand{next}\isamarkupfalse%
+\isanewline
+\ \ \isacommand{case}\isamarkupfalse%
+\ {\isacharparenleft}V\ x{\isacharparenright}\isanewline
+\ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}case\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}cases\ x{\isacharparenright}\isanewline
+\ \ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ join{\isacharunderscore}ir{\isacharunderscore}def{\isacharparenright}\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ join{\isacharunderscore}ir{\isacharunderscore}def{\isacharparenright}\isanewline
+\ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ max{\isacharunderscore}reg{\isacharunderscore}def{\isacharparenright}\isanewline
+\isacommand{next}\isamarkupfalse%
+\isanewline
+\ \ \isacommand{case}\isamarkupfalse%
+\ {\isacharparenleft}Plus\ a{\isadigit{1}}\ a{\isadigit{2}}{\isacharparenright}\isanewline
+\ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}case\isanewline
+\ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ max{\isacharunderscore}reg{\isacharunderscore}Plus\ max{\isacharunderscore}is{\isacharunderscore}None{\isacharparenright}\isanewline
+\isacommand{next}\isamarkupfalse%
+\isanewline
+\ \ \isacommand{case}\isamarkupfalse%
+\ {\isacharparenleft}Minus\ a{\isadigit{1}}\ a{\isadigit{2}}{\isacharparenright}\isanewline
+\ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}case\isanewline
+\ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ max{\isacharunderscore}reg{\isacharunderscore}Minus\ max{\isacharunderscore}is{\isacharunderscore}None{\isacharparenright}\isanewline
 \isacommand{qed}\isamarkupfalse%
 %
 \endisatagproof
@@ -719,7 +1430,8 @@ limit ourselves to a simple arithmetic of plus and minus as a proof of concept.%
 \endisadelimproof
 \isanewline
 \isacommand{lemma}\isamarkupfalse%
-\ set{\isacharunderscore}enumerate{\isacharunderscore}aexp{\isacharunderscore}inputs{\isacharunderscore}list{\isacharcolon}\ {\isachardoublequoteopen}set\ {\isacharparenleft}fold\ {\isacharparenleft}{\isacharat}{\isacharparenright}\ {\isacharparenleft}map\ enumerate{\isacharunderscore}aexp{\isacharunderscore}inputs{\isacharunderscore}list\ l{\isacharparenright}\ {\isacharbrackleft}{\isacharbrackright}{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}{\isasymUnion}\ set\ {\isacharparenleft}map\ enumerate{\isacharunderscore}aexp{\isacharunderscore}inputs\ l{\isacharparenright}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ set{\isacharunderscore}enumerate{\isacharunderscore}aexp{\isacharunderscore}inputs{\isacharunderscore}list{\isacharcolon}\ \isanewline
+{\isachardoublequoteopen}set\ {\isacharparenleft}fold\ {\isacharparenleft}{\isacharat}{\isacharparenright}\ {\isacharparenleft}map\ enumerate{\isacharunderscore}aexp{\isacharunderscore}inputs{\isacharunderscore}list\ l{\isacharparenright}\ {\isacharbrackleft}{\isacharbrackright}{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}{\isasymUnion}\ {\isacharparenleft}set\ {\isacharparenleft}map\ enumerate{\isacharunderscore}aexp{\isacharunderscore}inputs\ l{\isacharparenright}{\isacharparenright}{\isacharparenright}{\isachardoublequoteclose}\isanewline
 %
 \isadelimproof
 %
@@ -1033,655 +1745,1081 @@ limit ourselves to a simple arithmetic of plus and minus as a proof of concept.%
 %:%74=24%:%
 %:%75=24%:%
 %:%76=25%:%
-%:%77=26%:%
+%:%77=25%:%
 %:%78=26%:%
 %:%79=27%:%
 %:%80=27%:%
-%:%81=29%:%
-%:%82=30%:%
+%:%81=28%:%
+%:%82=28%:%
 %:%83=30%:%
 %:%84=31%:%
-%:%85=33%:%
-%:%86=33%:%
+%:%85=31%:%
+%:%86=32%:%
 %:%87=34%:%
-%:%88=35%:%
-%:%89=36%:%
-%:%90=37%:%
+%:%88=34%:%
+%:%89=35%:%
+%:%90=36%:%
 %:%91=37%:%
 %:%92=38%:%
-%:%93=39%:%
-%:%94=40%:%
-%:%95=41%:%
-%:%96=41%:%
-%:%99=42%:%
-%:%103=42%:%
-%:%104=42%:%
-%:%105=42%:%
-%:%110=42%:%
-%:%113=43%:%
-%:%114=44%:%
-%:%115=44%:%
-%:%118=45%:%
-%:%122=45%:%
-%:%123=45%:%
-%:%124=46%:%
-%:%125=46%:%
-%:%126=47%:%
-%:%127=47%:%
-%:%128=47%:%
-%:%129=47%:%
-%:%130=48%:%
-%:%131=48%:%
-%:%132=49%:%
-%:%133=49%:%
+%:%93=38%:%
+%:%96=39%:%
+%:%100=39%:%
+%:%101=39%:%
+%:%102=40%:%
+%:%103=40%:%
+%:%104=41%:%
+%:%105=41%:%
+%:%106=42%:%
+%:%107=42%:%
+%:%108=43%:%
+%:%109=43%:%
+%:%110=44%:%
+%:%111=44%:%
+%:%112=45%:%
+%:%113=45%:%
+%:%114=46%:%
+%:%115=46%:%
+%:%116=47%:%
+%:%117=47%:%
+%:%122=47%:%
+%:%125=48%:%
+%:%126=49%:%
+%:%127=49%:%
+%:%130=50%:%
 %:%134=50%:%
 %:%135=50%:%
-%:%136=50%:%
+%:%136=51%:%
 %:%137=51%:%
-%:%138=51%:%
+%:%138=52%:%
 %:%139=52%:%
-%:%140=52%:%
+%:%140=53%:%
 %:%141=53%:%
-%:%142=53%:%
+%:%142=54%:%
 %:%143=54%:%
-%:%144=54%:%
+%:%144=55%:%
 %:%145=55%:%
-%:%146=55%:%
+%:%146=56%:%
 %:%147=56%:%
-%:%148=56%:%
+%:%148=57%:%
 %:%149=57%:%
-%:%150=57%:%
+%:%150=58%:%
 %:%151=58%:%
-%:%152=58%:%
-%:%153=59%:%
+%:%156=58%:%
 %:%159=59%:%
-%:%162=60%:%
-%:%163=61%:%
+%:%160=60%:%
+%:%161=60%:%
 %:%164=61%:%
-%:%165=62%:%
-%:%166=63%:%
-%:%167=64%:%
-%:%168=65%:%
-%:%169=65%:%
-%:%172=66%:%
-%:%176=66%:%
-%:%177=66%:%
-%:%178=66%:%
-%:%183=66%:%
-%:%186=67%:%
-%:%187=68%:%
-%:%188=68%:%
-%:%189=69%:%
-%:%190=70%:%
-%:%191=71%:%
-%:%192=72%:%
-%:%193=73%:%
-%:%194=74%:%
-%:%195=74%:%
-%:%198=75%:%
-%:%202=75%:%
-%:%203=75%:%
-%:%208=75%:%
-%:%211=76%:%
-%:%212=77%:%
-%:%213=77%:%
-%:%214=78%:%
-%:%215=79%:%
-%:%216=80%:%
-%:%217=80%:%
-%:%218=81%:%
-%:%219=82%:%
-%:%220=83%:%
-%:%221=84%:%
-%:%222=85%:%
-%:%223=85%:%
-%:%224=86%:%
-%:%225=86%:%
-%:%226=87%:%
-%:%227=88%:%
-%:%228=89%:%
-%:%229=90%:%
-%:%232=90%:%
-%:%236=90%:%
-%:%237=90%:%
-%:%244=90%:%
-%:%245=91%:%
-%:%246=91%:%
-%:%247=92%:%
-%:%248=93%:%
-%:%249=93%:%
-%:%250=94%:%
-%:%251=94%:%
-%:%252=95%:%
-%:%253=96%:%
-%:%254=97%:%
-%:%255=98%:%
-%:%258=98%:%
-%:%262=98%:%
-%:%263=98%:%
-%:%270=98%:%
-%:%271=99%:%
-%:%272=99%:%
-%:%273=100%:%
-%:%274=101%:%
-%:%275=101%:%
-%:%276=102%:%
-%:%277=103%:%
-%:%278=104%:%
-%:%279=104%:%
-%:%286=105%:%
-%:%287=105%:%
-%:%288=106%:%
-%:%289=106%:%
-%:%290=107%:%
-%:%291=107%:%
-%:%292=107%:%
-%:%293=108%:%
-%:%294=108%:%
-%:%295=109%:%
-%:%296=109%:%
-%:%297=110%:%
-%:%298=110%:%
-%:%299=111%:%
-%:%300=111%:%
-%:%301=111%:%
-%:%302=112%:%
-%:%303=112%:%
-%:%304=113%:%
-%:%305=113%:%
-%:%306=114%:%
-%:%312=114%:%
-%:%315=115%:%
-%:%316=116%:%
-%:%317=116%:%
-%:%320=117%:%
-%:%324=117%:%
-%:%325=117%:%
-%:%330=117%:%
-%:%333=118%:%
-%:%334=119%:%
-%:%335=119%:%
-%:%342=120%:%
-%:%343=120%:%
-%:%344=121%:%
-%:%345=121%:%
-%:%346=122%:%
-%:%347=122%:%
-%:%348=122%:%
-%:%349=123%:%
-%:%350=123%:%
-%:%351=124%:%
-%:%352=124%:%
-%:%353=125%:%
-%:%354=125%:%
-%:%355=126%:%
-%:%356=126%:%
-%:%357=126%:%
-%:%358=127%:%
-%:%359=127%:%
+%:%168=61%:%
+%:%169=61%:%
+%:%170=61%:%
+%:%175=61%:%
+%:%178=62%:%
+%:%179=63%:%
+%:%180=63%:%
+%:%183=64%:%
+%:%187=64%:%
+%:%188=64%:%
+%:%193=64%:%
+%:%196=65%:%
+%:%197=66%:%
+%:%198=66%:%
+%:%199=67%:%
+%:%200=68%:%
+%:%201=68%:%
+%:%204=69%:%
+%:%208=69%:%
+%:%209=69%:%
+%:%210=69%:%
+%:%215=69%:%
+%:%218=70%:%
+%:%219=71%:%
+%:%220=71%:%
+%:%223=72%:%
+%:%227=72%:%
+%:%228=72%:%
+%:%229=73%:%
+%:%230=73%:%
+%:%235=73%:%
+%:%238=74%:%
+%:%239=75%:%
+%:%240=75%:%
+%:%241=76%:%
+%:%242=77%:%
+%:%243=77%:%
+%:%246=78%:%
+%:%250=78%:%
+%:%251=78%:%
+%:%256=78%:%
+%:%259=79%:%
+%:%260=80%:%
+%:%261=80%:%
+%:%262=81%:%
+%:%263=82%:%
+%:%264=83%:%
+%:%265=84%:%
+%:%266=85%:%
+%:%267=86%:%
+%:%268=86%:%
+%:%271=87%:%
+%:%275=87%:%
+%:%276=87%:%
+%:%281=87%:%
+%:%284=88%:%
+%:%285=89%:%
+%:%286=89%:%
+%:%287=90%:%
+%:%288=91%:%
+%:%289=92%:%
+%:%290=92%:%
+%:%291=93%:%
+%:%292=94%:%
+%:%293=94%:%
+%:%294=95%:%
+%:%295=96%:%
+%:%296=97%:%
+%:%297=98%:%
+%:%298=99%:%
+%:%299=100%:%
+%:%300=101%:%
+%:%301=102%:%
+%:%302=103%:%
+%:%303=103%:%
+%:%304=104%:%
+%:%305=105%:%
+%:%306=106%:%
+%:%307=107%:%
+%:%308=108%:%
+%:%309=109%:%
+%:%310=113%:%
+%:%311=114%:%
+%:%312=115%:%
+%:%313=115%:%
+%:%314=116%:%
+%:%315=116%:%
+%:%316=117%:%
+%:%317=118%:%
+%:%318=119%:%
+%:%319=120%:%
+%:%322=120%:%
+%:%326=120%:%
+%:%327=120%:%
+%:%334=120%:%
+%:%335=121%:%
+%:%336=121%:%
+%:%337=122%:%
+%:%338=123%:%
+%:%339=123%:%
+%:%340=124%:%
+%:%341=124%:%
+%:%342=125%:%
+%:%343=126%:%
+%:%344=127%:%
+%:%345=128%:%
+%:%348=128%:%
+%:%352=128%:%
+%:%353=128%:%
 %:%360=128%:%
-%:%361=128%:%
+%:%361=129%:%
 %:%362=129%:%
-%:%363=129%:%
-%:%364=130%:%
-%:%370=130%:%
-%:%373=131%:%
-%:%374=132%:%
-%:%375=132%:%
-%:%376=133%:%
-%:%378=135%:%
-%:%381=136%:%
-%:%385=136%:%
-%:%386=136%:%
-%:%391=136%:%
-%:%394=137%:%
-%:%395=138%:%
-%:%396=138%:%
-%:%397=139%:%
-%:%400=142%:%
-%:%401=143%:%
-%:%402=144%:%
+%:%363=130%:%
+%:%364=131%:%
+%:%365=131%:%
+%:%366=132%:%
+%:%367=133%:%
+%:%368=134%:%
+%:%369=134%:%
+%:%370=135%:%
+%:%371=136%:%
+%:%372=137%:%
+%:%373=138%:%
+%:%374=138%:%
+%:%377=139%:%
+%:%381=139%:%
+%:%382=139%:%
+%:%383=140%:%
+%:%384=140%:%
+%:%385=141%:%
+%:%386=141%:%
+%:%391=141%:%
+%:%394=142%:%
+%:%395=143%:%
+%:%396=143%:%
+%:%399=144%:%
 %:%403=144%:%
-%:%404=145%:%
-%:%405=146%:%
-%:%406=146%:%
-%:%409=147%:%
-%:%413=147%:%
-%:%414=147%:%
-%:%415=148%:%
-%:%416=148%:%
-%:%417=149%:%
-%:%418=149%:%
-%:%419=150%:%
-%:%420=150%:%
-%:%421=151%:%
-%:%422=151%:%
-%:%427=151%:%
-%:%430=152%:%
-%:%431=153%:%
-%:%432=153%:%
-%:%435=154%:%
-%:%439=154%:%
-%:%440=154%:%
-%:%441=155%:%
-%:%442=155%:%
-%:%443=156%:%
-%:%444=156%:%
-%:%445=157%:%
-%:%446=157%:%
-%:%447=158%:%
-%:%448=158%:%
-%:%453=158%:%
-%:%456=159%:%
-%:%457=160%:%
-%:%458=160%:%
-%:%461=161%:%
-%:%465=161%:%
-%:%466=161%:%
-%:%467=162%:%
-%:%468=162%:%
-%:%469=163%:%
-%:%470=163%:%
-%:%471=164%:%
-%:%472=164%:%
-%:%473=165%:%
-%:%474=165%:%
-%:%479=165%:%
-%:%482=166%:%
-%:%483=167%:%
-%:%484=167%:%
-%:%485=168%:%
-%:%486=169%:%
-%:%487=170%:%
-%:%488=171%:%
-%:%489=172%:%
-%:%490=173%:%
-%:%491=173%:%
-%:%494=174%:%
-%:%498=174%:%
-%:%499=174%:%
-%:%500=174%:%
-%:%505=174%:%
-%:%508=175%:%
-%:%509=176%:%
-%:%510=176%:%
-%:%511=177%:%
-%:%512=178%:%
-%:%513=179%:%
-%:%514=180%:%
-%:%515=181%:%
-%:%516=182%:%
-%:%517=183%:%
-%:%518=183%:%
-%:%519=184%:%
-%:%520=185%:%
-%:%521=186%:%
-%:%522=187%:%
-%:%523=188%:%
-%:%524=189%:%
-%:%525=190%:%
-%:%526=190%:%
-%:%527=191%:%
-%:%528=192%:%
-%:%529=193%:%
-%:%530=194%:%
-%:%531=195%:%
-%:%532=196%:%
-%:%533=197%:%
-%:%534=197%:%
-%:%535=198%:%
-%:%536=199%:%
-%:%537=200%:%
-%:%538=201%:%
-%:%539=202%:%
-%:%540=203%:%
-%:%541=204%:%
-%:%542=204%:%
-%:%543=205%:%
-%:%544=206%:%
-%:%545=207%:%
-%:%546=208%:%
-%:%547=209%:%
-%:%548=210%:%
-%:%549=211%:%
-%:%550=211%:%
-%:%557=212%:%
-%:%558=212%:%
-%:%559=213%:%
-%:%560=213%:%
-%:%561=214%:%
-%:%562=214%:%
-%:%563=214%:%
-%:%564=215%:%
-%:%565=215%:%
-%:%566=216%:%
-%:%567=216%:%
-%:%568=217%:%
-%:%569=217%:%
-%:%570=218%:%
-%:%571=218%:%
-%:%572=218%:%
-%:%573=219%:%
-%:%574=219%:%
-%:%575=220%:%
-%:%576=220%:%
-%:%577=221%:%
-%:%578=221%:%
-%:%579=222%:%
-%:%580=222%:%
-%:%581=223%:%
-%:%582=223%:%
-%:%583=223%:%
-%:%584=224%:%
-%:%585=224%:%
-%:%586=225%:%
-%:%587=225%:%
-%:%588=226%:%
-%:%589=226%:%
-%:%590=227%:%
-%:%591=227%:%
-%:%592=227%:%
-%:%593=228%:%
-%:%594=228%:%
-%:%595=229%:%
-%:%601=229%:%
-%:%604=230%:%
-%:%605=231%:%
-%:%606=231%:%
-%:%613=232%:%
-%:%614=232%:%
-%:%615=233%:%
-%:%616=233%:%
-%:%617=234%:%
-%:%618=234%:%
-%:%619=234%:%
-%:%620=235%:%
-%:%621=235%:%
-%:%622=236%:%
-%:%623=236%:%
-%:%624=237%:%
-%:%625=237%:%
-%:%626=238%:%
-%:%627=238%:%
-%:%628=238%:%
-%:%629=239%:%
-%:%630=239%:%
-%:%631=240%:%
-%:%632=240%:%
-%:%633=241%:%
-%:%634=241%:%
-%:%635=242%:%
-%:%636=242%:%
-%:%637=243%:%
-%:%638=243%:%
-%:%639=243%:%
-%:%640=244%:%
-%:%641=244%:%
-%:%642=245%:%
-%:%643=245%:%
-%:%644=246%:%
-%:%645=246%:%
-%:%646=247%:%
-%:%647=247%:%
-%:%648=247%:%
-%:%649=248%:%
-%:%650=248%:%
-%:%651=249%:%
-%:%657=249%:%
-%:%660=250%:%
-%:%661=251%:%
-%:%662=252%:%
-%:%663=252%:%
-%:%664=253%:%
-%:%671=254%:%
-%:%672=254%:%
-%:%673=255%:%
-%:%674=255%:%
-%:%675=256%:%
-%:%676=256%:%
-%:%677=256%:%
-%:%678=257%:%
-%:%679=257%:%
-%:%680=258%:%
-%:%681=258%:%
-%:%682=259%:%
-%:%683=259%:%
-%:%684=260%:%
-%:%685=260%:%
-%:%686=260%:%
-%:%687=261%:%
-%:%688=261%:%
-%:%689=262%:%
-%:%690=262%:%
-%:%691=263%:%
-%:%692=263%:%
-%:%693=264%:%
-%:%694=264%:%
-%:%695=265%:%
-%:%696=265%:%
-%:%697=266%:%
-%:%698=266%:%
-%:%699=266%:%
-%:%700=267%:%
-%:%701=267%:%
-%:%702=268%:%
-%:%703=268%:%
-%:%704=269%:%
-%:%705=269%:%
-%:%706=270%:%
-%:%707=270%:%
-%:%708=270%:%
-%:%709=271%:%
-%:%710=271%:%
-%:%711=272%:%
-%:%717=272%:%
-%:%720=273%:%
-%:%721=274%:%
-%:%722=274%:%
-%:%729=275%:%
-%:%730=275%:%
-%:%731=276%:%
-%:%732=276%:%
-%:%733=277%:%
-%:%734=277%:%
-%:%735=277%:%
-%:%736=278%:%
-%:%737=278%:%
-%:%738=279%:%
-%:%739=279%:%
-%:%740=280%:%
-%:%741=280%:%
-%:%742=281%:%
-%:%743=281%:%
-%:%744=281%:%
-%:%745=282%:%
-%:%746=282%:%
-%:%747=283%:%
-%:%748=283%:%
-%:%749=284%:%
-%:%755=284%:%
-%:%758=285%:%
-%:%759=286%:%
-%:%760=286%:%
-%:%761=287%:%
-%:%768=288%:%
-%:%769=288%:%
-%:%770=289%:%
-%:%771=289%:%
-%:%772=290%:%
-%:%773=290%:%
-%:%774=290%:%
-%:%775=291%:%
-%:%776=291%:%
-%:%777=292%:%
-%:%778=292%:%
-%:%779=293%:%
-%:%780=293%:%
-%:%781=294%:%
-%:%782=294%:%
-%:%783=294%:%
-%:%784=295%:%
-%:%785=295%:%
-%:%786=296%:%
-%:%787=296%:%
-%:%788=297%:%
-%:%789=297%:%
-%:%790=298%:%
-%:%791=298%:%
-%:%792=299%:%
-%:%793=299%:%
-%:%794=300%:%
-%:%795=300%:%
-%:%796=300%:%
-%:%797=301%:%
-%:%798=301%:%
-%:%799=302%:%
-%:%800=302%:%
-%:%801=303%:%
-%:%802=303%:%
-%:%803=304%:%
-%:%804=304%:%
-%:%805=304%:%
-%:%806=305%:%
-%:%807=305%:%
-%:%808=306%:%
-%:%814=306%:%
-%:%817=307%:%
-%:%818=308%:%
-%:%819=308%:%
-%:%820=309%:%
-%:%827=310%:%
-%:%828=310%:%
-%:%829=311%:%
-%:%830=311%:%
-%:%831=312%:%
-%:%832=312%:%
-%:%833=312%:%
-%:%834=313%:%
-%:%835=313%:%
-%:%836=314%:%
-%:%837=314%:%
-%:%838=315%:%
-%:%839=315%:%
-%:%840=316%:%
-%:%841=316%:%
-%:%842=316%:%
-%:%843=317%:%
-%:%844=317%:%
-%:%845=318%:%
-%:%846=318%:%
-%:%847=319%:%
-%:%848=319%:%
-%:%849=320%:%
-%:%850=320%:%
-%:%851=321%:%
-%:%852=321%:%
-%:%853=322%:%
-%:%854=322%:%
-%:%855=322%:%
-%:%856=323%:%
-%:%857=323%:%
-%:%858=324%:%
-%:%859=324%:%
-%:%860=325%:%
-%:%861=325%:%
-%:%862=326%:%
-%:%863=326%:%
-%:%864=326%:%
-%:%865=327%:%
-%:%866=327%:%
-%:%867=328%:%
-%:%873=328%:%
-%:%876=329%:%
-%:%877=330%:%
-%:%878=330%:%
-%:%879=331%:%
-%:%886=332%:%
-%:%887=332%:%
-%:%888=333%:%
-%:%889=333%:%
-%:%890=334%:%
-%:%891=334%:%
-%:%892=334%:%
-%:%893=335%:%
-%:%894=335%:%
-%:%895=336%:%
-%:%896=336%:%
-%:%897=337%:%
-%:%898=337%:%
-%:%899=338%:%
-%:%900=338%:%
-%:%901=338%:%
-%:%902=339%:%
-%:%903=339%:%
-%:%904=340%:%
-%:%905=340%:%
-%:%906=341%:%
-%:%907=341%:%
-%:%908=342%:%
-%:%909=342%:%
-%:%910=343%:%
-%:%911=343%:%
-%:%912=344%:%
-%:%913=344%:%
-%:%914=344%:%
-%:%915=345%:%
-%:%916=345%:%
-%:%917=346%:%
-%:%918=346%:%
-%:%919=347%:%
-%:%920=347%:%
-%:%921=348%:%
-%:%922=348%:%
-%:%923=348%:%
-%:%924=349%:%
-%:%925=349%:%
-%:%926=350%:%
-%:%932=350%:%
-%:%935=351%:%
-%:%936=352%:%
-%:%937=352%:%
-%:%938=353%:%
-%:%940=355%:%
-%:%947=356%:%
-%:%948=356%:%
-%:%949=357%:%
-%:%950=357%:%
-%:%951=358%:%
-%:%952=358%:%
-%:%953=358%:%
-%:%954=359%:%
-%:%955=359%:%
-%:%956=360%:%
-%:%957=360%:%
-%:%958=361%:%
-%:%959=361%:%
-%:%960=362%:%
-%:%961=362%:%
-%:%962=362%:%
-%:%963=363%:%
-%:%964=363%:%
-%:%965=364%:%
-%:%966=364%:%
-%:%967=365%:%
-%:%968=365%:%
-%:%969=366%:%
-%:%970=366%:%
-%:%971=367%:%
-%:%972=367%:%
-%:%973=367%:%
-%:%974=368%:%
-%:%975=368%:%
-%:%976=369%:%
-%:%977=369%:%
-%:%978=370%:%
-%:%979=370%:%
-%:%980=371%:%
-%:%981=371%:%
-%:%982=371%:%
-%:%983=372%:%
-%:%984=372%:%
-%:%985=373%:%
-%:%991=373%:%
-%:%996=374%:%
-%:%1001=375%:%
+%:%404=144%:%
+%:%409=144%:%
+%:%412=145%:%
+%:%413=146%:%
+%:%414=146%:%
+%:%417=147%:%
+%:%421=147%:%
+%:%422=147%:%
+%:%427=147%:%
+%:%430=148%:%
+%:%431=149%:%
+%:%432=149%:%
+%:%439=150%:%
+%:%440=150%:%
+%:%441=151%:%
+%:%442=151%:%
+%:%443=152%:%
+%:%444=152%:%
+%:%445=152%:%
+%:%446=153%:%
+%:%447=153%:%
+%:%448=154%:%
+%:%449=154%:%
+%:%450=155%:%
+%:%451=155%:%
+%:%452=156%:%
+%:%453=156%:%
+%:%454=156%:%
+%:%455=157%:%
+%:%456=157%:%
+%:%457=158%:%
+%:%463=158%:%
+%:%466=159%:%
+%:%467=160%:%
+%:%468=160%:%
+%:%471=161%:%
+%:%475=161%:%
+%:%476=161%:%
+%:%481=161%:%
+%:%484=162%:%
+%:%485=163%:%
+%:%486=163%:%
+%:%489=164%:%
+%:%493=164%:%
+%:%494=164%:%
+%:%499=164%:%
+%:%502=165%:%
+%:%503=166%:%
+%:%504=166%:%
+%:%511=167%:%
+%:%512=167%:%
+%:%513=168%:%
+%:%514=168%:%
+%:%515=169%:%
+%:%516=169%:%
+%:%517=169%:%
+%:%518=170%:%
+%:%519=170%:%
+%:%520=171%:%
+%:%521=171%:%
+%:%522=172%:%
+%:%523=172%:%
+%:%524=173%:%
+%:%525=173%:%
+%:%526=173%:%
+%:%527=174%:%
+%:%528=174%:%
+%:%529=175%:%
+%:%530=175%:%
+%:%531=176%:%
+%:%537=176%:%
+%:%540=177%:%
+%:%541=178%:%
+%:%542=178%:%
+%:%545=179%:%
+%:%549=179%:%
+%:%550=179%:%
+%:%551=179%:%
+%:%556=179%:%
+%:%559=180%:%
+%:%560=181%:%
+%:%561=181%:%
+%:%564=182%:%
+%:%568=182%:%
+%:%569=182%:%
+%:%570=183%:%
+%:%571=183%:%
+%:%572=183%:%
+%:%573=184%:%
+%:%574=184%:%
+%:%579=184%:%
+%:%582=185%:%
+%:%583=186%:%
+%:%584=186%:%
+%:%587=187%:%
+%:%591=187%:%
+%:%592=187%:%
+%:%593=188%:%
+%:%594=188%:%
+%:%595=188%:%
+%:%596=189%:%
+%:%597=189%:%
+%:%602=189%:%
+%:%605=190%:%
+%:%606=191%:%
+%:%607=191%:%
+%:%608=192%:%
+%:%610=194%:%
+%:%613=195%:%
+%:%617=195%:%
+%:%618=195%:%
+%:%623=195%:%
+%:%626=196%:%
+%:%627=197%:%
+%:%628=197%:%
+%:%635=198%:%
+%:%636=198%:%
+%:%637=199%:%
+%:%638=199%:%
+%:%639=200%:%
+%:%640=200%:%
+%:%641=200%:%
+%:%642=201%:%
+%:%643=201%:%
+%:%644=202%:%
+%:%645=202%:%
+%:%646=203%:%
+%:%647=203%:%
+%:%648=204%:%
+%:%649=204%:%
+%:%650=204%:%
+%:%651=205%:%
+%:%652=205%:%
+%:%653=206%:%
+%:%654=206%:%
+%:%655=207%:%
+%:%656=207%:%
+%:%657=208%:%
+%:%658=208%:%
+%:%659=209%:%
+%:%660=209%:%
+%:%661=210%:%
+%:%662=210%:%
+%:%663=211%:%
+%:%669=211%:%
+%:%672=212%:%
+%:%673=213%:%
+%:%674=213%:%
+%:%681=214%:%
+%:%682=214%:%
+%:%683=215%:%
+%:%684=215%:%
+%:%685=216%:%
+%:%686=216%:%
+%:%687=216%:%
+%:%688=217%:%
+%:%689=217%:%
+%:%690=218%:%
+%:%691=218%:%
+%:%692=219%:%
+%:%693=219%:%
+%:%694=220%:%
+%:%695=220%:%
+%:%696=221%:%
+%:%697=221%:%
+%:%698=221%:%
+%:%699=222%:%
+%:%700=222%:%
+%:%701=223%:%
+%:%702=223%:%
+%:%703=224%:%
+%:%704=224%:%
+%:%705=225%:%
+%:%711=225%:%
+%:%714=226%:%
+%:%715=227%:%
+%:%716=227%:%
+%:%717=228%:%
+%:%718=229%:%
+%:%719=230%:%
+%:%720=231%:%
+%:%721=231%:%
+%:%728=232%:%
+%:%729=232%:%
+%:%730=233%:%
+%:%731=233%:%
+%:%732=234%:%
+%:%733=234%:%
+%:%734=234%:%
+%:%735=235%:%
+%:%736=235%:%
+%:%737=236%:%
+%:%738=236%:%
+%:%739=237%:%
+%:%740=237%:%
+%:%741=238%:%
+%:%742=238%:%
+%:%743=238%:%
+%:%744=239%:%
+%:%745=239%:%
+%:%746=240%:%
+%:%752=240%:%
+%:%755=241%:%
+%:%756=242%:%
+%:%757=242%:%
+%:%760=243%:%
+%:%764=243%:%
+%:%765=243%:%
+%:%770=243%:%
+%:%773=244%:%
+%:%774=245%:%
+%:%775=245%:%
+%:%778=246%:%
+%:%782=246%:%
+%:%783=246%:%
+%:%788=246%:%
+%:%791=247%:%
+%:%792=248%:%
+%:%793=248%:%
+%:%796=249%:%
+%:%800=249%:%
+%:%801=249%:%
+%:%802=250%:%
+%:%803=250%:%
+%:%804=251%:%
+%:%805=251%:%
+%:%806=252%:%
+%:%807=252%:%
+%:%808=253%:%
+%:%809=253%:%
+%:%810=254%:%
+%:%811=254%:%
+%:%812=255%:%
+%:%813=255%:%
+%:%814=256%:%
+%:%815=256%:%
+%:%820=256%:%
+%:%823=257%:%
+%:%824=258%:%
+%:%825=258%:%
+%:%828=259%:%
+%:%832=259%:%
+%:%833=259%:%
+%:%834=260%:%
+%:%835=260%:%
+%:%836=261%:%
+%:%837=261%:%
+%:%838=262%:%
+%:%839=262%:%
+%:%840=263%:%
+%:%841=263%:%
+%:%842=264%:%
+%:%843=264%:%
+%:%844=265%:%
+%:%845=265%:%
+%:%846=266%:%
+%:%847=266%:%
+%:%848=267%:%
+%:%849=267%:%
+%:%850=268%:%
+%:%851=268%:%
+%:%856=268%:%
+%:%859=269%:%
+%:%860=270%:%
+%:%861=270%:%
+%:%862=271%:%
+%:%865=274%:%
+%:%866=275%:%
+%:%867=276%:%
+%:%868=276%:%
+%:%869=277%:%
+%:%870=278%:%
+%:%871=278%:%
+%:%874=279%:%
+%:%878=279%:%
+%:%879=279%:%
+%:%880=280%:%
+%:%881=280%:%
+%:%882=281%:%
+%:%883=281%:%
+%:%884=282%:%
+%:%885=282%:%
+%:%886=283%:%
+%:%887=283%:%
+%:%892=283%:%
+%:%895=284%:%
+%:%896=285%:%
+%:%897=285%:%
+%:%904=286%:%
+%:%905=286%:%
+%:%906=287%:%
+%:%907=287%:%
+%:%908=288%:%
+%:%909=288%:%
+%:%910=288%:%
+%:%911=289%:%
+%:%912=289%:%
+%:%913=290%:%
+%:%914=290%:%
+%:%915=291%:%
+%:%916=291%:%
+%:%917=292%:%
+%:%918=292%:%
+%:%919=292%:%
+%:%920=293%:%
+%:%921=293%:%
+%:%922=294%:%
+%:%923=294%:%
+%:%924=295%:%
+%:%925=295%:%
+%:%926=295%:%
+%:%927=296%:%
+%:%928=296%:%
+%:%929=297%:%
+%:%930=297%:%
+%:%931=298%:%
+%:%932=298%:%
+%:%933=298%:%
+%:%934=299%:%
+%:%935=299%:%
+%:%936=299%:%
+%:%937=300%:%
+%:%943=300%:%
+%:%946=301%:%
+%:%947=302%:%
+%:%948=302%:%
+%:%955=303%:%
+%:%956=303%:%
+%:%957=304%:%
+%:%958=304%:%
+%:%959=305%:%
+%:%960=305%:%
+%:%961=306%:%
+%:%962=306%:%
+%:%963=306%:%
+%:%964=307%:%
+%:%965=307%:%
+%:%966=308%:%
+%:%967=308%:%
+%:%968=309%:%
+%:%969=309%:%
+%:%970=310%:%
+%:%971=310%:%
+%:%972=310%:%
+%:%973=311%:%
+%:%974=311%:%
+%:%975=312%:%
+%:%976=312%:%
+%:%977=313%:%
+%:%978=313%:%
+%:%979=314%:%
+%:%980=314%:%
+%:%981=314%:%
+%:%982=315%:%
+%:%983=315%:%
+%:%984=316%:%
+%:%985=316%:%
+%:%986=317%:%
+%:%987=317%:%
+%:%988=318%:%
+%:%989=318%:%
+%:%990=318%:%
+%:%991=319%:%
+%:%992=319%:%
+%:%993=320%:%
+%:%994=320%:%
+%:%995=321%:%
+%:%996=321%:%
+%:%997=322%:%
+%:%1003=322%:%
+%:%1006=323%:%
+%:%1007=324%:%
+%:%1008=324%:%
+%:%1011=325%:%
+%:%1015=325%:%
+%:%1016=325%:%
+%:%1017=326%:%
+%:%1018=326%:%
+%:%1023=326%:%
+%:%1026=327%:%
+%:%1027=328%:%
+%:%1028=328%:%
+%:%1031=329%:%
+%:%1035=329%:%
+%:%1036=329%:%
+%:%1037=330%:%
+%:%1038=330%:%
+%:%1043=330%:%
+%:%1046=331%:%
+%:%1047=332%:%
+%:%1048=332%:%
+%:%1049=333%:%
+%:%1050=334%:%
+%:%1051=335%:%
+%:%1052=336%:%
+%:%1053=337%:%
+%:%1054=338%:%
+%:%1055=338%:%
+%:%1058=339%:%
+%:%1062=339%:%
+%:%1063=339%:%
+%:%1064=339%:%
+%:%1069=339%:%
+%:%1072=340%:%
+%:%1073=341%:%
+%:%1074=341%:%
+%:%1075=342%:%
+%:%1076=343%:%
+%:%1077=344%:%
+%:%1078=345%:%
+%:%1079=346%:%
+%:%1080=347%:%
+%:%1081=348%:%
+%:%1082=348%:%
+%:%1083=349%:%
+%:%1084=350%:%
+%:%1085=351%:%
+%:%1086=352%:%
+%:%1087=353%:%
+%:%1088=354%:%
+%:%1089=355%:%
+%:%1090=355%:%
+%:%1091=356%:%
+%:%1092=357%:%
+%:%1093=358%:%
+%:%1094=359%:%
+%:%1095=360%:%
+%:%1096=361%:%
+%:%1097=362%:%
+%:%1098=362%:%
+%:%1099=363%:%
+%:%1100=364%:%
+%:%1101=365%:%
+%:%1102=366%:%
+%:%1103=367%:%
+%:%1104=368%:%
+%:%1105=369%:%
+%:%1106=369%:%
+%:%1107=370%:%
+%:%1108=371%:%
+%:%1109=372%:%
+%:%1110=373%:%
+%:%1111=374%:%
+%:%1112=375%:%
+%:%1113=376%:%
+%:%1114=376%:%
+%:%1121=377%:%
+%:%1122=377%:%
+%:%1123=378%:%
+%:%1124=378%:%
+%:%1125=379%:%
+%:%1126=379%:%
+%:%1127=379%:%
+%:%1128=380%:%
+%:%1129=380%:%
+%:%1130=381%:%
+%:%1131=381%:%
+%:%1132=382%:%
+%:%1133=382%:%
+%:%1134=383%:%
+%:%1135=383%:%
+%:%1136=383%:%
+%:%1137=384%:%
+%:%1138=384%:%
+%:%1139=385%:%
+%:%1140=385%:%
+%:%1141=386%:%
+%:%1142=386%:%
+%:%1143=387%:%
+%:%1144=387%:%
+%:%1145=388%:%
+%:%1146=388%:%
+%:%1147=388%:%
+%:%1148=389%:%
+%:%1149=389%:%
+%:%1150=390%:%
+%:%1151=390%:%
+%:%1152=391%:%
+%:%1153=391%:%
+%:%1154=392%:%
+%:%1155=392%:%
+%:%1156=392%:%
+%:%1157=393%:%
+%:%1158=393%:%
+%:%1159=394%:%
+%:%1165=394%:%
+%:%1168=395%:%
+%:%1169=396%:%
+%:%1170=396%:%
+%:%1171=397%:%
+%:%1172=398%:%
+%:%1173=399%:%
+%:%1174=399%:%
+%:%1181=400%:%
+%:%1182=400%:%
+%:%1183=401%:%
+%:%1184=401%:%
+%:%1185=402%:%
+%:%1186=402%:%
+%:%1187=402%:%
+%:%1188=403%:%
+%:%1189=403%:%
+%:%1190=404%:%
+%:%1191=404%:%
+%:%1192=405%:%
+%:%1193=405%:%
+%:%1194=406%:%
+%:%1195=406%:%
+%:%1196=406%:%
+%:%1197=407%:%
+%:%1198=407%:%
+%:%1199=408%:%
+%:%1200=408%:%
+%:%1201=409%:%
+%:%1202=409%:%
+%:%1203=410%:%
+%:%1204=410%:%
+%:%1205=411%:%
+%:%1206=411%:%
+%:%1207=411%:%
+%:%1208=412%:%
+%:%1209=412%:%
+%:%1210=413%:%
+%:%1211=413%:%
+%:%1212=414%:%
+%:%1213=414%:%
+%:%1214=415%:%
+%:%1215=415%:%
+%:%1216=415%:%
+%:%1217=416%:%
+%:%1218=416%:%
+%:%1219=417%:%
+%:%1225=417%:%
+%:%1228=418%:%
+%:%1229=419%:%
+%:%1230=419%:%
+%:%1231=420%:%
+%:%1232=421%:%
+%:%1233=422%:%
+%:%1234=422%:%
+%:%1237=423%:%
+%:%1241=423%:%
+%:%1242=423%:%
+%:%1247=423%:%
+%:%1250=424%:%
+%:%1251=425%:%
+%:%1252=425%:%
+%:%1255=426%:%
+%:%1259=426%:%
+%:%1260=426%:%
+%:%1265=426%:%
+%:%1268=427%:%
+%:%1269=428%:%
+%:%1270=428%:%
+%:%1271=429%:%
+%:%1272=430%:%
+%:%1273=430%:%
+%:%1276=431%:%
+%:%1280=431%:%
+%:%1281=431%:%
+%:%1282=432%:%
+%:%1283=432%:%
+%:%1288=432%:%
+%:%1291=433%:%
+%:%1292=434%:%
+%:%1293=434%:%
+%:%1296=435%:%
+%:%1300=435%:%
+%:%1301=435%:%
+%:%1302=436%:%
+%:%1303=436%:%
+%:%1308=436%:%
+%:%1311=437%:%
+%:%1312=438%:%
+%:%1313=438%:%
+%:%1320=439%:%
+%:%1321=439%:%
+%:%1322=440%:%
+%:%1323=440%:%
+%:%1324=441%:%
+%:%1325=441%:%
+%:%1326=441%:%
+%:%1327=442%:%
+%:%1328=442%:%
+%:%1329=443%:%
+%:%1330=443%:%
+%:%1331=444%:%
+%:%1332=444%:%
+%:%1333=445%:%
+%:%1334=445%:%
+%:%1335=445%:%
+%:%1336=446%:%
+%:%1337=446%:%
+%:%1338=447%:%
+%:%1339=447%:%
+%:%1340=448%:%
+%:%1341=448%:%
+%:%1342=449%:%
+%:%1343=449%:%
+%:%1344=450%:%
+%:%1345=450%:%
+%:%1346=451%:%
+%:%1347=451%:%
+%:%1348=452%:%
+%:%1349=452%:%
+%:%1350=452%:%
+%:%1351=453%:%
+%:%1352=453%:%
+%:%1353=454%:%
+%:%1354=454%:%
+%:%1355=455%:%
+%:%1356=455%:%
+%:%1357=456%:%
+%:%1358=456%:%
+%:%1359=456%:%
+%:%1360=457%:%
+%:%1361=457%:%
+%:%1362=458%:%
+%:%1368=458%:%
+%:%1371=459%:%
+%:%1372=460%:%
+%:%1373=461%:%
+%:%1374=461%:%
+%:%1375=462%:%
+%:%1382=463%:%
+%:%1383=463%:%
+%:%1384=464%:%
+%:%1385=464%:%
+%:%1386=465%:%
+%:%1387=465%:%
+%:%1388=465%:%
+%:%1389=466%:%
+%:%1390=466%:%
+%:%1391=467%:%
+%:%1392=467%:%
+%:%1393=468%:%
+%:%1394=468%:%
+%:%1395=469%:%
+%:%1396=469%:%
+%:%1397=469%:%
+%:%1398=470%:%
+%:%1399=470%:%
+%:%1400=471%:%
+%:%1401=471%:%
+%:%1402=472%:%
+%:%1403=472%:%
+%:%1404=473%:%
+%:%1405=473%:%
+%:%1406=474%:%
+%:%1407=474%:%
+%:%1408=475%:%
+%:%1409=475%:%
+%:%1410=475%:%
+%:%1411=476%:%
+%:%1412=476%:%
+%:%1413=477%:%
+%:%1414=477%:%
+%:%1415=478%:%
+%:%1416=478%:%
+%:%1417=479%:%
+%:%1418=479%:%
+%:%1419=479%:%
+%:%1420=480%:%
+%:%1421=480%:%
+%:%1422=481%:%
+%:%1428=481%:%
+%:%1431=482%:%
+%:%1432=483%:%
+%:%1433=483%:%
+%:%1434=484%:%
+%:%1441=485%:%
+%:%1442=485%:%
+%:%1443=486%:%
+%:%1444=486%:%
+%:%1445=487%:%
+%:%1446=487%:%
+%:%1447=487%:%
+%:%1448=488%:%
+%:%1449=488%:%
+%:%1450=489%:%
+%:%1451=489%:%
+%:%1452=490%:%
+%:%1453=490%:%
+%:%1454=491%:%
+%:%1455=491%:%
+%:%1456=491%:%
+%:%1457=492%:%
+%:%1458=492%:%
+%:%1459=493%:%
+%:%1460=493%:%
+%:%1461=494%:%
+%:%1467=494%:%
+%:%1470=495%:%
+%:%1471=496%:%
+%:%1472=496%:%
+%:%1473=497%:%
+%:%1480=498%:%
+%:%1481=498%:%
+%:%1482=499%:%
+%:%1483=499%:%
+%:%1484=500%:%
+%:%1485=500%:%
+%:%1486=500%:%
+%:%1487=501%:%
+%:%1488=501%:%
+%:%1489=502%:%
+%:%1490=502%:%
+%:%1491=503%:%
+%:%1492=503%:%
+%:%1493=504%:%
+%:%1494=504%:%
+%:%1495=504%:%
+%:%1496=505%:%
+%:%1497=505%:%
+%:%1498=506%:%
+%:%1499=506%:%
+%:%1500=507%:%
+%:%1501=507%:%
+%:%1502=508%:%
+%:%1503=508%:%
+%:%1504=509%:%
+%:%1505=509%:%
+%:%1506=510%:%
+%:%1507=510%:%
+%:%1508=510%:%
+%:%1509=511%:%
+%:%1510=511%:%
+%:%1511=512%:%
+%:%1512=512%:%
+%:%1513=513%:%
+%:%1514=513%:%
+%:%1515=514%:%
+%:%1516=514%:%
+%:%1517=514%:%
+%:%1518=515%:%
+%:%1519=515%:%
+%:%1520=516%:%
+%:%1526=516%:%
+%:%1529=517%:%
+%:%1530=518%:%
+%:%1531=518%:%
+%:%1532=519%:%
+%:%1539=520%:%
+%:%1540=520%:%
+%:%1541=521%:%
+%:%1542=521%:%
+%:%1543=522%:%
+%:%1544=522%:%
+%:%1545=522%:%
+%:%1546=523%:%
+%:%1547=523%:%
+%:%1548=524%:%
+%:%1549=524%:%
+%:%1550=525%:%
+%:%1551=525%:%
+%:%1552=526%:%
+%:%1553=526%:%
+%:%1554=526%:%
+%:%1555=527%:%
+%:%1556=527%:%
+%:%1557=528%:%
+%:%1558=528%:%
+%:%1559=529%:%
+%:%1560=529%:%
+%:%1561=530%:%
+%:%1562=530%:%
+%:%1563=531%:%
+%:%1564=531%:%
+%:%1565=532%:%
+%:%1566=532%:%
+%:%1567=532%:%
+%:%1568=533%:%
+%:%1569=533%:%
+%:%1570=534%:%
+%:%1571=534%:%
+%:%1572=535%:%
+%:%1573=535%:%
+%:%1574=536%:%
+%:%1575=536%:%
+%:%1576=536%:%
+%:%1577=537%:%
+%:%1578=537%:%
+%:%1579=538%:%
+%:%1585=538%:%
+%:%1588=539%:%
+%:%1589=540%:%
+%:%1590=540%:%
+%:%1591=541%:%
+%:%1598=542%:%
+%:%1599=542%:%
+%:%1600=543%:%
+%:%1601=543%:%
+%:%1602=544%:%
+%:%1603=544%:%
+%:%1604=544%:%
+%:%1605=545%:%
+%:%1606=545%:%
+%:%1607=546%:%
+%:%1608=546%:%
+%:%1609=547%:%
+%:%1610=547%:%
+%:%1611=548%:%
+%:%1612=548%:%
+%:%1613=548%:%
+%:%1614=549%:%
+%:%1615=549%:%
+%:%1616=550%:%
+%:%1617=550%:%
+%:%1618=551%:%
+%:%1619=551%:%
+%:%1620=552%:%
+%:%1621=552%:%
+%:%1622=553%:%
+%:%1623=553%:%
+%:%1624=554%:%
+%:%1625=554%:%
+%:%1626=554%:%
+%:%1627=555%:%
+%:%1628=555%:%
+%:%1629=556%:%
+%:%1630=556%:%
+%:%1631=557%:%
+%:%1632=557%:%
+%:%1633=558%:%
+%:%1634=558%:%
+%:%1635=558%:%
+%:%1636=559%:%
+%:%1637=559%:%
+%:%1638=560%:%
+%:%1644=560%:%
+%:%1647=561%:%
+%:%1648=562%:%
+%:%1649=562%:%
+%:%1650=563%:%
+%:%1652=565%:%
+%:%1659=566%:%
+%:%1660=566%:%
+%:%1661=567%:%
+%:%1662=567%:%
+%:%1663=568%:%
+%:%1664=568%:%
+%:%1665=568%:%
+%:%1666=569%:%
+%:%1667=569%:%
+%:%1668=570%:%
+%:%1669=570%:%
+%:%1670=571%:%
+%:%1671=571%:%
+%:%1672=572%:%
+%:%1673=572%:%
+%:%1674=572%:%
+%:%1675=573%:%
+%:%1676=573%:%
+%:%1677=574%:%
+%:%1678=574%:%
+%:%1679=575%:%
+%:%1680=575%:%
+%:%1681=576%:%
+%:%1682=576%:%
+%:%1683=577%:%
+%:%1684=577%:%
+%:%1685=577%:%
+%:%1686=578%:%
+%:%1687=578%:%
+%:%1688=579%:%
+%:%1689=579%:%
+%:%1690=580%:%
+%:%1691=580%:%
+%:%1692=581%:%
+%:%1693=581%:%
+%:%1694=581%:%
+%:%1695=582%:%
+%:%1696=582%:%
+%:%1697=583%:%
+%:%1703=583%:%
+%:%1708=584%:%
+%:%1713=585%:%
