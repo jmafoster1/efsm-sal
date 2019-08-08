@@ -10,6 +10,15 @@ arithmetic {N_ : INTEGER; string: TYPE} : CONTEXT = BEGIN
 
   Some? : [value_option ! B_OPTION -> bool] = value_option ! Some?;
   NUM?: [Value ! B_VALUE -> bool] = Value ! NUM?;
+
+  SomeNum? : [value_option ! B_OPTION -> bool] =
+  LAMBDA(x1 : value_option ! B_OPTION):
+    IF Some?(x1) THEN
+       NUM?(valueOf(x1))
+    ELSE
+      FALSE
+    ENDIF;
+
   natOf: [Value ! B_VALUE -> INTEGER] = Value ! natOf;
   NUM: [Value ! int -> VALUE] = Value ! NUM;
 
