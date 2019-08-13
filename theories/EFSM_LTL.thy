@@ -165,88 +165,105 @@ lemma alw_conj_pred: "alw \<chi> \<omega> \<Longrightarrow> \<psi> \<omega> = (\
 lemma not_until_implies_not_suntil: "\<not>(\<phi> until \<psi>) \<omega> \<Longrightarrow> \<not>(\<phi> suntil \<psi>) \<omega>"
   using suntil_implies_until by auto
 
-lemma "(\<phi> until \<psi>) \<omega> \<Longrightarrow> ev \<psi> \<omega> \<Longrightarrow> (\<phi> suntil \<psi>) \<omega>"
+lemma not_suntil_iff: "\<not>(\<phi> until \<psi>) \<omega> \<or> \<not>ev \<psi> \<omega> \<Longrightarrow> \<not>(\<phi> suntil \<psi>) \<omega>"
+  using ev_suntil suntil_implies_until by blast
 
+lemma not_suntil_nxt: " \<not>(\<phi> suntil \<psi>) \<omega> \<Longrightarrow> \<phi> \<omega> \<Longrightarrow> \<not>(\<phi> suntil \<psi>) (stl \<omega>)"
+  using suntil.step by blast
 
-lemma "\<not>alw \<phi> \<omega> \<Longrightarrow> \<not>ev \<psi> \<omega> \<Longrightarrow> \<not>(\<phi> until \<psi>) \<omega>"
-  apply (simp add: not_ev_iff)
-  apply (simp add: alw_as_suntil)
-  
+lemma de_morgans: "(\<not> x \<or> \<not> y) = (\<not>(x \<and> y))"
+  by simp
 
-lemma "(\<phi> until \<psi>) \<omega> \<Longrightarrow> \<not> alw \<phi> \<omega> \<Longrightarrow> ev \<psi> \<omega>"
-  apply (simp add: not_alw_iff)
-  apply (simp add: ev_iff_sdrop)
-  apply clarify
+lemma suntil_true: "ev P \<omega> = ((\<lambda>x. True) suntil P) \<omega>"
+  by (simp add: true_suntil)
 
-lemma "(\<phi> until \<psi>) \<omega> \<Longrightarrow> alw \<phi> \<omega> \<or> ev \<psi> \<omega>"
-  apply (case_tac "alw \<phi> \<omega>")
-   apply simp
-  apply simp
+lemma ev_stl: "\<not> \<psi> \<omega> \<Longrightarrow> ev \<psi> \<omega> = ev \<psi> (stl \<omega>)"
+  using ev.cases by auto
 
-lemma " \<not> ev \<psi> \<omega> \<Longrightarrow> (\<phi> until \<psi>) \<omega> \<Longrightarrow> (\<phi> until (\<lambda>x. False)) \<omega>"
-proof(coinduction)
-  case UNTIL
+lemma suntil_stl: "\<not> \<psi> \<omega> \<Longrightarrow> \<phi> \<omega> \<Longrightarrow> (\<phi> suntil \<psi>) \<omega> = (\<phi> suntil \<psi>) (stl \<omega>)"
+  by (meson suntil.simps)
+
+lemma until_stl: "\<not> \<psi> \<omega> \<Longrightarrow> \<phi> \<omega> \<Longrightarrow> (\<phi> until \<psi>) \<omega> = (\<phi> until \<psi>) (stl \<omega>)"
+  by (meson UNTIL.cases UNTIL.step)
+
+lemma suntil_iff: "(\<phi> suntil \<psi>) \<omega> \<Longrightarrow> ev \<psi> \<omega> \<and> (\<phi> suntil \<psi>) \<omega>"
+  using not_ev_not_suntil by blast
+
+lemma de_morgans_fun: "(\<lambda>xs. \<not> \<phi> xs \<and> \<not> \<psi> xs) = (\<lambda>xs. \<not> (\<phi> xs \<or> \<psi> xs))"
+  by simp
+
+lemma ev_not_iff: "ev (\<lambda>xs. \<not> P xs) \<omega> = (\<not> alw P \<omega>)"
+  by (simp add: alw_iff_sdrop ev_iff_sdrop)
+
+lemma not_alw_not_iff: "(\<not> alw (\<lambda>xs. \<not> \<psi> xs) \<omega>) = ev \<psi> \<omega>"
+  by (simp add: alw_iff_sdrop ev_iff_sdrop)
+
+lemma eq_shift: "\<exists>l \<omega>'. \<omega> = l @- \<omega>'"
+  by (metis shift.simps(1))
+
+lemma ev_shift: "\<exists>l \<omega>'. ev \<psi> \<omega> = ev \<psi> (l @- \<omega>')"
+  by (metis eq_shift)
+
+lemma suntil_shift: "\<psi> \<omega> \<Longrightarrow> (\<phi> until \<psi>) (l @- \<omega>) \<Longrightarrow> (\<phi> suntil \<psi>) (l @- \<omega>)"
+proof(induct l)
+  case Nil
   then show ?case
-    apply simp
-    apply standard
-    using UNTIL.cases apply blast
-    apply (rule disjI2)
+    by (simp add: suntil.base)
+next
+  case (Cons a l)
+  then show ?case
+    by (metis UNTIL.cases list.sel(3) list.simps(3) shift_simps(2) suntil.base suntil.step)
 qed
 
-lemma "\<not> ev \<psi> \<omega> \<Longrightarrow> (\<phi> until \<psi>) \<omega> = (\<phi> until (\<lambda>x. False)) \<omega>"
-  apply standard
+lemma suntil_if_shift: "\<exists>l \<omega>. \<omega>' = (l @- \<omega>) \<and> \<psi> \<omega> \<and> (\<phi> until \<psi>) (l @- \<omega>) \<Longrightarrow> (\<phi> suntil \<psi>) \<omega>'"
+  using suntil_shift by blast
 
-lemma "\<not> ev \<psi> \<omega> \<Longrightarrow> \<not>alw \<phi> \<omega> \<Longrightarrow> \<not>(\<phi> until \<psi>) \<omega>"
-  apply clarify
-  apply (rule UNTIL.cases)
-    apply simp
-   apply auto[1]
-  apply clarify
+lemma until_ev_suntil: "(\<phi> until \<psi>) \<omega> \<Longrightarrow> ev \<psi> \<omega> \<Longrightarrow> (\<phi> suntil \<psi>) \<omega>"
+  apply (rule suntil_if_shift)
+  apply (simp add: ev_iff_sdrop)
+  apply (erule exE)
+  apply (rule_tac x="stake m \<omega>" in exI)
+  apply (rule_tac x="sdrop m \<omega>" in exI)
+  by (simp add: stake_sdrop)
 
+lemma alw_ev_conj: "alw \<psi> \<omega> \<Longrightarrow> ev \<phi> \<omega> \<Longrightarrow> ev (\<lambda>xs. \<phi> xs \<and> \<psi> xs) \<omega>"
+  by (simp add: ev_iff_sdrop alw_iff_sdrop)
 
-lemma "\<not> ev \<psi> \<omega> \<Longrightarrow> (\<phi> until \<psi>) \<omega> \<Longrightarrow> alw \<phi> \<omega>"
+lemma not_suntil_iff_2: "\<not>(\<phi> suntil \<psi>) \<omega> \<Longrightarrow> \<not>(\<phi> until \<psi>) \<omega> \<or> \<not>ev \<psi> \<omega>"
+  using until_ev_suntil by blast
 
+lemma suntil_eq: "(\<phi> suntil \<psi>) \<omega> = ((\<phi> until \<psi>) \<omega> \<and> ev \<psi> \<omega>)"
+  using not_suntil_iff not_suntil_iff_2 by blast
 
-lemma "(\<phi> until \<psi>) \<omega>  \<Longrightarrow> \<not> ((\<phi> suntil \<psi>) \<omega>) \<Longrightarrow> alw \<phi> \<omega>"
+(* This takes about 25 seconds to go through on my office machine *)
+lemma until_iff_alw: "alw (\<phi> or \<psi>) \<omega> \<Longrightarrow> (\<phi> until \<psi>) \<omega>"
+  using UNTIL.coinduct alw.cases UNTIL.cases
+  by blast
 
+lemma not_until_not_alw: "\<not>(\<phi> until \<psi>) \<omega> \<Longrightarrow> \<not>alw (\<phi> or \<psi>) \<omega>"
+  using until_iff_alw
+  by auto
 
-lemma "(\<phi> until \<psi>) \<omega> \<Longrightarrow> \<not> alw \<phi> \<omega> \<Longrightarrow> ev \<psi> \<omega>"
-  apply (simp only: not_alw_iff ev_eq_suntil)
+lemma not_until_not_ev_not_alw: "\<not>(\<phi> until \<psi>) \<omega> \<Longrightarrow> \<not>ev \<psi> \<omega> \<Longrightarrow> \<not>alw \<phi> \<omega>"
+  using not_until_not_alw[of \<phi> \<psi> \<omega>]
   apply simp
-  apply (case_tac "(\<phi> suntil \<psi>) \<omega>")
-   apply (metis (full_types) ev_eq_suntil ev_suntil)
-  using suntil.base suntil.step suntil_induct_strong
+  using alw_implies_until by auto
 
-lemma "(\<phi> until \<psi>) \<omega> \<Longrightarrow> alw \<phi> \<omega> \<or> ev \<psi> \<omega>"
-  apply (case_tac "alw \<phi> \<omega>")
-   apply simp
-  apply (case_tac "ev \<psi> \<omega>")
-   apply simp
-  apply simp
+lemma alw_stl: "\<phi> xs \<Longrightarrow> alw \<phi> xs = alw \<phi> (stl xs)"
+  using alw.simps by auto
 
-lemma "(\<phi> until \<psi>) \<omega> \<Longrightarrow> \<not> ev \<psi> \<omega> \<Longrightarrow> (\<phi> until (\<lambda>xs. False)) \<omega>"
-  apply (simp add: not_ev_iff)
+lemma ev_cases: "ev \<phi> \<omega> = \<phi> \<omega> \<or> ev \<phi> (stl \<omega>)"
+  using ev_stl by blast
 
-lemma "(\<phi> until \<psi>) \<omega> \<Longrightarrow> \<not> ev \<psi> \<omega> \<Longrightarrow> alw \<phi> \<omega>"
-
-lemma "(\<phi> until \<psi>) \<omega> \<Longrightarrow> \<not>(\<phi> suntil \<psi>) \<omega> \<Longrightarrow> alw \<phi> \<omega>"
-  apply (case_tac "ev \<psi> \<omega>")
-   prefer 2
-   apply (simp add: not_ev_iff)
-
-lemma "(\<phi> until \<psi>) \<omega> \<Longrightarrow> ev \<psi> \<omega> \<Longrightarrow> (\<phi> suntil \<psi>) \<omega>"
-  
-
-lemma "(\<phi> until \<psi>) \<omega> \<Longrightarrow> (\<phi> suntil \<psi>) \<omega> \<or> alw \<phi> \<omega>"
-  apply (rule suntil.cases)
-  using suntil.base apply blast
-   prefer 2
-   apply simp
-  apply clarify
-  apply (simp add: not_alw_iff)
-  
+lemma "\<forall>m. \<phi> (sdrop m \<omega>) \<Longrightarrow> (\<phi> until \<psi>) \<omega>"
+  by (simp add: alw_iff_sdrop alw_implies_until)
 
 lemma "(\<phi> until \<psi>) \<omega> = ((\<phi> suntil \<psi>) or (alw \<phi>)) \<omega>"
   apply standard
-
+   defer
+  using alw_implies_until not_suntil_iff apply blast
+  apply (case_tac "alw \<phi> \<omega>")
+   apply (simp add: suntil_eq)
+  apply simp
+  oops
 end
