@@ -232,7 +232,7 @@ lemma alw_ev_conj: "alw \<psi> \<omega> \<Longrightarrow> ev \<phi> \<omega> \<L
 lemma not_suntil_iff_2: "\<not>(\<phi> suntil \<psi>) \<omega> \<Longrightarrow> \<not>(\<phi> until \<psi>) \<omega> \<or> \<not>ev \<psi> \<omega>"
   using until_ev_suntil by blast
 
-lemma suntil_eq: "(\<phi> suntil \<psi>) \<omega> = ((\<phi> until \<psi>) \<omega> \<and> ev \<psi> \<omega>)"
+lemma suntil_as_until: "(\<phi> suntil \<psi>) \<omega> = ((\<phi> until \<psi>) \<omega> \<and> ev \<psi> \<omega>)"
   using not_suntil_iff not_suntil_iff_2 by blast
 
 (* This takes about 25 seconds to go through on my office machine *)
@@ -258,12 +258,93 @@ lemma ev_cases: "ev \<phi> \<omega> = \<phi> \<omega> \<or> ev \<phi> (stl \<ome
 lemma "\<forall>m. \<phi> (sdrop m \<omega>) \<Longrightarrow> (\<phi> until \<psi>) \<omega>"
   by (simp add: alw_iff_sdrop alw_implies_until)
 
-lemma "(\<phi> until \<psi>) \<omega> = ((\<phi> suntil \<psi>) or (alw \<phi>)) \<omega>"
+lemma not_ev_until_step: "\<not> ev \<psi> \<omega> \<Longrightarrow> (\<phi> until \<psi>) \<omega> = (\<phi> \<omega> \<and> (\<phi> until \<psi>) (stl \<omega>))"
+  by (metis UNTIL.simps ev.base)
+
+lemma not_ev_iff_stl: "(\<not> ev \<psi> \<omega>) = (\<not> \<psi> \<omega> \<and> \<not> ev \<psi> (stl \<omega>))"
+  using ev_stl by blast
+
+lemma until_stake_sdrop: "(\<phi> until \<psi>) \<omega> = (\<phi> until \<psi>) ((stake i \<omega>)@-(sdrop i \<omega>))"
+  by (simp add: stake_sdrop)
+
+lemma ev_iff_sdrop_specific: "\<not> ev \<psi> \<omega> \<Longrightarrow> \<not> \<psi> (sdrop i \<omega>)"
+  by (simp add: ev_iff_sdrop)
+
+lemma ev_sdrop: "\<exists>i < j. \<phi> (sdrop i \<omega>) \<Longrightarrow> ev \<phi> \<omega>"
+  using ev_iff_sdrop by auto
+
+lemma alw_or: "\<not> ev \<psi> \<omega> \<Longrightarrow> alw \<phi> \<omega> = alw (\<lambda>xs. \<phi> xs \<or> \<psi> xs) \<omega>"
+  by (simp add: alw_iff_sdrop ev_iff_sdrop)
+
+lemma nxt_until: "(\<phi> until \<psi>) \<omega> \<Longrightarrow> \<not> \<psi> \<omega> \<Longrightarrow> nxt (\<phi> or \<psi>) \<omega>"
+  by (metis UNTIL.cases nxt.elims)
+
+lemma never_not_now: "\<not> ev \<psi> \<omega> \<Longrightarrow> \<not> \<psi> \<omega>"
+  by auto
+
+lemma never_not_ever: "\<not> ev \<psi> \<omega> \<Longrightarrow> \<not> ev \<psi> (stl \<omega>)"
+  by auto
+
+lemma not_now_not_ever: "\<not> ev \<psi> \<omega> \<Longrightarrow> \<not> \<psi> \<omega> \<and> \<not> ev \<psi> (stl \<omega>)"
+  by auto
+
+lemma not_relesased_yet: "(\<phi> until \<psi>) \<omega> \<Longrightarrow> \<not> \<psi> \<omega> \<Longrightarrow> \<phi> \<omega>"
+  using UNTIL.cases by auto
+
+lemma until_false_iff: "alw \<phi> \<omega> = (\<phi> until (\<lambda>xs. False)) \<omega>"
+  by (simp add: until_false)
+
+lemma ev_if_nxt: "\<exists>n. (nxt ^^ n) \<phi> xs \<Longrightarrow> ev \<phi> xs"
+  using nxt_ev by blast
+
+lemma not_ev_at_less: "ev_at \<phi> i \<omega> \<Longrightarrow> \<forall>j < i. \<not> ev_at \<phi> j \<omega>"
+  using ev_at_unique by auto
+
+lemma ev_at_iff_ef: "ev_at P n \<omega> \<Longrightarrow> ev P \<omega>"
+  using ev_iff_ev_at by blast
+
+lemma ev_at_unique_case: "ev_at \<phi> n \<omega> \<Longrightarrow> \<forall>y. ev_at \<phi> y \<omega> \<longrightarrow> y = n"
+  by (simp add: ev_at_unique)
+
+lemma ev_min_sdrop: "\<exists>m. (\<forall>n < m. \<not>\<psi> (sdrop m \<omega>))"
+  by auto
+
+lemma ev_first_sdrop: "ev \<psi> \<omega> \<Longrightarrow> \<exists>m. \<psi> (sdrop m \<omega>) \<and> (\<forall>n < m. \<not>\<psi> (sdrop n \<omega>))"
+  using sdrop_wait sdrop_wait_least by fastforce
+
+lemma aux1: "ev (\<lambda>xs. \<not> \<phi> xs) \<omega> \<Longrightarrow> (\<phi> until \<psi>) \<omega> \<Longrightarrow> \<exists>m. \<psi> (sdrop m \<omega>)"
+proof(induction rule: ev.induct)
+  case (base xs)
+  then show ?case
+    by (metis not_relesased_yet sdrop.simps(1))
+next
+  case (step xs)
+  then show ?case
+    apply (case_tac "\<psi> xs")
+     apply (metis sdrop.simps(1))
+    apply (case_tac "\<not> \<phi> xs")
+    using UNTIL.cases apply blast
+    apply (simp add: until_stl)
+    by (metis ev_iff_sdrop ev_stl)
+qed
+
+
+lemma until_must_release: "(\<phi> until \<psi>) \<omega> \<Longrightarrow> \<not> alw \<phi> \<omega> \<Longrightarrow> ev \<psi> \<omega>"
+  apply (insert ev_first_sdrop[of "(\<lambda>xs. \<not> \<phi> xs)" \<omega>])
+  apply (simp add: not_alw_iff ev_iff_sdrop[of \<psi>])
+  apply (erule exE)
+  using aux1
+  by blast
+
+lemma no_release_must_hold_globally: "\<not> ev \<psi> \<omega> \<Longrightarrow> (\<phi> until \<psi>) \<omega> \<Longrightarrow> alw \<phi> \<omega>"
+  using until_must_release
+  by auto
+
+lemma until_as_suntil: "(\<phi> until \<psi>) \<omega> = ((\<phi> suntil \<psi>) or (alw \<phi>)) \<omega>"
   apply standard
    defer
   using alw_implies_until not_suntil_iff apply blast
-  apply (case_tac "alw \<phi> \<omega>")
-   apply (simp add: suntil_eq)
-  apply simp
-  oops
+  apply (simp add: suntil_as_until)
+  using until_must_release by blast
+
 end
