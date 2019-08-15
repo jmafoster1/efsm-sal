@@ -6,7 +6,7 @@ declare One_nat_def [simp del]
 declare ValueLt_def [simp]
 declare ltl_step_alt [simp]
 
-text_raw\<open>\snip{cointea}{1}{2}{%\<close>
+text_raw{*\snip{cointea}{1}{2}{%*}
 definition init :: transition where
 "init \<equiv> \<lparr>
           Label = (STR ''init''),
@@ -40,7 +40,7 @@ definition drinks :: "transition_matrix" where
             ((1,1), coin),
             ((1,2), vend)
           |}"
-text_raw\<open>}%endsnip\<close>
+text_raw{*}%endsnip*}
 
 lemma "(not (LabelEq ''vend'') until (LabelEq ''coin'')) (watch drinks t)"
   oops
@@ -275,12 +275,12 @@ proof(coinduction)
   qed
 qed
 
-text_raw\<open>\snip{checkinit}{1}{2}{%\<close>
+text_raw{*\snip{checkinit}{1}{2}{%*}
 lemma LTL_init_makes_r_1_zero:
   "((LabelEq ''init'' aand InputEq []) impl
     (nxt (checkInx rg 1 ValueEq (Some (Num 0)))))
    (watch drinks t)"
-text_raw\<open>}%endsnip\<close>
+text_raw{*}%endsnip*}
   apply (case_tac "shd t = (STR ''init'', [])")
   using watch_def
    apply (simp add: possible_steps_init updates_init ValueEq_def)
@@ -379,16 +379,16 @@ lemma LTL_must_pay_correct_bracketed:
    (watch drinks t)"
   oops
 
-text_raw\<open>\snip{mustpaycorrectfull}{1}{2}{%\<close>
-lemma LTL_must_pay_correct_full: "(ev (\<lambda>s. statename (shd s) = Some 2) impl ((\<lambda>xs. fst (event (shd xs)) \<noteq> STR ''vend'') until (\<lambda>xs. fst (event (shd xs)) = STR ''coin'')))
+text_raw{*\snip{mustpaycorrect}{1}{2}{%*}
+lemma "(ev (\<lambda>s. statename (shd s) = Some 2) impl ((\<lambda>xs. fst (event (shd xs)) \<noteq> STR ''vend'') until (\<lambda>xs. fst (event (shd xs)) = STR ''coin'')))
        (watch drinks t)"
-text_raw\<open>}%endsnip\<close>
   oops
+text_raw{*}%endsnip*}
 
 (* Ramsay, this is the proof you want!
    I'll convert it to an Isabelle code snippet for the actual paper to make it really pretty but for
    now, just use a screenshot image or something... *)
-text_raw\<open>\snip{mustpaycorrect}{1}{2}{%\<close>
+text_raw{*\snip{mustpaycorrect}{1}{2}{%*}
 lemma LTL_must_pay_correct:
   "((ev (StateEq (Some 2))) impl
     (not (LabelEq ''vend'') suntil LabelEq ''coin''))
@@ -411,6 +411,6 @@ lemma LTL_must_pay_correct:
   using StateEq_def watch_def LTL_invalid_gets_stuck_2[of t]
    apply (simp add: event_components implode_vend implode_coin ev_mono)
   by (simp add: shd_not_init)
-text_raw\<open>}%endsnip\<close>
+text_raw{*}%endsnip*}
 
 end

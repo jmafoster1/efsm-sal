@@ -668,6 +668,24 @@
 \endisadelimproof
 \isanewline
 \isacommand{lemma}\isamarkupfalse%
+\ negate{\isacharunderscore}valid{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}{\isasymnot}\isactrlsub {\isacharquery}\ x\ {\isasymnoteq}\ invalid{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}x\ {\isasymnoteq}\ invalid{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}metis\ maybe{\isacharunderscore}double{\isacharunderscore}negation\ maybe{\isacharunderscore}not{\isachardot}simps{\isacharparenleft}{\isadigit{3}}{\isacharparenright}{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
 \ maybe{\isacharunderscore}and{\isacharunderscore}valid{\isacharcolon}\ {\isachardoublequoteopen}x\ {\isasymand}\isactrlsub {\isacharquery}\ y\ {\isasymnoteq}\ invalid\ {\isasymLongrightarrow}\ x\ {\isasymnoteq}\ invalid\ {\isasymand}\ y\ {\isasymnoteq}\ invalid{\isachardoublequoteclose}\isanewline
 %
 \isadelimproof
@@ -725,6 +743,25 @@
 \endisadelimproof
 \isanewline
 \isacommand{lemma}\isamarkupfalse%
+\ maybe{\isacharunderscore}or{\isacharunderscore}true{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}x\ {\isasymor}\isactrlsub {\isacharquery}\ y\ {\isacharequal}\ true{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}{\isacharparenleft}x\ {\isacharequal}\ true\ {\isasymor}\ y\ {\isacharequal}\ true{\isacharparenright}\ {\isasymand}\ x\ {\isasymnoteq}\ invalid\ {\isasymand}\ y\ {\isasymnoteq}\ invalid{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{using}\isamarkupfalse%
+\ plus{\isacharunderscore}trilean{\isachardot}elims\ \isacommand{by}\isamarkupfalse%
+\ blast%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
 \ maybe{\isacharunderscore}not{\isacharunderscore}invalid{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}{\isasymnot}\isactrlsub {\isacharquery}\ x\ {\isacharequal}\ invalid{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}x\ {\isacharequal}\ invalid{\isacharparenright}{\isachardoublequoteclose}\isanewline
 %
 \isadelimproof
@@ -763,6 +800,25 @@
 \isanewline
 \isacommand{lemma}\isamarkupfalse%
 \ maybe{\isacharunderscore}and{\isacharunderscore}invalid{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}x\ {\isasymand}\isactrlsub {\isacharquery}\ y\ {\isacharequal}\ invalid{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}x\ {\isacharequal}\ invalid\ {\isasymor}\ y\ {\isacharequal}\ invalid{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{using}\isamarkupfalse%
+\ times{\isacharunderscore}trilean{\isachardot}elims\ \isacommand{by}\isamarkupfalse%
+\ blast%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ maybe{\isacharunderscore}and{\isacharunderscore}false{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}x\ {\isasymand}\isactrlsub {\isacharquery}\ y\ {\isacharequal}\ false{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}{\isacharparenleft}x\ {\isacharequal}\ false\ {\isasymor}\ y\ {\isacharequal}\ false{\isacharparenright}\ {\isasymand}\ x\ {\isasymnoteq}\ invalid\ {\isasymand}\ y\ {\isasymnoteq}\ invalid{\isacharparenright}{\isachardoublequoteclose}\isanewline
 %
 \isadelimproof
 \ \ %
@@ -845,6 +901,24 @@
 \isatagproof
 \isacommand{by}\isamarkupfalse%
 \ {\isacharparenleft}metis\ de{\isacharunderscore}morgans{\isacharunderscore}{\isadigit{1}}\ maybe{\isacharunderscore}double{\isacharunderscore}negation{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ not{\isacharunderscore}true{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}x\ {\isasymnoteq}\ true{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}x\ {\isacharequal}\ false\ {\isasymor}\ x\ {\isacharequal}\ invalid{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}metis\ {\isacharparenleft}no{\isacharunderscore}types{\isacharcomma}\ lifting{\isacharparenright}\ maybe{\isacharunderscore}not{\isachardot}cases\ trilean{\isachardot}distinct{\isacharparenleft}{\isadigit{1}}{\isacharparenright}\ trilean{\isachardot}distinct{\isacharparenleft}{\isadigit{3}}{\isacharparenright}{\isacharparenright}%
 \endisatagproof
 {\isafoldproof}%
 %
@@ -1335,28 +1409,28 @@
 %:%674=226%:%
 %:%678=226%:%
 %:%679=226%:%
-%:%680=226%:%
-%:%685=226%:%
-%:%688=227%:%
+%:%684=226%:%
+%:%687=227%:%
+%:%688=228%:%
 %:%689=228%:%
-%:%690=228%:%
-%:%693=229%:%
+%:%692=229%:%
+%:%696=229%:%
 %:%697=229%:%
 %:%698=229%:%
-%:%699=229%:%
-%:%704=229%:%
-%:%707=230%:%
+%:%703=229%:%
+%:%706=230%:%
+%:%707=231%:%
 %:%708=231%:%
-%:%709=231%:%
-%:%712=232%:%
+%:%711=232%:%
+%:%715=232%:%
 %:%716=232%:%
 %:%717=232%:%
-%:%718=232%:%
-%:%723=232%:%
-%:%726=233%:%
+%:%722=232%:%
+%:%725=233%:%
+%:%726=234%:%
 %:%727=234%:%
-%:%728=234%:%
-%:%731=235%:%
+%:%730=235%:%
+%:%734=235%:%
 %:%735=235%:%
 %:%736=235%:%
 %:%741=235%:%
@@ -1374,20 +1448,20 @@
 %:%768=241%:%
 %:%772=241%:%
 %:%773=241%:%
-%:%774=241%:%
-%:%779=241%:%
-%:%782=242%:%
+%:%778=241%:%
+%:%781=242%:%
+%:%782=243%:%
 %:%783=243%:%
-%:%784=243%:%
-%:%787=244%:%
+%:%786=244%:%
+%:%790=244%:%
 %:%791=244%:%
 %:%792=244%:%
-%:%793=244%:%
-%:%798=244%:%
-%:%801=245%:%
+%:%797=244%:%
+%:%800=245%:%
+%:%801=246%:%
 %:%802=246%:%
-%:%803=246%:%
-%:%806=247%:%
+%:%805=247%:%
+%:%809=247%:%
 %:%810=247%:%
 %:%811=247%:%
 %:%816=247%:%
@@ -1397,13 +1471,43 @@
 %:%824=250%:%
 %:%828=250%:%
 %:%829=250%:%
-%:%834=250%:%
-%:%837=251%:%
-%:%838=252%:%
+%:%830=250%:%
+%:%835=250%:%
+%:%838=251%:%
 %:%839=252%:%
-%:%842=253%:%
-%:%846=253%:%
+%:%840=252%:%
+%:%843=253%:%
 %:%847=253%:%
-%:%852=253%:%
+%:%848=253%:%
+%:%849=253%:%
+%:%854=253%:%
 %:%857=254%:%
-%:%862=255%:%
+%:%858=255%:%
+%:%859=255%:%
+%:%862=256%:%
+%:%866=256%:%
+%:%867=256%:%
+%:%872=256%:%
+%:%875=257%:%
+%:%876=258%:%
+%:%877=258%:%
+%:%880=259%:%
+%:%884=259%:%
+%:%885=259%:%
+%:%890=259%:%
+%:%893=260%:%
+%:%894=261%:%
+%:%895=261%:%
+%:%898=262%:%
+%:%902=262%:%
+%:%903=262%:%
+%:%908=262%:%
+%:%911=263%:%
+%:%912=264%:%
+%:%913=264%:%
+%:%916=265%:%
+%:%920=265%:%
+%:%921=265%:%
+%:%926=265%:%
+%:%931=266%:%
+%:%936=267%:%

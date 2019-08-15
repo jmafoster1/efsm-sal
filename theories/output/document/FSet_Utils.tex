@@ -19,48 +19,6 @@
 %
 \endisadelimtheory
 \isanewline
-\isacommand{context}\isamarkupfalse%
-\ \isakeyword{includes}\ fset{\isachardot}lifting\ \isakeyword{begin}\isanewline
-\isacommand{lift{\isacharunderscore}definition}\isamarkupfalse%
-\ fprod\ \ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}{\isacharprime}a\ fset\ {\isasymRightarrow}\ {\isacharprime}b\ fset\ {\isasymRightarrow}\ {\isacharparenleft}{\isacharprime}a\ {\isasymtimes}\ {\isacharprime}b{\isacharparenright}\ fset\ {\isachardoublequoteclose}\ {\isacharparenleft}\isakeyword{infixr}\ {\isachardoublequoteopen}{\isacharbar}{\isasymtimes}{\isacharbar}{\isachardoublequoteclose}\ {\isadigit{8}}{\isadigit{0}}{\isacharparenright}\ \isakeyword{is}\ {\isachardoublequoteopen}{\isasymlambda}a\ b{\isachardot}\ fset\ a\ {\isasymtimes}\ fset\ b{\isachardoublequoteclose}\isanewline
-%
-\isadelimproof
-\ \ %
-\endisadelimproof
-%
-\isatagproof
-\isacommand{by}\isamarkupfalse%
-\ simp%
-\endisatagproof
-{\isafoldproof}%
-%
-\isadelimproof
-\isanewline
-%
-\endisadelimproof
-\isanewline
-\isacommand{lift{\isacharunderscore}definition}\isamarkupfalse%
-\ fis{\isacharunderscore}singleton\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}{\isacharprime}a\ fset\ {\isasymRightarrow}\ bool{\isachardoublequoteclose}\ \isakeyword{is}\ {\isachardoublequoteopen}{\isasymlambda}A{\isachardot}\ is{\isacharunderscore}singleton\ {\isacharparenleft}fset\ A{\isacharparenright}{\isachardoublequoteclose}%
-\isadelimproof
-%
-\endisadelimproof
-%
-\isatagproof
-\isacommand{{\isachardot}}\isamarkupfalse%
-%
-\endisatagproof
-{\isafoldproof}%
-%
-\isadelimproof
-%
-\endisadelimproof
-\isanewline
-\isacommand{end}\isamarkupfalse%
-\isanewline
-\isanewline
-\isacommand{definition}\isamarkupfalse%
-\ {\isachardoublequoteopen}fSum\ {\isasymequiv}\ fsum\ {\isacharparenleft}{\isasymlambda}x{\isachardot}\ x{\isacharparenright}{\isachardoublequoteclose}\isanewline
-\isanewline
 \isacommand{syntax}\isamarkupfalse%
 \ {\isacharparenleft}ASCII{\isacharparenright}\isanewline
 \ \ {\isachardoublequoteopen}{\isacharunderscore}fBall{\isachardoublequoteclose}\ \ \ \ \ \ \ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}pttrn\ {\isasymRightarrow}\ {\isacharprime}a\ fset\ {\isasymRightarrow}\ bool\ {\isasymRightarrow}\ bool{\isachardoublequoteclose}\ \ \ \ \ \ {\isacharparenleft}{\isachardoublequoteopen}{\isacharparenleft}{\isadigit{3}}ALL\ {\isacharparenleft}{\isacharunderscore}{\isacharslash}{\isacharcolon}{\isacharunderscore}{\isacharparenright}{\isachardot}{\isacharslash}\ {\isacharunderscore}{\isacharparenright}{\isachardoublequoteclose}\ {\isacharbrackleft}{\isadigit{0}}{\isacharcomma}\ {\isadigit{0}}{\isacharcomma}\ {\isadigit{1}}{\isadigit{0}}{\isacharbrackright}\ {\isadigit{1}}{\isadigit{0}}{\isacharparenright}\isanewline
@@ -85,8 +43,132 @@
 \ \ {\isachardoublequoteopen}{\isasymexists}x{\isacharbar}{\isasymin}{\isacharbar}A{\isachardot}\ P{\isachardoublequoteclose}\ {\isasymrightleftharpoons}\ {\isachardoublequoteopen}CONST\ fBex\ A\ {\isacharparenleft}{\isasymlambda}x{\isachardot}\ P{\isacharparenright}{\isachardoublequoteclose}\isanewline
 \ \ {\isachardoublequoteopen}{\isasymexists}{\isacharbang}x{\isacharbar}{\isasymin}{\isacharbar}A{\isachardot}\ P{\isachardoublequoteclose}\ {\isasymrightharpoonup}\ {\isachardoublequoteopen}{\isasymexists}{\isacharbang}x{\isachardot}\ x\ {\isacharbar}{\isasymin}{\isacharbar}\ A\ {\isasymand}\ P{\isachardoublequoteclose}\isanewline
 \isanewline
+\isacommand{context}\isamarkupfalse%
+\ \isakeyword{includes}\ fset{\isachardot}lifting\ \isakeyword{begin}\isanewline
+\ \ \isacommand{lift{\isacharunderscore}definition}\isamarkupfalse%
+\ fprod\ \ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}{\isacharprime}a\ fset\ {\isasymRightarrow}\ {\isacharprime}b\ fset\ {\isasymRightarrow}\ {\isacharparenleft}{\isacharprime}a\ {\isasymtimes}\ {\isacharprime}b{\isacharparenright}\ fset\ {\isachardoublequoteclose}\ {\isacharparenleft}\isakeyword{infixr}\ {\isachardoublequoteopen}{\isacharbar}{\isasymtimes}{\isacharbar}{\isachardoublequoteclose}\ {\isadigit{8}}{\isadigit{0}}{\isacharparenright}\ \isakeyword{is}\ {\isachardoublequoteopen}{\isasymlambda}a\ b{\isachardot}\ fset\ a\ {\isasymtimes}\ fset\ b{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ \ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ simp%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\ \ \isanewline
+\ \ \isacommand{lift{\isacharunderscore}definition}\isamarkupfalse%
+\ fis{\isacharunderscore}singleton\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}{\isacharprime}a\ fset\ {\isasymRightarrow}\ bool{\isachardoublequoteclose}\ \isakeyword{is}\ {\isachardoublequoteopen}{\isasymlambda}A{\isachardot}\ is{\isacharunderscore}singleton\ {\isacharparenleft}fset\ A{\isacharparenright}{\isachardoublequoteclose}%
+\isadelimproof
+%
+\endisadelimproof
+%
+\isatagproof
+\isacommand{{\isachardot}}\isamarkupfalse%
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+%
+\endisadelimproof
+\isanewline
+\isacommand{end}\isamarkupfalse%
+\isanewline
+\isanewline
+\isacommand{definition}\isamarkupfalse%
+\ {\isachardoublequoteopen}fSum\ {\isasymequiv}\ fsum\ {\isacharparenleft}{\isasymlambda}x{\isachardot}\ x{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\isanewline
 \isacommand{lemma}\isamarkupfalse%
-\ fis{\isacharunderscore}singleton{\isacharunderscore}code{\isacharbrackleft}code{\isacharbrackright}{\isacharcolon}\ {\isachardoublequoteopen}fis{\isacharunderscore}singleton\ s\ {\isacharequal}\ {\isacharparenleft}size\ s\ {\isacharequal}\ {\isadigit{1}}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ fprod{\isacharunderscore}member{\isacharcolon}\ {\isachardoublequoteopen}x\ {\isacharbar}{\isasymin}{\isacharbar}\ xs\ {\isasymLongrightarrow}\ y\ {\isacharbar}{\isasymin}{\isacharbar}\ ys\ {\isasymLongrightarrow}\ {\isacharparenleft}x{\isacharcomma}\ y{\isacharparenright}\ {\isacharbar}{\isasymin}{\isacharbar}\ xs\ {\isacharbar}{\isasymtimes}{\isacharbar}\ ys{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ fmember{\isacharunderscore}def\ fprod{\isacharunderscore}def\ Abs{\isacharunderscore}fset{\isacharunderscore}inverse{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ fprod{\isacharunderscore}empty{\isacharunderscore}l{\isacharcolon}\ {\isachardoublequoteopen}{\isacharbraceleft}{\isacharbar}{\isacharbar}{\isacharbraceright}\ {\isacharbar}{\isasymtimes}{\isacharbar}\ a\ {\isacharequal}\ {\isacharbraceleft}{\isacharbar}{\isacharbar}{\isacharbraceright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{using}\isamarkupfalse%
+\ bot{\isacharunderscore}fset{\isacharunderscore}def\ fprod{\isachardot}abs{\isacharunderscore}eq\ \isacommand{by}\isamarkupfalse%
+\ force%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ fprod{\isacharunderscore}empty{\isacharunderscore}r{\isacharcolon}\ {\isachardoublequoteopen}a\ {\isacharbar}{\isasymtimes}{\isacharbar}\ {\isacharbraceleft}{\isacharbar}{\isacharbar}{\isacharbraceright}\ {\isacharequal}\ {\isacharbraceleft}{\isacharbar}{\isacharbar}{\isacharbraceright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ fprod{\isacharunderscore}def\ bot{\isacharunderscore}fset{\isacharunderscore}def\ Abs{\isacharunderscore}fset{\isacharunderscore}inverse{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemmas}\isamarkupfalse%
+\ fprod{\isacharunderscore}empty\ {\isacharequal}\ fprod{\isacharunderscore}empty{\isacharunderscore}l\ fprod{\isacharunderscore}empty{\isacharunderscore}r\isanewline
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ fprod{\isacharunderscore}finsert{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}finsert\ a\ as{\isacharparenright}\ {\isacharbar}{\isasymtimes}{\isacharbar}\ {\isacharparenleft}finsert\ b\ bs{\isacharparenright}\ {\isacharequal}\ finsert\ {\isacharparenleft}a{\isacharcomma}\ b{\isacharparenright}\ {\isacharparenleft}fimage\ {\isacharparenleft}{\isasymlambda}b{\isachardot}\ {\isacharparenleft}a{\isacharcomma}\ b{\isacharparenright}{\isacharparenright}\ bs\ {\isacharbar}{\isasymunion}{\isacharbar}\ fimage\ {\isacharparenleft}{\isasymlambda}a{\isachardot}\ {\isacharparenleft}a{\isacharcomma}\ b{\isacharparenright}{\isacharparenright}\ as\ {\isacharbar}{\isasymunion}{\isacharbar}\ {\isacharparenleft}as\ {\isacharbar}{\isasymtimes}{\isacharbar}\ bs{\isacharparenright}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ finsert{\isacharunderscore}def\ fprod{\isacharunderscore}def\ Abs{\isacharunderscore}fset{\isacharunderscore}inverse{\isacharparenright}\isanewline
+\ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}rule\ arg{\isacharunderscore}cong{\isacharbrackleft}of\ {\isachardoublequoteopen}{\isacharparenleft}insert\ {\isacharparenleft}a{\isacharcomma}\ b{\isacharparenright}\ {\isacharparenleft}fset\ as\ {\isasymtimes}\ insert\ b\ {\isacharparenleft}fset\ bs{\isacharparenright}\ {\isasymunion}\ insert\ a\ {\isacharparenleft}fset\ as{\isacharparenright}\ {\isasymtimes}\ fset\ bs{\isacharparenright}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ {\isachardoublequoteopen}{\isacharparenleft}insert\ {\isacharparenleft}a{\isacharcomma}\ b{\isacharparenright}\ {\isacharparenleft}Pair\ a\ {\isacharbackquote}\ fset\ bs\ {\isasymunion}\ {\isacharparenleft}{\isasymlambda}a{\isachardot}\ {\isacharparenleft}a{\isacharcomma}\ b{\isacharparenright}{\isacharparenright}\ {\isacharbackquote}\ fset\ as\ {\isasymunion}\ fset\ as\ {\isasymtimes}\ fset\ bs{\isacharparenright}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Abs{\isacharunderscore}fset{\isacharbrackright}{\isacharparenright}\isanewline
+\ \ \isacommand{by}\isamarkupfalse%
+\ auto%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ fis{\isacharunderscore}singleton{\isacharunderscore}code\ {\isacharbrackleft}code{\isacharbrackright}{\isacharcolon}\ {\isachardoublequoteopen}fis{\isacharunderscore}singleton\ s\ {\isacharequal}\ {\isacharparenleft}size\ s\ {\isacharequal}\ {\isadigit{1}}{\isacharparenright}{\isachardoublequoteclose}\isanewline
 %
 \isadelimproof
 \ \ %
@@ -106,7 +188,7 @@
 \endisadelimproof
 \isanewline
 \isacommand{lemma}\isamarkupfalse%
-\ fprod{\isacharunderscore}subset{\isacharcolon}\ {\isachardoublequoteopen}x\ {\isacharbar}{\isasymsubseteq}{\isacharbar}\ x{\isacharprime}\ {\isasymand}\ y\ {\isacharbar}{\isasymsubseteq}{\isacharbar}\ y{\isacharprime}\ {\isasymLongrightarrow}\ x\ {\isacharbar}{\isasymtimes}{\isacharbar}\ y\ {\isacharbar}{\isasymsubseteq}{\isacharbar}\ x{\isacharprime}\ {\isacharbar}{\isasymtimes}{\isacharbar}\ y{\isacharprime}{\isachardoublequoteclose}\isanewline
+\ fprod{\isacharunderscore}subseteq{\isacharcolon}\ {\isachardoublequoteopen}x\ {\isacharbar}{\isasymsubseteq}{\isacharbar}\ x{\isacharprime}\ {\isasymand}\ y\ {\isacharbar}{\isasymsubseteq}{\isacharbar}\ y{\isacharprime}\ {\isasymLongrightarrow}\ x\ {\isacharbar}{\isasymtimes}{\isacharbar}\ y\ {\isacharbar}{\isasymsubseteq}{\isacharbar}\ x{\isacharprime}\ {\isacharbar}{\isasymtimes}{\isacharbar}\ y{\isacharprime}{\isachardoublequoteclose}\isanewline
 %
 \isadelimproof
 \ \ %
@@ -155,6 +237,24 @@
 \ {\isacharparenleft}simp\ add{\isacharcolon}\ fprod{\isacharunderscore}def{\isacharparenright}\isanewline
 \ \ \isacommand{by}\isamarkupfalse%
 \ {\isacharparenleft}metis\ fset{\isacharunderscore}inverse\ fset{\isacharunderscore}simps{\isacharparenleft}{\isadigit{1}}{\isacharparenright}\ fset{\isacharunderscore}simps{\isacharparenleft}{\isadigit{2}}{\isacharparenright}{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ fprod{\isacharunderscore}equiv{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}fset\ {\isacharparenleft}f\ {\isacharbar}{\isasymtimes}{\isacharbar}\ f{\isacharprime}{\isacharparenright}\ {\isacharequal}\ s{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}{\isacharparenleft}{\isacharparenleft}fset\ f{\isacharparenright}\ {\isasymtimes}\ {\isacharparenleft}fset\ f{\isacharprime}{\isacharparenright}{\isacharparenright}\ {\isacharequal}\ s{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ fprod{\isacharunderscore}def\ Abs{\isacharunderscore}fset{\isacharunderscore}inverse{\isacharparenright}%
 \endisatagproof
 {\isafoldproof}%
 %
@@ -218,7 +318,7 @@
 \endisadelimproof
 \isanewline
 \isacommand{lemma}\isamarkupfalse%
-\ ffilter{\isacharunderscore}empty{\isacharcolon}\ {\isachardoublequoteopen}ffilter\ f\ {\isacharbraceleft}{\isacharbar}{\isacharbar}{\isacharbraceright}\ {\isacharequal}\ {\isacharbraceleft}{\isacharbar}{\isacharbar}{\isacharbraceright}{\isachardoublequoteclose}\isanewline
+\ ffilter{\isacharunderscore}empty\ {\isacharbrackleft}simp{\isacharbrackright}{\isacharcolon}\ {\isachardoublequoteopen}ffilter\ f\ {\isacharbraceleft}{\isacharbar}{\isacharbar}{\isacharbraceright}\ {\isacharequal}\ {\isacharbraceleft}{\isacharbar}{\isacharbar}{\isacharbraceright}{\isachardoublequoteclose}\isanewline
 %
 \isadelimproof
 \ \ %
@@ -284,7 +384,7 @@
 \endisadelimproof
 \isanewline
 \isacommand{lemma}\isamarkupfalse%
-\ not{\isacharunderscore}singleton{\isacharunderscore}emty\ {\isacharbrackleft}simp{\isacharbrackright}{\isacharcolon}\ {\isachardoublequoteopen}{\isasymnot}fis{\isacharunderscore}singleton\ {\isacharbraceleft}{\isacharbar}{\isacharbar}{\isacharbraceright}{\isachardoublequoteclose}\isanewline
+\ not{\isacharunderscore}singleton{\isacharunderscore}empty\ {\isacharbrackleft}simp{\isacharbrackright}{\isacharcolon}\ {\isachardoublequoteopen}{\isasymnot}\ fis{\isacharunderscore}singleton\ {\isacharbraceleft}{\isacharbar}{\isacharbar}{\isacharbraceright}{\isachardoublequoteclose}\isanewline
 %
 \isadelimproof
 \ \ %
@@ -304,151 +404,7 @@
 \endisadelimproof
 \isanewline
 \isacommand{lemma}\isamarkupfalse%
-\ abs{\isacharunderscore}fset{\isacharunderscore}fiveton{\isacharbrackleft}simp{\isacharbrackright}{\isacharcolon}\ {\isachardoublequoteopen}Abs{\isacharunderscore}fset\ {\isacharbraceleft}a{\isacharcomma}\ b{\isacharcomma}\ c{\isacharcomma}\ d{\isacharcomma}\ e{\isacharbraceright}\ {\isacharequal}\ {\isacharbraceleft}{\isacharbar}a{\isacharcomma}\ b{\isacharcomma}\ c{\isacharcomma}\ d{\isacharcomma}\ e{\isacharbar}{\isacharbraceright}{\isachardoublequoteclose}\isanewline
-%
-\isadelimproof
-\ \ %
-\endisadelimproof
-%
-\isatagproof
-\isacommand{by}\isamarkupfalse%
-\ {\isacharparenleft}metis\ bot{\isacharunderscore}fset{\isachardot}rep{\isacharunderscore}eq\ finsert{\isachardot}rep{\isacharunderscore}eq\ fset{\isacharunderscore}inverse{\isacharparenright}%
-\endisatagproof
-{\isafoldproof}%
-%
-\isadelimproof
-\isanewline
-%
-\endisadelimproof
-\isanewline
-\isacommand{lemma}\isamarkupfalse%
-\ abs{\isacharunderscore}fset{\isacharunderscore}fourton{\isacharbrackleft}simp{\isacharbrackright}{\isacharcolon}\ {\isachardoublequoteopen}Abs{\isacharunderscore}fset\ {\isacharbraceleft}a{\isacharcomma}\ b{\isacharcomma}\ c{\isacharcomma}\ d{\isacharbraceright}\ {\isacharequal}\ {\isacharbraceleft}{\isacharbar}a{\isacharcomma}\ b{\isacharcomma}\ c{\isacharcomma}\ d{\isacharbar}{\isacharbraceright}{\isachardoublequoteclose}\isanewline
-%
-\isadelimproof
-\ \ %
-\endisadelimproof
-%
-\isatagproof
-\isacommand{by}\isamarkupfalse%
-\ {\isacharparenleft}metis\ bot{\isacharunderscore}fset{\isachardot}rep{\isacharunderscore}eq\ finsert{\isachardot}rep{\isacharunderscore}eq\ fset{\isacharunderscore}inverse{\isacharparenright}%
-\endisatagproof
-{\isafoldproof}%
-%
-\isadelimproof
-\isanewline
-%
-\endisadelimproof
-\isanewline
-\isacommand{lemma}\isamarkupfalse%
-\ abs{\isacharunderscore}fset{\isacharunderscore}tripleton{\isacharbrackleft}simp{\isacharbrackright}{\isacharcolon}\ {\isachardoublequoteopen}Abs{\isacharunderscore}fset\ {\isacharbraceleft}a{\isacharcomma}\ b{\isacharcomma}\ c{\isacharbraceright}\ {\isacharequal}\ {\isacharbraceleft}{\isacharbar}a{\isacharcomma}\ b{\isacharcomma}\ c{\isacharbar}{\isacharbraceright}{\isachardoublequoteclose}\isanewline
-%
-\isadelimproof
-\ \ %
-\endisadelimproof
-%
-\isatagproof
-\isacommand{by}\isamarkupfalse%
-\ {\isacharparenleft}metis\ bot{\isacharunderscore}fset{\isachardot}rep{\isacharunderscore}eq\ finsert{\isachardot}rep{\isacharunderscore}eq\ fset{\isacharunderscore}inverse{\isacharparenright}%
-\endisatagproof
-{\isafoldproof}%
-%
-\isadelimproof
-\isanewline
-%
-\endisadelimproof
-\isanewline
-\isacommand{lemma}\isamarkupfalse%
-\ abs{\isacharunderscore}fset{\isacharunderscore}doubleton{\isacharbrackleft}simp{\isacharbrackright}{\isacharcolon}\ {\isachardoublequoteopen}Abs{\isacharunderscore}fset\ {\isacharbraceleft}a{\isacharcomma}\ b{\isacharbraceright}\ {\isacharequal}\ {\isacharbraceleft}{\isacharbar}a{\isacharcomma}\ b{\isacharbar}{\isacharbraceright}{\isachardoublequoteclose}\isanewline
-%
-\isadelimproof
-\ \ %
-\endisadelimproof
-%
-\isatagproof
-\isacommand{by}\isamarkupfalse%
-\ {\isacharparenleft}metis\ bot{\isacharunderscore}fset{\isachardot}rep{\isacharunderscore}eq\ finsert{\isachardot}rep{\isacharunderscore}eq\ fset{\isacharunderscore}inverse{\isacharparenright}%
-\endisatagproof
-{\isafoldproof}%
-%
-\isadelimproof
-\isanewline
-%
-\endisadelimproof
-\isanewline
-\isacommand{lemma}\isamarkupfalse%
-\ abs{\isacharunderscore}fset{\isacharunderscore}singleton{\isacharbrackleft}simp{\isacharbrackright}{\isacharcolon}\ {\isachardoublequoteopen}Abs{\isacharunderscore}fset\ {\isacharbraceleft}a{\isacharbraceright}\ {\isacharequal}\ {\isacharbraceleft}{\isacharbar}a{\isacharbar}{\isacharbraceright}{\isachardoublequoteclose}\isanewline
-%
-\isadelimproof
-\ \ %
-\endisadelimproof
-%
-\isatagproof
-\isacommand{by}\isamarkupfalse%
-\ {\isacharparenleft}metis\ bot{\isacharunderscore}fset{\isachardot}rep{\isacharunderscore}eq\ finsert{\isachardot}rep{\isacharunderscore}eq\ fset{\isacharunderscore}inverse{\isacharparenright}%
-\endisatagproof
-{\isafoldproof}%
-%
-\isadelimproof
-\isanewline
-%
-\endisadelimproof
-\isanewline
-\isacommand{lemma}\isamarkupfalse%
-\ abs{\isacharunderscore}fset{\isacharunderscore}empty{\isacharbrackleft}simp{\isacharbrackright}{\isacharcolon}\ {\isachardoublequoteopen}Abs{\isacharunderscore}fset\ {\isacharbraceleft}{\isacharbraceright}\ {\isacharequal}\ {\isacharbraceleft}{\isacharbar}{\isacharbar}{\isacharbraceright}{\isachardoublequoteclose}\isanewline
-%
-\isadelimproof
-\ \ %
-\endisadelimproof
-%
-\isatagproof
-\isacommand{by}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ bot{\isacharunderscore}fset{\isacharunderscore}def{\isacharparenright}%
-\endisatagproof
-{\isafoldproof}%
-%
-\isadelimproof
-\isanewline
-%
-\endisadelimproof
-\isanewline
-\isacommand{lemma}\isamarkupfalse%
-\ fprod{\isacharunderscore}empty{\isacharbrackleft}simp{\isacharbrackright}{\isacharcolon}\ {\isachardoublequoteopen}{\isasymforall}a{\isachardot}\ fprod\ {\isacharbraceleft}{\isacharbar}{\isacharbar}{\isacharbraceright}\ a\ {\isacharequal}\ {\isacharbraceleft}{\isacharbar}{\isacharbar}{\isacharbraceright}{\isachardoublequoteclose}\isanewline
-%
-\isadelimproof
-\ \ %
-\endisadelimproof
-%
-\isatagproof
-\isacommand{by}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ fprod{\isacharunderscore}def{\isacharparenright}%
-\endisatagproof
-{\isafoldproof}%
-%
-\isadelimproof
-\isanewline
-%
-\endisadelimproof
-\isanewline
-\isacommand{lemma}\isamarkupfalse%
-\ fprod{\isacharunderscore}empty{\isacharunderscore}{\isadigit{2}}{\isacharbrackleft}simp{\isacharbrackright}{\isacharcolon}\ {\isachardoublequoteopen}{\isasymforall}a{\isachardot}\ fprod\ a\ {\isacharbraceleft}{\isacharbar}{\isacharbar}{\isacharbraceright}\ {\isacharequal}\ {\isacharbraceleft}{\isacharbar}{\isacharbar}{\isacharbraceright}{\isachardoublequoteclose}\isanewline
-%
-\isadelimproof
-\ \ %
-\endisadelimproof
-%
-\isatagproof
-\isacommand{by}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ fprod{\isacharunderscore}def\ ffUnion{\isacharunderscore}def{\isacharparenright}%
-\endisatagproof
-{\isafoldproof}%
-%
-\isadelimproof
-\isanewline
-%
-\endisadelimproof
-\isanewline
-\isacommand{lemma}\isamarkupfalse%
-\ set{\isacharunderscore}equiv{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}f{\isadigit{1}}\ {\isacharequal}\ f{\isadigit{2}}{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}fset\ f{\isadigit{1}}\ {\isacharequal}\ fset\ f{\isadigit{2}}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ fset{\isacharunderscore}equiv{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}f{\isadigit{1}}\ {\isacharequal}\ f{\isadigit{2}}{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}fset\ f{\isadigit{1}}\ {\isacharequal}\ fset\ f{\isadigit{2}}{\isacharparenright}{\isachardoublequoteclose}\isanewline
 %
 \isadelimproof
 \ \ %
@@ -457,24 +413,6 @@
 \isatagproof
 \isacommand{by}\isamarkupfalse%
 \ {\isacharparenleft}simp\ add{\isacharcolon}\ fset{\isacharunderscore}inject{\isacharparenright}%
-\endisatagproof
-{\isafoldproof}%
-%
-\isadelimproof
-\isanewline
-%
-\endisadelimproof
-\isanewline
-\isacommand{lemma}\isamarkupfalse%
-\ fprod{\isacharunderscore}equiv{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}fset\ {\isacharparenleft}f\ {\isacharbar}{\isasymtimes}{\isacharbar}\ f{\isacharprime}{\isacharparenright}\ {\isacharequal}\ s{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}{\isacharparenleft}{\isacharparenleft}fset\ f{\isacharparenright}\ {\isasymtimes}\ {\isacharparenleft}fset\ f{\isacharprime}{\isacharparenright}{\isacharparenright}\ {\isacharequal}\ s{\isacharparenright}{\isachardoublequoteclose}\isanewline
-%
-\isadelimproof
-\ \ %
-\endisadelimproof
-%
-\isatagproof
-\isacommand{by}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ fprod{\isacharunderscore}def\ Abs{\isacharunderscore}fset{\isacharunderscore}inverse{\isacharparenright}%
 \endisatagproof
 {\isafoldproof}%
 %
@@ -565,24 +503,6 @@
 \isatagproof
 \isacommand{by}\isamarkupfalse%
 \ {\isacharparenleft}simp\ add{\isacharcolon}\ fmember{\isacharunderscore}def{\isacharparenright}%
-\endisatagproof
-{\isafoldproof}%
-%
-\isadelimproof
-\isanewline
-%
-\endisadelimproof
-\isanewline
-\isacommand{lemma}\isamarkupfalse%
-\ ffilter{\isacharunderscore}to{\isacharunderscore}filter{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}ffilter\ f\ s\ {\isacharequal}\ s{\isacharprime}{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}Set{\isachardot}filter\ f\ {\isacharparenleft}fset\ s{\isacharparenright}\ {\isacharequal}\ fset\ s{\isacharprime}{\isacharparenright}{\isachardoublequoteclose}\isanewline
-%
-\isadelimproof
-\ \ %
-\endisadelimproof
-%
-\isatagproof
-\isacommand{by}\isamarkupfalse%
-\ {\isacharparenleft}metis\ ffilter{\isachardot}rep{\isacharunderscore}eq\ fset{\isacharunderscore}inject{\isacharparenright}%
 \endisatagproof
 {\isafoldproof}%
 %
@@ -726,6 +646,122 @@
 \isacommand{definition}\isamarkupfalse%
 \ fremove\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}{\isacharprime}a\ {\isasymRightarrow}\ {\isacharprime}a\ fset\ {\isasymRightarrow}\ {\isacharprime}a\ fset{\isachardoublequoteclose}\isanewline
 \ \ \isakeyword{where}\ {\isacharbrackleft}code{\isacharunderscore}abbrev{\isacharbrackright}{\isacharcolon}\ {\isachardoublequoteopen}fremove\ x\ A\ {\isacharequal}\ A\ {\isacharminus}\ {\isacharbraceleft}{\isacharbar}x{\isacharbar}{\isacharbraceright}{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ arg{\isacharunderscore}cong{\isacharunderscore}ffilter{\isacharcolon}\ {\isachardoublequoteopen}{\isasymforall}e\ {\isacharbar}{\isasymin}{\isacharbar}\ f{\isachardot}\ p\ e\ {\isacharequal}\ p{\isacharprime}\ e\ {\isasymLongrightarrow}\ ffilter\ p\ f\ {\isacharequal}\ ffilter\ p{\isacharprime}\ f{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ auto%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ ffilter{\isacharunderscore}singleton{\isacharcolon}\ {\isachardoublequoteopen}f\ e\ {\isasymLongrightarrow}\ ffilter\ f\ {\isacharbraceleft}{\isacharbar}e{\isacharbar}{\isacharbraceright}\ {\isacharequal}\ {\isacharbraceleft}{\isacharbar}e{\isacharbar}{\isacharbraceright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ ffilter{\isacharunderscore}def\ fset{\isacharunderscore}both{\isacharunderscore}sides\ Abs{\isacharunderscore}fset{\isacharunderscore}inverse{\isacharparenright}\isanewline
+\ \ \isacommand{by}\isamarkupfalse%
+\ auto%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ ffilter{\isacharunderscore}true{\isacharcolon}\ {\isachardoublequoteopen}ffilter\ {\isacharparenleft}{\isasymlambda}x{\isachardot}\ True{\isacharparenright}\ f\ {\isacharequal}\ f{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ ffilter{\isacharunderscore}def\ fset{\isacharunderscore}both{\isacharunderscore}sides\ Abs{\isacharunderscore}fset{\isacharunderscore}inverse{\isacharparenright}\isanewline
+\ \ \isacommand{by}\isamarkupfalse%
+\ auto%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ ffilter{\isacharunderscore}true{\isacharunderscore}pair{\isacharcolon}\ {\isachardoublequoteopen}ffilter\ {\isacharparenleft}{\isasymlambda}{\isacharparenleft}x{\isacharcomma}\ y{\isacharparenright}{\isachardot}\ True{\isacharparenright}\ f\ {\isacharequal}\ f{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ ffilter{\isacharunderscore}def\ fset{\isacharunderscore}both{\isacharunderscore}sides\ Abs{\isacharunderscore}fset{\isacharunderscore}inverse{\isacharparenright}\isanewline
+\ \ \isacommand{by}\isamarkupfalse%
+\ auto%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ ffilter{\isacharunderscore}out{\isacharunderscore}all{\isacharcolon}\ {\isachardoublequoteopen}{\isasymforall}e\ {\isacharbar}{\isasymin}{\isacharbar}\ f{\isachardot}\ {\isasymnot}P\ e\ {\isasymLongrightarrow}\ ffilter\ P\ f\ {\isacharequal}\ {\isacharbraceleft}{\isacharbar}{\isacharbar}{\isacharbraceright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ ffilter{\isacharunderscore}def\ fBall{\isacharunderscore}def\ fset{\isacharunderscore}both{\isacharunderscore}sides\ Abs{\isacharunderscore}fset{\isacharunderscore}inverse{\isacharparenright}\isanewline
+\ \ \isacommand{by}\isamarkupfalse%
+\ auto%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ fset{\isacharunderscore}eq{\isacharunderscore}alt{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}x\ {\isacharequal}\ y{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}x\ {\isacharbar}{\isasymsubseteq}{\isacharbar}\ y\ {\isasymand}\ size\ x\ {\isacharequal}\ size\ y{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}metis\ exists{\isacharunderscore}least{\isacharunderscore}iff\ le{\isacharunderscore}less\ size{\isacharunderscore}fsubset{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
 %
 \isadelimtheory
 \isanewline
@@ -754,44 +790,44 @@
 %:%22=5%:%
 %:%23=5%:%
 %:%24=6%:%
-%:%25=6%:%
-%:%28=7%:%
-%:%32=7%:%
-%:%33=7%:%
-%:%38=7%:%
-%:%41=8%:%
-%:%42=9%:%
-%:%43=9%:%
-%:%49=9%:%
-%:%57=9%:%
-%:%58=10%:%
-%:%59=10%:%
-%:%60=11%:%
-%:%61=12%:%
-%:%62=12%:%
-%:%63=13%:%
-%:%64=14%:%
-%:%65=14%:%
-%:%66=15%:%
-%:%67=16%:%
-%:%68=17%:%
-%:%69=18%:%
-%:%70=19%:%
-%:%71=19%:%
-%:%72=20%:%
-%:%73=21%:%
-%:%74=22%:%
-%:%75=23%:%
-%:%76=24%:%
-%:%77=24%:%
-%:%78=25%:%
-%:%79=26%:%
-%:%80=27%:%
-%:%81=28%:%
-%:%82=29%:%
-%:%83=29%:%
-%:%84=30%:%
-%:%85=31%:%
+%:%25=7%:%
+%:%26=8%:%
+%:%27=9%:%
+%:%28=10%:%
+%:%29=10%:%
+%:%30=11%:%
+%:%31=12%:%
+%:%32=13%:%
+%:%33=14%:%
+%:%34=15%:%
+%:%35=15%:%
+%:%36=16%:%
+%:%37=17%:%
+%:%38=18%:%
+%:%39=19%:%
+%:%40=20%:%
+%:%41=20%:%
+%:%42=21%:%
+%:%43=22%:%
+%:%44=23%:%
+%:%45=24%:%
+%:%46=25%:%
+%:%47=25%:%
+%:%48=26%:%
+%:%49=26%:%
+%:%52=27%:%
+%:%56=27%:%
+%:%57=27%:%
+%:%62=27%:%
+%:%65=28%:%
+%:%66=29%:%
+%:%67=29%:%
+%:%73=29%:%
+%:%81=29%:%
+%:%82=30%:%
+%:%83=30%:%
+%:%84=31%:%
+%:%85=32%:%
 %:%86=32%:%
 %:%87=33%:%
 %:%88=34%:%
@@ -799,25 +835,25 @@
 %:%92=35%:%
 %:%96=35%:%
 %:%97=35%:%
-%:%98=36%:%
-%:%99=36%:%
-%:%104=36%:%
+%:%102=35%:%
+%:%105=36%:%
+%:%106=37%:%
 %:%107=37%:%
-%:%108=38%:%
-%:%109=38%:%
-%:%112=39%:%
-%:%116=39%:%
-%:%117=39%:%
-%:%118=40%:%
-%:%119=40%:%
-%:%124=40%:%
-%:%127=41%:%
-%:%128=42%:%
-%:%129=42%:%
-%:%132=43%:%
-%:%136=43%:%
-%:%137=43%:%
-%:%142=43%:%
+%:%110=38%:%
+%:%114=38%:%
+%:%115=38%:%
+%:%116=38%:%
+%:%121=38%:%
+%:%124=39%:%
+%:%125=40%:%
+%:%126=40%:%
+%:%129=41%:%
+%:%133=41%:%
+%:%134=41%:%
+%:%139=41%:%
+%:%142=42%:%
+%:%143=43%:%
+%:%144=43%:%
 %:%145=44%:%
 %:%146=45%:%
 %:%147=45%:%
@@ -826,248 +862,273 @@
 %:%155=46%:%
 %:%156=47%:%
 %:%157=47%:%
-%:%162=47%:%
-%:%165=48%:%
-%:%166=49%:%
-%:%167=49%:%
-%:%170=50%:%
-%:%174=50%:%
-%:%175=50%:%
-%:%180=50%:%
-%:%183=51%:%
-%:%184=52%:%
-%:%185=52%:%
-%:%188=53%:%
-%:%192=53%:%
-%:%193=53%:%
-%:%198=53%:%
-%:%201=54%:%
-%:%202=55%:%
-%:%203=55%:%
-%:%206=56%:%
-%:%210=56%:%
-%:%211=56%:%
-%:%216=56%:%
-%:%219=57%:%
-%:%220=58%:%
-%:%221=58%:%
-%:%224=59%:%
-%:%228=59%:%
-%:%229=59%:%
-%:%230=60%:%
-%:%231=60%:%
-%:%236=60%:%
-%:%239=61%:%
-%:%240=62%:%
-%:%241=62%:%
-%:%244=63%:%
-%:%248=63%:%
-%:%249=63%:%
-%:%250=64%:%
-%:%251=64%:%
-%:%252=65%:%
-%:%253=65%:%
-%:%254=66%:%
-%:%255=66%:%
-%:%256=67%:%
-%:%257=67%:%
-%:%258=68%:%
-%:%259=68%:%
-%:%264=68%:%
-%:%267=69%:%
-%:%268=70%:%
-%:%269=70%:%
-%:%272=71%:%
-%:%276=71%:%
-%:%277=71%:%
-%:%282=71%:%
-%:%285=72%:%
-%:%286=73%:%
-%:%287=73%:%
-%:%290=74%:%
-%:%294=74%:%
-%:%295=74%:%
-%:%296=75%:%
-%:%297=75%:%
-%:%302=75%:%
-%:%305=76%:%
+%:%158=48%:%
+%:%159=49%:%
+%:%160=50%:%
+%:%161=50%:%
+%:%166=50%:%
+%:%169=51%:%
+%:%170=52%:%
+%:%171=52%:%
+%:%174=53%:%
+%:%178=53%:%
+%:%179=53%:%
+%:%180=54%:%
+%:%181=54%:%
+%:%186=54%:%
+%:%189=55%:%
+%:%190=56%:%
+%:%191=56%:%
+%:%194=57%:%
+%:%198=57%:%
+%:%199=57%:%
+%:%200=58%:%
+%:%201=58%:%
+%:%206=58%:%
+%:%209=59%:%
+%:%210=60%:%
+%:%211=60%:%
+%:%214=61%:%
+%:%218=61%:%
+%:%219=61%:%
+%:%224=61%:%
+%:%227=62%:%
+%:%228=63%:%
+%:%229=63%:%
+%:%232=64%:%
+%:%236=64%:%
+%:%237=64%:%
+%:%238=65%:%
+%:%239=65%:%
+%:%244=65%:%
+%:%247=66%:%
+%:%248=67%:%
+%:%249=67%:%
+%:%252=68%:%
+%:%256=68%:%
+%:%257=68%:%
+%:%262=68%:%
+%:%265=69%:%
+%:%266=70%:%
+%:%267=70%:%
+%:%270=71%:%
+%:%274=71%:%
+%:%275=71%:%
+%:%280=71%:%
+%:%283=72%:%
+%:%284=73%:%
+%:%285=73%:%
+%:%288=74%:%
+%:%292=74%:%
+%:%293=74%:%
+%:%298=74%:%
+%:%301=75%:%
+%:%302=76%:%
+%:%303=76%:%
 %:%306=77%:%
-%:%307=77%:%
-%:%310=78%:%
-%:%314=78%:%
-%:%315=78%:%
-%:%320=78%:%
-%:%323=79%:%
+%:%310=77%:%
+%:%311=77%:%
+%:%316=77%:%
+%:%319=78%:%
+%:%320=79%:%
+%:%321=79%:%
 %:%324=80%:%
-%:%325=80%:%
-%:%328=81%:%
-%:%332=81%:%
-%:%333=81%:%
-%:%338=81%:%
-%:%341=82%:%
-%:%342=83%:%
-%:%343=83%:%
-%:%346=84%:%
-%:%350=84%:%
-%:%351=84%:%
-%:%356=84%:%
-%:%359=85%:%
-%:%360=86%:%
-%:%361=86%:%
-%:%364=87%:%
-%:%368=87%:%
-%:%369=87%:%
-%:%374=87%:%
-%:%377=88%:%
-%:%378=89%:%
-%:%379=89%:%
-%:%382=90%:%
-%:%386=90%:%
-%:%387=90%:%
-%:%392=90%:%
-%:%395=91%:%
-%:%396=92%:%
-%:%397=92%:%
-%:%400=93%:%
-%:%404=93%:%
-%:%405=93%:%
-%:%410=93%:%
-%:%413=94%:%
-%:%414=95%:%
-%:%415=95%:%
-%:%418=96%:%
-%:%422=96%:%
-%:%423=96%:%
-%:%428=96%:%
-%:%431=97%:%
-%:%432=98%:%
-%:%433=98%:%
-%:%436=99%:%
-%:%440=99%:%
-%:%441=99%:%
-%:%446=99%:%
-%:%449=100%:%
-%:%450=101%:%
-%:%451=101%:%
-%:%454=102%:%
-%:%458=102%:%
-%:%459=102%:%
-%:%464=102%:%
-%:%467=103%:%
-%:%468=104%:%
-%:%469=104%:%
-%:%472=105%:%
-%:%476=105%:%
-%:%477=105%:%
-%:%482=105%:%
-%:%485=106%:%
-%:%486=107%:%
-%:%487=107%:%
-%:%490=108%:%
-%:%494=108%:%
-%:%495=108%:%
-%:%500=108%:%
-%:%503=109%:%
-%:%504=110%:%
-%:%505=110%:%
-%:%508=111%:%
-%:%512=111%:%
-%:%513=111%:%
-%:%518=111%:%
-%:%521=112%:%
-%:%522=113%:%
-%:%523=113%:%
-%:%526=114%:%
-%:%530=114%:%
-%:%531=114%:%
-%:%536=114%:%
-%:%539=115%:%
-%:%540=116%:%
-%:%541=116%:%
-%:%544=117%:%
-%:%548=117%:%
-%:%549=117%:%
-%:%554=117%:%
-%:%557=118%:%
-%:%558=119%:%
-%:%559=119%:%
-%:%562=120%:%
-%:%566=120%:%
-%:%567=120%:%
-%:%572=120%:%
-%:%575=121%:%
-%:%576=122%:%
-%:%577=122%:%
-%:%580=123%:%
-%:%584=123%:%
-%:%585=123%:%
-%:%590=123%:%
-%:%593=124%:%
-%:%594=125%:%
-%:%595=125%:%
-%:%602=126%:%
-%:%603=126%:%
-%:%604=127%:%
-%:%605=127%:%
-%:%606=128%:%
-%:%607=128%:%
-%:%608=128%:%
-%:%609=128%:%
-%:%610=129%:%
-%:%611=129%:%
-%:%612=130%:%
-%:%613=130%:%
-%:%614=131%:%
-%:%615=131%:%
-%:%616=131%:%
-%:%617=132%:%
-%:%618=132%:%
-%:%619=133%:%
-%:%625=133%:%
-%:%628=134%:%
-%:%629=135%:%
-%:%630=135%:%
-%:%633=136%:%
-%:%637=136%:%
-%:%638=136%:%
-%:%643=136%:%
-%:%646=137%:%
-%:%647=138%:%
-%:%648=138%:%
-%:%651=139%:%
-%:%655=139%:%
-%:%656=139%:%
-%:%661=139%:%
-%:%664=140%:%
-%:%665=141%:%
-%:%666=141%:%
-%:%669=142%:%
-%:%673=142%:%
-%:%674=142%:%
-%:%679=142%:%
-%:%682=143%:%
-%:%683=144%:%
-%:%684=144%:%
-%:%685=145%:%
-%:%687=147%:%
-%:%690=148%:%
-%:%694=148%:%
-%:%695=148%:%
-%:%696=149%:%
-%:%697=149%:%
-%:%702=149%:%
-%:%705=150%:%
-%:%706=151%:%
-%:%707=151%:%
-%:%710=152%:%
-%:%714=152%:%
-%:%715=152%:%
-%:%716=153%:%
-%:%717=153%:%
-%:%722=153%:%
-%:%725=154%:%
-%:%726=155%:%
-%:%727=155%:%
-%:%728=156%:%
-%:%731=157%:%
-%:%736=158%:%
+%:%328=80%:%
+%:%329=80%:%
+%:%330=81%:%
+%:%331=81%:%
+%:%336=81%:%
+%:%339=82%:%
+%:%340=83%:%
+%:%341=83%:%
+%:%344=84%:%
+%:%348=84%:%
+%:%349=84%:%
+%:%350=85%:%
+%:%351=85%:%
+%:%352=86%:%
+%:%353=86%:%
+%:%354=87%:%
+%:%355=87%:%
+%:%356=88%:%
+%:%357=88%:%
+%:%358=89%:%
+%:%359=89%:%
+%:%364=89%:%
+%:%367=90%:%
+%:%368=91%:%
+%:%369=91%:%
+%:%372=92%:%
+%:%376=92%:%
+%:%377=92%:%
+%:%382=92%:%
+%:%385=93%:%
+%:%386=94%:%
+%:%387=94%:%
+%:%390=95%:%
+%:%394=95%:%
+%:%395=95%:%
+%:%396=96%:%
+%:%397=96%:%
+%:%402=96%:%
+%:%405=97%:%
+%:%406=98%:%
+%:%407=98%:%
+%:%410=99%:%
+%:%414=99%:%
+%:%415=99%:%
+%:%420=99%:%
+%:%423=100%:%
+%:%424=101%:%
+%:%425=101%:%
+%:%428=102%:%
+%:%432=102%:%
+%:%433=102%:%
+%:%438=102%:%
+%:%441=103%:%
+%:%442=104%:%
+%:%443=104%:%
+%:%446=105%:%
+%:%450=105%:%
+%:%451=105%:%
+%:%456=105%:%
+%:%459=106%:%
+%:%460=107%:%
+%:%461=107%:%
+%:%464=108%:%
+%:%468=108%:%
+%:%469=108%:%
+%:%474=108%:%
+%:%477=109%:%
+%:%478=110%:%
+%:%479=110%:%
+%:%482=111%:%
+%:%486=111%:%
+%:%487=111%:%
+%:%492=111%:%
+%:%495=112%:%
+%:%496=113%:%
+%:%497=113%:%
+%:%500=114%:%
+%:%504=114%:%
+%:%505=114%:%
+%:%510=114%:%
+%:%513=115%:%
+%:%514=116%:%
+%:%515=116%:%
+%:%522=117%:%
+%:%523=117%:%
+%:%524=118%:%
+%:%525=118%:%
+%:%526=119%:%
+%:%527=119%:%
+%:%528=119%:%
+%:%529=119%:%
+%:%530=120%:%
+%:%531=120%:%
+%:%532=121%:%
+%:%533=121%:%
+%:%534=122%:%
+%:%535=122%:%
+%:%536=122%:%
+%:%537=123%:%
+%:%538=123%:%
+%:%539=124%:%
+%:%545=124%:%
+%:%548=125%:%
+%:%549=126%:%
+%:%550=126%:%
+%:%553=127%:%
+%:%557=127%:%
+%:%558=127%:%
+%:%563=127%:%
+%:%566=128%:%
+%:%567=129%:%
+%:%568=129%:%
+%:%571=130%:%
+%:%575=130%:%
+%:%576=130%:%
+%:%581=130%:%
+%:%584=131%:%
+%:%585=132%:%
+%:%586=132%:%
+%:%589=133%:%
+%:%593=133%:%
+%:%594=133%:%
+%:%599=133%:%
+%:%602=134%:%
+%:%603=135%:%
+%:%604=135%:%
+%:%605=136%:%
+%:%607=138%:%
+%:%610=139%:%
+%:%614=139%:%
+%:%615=139%:%
+%:%616=140%:%
+%:%617=140%:%
+%:%622=140%:%
+%:%625=141%:%
+%:%626=142%:%
+%:%627=142%:%
+%:%630=143%:%
+%:%634=143%:%
+%:%635=143%:%
+%:%636=144%:%
+%:%637=144%:%
+%:%642=144%:%
+%:%645=145%:%
+%:%646=146%:%
+%:%647=146%:%
+%:%648=147%:%
+%:%649=148%:%
+%:%650=149%:%
+%:%651=149%:%
+%:%654=150%:%
+%:%658=150%:%
+%:%659=150%:%
+%:%664=150%:%
+%:%667=151%:%
+%:%668=152%:%
+%:%669=152%:%
+%:%672=153%:%
+%:%676=153%:%
+%:%677=153%:%
+%:%678=154%:%
+%:%679=154%:%
+%:%684=154%:%
+%:%687=155%:%
+%:%688=156%:%
+%:%689=156%:%
+%:%692=157%:%
+%:%696=157%:%
+%:%697=157%:%
+%:%698=158%:%
+%:%699=158%:%
+%:%704=158%:%
+%:%707=159%:%
+%:%708=160%:%
+%:%709=160%:%
+%:%712=161%:%
+%:%716=161%:%
+%:%717=161%:%
+%:%718=162%:%
+%:%719=162%:%
+%:%724=162%:%
+%:%727=163%:%
+%:%728=164%:%
+%:%729=164%:%
+%:%732=165%:%
+%:%736=165%:%
+%:%737=165%:%
+%:%738=166%:%
+%:%739=166%:%
+%:%744=166%:%
+%:%747=167%:%
+%:%748=168%:%
+%:%749=168%:%
+%:%752=169%:%
+%:%756=169%:%
+%:%757=169%:%
+%:%762=169%:%
+%:%767=170%:%
+%:%772=171%:%

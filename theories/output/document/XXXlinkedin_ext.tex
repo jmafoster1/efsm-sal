@@ -462,15 +462,17 @@
 \ \ \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}case{\isacharunderscore}tac\ list{\isacharparenright}\isanewline
 \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ possible{\isacharunderscore}steps{\isacharunderscore}empty\ pdf{\isadigit{2}}{\isacharunderscore}def\ linkedIn{\isacharunderscore}def{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ possible{\isacharunderscore}steps{\isacharunderscore}empty\ pdf{\isadigit{2}}{\isacharunderscore}def\ linkedIn{\isacharunderscore}def\ join{\isacharunderscore}ir{\isacharunderscore}def\ input{\isadigit{2}}state{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def{\isacharparenright}\isanewline
+\ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}metis\ numeral{\isacharunderscore}{\isadigit{1}}{\isacharunderscore}eq{\isacharunderscore}Suc{\isacharunderscore}{\isadigit{0}}\ numeral{\isacharunderscore}eq{\isacharunderscore}iff\ semiring{\isacharunderscore}norm{\isacharparenleft}{\isadigit{8}}{\isadigit{6}}{\isacharparenright}\ transition{\isachardot}select{\isacharunderscore}convs{\isacharparenleft}{\isadigit{2}}{\isacharparenright}{\isacharparenright}\isanewline
 \ \ \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}case{\isacharunderscore}tac\ lista{\isacharparenright}\isanewline
 \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ possible{\isacharunderscore}steps{\isacharunderscore}empty\ pdf{\isadigit{2}}{\isacharunderscore}def\ linkedIn{\isacharunderscore}def{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ possible{\isacharunderscore}steps{\isacharunderscore}empty\ pdf{\isadigit{2}}{\isacharunderscore}def\ linkedIn{\isacharunderscore}def\ join{\isacharunderscore}ir{\isacharunderscore}def\ input{\isadigit{2}}state{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def{\isacharparenright}\isanewline
 \ \ \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}case{\isacharunderscore}tac\ listb{\isacharparenright}\isanewline
 \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ possible{\isacharunderscore}steps{\isacharunderscore}empty\ pdf{\isadigit{2}}{\isacharunderscore}def\ linkedIn{\isacharunderscore}def\ apply{\isacharunderscore}guards\ numeral{\isacharunderscore}{\isadigit{2}}{\isacharunderscore}eq{\isacharunderscore}{\isadigit{2}}{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ possible{\isacharunderscore}steps{\isacharunderscore}empty\ pdf{\isadigit{2}}{\isacharunderscore}def\ linkedIn{\isacharunderscore}def\ numeral{\isacharunderscore}{\isadigit{2}}{\isacharunderscore}eq{\isacharunderscore}{\isadigit{2}}\ apply{\isacharunderscore}guards{\isacharunderscore}def\ join{\isacharunderscore}ir{\isacharunderscore}def\ input{\isadigit{2}}state{\isacharunderscore}def{\isacharparenright}\isanewline
 \ \ \isacommand{by}\isamarkupfalse%
 \ {\isacharparenleft}simp\ add{\isacharcolon}\ possible{\isacharunderscore}steps{\isacharunderscore}empty\ pdf{\isadigit{2}}{\isacharunderscore}def\ linkedIn{\isacharunderscore}def{\isacharparenright}%
 \endisatagproof
@@ -616,14 +618,28 @@
 \ standard\isanewline
 \ \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}simp\ add{\isacharcolon}\ OutputEq{\isacharunderscore}def\ ltl{\isacharunderscore}step{\isacharunderscore}alt\ not{\isacharunderscore}view{\isacharparenright}\isanewline
+\ \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ standard\isanewline
+\ \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}rule\ disjI{\isadigit{2}}{\isacharparenright}\isanewline
+\ \ \ \ \isacommand{using}\isamarkupfalse%
+\ no{\isacharunderscore}output{\isacharunderscore}none{\isacharbrackleft}of\ linkedIn\ {\isachardoublequoteopen}{\isacharless}{\isachargreater}{\isachardoublequoteclose}\ {\isachardoublequoteopen}stl\ {\isacharparenleft}stl\ i{\isacharparenright}{\isachardoublequoteclose}{\isacharbrackright}\isanewline
+\ \ \ \ \isacommand{unfolding}\isamarkupfalse%
+\ OutputEq{\isacharunderscore}def\isanewline
+\ \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ alw{\isacharunderscore}mono{\isacharparenright}\isanewline
 \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ OutputEq{\isacharunderscore}def\ ValueEq{\isacharunderscore}def{\isacharparenright}\isanewline
+\ standard\isanewline
+\ \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}rule\ disjI{\isadigit{2}}{\isacharparenright}\isanewline
 \ \ \ \ \isacommand{using}\isamarkupfalse%
 \ no{\isacharunderscore}output{\isacharunderscore}none{\isacharbrackleft}of\ linkedIn\ {\isachardoublequoteopen}{\isacharless}{\isachargreater}{\isachardoublequoteclose}\ {\isachardoublequoteopen}stl\ {\isacharparenleft}stl\ i{\isacharparenright}{\isachardoublequoteclose}{\isacharbrackright}\isanewline
 \ \ \ \ \isacommand{unfolding}\isamarkupfalse%
 \ OutputEq{\isacharunderscore}def\isanewline
 \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}simp\ add{\isacharcolon}\ alw{\isacharunderscore}mono{\isacharparenright}\isanewline
+\ \ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ OutputEq{\isacharunderscore}def{\isacharparenright}\isanewline
 \ \ \ \ \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}{\isacharparenleft}snd\ {\isacharparenleft}shd\ {\isacharparenleft}stl\ i{\isacharparenright}{\isacharparenright}{\isacharparenright}\ {\isacharequal}\ {\isacharbrackleft}Str\ {\isacharprime}{\isacharprime}otherID{\isacharprime}{\isacharprime}{\isacharcomma}\ Str\ {\isacharprime}{\isacharprime}name{\isacharprime}{\isacharprime}{\isacharcomma}\ Str\ {\isacharprime}{\isacharprime}MNn{\isadigit{5}}{\isacharprime}{\isacharprime}{\isacharbrackright}{\isachardoublequoteclose}{\isacharparenright}\isanewline
 \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
@@ -899,34 +915,34 @@
 %:%473=207%:%
 %:%474=208%:%
 %:%475=208%:%
-%:%480=208%:%
-%:%483=209%:%
-%:%484=210%:%
+%:%476=209%:%
+%:%477=209%:%
+%:%482=209%:%
 %:%485=210%:%
-%:%488=211%:%
-%:%492=211%:%
-%:%493=211%:%
+%:%486=211%:%
+%:%487=211%:%
+%:%490=212%:%
 %:%494=212%:%
 %:%495=212%:%
 %:%496=213%:%
 %:%497=213%:%
-%:%505=215%:%
-%:%506=216%:%
+%:%498=214%:%
+%:%499=214%:%
 %:%507=216%:%
 %:%508=217%:%
-%:%511=218%:%
-%:%515=218%:%
-%:%524=219%:%
-%:%525=222%:%
-%:%526=222%:%
-%:%528=224%:%
-%:%535=225%:%
-%:%536=225%:%
+%:%509=217%:%
+%:%510=218%:%
+%:%513=219%:%
+%:%517=219%:%
+%:%526=220%:%
+%:%527=223%:%
+%:%528=223%:%
+%:%530=225%:%
 %:%537=226%:%
 %:%538=226%:%
 %:%539=227%:%
 %:%540=227%:%
-%:%541=227%:%
+%:%541=228%:%
 %:%542=228%:%
 %:%543=228%:%
 %:%544=229%:%
@@ -966,18 +982,18 @@
 %:%578=246%:%
 %:%579=246%:%
 %:%580=247%:%
-%:%586=247%:%
-%:%589=248%:%
-%:%590=249%:%
+%:%581=247%:%
+%:%582=248%:%
+%:%588=248%:%
 %:%591=249%:%
-%:%593=251%:%
-%:%600=252%:%
-%:%601=252%:%
+%:%592=250%:%
+%:%593=250%:%
+%:%595=252%:%
 %:%602=253%:%
 %:%603=253%:%
 %:%604=254%:%
 %:%605=254%:%
-%:%606=254%:%
+%:%606=255%:%
 %:%607=255%:%
 %:%608=255%:%
 %:%609=256%:%
@@ -1005,21 +1021,37 @@
 %:%631=267%:%
 %:%632=267%:%
 %:%633=268%:%
-%:%642=271%:%
-%:%643=272%:%
-%:%644=272%:%
-%:%645=273%:%
-%:%650=278%:%
-%:%653=279%:%
-%:%657=279%:%
-%:%658=279%:%
-%:%659=280%:%
-%:%660=280%:%
-%:%661=281%:%
-%:%662=281%:%
-%:%663=282%:%
-%:%664=282%:%
-%:%665=283%:%
-%:%673=283%:%
-%:%676=284%:%
-%:%681=285%:%
+%:%634=268%:%
+%:%635=269%:%
+%:%636=269%:%
+%:%637=270%:%
+%:%638=270%:%
+%:%639=271%:%
+%:%640=271%:%
+%:%641=272%:%
+%:%642=272%:%
+%:%643=273%:%
+%:%644=273%:%
+%:%645=274%:%
+%:%646=274%:%
+%:%647=275%:%
+%:%648=275%:%
+%:%649=276%:%
+%:%658=278%:%
+%:%659=279%:%
+%:%660=279%:%
+%:%661=280%:%
+%:%666=285%:%
+%:%669=286%:%
+%:%673=286%:%
+%:%674=286%:%
+%:%675=287%:%
+%:%676=287%:%
+%:%677=288%:%
+%:%678=288%:%
+%:%679=289%:%
+%:%680=289%:%
+%:%681=290%:%
+%:%689=290%:%
+%:%692=291%:%
+%:%697=292%:%

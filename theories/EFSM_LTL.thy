@@ -125,7 +125,7 @@ proof -
     "\<forall>f p s. f (stl (ss f)) \<noteq> stl (f (ss f)) \<or> alw p (f s) = alw (\<lambda>s. p (f s)) s"
     by (metis (no_types) alw_inv)
   then show ?thesis
-    by (simp add: ValueEq_def all_imp_alw)
+    by (simp add: all_imp_alw)
 qed
 
 lemma event_components: "(LabelEq l aand InputEq i) s = (event (shd s) = (String.implode l, i))"
@@ -327,7 +327,6 @@ next
     apply (simp add: until_stl)
     by (metis ev_iff_sdrop ev_stl)
 qed
-
 
 lemma until_must_release: "(\<phi> until \<psi>) \<omega> \<Longrightarrow> \<not> alw \<phi> \<omega> \<Longrightarrow> ev \<psi> \<omega>"
   apply (insert ev_first_sdrop[of "(\<lambda>xs. \<not> \<phi> xs)" \<omega>])

@@ -10,7 +10,7 @@ definition I :: "nat \<Rightarrow> vname" where
   "I n = vname.I (n-1)"
 declare I_def [simp]
 
-text_raw{*\snip{cointeabroken}{1}{2}{%*}
+text_raw\<open>\snip{cointeabroken}{1}{2}{%\<close>
 definition init :: transition where
 "init \<equiv> \<lparr>
           Label = (STR ''init''),
@@ -44,7 +44,7 @@ definition drinks :: "transition_matrix" where
             ((1,1), coin),
             ((1,2), vend)
           |}"
-text_raw{*}%endsnip*}
+text_raw\<open>}%endsnip\<close>
 
 lemma possible_steps_init: "possible_steps drinks 0 <> STR ''init'' [] = {|(1, init)|}"
     apply (simp add: possible_steps_alt Abs_ffilter Set.filter_def drinks_def)
@@ -185,6 +185,7 @@ lemma possible_steps_0: "possible_steps drinks 0 <> l i = finsert x S' \<Longrig
 lemma apply_updates_init: "apply_updates (Updates init) (\<lambda>x. None) <> = (<>(1 := Num 0))"
   by (simp add: init_def)
 
+(* This is supposed to break *)
 lemma vend_insufficient: "possible_steps drinks 1 (<>(1 := Num 0)) STR ''vend'' i = {||}"
   apply (simp add: possible_steps_def ffilter_def fset_both_sides Abs_fset_inverse Set.filter_def drinks_def)
   apply safe

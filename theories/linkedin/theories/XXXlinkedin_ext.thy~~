@@ -200,12 +200,11 @@ lemma pdf_6_invalid_inputs: "i \<noteq> [EFSM.Str ''otherID'', EFSM.Str ''name''
   apply (case_tac i)
    apply (simp add: possible_steps_empty pdf2_def linkedIn_def)
   apply (case_tac list)
-   apply (simp add: possible_steps_empty pdf2_def linkedIn_def join_ir_def input2state_def apply_guards_def)
-   apply (metis numeral_1_eq_Suc_0 numeral_eq_iff semiring_norm(86) transition.select_convs(2))
+   apply (simp add: possible_steps_empty pdf2_def linkedIn_def)
   apply (case_tac lista)
-   apply (simp add: possible_steps_empty pdf2_def linkedIn_def join_ir_def input2state_def apply_guards_def)
+   apply (simp add: possible_steps_empty pdf2_def linkedIn_def)
   apply (case_tac listb)
-   apply (simp add: possible_steps_empty pdf2_def linkedIn_def numeral_2_eq_2 apply_guards_def join_ir_def input2state_def)
+   apply (simp add: possible_steps_empty pdf2_def linkedIn_def apply_guards numeral_2_eq_2)
   by (simp add: possible_steps_empty pdf2_def linkedIn_def)
 
 lemma pdf_fuzz: "possible_steps linkedIn 6 <> STR ''pdf'' [EFSM.Str ''otherID'', EFSM.Str ''name'', EFSM.Str ''4zoF''] = {|(7, pdf2)|}"
@@ -213,11 +212,11 @@ lemma pdf_fuzz: "possible_steps linkedIn 6 <> STR ''pdf'' [EFSM.Str ''otherID'',
   apply safe
   by (simp_all add: pdf2_def apply_guards numeral_2_eq_2)
 
-text_raw\<open>\snip{contradiction}{1}{2}{%\<close>
+text_raw{*\snip{contradiction}{1}{2}{%*}
 lemma contradiction: "fst (shd (stl (stl i))) = STR ''pdf'' \<Longrightarrow>
     snd (shd (stl (stl i))) = [value.Str STR ''otherID'', value.Str STR ''name'', value.Str STR ''4zoF''] \<Longrightarrow> False"
   oops
-text_raw\<open>}%endsnip\<close>
+text_raw{*}%endsnip*}
 
 (* This should be where the wheels fall off *)
 lemma "alw (\<lambda>xs. label (shd xs) = STR ''pdf'' \<and> ValueEq (Some (Inputs 0 xs)) (Some (value.Str STR ''otherID'')) = trilean.true \<longrightarrow>
@@ -259,30 +258,24 @@ proof(coinduction)
      apply (simp add: not_view)
      apply standard
       apply (simp add: OutputEq_def ltl_step_alt not_view)
-      apply standard
-      apply (rule disjI2)
-    using no_output_none[of linkedIn "<>" "stl (stl i)"]
-    unfolding OutputEq_def
-      apply (simp add: alw_mono)
-     apply standard
-      apply (rule disjI2)
+     apply (simp add: OutputEq_def ValueEq_def)
     using no_output_none[of linkedIn "<>" "stl (stl i)"]
     unfolding OutputEq_def
      apply (simp add: alw_mono)
-     apply (simp add: OutputEq_def)
     apply (case_tac "(snd (shd (stl i))) = [Str ''otherID'', Str ''name'', Str ''MNn5'']")
      apply (simp add: ltl_step_alt view_fuzz view3_def)
     apply (rule disjI2)
     oops
 
-text_raw\<open>\snip{neverDetailed}{1}{2}{%\<close>
+
+text_raw{*\snip{neverDetailed}{1}{2}{%*}
 lemma LTL_neverDetailed:
     "(((LabelEq  ''login'' aand InputEq [Str ''free'']) impl
      (nxt (alw ((LabelEq ''pdf'' aand
      checkInx ip 1 ValueEq (Some (Str ''otherID''))) impl 
      (not (OutputEq [Some (Str ''detailed_pdf_of_otherID'')])))))))
      (watch linkedIn i)"
-text_raw\<open>}%endsnip\<close>
+text_raw{*}%endsnip*}
   apply (simp add: watch_def ltl_step_alt)
   apply (simp add: InputEq_def LabelEq_def implode_login)
   apply (simp add: login_free login_def)
