@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2019.3.7)  15 AUG 2019 16:51
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2019.3.7)  16 AUG 2019 14:23
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -2415,7 +2415,7 @@ cmtt/m/sl/9 ) $\OML/cmm/m/it/9 !$\OT1/cmtt/m/sl/9 '"[]
  []
 
 [181] [182]) (./Coin_Tea.tex [183]
-Overfull \hbox (7.45882pt too wide) in paragraph at lines 106--108
+Overfull \hbox (7.45882pt too wide) in paragraph at lines 108--110
 [][]\OT1/cmr/bx/n/9 lemma \OT1/cmtt/m/sl/9 possible_steps_not_init: "$\OMS/cmsy
 /m/n/9 :$ \OT1/cmtt/m/sl/9 (a = STR ''init'' $\OMS/cmsy/m/n/9 ^$ \OT1/cmtt/m/sl
 /9 b = []) $\OT1/cmr/m/n/9 =[]\OMS/cmsy/m/n/9 )$ \OT1/cmtt/m/sl/9 possible_step
@@ -2423,33 +2423,33 @@ s drinks 0 <> a b =
  []
 
 
-Overfull \hbox (0.72263pt too wide) in paragraph at lines 162--164
+Overfull \hbox (0.72263pt too wide) in paragraph at lines 164--166
 [][]\OT1/cmr/bx/n/9 lemma \OT1/cmtt/m/sl/9 make_full_obs_neq: "make_full_observ
 ation drinks (fst (ltl_step drinks (Some 0) <> (shd t)))
  []
 
 
-Overfull \hbox (52.23955pt too wide) in paragraph at lines 182--184
+Overfull \hbox (52.23955pt too wide) in paragraph at lines 184--186
 [][]  \OT1/cmr/bx/n/9 ap-ply \OT1/cmtt/m/sl/9 (metis (no_types, lifting) make_f
 ull_observation.simps(1) option.inject state.ext_inject zero_neq_one)[] 
  []
 
 [184]
-Overfull \hbox (54.46667pt too wide) in paragraph at lines 232--234
+Overfull \hbox (54.46667pt too wide) in paragraph at lines 234--236
 [][]\OT1/cmr/bx/n/9 lemma \OT1/cmtt/m/sl/9 state_none_2: "(StateEq None) (make_
 full_observation e s r t) $\OT1/cmr/m/n/9 =[]\OMS/cmsy/m/n/9 )$ \OT1/cmtt/m/sl/
 9 (StateEq None) (make_full_observation
  []
 
 
-Overfull \hbox (7.21707pt too wide) in paragraph at lines 360--362
+Overfull \hbox (7.21707pt too wide) in paragraph at lines 362--364
 [][]\OT1/cmr/bx/n/9 lemma \OT1/cmtt/m/sl/9 no_possible_steps: "possible_steps e
  s r (fst t) (snd t) = {||} $\OT1/cmr/m/n/9 =[]\OMS/cmsy/m/n/9 )$ \OT1/cmtt/m/s
 l/9 ltl_step e (Some s) r t =
  []
 
 
-Overfull \hbox (10.7282pt too wide) in paragraph at lines 393--395
+Overfull \hbox (10.7282pt too wide) in paragraph at lines 395--397
 [][]\OT1/cmr/bx/n/9 lemma \OT1/cmtt/m/sl/9 no_possible_steps_not_init:"t $\OMS/
 cmsy/m/n/9 6\OT1/cmr/m/n/9 =$ \OT1/cmtt/m/sl/9 (STR ''init'', []) $\OT1/cmr/m/n
 /9 =[]\OMS/cmsy/m/n/9 )$ \OT1/cmtt/m/sl/9 possible_steps drinks 0 r (fst t) (sn
@@ -2457,69 +2457,69 @@ d
  []
 
 
-Overfull \hbox (47.51459pt too wide) in paragraph at lines 395--403
+Overfull \hbox (47.51459pt too wide) in paragraph at lines 397--405
 [][]  \OT1/cmr/bx/n/9 ap-ply \OT1/cmtt/m/sl/9 (simp add: possible_steps_def ffi
 lter_def Set.filter_def drinks_def fset_both_sides Abs_fset_inverse)[] 
  []
 
 
-Overfull \hbox (75.6915pt too wide) in paragraph at lines 403--410
+Overfull \hbox (75.6915pt too wide) in paragraph at lines 405--412
 [][]  \OT1/cmr/bx/n/9 by \OT1/cmtt/m/sl/9 (metis init_def length_0_conv less_nu
 meral_extra(1) prod.collapse transition.ext_inject transition.surjective)[] 
  []
 
 
-Overfull \hbox (47.51459pt too wide) in paragraph at lines 435--443
+Overfull \hbox (47.51459pt too wide) in paragraph at lines 437--445
 [][]  \OT1/cmr/bx/n/9 ap-ply \OT1/cmtt/m/sl/9 (simp add: possible_steps_alt ffi
 lter_def fset_both_sides Abs_fset_inverse Set.filter_def drinks_def)[] 
  []
 
-
-Overfull \hbox (34.353pt too wide) in paragraph at lines 455--457
+[185]
+Overfull \hbox (34.353pt too wide) in paragraph at lines 457--459
 [][]\OT1/cmr/bx/n/9 lemma \OT1/cmtt/m/sl/9 possible_steps_vend_insufficient: "n
  $\OMS/cmsy/m/n/9 ^^T$ \OT1/cmtt/m/sl/9 0 $\OT1/cmr/m/n/9 =[]\OMS/cmsy/m/n/9 )$
  \OT1/cmtt/m/sl/9 possible_steps drinks 1 (<>(1 := Num n)) STR ''vend''
  []
 
-[185]
-Overfull \hbox (47.51459pt too wide) in paragraph at lines 457--465
+
+Overfull \hbox (47.51459pt too wide) in paragraph at lines 459--467
 [][]  \OT1/cmr/bx/n/9 ap-ply \OT1/cmtt/m/sl/9 (simp add: possible_steps_def ffi
 lter_def fset_both_sides Abs_fset_inverse Set.filter_def drinks_def)[] 
  []
 
 
-Overfull \hbox (21.39195pt too wide) in paragraph at lines 477--479
+Overfull \hbox (21.39195pt too wide) in paragraph at lines 479--481
 [][]\OT1/cmr/bx/n/9 lemma \OT1/cmtt/m/sl/9 possible_steps_vend_sufficient: "n >
  0 $\OT1/cmr/m/n/9 =[]\OMS/cmsy/m/n/9 )$ \OT1/cmtt/m/sl/9 possible_steps drinks
  1 (<>(1 := Num n)) STR ''vend''
  []
 
 
-Overfull \hbox (47.51459pt too wide) in paragraph at lines 479--487
+Overfull \hbox (47.51459pt too wide) in paragraph at lines 481--489
 [][]  \OT1/cmr/bx/n/9 ap-ply \OT1/cmtt/m/sl/9 (simp add: possible_steps_alt ffi
 lter_def fset_both_sides Abs_fset_inverse Set.filter_def drinks_def)[] 
  []
 
 
-Overfull \hbox (47.51459pt too wide) in paragraph at lines 504--512
+Overfull \hbox (47.51459pt too wide) in paragraph at lines 506--514
 [][]  \OT1/cmr/bx/n/9 ap-ply \OT1/cmtt/m/sl/9 (simp add: possible_steps_def ffi
 lter_def fset_both_sides Abs_fset_inverse drinks_def Set.filter_def)[] 
  []
 
 
-Overfull \hbox (14.26701pt too wide) in paragraph at lines 512--519
+Overfull \hbox (14.26701pt too wide) in paragraph at lines 514--521
 [][]  \OT1/cmr/bx/n/9 by \OT1/cmtt/m/sl/9 (metis coin_def length_0_conv prod.co
 llapse transition.ext_inject transition.surjective vend_def)[] 
  []
 
 
-Overfull \hbox (33.16685pt too wide) in paragraph at lines 570--583
+Overfull \hbox (33.16685pt too wide) in paragraph at lines 572--585
 [][]  \OT1/cmr/bx/n/9 by \OT1/cmtt/m/sl/9 (simp add: possible_steps_def ffilter
 _def fset_both_sides Abs_fset_inverse Set.filter_def drinks_def)[] 
  []
 
 
-Overfull \hbox (11.22688pt too wide) in paragraph at lines 586--588
+Overfull \hbox (11.22688pt too wide) in paragraph at lines 588--590
 [][]\OT1/cmr/bx/n/9 lemma \OT1/cmtt/m/sl/9 shd_not_lt_zero: "0 $\OMS/cmsy/m/n/9
  ^^T$ \OT1/cmtt/m/sl/9 n $\OT1/cmr/m/n/9 =[]\OMS/cmsy/m/n/9 )$ \OT1/cmtt/m/sl/9
  ($\OML/cmm/m/it/9 ^^U$\OT1/cmtt/m/sl/9 xs. MaybeBoolInt (<) (datastate (shd xs
@@ -2527,7 +2527,7 @@ Overfull \hbox (11.22688pt too wide) in paragraph at lines 586--588
  []
 
 
-Overfull \hbox (17.16568pt too wide) in paragraph at lines 604--606
+Overfull \hbox (17.16568pt too wide) in paragraph at lines 606--608
 [][]\OT1/cmr/bx/n/9 lemma \OT1/cmtt/m/sl/9 nxt_not_lt_zero: "0 $\OMS/cmsy/m/n/9
  ^^T$ \OT1/cmtt/m/sl/9 n $\OT1/cmr/m/n/9 =[]\OMS/cmsy/m/n/9 )$ \OT1/cmtt/m/sl/9
  nxt ($\OML/cmm/m/it/9 ^^U$\OT1/cmtt/m/sl/9 xs. MaybeBoolInt (<) (datastate (sh
@@ -2535,7 +2535,7 @@ d xs) $ 1) (Some (Num 0))
  []
 
 
-Overfull \hbox (12.44072pt too wide) in paragraph at lines 622--624
+Overfull \hbox (12.44072pt too wide) in paragraph at lines 624--626
 [][]\OT1/cmr/bx/n/9 lemma \OT1/cmtt/m/sl/9 once_none_remains_not_lt_zero: "0 $\
 OMS/cmsy/m/n/9 ^^T$ \OT1/cmtt/m/sl/9 n $\OT1/cmr/m/n/9 =[]\OMS/cmsy/m/n/9 )$ \O
 T1/cmtt/m/sl/9 alw ($\OML/cmm/m/it/9 ^^U$\OT1/cmtt/m/sl/9 xs. MaybeBoolInt (<) 
@@ -2543,59 +2543,59 @@ T1/cmtt/m/sl/9 alw ($\OML/cmm/m/it/9 ^^U$\OT1/cmtt/m/sl/9 xs. MaybeBoolInt (<)
  []
 
 
-Overfull \hbox (11.88507pt too wide) in paragraph at lines 642--644
+Overfull \hbox (11.88507pt too wide) in paragraph at lines 644--646
 [][]\OT1/cmr/bx/n/9 lemma \OT1/cmtt/m/sl/9 once_none_null_remains_not_lt_zero: 
 "alw ($\OML/cmm/m/it/9 ^^U$\OT1/cmtt/m/sl/9 xs. MaybeBoolInt (<) (datastate (sh
 d xs) $ 1) (Some
  []
 
 
-Overfull \hbox (60.22372pt too wide) in paragraph at lines 664--665
+Overfull \hbox (60.22372pt too wide) in paragraph at lines 666--667
 [][]      \OT1/cmtt/m/sl/9 alw ($\OML/cmm/m/it/9 ^^U$\OT1/cmtt/m/sl/9 xs. Maybe
 BoolInt (<) (datastate (shd xs) $ 1) (Some (Num 0)) $\OMS/cmsy/m/n/9 6\OT1/cmr/
 m/n/9 =$ \OT1/cmtt/m/sl/9 trilean.true) (make_full_observation
  []
 
 [186]
-Overfull \hbox (7.75047pt too wide) in paragraph at lines 693--694
+Overfull \hbox (7.75047pt too wide) in paragraph at lines 695--696
 [][]   \OT1/cmtt/m/sl/9 (nxt (not (checkInx rg 1 ValueLt (Some (Num 0))))) (mak
 e_full_observation drinks (Some 1) (<>(1 :=
  []
 
 
-Overfull \hbox (33.85863pt too wide) in paragraph at lines 726--727
+Overfull \hbox (33.85863pt too wide) in paragraph at lines 728--729
 [][]              \OT1/cmtt/m/sl/9 MaybeBoolInt (<) (datastate (shd xs) $ (1)) 
 (Some (Num 0)) = trilean.true $\OMS/cmsy/m/n/9 ^$ \OT1/cmtt/m/sl/9 LabelEq ''ve
 nd''
  []
 
 
-Overfull \hbox (0.72263pt too wide) in paragraph at lines 822--824
+Overfull \hbox (0.72263pt too wide) in paragraph at lines 824--826
 [][]\OT1/cmr/bx/n/9 lemma \OT1/cmtt/m/sl/9 LTL_label_vend_not_2: "((LabelEq ''v
 end'') impl (not (ev (StateEq (Some 2))))) (watch drinks
  []
 
 
-Overfull \hbox (30.84187pt too wide) in paragraph at lines 863--865
+Overfull \hbox (30.84187pt too wide) in paragraph at lines 865--867
 [][]\OT1/cmr/bx/n/9 lemma \OT1/cmtt/m/sl/9 possible_steps_0: "possible_steps dr
 inks 0 <> l i = finsert x S' $\OT1/cmr/m/n/9 =[]\OMS/cmsy/m/n/9 )$ \OT1/cmtt/m/
 sl/9 finsert x S' = {|(1, init)|}"[] 
  []
 
 
-Overfull \hbox (47.51459pt too wide) in paragraph at lines 891--899
+Overfull \hbox (47.51459pt too wide) in paragraph at lines 893--901
 [][]  \OT1/cmr/bx/n/9 ap-ply \OT1/cmtt/m/sl/9 (simp add: possible_steps_def ffi
 lter_def fset_both_sides Abs_fset_inverse Set.filter_def drinks_def)[] 
  []
 
 [187]
-Overfull \hbox (29.07239pt too wide) in paragraph at lines 1022--1024
+Overfull \hbox (29.07239pt too wide) in paragraph at lines 1024--1026
 [][]\OT1/cmr/bx/n/9 lemma \OT1/cmtt/m/sl/9 LTL_must_pay_wrong: "((not (LabelEq 
 ''vend'' suntil LabelEq ''coin'')) suntil StateEq None) (watch
  []
 
 
-Overfull \hbox (75.30687pt too wide) in paragraph at lines 1040--1042
+Overfull \hbox (75.30687pt too wide) in paragraph at lines 1042--1044
 [][]\OT1/cmr/bx/n/9 lemma \OT1/cmtt/m/sl/9 shd_not_init: "shd t $\OMS/cmsy/m/n/
 9 6\OT1/cmr/m/n/9 =$ \OT1/cmtt/m/sl/9 (STR ''init'', []) $\OT1/cmr/m/n/9 =[]\OM
 S/cmsy/m/n/9 )$ $:$ \OT1/cmtt/m/sl/9 ev ($\OML/cmm/m/it/9 ^^U$\OT1/cmtt/m/sl/9 
@@ -2603,39 +2603,32 @@ s. statename (shd s) = Some 2) (make_full_observation
  []
 
 
-Overfull \hbox (0.92134pt too wide) in paragraph at lines 1075--1077
+Overfull \hbox (0.92134pt too wide) in paragraph at lines 1077--1079
 [][]\OT1/cmr/bx/n/9 lemma \OT1/cmtt/m/sl/9 vend_gets_stuck: "stl t = (STR ''ven
 d'', []) ## x2 $\OT1/cmr/m/n/9 =[]\OMS/cmsy/m/n/9 )$ $:$\OT1/cmtt/m/sl/9 ev ($\
 OML/cmm/m/it/9 ^^U$\OT1/cmtt/m/sl/9 s. statename (shd s) = Some 2)
  []
 
 [188]
-Overfull \hbox (47.51459pt too wide) in paragraph at lines 1108--1116
+Overfull \hbox (47.51459pt too wide) in paragraph at lines 1110--1118
 [][]  \OT1/cmr/bx/n/9 ap-ply \OT1/cmtt/m/sl/9 (simp add: possible_steps_def ffi
 lter_def fset_both_sides Abs_fset_inverse drinks_def Set.filter_def)[] 
  []
 
 
-Overfull \hbox (1.45474pt too wide) in paragraph at lines 1135--1136
+Overfull \hbox (1.45474pt too wide) in paragraph at lines 1137--1138
 [][]                           $\OMS/cmsy/m/n/9 :$\OT1/cmtt/m/sl/9 ev ($\OML/cm
 m/m/it/9 ^^U$\OT1/cmtt/m/sl/9 s. statename (shd s) = Some 2) (make_full_observa
 tion drinks (Some
  []
 
 
-Overfull \hbox (10.17255pt too wide) in paragraph at lines 1163--1165
+Overfull \hbox (10.17255pt too wide) in paragraph at lines 1165--1167
 [][]\OT1/cmr/bx/n/9 lemma \OT1/cmtt/m/sl/9 LTL_vend_no_coin: "((nxt (LabelEq ''
 vend'' aand InputEq [])) impl not (ev (StateEq (Some 2))))
  []
 
-[189]
-Overfull \hbox (4.14767pt too wide) in paragraph at lines 1299--1299
-[][]\OT1/cmr/bx/n/9 lemma \OT1/cmtt/m/sl/9 LTL_must_pay_correct_full: "(ev ($\O
-ML/cmm/m/it/9 ^^U$\OT1/cmtt/m/sl/9 s. statename (shd s) = Some 2) impl (($\OML/
-cmm/m/it/9 ^^U$\OT1/cmtt/m/sl/9 xs. fst (event (shd
- []
-
-) (./Coin.tex) (./XXXlinkedin_ext.tex [190] [191] [192]
+[189]) (./Coin.tex) (./XXXlinkedin_ext.tex [190] [191] [192]
 Overfull \hbox (33.79735pt too wide) in paragraph at lines 334--336
 [][]\OT1/cmr/bx/n/9 lemma \OT1/cmtt/m/sl/9 implode_detailedPDF: "String.implode
  ''detailed_pdf_of_otherID'' = STR ''detailed_pdf_of_otherID''"[] 
@@ -2653,13 +2646,13 @@ Overfull \hbox (14.8975pt too wide) in paragraph at lines 404--406
 1 <> STR ''view'' [EFSM.Str ''otherID'', EFSM.Str ''name'',
  []
 
-[193]
+
 Overfull \hbox (61.51662pt too wide) in paragraph at lines 416--423
 [][]  \OT1/cmr/bx/n/9 by \OT1/cmtt/m/sl/9 (simp_all add: view_def view1_def vie
 w2_def view3_def apply_guards Str_def implode_otherID implode_friendID
  []
 
-
+[193]
 Overfull \hbox (1.27827pt too wide) in paragraph at lines 448--450
 [][]\OT1/cmr/bx/n/9 lemma \OT1/cmtt/m/sl/9 pdf_6_invalid_inputs: "i $\OMS/cmsy/
 m/n/9 6\OT1/cmr/m/n/9 =$ \OT1/cmtt/m/sl/9 [EFSM.Str ''otherID'', EFSM.Str ''nam
@@ -2883,7 +2876,7 @@ live/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texl
 ive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb></usr/local/texliv
 e/2018/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/te
 xlive/2018/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on root.pdf (202 pages, 572213 bytes).
+Output written on root.pdf (202 pages, 571858 bytes).
 PDF statistics:
  1296 PDF objects out of 1440 (max. 8388607)
  1054 compressed objects within 11 object streams

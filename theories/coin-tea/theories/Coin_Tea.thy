@@ -4,6 +4,7 @@ begin
 
 declare One_nat_def [simp del]
 declare ValueLt_def [simp]
+declare ValueGt_def [simp]
 declare ltl_step_alt [simp]
 
 text_raw\<open>\snip{cointea}{1}{2}{%\<close>
@@ -138,12 +139,12 @@ lemma possible_steps_coin: "possible_steps drinks 1 r STR ''coin'' [] = {|(1, co
 lemma possible_steps_vend_insufficient: "n \<le> 0 \<Longrightarrow> possible_steps drinks 1 (<>(1 := Num n)) STR ''vend'' [] = {||}"
   apply (simp add: possible_steps_def ffilter_def fset_both_sides Abs_fset_inverse Set.filter_def drinks_def)
   apply safe
-  by (simp_all add: vend_def coin_def apply_guards)
+  by (simp_all add: vend_def coin_def apply_guards_def join_ir_def)
 
 lemma possible_steps_vend_sufficient: "n > 0 \<Longrightarrow> possible_steps drinks 1 (<>(1 := Num n)) STR ''vend'' [] = {|(2, vend)|}"
   apply (simp add: possible_steps_alt ffilter_def fset_both_sides Abs_fset_inverse Set.filter_def drinks_def)
   apply safe
-  by (simp_all add: vend_def coin_def apply_guards)
+  by (simp_all add: vend_def coin_def apply_guards_def join_ir_def)
 
 lemma invalid_possible_steps_1:
   "shd t \<noteq> (STR ''coin'', []) \<Longrightarrow>
@@ -247,7 +248,7 @@ lemma vend_insufficient: "possible_steps drinks 1 (<>(1 := Num 0)) STR ''vend'' 
   apply (simp add: possible_steps_def ffilter_def fset_both_sides Abs_fset_inverse Set.filter_def drinks_def)
   apply safe
    apply (simp add: coin_def)
-  by (simp add: vend_def apply_guards)
+  by (simp add: vend_def apply_guards_def join_ir_def)
 
 lemma updates_init: "apply_updates (Updates init) (\<lambda>x. None) <> = (<>(1 := Num 0))"
   by (simp add: init_def)
@@ -283,7 +284,7 @@ lemma LTL_init_makes_r_1_zero:
 text_raw\<open>}%endsnip\<close>
   apply (case_tac "shd t = (STR ''init'', [])")
   using watch_def
-   apply (simp add: possible_steps_init updates_init ValueEq_def)
+   apply (simp add: possible_steps_init updates_init)
   apply clarify
   by (simp add: not_init)
 
@@ -380,8 +381,11 @@ lemma LTL_must_pay_correct_bracketed:
   oops
 
 text_raw\<open>\snip{mustpaycorrectfull}{1}{2}{%\<close>
-lemma LTL_must_pay_correct_full: "(ev (\<lambda>s. statename (shd s) = Some 2) impl ((\<lambda>xs. fst (event (shd xs)) \<noteq> STR ''vend'') until (\<lambda>xs. fst (event (shd xs)) = STR ''coin'')))
-       (watch drinks t)"
+lemma LTL_must_pay_correct_full: 
+  "(ev (\<lambda>s. statename (shd s) = Some 2) impl
+   ((\<lambda>xs. fst (event (shd xs)) \<noteq> STR ''vend'') until
+    (\<lambda>xs. fst (event (shd xs)) = STR ''coin'')))
+   (watch drinks t)"
 text_raw\<open>}%endsnip\<close>
   oops
 
@@ -394,23 +398,15 @@ lemma LTL_must_pay_correct:
     (not (LabelEq ''vend'') suntil LabelEq ''coin''))
    (watch drinks t)"
   apply clarify
-  unfolding LabelEq_def StateEq_def implode_vend implode_coin
-  apply (simp add: watch_def)
-  apply (case_tac "shd t = (STR ''init'', [])")
+  apply (rule suntil.step)
+  using LTL_label_vend_not_2 watch_def apply auto[1]
+  apply (case_tac "shd (stl t) = (STR ''coin'', [])")
+   apply (simp add: LabelEq_def implode_coin suntil.base watch_def)
+  apply (case_tac "shd (stl t) = (STR ''vend'', [])")
    apply (rule suntil.step)
-    apply simp
-   apply (simp add: possible_steps_init updates_init)
-   apply (case_tac "shd (stl t) = (STR ''coin'', [])")
-    apply (simp add: suntil.base)
-   apply (case_tac "shd (stl t) = (STR ''vend'', [])")
-    apply (rule suntil.step)
-  using watch_def LTL_vend_no_coin[of t]
-     apply (simp add: event_components implode_vend StateEq_def ev_mono)
-  using watch_def LTL_vend_no_coin[of t]
-    apply (simp add: event_components implode_vend StateEq_def ev_mono)
-  using StateEq_def watch_def LTL_invalid_gets_stuck_2[of t]
-   apply (simp add: event_components implode_vend implode_coin ev_mono)
-  by (simp add: shd_not_init)
+  using LTL_aux2 watch_def watch_def apply auto[1]
+  using LTL_aux2 LabelEq_def implode_vend watch_def apply auto[1]
+  using LTL_aux2 LTL_invalid_gets_stuck_2 suntil.base by fastforce
 text_raw\<open>}%endsnip\<close>
 
 end
