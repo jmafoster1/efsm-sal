@@ -5,7 +5,7 @@ value {N_: nznat; string: TYPE} : CONTEXT = BEGIN
   B_VALUE : TYPE = DATATYPE
     VALUE_BB,
     STR(stringOf: string),
-    NUM(natOf: int)
+    NUM(intOf: int)
   END;
 
   % Remove the bottom element for general use

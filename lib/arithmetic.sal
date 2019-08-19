@@ -19,7 +19,7 @@ arithmetic {N_ : INTEGER; string: TYPE} : CONTEXT = BEGIN
       FALSE
     ENDIF;
 
-  natOf: [Value ! B_VALUE -> INTEGER] = Value ! natOf;
+  intOf: [Value ! B_VALUE -> INTEGER] = Value ! intOf;
   NUM: [Value ! int -> VALUE] = Value ! NUM;
 
   TRILEAN: TYPE = {True, False, Invalid};
@@ -29,7 +29,7 @@ arithmetic {N_ : INTEGER; string: TYPE} : CONTEXT = BEGIN
     IF Some?(x1) AND Some?(x2) THEN
       IF NUM?(valueOf(x1)) AND NUM?(valueOf(x2))
       THEN
-        IF f(natOf(valueOf(x1)), natOf(valueOf(x2))) THEN True ELSE False ENDIF
+        IF f(intOf(valueOf(x1)), intOf(valueOf(x2))) THEN True ELSE False ENDIF
       ELSE
         Invalid
       ENDIF
@@ -87,7 +87,7 @@ arithmetic {N_ : INTEGER; string: TYPE} : CONTEXT = BEGIN
     IF Some?(x1) AND Some?(x2) THEN
       IF NUM?(valueOf(x1)) AND NUM?(valueOf(x2))
       THEN
-        value_option ! Some(NUM(f(natOf(valueOf(x1)), natOf(valueOf(x2)))))
+        value_option ! Some(NUM(f(intOf(valueOf(x1)), intOf(valueOf(x2)))))
       ELSE
         None
       ENDIF
