@@ -36,6 +36,9 @@ lemma ltl_step_alt:  "ltl_step e (Some s) r t = (let possibilities = possible_st
   apply (case_tac t)
   by (simp add: Let_def)
 
+lemma ltl_step_none: "possible_steps e s r (fst ie) (snd ie) = {||} \<Longrightarrow> ltl_step e (Some s) r ie = (None, [], r)"
+  by (simp add: ltl_step_alt)
+
 primcorec make_full_observation :: "transition_matrix \<Rightarrow> nat option \<Rightarrow> registers \<Rightarrow> event stream \<Rightarrow> state stream" where
   "make_full_observation e s d i = (let (s', o', d') = ltl_step e s d (shd i) in \<lparr>statename = s, datastate = d, event=(shd i), output = o'\<rparr>##(make_full_observation e s' d' (stl i)))"
 
@@ -101,7 +104,7 @@ proof -
     by (simp add: all_imp_alw)
 qed
 
-lemma no_updates_none_individual: "alw (check_inx rg n ValueEq (r $ n)) (make_full_observation e None r t)"
+lemma no_updates_none_individual: "alw (check_inx rg n value_eq (r $ n)) (make_full_observation e None r t)"
 proof -
   obtain ss :: "((String.literal \<times> value list) stream \<Rightarrow> state stream) \<Rightarrow> (String.literal \<times> value list) stream" where
     "\<forall>f p s. f (stl (ss f)) \<noteq> stl (f (ss f)) \<or> alw p (f s) = alw (\<lambda>s. p (f s)) s"

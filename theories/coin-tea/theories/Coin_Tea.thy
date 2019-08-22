@@ -3,8 +3,8 @@ theory Coin_Tea
 begin
 
 declare One_nat_def [simp del]
-declare ValueLt_def [simp]
-declare ValueGt_def [simp]
+declare value_lt_def [simp]
+declare value_gt_def [simp]
 declare ltl_step_alt [simp]
 
 text_raw\<open>\snip{cointea}{1}{2}{%\<close>
@@ -162,7 +162,7 @@ lemma less_than_zero_not_nxt_2:
   apply (case_tac "shd t = (STR ''coin'', [])")
    apply (simp add: possible_steps_coin)
   apply (case_tac "shd t = (STR ''vend'', [])")
-   apply (simp add: possible_steps_vend_insufficient ValueGt_def)
+   apply (simp add: possible_steps_vend_insufficient)
   by (simp add: invalid_possible_steps_1 state_eq_def)
 
 lemma possible_steps_2: "possible_steps drinks 2 r (fst (shd t)) (snd (shd t)) = {||}"
@@ -192,7 +192,7 @@ qed
 
 lemma next_not_lt_zero:
   "n \<ge> 0 \<Longrightarrow>
-   (nxt (not (check_inx rg 1 ValueLt (Some (Num 0))))) (make_full_observation drinks (Some 1) (<>(1 := Num n)) t)"
+   (nxt (not (check_inx rg 1 value_lt (Some (Num 0))))) (make_full_observation drinks (Some 1) (<>(1 := Num n)) t)"
     apply simp
     apply (case_tac "shd t = (STR ''vend'', [])")
     apply (case_tac "n = 0")
@@ -279,7 +279,7 @@ qed
 text_raw\<open>\snip{checkinit}{1}{2}{%\<close>
 lemma LTL_init_makes_r_1_zero:
   "((label_eq ''init'' aand input_eq []) impl
-    (nxt (check_inx rg 1 ValueEq (Some (Num 0)))))
+    (nxt (check_inx rg 1 value_eq (Some (Num 0)))))
    (watch drinks t)"
 text_raw\<open>}%endsnip\<close>
   apply (case_tac "shd t = (STR ''init'', [])")

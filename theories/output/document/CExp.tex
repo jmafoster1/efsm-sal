@@ -1254,7 +1254,7 @@ not equal to as well as the expression of logical ``or'' in terms of negation an
 \ \ \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}rule{\isacharunderscore}tac\ x{\isacharequal}{\isachardoublequoteopen}{\isacharless}{\isachargreater}{\isachardoublequoteclose}\ \isakeyword{in}\ exI{\isacharparenright}\isanewline
 \ \ \isacommand{by}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ cval{\isacharunderscore}def\ gval{\isachardot}simps\ ValueEq{\isacharunderscore}def{\isacharparenright}%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ cval{\isacharunderscore}def\ gval{\isachardot}simps\ value_eq{\isacharunderscore}def{\isacharparenright}%
 \endisatagproof
 {\isafoldproof}%
 %
@@ -1278,7 +1278,7 @@ not equal to as well as the expression of logical ``or'' in terms of negation an
 \ \ \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}rule{\isacharunderscore}tac\ x{\isacharequal}{\isachardoublequoteopen}{\isacharless}R\ {\isadigit{1}}\ {\isacharcolon}{\isacharequal}\ Num\ {\isadigit{5}}{\isachargreater}{\isachardoublequoteclose}\ \isakeyword{in}\ exI{\isacharparenright}\isanewline
 \ \ \isacommand{by}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ cval{\isacharunderscore}def\ gval{\isachardot}simps\ ValueEq{\isacharunderscore}def{\isacharparenright}%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ cval{\isacharunderscore}def\ gval{\isachardot}simps\ value_eq{\isacharunderscore}def{\isacharparenright}%
 \endisatagproof
 {\isafoldproof}%
 %
@@ -1368,7 +1368,7 @@ not equal to as well as the expression of logical ``or'' in terms of negation an
 %
 \isatagproof
 \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ satisfiable{\isacharunderscore}def\ cval{\isacharunderscore}def\ gval{\isachardot}simps\ ValueEq{\isacharunderscore}def{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ satisfiable{\isacharunderscore}def\ cval{\isacharunderscore}def\ gval{\isachardot}simps\ value_eq{\isacharunderscore}def{\isacharparenright}\isanewline
 \ \ \isacommand{using}\isamarkupfalse%
 \ aval{\isachardot}simps{\isacharparenleft}{\isadigit{1}}{\isacharparenright}\ \isacommand{by}\isamarkupfalse%
 \ blast%
@@ -1395,7 +1395,7 @@ not equal to as well as the expression of logical ``or'' in terms of negation an
 \ \ \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}rule{\isacharunderscore}tac\ x{\isacharequal}{\isachardoublequoteopen}{\isacharless}{\isachargreater}{\isachardoublequoteclose}\ \isakeyword{in}\ exI{\isacharparenright}\isanewline
 \ \ \isacommand{by}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ cval{\isacharunderscore}def\ gval{\isachardot}simps\ ValueEq{\isacharunderscore}def{\isacharparenright}%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ cval{\isacharunderscore}def\ gval{\isachardot}simps\ value_eq{\isacharunderscore}def{\isacharparenright}%
 \endisatagproof
 {\isafoldproof}%
 %
@@ -1413,7 +1413,7 @@ not equal to as well as the expression of logical ``or'' in terms of negation an
 %
 \isatagproof
 \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ satisfiable{\isacharunderscore}def\ cval{\isacharunderscore}def\ gval{\isachardot}simps\ ValueGt{\isacharunderscore}def{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ satisfiable{\isacharunderscore}def\ cval{\isacharunderscore}def\ gval{\isachardot}simps\ value_gt{\isacharunderscore}def{\isacharparenright}\isanewline
 \ \ \isacommand{by}\isamarkupfalse%
 \ {\isacharparenleft}metis\ {\isacharparenleft}full{\isacharunderscore}types{\isacharparenright}\ MaybeBoolInt{\isachardot}simps{\isacharparenleft}{\isadigit{1}}{\isacharparenright}\ aval{\isachardot}simps{\isacharparenleft}{\isadigit{1}}{\isacharparenright}\ lt{\isacharunderscore}ex{\isacharparenright}%
 \endisatagproof
@@ -1433,7 +1433,7 @@ not equal to as well as the expression of logical ``or'' in terms of negation an
 %
 \isatagproof
 \isacommand{by}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ satisfiable{\isacharunderscore}def\ cval{\isacharunderscore}def\ gval{\isachardot}simps\ ValueGt{\isacharunderscore}def{\isacharparenright}%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ satisfiable{\isacharunderscore}def\ cval{\isacharunderscore}def\ gval{\isachardot}simps\ value_gt{\isacharunderscore}def{\isacharparenright}%
 \endisatagproof
 {\isafoldproof}%
 %
@@ -1457,7 +1457,7 @@ not equal to as well as the expression of logical ``or'' in terms of negation an
 \ \ \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}rule{\isacharunderscore}tac\ x{\isacharequal}{\isachardoublequoteopen}{\isacharless}{\isachargreater}{\isachardoublequoteclose}\ \isakeyword{in}\ exI{\isacharparenright}\isanewline
 \ \ \isacommand{by}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ cval{\isacharunderscore}def\ gval{\isachardot}simps\ ValueGt{\isacharunderscore}def{\isacharparenright}%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ cval{\isacharunderscore}def\ gval{\isachardot}simps\ value_gt{\isacharunderscore}def{\isacharparenright}%
 \endisatagproof
 {\isafoldproof}%
 %
@@ -1475,7 +1475,7 @@ not equal to as well as the expression of logical ``or'' in terms of negation an
 %
 \isatagproof
 \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ satisfiable{\isacharunderscore}def\ cval{\isacharunderscore}def\ gval{\isachardot}simps\ ValueGt{\isacharunderscore}def{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ satisfiable{\isacharunderscore}def\ cval{\isacharunderscore}def\ gval{\isachardot}simps\ value_gt{\isacharunderscore}def{\isacharparenright}\isanewline
 \ \ \isacommand{by}\isamarkupfalse%
 \ {\isacharparenleft}metis\ {\isacharparenleft}full{\isacharunderscore}types{\isacharparenright}\ MaybeBoolInt{\isachardot}simps{\isacharparenleft}{\isadigit{1}}{\isacharparenright}\ aval{\isachardot}simps{\isacharparenleft}{\isadigit{1}}{\isacharparenright}\ zless{\isacharunderscore}iff{\isacharunderscore}Suc{\isacharunderscore}zadd{\isacharparenright}%
 \endisatagproof
@@ -1495,7 +1495,7 @@ not equal to as well as the expression of logical ``or'' in terms of negation an
 %
 \isatagproof
 \isacommand{by}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ satisfiable{\isacharunderscore}def\ cval{\isacharunderscore}def\ gval{\isachardot}simps\ ValueGt{\isacharunderscore}def{\isacharparenright}%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ satisfiable{\isacharunderscore}def\ cval{\isacharunderscore}def\ gval{\isachardot}simps\ value_gt{\isacharunderscore}def{\isacharparenright}%
 \endisatagproof
 {\isafoldproof}%
 %
@@ -1519,7 +1519,7 @@ not equal to as well as the expression of logical ``or'' in terms of negation an
 \ \ \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}rule{\isacharunderscore}tac\ x{\isacharequal}{\isachardoublequoteopen}{\isacharless}{\isachargreater}{\isachardoublequoteclose}\ \isakeyword{in}\ exI{\isacharparenright}\isanewline
 \ \ \isacommand{by}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ gval{\isachardot}simps\ ValueGt{\isacharunderscore}def{\isacharparenright}%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ gval{\isachardot}simps\ value_gt{\isacharunderscore}def{\isacharparenright}%
 \endisatagproof
 {\isafoldproof}%
 %
@@ -1537,7 +1537,7 @@ not equal to as well as the expression of logical ``or'' in terms of negation an
 %
 \isatagproof
 \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ satisfiable{\isacharunderscore}def\ cval{\isacharunderscore}def\ gval{\isachardot}simps\ ValueEq{\isacharunderscore}def{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ satisfiable{\isacharunderscore}def\ cval{\isacharunderscore}def\ gval{\isachardot}simps\ value_eq{\isacharunderscore}def{\isacharparenright}\isanewline
 \ \ \isacommand{using}\isamarkupfalse%
 \ aval{\isachardot}simps{\isacharparenleft}{\isadigit{1}}{\isacharparenright}\ \isacommand{by}\isamarkupfalse%
 \ blast%
@@ -1558,7 +1558,7 @@ not equal to as well as the expression of logical ``or'' in terms of negation an
 %
 \isatagproof
 \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ satisfiable{\isacharunderscore}def\ cval{\isacharunderscore}def\ gval{\isachardot}simps\ ValueEq{\isacharunderscore}def{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ satisfiable{\isacharunderscore}def\ cval{\isacharunderscore}def\ gval{\isachardot}simps\ value_eq{\isacharunderscore}def{\isacharparenright}\isanewline
 \ \ \isacommand{by}\isamarkupfalse%
 \ {\isacharparenleft}metis\ aval{\isachardot}simps{\isacharparenleft}{\isadigit{1}}{\isacharparenright}\ option{\isachardot}inject\ value{\isachardot}simps{\isacharparenleft}{\isadigit{4}}{\isacharparenright}{\isacharparenright}%
 \endisatagproof
@@ -1580,7 +1580,7 @@ not equal to as well as the expression of logical ``or'' in terms of negation an
 \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}simp\ add{\isacharcolon}\ satisfiable{\isacharunderscore}def\ cval{\isacharunderscore}Not\ maybe{\isacharunderscore}negate{\isacharunderscore}true{\isacharparenright}\isanewline
 \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ cval{\isacharunderscore}def\ gval{\isachardot}simps\ ValueGt{\isacharunderscore}def{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ cval{\isacharunderscore}def\ gval{\isachardot}simps\ value_gt{\isacharunderscore}def{\isacharparenright}\isanewline
 \ \ \isacommand{by}\isamarkupfalse%
 \ {\isacharparenleft}metis\ MaybeBoolInt{\isachardot}simps{\isacharparenleft}{\isadigit{1}}{\isacharparenright}\ aval{\isachardot}simps{\isacharparenleft}{\isadigit{1}}{\isacharparenright}\ minf{\isacharparenleft}{\isadigit{4}}{\isacharparenright}{\isacharparenright}%
 \endisatagproof
@@ -1602,7 +1602,7 @@ not equal to as well as the expression of logical ``or'' in terms of negation an
 \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}simp\ add{\isacharcolon}\ satisfiable{\isacharunderscore}def\ cval{\isacharunderscore}Not\ maybe{\isacharunderscore}negate{\isacharunderscore}true{\isacharparenright}\isanewline
 \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ cval{\isacharunderscore}def\ gval{\isachardot}simps\ ValueGt{\isacharunderscore}def{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ cval{\isacharunderscore}def\ gval{\isachardot}simps\ value_gt{\isacharunderscore}def{\isacharparenright}\isanewline
 \ \ \isacommand{by}\isamarkupfalse%
 \ {\isacharparenleft}metis\ MaybeBoolInt{\isachardot}simps{\isacharparenleft}{\isadigit{1}}{\isacharparenright}\ aval{\isachardot}simps{\isacharparenleft}{\isadigit{1}}{\isacharparenright}\ pinf{\isacharparenleft}{\isadigit{4}}{\isacharparenright}{\isacharparenright}%
 \endisatagproof

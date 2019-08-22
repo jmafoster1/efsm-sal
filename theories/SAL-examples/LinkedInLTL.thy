@@ -107,7 +107,7 @@ lemma possible_steps_1_pdf: "possible_steps linkedIn 1 Map.empty STR ''pdf'' [EF
   by (simp_all add: viewFriend_def viewOther_def viewOtherOON_def viewOtherFuzz_def)
 
 lemma "alw (\<lambda>xs. event (shd xs) = (String.implode ''pdf'', [EFSM.Str ''otherID'', type, token]) \<longrightarrow>
-              ValueEq (EFSM_LTL.Outputs 1 (stl xs)) (Some (EFSM.Str ''detailedPDF'')) \<noteq> trilean.true)
+              value_eq (EFSM_LTL.Outputs 1 (stl xs)) (Some (EFSM.Str ''detailedPDF'')) \<noteq> trilean.true)
      (make_full_observation linkedIn (Some 1) Map.empty (stl i))"
   oops
 
@@ -120,7 +120,7 @@ lemma "alw (\<lambda>xs. event (shd xs) = (String.implode ''pdf'', [EFSM.Str ''o
 lemma LTL_neverDetailed:
     "(alw ((label_eq ''login'' aand input_eq [Str ''free'']) impl
           (nxt (alw ((label_eq ''pdf'' aand input_eq [(Str ''otherID''), type, token]) impl
-          (nxt (not (check_inx op 1 ValueEq (Some (Str ''detailedPDF''))))))))))
+          (nxt (not (check_inx op 1 value_eq (Some (Str ''detailedPDF''))))))))))
      (watch linkedIn i)"
   oops
 

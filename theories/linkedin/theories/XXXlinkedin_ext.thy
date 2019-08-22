@@ -214,40 +214,34 @@ lemma pdf_fuzz: "possible_steps linkedIn 6 <> STR ''pdf'' [EFSM.Str ''otherID'',
   by (simp_all add: pdf2_def apply_guards numeral_2_eq_2)
 
 text_raw\<open>\snip{contradiction}{1}{2}{%\<close>
-lemma contradiction: "fst (shd (stl (stl i))) = STR ''pdf'' \<Longrightarrow>
-    snd (shd (stl (stl i))) = [value.Str STR ''otherID'', value.Str STR ''name'', value.Str STR ''4zoF''] \<Longrightarrow> False"
+lemma contradiction: "apply_outputs (Outputs pdf2) (join_ir (snd (shd i)) <>) \<noteq> [Some (value.Str STR ''detailed_pdf_of_otherID'')]"
+  apply (simp add: apply_outputs_def pdf2_def Str_def implode)
   oops
-text_raw\<open>}%endsnip\<close>
+  text_raw\<open>}%endsnip\<close>
+
+lemma possible_steps_linkedIn_6:
+  "possible_steps linkedIn 6 <> STR ''pdf'' i = {|(7, pdf2)|} \<or>
+   possible_steps linkedIn 6 <> STR ''pdf'' i = {||}"
+  apply (case_tac "[EFSM.Str ''otherID'', EFSM.Str ''name'', EFSM.Str ''4zoF'']")
+   apply simp
+  by (metis pdf_6_invalid_inputs pdf_fuzz)
 
 (* This should be where the wheels fall off *)
-lemma "alw (\<lambda>xs. label (shd xs) = STR ''pdf'' \<and> ValueEq (Some (Inputs 0 xs)) (Some (value.Str STR ''otherID'')) = trilean.true \<longrightarrow>
+lemma "alw (\<lambda>xs. label (shd xs) = STR ''pdf'' \<and> value_eq (Some (nth (inputs (shd xs)) 0)) (Some (value.Str STR ''otherID'')) = trilean.true \<longrightarrow>
               output (shd xs) \<noteq> [Some (value.Str STR ''detailed_pdf_of_otherID'')])
-     (make_full_observation linkedIn (Some 6) <> (stl (stl i)))"
-proof(coinduction)
-  case alw
-  then show ?case
-    apply (simp add: ltl_step_alt)
-    apply (case_tac "(fst (shd (stl (stl i)))) = STR ''pdf''")
-     defer
-     apply (simp add: not_pdf_6)
-    using no_output_none[of linkedIn "<>" "stl (stl (stl i))"]
-    unfolding output_eq_def
-     apply (simp add: alw_mono)
+     (make_full_observation linkedIn (Some 6) <> i)"
+  apply (rule alw)
+   apply (simp add: ltl_step_alt)
+   apply (case_tac "possible_steps linkedIn 6 <> STR ''pdf'' (snd (shd i)) = {||}")
     apply simp
-    apply (case_tac "(snd (shd (stl (stl i)))) = [Str ''otherID'', Str ''name'', Str ''4zoF'']")
-     defer
-     apply (simp add: pdf_6_invalid_inputs)
-    using no_output_none[of linkedIn "<>" "stl (stl (stl i))"]
-    unfolding output_eq_def
-     apply (simp add: alw_mono)
-    apply (simp add: pdf_fuzz pdf2_def)
+   apply (case_tac "possible_steps linkedIn 6 <> STR ''pdf'' (snd (shd i)) = {|(7, pdf2)|}")
+    apply simp
     apply standard
-     apply standard
-     apply (simp add: apply_outputs Str_def implode)
-     apply (simp add: ValueEq_def Inputs_def)
-    oops
+    apply standard
+  oops
+ 
 
-lemma after_login: "alw (\<lambda>xs. label (shd xs) = String.implode ''pdf'' \<and> ValueEq (Some (Inputs 0 xs)) (Some (EFSM.Str ''otherID'')) = trilean.true \<longrightarrow>
+lemma after_login: "alw (\<lambda>xs. label (shd xs) = String.implode ''pdf'' \<and> value_eq (Some (Inputs 0 xs)) (Some (EFSM.Str ''otherID'')) = trilean.true \<longrightarrow>
               \<not> output_eq [Some (EFSM.Str ''detailed_pdf_of_otherID'')] xs)
      (make_full_observation linkedIn (Some 1) <> (stl i))"
 proof(coinduction)
@@ -279,7 +273,7 @@ text_raw\<open>\snip{neverDetailed}{1}{2}{%\<close>
 lemma LTL_neverDetailed:
     "(((label_eq  ''login'' aand input_eq [Str ''free'']) impl
      (nxt (alw ((label_eq ''pdf'' aand
-     check_inx ip 1 ValueEq (Some (Str ''otherID''))) impl 
+     check_inx ip 1 value_eq (Some (Str ''otherID''))) impl 
      (not (output_eq [Some (Str ''detailed_pdf_of_otherID'')])))))))
      (watch linkedIn i)"
 text_raw\<open>}%endsnip\<close>

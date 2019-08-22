@@ -90,18 +90,18 @@
 \endisadelimproof
 \isanewline
 \isacommand{definition}\isamarkupfalse%
-\ ValueGt\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}value\ option\ {\isasymRightarrow}\ value\ option\ {\isasymRightarrow}\ trilean{\isachardoublequoteclose}\ \ \isakeyword{where}\isanewline
-\ \ {\isachardoublequoteopen}ValueGt\ a\ b\ {\isasymequiv}\ MaybeBoolInt\ {\isacharparenleft}{\isasymlambda}x{\isacharcolon}{\isacharcolon}int{\isachardot}{\isasymlambda}y{\isacharcolon}{\isacharcolon}int{\isachardot}{\isacharparenleft}x{\isachargreater}y{\isacharparenright}{\isacharparenright}\ a\ b{\isachardoublequoteclose}\isanewline
+\ value{\isacharunderscore}gt\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}value\ option\ {\isasymRightarrow}\ value\ option\ {\isasymRightarrow}\ trilean{\isachardoublequoteclose}\ \ \isakeyword{where}\isanewline
+\ \ {\isachardoublequoteopen}value{\isacharunderscore}gt\ a\ b\ {\isasymequiv}\ MaybeBoolInt\ {\isacharparenleft}{\isasymlambda}x{\isacharcolon}{\isacharcolon}int{\isachardot}{\isasymlambda}y{\isacharcolon}{\isacharcolon}int{\isachardot}{\isacharparenleft}x{\isachargreater}y{\isacharparenright}{\isacharparenright}\ a\ b{\isachardoublequoteclose}\isanewline
 \isanewline
 \isacommand{definition}\isamarkupfalse%
-\ ValueLt\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}value\ option\ {\isasymRightarrow}\ value\ option\ {\isasymRightarrow}\ trilean{\isachardoublequoteclose}\ \ \isakeyword{where}\isanewline
-\ \ {\isachardoublequoteopen}ValueLt\ a\ b\ {\isasymequiv}\ MaybeBoolInt\ {\isacharparenleft}{\isasymlambda}x{\isacharcolon}{\isacharcolon}int{\isachardot}{\isasymlambda}y{\isacharcolon}{\isacharcolon}int{\isachardot}{\isacharparenleft}x{\isacharless}y{\isacharparenright}{\isacharparenright}\ a\ b{\isachardoublequoteclose}\isanewline
+\ value{\isacharunderscore}lt\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}value\ option\ {\isasymRightarrow}\ value\ option\ {\isasymRightarrow}\ trilean{\isachardoublequoteclose}\ \ \isakeyword{where}\isanewline
+\ \ {\isachardoublequoteopen}value{\isacharunderscore}lt\ a\ b\ {\isasymequiv}\ MaybeBoolInt\ {\isacharparenleft}{\isasymlambda}x{\isacharcolon}{\isacharcolon}int{\isachardot}{\isasymlambda}y{\isacharcolon}{\isacharcolon}int{\isachardot}{\isacharparenleft}x{\isacharless}y{\isacharparenright}{\isacharparenright}\ a\ b{\isachardoublequoteclose}\isanewline
 \isanewline
 \isacommand{definition}\isamarkupfalse%
-\ ValueEq\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}value\ option\ {\isasymRightarrow}\ value\ option\ {\isasymRightarrow}\ trilean{\isachardoublequoteclose}\ \ \isakeyword{where}\isanewline
-\ \ {\isachardoublequoteopen}ValueEq\ a\ b\ {\isasymequiv}\ {\isacharparenleft}if\ a\ {\isacharequal}\ b\ then\ true\ else\ false{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ value{\isacharunderscore}eq\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}value\ option\ {\isasymRightarrow}\ value\ option\ {\isasymRightarrow}\ trilean{\isachardoublequoteclose}\ \ \isakeyword{where}\isanewline
+\ \ {\isachardoublequoteopen}value{\isacharunderscore}eq\ a\ b\ {\isasymequiv}\ {\isacharparenleft}if\ a\ {\isacharequal}\ b\ then\ true\ else\ false{\isacharparenright}{\isachardoublequoteclose}\isanewline
 \isacommand{declare}\isamarkupfalse%
-\ ValueEq{\isacharunderscore}def\ {\isacharbrackleft}simp{\isacharbrackright}\isanewline
+\ value{\isacharunderscore}eq{\isacharunderscore}def\ {\isacharbrackleft}simp{\isacharbrackright}\isanewline
 \isanewline
 \isacommand{instantiation}\isamarkupfalse%
 \ {\isachardoublequoteopen}value{\isachardoublequoteclose}\ {\isacharcolon}{\isacharcolon}\ linorder\ \isakeyword{begin}\isanewline

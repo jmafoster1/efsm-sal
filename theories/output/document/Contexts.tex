@@ -116,7 +116,7 @@ transitions with register update functions.%
 \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}simp\ add{\isacharcolon}\ cval{\isacharunderscore}true{\isacharparenright}\isanewline
 \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ cval{\isacharunderscore}def\ gval{\isachardot}simps\ ValueEq{\isacharunderscore}def{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ cval{\isacharunderscore}def\ gval{\isachardot}simps\ value_eq{\isacharunderscore}def{\isacharparenright}\isanewline
 \ \ \isacommand{using}\isamarkupfalse%
 \ cval{\isacharunderscore}true\ \isacommand{by}\isamarkupfalse%
 \ auto%
@@ -386,7 +386,7 @@ transitions with register update functions.%
 \ \ \ \ \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}case{\isacharunderscore}tac\ x{\isadigit{2}}{\isacharparenright}\isanewline
 \ \ \isacommand{by}\isamarkupfalse%
-\ {\isacharparenleft}simp{\isacharunderscore}all\ add{\isacharcolon}\ conjoin{\isacharunderscore}def\ sorted{\isacharunderscore}list{\isacharunderscore}of{\isacharunderscore}fset{\isacharunderscore}def\ gval{\isacharunderscore}gAnd\ gval{\isachardot}simps\ ValueEq{\isacharunderscore}def{\isacharparenright}%
+\ {\isacharparenleft}simp{\isacharunderscore}all\ add{\isacharcolon}\ conjoin{\isacharunderscore}def\ sorted{\isacharunderscore}list{\isacharunderscore}of{\isacharunderscore}fset{\isacharunderscore}def\ gval{\isacharunderscore}gAnd\ gval{\isachardot}simps\ value_eq{\isacharunderscore}def{\isacharparenright}%
 \endisatagproof
 {\isafoldproof}%
 %
@@ -1169,7 +1169,7 @@ transitions with register update functions.%
 \ \ \ \ \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}ra\ {\isacharparenleft}R\ r{\isacharparenright}{\isachardoublequoteclose}{\isacharparenright}\isanewline
 \ \ \ \ \isacommand{using}\isamarkupfalse%
-\ gval{\isachardot}simps\ ValueEq{\isacharunderscore}def\isanewline
+\ gval{\isachardot}simps\ value_eq{\isacharunderscore}def\isanewline
 \ \ \ \ \isacommand{by}\isamarkupfalse%
 \ auto\isanewline
 \ \ \isacommand{show}\isamarkupfalse%
@@ -1196,7 +1196,7 @@ transitions with register update functions.%
 %
 \isatagproof
 \isacommand{by}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ cval{\isacharunderscore}def\ gval{\isachardot}simps\ ValueEq{\isacharunderscore}def{\isacharparenright}%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ cval{\isacharunderscore}def\ gval{\isachardot}simps\ value_eq{\isacharunderscore}def{\isacharparenright}%
 \endisatagproof
 {\isafoldproof}%
 %
@@ -1228,7 +1228,7 @@ transitions with register update functions.%
 \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}x{\isacharequal}Bc\ True{\isachardoublequoteclose}{\isacharparenright}\isanewline
 \ \ \isacommand{by}\isamarkupfalse%
-\ {\isacharparenleft}simp{\isacharunderscore}all\ add{\isacharcolon}\ cval{\isacharunderscore}true\ cval{\isacharunderscore}def\ gval{\isachardot}simps\ ValueEq{\isacharunderscore}def{\isacharparenright}%
+\ {\isacharparenleft}simp{\isacharunderscore}all\ add{\isacharcolon}\ cval{\isacharunderscore}true\ cval{\isacharunderscore}def\ gval{\isachardot}simps\ value_eq{\isacharunderscore}def{\isacharparenright}%
 \endisatagproof
 {\isafoldproof}%
 %
@@ -1494,7 +1494,7 @@ transitions with register update functions.%
 \ \ \ \ \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}case{\isacharunderscore}tac\ x{\isadigit{2}}{\isacharparenright}\isanewline
 \ \ \isacommand{by}\isamarkupfalse%
-\ {\isacharparenleft}simp{\isacharunderscore}all\ add{\isacharcolon}\ conjoin{\isacharunderscore}def\ sorted{\isacharunderscore}list{\isacharunderscore}of{\isacharunderscore}fset{\isacharunderscore}def\ gval{\isacharunderscore}gAnd\ gval{\isachardot}simps\ ValueEq{\isacharunderscore}def{\isacharparenright}%
+\ {\isacharparenleft}simp{\isacharunderscore}all\ add{\isacharcolon}\ conjoin{\isacharunderscore}def\ sorted{\isacharunderscore}list{\isacharunderscore}of{\isacharunderscore}fset{\isacharunderscore}def\ gval{\isacharunderscore}gAnd\ gval{\isachardot}simps\ value_eq{\isacharunderscore}def{\isacharparenright}%
 \endisatagproof
 {\isafoldproof}%
 %

@@ -67,10 +67,10 @@ well as the expression of logical conjunction, disjunction, and negation in term
 \ gval\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}gexp\ {\isasymRightarrow}\ datastate\ {\isasymRightarrow}\ trilean{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
 \ \ {\isachardoublequoteopen}gval\ {\isacharparenleft}Bc\ True{\isacharparenright}\ {\isacharunderscore}\ {\isacharequal}\ true{\isachardoublequoteclose}\ {\isacharbar}\isanewline
 \ \ {\isachardoublequoteopen}gval\ {\isacharparenleft}Bc\ False{\isacharparenright}\ {\isacharunderscore}\ {\isacharequal}\ false{\isachardoublequoteclose}\ {\isacharbar}\isanewline
-\ \ {\isachardoublequoteopen}gval\ {\isacharparenleft}Gt\ a\isactrlsub {\isadigit{1}}\ a\isactrlsub {\isadigit{2}}{\isacharparenright}\ s\ {\isacharequal}\ ValueGt\ {\isacharparenleft}aval\ a\isactrlsub {\isadigit{1}}\ s{\isacharparenright}\ {\isacharparenleft}aval\ a\isactrlsub {\isadigit{2}}\ s{\isacharparenright}{\isachardoublequoteclose}\ {\isacharbar}\isanewline
-\ \ {\isachardoublequoteopen}gval\ {\isacharparenleft}Eq\ a\isactrlsub {\isadigit{1}}\ a\isactrlsub {\isadigit{2}}{\isacharparenright}\ s\ {\isacharequal}\ ValueEq\ {\isacharparenleft}aval\ a\isactrlsub {\isadigit{1}}\ s{\isacharparenright}\ {\isacharparenleft}aval\ a\isactrlsub {\isadigit{2}}\ s{\isacharparenright}{\isachardoublequoteclose}\ {\isacharbar}\isanewline
+\ \ {\isachardoublequoteopen}gval\ {\isacharparenleft}Gt\ a\isactrlsub {\isadigit{1}}\ a\isactrlsub {\isadigit{2}}{\isacharparenright}\ s\ {\isacharequal}\ value{\isacharunderscore}gt\ {\isacharparenleft}aval\ a\isactrlsub {\isadigit{1}}\ s{\isacharparenright}\ {\isacharparenleft}aval\ a\isactrlsub {\isadigit{2}}\ s{\isacharparenright}{\isachardoublequoteclose}\ {\isacharbar}\isanewline
+\ \ {\isachardoublequoteopen}gval\ {\isacharparenleft}Eq\ a\isactrlsub {\isadigit{1}}\ a\isactrlsub {\isadigit{2}}{\isacharparenright}\ s\ {\isacharequal}\ value{\isacharunderscore}eq\ {\isacharparenleft}aval\ a\isactrlsub {\isadigit{1}}\ s{\isacharparenright}\ {\isacharparenleft}aval\ a\isactrlsub {\isadigit{2}}\ s{\isacharparenright}{\isachardoublequoteclose}\ {\isacharbar}\isanewline
 \ \ {\isachardoublequoteopen}gval\ {\isacharparenleft}Nor\ a\isactrlsub {\isadigit{1}}\ a\isactrlsub {\isadigit{2}}{\isacharparenright}\ s\ {\isacharequal}\ {\isasymnot}\isactrlsub {\isacharquery}\ {\isacharparenleft}{\isacharparenleft}gval\ a\isactrlsub {\isadigit{1}}\ s{\isacharparenright}\ {\isasymor}\isactrlsub {\isacharquery}\ {\isacharparenleft}gval\ a\isactrlsub {\isadigit{2}}\ s{\isacharparenright}{\isacharparenright}{\isachardoublequoteclose}\ {\isacharbar}\isanewline
-\ \ {\isachardoublequoteopen}gval\ {\isacharparenleft}Null\ v{\isacharparenright}\ s\ {\isacharequal}\ ValueEq\ {\isacharparenleft}aval\ v\ s{\isacharparenright}\ None{\isachardoublequoteclose}\isanewline
+\ \ {\isachardoublequoteopen}gval\ {\isacharparenleft}Null\ v{\isacharparenright}\ s\ {\isacharequal}\ value{\isacharunderscore}eq\ {\isacharparenleft}aval\ v\ s{\isacharparenright}\ None{\isachardoublequoteclose}\isanewline
 \isanewline
 \isacommand{abbreviation}\isamarkupfalse%
 \ gNot\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}gexp\ {\isasymRightarrow}\ gexp{\isachardoublequoteclose}\ \ \isakeyword{where}\isanewline
@@ -1107,7 +1107,7 @@ well as the expression of logical conjunction, disjunction, and negation in term
 \ \ {\isachardoublequoteopen}apply{\isacharunderscore}guards\ G\ s\ {\isacharequal}\ {\isacharparenleft}{\isasymforall}g\ {\isasymin}\ set\ {\isacharparenleft}map\ {\isacharparenleft}{\isasymlambda}g{\isachardot}\ gval\ g\ s{\isacharparenright}\ G{\isacharparenright}{\isachardot}\ g\ {\isacharequal}\ true{\isacharparenright}{\isachardoublequoteclose}\isanewline
 \isanewline
 \isacommand{lemmas}\isamarkupfalse%
-\ apply{\isacharunderscore}guards\ {\isacharequal}\ datastate\ apply{\isacharunderscore}guards{\isacharunderscore}def\ gval{\isachardot}simps\ ValueEq{\isacharunderscore}def\ ValueGt{\isacharunderscore}def\isanewline
+\ apply{\isacharunderscore}guards\ {\isacharequal}\ datastate\ apply{\isacharunderscore}guards{\isacharunderscore}def\ gval{\isachardot}simps\ value{\isacharunderscore}eq{\isacharunderscore}def\ value{\isacharunderscore}gt{\isacharunderscore}def\isanewline
 \isanewline
 \isacommand{lemma}\isamarkupfalse%
 \ no{\isacharunderscore}reg{\isacharunderscore}apply{\isacharunderscore}guards{\isacharunderscore}swap{\isacharunderscore}regs{\isacharcolon}\isanewline
@@ -2348,7 +2348,7 @@ well as the expression of logical conjunction, disjunction, and negation in term
 \ \ \ \ \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}join{\isacharunderscore}ir\ ia\ r\ {\isacharparenleft}vname{\isachardot}I\ a{\isacharparenright}\ {\isacharequal}\ None{\isachardoublequoteclose}{\isacharparenright}\isanewline
 \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ ValueEq{\isacharunderscore}def{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ value{\isacharunderscore}eq{\isacharunderscore}def{\isacharparenright}\isanewline
 \ \ \ \ \isacommand{by}\isamarkupfalse%
 \ {\isacharparenleft}simp\ add{\isacharcolon}\ Suc{\isacharunderscore}leI\ datastate{\isacharparenleft}{\isadigit{1}}{\isacharparenright}\ input{\isadigit{2}}state{\isacharunderscore}not{\isacharunderscore}None{\isacharparenright}\isanewline
 \isacommand{qed}\isamarkupfalse%
@@ -2477,7 +2477,7 @@ well as the expression of logical conjunction, disjunction, and negation in term
 \ \isacommand{show}\isamarkupfalse%
 \ {\isacharquery}case\isanewline
 \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ ensure{\isacharunderscore}not{\isacharunderscore}null{\isacharunderscore}cons\ apply{\isacharunderscore}guards{\isacharunderscore}append\ apply{\isacharunderscore}guards{\isacharunderscore}singleton\ ValueEq{\isacharunderscore}def{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ ensure{\isacharunderscore}not{\isacharunderscore}null{\isacharunderscore}cons\ apply{\isacharunderscore}guards{\isacharunderscore}append\ apply{\isacharunderscore}guards{\isacharunderscore}singleton\ value{\isacharunderscore}eq{\isacharunderscore}def{\isacharparenright}\isanewline
 \ \ \ \ \isacommand{by}\isamarkupfalse%
 \ {\isacharparenleft}simp\ add{\isacharcolon}\ join{\isacharunderscore}ir{\isacharunderscore}def\ input{\isadigit{2}}state{\isacharunderscore}nth{\isacharparenright}\isanewline
 \isacommand{qed}\isamarkupfalse%

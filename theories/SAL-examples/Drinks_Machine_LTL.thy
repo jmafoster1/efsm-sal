@@ -4,10 +4,10 @@ begin
 
 declare One_nat_def [simp del]
 
-lemma LTL_r2_not_always_gt_100: "not (alw (check_inx rg 2 ValueGt (Some (Num 100)))) (watch drinks i)"
+lemma LTL_r2_not_always_gt_100: "not (alw (check_inx rg 2 value_gt (Some (Num 100)))) (watch drinks i)"
   apply (simp add: not_alw_iff watch_def)
   apply (rule ev.base)
-  by (simp add: ValueGt_def)
+  by (simp add: value_gt_def)
 
 lemma possible_steps_select_wrong_arity: "a = STR ''select'' \<Longrightarrow>
        length b \<noteq> 1 \<Longrightarrow>
@@ -42,19 +42,19 @@ proof(coinduction)
     apply (rule disjI2)
     oops
 
-lemma LTL_costsMoney_aux: "(alw ((not (check_inx rg 2 ValueGt (Some (Num 100)))) impl (not (nxt (state_eq (Some 2)))))) (watch drinks i)"
+lemma LTL_costsMoney_aux: "(alw ((not (check_inx rg 2 value_gt (Some (Num 100)))) impl (not (nxt (state_eq (Some 2)))))) (watch drinks i)"
   oops
 
   (* costsMoney: THEOREM drinks |- G(X(cfstate=State_2) => gval(value_ge(r_2, Some(NUM(100))))); *)
-lemma LTL_costsMoney: "(alw ((nxt (state_eq (Some 2))) impl ((check_inx rg 2 ValueGt (Some (Num 100)))))) (watch drinks i)"
+lemma LTL_costsMoney: "(alw ((nxt (state_eq (Some 2))) impl ((check_inx rg 2 value_gt (Some (Num 100)))))) (watch drinks i)"
   oops
 
 (* neverReachS2: THEOREM drinks |- label=select AND I(1) = STR(String_coke) AND
                                 X(label=coin AND I(1) = NUM(100)) AND
                                 X(X(label=vend AND I=InputSequence !empty)) => X(X(X(cfstate=State_2)));;*)
-lemma LTL_neverReachS2:"(((((label_eq ''select'') aand (check_inx ip 1 ValueEq (Some (Str ''coke''))))
+lemma LTL_neverReachS2:"(((((label_eq ''select'') aand (check_inx ip 1 value_eq (Some (Str ''coke''))))
                     aand
-                    (nxt ((label_eq ''coin'') aand (check_inx ip 1 ValueEq (Some (Num 100))))))
+                    (nxt ((label_eq ''coin'') aand (check_inx ip 1 value_eq (Some (Num 100))))))
                     aand
                     (nxt (nxt((label_eq ''vend'' aand (input_eq []))))))
                     impl

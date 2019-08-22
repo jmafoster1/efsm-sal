@@ -3,7 +3,7 @@ theory Coin_Choc
 begin
 
 declare One_nat_def [simp del]
-declare ValueLt_def [simp]
+declare value_lt_def [simp]
 
 definition init :: transition where
 "init \<equiv> \<lparr>
@@ -146,7 +146,7 @@ lemma less_than_zero_not_nxt_2: "n \<le> 0 \<Longrightarrow> \<not>statename (sh
   apply (case_tac "shd t = (STR ''coin'', [])")
       apply (simp add: possible_steps_coin)
   apply (case_tac "shd t = (STR ''vend'', [])")
-      apply (simp add: possible_steps_vend_insufficient ValueGt_def)
+      apply (simp add: possible_steps_vend_insufficient value_gt_def)
   by (simp add: invalid_possible_steps_1 state_eq_def)
 
 lemma possible_steps_2: "possible_steps drinks 2 r (fst (shd t)) (snd (shd t)) = {||}"
@@ -220,9 +220,9 @@ proof(coinduction)
   qed
 qed
 
-lemma LTL_init_makes_r_1_zero: "((label_eq ''init'' aand input_eq []) impl nxt (check_inx rg 1 ValueEq (Some (Num 0)))) (watch drinks t)"
+lemma LTL_init_makes_r_1_zero: "((label_eq ''init'' aand input_eq []) impl nxt (check_inx rg 1 value_eq (Some (Num 0)))) (watch drinks t)"
   apply (case_tac "shd t = (STR ''init'', [])")
-   apply (simp add: possible_steps_init apply_updates_init ValueEq_def watch_def)
+   apply (simp add: possible_steps_init apply_updates_init value_eq_def watch_def)
   apply clarify
   using not_init
   by simp

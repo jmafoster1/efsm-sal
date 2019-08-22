@@ -3,7 +3,7 @@ theory Coin_Tea_Broken
 begin
 
 declare One_nat_def [simp del]
-declare ValueLt_def [simp]
+declare value_lt_def [simp]
 declare ltl_step_alt [simp]
 
 definition I :: "nat \<Rightarrow> vname" where
@@ -191,9 +191,9 @@ lemma vend_insufficient: "possible_steps drinks 1 (<>(1 := Num 0)) STR ''vend'' 
    apply (simp add: coin_def)
   by (simp add: vend_def apply_guards)
 
-lemma LTL_init_makes_r_1_zero: "((label_eq ''init'' aand input_eq []) impl nxt (check_inx rg 1 ValueEq (Some (Num 0)))) (watch drinks t)"
+lemma LTL_init_makes_r_1_zero: "((label_eq ''init'' aand input_eq []) impl nxt (check_inx rg 1 value_eq (Some (Num 0)))) (watch drinks t)"
   apply (case_tac "shd t = (STR ''init'', [])")
-   apply (simp add: possible_steps_init apply_updates_init ValueEq_def watch_def)
+   apply (simp add: possible_steps_init apply_updates_init value_eq_def watch_def)
   apply clarify
   using not_init
   by simp

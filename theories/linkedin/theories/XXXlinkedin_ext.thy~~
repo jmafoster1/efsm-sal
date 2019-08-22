@@ -219,7 +219,7 @@ lemma contradiction: "fst (shd (stl (stl i))) = STR ''pdf'' \<Longrightarrow>
 text_raw{*}%endsnip*}
 
 (* This should be where the wheels fall off *)
-lemma "alw (\<lambda>xs. label (shd xs) = STR ''pdf'' \<and> ValueEq (Some (Inputs 0 xs)) (Some (value.Str STR ''otherID'')) = trilean.true \<longrightarrow>
+lemma "alw (\<lambda>xs. label (shd xs) = STR ''pdf'' \<and> value_eq (Some (Inputs 0 xs)) (Some (value.Str STR ''otherID'')) = trilean.true \<longrightarrow>
               output (shd xs) \<noteq> [Some (value.Str STR ''detailed_pdf_of_otherID'')])
      (make_full_observation linkedIn (Some 6) <> (stl (stl i)))"
 proof(coinduction)
@@ -243,10 +243,10 @@ proof(coinduction)
     apply standard
      apply standard
      apply (simp add: apply_outputs Str_def implode)
-     apply (simp add: ValueEq_def Inputs_def)
+     apply (simp add: value_eq_def Inputs_def)
     oops
 
-lemma after_login: "alw (\<lambda>xs. label (shd xs) = String.implode ''pdf'' \<and> ValueEq (Some (Inputs 0 xs)) (Some (EFSM.Str ''otherID'')) = trilean.true \<longrightarrow>
+lemma after_login: "alw (\<lambda>xs. label (shd xs) = String.implode ''pdf'' \<and> value_eq (Some (Inputs 0 xs)) (Some (EFSM.Str ''otherID'')) = trilean.true \<longrightarrow>
               \<not> output_eq [Some (EFSM.Str ''detailed_pdf_of_otherID'')] xs)
      (make_full_observation linkedIn (Some 1) <> (stl i))"
 proof(coinduction)
@@ -258,7 +258,7 @@ proof(coinduction)
      apply (simp add: not_view)
      apply standard
       apply (simp add: output_eq_def ltl_step_alt not_view)
-     apply (simp add: output_eq_def ValueEq_def)
+     apply (simp add: output_eq_def value_eq_def)
     using no_output_none[of linkedIn "<>" "stl (stl i)"]
     unfolding output_eq_def
      apply (simp add: alw_mono)
@@ -272,7 +272,7 @@ text_raw{*\snip{neverDetailed}{1}{2}{%*}
 lemma LTL_neverDetailed:
     "(((label_eq  ''login'' aand input_eq [Str ''free'']) impl
      (nxt (alw ((label_eq ''pdf'' aand
-     check_inx ip 1 ValueEq (Some (Str ''otherID''))) impl 
+     check_inx ip 1 value_eq (Some (Str ''otherID''))) impl 
      (not (output_eq [Some (Str ''detailed_pdf_of_otherID'')])))))))
      (watch linkedIn i)"
 text_raw{*}%endsnip*}
