@@ -67,7 +67,7 @@
 \ \ \ \ \ \ \ \ \ \ {\isacharbar}{\isacharbraceright}{\isachardoublequoteclose}%
 }%endsnip
 \isacommand{lemma}\isamarkupfalse%
-\ {\isachardoublequoteopen}{\isacharparenleft}not\ {\isacharparenleft}LabelEq\ {\isacharprime}{\isacharprime}vend{\isacharprime}{\isacharprime}{\isacharparenright}\ until\ {\isacharparenleft}LabelEq\ {\isacharprime}{\isacharprime}coin{\isacharprime}{\isacharprime}{\isacharparenright}{\isacharparenright}\ {\isacharparenleft}watch\ drinks\ t{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ {\isachardoublequoteopen}{\isacharparenleft}not\ {\isacharparenleft}label_eq\ {\isacharprime}{\isacharprime}vend{\isacharprime}{\isacharprime}{\isacharparenright}\ until\ {\isacharparenleft}label_eq\ {\isacharprime}{\isacharprime}coin{\isacharprime}{\isacharprime}{\isacharparenright}{\isacharparenright}\ {\isacharparenleft}watch\ drinks\ t{\isacharparenright}{\isachardoublequoteclose}\isanewline
 %
 \isadelimproof
 \ \ %
@@ -129,7 +129,7 @@
 \endisadelimproof
 \isanewline
 \isacommand{lemma}\isamarkupfalse%
-\ aux{\isadigit{1}}{\isacharcolon}\ {\isachardoublequoteopen}{\isasymnot}\ StateEq\ {\isacharparenleft}Some\ {\isadigit{2}}{\isacharparenright}\isanewline
+\ aux{\isadigit{1}}{\isacharcolon}\ {\isachardoublequoteopen}{\isasymnot}\ state_eq\ {\isacharparenleft}Some\ {\isadigit{2}}{\isacharparenright}\isanewline
 \ \ \ \ \ \ \ \ {\isacharparenleft}make{\isacharunderscore}full{\isacharunderscore}observation\ drinks\ {\isacharparenleft}fst\ {\isacharparenleft}ltl{\isacharunderscore}step\ drinks\ {\isacharparenleft}Some\ {\isadigit{0}}{\isacharparenright}\ {\isacharless}{\isachargreater}\ {\isacharparenleft}shd\ t{\isacharparenright}{\isacharparenright}{\isacharparenright}\isanewline
 \ \ \ \ \ \ \ \ \ \ {\isacharparenleft}snd\ {\isacharparenleft}snd\ {\isacharparenleft}ltl{\isacharunderscore}step\ drinks\ {\isacharparenleft}Some\ {\isadigit{0}}{\isacharparenright}\ {\isacharless}{\isachargreater}\ {\isacharparenleft}shd\ t{\isacharparenright}{\isacharparenright}{\isacharparenright}{\isacharparenright}\ {\isacharparenleft}stl\ t{\isacharparenright}{\isacharparenright}{\isachardoublequoteclose}\isanewline
 %
@@ -149,9 +149,9 @@
 \ \ \ \ \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}a\ {\isacharequal}\ STR\ {\isacharprime}{\isacharprime}init{\isacharprime}{\isacharprime}\ {\isasymand}\ b\ {\isacharequal}\ {\isacharbrackleft}{\isacharbrackright}{\isachardoublequoteclose}{\isacharparenright}\isanewline
 \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ possible{\isacharunderscore}steps{\isacharunderscore}init\ StateEq{\isacharunderscore}def{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ possible{\isacharunderscore}steps{\isacharunderscore}init\ state_eq{\isacharunderscore}def{\isacharparenright}\isanewline
 \ \ \ \ \isacommand{by}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ StateEq{\isacharunderscore}def\ possible{\isacharunderscore}steps{\isacharunderscore}not{\isacharunderscore}init{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ state_eq{\isacharunderscore}def\ possible{\isacharunderscore}steps{\isacharunderscore}not{\isacharunderscore}init{\isacharparenright}\isanewline
 \isacommand{qed}\isamarkupfalse%
 %
 \endisatagproof
@@ -197,7 +197,7 @@
 \endisadelimproof
 \isanewline
 \isacommand{lemma}\isamarkupfalse%
-\ state{\isacharunderscore}none{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}{\isacharparenleft}StateEq\ None{\isacharparenright}\ impl\ nxt\ {\isacharparenleft}StateEq\ None{\isacharparenright}{\isacharparenright}\ {\isacharparenleft}make{\isacharunderscore}full{\isacharunderscore}observation\ e\ s\ r\ t{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ state{\isacharunderscore}none{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}{\isacharparenleft}state_eq\ None{\isacharparenright}\ impl\ nxt\ {\isacharparenleft}state_eq\ None{\isacharparenright}{\isacharparenright}\ {\isacharparenleft}make{\isacharunderscore}full{\isacharunderscore}observation\ e\ s\ r\ t{\isacharparenright}{\isachardoublequoteclose}\isanewline
 %
 \isadelimproof
 \ \ %
@@ -205,7 +205,7 @@
 %
 \isatagproof
 \isacommand{by}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ StateEq{\isacharunderscore}def{\isacharparenright}%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ state_eq{\isacharunderscore}def{\isacharparenright}%
 \endisatagproof
 {\isafoldproof}%
 %
@@ -215,7 +215,7 @@
 \endisadelimproof
 \isanewline
 \isacommand{lemma}\isamarkupfalse%
-\ shd{\isacharunderscore}state{\isacharunderscore}is{\isacharunderscore}none{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}StateEq\ None{\isacharparenright}\ {\isacharparenleft}make{\isacharunderscore}full{\isacharunderscore}observation\ e\ None\ r\ t{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ shd{\isacharunderscore}state{\isacharunderscore}is{\isacharunderscore}none{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}state_eq\ None{\isacharparenright}\ {\isacharparenleft}make{\isacharunderscore}full{\isacharunderscore}observation\ e\ None\ r\ t{\isacharparenright}{\isachardoublequoteclose}\isanewline
 %
 \isadelimproof
 \ \ %
@@ -223,7 +223,7 @@
 %
 \isatagproof
 \isacommand{by}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ StateEq{\isacharunderscore}def{\isacharparenright}%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ state_eq{\isacharunderscore}def{\isacharparenright}%
 \endisatagproof
 {\isafoldproof}%
 %
@@ -233,7 +233,7 @@
 \endisadelimproof
 \isanewline
 \isacommand{lemma}\isamarkupfalse%
-\ state{\isacharunderscore}none{\isacharunderscore}{\isadigit{2}}{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}StateEq\ None{\isacharparenright}\ {\isacharparenleft}make{\isacharunderscore}full{\isacharunderscore}observation\ e\ s\ r\ t{\isacharparenright}\ {\isasymLongrightarrow}\ {\isacharparenleft}StateEq\ None{\isacharparenright}\ {\isacharparenleft}make{\isacharunderscore}full{\isacharunderscore}observation\ e\ s\ r\ {\isacharparenleft}stl\ t{\isacharparenright}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ state{\isacharunderscore}none{\isacharunderscore}{\isadigit{2}}{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}state_eq\ None{\isacharparenright}\ {\isacharparenleft}make{\isacharunderscore}full{\isacharunderscore}observation\ e\ s\ r\ t{\isacharparenright}\ {\isasymLongrightarrow}\ {\isacharparenleft}state_eq\ None{\isacharparenright}\ {\isacharparenleft}make{\isacharunderscore}full{\isacharunderscore}observation\ e\ s\ r\ {\isacharparenleft}stl\ t{\isacharparenright}{\isacharparenright}{\isachardoublequoteclose}\isanewline
 %
 \isadelimproof
 \ \ %
@@ -241,7 +241,7 @@
 %
 \isatagproof
 \isacommand{by}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ StateEq{\isacharunderscore}def{\isacharparenright}%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ state_eq{\isacharunderscore}def{\isacharparenright}%
 \endisatagproof
 {\isafoldproof}%
 %
@@ -269,7 +269,7 @@
 \endisadelimproof
 \isanewline
 \isacommand{lemma}\isamarkupfalse%
-\ StateEq{\isacharunderscore}alt{\isacharcolon}\ {\isachardoublequoteopen}alw\ {\isacharparenleft}StateEq\ s{\isacharparenright}\ s{\isacharprime}\ {\isacharequal}\ alw\ {\isacharparenleft}{\isasymlambda}x{\isachardot}\ shd\ x\ {\isacharequal}\ s{\isacharparenright}\ {\isacharparenleft}smap\ {\isacharparenleft}{\isasymlambda}x{\isachardot}\ statename\ x{\isacharparenright}\ s{\isacharprime}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ state_eq{\isacharunderscore}alt{\isacharcolon}\ {\isachardoublequoteopen}alw\ {\isacharparenleft}state_eq\ s{\isacharparenright}\ s{\isacharprime}\ {\isacharequal}\ alw\ {\isacharparenleft}{\isasymlambda}x{\isachardot}\ shd\ x\ {\isacharequal}\ s{\isacharparenright}\ {\isacharparenleft}smap\ {\isacharparenleft}{\isasymlambda}x{\isachardot}\ statename\ x{\isacharparenright}\ s{\isacharprime}{\isacharparenright}{\isachardoublequoteclose}\isanewline
 %
 \isadelimproof
 \ \ %
@@ -279,9 +279,9 @@
 \isacommand{apply}\isamarkupfalse%
 \ standard\isanewline
 \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ StateEq{\isacharunderscore}def\ alw{\isacharunderscore}iff{\isacharunderscore}sdrop{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ state_eq{\isacharunderscore}def\ alw{\isacharunderscore}iff{\isacharunderscore}sdrop{\isacharparenright}\isanewline
 \ \ \isacommand{by}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ StateEq{\isacharunderscore}def\ alw{\isacharunderscore}mono\ alw{\isacharunderscore}smap{\isacharparenright}%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ state_eq{\isacharunderscore}def\ alw{\isacharunderscore}mono\ alw{\isacharunderscore}smap{\isacharparenright}%
 \endisatagproof
 {\isafoldproof}%
 %
@@ -309,7 +309,7 @@
 \endisadelimproof
 \isanewline
 \isacommand{lemma}\isamarkupfalse%
-\ {\isachardoublequoteopen}alw\ {\isacharparenleft}nxt\ {\isacharparenleft}StateEq\ {\isacharparenleft}Some\ {\isadigit{2}}{\isacharparenright}{\isacharparenright}\ impl\ {\isacharparenleft}LabelEq\ {\isacharprime}{\isacharprime}vend{\isacharprime}{\isacharprime}{\isacharparenright}{\isacharparenright}\ {\isacharparenleft}watch\ drinks\ t{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ {\isachardoublequoteopen}alw\ {\isacharparenleft}nxt\ {\isacharparenleft}state_eq\ {\isacharparenleft}Some\ {\isadigit{2}}{\isacharparenright}{\isacharparenright}\ impl\ {\isacharparenleft}label_eq\ {\isacharprime}{\isacharprime}vend{\isacharprime}{\isacharprime}{\isacharparenright}{\isacharparenright}\ {\isacharparenleft}watch\ drinks\ t{\isacharparenright}{\isachardoublequoteclose}\isanewline
 %
 \isadelimproof
 %
@@ -343,7 +343,7 @@
 \isanewline
 \isanewline
 \isacommand{lemma}\isamarkupfalse%
-\ {\isachardoublequoteopen}alw\ {\isacharparenleft}{\isasymlambda}s{\isachardot}\ StateEq\ None\ {\isacharparenleft}stl\ s{\isacharparenright}{\isacharparenright}\ {\isacharparenleft}make{\isacharunderscore}full{\isacharunderscore}observation\ drinks\ None\ {\isacharless}{\isachargreater}\ t{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ {\isachardoublequoteopen}alw\ {\isacharparenleft}{\isasymlambda}s{\isachardot}\ state_eq\ None\ {\isacharparenleft}stl\ s{\isacharparenright}{\isacharparenright}\ {\isacharparenleft}make{\isacharunderscore}full{\isacharunderscore}observation\ drinks\ None\ {\isacharless}{\isachargreater}\ t{\isacharparenright}{\isachardoublequoteclose}\isanewline
 %
 \isadelimproof
 \ \ %
@@ -559,7 +559,7 @@
 \ \ \ \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}simp\ add{\isacharcolon}\ possible{\isacharunderscore}steps{\isacharunderscore}vend{\isacharunderscore}insufficient\ ValueGt{\isacharunderscore}def{\isacharparenright}\isanewline
 \ \ \isacommand{by}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ invalid{\isacharunderscore}possible{\isacharunderscore}steps{\isacharunderscore}{\isadigit{1}}\ StateEq{\isacharunderscore}def{\isacharparenright}%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ invalid{\isacharunderscore}possible{\isacharunderscore}steps{\isacharunderscore}{\isadigit{1}}\ state_eq{\isacharunderscore}def{\isacharparenright}%
 \endisatagproof
 {\isafoldproof}%
 %
@@ -693,7 +693,7 @@
 \isacommand{lemma}\isamarkupfalse%
 \ next{\isacharunderscore}not{\isacharunderscore}lt{\isacharunderscore}zero{\isacharcolon}\isanewline
 \ \ {\isachardoublequoteopen}n\ {\isasymge}\ {\isadigit{0}}\ {\isasymLongrightarrow}\isanewline
-\ \ \ {\isacharparenleft}nxt\ {\isacharparenleft}not\ {\isacharparenleft}checkInx\ rg\ {\isadigit{1}}\ ValueLt\ {\isacharparenleft}Some\ {\isacharparenleft}Num\ {\isadigit{0}}{\isacharparenright}{\isacharparenright}{\isacharparenright}{\isacharparenright}{\isacharparenright}\ {\isacharparenleft}make{\isacharunderscore}full{\isacharunderscore}observation\ drinks\ {\isacharparenleft}Some\ {\isadigit{1}}{\isacharparenright}\ {\isacharparenleft}{\isacharless}{\isachargreater}{\isacharparenleft}{\isadigit{1}}\ {\isacharcolon}{\isacharequal}\ Num\ n{\isacharparenright}{\isacharparenright}\ t{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ \ {\isacharparenleft}nxt\ {\isacharparenleft}not\ {\isacharparenleft}check_inx\ rg\ {\isadigit{1}}\ ValueLt\ {\isacharparenleft}Some\ {\isacharparenleft}Num\ {\isadigit{0}}{\isacharparenright}{\isacharparenright}{\isacharparenright}{\isacharparenright}{\isacharparenright}\ {\isacharparenleft}make{\isacharunderscore}full{\isacharunderscore}observation\ drinks\ {\isacharparenleft}Some\ {\isadigit{1}}{\isacharparenright}\ {\isacharparenleft}{\isacharless}{\isachargreater}{\isacharparenleft}{\isadigit{1}}\ {\isacharcolon}{\isacharequal}\ Num\ n{\isacharparenright}{\isacharparenright}\ t{\isacharparenright}{\isachardoublequoteclose}\isanewline
 %
 \isadelimproof
 \ \ \ \ %
@@ -725,9 +725,9 @@
 \endisadelimproof
 \isanewline
 \isacommand{lemma}\isamarkupfalse%
-\ not{\isacharunderscore}initialised{\isacharcolon}\ {\isachardoublequoteopen}alw\ {\isacharparenleft}{\isasymlambda}xs{\isachardot}\ StateEq\ {\isacharparenleft}Some\ {\isadigit{1}}{\isacharparenright}\ xs\ {\isasymand}\isanewline
-\ \ \ \ \ \ \ \ \ \ \ \ \ \ MaybeBoolInt\ {\isacharparenleft}{\isacharless}{\isacharparenright}\ {\isacharparenleft}datastate\ {\isacharparenleft}shd\ xs{\isacharparenright}\ {\isachardollar}\ {\isacharparenleft}{\isadigit{1}}{\isacharparenright}{\isacharparenright}\ {\isacharparenleft}Some\ {\isacharparenleft}Num\ {\isadigit{0}}{\isacharparenright}{\isacharparenright}\ {\isacharequal}\ trilean{\isachardot}true\ {\isasymand}\ LabelEq\ {\isacharprime}{\isacharprime}vend{\isacharprime}{\isacharprime}\ xs\ {\isasymand}\ InputEq\ {\isacharbrackleft}{\isacharbrackright}\ xs\ {\isasymlongrightarrow}\isanewline
-\ \ \ \ \ \ \ \ \ \ \ \ \ \ StateEq\ {\isacharparenleft}Some\ {\isadigit{2}}{\isacharparenright}\ {\isacharparenleft}stl\ xs{\isacharparenright}{\isacharparenright}\isanewline
+\ not{\isacharunderscore}initialised{\isacharcolon}\ {\isachardoublequoteopen}alw\ {\isacharparenleft}{\isasymlambda}xs{\isachardot}\ state_eq\ {\isacharparenleft}Some\ {\isadigit{1}}{\isacharparenright}\ xs\ {\isasymand}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ MaybeBoolInt\ {\isacharparenleft}{\isacharless}{\isacharparenright}\ {\isacharparenleft}datastate\ {\isacharparenleft}shd\ xs{\isacharparenright}\ {\isachardollar}\ {\isacharparenleft}{\isadigit{1}}{\isacharparenright}{\isacharparenright}\ {\isacharparenleft}Some\ {\isacharparenleft}Num\ {\isadigit{0}}{\isacharparenright}{\isacharparenright}\ {\isacharequal}\ trilean{\isachardot}true\ {\isasymand}\ label_eq\ {\isacharprime}{\isacharprime}vend{\isacharprime}{\isacharprime}\ xs\ {\isasymand}\ input_eq\ {\isacharbrackleft}{\isacharbrackright}\ xs\ {\isasymlongrightarrow}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ state_eq\ {\isacharparenleft}Some\ {\isadigit{2}}{\isacharparenright}\ {\isacharparenleft}stl\ xs{\isacharparenright}{\isacharparenright}\isanewline
 \ \ \ \ \ {\isacharparenleft}make{\isacharunderscore}full{\isacharunderscore}observation\ drinks\ None\ {\isacharless}{\isachargreater}\ t{\isacharparenright}{\isachardoublequoteclose}\isanewline
 %
 \isadelimproof
@@ -736,7 +736,7 @@
 %
 \isatagproof
 \isacommand{using}\isamarkupfalse%
-\ once{\isacharunderscore}none{\isacharunderscore}always{\isacharunderscore}none\ StateEq{\isacharunderscore}None{\isacharunderscore}not{\isacharunderscore}Some\isanewline
+\ once{\isacharunderscore}none{\isacharunderscore}always{\isacharunderscore}none\ state_eq{\isacharunderscore}None{\isacharunderscore}not{\isacharunderscore}Some\isanewline
 \ \ \isacommand{by}\isamarkupfalse%
 \ {\isacharparenleft}simp\ add{\isacharcolon}\ alw{\isacharunderscore}iff{\isacharunderscore}sdrop{\isacharparenright}%
 \endisatagproof
@@ -767,7 +767,7 @@
 \isanewline
 \isacommand{lemma}\isamarkupfalse%
 \ not{\isacharunderscore}init{\isacharcolon}\ {\isachardoublequoteopen}shd\ t\ {\isasymnoteq}\ {\isacharparenleft}STR\ {\isacharprime}{\isacharprime}init{\isacharprime}{\isacharprime}{\isacharcomma}\ {\isacharbrackleft}{\isacharbrackright}{\isacharparenright}\ {\isasymLongrightarrow}\isanewline
-\ \ \ \ LabelEq\ {\isacharprime}{\isacharprime}init{\isacharprime}{\isacharprime}\ {\isacharparenleft}watch\ drinks\ t{\isacharparenright}\ {\isasymLongrightarrow}\ {\isasymnot}\ InputEq\ {\isacharbrackleft}{\isacharbrackright}\ {\isacharparenleft}watch\ drinks\ t{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ label_eq\ {\isacharprime}{\isacharprime}init{\isacharprime}{\isacharprime}\ {\isacharparenleft}watch\ drinks\ t{\isacharparenright}\ {\isasymLongrightarrow}\ {\isasymnot}\ input_eq\ {\isacharbrackleft}{\isacharbrackright}\ {\isacharparenleft}watch\ drinks\ t{\isacharparenright}{\isachardoublequoteclose}\isanewline
 %
 \isadelimproof
 \ \ %
@@ -775,7 +775,7 @@
 %
 \isatagproof
 \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ LabelEq{\isacharunderscore}def\ InputEq{\isacharunderscore}def\ implode{\isacharunderscore}init\ watch{\isacharunderscore}def{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ label_eq{\isacharunderscore}def\ input_eq{\isacharunderscore}def\ implode{\isacharunderscore}init\ watch{\isacharunderscore}def{\isacharparenright}\isanewline
 \ \ \isacommand{by}\isamarkupfalse%
 \ {\isacharparenleft}metis\ prod{\isachardot}collapse{\isacharparenright}%
 \endisatagproof
@@ -823,7 +823,7 @@
 \endisadelimproof
 \isanewline
 \isacommand{lemma}\isamarkupfalse%
-\ LTL{\isacharunderscore}label{\isacharunderscore}vend{\isacharunderscore}not{\isacharunderscore}{\isadigit{2}}{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}{\isacharparenleft}LabelEq\ {\isacharprime}{\isacharprime}vend{\isacharprime}{\isacharprime}{\isacharparenright}\ impl\ {\isacharparenleft}not\ {\isacharparenleft}ev\ {\isacharparenleft}StateEq\ {\isacharparenleft}Some\ {\isadigit{2}}{\isacharparenright}{\isacharparenright}{\isacharparenright}{\isacharparenright}{\isacharparenright}\ {\isacharparenleft}watch\ drinks\ t{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ LTL{\isacharunderscore}label{\isacharunderscore}vend{\isacharunderscore}not{\isacharunderscore}{\isadigit{2}}{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}{\isacharparenleft}label_eq\ {\isacharprime}{\isacharprime}vend{\isacharprime}{\isacharprime}{\isacharparenright}\ impl\ {\isacharparenleft}not\ {\isacharparenleft}ev\ {\isacharparenleft}state_eq\ {\isacharparenleft}Some\ {\isadigit{2}}{\isacharparenright}{\isacharparenright}{\isacharparenright}{\isacharparenright}{\isacharparenright}\ {\isacharparenleft}watch\ drinks\ t{\isacharparenright}{\isachardoublequoteclose}\isanewline
 %
 \isadelimproof
 \ \ %
@@ -844,13 +844,13 @@
 \ \isacommand{show}\isamarkupfalse%
 \ {\isacharquery}case\isanewline
 \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ StateEq{\isacharunderscore}def\ possible{\isacharunderscore}steps{\isacharunderscore}not{\isacharunderscore}init{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ state_eq{\isacharunderscore}def\ possible{\isacharunderscore}steps{\isacharunderscore}not{\isacharunderscore}init{\isacharparenright}\isanewline
 \ \ \ \ \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}rule\ disjI{\isadigit{2}}{\isacharparenright}\isanewline
 \ \ \ \ \isacommand{using}\isamarkupfalse%
 \ once{\isacharunderscore}none{\isacharunderscore}always{\isacharunderscore}none\isanewline
 \ \ \ \ \isacommand{unfolding}\isamarkupfalse%
-\ StateEq{\isacharunderscore}def\isanewline
+\ state_eq{\isacharunderscore}def\isanewline
 \ \ \ \ \isacommand{by}\isamarkupfalse%
 \ {\isacharparenleft}simp\ add{\isacharcolon}\ alw{\isacharunderscore}iff{\isacharunderscore}sdrop{\isacharparenright}\isanewline
 \isacommand{qed}\isamarkupfalse%
@@ -932,7 +932,7 @@
 \endisadelimproof
 \isanewline
 \isacommand{lemma}\isamarkupfalse%
-\ LTL{\isacharunderscore}aux{\isadigit{2}}{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}{\isacharparenleft}nxt\ {\isacharparenleft}LabelEq\ {\isacharprime}{\isacharprime}vend{\isacharprime}{\isacharprime}{\isacharparenright}{\isacharparenright}\ impl\ not\ {\isacharparenleft}ev\ {\isacharparenleft}StateEq\ {\isacharparenleft}Some\ {\isadigit{2}}{\isacharparenright}{\isacharparenright}{\isacharparenright}{\isacharparenright}\ {\isacharparenleft}watch\ drinks\ t{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ LTL{\isacharunderscore}aux{\isadigit{2}}{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}{\isacharparenleft}nxt\ {\isacharparenleft}label_eq\ {\isacharprime}{\isacharprime}vend{\isacharprime}{\isacharprime}{\isacharparenright}{\isacharparenright}\ impl\ not\ {\isacharparenleft}ev\ {\isacharparenleft}state_eq\ {\isacharparenleft}Some\ {\isadigit{2}}{\isacharparenright}{\isacharparenright}{\isacharparenright}{\isacharparenright}\ {\isacharparenleft}watch\ drinks\ t{\isacharparenright}{\isachardoublequoteclose}\isanewline
 %
 \isadelimproof
 \ \ %
@@ -940,7 +940,7 @@
 %
 \isatagproof
 \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ watch{\isacharunderscore}def\ LabelEq{\isacharunderscore}def\ implode{\isacharunderscore}vend\ not{\isacharunderscore}ev{\isacharunderscore}iff{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ watch{\isacharunderscore}def\ label_eq{\isacharunderscore}def\ implode{\isacharunderscore}vend\ not{\isacharunderscore}ev{\isacharunderscore}iff{\isacharparenright}\isanewline
 \ \ \isacommand{apply}\isamarkupfalse%
 \ clarify\isanewline
 \isacommand{proof}\isamarkupfalse%
@@ -951,7 +951,7 @@
 \ \isacommand{show}\isamarkupfalse%
 \ {\isacharquery}case\isanewline
 \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ StateEq{\isacharunderscore}def{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ state_eq{\isacharunderscore}def{\isacharparenright}\isanewline
 \ \ \ \ \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}shd\ t\ {\isacharequal}\ {\isacharparenleft}STR\ {\isacharprime}{\isacharprime}init{\isacharprime}{\isacharprime}{\isacharcomma}\ {\isacharbrackleft}{\isacharbrackright}{\isacharparenright}{\isachardoublequoteclose}{\isacharparenright}\isanewline
 \ \ \ \ \ \isacommand{defer}\isamarkupfalse%
@@ -993,8 +993,8 @@
 \snip{checkinit}{1}{2}{%
 \isacommand{lemma}\isamarkupfalse%
 \ LTL{\isacharunderscore}init{\isacharunderscore}makes{\isacharunderscore}r{\isacharunderscore}{\isadigit{1}}{\isacharunderscore}zero{\isacharcolon}\isanewline
-\ \ {\isachardoublequoteopen}{\isacharparenleft}{\isacharparenleft}LabelEq\ {\isacharprime}{\isacharprime}init{\isacharprime}{\isacharprime}\ aand\ InputEq\ {\isacharbrackleft}{\isacharbrackright}{\isacharparenright}\ impl\isanewline
-\ \ \ \ {\isacharparenleft}nxt\ {\isacharparenleft}checkInx\ rg\ {\isadigit{1}}\ ValueEq\ {\isacharparenleft}Some\ {\isacharparenleft}Num\ {\isadigit{0}}{\isacharparenright}{\isacharparenright}{\isacharparenright}{\isacharparenright}{\isacharparenright}\isanewline
+\ \ {\isachardoublequoteopen}{\isacharparenleft}{\isacharparenleft}label_eq\ {\isacharprime}{\isacharprime}init{\isacharprime}{\isacharprime}\ aand\ input_eq\ {\isacharbrackleft}{\isacharbrackright}{\isacharparenright}\ impl\isanewline
+\ \ \ \ {\isacharparenleft}nxt\ {\isacharparenleft}check_inx\ rg\ {\isadigit{1}}\ ValueEq\ {\isacharparenleft}Some\ {\isacharparenleft}Num\ {\isadigit{0}}{\isacharparenright}{\isacharparenright}{\isacharparenright}{\isacharparenright}{\isacharparenright}\isanewline
 \ \ \ {\isacharparenleft}watch\ drinks\ t{\isacharparenright}{\isachardoublequoteclose}%
 }%endsnip
 %
@@ -1023,7 +1023,7 @@
 \isanewline
 \isanewline
 \isacommand{lemma}\isamarkupfalse%
-\ LTL{\isacharunderscore}must{\isacharunderscore}pay{\isacharunderscore}wrong{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}{\isacharparenleft}not\ {\isacharparenleft}LabelEq\ {\isacharprime}{\isacharprime}vend{\isacharprime}{\isacharprime}\ suntil\ LabelEq\ {\isacharprime}{\isacharprime}coin{\isacharprime}{\isacharprime}{\isacharparenright}{\isacharparenright}\ suntil\ StateEq\ None{\isacharparenright}\ {\isacharparenleft}watch\ drinks\ t{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ LTL{\isacharunderscore}must{\isacharunderscore}pay{\isacharunderscore}wrong{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}{\isacharparenleft}not\ {\isacharparenleft}label_eq\ {\isacharprime}{\isacharprime}vend{\isacharprime}{\isacharprime}\ suntil\ label_eq\ {\isacharprime}{\isacharprime}coin{\isacharprime}{\isacharprime}{\isacharparenright}{\isacharparenright}\ suntil\ state_eq\ None{\isacharparenright}\ {\isacharparenleft}watch\ drinks\ t{\isacharparenright}{\isachardoublequoteclose}\isanewline
 %
 \isadelimproof
 \ \ %
@@ -1164,7 +1164,7 @@
 \endisadelimproof
 \isanewline
 \isacommand{lemma}\isamarkupfalse%
-\ LTL{\isacharunderscore}vend{\isacharunderscore}no{\isacharunderscore}coin{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}{\isacharparenleft}nxt\ {\isacharparenleft}LabelEq\ {\isacharprime}{\isacharprime}vend{\isacharprime}{\isacharprime}\ aand\ InputEq\ {\isacharbrackleft}{\isacharbrackright}{\isacharparenright}{\isacharparenright}\ impl\ not\ {\isacharparenleft}ev\ {\isacharparenleft}StateEq\ {\isacharparenleft}Some\ {\isadigit{2}}{\isacharparenright}{\isacharparenright}{\isacharparenright}{\isacharparenright}\ {\isacharparenleft}watch\ drinks\ t{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ LTL{\isacharunderscore}vend{\isacharunderscore}no{\isacharunderscore}coin{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}{\isacharparenleft}nxt\ {\isacharparenleft}label_eq\ {\isacharprime}{\isacharprime}vend{\isacharprime}{\isacharprime}\ aand\ input_eq\ {\isacharbrackleft}{\isacharbrackright}{\isacharparenright}{\isacharparenright}\ impl\ not\ {\isacharparenleft}ev\ {\isacharparenleft}state_eq\ {\isacharparenleft}Some\ {\isadigit{2}}{\isacharparenright}{\isacharparenright}{\isacharparenright}{\isacharparenright}\ {\isacharparenleft}watch\ drinks\ t{\isacharparenright}{\isachardoublequoteclose}\isanewline
 %
 \isadelimproof
 \ \ %
@@ -1172,7 +1172,7 @@
 %
 \isatagproof
 \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ not{\isacharunderscore}ev{\isacharunderscore}iff\ event{\isacharunderscore}components\ implode{\isacharunderscore}vend\ watch{\isacharunderscore}def\ StateEq{\isacharunderscore}def{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ not{\isacharunderscore}ev{\isacharunderscore}iff\ event{\isacharunderscore}components\ implode{\isacharunderscore}vend\ watch{\isacharunderscore}def\ state_eq{\isacharunderscore}def{\isacharparenright}\isanewline
 \ \ \isacommand{apply}\isamarkupfalse%
 \ clarify\isanewline
 \isacommand{proof}\isamarkupfalse%
@@ -1221,9 +1221,9 @@
 \isanewline
 \isacommand{lemma}\isamarkupfalse%
 \ LTL{\isacharunderscore}invalid{\isacharunderscore}gets{\isacharunderscore}stuck{\isacharunderscore}{\isadigit{2}}{\isacharcolon}\isanewline
-\ \ {\isachardoublequoteopen}{\isacharparenleft}{\isacharparenleft}{\isacharparenleft}nxt\ {\isacharparenleft}not\ {\isacharparenleft}LabelEq\ {\isacharprime}{\isacharprime}coin{\isacharprime}{\isacharprime}\ aand\ InputEq\ {\isacharbrackleft}{\isacharbrackright}{\isacharparenright}{\isacharparenright}{\isacharparenright}\ aand\isanewline
-\ \ \ {\isacharparenleft}nxt\ {\isacharparenleft}not\ {\isacharparenleft}LabelEq\ {\isacharprime}{\isacharprime}vend{\isacharprime}{\isacharprime}\ aand\ InputEq\ {\isacharbrackleft}{\isacharbrackright}{\isacharparenright}{\isacharparenright}{\isacharparenright}{\isacharparenright}\ impl\isanewline
-\ \ \ {\isacharparenleft}not\ {\isacharparenleft}ev\ {\isacharparenleft}StateEq\ {\isacharparenleft}Some\ {\isadigit{2}}{\isacharparenright}{\isacharparenright}{\isacharparenright}{\isacharparenright}{\isacharparenright}\ {\isacharparenleft}watch\ drinks\ t{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ {\isachardoublequoteopen}{\isacharparenleft}{\isacharparenleft}{\isacharparenleft}nxt\ {\isacharparenleft}not\ {\isacharparenleft}label_eq\ {\isacharprime}{\isacharprime}coin{\isacharprime}{\isacharprime}\ aand\ input_eq\ {\isacharbrackleft}{\isacharbrackright}{\isacharparenright}{\isacharparenright}{\isacharparenright}\ aand\isanewline
+\ \ \ {\isacharparenleft}nxt\ {\isacharparenleft}not\ {\isacharparenleft}label_eq\ {\isacharprime}{\isacharprime}vend{\isacharprime}{\isacharprime}\ aand\ input_eq\ {\isacharbrackleft}{\isacharbrackright}{\isacharparenright}{\isacharparenright}{\isacharparenright}{\isacharparenright}\ impl\isanewline
+\ \ \ {\isacharparenleft}not\ {\isacharparenleft}ev\ {\isacharparenleft}state_eq\ {\isacharparenleft}Some\ {\isadigit{2}}{\isacharparenright}{\isacharparenright}{\isacharparenright}{\isacharparenright}{\isacharparenright}\ {\isacharparenleft}watch\ drinks\ t{\isacharparenright}{\isachardoublequoteclose}\isanewline
 %
 \isadelimproof
 \ \ %
@@ -1233,7 +1233,7 @@
 \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}simp\ add{\isacharcolon}\ not{\isacharunderscore}ev{\isacharunderscore}iff\ event{\isacharunderscore}components{\isacharparenright}\isanewline
 \ \ \isacommand{unfolding}\isamarkupfalse%
-\ watch{\isacharunderscore}def\ StateEq{\isacharunderscore}def\ LabelEq{\isacharunderscore}def\ InputEq{\isacharunderscore}def\isanewline
+\ watch{\isacharunderscore}def\ state_eq{\isacharunderscore}def\ label_eq{\isacharunderscore}def\ input_eq{\isacharunderscore}def\isanewline
 \ \ \isacommand{apply}\isamarkupfalse%
 \ clarify\isanewline
 \isacommand{proof}\isamarkupfalse%
@@ -1276,8 +1276,8 @@
 \isanewline
 \isacommand{lemma}\isamarkupfalse%
 \ LTL{\isacharunderscore}must{\isacharunderscore}pay{\isacharunderscore}correct{\isacharunderscore}bracketed{\isacharcolon}\isanewline
-\ \ {\isachardoublequoteopen}{\isacharparenleft}{\isacharparenleft}ev\ {\isacharparenleft}StateEq\ {\isacharparenleft}Some\ {\isadigit{2}}{\isacharparenright}{\isacharparenright}{\isacharparenright}\ impl\isanewline
-\ \ \ \ {\isacharparenleft}{\isacharparenleft}not\ {\isacharparenleft}LabelEq\ {\isacharprime}{\isacharprime}vend{\isacharprime}{\isacharprime}{\isacharparenright}{\isacharparenright}\ suntil\ LabelEq\ {\isacharprime}{\isacharprime}coin{\isacharprime}{\isacharprime}{\isacharparenright}{\isacharparenright}\isanewline
+\ \ {\isachardoublequoteopen}{\isacharparenleft}{\isacharparenleft}ev\ {\isacharparenleft}state_eq\ {\isacharparenleft}Some\ {\isadigit{2}}{\isacharparenright}{\isacharparenright}{\isacharparenright}\ impl\isanewline
+\ \ \ \ {\isacharparenleft}{\isacharparenleft}not\ {\isacharparenleft}label_eq\ {\isacharprime}{\isacharprime}vend{\isacharprime}{\isacharprime}{\isacharparenright}{\isacharparenright}\ suntil\ label_eq\ {\isacharprime}{\isacharprime}coin{\isacharprime}{\isacharprime}{\isacharparenright}{\isacharparenright}\isanewline
 \ \ \ {\isacharparenleft}watch\ drinks\ t{\isacharparenright}{\isachardoublequoteclose}\isanewline
 %
 \isadelimproof
@@ -1320,8 +1320,8 @@
 \snip{mustpaycorrect}{1}{2}{%
 \isacommand{lemma}\isamarkupfalse%
 \ LTL{\isacharunderscore}must{\isacharunderscore}pay{\isacharunderscore}correct{\isacharcolon}\isanewline
-\ \ {\isachardoublequoteopen}{\isacharparenleft}{\isacharparenleft}ev\ {\isacharparenleft}StateEq\ {\isacharparenleft}Some\ {\isadigit{2}}{\isacharparenright}{\isacharparenright}{\isacharparenright}\ impl\isanewline
-\ \ \ \ {\isacharparenleft}not\ {\isacharparenleft}LabelEq\ {\isacharprime}{\isacharprime}vend{\isacharprime}{\isacharprime}{\isacharparenright}\ suntil\ LabelEq\ {\isacharprime}{\isacharprime}coin{\isacharprime}{\isacharprime}{\isacharparenright}{\isacharparenright}\isanewline
+\ \ {\isachardoublequoteopen}{\isacharparenleft}{\isacharparenleft}ev\ {\isacharparenleft}state_eq\ {\isacharparenleft}Some\ {\isadigit{2}}{\isacharparenright}{\isacharparenright}{\isacharparenright}\ impl\isanewline
+\ \ \ \ {\isacharparenleft}not\ {\isacharparenleft}label_eq\ {\isacharprime}{\isacharprime}vend{\isacharprime}{\isacharprime}{\isacharparenright}\ suntil\ label_eq\ {\isacharprime}{\isacharprime}coin{\isacharprime}{\isacharprime}{\isacharparenright}{\isacharparenright}\isanewline
 \ \ \ {\isacharparenleft}watch\ drinks\ t{\isacharparenright}{\isachardoublequoteclose}\isanewline
 %
 \isadelimproof
@@ -1339,7 +1339,7 @@
 \ \ \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}shd\ {\isacharparenleft}stl\ t{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}STR\ {\isacharprime}{\isacharprime}coin{\isacharprime}{\isacharprime}{\isacharcomma}\ {\isacharbrackleft}{\isacharbrackright}{\isacharparenright}{\isachardoublequoteclose}{\isacharparenright}\isanewline
 \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ LabelEq{\isacharunderscore}def\ implode{\isacharunderscore}coin\ suntil{\isachardot}base\ watch{\isacharunderscore}def{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ label_eq{\isacharunderscore}def\ implode{\isacharunderscore}coin\ suntil{\isachardot}base\ watch{\isacharunderscore}def{\isacharparenright}\isanewline
 \ \ \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}shd\ {\isacharparenleft}stl\ t{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}STR\ {\isacharprime}{\isacharprime}vend{\isacharprime}{\isacharprime}{\isacharcomma}\ {\isacharbrackleft}{\isacharbrackright}{\isacharparenright}{\isachardoublequoteclose}{\isacharparenright}\isanewline
 \ \ \ \isacommand{apply}\isamarkupfalse%
@@ -1348,7 +1348,7 @@
 \ LTL{\isacharunderscore}aux{\isadigit{2}}\ watch{\isacharunderscore}def\ watch{\isacharunderscore}def\ \isacommand{apply}\isamarkupfalse%
 \ auto{\isacharbrackleft}{\isadigit{1}}{\isacharbrackright}\isanewline
 \ \ \isacommand{using}\isamarkupfalse%
-\ LTL{\isacharunderscore}aux{\isadigit{2}}\ LabelEq{\isacharunderscore}def\ implode{\isacharunderscore}vend\ watch{\isacharunderscore}def\ \isacommand{apply}\isamarkupfalse%
+\ LTL{\isacharunderscore}aux{\isadigit{2}}\ label_eq{\isacharunderscore}def\ implode{\isacharunderscore}vend\ watch{\isacharunderscore}def\ \isacommand{apply}\isamarkupfalse%
 \ auto{\isacharbrackleft}{\isadigit{1}}{\isacharbrackright}\isanewline
 \ \ \isacommand{using}\isamarkupfalse%
 \ LTL{\isacharunderscore}aux{\isadigit{2}}\ LTL{\isacharunderscore}invalid{\isacharunderscore}gets{\isacharunderscore}stuck{\isacharunderscore}{\isadigit{2}}\ suntil{\isachardot}base\ \isacommand{by}\isamarkupfalse%

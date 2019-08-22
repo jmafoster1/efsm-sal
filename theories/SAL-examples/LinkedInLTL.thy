@@ -118,19 +118,19 @@ lemma "alw (\<lambda>xs. event (shd xs) = (String.implode ''pdf'', [EFSM.Str ''o
 );*)
 
 lemma LTL_neverDetailed:
-    "(alw ((LabelEq ''login'' aand InputEq [Str ''free'']) impl
-          (nxt (alw ((LabelEq ''pdf'' aand InputEq [(Str ''otherID''), type, token]) impl
-          (nxt (not (checkInx op 1 ValueEq (Some (Str ''detailedPDF''))))))))))
+    "(alw ((label_eq ''login'' aand input_eq [Str ''free'']) impl
+          (nxt (alw ((label_eq ''pdf'' aand input_eq [(Str ''otherID''), type, token]) impl
+          (nxt (not (check_inx op 1 ValueEq (Some (Str ''detailedPDF''))))))))))
      (watch linkedIn i)"
   oops
 
-lemma LTL_testStateEqNone: "(ev (StateEq None)) (watch linkedIn i)"
+lemma LTL_teststate_eqNone: "(ev (state_eq None)) (watch linkedIn i)"
   oops
 
-lemma LTL_testInputEq: "((((StateEq (Some 0)) aand (LabelEq ''login'')) aand (InputEq [Str ''free''])) impl (nxt (StateEq (Some 1)))) (watch linkedIn i)"
+lemma LTL_testinput_eq: "((((state_eq (Some 0)) aand (label_eq ''login'')) aand (input_eq [Str ''free''])) impl (nxt (state_eq (Some 1)))) (watch linkedIn i)"
   oops
 
-lemma LTL_testOutputEq: "(alw (StateEq (Some 3) aand InputEq [Str ''otherID'', Str ''OUT_OF_NETWORK'', Str ''MNn5'']) impl OutputEq [Some (Str ''summaryPDF'')]) (watch linkedIn i)"
+lemma LTL_testoutput_eq: "(alw (state_eq (Some 3) aand input_eq [Str ''otherID'', Str ''OUT_OF_NETWORK'', Str ''MNn5'']) impl output_eq [Some (Str ''summaryPDF'')]) (watch linkedIn i)"
   oops
 
 end

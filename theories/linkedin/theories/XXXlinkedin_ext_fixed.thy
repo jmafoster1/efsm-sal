@@ -239,24 +239,24 @@ proof(coinduction)
      defer
      apply (simp add: not_pdf_2)
     using no_output_none[of linkedIn "(<>(1 := EFSM.Str ''free''))" "(stl i)"]
-    unfolding OutputEq_def
+    unfolding output_eq_def
      apply (simp add: alw_mono)
     apply (case_tac "(snd (shd i)) = [Str ''friendID'', Str ''name'', Str ''HM8p'']")
      defer
      apply (simp add: pdf_2_invalid)
     using no_output_none[of linkedIn "(<>(1 := EFSM.Str ''free''))" "(stl i)"]
-    unfolding OutputEq_def
+    unfolding output_eq_def
      apply (simp add: alw_mono)
     apply (simp add: pdf_friend)
     apply standard
      apply (simp add: pdf_def apply_outputs Str_def implode)
      apply standard
      apply (rule disjI2)
-     apply (rule alw_mono[of "OutputEq []"])
-      apply (rule alw.coinduct[of "OutputEq []"])
+     apply (rule alw_mono[of "output_eq []"])
+      apply (rule alw.coinduct[of "output_eq []"])
        apply (simp add: Inputs_def)
       apply (simp add: Inputs_def)
-     apply (simp add: OutputEq_def)
+     apply (simp add: output_eq_def)
     apply standard
     apply (rule disjI2)
   proof(coinduction)
@@ -264,7 +264,7 @@ proof(coinduction)
     then show ?case
       apply (simp add: ltl_step_alt stop_at_3 pdf_def)
     using no_output_none[of linkedIn "(<>(1 := EFSM.Str ''free''))" "stl (stl i)"]
-    unfolding OutputEq_def
+    unfolding output_eq_def
     by (simp add: alw_mono)
   qed
 qed
@@ -314,24 +314,24 @@ proof(coinduction)
      defer
      apply (simp add: not_pdf_4 )
     using no_output_none[of linkedIn "(<>(1 := EFSM.Str ''free''))" "(stl i)"]
-    unfolding OutputEq_def
+    unfolding output_eq_def
      apply (simp add: alw_mono)
     apply (case_tac "(snd (shd i)) = [EFSM.Str ''otherID'', EFSM.Str ''OUT_OF_NETWORK'', EFSM.Str ''MNn5'']")
      defer
      apply (simp add: pdf_4_invalid_inputs)
     using no_output_none[of linkedIn "(<>(1 := EFSM.Str ''free''))" "(stl i)"]
-    unfolding OutputEq_def
+    unfolding output_eq_def
      apply (simp add: alw_mono)
      apply (simp add: pdf_summary)
      apply standard
      apply (simp add: pdf1_def apply_outputs Str_def implode Inputs_def)
      apply (rule disjI2)
-     apply (rule alw_mono[of "OutputEq []"])
+     apply (rule alw_mono[of "output_eq []"])
       prefer 2
-    using OutputEq_def apply auto[1]
+    using output_eq_def apply auto[1]
      apply (rule alw)
-      apply (simp add: OutputEq_def ltl_step_alt stop_at_5)
-    using Str_def \<open>alw (OutputEq []) (make_full_observation linkedIn None (<>(1 := EFSM.Str ''free'')) (stl i))\<close> implode_free ltl_step_alt stop_at_5 apply auto[1]
+      apply (simp add: output_eq_def ltl_step_alt stop_at_5)
+    using Str_def \<open>alw (output_eq []) (make_full_observation linkedIn None (<>(1 := EFSM.Str ''free'')) (stl i))\<close> implode_free ltl_step_alt stop_at_5 apply auto[1]
     apply (simp add: pdf1_def)
     apply standard
     apply (rule disjI2)
@@ -340,7 +340,7 @@ proof(coinduction)
     then show ?case
       apply (simp add: ltl_step_alt stop_at_5)
     using no_output_none[of linkedIn "(<>(1 := EFSM.Str ''free''))" "stl (stl i)"]
-    unfolding OutputEq_def
+    unfolding output_eq_def
     by (simp add: alw_mono)
   qed
 qed
@@ -371,7 +371,7 @@ lemma invalid_input_1:
   by (simp_all add: apply_guards_def transitions join_ir_def input2state_def Str_def implode numeral_2_eq_2)
 
 lemma after_login: "alw (\<lambda>xs. label (shd xs) = STR ''pdf'' \<and> ValueEq (Some (Inputs 0 xs)) (Some (EFSM.Str ''otherID'')) = trilean.true \<longrightarrow>
-              \<not> OutputEq [Some (EFSM.Str ''detailed_pdf_of_otherID'')] xs)
+              \<not> output_eq [Some (EFSM.Str ''detailed_pdf_of_otherID'')] xs)
      (make_full_observation XXXlinkedin_ext_fixed.linkedIn (Some 1) (<>(1 := EFSM.Str ''free'')) i)"
 proof(coinduction)
   case alw
@@ -381,7 +381,7 @@ proof(coinduction)
      defer
      apply (simp add: not_view_1)
     using no_output_none[of linkedIn "(<>(1 := EFSM.Str ''free''))" "(stl i)"]
-    unfolding OutputEq_def
+    unfolding output_eq_def
      apply (simp add: alw_mono ltl_step_alt not_view_1)
     apply simp
     apply (case_tac "(snd (shd i)) = [Str ''friendID'', Str ''name'', Str ''HM8p'']")
@@ -398,20 +398,20 @@ proof(coinduction)
     apply (simp add: alw_mono)
     apply (simp add: invalid_input_1)
     using no_output_none[of linkedIn "(<>(1 := EFSM.Str ''free''))" "(stl i)"]
-    unfolding OutputEq_def
+    unfolding output_eq_def
     by (simp add: alw_mono)
 qed
 
 (* SAL thinks this is true so we should be able to prove it *)
 text_raw\<open>\snip{neverDetailedProof}{1}{2}{%\<close>
 lemma LTL_neverDetailed:
-    "(((LabelEq  ''login'' aand InputEq [Str ''free'']) impl
-     (nxt (alw ((LabelEq ''pdf'' aand
-     checkInx ip 1 ValueEq (Some (Str ''otherID''))) impl
-     (not (OutputEq [Some (Str ''detailed_pdf_of_otherID'')])))))))
+    "(((label_eq  ''login'' aand input_eq [Str ''free'']) impl
+     (nxt (alw ((label_eq ''pdf'' aand
+     check_inx ip 1 ValueEq (Some (Str ''otherID''))) impl
+     (not (output_eq [Some (Str ''detailed_pdf_of_otherID'')])))))))
      (watch linkedIn i)"
   apply (simp add: watch_def ltl_step_alt)
-  apply (simp add: InputEq_def LabelEq_def)
+  apply (simp add: input_eq_def label_eq_def)
   apply (simp add: implode login_user apply_updates_login)
   using after_login[of "stl i"]
   by (simp add: alw_mono)

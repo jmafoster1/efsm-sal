@@ -115,11 +115,11 @@
 \ \ {\isachardoublequoteopen}Registers\ n\ s\ {\isasymequiv}\ datastate\ {\isacharparenleft}shd\ s{\isacharparenright}\ {\isachardollar}\ n{\isachardoublequoteclose}\isanewline
 \isanewline
 \isacommand{definition}\isamarkupfalse%
-\ StateEq\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}nat\ option\ {\isasymRightarrow}\ state\ stream\ {\isasymRightarrow}\ bool{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
-\ \ {\isachardoublequoteopen}StateEq\ v\ s\ {\isasymequiv}\ statename\ {\isacharparenleft}shd\ s{\isacharparenright}\ {\isacharequal}\ v{\isachardoublequoteclose}\isanewline
+\ state_eq\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}nat\ option\ {\isasymRightarrow}\ state\ stream\ {\isasymRightarrow}\ bool{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+\ \ {\isachardoublequoteopen}state_eq\ v\ s\ {\isasymequiv}\ statename\ {\isacharparenleft}shd\ s{\isacharparenright}\ {\isacharequal}\ v{\isachardoublequoteclose}\isanewline
 \isanewline
 \isacommand{lemma}\isamarkupfalse%
-\ StateEq{\isacharunderscore}None{\isacharunderscore}not{\isacharunderscore}Some{\isacharcolon}\ {\isachardoublequoteopen}StateEq\ None\ s\ {\isasymLongrightarrow}\ {\isasymnot}\ StateEq\ {\isacharparenleft}Some\ n{\isacharparenright}\ s{\isachardoublequoteclose}\isanewline
+\ state_eq{\isacharunderscore}None{\isacharunderscore}not{\isacharunderscore}Some{\isacharcolon}\ {\isachardoublequoteopen}state_eq\ None\ s\ {\isasymLongrightarrow}\ {\isasymnot}\ state_eq\ {\isacharparenleft}Some\ n{\isacharparenright}\ s{\isachardoublequoteclose}\isanewline
 %
 \isadelimproof
 \ \ %
@@ -127,7 +127,7 @@
 %
 \isatagproof
 \isacommand{by}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ StateEq{\isacharunderscore}def{\isacharparenright}%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ state_eq{\isacharunderscore}def{\isacharparenright}%
 \endisatagproof
 {\isafoldproof}%
 %
@@ -137,11 +137,11 @@
 \endisadelimproof
 \isanewline
 \isacommand{definition}\isamarkupfalse%
-\ LabelEq\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}string\ {\isasymRightarrow}\ state\ stream\ {\isasymRightarrow}\ bool{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
-\ \ {\isachardoublequoteopen}LabelEq\ v\ s\ {\isasymequiv}\ fst\ {\isacharparenleft}event\ {\isacharparenleft}shd\ s{\isacharparenright}{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}String{\isachardot}implode\ v{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ label_eq\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}string\ {\isasymRightarrow}\ state\ stream\ {\isasymRightarrow}\ bool{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+\ \ {\isachardoublequoteopen}label_eq\ v\ s\ {\isasymequiv}\ fst\ {\isacharparenleft}event\ {\isacharparenleft}shd\ s{\isacharparenright}{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}String{\isachardot}implode\ v{\isacharparenright}{\isachardoublequoteclose}\isanewline
 \isanewline
 \isacommand{lemma}\isamarkupfalse%
-\ watch{\isacharunderscore}label{\isacharcolon}\ {\isachardoublequoteopen}LabelEq\ l\ {\isacharparenleft}watch\ e\ t{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}fst\ {\isacharparenleft}shd\ t{\isacharparenright}\ {\isacharequal}\ String{\isachardot}implode\ l{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ watch{\isacharunderscore}label{\isacharcolon}\ {\isachardoublequoteopen}label_eq\ l\ {\isacharparenleft}watch\ e\ t{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}fst\ {\isacharparenleft}shd\ t{\isacharparenright}\ {\isacharequal}\ String{\isachardot}implode\ l{\isacharparenright}{\isachardoublequoteclose}\isanewline
 %
 \isadelimproof
 \ \ %
@@ -149,7 +149,7 @@
 %
 \isatagproof
 \isacommand{by}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ LabelEq{\isacharunderscore}def\ watch{\isacharunderscore}def{\isacharparenright}%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ label_eq{\isacharunderscore}def\ watch{\isacharunderscore}def{\isacharparenright}%
 \endisatagproof
 {\isafoldproof}%
 %
@@ -159,33 +159,33 @@
 \endisadelimproof
 \isanewline
 \isacommand{definition}\isamarkupfalse%
-\ InputEq\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}value\ list\ {\isasymRightarrow}\ state\ stream\ {\isasymRightarrow}\ bool{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
-\ \ {\isachardoublequoteopen}InputEq\ v\ s\ {\isasymequiv}\ inputs\ {\isacharparenleft}shd\ s{\isacharparenright}\ {\isacharequal}\ v{\isachardoublequoteclose}\isanewline
+\ input_eq\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}value\ list\ {\isasymRightarrow}\ state\ stream\ {\isasymRightarrow}\ bool{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+\ \ {\isachardoublequoteopen}input_eq\ v\ s\ {\isasymequiv}\ inputs\ {\isacharparenleft}shd\ s{\isacharparenright}\ {\isacharequal}\ v{\isachardoublequoteclose}\isanewline
 \isanewline
 \isacommand{definition}\isamarkupfalse%
 \ EventEq\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}string\ {\isasymtimes}\ inputs{\isacharparenright}\ {\isasymRightarrow}\ state\ stream\ {\isasymRightarrow}\ bool{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
-\ \ {\isachardoublequoteopen}EventEq\ e\ {\isacharequal}\ LabelEq\ {\isacharparenleft}fst\ e{\isacharparenright}\ aand\ InputEq\ {\isacharparenleft}snd\ e{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ {\isachardoublequoteopen}EventEq\ e\ {\isacharequal}\ label_eq\ {\isacharparenleft}fst\ e{\isacharparenright}\ aand\ input_eq\ {\isacharparenleft}snd\ e{\isacharparenright}{\isachardoublequoteclose}\isanewline
 \isanewline
 \isacommand{definition}\isamarkupfalse%
-\ OutputEq\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}value\ option\ list\ {\isasymRightarrow}\ state\ stream\ {\isasymRightarrow}\ bool{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
-\ \ {\isachardoublequoteopen}OutputEq\ v\ s\ {\isasymequiv}\ output\ {\isacharparenleft}shd\ s{\isacharparenright}\ {\isacharequal}\ v{\isachardoublequoteclose}\isanewline
+\ output_eq\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}value\ option\ list\ {\isasymRightarrow}\ state\ stream\ {\isasymRightarrow}\ bool{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+\ \ {\isachardoublequoteopen}output_eq\ v\ s\ {\isasymequiv}\ output\ {\isacharparenleft}shd\ s{\isacharparenright}\ {\isacharequal}\ v{\isachardoublequoteclose}\isanewline
 \isanewline
 \isacommand{definition}\isamarkupfalse%
-\ InputLength\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}nat\ {\isasymRightarrow}\ state\ stream\ {\isasymRightarrow}\ bool{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
-\ \ {\isachardoublequoteopen}InputLength\ v\ s\ {\isasymequiv}\ length\ {\isacharparenleft}inputs\ {\isacharparenleft}shd\ s{\isacharparenright}{\isacharparenright}\ {\isacharequal}\ v{\isachardoublequoteclose}\isanewline
+\ input_length\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}nat\ {\isasymRightarrow}\ state\ stream\ {\isasymRightarrow}\ bool{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+\ \ {\isachardoublequoteopen}input_length\ v\ s\ {\isasymequiv}\ length\ {\isacharparenleft}inputs\ {\isacharparenleft}shd\ s{\isacharparenright}{\isacharparenright}\ {\isacharequal}\ v{\isachardoublequoteclose}\isanewline
 \isanewline
 \isacommand{definition}\isamarkupfalse%
-\ OutputLength\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}nat\ {\isasymRightarrow}\ state\ stream\ {\isasymRightarrow}\ bool{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
-\ \ {\isachardoublequoteopen}OutputLength\ v\ s\ {\isasymequiv}\ length\ {\isacharparenleft}output\ {\isacharparenleft}shd\ s{\isacharparenright}{\isacharparenright}\ {\isacharequal}\ v{\isachardoublequoteclose}\isanewline
+\ output_length\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}nat\ {\isasymRightarrow}\ state\ stream\ {\isasymRightarrow}\ bool{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+\ \ {\isachardoublequoteopen}output_length\ v\ s\ {\isasymequiv}\ length\ {\isacharparenleft}output\ {\isacharparenleft}shd\ s{\isacharparenright}{\isacharparenright}\ {\isacharequal}\ v{\isachardoublequoteclose}\isanewline
 \isanewline
 \isacommand{fun}\isamarkupfalse%
-\ {\isachardoublequoteopen}checkInx{\isachardoublequoteclose}\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}ior\ {\isasymRightarrow}\ nat\ {\isasymRightarrow}\ {\isacharparenleft}value\ option\ {\isasymRightarrow}\ value\ option\ {\isasymRightarrow}\ trilean{\isacharparenright}\ {\isasymRightarrow}\ value\ option\ {\isasymRightarrow}\ state\ stream\ {\isasymRightarrow}\ bool{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
-\ \ {\isachardoublequoteopen}checkInx\ ior{\isachardot}ip\ n\ f\ v\ s\ {\isacharequal}\ {\isacharparenleft}f\ {\isacharparenleft}Some\ {\isacharparenleft}Inputs\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}\ s{\isacharparenright}{\isacharparenright}\ v\ {\isacharequal}\ trilean{\isachardot}true{\isacharparenright}{\isachardoublequoteclose}\ {\isacharbar}\isanewline
-\ \ {\isachardoublequoteopen}checkInx\ ior{\isachardot}op\ n\ f\ v\ s\ {\isacharequal}\ {\isacharparenleft}f\ {\isacharparenleft}Outputs\ n\ s{\isacharparenright}\ v\ {\isacharequal}\ trilean{\isachardot}true{\isacharparenright}{\isachardoublequoteclose}\ {\isacharbar}\isanewline
-\ \ {\isachardoublequoteopen}checkInx\ ior{\isachardot}rg\ n\ f\ v\ s\ {\isacharequal}\ {\isacharparenleft}f\ {\isacharparenleft}datastate\ {\isacharparenleft}shd\ s{\isacharparenright}\ {\isachardollar}\ n{\isacharparenright}\ v\ {\isacharequal}\ trilean{\isachardot}true{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ {\isachardoublequoteopen}check_inx{\isachardoublequoteclose}\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}ior\ {\isasymRightarrow}\ nat\ {\isasymRightarrow}\ {\isacharparenleft}value\ option\ {\isasymRightarrow}\ value\ option\ {\isasymRightarrow}\ trilean{\isacharparenright}\ {\isasymRightarrow}\ value\ option\ {\isasymRightarrow}\ state\ stream\ {\isasymRightarrow}\ bool{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+\ \ {\isachardoublequoteopen}check_inx\ ior{\isachardot}ip\ n\ f\ v\ s\ {\isacharequal}\ {\isacharparenleft}f\ {\isacharparenleft}Some\ {\isacharparenleft}Inputs\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}\ s{\isacharparenright}{\isacharparenright}\ v\ {\isacharequal}\ trilean{\isachardot}true{\isacharparenright}{\isachardoublequoteclose}\ {\isacharbar}\isanewline
+\ \ {\isachardoublequoteopen}check_inx\ ior{\isachardot}op\ n\ f\ v\ s\ {\isacharequal}\ {\isacharparenleft}f\ {\isacharparenleft}Outputs\ n\ s{\isacharparenright}\ v\ {\isacharequal}\ trilean{\isachardot}true{\isacharparenright}{\isachardoublequoteclose}\ {\isacharbar}\isanewline
+\ \ {\isachardoublequoteopen}check_inx\ ior{\isachardot}rg\ n\ f\ v\ s\ {\isacharequal}\ {\isacharparenleft}f\ {\isacharparenleft}datastate\ {\isacharparenleft}shd\ s{\isacharparenright}\ {\isachardollar}\ n{\isacharparenright}\ v\ {\isacharequal}\ trilean{\isachardot}true{\isacharparenright}{\isachardoublequoteclose}\isanewline
 \isanewline
 \isacommand{lemma}\isamarkupfalse%
-\ shd{\isacharunderscore}state{\isacharunderscore}is{\isacharunderscore}none{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}StateEq\ None{\isacharparenright}\ {\isacharparenleft}make{\isacharunderscore}full{\isacharunderscore}observation\ e\ None\ r\ t{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ shd{\isacharunderscore}state{\isacharunderscore}is{\isacharunderscore}none{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}state_eq\ None{\isacharparenright}\ {\isacharparenleft}make{\isacharunderscore}full{\isacharunderscore}observation\ e\ None\ r\ t{\isacharparenright}{\isachardoublequoteclose}\isanewline
 %
 \isadelimproof
 \ \ %
@@ -193,7 +193,7 @@
 %
 \isatagproof
 \isacommand{by}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ StateEq{\isacharunderscore}def{\isacharparenright}%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ state_eq{\isacharunderscore}def{\isacharparenright}%
 \endisatagproof
 {\isafoldproof}%
 %
@@ -221,7 +221,7 @@
 \endisadelimproof
 \isanewline
 \isacommand{lemma}\isamarkupfalse%
-\ once{\isacharunderscore}none{\isacharunderscore}always{\isacharunderscore}none{\isacharcolon}\ {\isachardoublequoteopen}alw\ {\isacharparenleft}StateEq\ None{\isacharparenright}\ {\isacharparenleft}make{\isacharunderscore}full{\isacharunderscore}observation\ e\ None\ r\ t{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ once{\isacharunderscore}none{\isacharunderscore}always{\isacharunderscore}none{\isacharcolon}\ {\isachardoublequoteopen}alw\ {\isacharparenleft}state_eq\ None{\isacharparenright}\ {\isacharparenleft}make{\isacharunderscore}full{\isacharunderscore}observation\ e\ None\ r\ t{\isacharparenright}{\isachardoublequoteclose}\isanewline
 %
 \isadelimproof
 %
@@ -239,7 +239,7 @@
 \ \isacommand{show}\isamarkupfalse%
 \ {\isacharquery}thesis\isanewline
 \ \ \ \ \isacommand{by}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ StateEq{\isacharunderscore}def\ all{\isacharunderscore}imp{\isacharunderscore}alw{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ state_eq{\isacharunderscore}def\ all{\isacharunderscore}imp{\isacharunderscore}alw{\isacharparenright}\isanewline
 \isacommand{qed}\isamarkupfalse%
 %
 \endisatagproof
@@ -251,7 +251,7 @@
 \endisadelimproof
 \isanewline
 \isacommand{lemma}\isamarkupfalse%
-\ no{\isacharunderscore}output{\isacharunderscore}none{\isacharcolon}\ {\isachardoublequoteopen}alw\ {\isacharparenleft}OutputEq\ {\isacharbrackleft}{\isacharbrackright}{\isacharparenright}\ {\isacharparenleft}make{\isacharunderscore}full{\isacharunderscore}observation\ e\ None\ r\ t{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ no{\isacharunderscore}output{\isacharunderscore}none{\isacharcolon}\ {\isachardoublequoteopen}alw\ {\isacharparenleft}output_eq\ {\isacharbrackleft}{\isacharbrackright}{\isacharparenright}\ {\isacharparenleft}make{\isacharunderscore}full{\isacharunderscore}observation\ e\ None\ r\ t{\isacharparenright}{\isachardoublequoteclose}\isanewline
 %
 \isadelimproof
 %
@@ -269,7 +269,7 @@
 \ \isacommand{show}\isamarkupfalse%
 \ {\isacharquery}thesis\isanewline
 \ \ \ \ \isacommand{by}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ OutputEq{\isacharunderscore}def\ all{\isacharunderscore}imp{\isacharunderscore}alw{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ output_eq{\isacharunderscore}def\ all{\isacharunderscore}imp{\isacharunderscore}alw{\isacharparenright}\isanewline
 \isacommand{qed}\isamarkupfalse%
 %
 \endisatagproof
@@ -311,7 +311,7 @@
 \endisadelimproof
 \isanewline
 \isacommand{lemma}\isamarkupfalse%
-\ no{\isacharunderscore}updates{\isacharunderscore}none{\isacharunderscore}individual{\isacharcolon}\ {\isachardoublequoteopen}alw\ {\isacharparenleft}checkInx\ rg\ n\ ValueEq\ {\isacharparenleft}r\ {\isachardollar}\ n{\isacharparenright}{\isacharparenright}\ {\isacharparenleft}make{\isacharunderscore}full{\isacharunderscore}observation\ e\ None\ r\ t{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ no{\isacharunderscore}updates{\isacharunderscore}none{\isacharunderscore}individual{\isacharcolon}\ {\isachardoublequoteopen}alw\ {\isacharparenleft}check_inx\ rg\ n\ ValueEq\ {\isacharparenleft}r\ {\isachardollar}\ n{\isacharparenright}{\isacharparenright}\ {\isacharparenleft}make{\isacharunderscore}full{\isacharunderscore}observation\ e\ None\ r\ t{\isacharparenright}{\isachardoublequoteclose}\isanewline
 %
 \isadelimproof
 %
@@ -341,7 +341,7 @@
 \endisadelimproof
 \isanewline
 \isacommand{lemma}\isamarkupfalse%
-\ event{\isacharunderscore}components{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}LabelEq\ l\ aand\ InputEq\ i{\isacharparenright}\ s\ {\isacharequal}\ {\isacharparenleft}event\ {\isacharparenleft}shd\ s{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}String{\isachardot}implode\ l{\isacharcomma}\ i{\isacharparenright}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ event{\isacharunderscore}components{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}label_eq\ l\ aand\ input_eq\ i{\isacharparenright}\ s\ {\isacharequal}\ {\isacharparenleft}event\ {\isacharparenleft}shd\ s{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}String{\isachardot}implode\ l{\isacharcomma}\ i{\isacharparenright}{\isacharparenright}{\isachardoublequoteclose}\isanewline
 %
 \isadelimproof
 \ \ %
@@ -349,7 +349,7 @@
 %
 \isatagproof
 \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ LabelEq{\isacharunderscore}def\ InputEq{\isacharunderscore}def{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ label_eq{\isacharunderscore}def\ input_eq{\isacharunderscore}def{\isacharparenright}\isanewline
 \ \ \isacommand{by}\isamarkupfalse%
 \ {\isacharparenleft}metis\ fst{\isacharunderscore}conv\ prod{\isachardot}collapse\ snd{\isacharunderscore}conv{\isacharparenright}%
 \endisatagproof
@@ -371,7 +371,7 @@
 \isacommand{using}\isamarkupfalse%
 \ once{\isacharunderscore}none{\isacharunderscore}always{\isacharunderscore}none{\isacharbrackleft}of\ e\ r\ t{\isacharbrackright}\isanewline
 \ \ \isacommand{unfolding}\isamarkupfalse%
-\ StateEq{\isacharunderscore}def\isanewline
+\ state_eq{\isacharunderscore}def\isanewline
 \ \ \isacommand{by}\isamarkupfalse%
 \ {\isacharparenleft}simp\ add{\isacharcolon}\ alw{\isacharunderscore}mono{\isacharparenright}%
 \endisatagproof

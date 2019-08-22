@@ -1,4 +1,4 @@
-coin_choc_broken {N_ : nznat} : CONTEXT = BEGIN
+coin_choc_broken {n_ : nznat} : CONTEXT = BEGIN
 
 LABEL : TYPE = DATATYPE
   coin,
@@ -7,63 +7,28 @@ LABEL : TYPE = DATATYPE
 END;
 
 STRING : TYPE = {String_dummy_};
-                                                                 %%10
-STATES : TYPE = {State_0, State_1, State_2, NULL_STATE};
+STATE : TYPE = {State_0, State_1, State_2, NULL_STATE};
 
-value : CONTEXT = value {N_, STRING};
-arithmetic : CONTEXT = arithmetic{N_, STRING};
+IMPORTING trilean;
+IMPORTING value{n_, STRING};
+IMPORTING option{VALUE};
+IMPORTING arithmetic{n_, STRING};
 
-TRILEAN : TYPE = arithmetic ! TRILEAN;
-B_VALUE : TYPE =  value ! B_VALUE;
-VALUE : TYPE =  value ! VALUE;
-value_option : CONTEXT = option {VALUE};
-                                                                 %%20
-VALUE_OPTION : TYPE =  value_option ! OPTION;
-
-Some : [VALUE -> VALUE_OPTION] = value_option ! Some;
-NUM : [value ! int -> VALUE] = value ! NUM;
-STR : [STRING -> VALUE] = value ! STR;
-
-value_plus : [[VALUE_OPTION, VALUE_OPTION] -> VALUE_OPTION] =
-    arithmetic ! value_plus;
-value_minus : [[VALUE_OPTION, VALUE_OPTION] -> VALUE_OPTION] =
-    arithmetic ! value_minus;                                      %%30
-
-value_le : [[VALUE_OPTION, VALUE_OPTION] -> TRILEAN] =
-    arithmetic ! value_le;
-value_ge : [[VALUE_OPTION, VALUE_OPTION] -> TRILEAN] =
-    arithmetic ! value_ge;
-value_lt : [[VALUE_OPTION, VALUE_OPTION] -> TRILEAN] =
-    arithmetic ! value_lt;
-value_gt : [[VALUE_OPTION, VALUE_OPTION] -> TRILEAN] =
-    arithmetic ! value_gt;
-value_eq : [[VALUE_OPTION, VALUE_OPTION] -> TRILEAN] =           %%40
-    arithmetic ! value_eq;
-
-output_sequence : CONTEXT = sequence {value_option !
-    B_OPTION, value_option ! OPTION_BB, 1};
-input_sequence : CONTEXT = sequence {B_VALUE, value !
-    VALUE_BB, 1};
-gval : [TRILEAN -> BOOLEAN] = LAMBDA(g : TRILEAN) : g =
-    arithmetic ! True;
-
-check_underflow : [VALUE_OPTION -> BOOLEAN] =                    %%50
-    LAMBDA(v : VALUE_OPTION) : gval(value_ge(v, Some(NUM(0-N_))));
-check_overflow : [VALUE_OPTION -> BOOLEAN] =
-    LAMBDA(v : VALUE_OPTION) : gval(value_le(v, Some(NUM(N_))));
+output_sequence : CONTEXT = sequence {B_OPTION, OptionBB, 1};
+input_sequence : CONTEXT = sequence {B_VALUE, ValueBB, 1};
 
 drinks : MODULE =
   BEGIN
     INPUT label : LABEL
-    LOCAL cfstate : STATES
-    LOCAL r_1 : VALUE_OPTION
+    LOCAL cfstate : STATE
+    LOCAL r_1 : OPTION
     INPUT I : input_sequence ! Sequence                          %%60
     OUTPUT O : output_sequence ! Sequence
     INITIALIZATION [
         cfstate = State_0 AND
         I = input_sequence ! empty AND
         O = output_sequence ! empty AND
-        r_1 = value_option ! None
+        r_1 = None
       -->
     ]
     TRANSITION [
@@ -73,30 +38,30 @@ drinks : MODULE =
               input_sequence ! size?(I) = 0
         -->
           cfstate' = State_1;
-          r_1' = Some(NUM(0));
+          r_1' = Some(Num(0));
           O' = output_sequence ! empty
       []
       %% coin
       COIN :                                                     %%80
           cfstate = State_1 AND label = coin AND
               input_sequence ! size?(I) = 0 AND
-              check_overflow(value_plus(r_1, Some(NUM(1)))) AND
-              check_underflow(value_plus(r_1, Some(NUM(1))))
+              check_overflow(value_plus(r_1, Some(Num(1)))) AND
+              check_underflow(value_plus(r_1, Some(Num(1))))
         -->
           cfstate' = State_1;
-          r_1' = value_plus(r_1, Some(NUM(1)));
+          r_1' = value_plus(r_1, Some(Num(1)));
           O' = output_sequence ! empty
       []
       %% vend                                                    %%90
       VEND :
           cfstate = State_1 AND label = vend AND
               input_sequence ! size?(I) = 0 AND
-              gval(value_ge(r_1, Some(NUM(0)))) AND
-              check_overflow(value_minus(r_1, Some(NUM(1)))) AND
-              check_underflow(value_minus(r_1, Some(NUM(1))))
+              gval(value_ge(r_1, Some(Num(0)))) AND
+              check_overflow(value_minus(r_1, Some(Num(1)))) AND
+              check_underflow(value_minus(r_1, Some(Num(1))))
         -->
           cfstate' = State_2;
-          r_1' = value_minus(r_1, Some(NUM(1)));
+          r_1' = value_minus(r_1, Some(Num(1)));
           O' = output_sequence ! empty                           %%100
       []
       SINK_HOLE :
@@ -115,7 +80,7 @@ drinks : MODULE =
   LTL_init_makes_r_1_zero : THEOREM drinks |-
     label = init AND
         I = input_sequence ! empty =>
-        X(gval(value_eq(r_1,(Some(NUM(0))))));
+        X(gval(value_eq(r_1,(Some(Num(0))))));
 
   LTL_must_pay_wrong : THEOREM drinks |-                         %%120
     U(NOT (U(label = vend, label = coin)), cfstate = NULL_STATE);

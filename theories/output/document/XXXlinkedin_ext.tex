@@ -552,7 +552,7 @@
 \ \ \ \ \isacommand{using}\isamarkupfalse%
 \ no{\isacharunderscore}output{\isacharunderscore}none{\isacharbrackleft}of\ linkedIn\ {\isachardoublequoteopen}{\isacharless}{\isachargreater}{\isachardoublequoteclose}\ {\isachardoublequoteopen}stl\ {\isacharparenleft}stl\ {\isacharparenleft}stl\ i{\isacharparenright}{\isacharparenright}{\isachardoublequoteclose}{\isacharbrackright}\isanewline
 \ \ \ \ \isacommand{unfolding}\isamarkupfalse%
-\ OutputEq{\isacharunderscore}def\isanewline
+\ output_eq{\isacharunderscore}def\isanewline
 \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}simp\ add{\isacharcolon}\ alw{\isacharunderscore}mono{\isacharparenright}\isanewline
 \ \ \ \ \isacommand{apply}\isamarkupfalse%
@@ -566,7 +566,7 @@
 \ \ \ \ \isacommand{using}\isamarkupfalse%
 \ no{\isacharunderscore}output{\isacharunderscore}none{\isacharbrackleft}of\ linkedIn\ {\isachardoublequoteopen}{\isacharless}{\isachargreater}{\isachardoublequoteclose}\ {\isachardoublequoteopen}stl\ {\isacharparenleft}stl\ {\isacharparenleft}stl\ i{\isacharparenright}{\isacharparenright}{\isachardoublequoteclose}{\isacharbrackright}\isanewline
 \ \ \ \ \isacommand{unfolding}\isamarkupfalse%
-\ OutputEq{\isacharunderscore}def\isanewline
+\ output_eq{\isacharunderscore}def\isanewline
 \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}simp\ add{\isacharcolon}\ alw{\isacharunderscore}mono{\isacharparenright}\isanewline
 \ \ \ \ \isacommand{apply}\isamarkupfalse%
@@ -591,7 +591,7 @@
 \isanewline
 \isacommand{lemma}\isamarkupfalse%
 \ after{\isacharunderscore}login{\isacharcolon}\ {\isachardoublequoteopen}alw\ {\isacharparenleft}{\isasymlambda}xs{\isachardot}\ label\ {\isacharparenleft}shd\ xs{\isacharparenright}\ {\isacharequal}\ String{\isachardot}implode\ {\isacharprime}{\isacharprime}pdf{\isacharprime}{\isacharprime}\ {\isasymand}\ ValueEq\ {\isacharparenleft}Some\ {\isacharparenleft}Inputs\ {\isadigit{0}}\ xs{\isacharparenright}{\isacharparenright}\ {\isacharparenleft}Some\ {\isacharparenleft}EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}otherID{\isacharprime}{\isacharprime}{\isacharparenright}{\isacharparenright}\ {\isacharequal}\ trilean{\isachardot}true\ {\isasymlongrightarrow}\isanewline
-\ \ \ \ \ \ \ \ \ \ \ \ \ \ {\isasymnot}\ OutputEq\ {\isacharbrackleft}Some\ {\isacharparenleft}EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}detailed{\isacharunderscore}pdf{\isacharunderscore}of{\isacharunderscore}otherID{\isacharprime}{\isacharprime}{\isacharparenright}{\isacharbrackright}\ xs{\isacharparenright}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ {\isasymnot}\ output_eq\ {\isacharbrackleft}Some\ {\isacharparenleft}EFSM{\isachardot}Str\ {\isacharprime}{\isacharprime}detailed{\isacharunderscore}pdf{\isacharunderscore}of{\isacharunderscore}otherID{\isacharprime}{\isacharprime}{\isacharparenright}{\isacharbrackright}\ xs{\isacharparenright}\isanewline
 \ \ \ \ \ {\isacharparenleft}make{\isacharunderscore}full{\isacharunderscore}observation\ linkedIn\ {\isacharparenleft}Some\ {\isadigit{1}}{\isacharparenright}\ {\isacharless}{\isachargreater}\ {\isacharparenleft}stl\ i{\isacharparenright}{\isacharparenright}{\isachardoublequoteclose}\isanewline
 %
 \isadelimproof
@@ -617,7 +617,7 @@
 \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
 \ standard\isanewline
 \ \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ OutputEq{\isacharunderscore}def\ ltl{\isacharunderscore}step{\isacharunderscore}alt\ not{\isacharunderscore}view{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ output_eq{\isacharunderscore}def\ ltl{\isacharunderscore}step{\isacharunderscore}alt\ not{\isacharunderscore}view{\isacharparenright}\isanewline
 \ \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
 \ standard\isanewline
 \ \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
@@ -625,7 +625,7 @@
 \ \ \ \ \isacommand{using}\isamarkupfalse%
 \ no{\isacharunderscore}output{\isacharunderscore}none{\isacharbrackleft}of\ linkedIn\ {\isachardoublequoteopen}{\isacharless}{\isachargreater}{\isachardoublequoteclose}\ {\isachardoublequoteopen}stl\ {\isacharparenleft}stl\ i{\isacharparenright}{\isachardoublequoteclose}{\isacharbrackright}\isanewline
 \ \ \ \ \isacommand{unfolding}\isamarkupfalse%
-\ OutputEq{\isacharunderscore}def\isanewline
+\ output_eq{\isacharunderscore}def\isanewline
 \ \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}simp\ add{\isacharcolon}\ alw{\isacharunderscore}mono{\isacharparenright}\isanewline
 \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
@@ -635,11 +635,11 @@
 \ \ \ \ \isacommand{using}\isamarkupfalse%
 \ no{\isacharunderscore}output{\isacharunderscore}none{\isacharbrackleft}of\ linkedIn\ {\isachardoublequoteopen}{\isacharless}{\isachargreater}{\isachardoublequoteclose}\ {\isachardoublequoteopen}stl\ {\isacharparenleft}stl\ i{\isacharparenright}{\isachardoublequoteclose}{\isacharbrackright}\isanewline
 \ \ \ \ \isacommand{unfolding}\isamarkupfalse%
-\ OutputEq{\isacharunderscore}def\isanewline
+\ output_eq{\isacharunderscore}def\isanewline
 \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}simp\ add{\isacharcolon}\ alw{\isacharunderscore}mono{\isacharparenright}\isanewline
 \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ OutputEq{\isacharunderscore}def{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ output_eq{\isacharunderscore}def{\isacharparenright}\isanewline
 \ \ \ \ \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}{\isacharparenleft}snd\ {\isacharparenleft}shd\ {\isacharparenleft}stl\ i{\isacharparenright}{\isacharparenright}{\isacharparenright}\ {\isacharequal}\ {\isacharbrackleft}Str\ {\isacharprime}{\isacharprime}otherID{\isacharprime}{\isacharprime}{\isacharcomma}\ Str\ {\isacharprime}{\isacharprime}name{\isacharprime}{\isacharprime}{\isacharcomma}\ Str\ {\isacharprime}{\isacharprime}MNn{\isadigit{5}}{\isacharprime}{\isacharprime}{\isacharbrackright}{\isachardoublequoteclose}{\isacharparenright}\isanewline
 \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
@@ -658,10 +658,10 @@
 \snip{neverDetailed}{1}{2}{%
 \isacommand{lemma}\isamarkupfalse%
 \ LTL{\isacharunderscore}neverDetailed{\isacharcolon}\isanewline
-\ \ \ \ {\isachardoublequoteopen}{\isacharparenleft}{\isacharparenleft}{\isacharparenleft}LabelEq\ \ {\isacharprime}{\isacharprime}login{\isacharprime}{\isacharprime}\ aand\ InputEq\ {\isacharbrackleft}Str\ {\isacharprime}{\isacharprime}free{\isacharprime}{\isacharprime}{\isacharbrackright}{\isacharparenright}\ impl\isanewline
-\ \ \ \ \ {\isacharparenleft}nxt\ {\isacharparenleft}alw\ {\isacharparenleft}{\isacharparenleft}LabelEq\ {\isacharprime}{\isacharprime}pdf{\isacharprime}{\isacharprime}\ aand\isanewline
-\ \ \ \ \ checkInx\ ip\ {\isadigit{1}}\ ValueEq\ {\isacharparenleft}Some\ {\isacharparenleft}Str\ {\isacharprime}{\isacharprime}otherID{\isacharprime}{\isacharprime}{\isacharparenright}{\isacharparenright}{\isacharparenright}\ impl\ \isanewline
-\ \ \ \ \ {\isacharparenleft}not\ {\isacharparenleft}OutputEq\ {\isacharbrackleft}Some\ {\isacharparenleft}Str\ {\isacharprime}{\isacharprime}detailed{\isacharunderscore}pdf{\isacharunderscore}of{\isacharunderscore}otherID{\isacharprime}{\isacharprime}{\isacharparenright}{\isacharbrackright}{\isacharparenright}{\isacharparenright}{\isacharparenright}{\isacharparenright}{\isacharparenright}{\isacharparenright}{\isacharparenright}\isanewline
+\ \ \ \ {\isachardoublequoteopen}{\isacharparenleft}{\isacharparenleft}{\isacharparenleft}label_eq\ \ {\isacharprime}{\isacharprime}login{\isacharprime}{\isacharprime}\ aand\ input_eq\ {\isacharbrackleft}Str\ {\isacharprime}{\isacharprime}free{\isacharprime}{\isacharprime}{\isacharbrackright}{\isacharparenright}\ impl\isanewline
+\ \ \ \ \ {\isacharparenleft}nxt\ {\isacharparenleft}alw\ {\isacharparenleft}{\isacharparenleft}label_eq\ {\isacharprime}{\isacharprime}pdf{\isacharprime}{\isacharprime}\ aand\isanewline
+\ \ \ \ \ check_inx\ ip\ {\isadigit{1}}\ ValueEq\ {\isacharparenleft}Some\ {\isacharparenleft}Str\ {\isacharprime}{\isacharprime}otherID{\isacharprime}{\isacharprime}{\isacharparenright}{\isacharparenright}{\isacharparenright}\ impl\ \isanewline
+\ \ \ \ \ {\isacharparenleft}not\ {\isacharparenleft}output_eq\ {\isacharbrackleft}Some\ {\isacharparenleft}Str\ {\isacharprime}{\isacharprime}detailed{\isacharunderscore}pdf{\isacharunderscore}of{\isacharunderscore}otherID{\isacharprime}{\isacharprime}{\isacharparenright}{\isacharbrackright}{\isacharparenright}{\isacharparenright}{\isacharparenright}{\isacharparenright}{\isacharparenright}{\isacharparenright}{\isacharparenright}\isanewline
 \ \ \ \ \ {\isacharparenleft}watch\ linkedIn\ i{\isacharparenright}{\isachardoublequoteclose}%
 }%endsnip
 %
@@ -673,7 +673,7 @@
 \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}simp\ add{\isacharcolon}\ watch{\isacharunderscore}def\ ltl{\isacharunderscore}step{\isacharunderscore}alt{\isacharparenright}\isanewline
 \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ InputEq{\isacharunderscore}def\ LabelEq{\isacharunderscore}def\ implode{\isacharunderscore}login{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ input_eq{\isacharunderscore}def\ label_eq{\isacharunderscore}def\ implode{\isacharunderscore}login{\isacharparenright}\isanewline
 \ \ \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}simp\ add{\isacharcolon}\ login{\isacharunderscore}free\ login{\isacharunderscore}def{\isacharparenright}\isanewline
 \ \ \isacommand{apply}\isamarkupfalse%

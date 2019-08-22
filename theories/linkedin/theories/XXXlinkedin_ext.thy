@@ -231,14 +231,14 @@ proof(coinduction)
      defer
      apply (simp add: not_pdf_6)
     using no_output_none[of linkedIn "<>" "stl (stl (stl i))"]
-    unfolding OutputEq_def
+    unfolding output_eq_def
      apply (simp add: alw_mono)
     apply simp
     apply (case_tac "(snd (shd (stl (stl i)))) = [Str ''otherID'', Str ''name'', Str ''4zoF'']")
      defer
      apply (simp add: pdf_6_invalid_inputs)
     using no_output_none[of linkedIn "<>" "stl (stl (stl i))"]
-    unfolding OutputEq_def
+    unfolding output_eq_def
      apply (simp add: alw_mono)
     apply (simp add: pdf_fuzz pdf2_def)
     apply standard
@@ -248,7 +248,7 @@ proof(coinduction)
     oops
 
 lemma after_login: "alw (\<lambda>xs. label (shd xs) = String.implode ''pdf'' \<and> ValueEq (Some (Inputs 0 xs)) (Some (EFSM.Str ''otherID'')) = trilean.true \<longrightarrow>
-              \<not> OutputEq [Some (EFSM.Str ''detailed_pdf_of_otherID'')] xs)
+              \<not> output_eq [Some (EFSM.Str ''detailed_pdf_of_otherID'')] xs)
      (make_full_observation linkedIn (Some 1) <> (stl i))"
 proof(coinduction)
   case alw
@@ -258,18 +258,18 @@ proof(coinduction)
      defer
      apply (simp add: not_view)
      apply standard
-      apply (simp add: OutputEq_def ltl_step_alt not_view)
+      apply (simp add: output_eq_def ltl_step_alt not_view)
       apply standard
       apply (rule disjI2)
     using no_output_none[of linkedIn "<>" "stl (stl i)"]
-    unfolding OutputEq_def
+    unfolding output_eq_def
       apply (simp add: alw_mono)
      apply standard
       apply (rule disjI2)
     using no_output_none[of linkedIn "<>" "stl (stl i)"]
-    unfolding OutputEq_def
+    unfolding output_eq_def
      apply (simp add: alw_mono)
-     apply (simp add: OutputEq_def)
+     apply (simp add: output_eq_def)
     apply (case_tac "(snd (shd (stl i))) = [Str ''otherID'', Str ''name'', Str ''MNn5'']")
      apply (simp add: ltl_step_alt view_fuzz view3_def)
     apply (rule disjI2)
@@ -277,14 +277,14 @@ proof(coinduction)
 
 text_raw\<open>\snip{neverDetailed}{1}{2}{%\<close>
 lemma LTL_neverDetailed:
-    "(((LabelEq  ''login'' aand InputEq [Str ''free'']) impl
-     (nxt (alw ((LabelEq ''pdf'' aand
-     checkInx ip 1 ValueEq (Some (Str ''otherID''))) impl 
-     (not (OutputEq [Some (Str ''detailed_pdf_of_otherID'')])))))))
+    "(((label_eq  ''login'' aand input_eq [Str ''free'']) impl
+     (nxt (alw ((label_eq ''pdf'' aand
+     check_inx ip 1 ValueEq (Some (Str ''otherID''))) impl 
+     (not (output_eq [Some (Str ''detailed_pdf_of_otherID'')])))))))
      (watch linkedIn i)"
 text_raw\<open>}%endsnip\<close>
   apply (simp add: watch_def ltl_step_alt)
-  apply (simp add: InputEq_def LabelEq_def implode_login)
+  apply (simp add: input_eq_def label_eq_def implode_login)
   apply (simp add: login_free login_def)
   apply standard
   oops

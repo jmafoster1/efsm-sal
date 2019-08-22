@@ -1,14 +1,14 @@
-value {N_: nznat; string: TYPE} : CONTEXT = BEGIN
-  int : TYPE = [(0-N_)..N_];
+value {n_: INTEGER; string: TYPE} : CONTEXT = BEGIN
+  INT : TYPE = [(0-n_)..n_];
 
   % The VALUE type for inputs, outputs, and registers with a bottom element
   B_VALUE : TYPE = DATATYPE
-    VALUE_BB,
-    STR(stringOf: string),
-    NUM(intOf: int)
+    ValueBB,
+    Str(stringOf: string),
+    Num(intOf: INT)
   END;
 
   % Remove the bottom element for general use
-  VALUE : TYPE = {g : B_VALUE | g /= VALUE_BB};
+  VALUE : TYPE = {g : B_VALUE | g /= ValueBB};
 
 END

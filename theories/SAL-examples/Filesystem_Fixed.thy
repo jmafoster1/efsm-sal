@@ -169,8 +169,8 @@ lemma implode_login: "String.implode ''login'' = STR ''login''"
   by (metis Literal.rep_eq String.implode_explode_eq zero_literal.rep_eq)
 
 text_raw{*\snip{userdetails}{1}{2}{%*}
-lemma LTL_user_details_stored_in_r1: "((LabelEq ''login'' aand InputEq [u]) impl
-                                      (nxt (checkInx rg 1 ValueEq (Some u)))) (watch filesystem i)"
+lemma LTL_user_details_stored_in_r1: "((label_eq ''login'' aand input_eq [u]) impl
+                                      (nxt (check_inx rg 1 ValueEq (Some u)))) (watch filesystem i)"
   by (simp add: event_components implode_login possible_steps_0 login_def watch_def ValueEq_def datastate)  
 text_raw{*}%endsnip*}
 

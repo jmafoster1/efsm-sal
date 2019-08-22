@@ -56,7 +56,7 @@ lemma possible_steps_not_init: "\<not> (a = STR ''init'' \<and> b = []) \<Longri
     apply clarify
     by (simp add: init_def)
 
-lemma aux1: "\<not> StateEq (Some 2)
+lemma aux1: "\<not> state_eq (Some 2)
         (make_full_observation drinks (fst (ltl_step drinks (Some 0) <> (shd t)))
           (snd (snd (ltl_step drinks (Some 0) <> (shd t)))) (stl t))"
 proof-
@@ -64,8 +64,8 @@ proof-
     apply (case_tac "shd t")
     apply simp
     apply (case_tac "a = STR ''init'' \<and> b = []")
-     apply (simp add: possible_steps_init StateEq_def)
-    by (simp add: StateEq_def possible_steps_not_init)
+     apply (simp add: possible_steps_init state_eq_def)
+    by (simp add: state_eq_def possible_steps_not_init)
 qed
 
 lemma make_full_obs_neq: "make_full_observation drinks (fst (ltl_step drinks (Some 0) <> (shd t))) (snd (snd (ltl_step drinks (Some 0) <> (shd t))))
@@ -80,27 +80,27 @@ lemma make_full_obs_neq: "make_full_observation drinks (fst (ltl_step drinks (So
   apply (simp add: possible_steps_not_init)
   by (metis make_full_observation.simps(1) option.simps(3) state.ext_inject)
 
-lemma state_none: "((StateEq None) impl nxt (StateEq None)) (make_full_observation e s r t)"
-  by (simp add: StateEq_def)
+lemma state_none: "((state_eq None) impl nxt (state_eq None)) (make_full_observation e s r t)"
+  by (simp add: state_eq_def)
 
-lemma shd_state_is_none: "(StateEq None) (make_full_observation e None r t)"
-  by (simp add: StateEq_def)
+lemma shd_state_is_none: "(state_eq None) (make_full_observation e None r t)"
+  by (simp add: state_eq_def)
 
-lemma state_none_2: "(StateEq None) (make_full_observation e s r t) \<Longrightarrow> (StateEq None) (make_full_observation e s r (stl t))"
-  by (simp add: StateEq_def)
+lemma state_none_2: "(state_eq None) (make_full_observation e s r t) \<Longrightarrow> (state_eq None) (make_full_observation e s r (stl t))"
+  by (simp add: state_eq_def)
 
 lemma alw_ev: "alw f = not (ev (\<lambda>s. \<not>f s))"
   by simp
 
-lemma StateEq_alt: "alw (StateEq s) s' = alw (\<lambda>x. shd x = s) (smap (\<lambda>x. statename x) s')"
+lemma state_eq_alt: "alw (state_eq s) s' = alw (\<lambda>x. shd x = s) (smap (\<lambda>x. statename x) s')"
   apply standard
-  apply (simp add: StateEq_def alw_iff_sdrop)
-  by (simp add: StateEq_def alw_mono alw_smap)
+  apply (simp add: state_eq_def alw_iff_sdrop)
+  by (simp add: state_eq_def alw_mono alw_smap)
 
 lemma test: "statename (shd (make_full_observation e None r t)) = None"
   by simp
 
-lemma "alw (\<lambda>s. StateEq None (stl s)) (make_full_observation drinks None <> t)"
+lemma "alw (\<lambda>s. state_eq None (stl s)) (make_full_observation drinks None <> t)"
   by (metis alw_iff_sdrop once_none_always_none sdrop_simps(2))
 
 lemma no_possible_steps: "possible_steps e s r (fst t) (snd t) = {||} \<Longrightarrow> ltl_step e (Some s) r t = (None, [], r)"
@@ -151,8 +151,8 @@ lemma implode_init: "String.implode ''init'' = STR ''init''"
   by (metis Literal.rep_eq String.implode_explode_eq zero_literal.rep_eq)
 
 lemma not_init: "shd t \<noteq> (STR ''init'', []) \<Longrightarrow>
-    LabelEq ''init'' (watch drinks t) \<Longrightarrow> \<not> InputEq [] (watch drinks t)"
-  apply (simp add: LabelEq_def InputEq_def implode_init watch_def)
+    label_eq ''init'' (watch drinks t) \<Longrightarrow> \<not> input_eq [] (watch drinks t)"
+  apply (simp add: label_eq_def input_eq_def implode_init watch_def)
   by (metis prod.collapse)
 
 lemma implode_vend: "String.implode ''vend'' = STR ''vend''"
@@ -161,17 +161,17 @@ lemma implode_vend: "String.implode ''vend'' = STR ''vend''"
 lemma implode_coin: "String.implode ''coin'' = STR ''coin''"
   by (metis Literal.rep_eq String.implode_explode_eq zero_literal.rep_eq)
 
-lemma LTL_label_vend_not_2: "((LabelEq ''vend'') impl (not (ev (StateEq (Some 2))))) (watch drinks t)"
+lemma LTL_label_vend_not_2: "((label_eq ''vend'') impl (not (ev (state_eq (Some 2))))) (watch drinks t)"
   apply (simp only: watch_label implode_vend not_ev_iff)
   apply (simp add: watch_def)
   apply clarify
 proof(coinduction)
   case alw
   then show ?case
-    apply (simp add: StateEq_def possible_steps_not_init)
+    apply (simp add: state_eq_def possible_steps_not_init)
     apply (rule disjI2)
     using once_none_always_none
-    unfolding StateEq_def
+    unfolding state_eq_def
     by (simp add: alw_iff_sdrop)
 qed
 
@@ -192,7 +192,7 @@ lemma vend_insufficient: "possible_steps drinks 1 (<>(1 := Num 0)) STR ''vend'' 
    apply (simp add: coin_def)
   by (simp add: vend_def apply_guards)
 
-lemma LTL_init_makes_r_1_zero: "((LabelEq ''init'' aand InputEq []) impl nxt (checkInx rg 1 ValueEq (Some (Num 0)))) (watch drinks t)"
+lemma LTL_init_makes_r_1_zero: "((label_eq ''init'' aand input_eq []) impl nxt (check_inx rg 1 ValueEq (Some (Num 0)))) (watch drinks t)"
   apply (case_tac "shd t = (STR ''init'', [])")
    apply (simp add: possible_steps_init apply_updates_init ValueEq_def watch_def)
   apply clarify
@@ -231,8 +231,8 @@ proof(coinduction)
     by (simp add: possible_steps_1_invalid alw_not_some)
 qed
 
-lemma LTL_vend_no_coin: "((nxt (LabelEq ''vend'' aand InputEq [])) impl not (ev (StateEq (Some 2)))) (watch drinks t)"
-  apply (simp add: not_ev_iff event_components implode_vend watch_def StateEq_def)
+lemma LTL_vend_no_coin: "((nxt (label_eq ''vend'' aand input_eq [])) impl not (ev (state_eq (Some 2)))) (watch drinks t)"
+  apply (simp add: not_ev_iff event_components implode_vend watch_def state_eq_def)
   apply clarify
 proof(coinduction)
   case alw
@@ -253,11 +253,11 @@ proof(coinduction)
 qed
 
 lemma LTL_invalid_gets_stuck_2:
-  "(((nxt (not (LabelEq ''coin'' aand InputEq []))) aand
-   (nxt (not (LabelEq ''vend'' aand InputEq [])))) impl
-   (not (ev (StateEq (Some 2))))) (watch drinks t)"
+  "(((nxt (not (label_eq ''coin'' aand input_eq []))) aand
+   (nxt (not (label_eq ''vend'' aand input_eq [])))) impl
+   (not (ev (state_eq (Some 2))))) (watch drinks t)"
   apply (simp add: not_ev_iff event_components)
-  unfolding watch_def StateEq_def LabelEq_def InputEq_def
+  unfolding watch_def state_eq_def label_eq_def input_eq_def
   apply clarify
 proof(coinduction)
   case alw
@@ -277,9 +277,9 @@ qed
 (* Ramsay, this is the proof you want!
    I'll convert it to an Isabelle code snippet for the actual paper to make it really pretty but for
    now, just use a screenshot image or something... *)
-lemma LTL_must_pay_correct: "((ev (StateEq (Some 2))) impl (not(LabelEq ''vend'') suntil LabelEq ''coin'')) (watch drinks t)"
+lemma LTL_must_pay_correct: "((ev (state_eq (Some 2))) impl (not(label_eq ''vend'') suntil label_eq ''coin'')) (watch drinks t)"
   apply clarify
-  unfolding LabelEq_def StateEq_def implode_vend implode_coin
+  unfolding label_eq_def state_eq_def implode_vend implode_coin
   apply (simp add: watch_def)
   apply (case_tac "shd t = (STR ''init'', [])")
    defer
@@ -292,10 +292,10 @@ lemma LTL_must_pay_correct: "((ev (StateEq (Some 2))) impl (not(LabelEq ''vend''
   apply (case_tac "shd (stl t) = (STR ''vend'', [])")
    apply (rule suntil.step)
   using LTL_vend_no_coin[of t]
-  apply (simp add: event_components implode_vend StateEq_def watch_def ev_mono)
+  apply (simp add: event_components implode_vend state_eq_def watch_def ev_mono)
   using LTL_vend_no_coin[of t]
-  apply (simp add: event_components implode_vend StateEq_def watch_def ev_mono)
+  apply (simp add: event_components implode_vend state_eq_def watch_def ev_mono)
   using LTL_invalid_gets_stuck_2[of t]
-  by (simp add: event_components implode_vend implode_coin StateEq_def watch_def ev_mono)
+  by (simp add: event_components implode_vend implode_coin state_eq_def watch_def ev_mono)
 
 end
