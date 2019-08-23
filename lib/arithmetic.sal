@@ -16,7 +16,7 @@ arithmetic {n_ : INTEGER; STRING: TYPE} : CONTEXT = BEGIN
     IF Some?(x1) AND Some?(x2) THEN
       IF Num?(valueOf(x1)) AND Num?(valueOf(x2))
       THEN
-        option{VALUE} ! Some(Num(f(intOf(valueOf(x1)), intOf(valueOf(x2)))))
+        Some(Num(f(intOf(valueOf(x1)), intOf(valueOf(x2)))))
       ELSE
         None
       ENDIF

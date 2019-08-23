@@ -1,11 +1,11 @@
-value {n_: INTEGER; string: TYPE} : CONTEXT = BEGIN
-  INT : TYPE = [(0-n_)..n_];
+value {n_: INTEGER; STRING: TYPE} : CONTEXT = BEGIN
+  BOUNDED_INT : TYPE = [(0-n_)..n_];
 
   % The VALUE type for inputs, outputs, and registers with a bottom element
   B_VALUE : TYPE = DATATYPE
     ValueBB,
-    Str(stringOf: string),
-    Num(intOf: INT)
+    Str(stringOf: STRING),
+    Num(intOf: BOUNDED_INT)
   END;
 
   % Remove the bottom element for general use
