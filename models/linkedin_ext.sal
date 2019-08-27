@@ -10,7 +10,7 @@ STRING : TYPE =
     {String__4zoF, String__HM8p, String__MNn5, String__OUT_OF_NETWORK, String__detailed_pdf_of_friendID,                            %%10
     String__detailed_pdf_of_otherID, String__free, String__friendID, String__name, String__otherID, String__paid,
     String__summary_pdf_of_otherID, String__dummy__};
-  
+
 STATE : TYPE = {State__0, State__1, State__2, State__3, State__4, State__5, State__6, State__7, NULL_STATE};
 
 IMPORTING trilean;
@@ -19,7 +19,7 @@ IMPORTING option{VALUE};
 IMPORTING arithmetic{n_, STRING};
                                                                                                                                   %%20
 output_sequence : CONTEXT = sequence {B_OPTION, OptionBB, 1};
-input_sequence : CONTEXT = sequence {B_VALUE, ValueBB, 1};
+input_sequence : CONTEXT = sequence {B_VALUE, ValueBB, 3};
 
 linkedIn : MODULE =
   BEGIN
@@ -109,4 +109,9 @@ linkedIn : MODULE =
           cfstate' = NULL_STATE
     ]                                                                                                                             %%110
   END;
+  LTL_neverDetailed : THEOREM linkedIn |-
+    label = login AND i = input_sequence ! insert(Str(String__free), input_sequence ! empty) => X(G(label = pdf AND
+        gval(value_eq(Some(i(1)),(Some(Str(String__otherID))))) =>
+        NOT (o = output_sequence ! insert(Some(Str(String__detailed_pdf_of_otherID)), output_sequence ! empty))));
+
 END
