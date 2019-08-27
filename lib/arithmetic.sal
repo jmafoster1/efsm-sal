@@ -58,7 +58,7 @@ arithmetic {n_ : INTEGER; STRING: TYPE} : CONTEXT = BEGIN
   value_eq : [[OPTION, OPTION] -> TRILEAN] =
   LAMBDA(x: OPTION, y: OPTION): IF x = y THEN True ELSE False ENDIF;
 
-  check_underflow : [OPTION -> BOOLEAN] = LAMBDA(v : OPTION) : gval(value_ge(v, Some(Num(0-n_))));
-  check_overflow : [OPTION -> BOOLEAN] = LAMBDA(v : OPTION) : gval(value_le(v, Some(Num(n_))));
+  check_underflow : [OPTION -> BOOLEAN] = LAMBDA(v : OPTION) : arithmetic!SomeNum?(v) => gval(value_ge(v, Some(Num(0-n_))));
+  check_overflow : [OPTION -> BOOLEAN] = LAMBDA(v : OPTION) : arithmetic!SomeNum?(v) => gval(value_le(v, Some(Num(n_))));
 
 END
