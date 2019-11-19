@@ -1,5 +1,5 @@
 digraph Coin_Tea{
-    graph [rankdir="LR", fontname="Latin Modern Math"];
+    graph [rankdir="LR", fontname="Latin Modern Math", margin=0];
     node [color="black", fillcolor="white", shape="circle", style="filled", fontname="Latin Modern Math"];
     edge [fontname="Latin Modern Math"];
 

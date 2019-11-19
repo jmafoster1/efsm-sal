@@ -1,10 +1,6 @@
 theory XXXlinkedin_ext_fixed
-imports "../../EFSM_LTL"
+imports "../../EFSM_LTL" "../../I_Def"
 begin
-
-definition I :: "nat \<Rightarrow> vname" where
-  "I n = vname.I (n-1)"
-declare I_def [simp]
 
 declare One_nat_def [simp del]
 
