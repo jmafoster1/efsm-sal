@@ -1,3 +1,6 @@
 [submodule "lib"]
 	path = lib
 	url = git@github.com:jmafoster1/sal-arith.git
+[submodule "theories/efsm-isabelle"]
+	path = theories/efsm-isabelle
+	url = git@github.com:jmafoster1/efsm-isabelle.git
