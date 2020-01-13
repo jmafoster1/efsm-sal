@@ -1,11 +1,9 @@
 theory Coin_Tea
-  imports "../../EFSM_LTL"
+  imports "../../efsm-ltl/EFSM_LTL" "../../efsm-isabelle/AExp"
 begin
 
 declare One_nat_def [simp del]
-declare value_lt_def [simp]
 declare value_gt_def [simp]
-declare ltl_step_alt [simp]
 
 text_raw\<open>\snip{cointea}{1}{2}{%\<close>
 definition init :: transition where
@@ -14,7 +12,7 @@ definition init :: transition where
           Arity = 0,
           Guard = [],
           Outputs = [],
-          Updates = [(1, (L (Num 0)))]
+          Updates = [(1, (aexp.L (Num 0)))]
         \<rparr>"
 
 definition coin :: transition where
@@ -23,15 +21,15 @@ definition coin :: transition where
           Arity = 0,
           Guard = [],
           Outputs = [],
-          Updates = [(1, (Plus (V (R 1)) (L (Num 1))))]
+          Updates = [(1, (aexp.Plus (aexp.V (vname.R 1)) (aexp.L (Num 1))))]
         \<rparr>"
 
 definition vend :: transition where
 "vend \<equiv> \<lparr>
           Label = (STR ''vend''),
           Arity = 0,
-          Guard = [GExp.Gt (V (R 1)) (L (Num 0))],
-          Outputs = [L (Str ''tea'')],
+          Guard = [GExp.Gt (aexp.V (vname.R 1)) (aexp.L (Num 0))],
+          Outputs = [aexp.L (Str ''tea'')],
           Updates = []
         \<rparr>"
 
@@ -163,7 +161,7 @@ lemma less_than_zero_not_nxt_2:
    apply (simp add: possible_steps_coin)
   apply (case_tac "shd t = (STR ''vend'', [])")
    apply (simp add: possible_steps_vend_insufficient)
-  by (simp add: invalid_possible_steps_1 state_eq_def)
+  by (simp add: invalid_possible_steps_1 no_possible_steps)
 
 lemma possible_steps_2: "possible_steps drinks 2 r (fst (shd t)) (snd (shd t)) = {||}"
   by (simp add: possible_steps_def ffilter_def fset_both_sides Abs_fset_inverse Set.filter_def drinks_def)
@@ -187,20 +185,22 @@ lemma stop_at_2: "0 \<le> n \<Longrightarrow>
 proof(coinduction)
   case alw
   then show ?case
-    by (simp add: possible_steps_2 once_none_remains_not_lt_zero)
+    using ltl_step_alt once_none_remains_not_lt_zero possible_steps_2 by auto
 qed
 
 lemma next_not_lt_zero:
   "n \<ge> 0 \<Longrightarrow>
-   (nxt (not (check_inx rg 1 value_lt (Some (Num 0))))) (make_full_observation drinks (Some 1) (<>(1 := Num n)) t)"
+   (nxt (not 
+    (check_exp (Lt (V (R 1)) (L (Num 0))))
+    )) (make_full_observation drinks (Some 1) (<>(1 := Num n)) t)"
     apply simp
     apply (case_tac "shd t = (STR ''vend'', [])")
     apply (case_tac "n = 0")
-      apply (simp add: possible_steps_vend_insufficient)
-     apply (simp add: possible_steps_vend_sufficient updates_vend)
+      apply (simp add: possible_steps_vend_insufficient check_exp_def Lt_def)
+     apply (simp add: possible_steps_vend_sufficient updates_vend check_exp_def Lt_def)
     apply (case_tac "shd t = (STR ''coin'', [])")
-   apply (simp add: possible_steps_coin datastate coin_def value_plus_def)
-  by(simp add: invalid_possible_steps_1)
+   apply (simp add: possible_steps_coin datastate coin_def value_plus_def check_exp_def Lt_def)
+  by (simp add: check_exp_def Lt_def invalid_possible_steps_1 ltl_step_alt)
 
 lemma not_initialised: "alw (\<lambda>xs. state_eq (Some 1) xs \<and>
               MaybeBoolInt (<) (datastate (shd xs) $ (1)) (Some (Num 0)) = trilean.true \<and> label_eq ''vend'' xs \<and> input_eq [] xs \<longrightarrow>
@@ -223,6 +223,12 @@ lemma implode_vend: "String.implode ''vend'' = STR ''vend''"
 lemma implode_coin: "String.implode ''coin'' = STR ''coin''"
   by (metis Literal.rep_eq String.implode_explode_eq zero_literal.rep_eq)
 
+lemma step_0_vend: "fst e = STR ''vend'' \<Longrightarrow> ltl_step drinks (Some 0) r e = (None, [], r)"
+  apply (rule ltl_step_none)
+  apply (simp add: possible_steps_def Abs_ffilter Set.filter_def drinks_def)
+  apply (simp add: init_def)
+  by auto
+
 lemma LTL_label_vend_not_2: "((label_eq ''vend'') impl (not (ev (state_eq (Some 2))))) (watch drinks t)"
   apply (simp only: watch_label implode_vend not_ev_iff)
   apply (simp add: watch_def)
@@ -231,8 +237,8 @@ proof(coinduction)
   case alw
   then show ?case
     apply (simp add: state_eq_def possible_steps_not_init)
-    apply (rule disjI2)
-    using once_none_always_none
+    apply (simp add: step_0_vend)
+    using once_none_always_none[of drinks]
     unfolding state_eq_def
     by (simp add: alw_iff_sdrop)
 qed
@@ -264,6 +270,7 @@ proof(coinduction)
      defer
     using possible_steps_not_init alw_not_some
      apply (simp add: no_possible_steps_not_init)
+    using step_not_init apply auto[1]
     apply (simp add: possible_steps_init updates_init)
     apply (rule disjI2)
   proof(coinduction)
@@ -272,21 +279,20 @@ proof(coinduction)
       apply (simp add: vend_insufficient)
       apply (rule disjI2)
       using alw_not_some
-      by simp
+      by (simp add: ltl_step_alt vend_insufficient)
   qed
 qed
 
 text_raw\<open>\snip{checkinit}{1}{2}{%\<close>
 lemma LTL_init_makes_r_1_zero:
   "((label_eq ''init'' aand input_eq []) impl
-    (nxt (check_inx rg 1 value_eq (Some (Num 0)))))
+    (nxt (check_exp (Eq (V (R 1)) (L (Num 0))))))
    (watch drinks t)"
 text_raw\<open>}%endsnip\<close>
   apply (case_tac "shd t = (STR ''init'', [])")
   using watch_def
-   apply (simp add: possible_steps_init updates_init)
-  apply clarify
-  by (simp add: not_init)
+   apply (simp add: possible_steps_init updates_init check_exp_def)
+  by (simp add: not_init check_exp_def)
 
 (* This is not a true property but is good for testing the translation process *)
 lemma LTL_must_pay_wrong: "((not (label_eq ''vend'' suntil label_eq ''coin'')) suntil state_eq None) (watch drinks t)"
@@ -327,7 +333,7 @@ lemma invalid_gets_stuck: "x1 \<noteq> (STR ''coin'', []) \<Longrightarrow>
 proof(coinduction)
   case alw
   then show ?case
-    by (simp add: possible_steps_1_invalid alw_not_some)
+    by (simp add: possible_steps_1_invalid alw_not_some ltl_step_alt)
 qed
 
 lemma LTL_vend_no_coin: "((nxt (label_eq ''vend'' aand input_eq [])) impl not (ev (state_eq (Some 2)))) (watch drinks t)"
@@ -339,8 +345,8 @@ proof(coinduction)
     apply simp
     apply (case_tac "shd t = (STR ''init'', [])")
      defer
-    apply (simp add: decompose_pair)
-     apply (simp add: possible_steps_not_init alw_not_some)
+     apply (simp add: decompose_pair)
+     apply (simp add: possible_steps_not_init alw_not_some ltl_step_alt)
     apply (simp add: possible_steps_init updates_init)
     apply (rule disjI2)
   proof(coinduction)
@@ -367,8 +373,9 @@ proof(coinduction)
      apply (simp only: decompose_pair)
     using possible_steps_not_init alw_not_some
      apply simp
-    apply (simp add: possible_steps_init updates_init)
+    apply (simp add: possible_steps_init updates_init ltl_step_alt)
     apply (rule disjI2)
+    apply (simp add: possible_steps_init init_def)
     using invalid_gets_stuck[of "shd (stl t)" "stl (stl t)"]
     by (simp add: alw_ev)
 qed

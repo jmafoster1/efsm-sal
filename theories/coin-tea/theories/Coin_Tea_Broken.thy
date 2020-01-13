@@ -1,9 +1,8 @@
 theory Coin_Tea_Broken
-  imports "../../EFSM_LTL"
+  imports "../../efsm-ltl/EFSM_LTL"
 begin
 
 declare One_nat_def [simp del]
-declare value_lt_def [simp]
 declare ltl_step_alt [simp]
 
 definition I :: "nat \<Rightarrow> vname" where
@@ -17,7 +16,7 @@ definition init :: transition where
           Arity = 0,
           Guard = [],
           Outputs = [],
-          Updates = [(1, (L (Num 0)))]
+          Updates = [(1, (aexp.L (Num 0)))]
         \<rparr>"
 
 definition coin :: transition where
@@ -26,15 +25,15 @@ definition coin :: transition where
           Arity = 0,
           Guard = [],
           Outputs = [],
-          Updates = [(1, (Plus (V (R 1)) (L (Num 1))))]
+          Updates = [(1, (aexp.Plus (aexp.V (vname.R 1)) (aexp.L (Num 1))))]
         \<rparr>"
 
 definition vend :: transition where
 "vend \<equiv> \<lparr>
           Label = (STR ''vend''),
           Arity = 0,
-          Guard = [Ge (V (R 1)) (L (Num 0))],
-          Outputs = [L (Str ''tea'')],
+          Guard = [Ge (aexp.V (vname.R 1)) (aexp.L (Num 0))],
+          Outputs = [aexp.L (Str ''tea'')],
           Updates = []
         \<rparr>"
 
@@ -120,15 +119,6 @@ lemma step_not_init: "t \<noteq> (STR ''init'', []) \<Longrightarrow> ltl_step d
   using no_possible_steps_not_init no_possible_steps
   by simp
 
-lemma ltl_step_alt [simp]:  "ltl_step e (Some s) r t = (let possibilities = possible_steps e s r (fst t) (snd t) in
-                   if possibilities = {||} then (None, [], r)
-                   else
-                     let (s', t') = Eps (\<lambda>x. x |\<in>| possibilities) in
-                     (Some s', (apply_outputs (Transition.Outputs t') (join_ir (snd t) r)), (apply_updates (Updates t') (join_ir (snd t) r) r))
-                  )"
-  apply (case_tac t)
-  by (simp add: Let_def)
-
 lemma possible_steps_coin: "possible_steps drinks 1 r STR ''coin'' [] = {|(1, coin)|}"
   apply (simp add: possible_steps_alt ffilter_def fset_both_sides Abs_fset_inverse Set.filter_def drinks_def)
   apply safe
@@ -137,7 +127,7 @@ lemma possible_steps_coin: "possible_steps drinks 1 r STR ''coin'' [] = {|(1, co
 lemma possible_steps_vend_sufficient: "n > 0 \<Longrightarrow> possible_steps drinks 1 (<>(1 := Num n)) STR ''vend'' [] = {|(2, vend)|}"
   apply (simp add: possible_steps_alt ffilter_def fset_both_sides Abs_fset_inverse Set.filter_def drinks_def)
   apply safe
-  by (simp_all add: vend_def coin_def apply_guards)
+  by (simp_all add: vend_def coin_def apply_guards connectives)
 
 lemma invalid_possible_steps_1: "shd t \<noteq> (STR ''coin'', []) \<Longrightarrow>
     shd t \<noteq> (STR ''vend'', []) \<Longrightarrow> possible_steps drinks 1 r (fst (shd t)) (snd (shd t)) = {||}"
@@ -190,14 +180,14 @@ lemma vend_insufficient: "possible_steps drinks 1 (<>(1 := Num 0)) STR ''vend'' 
   apply (simp add: possible_steps_def ffilter_def fset_both_sides Abs_fset_inverse Set.filter_def drinks_def)
   apply safe
    apply (simp add: coin_def)
-  by (simp add: vend_def apply_guards)
+  apply (simp add: vend_def apply_guards connectives)
+  sorry
 
-lemma LTL_init_makes_r_1_zero: "((label_eq ''init'' aand input_eq []) impl nxt (check_inx rg 1 value_eq (Some (Num 0)))) (watch drinks t)"
+lemma LTL_init_makes_r_1_zero: "((label_eq ''init'' aand input_eq []) impl nxt (check_exp (Eq (V (R 1)) (L (Num 0))))) (watch drinks t)"
   apply (case_tac "shd t = (STR ''init'', [])")
-   apply (simp add: possible_steps_init apply_updates_init value_eq_def watch_def)
+   apply (simp add: possible_steps_init apply_updates_init value_eq_def watch_def check_exp_def)
   apply clarify
-  using not_init
-  by simp
+  by (simp add: not_init)
 
 lemma shd_not_init: "shd t \<noteq> (STR ''init'', []) \<Longrightarrow> \<not> ev (\<lambda>s. statename (shd s) = Some 2) (make_full_observation drinks (Some 0) <> t)"
   apply (simp add: not_ev_iff)
@@ -277,7 +267,7 @@ qed
 (* Ramsay, this is the proof you want!
    I'll convert it to an Isabelle code snippet for the actual paper to make it really pretty but for
    now, just use a screenshot image or something... *)
-lemma LTL_must_pay_correct: "((ev (state_eq (Some 2))) impl (not(label_eq ''vend'') suntil label_eq ''coin'')) (watch drinks t)"
+lemma LTL_must_pay_correct: "((ev (state_eq (Some 2))) impl (not (label_eq ''vend'') suntil label_eq ''coin'')) (watch drinks t)"
   apply clarify
   unfolding label_eq_def state_eq_def implode_vend implode_coin
   apply (simp add: watch_def)
