@@ -219,21 +219,22 @@ lemma possible_steps_linkedIn_6:
 
 (* This should be where the wheels fall off *)
 lemma flaw: "alw (\<lambda>xs. label (shd xs) = STR ''pdf'' \<and> value_eq (Some (nth (inputs (shd xs)) 0)) (Some (value.Str STR ''otherID'')) = trilean.true \<longrightarrow>
-              output (shd xs) \<noteq> [Some (value.Str STR ''detailed_pdf_of_otherID'')])
-     (make_full_observation linkedIn (Some 6) <> i)"
+              output (shd (stl xs)) \<noteq> [Some (value.Str STR ''detailed_pdf_of_otherID'')])
+     (make_full_observation linkedIn (Some 6) <> p i)"
   apply (rule alw)
    apply (simp add: ltl_step_alt)
    apply (case_tac "possible_steps linkedIn 6 <> STR ''pdf'' (snd (shd i)) = {||}")
     apply simp
    apply (case_tac "possible_steps linkedIn 6 <> STR ''pdf'' (snd (shd i)) = {|(7, pdf2)|}")
-    apply simp
-    apply standard
-    apply standard
+    apply (simp add: pdf2_def)
+    apply (simp add: pdf2_def[symmetric])
+    apply (simp add: apply_outputs_def)
+    apply (simp add: Str_def implode)
   sorry
 
-lemma after_login: "alw (\<lambda>xs. label (shd xs) = String.implode ''pdf'' \<and> value_eq (Some (inputs (shd xs) ! 0)) (Some (EFSM.Str ''otherID'')) = trilean.true \<longrightarrow>
-              \<not> output_eq [Some (EFSM.Str ''detailed_pdf_of_otherID'')] xs)
-     (make_full_observation linkedIn (Some 1) <> (stl i))"
+lemma after_login: "alw (\<lambda>xs. label (shd xs) = STR ''pdf'' \<and> value_eq (Some (inputs (shd xs) ! 0)) (Some (EFSM.Str ''otherID'')) = trilean.true \<longrightarrow>
+              \<not> output_eq [Some (EFSM.Str ''detailed_pdf_of_otherID'')] (stl xs))
+     (make_full_observation linkedIn (Some 1) <> p (stl i))"
 proof(coinduction)
   case alw
   then show ?case
@@ -244,21 +245,20 @@ proof(coinduction)
      apply standard
       apply (simp add: output_eq_def ltl_step_alt not_view)
       apply standard
-      apply (rule disjI2)
-    using no_output_none[of linkedIn "<>" "stl (stl i)"]
-    unfolding output_eq_def
-      apply (simp add: alw_mono)
+    apply (rule disjI2)
+      apply (rule alw_mono[of "nxt (output_eq [])"])
+       apply (simp add: no_output_none_nxt)
+      apply (simp add: output_eq_def)
      apply standard
-      apply (rule disjI2)
-    using no_output_none[of linkedIn "<>" "stl (stl i)"]
-    unfolding output_eq_def
-     apply (simp add: alw_mono)
-
+     apply (rule disjI2)
+      apply (rule alw_mono[of "nxt (output_eq [])"])
+      apply (simp add: no_output_none_nxt)
      apply (simp add: output_eq_def)
+    apply (simp add: output_eq_def)
     apply (case_tac "(snd (shd (stl i))) = [Str ''otherID'', Str ''name'', Str ''MNn5'']")
      apply (simp add: ltl_step_alt view_fuzz view3_def)
      apply (rule disjI2)
-    using flaw[of "stl (stl i)"]
+    using flaw[of "[]" "stl (stl i)"]
      apply (simp add: alw_mono) (* Using a broken proof *)
     oops
 

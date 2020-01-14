@@ -242,23 +242,23 @@ lemma possible_ltl_steps_from_2:
   by (metis (no_types, lifting) One_nat_def Suc_1 add_diff_cancel_left' decompose_pair less_2_cases less_Suc_eq nth_Cons' numeral_3_eq_3 plus_1_eq_Suc)
 
 lemma s2_ok: "alw (\<lambda>xs. label (shd xs) = STR ''pdf'' \<and> value_eq (Some (nth (inputs (shd xs)) 0)) (Some (EFSM.Str ''otherID'')) = trilean.true \<longrightarrow>
-              output (shd xs) \<noteq> [Some (EFSM.Str ''detailed_pdf_of_otherID'')])
-     (make_full_observation linkedIn (Some 2) (<>(1 := EFSM.Str ''free'')) i)"
+              output (shd (stl xs)) \<noteq> [Some (EFSM.Str ''detailed_pdf_of_otherID'')])
+     (make_full_observation linkedIn (Some 2) (<>(1 := EFSM.Str ''free'')) p i)"
   apply (rule alw)
    apply (simp add: ltl_step_alt pdf_2_invalid wrong_head)
   apply simp
   apply (case_tac "ltl_step linkedIn (Some 2) (<>(1 := EFSM.Str ''free'')) (shd i) = (None, [],(<>(1 := EFSM.Str ''free'')))")
   apply simp
-   apply (rule alw_mono[of "output_eq []"])
-  using no_output_none apply blast
+   apply (rule alw_mono[of "nxt (output_eq [])"])
+    apply (simp add: no_output_none_nxt)
    apply (simp add: output_eq_def)
   apply (case_tac "ltl_step linkedIn (Some 2) (<>(1 := EFSM.Str ''free'')) (shd i) = 
                     (Some 3, [Some (Str ''detailed_pdf_of_friendID'')], (<>(1 := EFSM.Str ''free'')))")
    apply simp
-   apply (rule alw_mono[of "output_eq []"])
+   apply (rule alw_mono[of "nxt (output_eq [])"])
     apply (rule alw)
      apply (simp add: ltl_step_alt output_eq_def stop_at_3)
-    apply (simp add: ltl_step_alt no_output_none stop_at_3)
+    apply (simp add: ltl_step_alt no_output_none_nxt stop_at_3)
    apply (simp add: output_eq_def)
   using possible_ltl_steps_from_2 by blast
 
@@ -305,8 +305,8 @@ lemma possible_ltl_steps_from_4:
   by (simp add: not_pdf_4)
 
 lemma s4_ok: "alw (\<lambda>xs. label (shd xs) = STR ''pdf'' \<and> value_eq (Some (nth (inputs (shd xs)) 0)) (Some (EFSM.Str ''otherID'')) = trilean.true \<longrightarrow>
-              output (shd xs) \<noteq> [Some (EFSM.Str ''detailed_pdf_of_otherID'')])
-     (make_full_observation linkedIn (Some 4) (<>(1 := EFSM.Str ''free'')) i)"
+              output (shd (stl xs)) \<noteq> [Some (EFSM.Str ''detailed_pdf_of_otherID'')])
+     (make_full_observation linkedIn (Some 4) (<>(1 := EFSM.Str ''free'')) p i)"
   apply (rule alw)
    apply simp
   using possible_ltl_steps_from_4[of "shd i"]
@@ -318,11 +318,11 @@ lemma s4_ok: "alw (\<lambda>xs. label (shd xs) = STR ''pdf'' \<and> value_eq (So
    apply simp
    apply (rule alw)
     apply (simp add: ltl_step_alt stop_at_5)
-   apply (rule alw_mono[of "output_eq []"])
-    apply (simp add: ltl_step_alt no_output_none stop_at_5)
+   apply (rule alw_mono[of "nxt (output_eq [])"])
+    apply (simp add: ltl_step_alt no_output_none_nxt stop_at_5)
    apply (simp add: output_eq_def)
-  apply (rule alw_mono[of "output_eq []"])
-   apply (simp add: no_output_none)
+   apply (rule alw_mono[of "nxt (output_eq [])"])
+   apply (simp add: no_output_none_nxt)
   by (simp add: output_eq_def)
 
 lemma invalid_input_1:
@@ -351,8 +351,8 @@ lemma invalid_input_1:
   by (simp_all add: apply_guards_def transitions join_ir_def input2state_def Str_def implode numeral_2_eq_2 One_nat_def)
 
 lemma after_login: "alw (\<lambda>xs. label (shd xs) = STR ''pdf'' \<and> value_eq (Some (nth (inputs (shd xs)) 0)) (Some (EFSM.Str ''otherID'')) = trilean.true \<longrightarrow>
-              \<not> output_eq [Some (EFSM.Str ''detailed_pdf_of_otherID'')] xs)
-     (make_full_observation XXXlinkedin_ext_fixed.linkedIn (Some 1) (<>(1 := EFSM.Str ''free'')) i)"
+              \<not> output_eq [Some (EFSM.Str ''detailed_pdf_of_otherID'')] (stl xs))
+     (make_full_observation XXXlinkedin_ext_fixed.linkedIn (Some 1) (<>(1 := EFSM.Str ''free'')) p i)"
 proof(coinduction)
   case alw
   then show ?case
@@ -360,26 +360,38 @@ proof(coinduction)
     apply (case_tac "(fst (shd i)) = STR ''view''")
      defer
      apply (simp add: not_view_1)
-    using no_output_none[of linkedIn "(<>(1 := EFSM.Str ''free''))" "(stl i)"]
-    unfolding output_eq_def
-     apply (simp add: alw_mono ltl_step_alt not_view_1)
+     apply standard
+      apply clarify
+      apply (simp add: output_eq_def)
+      apply (rule disjI2)
+      apply (rule alw_mono[of "nxt (output_eq [])"])
+       apply (simp add: no_output_none_nxt)
+      apply (simp add: output_eq_def)
+     apply standard
+     apply (rule disjI2)
+     apply (rule alw_mono[of "nxt (output_eq [])"])
+      apply (simp add: no_output_none_nxt)
+     apply (simp add: output_eq_def)
+
     apply simp
     apply (case_tac "(snd (shd i)) = [Str ''friendID'', Str ''name'', Str ''HM8p'']")
      apply (simp add: view_friend view_def)
-    using s2_ok[of "stl i"]
-    apply (simp add: alw_mono)
+    apply (rule disjI2)
+    using s2_ok[of "[]" "stl i"]
+    apply (simp add: alw_mono output_eq_def)
     apply (case_tac "(snd (shd i)) = [Str ''otherID'', Str ''OUT_OF_NETWORK'', Str ''MNn5'']")
      apply (simp add: view_other view1_def)
-    using s4_ok[of "stl i"]
-    apply (simp add: alw_mono)
+    using s4_ok[of "[]" "stl i"]
+    apply (simp add: alw_mono output_eq_def)
     apply (case_tac "(snd (shd i)) = [Str ''otherID'', Str ''name'', Str ''4zoF'']")
      apply (simp add: view_other_fuzz_foiled view2_def)
-    using s4_ok[of "stl i"]
-    apply (simp add: alw_mono)
+    using s4_ok[of "[]" "stl i"]
+    apply (simp add: alw_mono output_eq_def)
     apply (simp add: invalid_input_1)
-    using no_output_none[of linkedIn "(<>(1 := EFSM.Str ''free''))" "(stl i)"]
-    unfolding output_eq_def
-    by (simp add: alw_mono)
+    apply (rule disjI2)
+    apply (rule alw_mono[of "nxt (output_eq [])"])
+    using no_output_none_nxt apply blast
+    by (simp add: output_eq_def)
 qed
 
 (* SAL thinks this is true so we should be able to prove it *)
@@ -388,12 +400,13 @@ lemma LTL_neverDetailed:
     "(((label_eq  ''login'' aand input_eq [Str ''free'']) impl
      (nxt (alw ((label_eq ''pdf'' aand
      check_exp (Eq (V (I 0)) (L (Str ''otherID'')))) impl
-     (not (output_eq [Some (Str ''detailed_pdf_of_otherID'')])))))))
+     (not (nxt (output_eq [Some (Str ''detailed_pdf_of_otherID'')]))))))))
      (watch linkedIn i)"
   apply (simp add: watch_def ltl_step_alt)
   apply (simp add: input_eq_def label_eq_def)
-  apply (simp add: implode login_user apply_updates_login check_exp_def)
-  using after_login[of "stl i"]
-  by (simp add: alw_mono)
+  apply (simp add: implode login_user apply_updates_login check_exp_def login_def)
+  using after_login[of "[]" "stl i"]
+  by (simp add: alw_mono join_ir_nth)
+
 text_raw\<open>}%endsnip\<close>
 end

@@ -57,7 +57,7 @@ lemma possible_steps_not_init: "\<not> (a = STR ''init'' \<and> b = []) \<Longri
 
 lemma aux1: "\<not> state_eq (Some 2)
         (make_full_observation drinks (fst (ltl_step drinks (Some 0) <> (shd t)))
-          (snd (snd (ltl_step drinks (Some 0) <> (shd t)))) (stl t))"
+          (snd (snd (ltl_step drinks (Some 0) <> (shd t)))) p (stl t))"
 proof-
   show ?thesis
     apply (case_tac "shd t")
@@ -68,8 +68,8 @@ proof-
 qed
 
 lemma make_full_obs_neq: "make_full_observation drinks (fst (ltl_step drinks (Some 0) <> (shd t))) (snd (snd (ltl_step drinks (Some 0) <> (shd t))))
-     (stl t) \<noteq>
-    make_full_observation drinks (Some 0) <> t"
+     p (stl t) \<noteq>
+    make_full_observation drinks (Some 0) <> p t"
   apply (case_tac "ltl_step drinks (Some 0) <> (shd t)")
   apply (case_tac "shd t")
     apply simp
@@ -79,44 +79,17 @@ lemma make_full_obs_neq: "make_full_observation drinks (fst (ltl_step drinks (So
   apply (simp add: possible_steps_not_init)
   by (metis make_full_observation.simps(1) option.simps(3) state.ext_inject)
 
-lemma state_none: "((state_eq None) impl nxt (state_eq None)) (make_full_observation e s r t)"
-  by (simp add: state_eq_def)
-
-lemma shd_state_is_none: "(state_eq None) (make_full_observation e None r t)"
-  by (simp add: state_eq_def)
-
-lemma state_none_2: "(state_eq None) (make_full_observation e s r t) \<Longrightarrow> (state_eq None) (make_full_observation e s r (stl t))"
-  by (simp add: state_eq_def)
-
-lemma alw_ev: "alw f = not (ev (\<lambda>s. \<not>f s))"
-  by simp
-
 lemma state_eq_alt: "alw (state_eq s) s' = alw (\<lambda>x. shd x = s) (smap (\<lambda>x. statename x) s')"
   apply standard
   apply (simp add: state_eq_def alw_iff_sdrop)
   by (simp add: state_eq_def alw_mono alw_smap)
 
-lemma test: "statename (shd (make_full_observation e None r t)) = None"
-  by simp
-
-lemma "alw (\<lambda>s. state_eq None (stl s)) (make_full_observation drinks None <> t)"
-  by (metis alw_iff_sdrop once_none_always_none sdrop_simps(2))
-
-lemma no_possible_steps: "possible_steps e s r (fst t) (snd t) = {||} \<Longrightarrow> ltl_step e (Some s) r t = (None, [], r)"
-proof -
-  assume "possible_steps e s r (fst t) (snd t) = {||}"
-  then have "ltl_step e (Some s) r (fst t, snd t) = (None, [], r)"
-    using ltl_step.simps(2) by presburger
-  then show ?thesis
-    by simp
-qed
-
-lemma no_possible_steps_not_init:"t \<noteq> (STR ''init'', []) \<Longrightarrow> possible_steps drinks 0 r (fst t) (snd t) = {||}"
+lemma ltl_step_none_not_init:"t \<noteq> (STR ''init'', []) \<Longrightarrow> possible_steps drinks 0 r (fst t) (snd t) = {||}"
   apply (simp add: possible_steps_def ffilter_def Set.filter_def drinks_def fset_both_sides Abs_fset_inverse)
   by (metis init_def length_0_conv less_numeral_extra(1) prod.collapse transition.ext_inject transition.surjective)
 
 lemma step_not_init: "t \<noteq> (STR ''init'', []) \<Longrightarrow> ltl_step drinks (Some 0) r t = (None, [], r)"
-  using no_possible_steps_not_init no_possible_steps
+  using ltl_step_none_not_init ltl_step_none
   by simp
 
 lemma possible_steps_coin: "possible_steps drinks 1 r STR ''coin'' [] = {|(1, coin)|}"
@@ -127,7 +100,7 @@ lemma possible_steps_coin: "possible_steps drinks 1 r STR ''coin'' [] = {|(1, co
 lemma possible_steps_vend_sufficient: "n > 0 \<Longrightarrow> possible_steps drinks 1 (<>(1 := Num n)) STR ''vend'' [] = {|(2, vend)|}"
   apply (simp add: possible_steps_alt ffilter_def fset_both_sides Abs_fset_inverse Set.filter_def drinks_def)
   apply safe
-  by (simp_all add: vend_def coin_def apply_guards connectives)
+  by (simp_all add: vend_def coin_def apply_guards_def join_ir_def value_gt_def connectives)
 
 lemma invalid_possible_steps_1: "shd t \<noteq> (STR ''coin'', []) \<Longrightarrow>
     shd t \<noteq> (STR ''vend'', []) \<Longrightarrow> possible_steps drinks 1 r (fst (shd t)) (snd (shd t)) = {||}"
@@ -185,11 +158,11 @@ lemma vend_insufficient: "possible_steps drinks 1 (<>(1 := Num 0)) STR ''vend'' 
 
 lemma LTL_init_makes_r_1_zero: "((label_eq ''init'' aand input_eq []) impl nxt (check_exp (Eq (V (R 1)) (L (Num 0))))) (watch drinks t)"
   apply (case_tac "shd t = (STR ''init'', [])")
-   apply (simp add: possible_steps_init apply_updates_init value_eq_def watch_def check_exp_def)
+   apply (simp add: possible_steps_init apply_updates_init watch_def check_exp_def)
   apply clarify
   by (simp add: not_init)
 
-lemma shd_not_init: "shd t \<noteq> (STR ''init'', []) \<Longrightarrow> \<not> ev (\<lambda>s. statename (shd s) = Some 2) (make_full_observation drinks (Some 0) <> t)"
+lemma shd_not_init: "shd t \<noteq> (STR ''init'', []) \<Longrightarrow> \<not> ev (\<lambda>s. statename (shd s) = Some 2) (make_full_observation drinks (Some 0) <> p t)"
   apply (simp add: not_ev_iff)
 proof(coinduction)
   case alw
@@ -213,7 +186,7 @@ lemma possible_steps_1_invalid:
 
 lemma invalid_gets_stuck: "x1 \<noteq> (STR ''coin'', []) \<Longrightarrow>
                            x1 \<noteq> (STR ''vend'', []) \<Longrightarrow>
-                           \<not>ev (\<lambda>s. statename (shd s) = Some 2) (make_full_observation drinks (Some 1) (<>(1 := Num 0)) (x1 ## x2))"
+                           \<not>ev (\<lambda>s. statename (shd s) = Some 2) (make_full_observation drinks (Some 1) (<>(1 := Num 0)) p (x1 ## x2))"
   apply (simp add: not_ev_iff)
 proof(coinduction)
   case alw
@@ -260,8 +233,8 @@ proof(coinduction)
      apply simp
     apply (simp add: possible_steps_init apply_updates_init)
     apply (rule disjI2)
-    using invalid_gets_stuck[of "shd (stl t)" "stl (stl t)"]
-    by (simp add: alw_ev)
+    using invalid_gets_stuck[of "shd (stl t)" "[]" "stl (stl t)"]
+    by (simp add: alw_ev init_def)
 qed
 
 (* Ramsay, this is the proof you want!
