@@ -1,5 +1,5 @@
 theory Coin_Tea
-  imports "../../efsm-ltl/EFSM_LTL" "../../efsm-isabelle/AExp"
+  imports "../../efsm-ltl/EFSM_LTL"
 begin
 
 declare One_nat_def [simp del]
@@ -12,7 +12,7 @@ definition init :: transition where
           Arity = 0,
           Guard = [],
           Outputs = [],
-          Updates = [(1, (aexp.L (Num 0)))]
+          Updates = [(1, (L (Num 0)))]
         \<rparr>"
 
 definition coin :: transition where
@@ -21,15 +21,15 @@ definition coin :: transition where
           Arity = 0,
           Guard = [],
           Outputs = [],
-          Updates = [(1, (aexp.Plus (aexp.V (vname.R 1)) (aexp.L (Num 1))))]
+          Updates = [(1, (Plus (V (R 1)) (L (Num 1))))]
         \<rparr>"
 
 definition vend :: transition where
 "vend \<equiv> \<lparr>
           Label = (STR ''vend''),
           Arity = 0,
-          Guard = [GExp.Gt (aexp.V (vname.R 1)) (aexp.L (Num 0))],
-          Outputs = [aexp.L (Str ''tea'')],
+          Guard = [Gt (V (R 1)) (L (Num 0))],
+          Outputs = [L (Str ''tea'')],
           Updates = []
         \<rparr>"
 
@@ -163,16 +163,16 @@ qed
 lemma next_not_lt_zero:
   "n \<ge> 0 \<Longrightarrow>
    (nxt (not 
-    (check_exp (Lt (V (R 1)) (L (Num 0))))
+    (check_exp (Lt (V (Rg 1)) (L (Num 0))))
     )) (make_full_observation drinks (Some 1) (<>(1 := Num n)) p t)"
     apply simp
     apply (case_tac "shd t = (STR ''vend'', [])")
     apply (case_tac "n = 0")
-      apply (simp add: possible_steps_vend_insufficient check_exp_def Lt_def)
-     apply (simp add: possible_steps_vend_sufficient updates_vend check_exp_def Lt_def)
+      apply (simp add: possible_steps_vend_insufficient check_exp_def Lt_def join_iro_def)
+     apply (simp add: possible_steps_vend_sufficient updates_vend check_exp_def Lt_def join_iro_def)
     apply (case_tac "shd t = (STR ''coin'', [])")
-   apply (simp add: possible_steps_coin datastate coin_def value_plus_def check_exp_def Lt_def)
-  by (simp add: check_exp_def Lt_def invalid_possible_steps_1 ltl_step_alt)
+    apply (simp add: possible_steps_coin datastate coin_def value_plus_def check_exp_def Lt_def join_iro_def)
+  by (simp add: check_exp_def Lt_def invalid_possible_steps_1 ltl_step_alt join_iro_def)
 
 lemma not_initialised: "alw (\<lambda>xs. state_eq (Some 1) xs \<and>
               MaybeBoolInt (<) (datastate (shd xs) $ (1)) (Some (Num 0)) = trilean.true \<and> label_eq ''vend'' xs \<and> input_eq [] xs \<longrightarrow>
@@ -258,12 +258,12 @@ qed
 text_raw\<open>\snip{checkinit}{1}{2}{%\<close>
 lemma LTL_init_makes_r_1_zero:
   "((label_eq ''init'' aand input_eq []) impl
-    (nxt (check_exp (Eq (V (R 1)) (L (Num 0))))))
+    (nxt (check_exp (Eq (V (Rg 1)) (L (Num 0))))))
    (watch drinks t)"
 text_raw\<open>}%endsnip\<close>
   apply (case_tac "shd t = (STR ''init'', [])")
   using watch_def
-   apply (simp add: possible_steps_init updates_init check_exp_def)
+   apply (simp add: possible_steps_init updates_init check_exp_def join_iro_def)
   by (simp add: not_init check_exp_def)
 
 (* This is not a true property but is good for testing the translation process *)

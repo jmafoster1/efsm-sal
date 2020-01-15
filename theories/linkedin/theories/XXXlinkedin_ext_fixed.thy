@@ -11,7 +11,7 @@ definition "login" :: "transition" where
       Guard = [],
       Outputs = [],
       Updates = [
-            (1, (aexp.V (vname.I 0)))
+            (1, (V (I 0)))
       ]
 \<rparr>"
 
@@ -20,9 +20,9 @@ definition "view" :: "transition" where
       Label = STR ''view'',
       Arity = 3,
       Guard = [
-            GExp.Eq (aexp.V (vname.I 0)) (aexp.L (Str ''friendID'')),
-            GExp.Eq (aexp.V (vname.I 1)) (aexp.L (Str ''name'')),
-            GExp.Eq (aexp.V (vname.I 2)) (aexp.L (Str ''HM8p''))
+            Eq (V (I 0)) (L (Str ''friendID'')),
+            Eq (V (I 1)) (L (Str ''name'')),
+            Eq (V (I 2)) (L (Str ''HM8p''))
       ],
       Outputs = [],
       Updates = []
@@ -33,10 +33,10 @@ definition "view1" :: "transition" where
       Label = STR ''view'',
       Arity = 3,
       Guard = [
-            GExp.Eq (aexp.V (vname.R 1)) (aexp.L (Str ''free'')),
-            GExp.Eq (aexp.V (vname.I 0)) (aexp.L (Str ''otherID'')),
-            GExp.Eq (aexp.V (vname.I 1)) (aexp.L (Str ''OUT_OF_NETWORK'')),
-            GExp.Eq (aexp.V (vname.I 2)) (aexp.L (Str ''MNn5''))
+            Eq (V (R 1)) (L (Str ''free'')),
+            Eq (V (I 0)) (L (Str ''otherID'')),
+            Eq (V (I 1)) (L (Str ''OUT_OF_NETWORK'')),
+            Eq (V (I 2)) (L (Str ''MNn5''))
       ],
       Outputs = [],
       Updates = []
@@ -47,10 +47,10 @@ definition "view2" :: "transition" where
       Label = STR ''view'',
       Arity = 3,
       Guard = [
-            GExp.Eq (aexp.V (vname.R 1)) (aexp.L (Str ''free'')),
-            GExp.Eq (aexp.V (vname.I 0)) (aexp.L (Str ''otherID'')),
-            GExp.Eq (aexp.V (vname.I 1)) (aexp.L (Str ''name'')),
-            GExp.Eq (aexp.V (vname.I 2)) (aexp.L (Str ''4zoF''))
+            Eq (V (R 1)) (L (Str ''free'')),
+            Eq (V (I 0)) (L (Str ''otherID'')),
+            Eq (V (I 1)) (L (Str ''name'')),
+            Eq (V (I 2)) (L (Str ''4zoF''))
       ],
       Outputs = [],
       Updates = []
@@ -61,10 +61,10 @@ definition "view3" :: "transition" where
       Label = STR ''view'',
       Arity = 3,
       Guard = [
-            GExp.Eq (aexp.V (vname.R 1)) (aexp.L (Str ''paid'')),
-            GExp.Eq (aexp.V (vname.I 0)) (aexp.L (Str ''otherID'')),
-            GExp.Eq (aexp.V (vname.I 1)) (aexp.L (Str ''name'')),
-            GExp.Eq (aexp.V (vname.I 2)) (aexp.L (Str ''MNn5''))
+            Eq (V (R 1)) (L (Str ''paid'')),
+            Eq (V (I 0)) (L (Str ''otherID'')),
+            Eq (V (I 1)) (L (Str ''name'')),
+            Eq (V (I 2)) (L (Str ''MNn5''))
       ],
       Outputs = [],
       Updates = []
@@ -75,12 +75,12 @@ definition "pdf" :: "transition" where
       Label = STR ''pdf'',
       Arity = 3,
       Guard = [
-            GExp.Eq (aexp.V (vname.I 0)) (aexp.L (Str ''friendID'')),
-            GExp.Eq (aexp.V (vname.I 1)) (aexp.L (Str ''name'')),
-            GExp.Eq (aexp.V (vname.I 2)) (aexp.L (Str ''HM8p''))
+            Eq (V (I 0)) (L (Str ''friendID'')),
+            Eq (V (I 1)) (L (Str ''name'')),
+            Eq (V (I 2)) (L (Str ''HM8p''))
       ],
       Outputs = [
-            (aexp.L (Str ''detailed_pdf_of_friendID''))
+            (L (Str ''detailed_pdf_of_friendID''))
       ],
       Updates = []
 \<rparr>"
@@ -90,12 +90,12 @@ definition "pdf1" :: "transition" where
       Label = STR ''pdf'',
       Arity = 3,
       Guard = [
-            GExp.Eq (aexp.V (vname.I 0)) (aexp.L (Str ''otherID'')),
-            GExp.Eq (aexp.V (vname.I 1)) (aexp.L (Str ''OUT_OF_NETWORK'')),
-            GExp.Eq (aexp.V (vname.I 2)) (aexp.L (Str ''MNn5''))
+            Eq (V (I 0)) (L (Str ''otherID'')),
+            Eq (V (I 1)) (L (Str ''OUT_OF_NETWORK'')),
+            Eq (V (I 2)) (L (Str ''MNn5''))
       ],
       Outputs = [
-            (aexp.L (Str ''summary_pdf_of_otherID''))
+            (L (Str ''summary_pdf_of_otherID''))
       ],
       Updates = []
 \<rparr>"
@@ -105,12 +105,12 @@ definition "pdf2" :: "transition" where
       Label = STR ''pdf'',
       Arity = 3,
       Guard = [
-            GExp.Eq (aexp.V (vname.I 0)) (aexp.L (Str ''otherID'')),
-            GExp.Eq (aexp.V (vname.I 1)) (aexp.L (Str ''name'')),
-            GExp.Eq (aexp.V (vname.I 2)) (aexp.L (Str ''4zoF''))
+            Eq (V (I 0)) (L (Str ''otherID'')),
+            Eq (V (I 1)) (L (Str ''name'')),
+            Eq (V (I 2)) (L (Str ''4zoF''))
       ],
       Outputs = [
-            (aexp.L (Str ''detailed_pdf_of_otherID''))
+            (L (Str ''detailed_pdf_of_otherID''))
       ],
       Updates = []
 \<rparr>"
@@ -399,14 +399,14 @@ text_raw\<open>\snip{neverDetailedProof}{1}{2}{%\<close>
 lemma LTL_neverDetailed:
     "(((label_eq  ''login'' aand input_eq [Str ''free'']) impl
      (nxt (alw ((label_eq ''pdf'' aand
-     check_exp (Eq (V (I 0)) (L (Str ''otherID'')))) impl
+     check_exp (Eq (V (Ip 0)) (L (Str ''otherID'')))) impl
      (not (nxt (output_eq [Some (Str ''detailed_pdf_of_otherID'')]))))))))
      (watch linkedIn i)"
   apply (simp add: watch_def ltl_step_alt)
   apply (simp add: input_eq_def label_eq_def)
-  apply (simp add: implode login_user apply_updates_login check_exp_def login_def)
+  apply (simp add: implode login_user apply_updates_login check_exp_def login_def join_ir_nth)
   using after_login[of "[]" "stl i"]
-  by (simp add: alw_mono join_ir_nth)
+  by (simp add: alw_mono join_iro_def)
 
 text_raw\<open>}%endsnip\<close>
 end

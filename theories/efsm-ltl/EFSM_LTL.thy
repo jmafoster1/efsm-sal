@@ -135,7 +135,7 @@ lemma decompose_pair: "e \<noteq> (l, i) = (\<not> (fst e =l \<and> snd e = i))"
   by (metis fst_conv prod.collapse sndI)
 
 definition check_exp :: "ltl_gexp \<Rightarrow> state stream \<Rightarrow> bool" where
-  "check_exp g s = (gval g (snd (event (shd s))) (datastate (shd s)) (output (shd s)) = trilean.true)"
+  "check_exp g s = (gval g (join_iro (snd (event (shd s))) (datastate (shd s)) (output (shd s))) = trilean.true)"
 
 lemma alw_ev: "alw f = not (ev (\<lambda>s. \<not>f s))"
   by simp

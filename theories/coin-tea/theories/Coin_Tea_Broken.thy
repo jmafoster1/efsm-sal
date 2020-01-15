@@ -16,7 +16,7 @@ definition init :: transition where
           Arity = 0,
           Guard = [],
           Outputs = [],
-          Updates = [(1, (aexp.L (Num 0)))]
+          Updates = [(1, (L (Num 0)))]
         \<rparr>"
 
 definition coin :: transition where
@@ -25,15 +25,15 @@ definition coin :: transition where
           Arity = 0,
           Guard = [],
           Outputs = [],
-          Updates = [(1, (aexp.Plus (aexp.V (vname.R 1)) (aexp.L (Num 1))))]
+          Updates = [(1, (Plus (V (vname.R 1)) (L (Num 1))))]
         \<rparr>"
 
 definition vend :: transition where
 "vend \<equiv> \<lparr>
           Label = (STR ''vend''),
           Arity = 0,
-          Guard = [Ge (aexp.V (vname.R 1)) (aexp.L (Num 0))],
-          Outputs = [aexp.L (Str ''tea'')],
+          Guard = [Ge (V (vname.R 1)) (L (Num 0))],
+          Outputs = [L (Str ''tea'')],
           Updates = []
         \<rparr>"
 
@@ -156,9 +156,9 @@ lemma vend_insufficient: "possible_steps drinks 1 (<>(1 := Num 0)) STR ''vend'' 
   apply (simp add: vend_def apply_guards connectives)
   sorry
 
-lemma LTL_init_makes_r_1_zero: "((label_eq ''init'' aand input_eq []) impl nxt (check_exp (Eq (V (R 1)) (L (Num 0))))) (watch drinks t)"
+lemma LTL_init_makes_r_1_zero: "((label_eq ''init'' aand input_eq []) impl nxt (check_exp (Eq (V (Rg 1)) (L (Num 0))))) (watch drinks t)"
   apply (case_tac "shd t = (STR ''init'', [])")
-   apply (simp add: possible_steps_init apply_updates_init watch_def check_exp_def)
+   apply (simp add: possible_steps_init apply_updates_init watch_def check_exp_def join_iro_def)
   apply clarify
   by (simp add: not_init)
 
