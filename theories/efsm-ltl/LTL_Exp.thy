@@ -15,6 +15,9 @@ definition join_iro :: "value list \<Rightarrow> registers \<Rightarrow> outputs
     Op n \<Rightarrow> o ! n
   )"
 
+lemma join_iro_R [simp]: "join_iro i r o (Rg n) = r $ n"
+  by (simp add: join_iro_def)
+
 (*
 
 datatype ltl_aexp = L "value" | V ltl_vname | Plus ltl_aexp ltl_aexp | Minus ltl_aexp ltl_aexp | Times ltl_aexp ltl_aexp

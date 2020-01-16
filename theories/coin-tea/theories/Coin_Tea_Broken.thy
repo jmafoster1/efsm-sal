@@ -5,10 +5,6 @@ begin
 declare One_nat_def [simp del]
 declare ltl_step_alt [simp]
 
-definition I :: "nat \<Rightarrow> vname" where
-  "I n = vname.I (n-1)"
-declare I_def [simp]
-
 text_raw\<open>\snip{cointeabroken}{1}{2}{%\<close>
 definition init :: transition where
 "init \<equiv> \<lparr>
@@ -25,14 +21,14 @@ definition coin :: transition where
           Arity = 0,
           Guard = [],
           Outputs = [],
-          Updates = [(1, (Plus (V (vname.R 1)) (L (Num 1))))]
+          Updates = [(1, (Plus (V (R 1)) (L (Num 1))))]
         \<rparr>"
 
 definition vend :: transition where
 "vend \<equiv> \<lparr>
           Label = (STR ''vend''),
           Arity = 0,
-          Guard = [Ge (V (vname.R 1)) (L (Num 0))],
+          Guard = [Ge (V (R 1)) (L (Num 0))],
           Outputs = [L (Str ''tea'')],
           Updates = []
         \<rparr>"

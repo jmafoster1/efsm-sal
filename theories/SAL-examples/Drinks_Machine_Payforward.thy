@@ -1,5 +1,5 @@
 theory Drinks_Machine_Payforward
-  imports "Drinks_Machine"
+  imports "../efsm-isabelle/examples/Drinks_Machine"
 begin
 
 definition "setup" :: "transition" where
@@ -45,7 +45,7 @@ definition drinks :: transition_matrix where
 
 lemmas transitions = select_def coin_def vend_def setup_def
 
-lemma possible_steps_0: "possible_steps drinks 0 Map.empty (STR ''setup'') [] = {|(1, setup)|}"
+lemma possible_steps_0: "possible_steps drinks 0 <> (STR ''setup'') [] = {|(1, setup)|}"
   apply (simp add: possible_steps_def drinks_def transitions)
   by force
 
@@ -57,10 +57,10 @@ lemma possible_steps_2_coin: "possible_steps drinks 2 d (STR ''coin'') [Num n] =
   apply (simp add: possible_steps_def drinks_def transitions)
   by force
 
-lemma possible_steps_2_vend: "r 2 = Some (Num n) \<Longrightarrow> n \<ge> 100 \<Longrightarrow> possible_steps drinks 2 r (STR ''vend'') [] = {|(1, vend)|}"
+lemma possible_steps_2_vend: "r $ 2 = Some (Num n) \<Longrightarrow> n \<ge> 100 \<Longrightarrow> possible_steps drinks 2 r (STR ''vend'') [] = {|(1, vend)|}"
   apply (simp add: possible_steps_singleton drinks_def)
   apply safe
-  by (simp_all add: transitions apply_guards)
+  by (simp_all add: transitions apply_guards_def connectives value_gt_def)
 
 lemma "observe_trace drinks 0 <> [((STR ''setup''), []), ((STR ''select''), [Str ''coke'']), ((STR ''coin''),[Num 110]), ((STR ''vend''), []), ((STR ''select''), [Str ''pepsi'']), ((STR ''coin''),[Num 90]), ((STR ''vend''), [])] = [[],[],[Some (Num 110)],[Some (Str ''coke'')],[],[Some (Num 100)],[Some (Str ''pepsi'')]]"
   apply (rule observe_trace_possible_step)
@@ -73,12 +73,12 @@ lemma "observe_trace drinks 0 <> [((STR ''setup''), []), ((STR ''select''), [Str
    apply simp
   apply (rule observe_trace_possible_step)
      apply (simp add: possible_steps_2_coin)
-    apply (simp add: coin_def apply_outputs select_def setup_def)
+    apply (simp add: coin_def apply_outputs select_def setup_def value_plus_def)
    apply simp
   apply (rule observe_trace_possible_step)
      apply simp
      apply (rule possible_steps_2_vend)
-      apply (simp add: datastate coin_def select_def setup_def)
+      apply (simp add: datastate coin_def select_def setup_def value_plus_def)
      apply simp
     apply (simp add: vend_def apply_outputs coin_def select_def setup_def)
    apply simp
@@ -88,12 +88,12 @@ lemma "observe_trace drinks 0 <> [((STR ''setup''), []), ((STR ''select''), [Str
    apply simp
   apply (rule observe_trace_possible_step)
      apply (simp add: possible_steps_2_coin)
-    apply (simp add: coin_def apply_outputs select_def setup_def vend_def)
+    apply (simp add: coin_def apply_outputs select_def setup_def vend_def value_plus_def value_minus_def)
    apply simp
   apply (rule observe_trace_possible_step)
      apply simp
      apply (rule possible_steps_2_vend)
-      apply (simp add: datastate coin_def select_def setup_def vend_def)
+      apply (simp add: datastate coin_def select_def setup_def vend_def value_plus_def value_minus_def)
      apply simp
     apply (simp add: vend_def apply_outputs coin_def select_def setup_def)
    apply simp

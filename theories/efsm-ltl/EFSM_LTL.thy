@@ -88,6 +88,14 @@ proof -
     by (metis (no_types) alw.simps shd_state_is_none stream.sel(2) unfold_observe_none)
 qed
 
+lemma once_none_nxt_always_none: "alw (nxt (state_eq None)) (make_full_observation e None r p t)"
+proof(coinduction)
+  case alw
+  then show ?case
+    apply simp
+    by (metis alw_iff_sdrop nxt.simps once_none_always_none sdrop_simps(2) shd_state_is_none)
+qed
+
 lemma no_output_none: "nxt (alw (output_eq [])) (make_full_observation e None r p t)"
 proof -
   obtain ss :: "((String.literal \<times> value list) stream \<Rightarrow> state stream) \<Rightarrow> (String.literal \<times> value list) stream" where
@@ -139,5 +147,40 @@ definition check_exp :: "ltl_gexp \<Rightarrow> state stream \<Rightarrow> bool"
 
 lemma alw_ev: "alw f = not (ev (\<lambda>s. \<not>f s))"
   by simp
+
+lemma stream_eq_scons: "shd x = h \<Longrightarrow> stl x = t \<Longrightarrow> x = h##t"
+  by auto
+
+lemma test: "smap statename (make_full_observation e None r p i) = smap statename (make_full_observation e None r p' i)"
+  by (metis (no_types, lifting) state.select_convs(1) stream.map unfold_observe_none)
+
+lemma alw_state_eq_smap: "alw (state_eq s) ss = alw (\<lambda>ss. shd ss = s) (smap statename ss)"
+  apply standard
+   apply (simp add: alw_iff_sdrop state_eq_def)
+  by (simp add: alw_mono alw_smap state_eq_def)
+
+lemma scons: "\<exists>h t. s = h##t"
+  by (meson stream.exhaust)
+
+lemma alw_holds: "alw (holds P) (h##t) = (P h \<and> alw (holds P) t)"
+  apply standard
+   apply auto[1]
+  by (metis alw.simps holds_Stream stream.sel(2))
+
+lemma alw_holds2: "alw (holds P) ss = (P (shd ss) \<and> alw (holds P) (stl ss))"
+  by (meson alw.simps holds.elims(2) holds.elims(3))
+
+lemma holds_eq: "(\<lambda>ss. shd ss = s) = holds (\<lambda>ss. ss = s)"
+  apply (rule ext)
+  by (simp add: holds_def HLD_iff)
+
+lemma alw_sconst: "(alw (\<lambda>xs. shd xs = h) t) = (t = sconst h)"
+  apply standard
+   defer
+   apply (simp add: alw_sconst)
+  sorry
+
+lemma smap_statename_None: "smap statename (make_full_observation e None r p i) = sconst None"
+  by (meson EFSM_LTL.alw_sconst alw_state_eq_smap once_none_always_none)
 
 end

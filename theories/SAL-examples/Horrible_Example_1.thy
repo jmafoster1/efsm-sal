@@ -1,5 +1,5 @@
 theory Horrible_Example_1
-imports "../EFSM"
+imports "../efsm-isabelle/EFSM"
 begin
 definition t1 :: "transition" where
 "t1 \<equiv> \<lparr>
@@ -46,6 +46,6 @@ definition vend :: transition_matrix where
          |}"
 
 lemma "\<forall> i r. \<not> (apply_guards (Guard t3) (join_ir i r) \<and> apply_guards (Guard t4) (join_ir i r))"
-  by (simp add: apply_guards t3_def t4_def)
+  by (simp add: apply_guards_def t3_def t4_def connectives)
 
 end

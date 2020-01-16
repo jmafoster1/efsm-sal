@@ -1,5 +1,5 @@
 theory Byzantine_Drinks_Machine
-  imports "../Contexts"
+  imports "../efsm-isabelle/Contexts"
 begin
 
 definition select :: "transition" where
@@ -9,7 +9,7 @@ definition select :: "transition" where
         Guard = [], \<comment> \<open> No guards \<close>
         Outputs = [],
         Updates = [ \<comment> \<open> Two updates: \<close>
-                    (1, (V (I 1))), \<comment> \<open>  Firstly set value of r1 to value of i1 \<close>
+                    (1, (V (I 1))), \<comment> \<open> Firstly set value of r1 to value of i1 \<close>
                     (2, (L (Num 0))) \<comment> \<open> Secondly set the value of r2 to literal zero \<close>
                   ]
       \<rparr>"

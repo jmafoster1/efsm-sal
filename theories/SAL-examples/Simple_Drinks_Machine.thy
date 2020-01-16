@@ -1,5 +1,5 @@
 theory Simple_Drinks_Machine
-imports "../Contexts" "Drinks_Machine_2"
+imports "../efsm-isabelle/Contexts" "../efsm-isabelle/examples/Drinks_Machine_2"
 begin
 
 definition t1 :: "transition" where
@@ -8,15 +8,15 @@ definition t1 :: "transition" where
         Arity = 1,
         Guard = [],
         Outputs = [],
-        Updates = [(1, (V (I 1))), (2, (L (Num 0)))]
+        Updates = [(1, (V (I 0))), (2, (L (Num 0)))]
       \<rparr>"
 
 definition coin50 :: "transition" where
 "coin50 \<equiv> \<lparr>
         Label = (STR ''coin''),
         Arity = 1,
-        Guard = [(gexp.Eq (V (I 1)) (L (Num 50)))],
-        Outputs = [(Plus (V (R 2)) (V (I 1)))],
+        Guard = [(gexp.Eq (V (I 0)) (L (Num 50)))],
+        Outputs = [(Plus (V (R 2)) (V (I 0)))],
         Updates = [(1, (V (R 1))),
                    (2, Plus (V (R 2)) (L (Num 50)))]
       \<rparr>"
@@ -26,10 +26,10 @@ definition coin :: "transition" where
         Label = (STR ''coin''),
         Arity = 1,
         Guard = [],
-        Outputs = [(Plus (V (R 2)) (V (I 1)))],
+        Outputs = [(Plus (V (R 2)) (V (I 0)))],
         Updates = [
                   (1, (V (R 1))),
-                  (2, (Plus (V (R 2)) (V (I 1))))
+                  (2, (Plus (V (R 2)) (V (I 0))))
                 ]
       \<rparr>"
 

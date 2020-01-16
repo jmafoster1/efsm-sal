@@ -1,5 +1,5 @@
 theory Siobhan_Examples
-imports "../EFSM"
+imports "../efsm-isabelle/EFSM"
 begin
 
 definition all_syntax :: transition where
@@ -11,8 +11,7 @@ definition all_syntax :: transition where
                             Bc False,
                             Eq (Plus (V (R 1)) (V (I 1))) (L (Num 7)),
                             Gt (L (Num 3)) (Minus (V (I 4)) (V (R 3))),
-                            Nor (Lt (V (R 2)) (L (Num 100))) (Lt (V (R 2)) (L (Num 100))),
-                            Null (V (R 3))
+                            Nor (Lt (V (R 2)) (L (Num 100))) (Lt (V (R 2)) (L (Num 100)))
                           ],
                   Outputs = [L (Num 5),
                              L (Str ''hello''),

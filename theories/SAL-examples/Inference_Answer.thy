@@ -1,5 +1,5 @@
 theory Inference_Answer
-  imports "../EFSM"
+  imports "../efsm-isabelle/EFSM"
 begin
 definition select :: transition where
   "select = \<lparr>Label = STR ''select'', Arity = 1, Guard = [], Outputs = [], Updates = [(2, L (Num 0)), (1, V (I 1))]\<rparr>"

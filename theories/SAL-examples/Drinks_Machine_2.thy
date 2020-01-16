@@ -1,1 +1,0 @@
-/home/michael/Documents/efsm-inference/formal/examples/Drinks_Machine_2.thy
