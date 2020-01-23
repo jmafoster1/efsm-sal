@@ -1,5 +1,5 @@
 theory Coin
-imports "../../EFSM"
+imports "../../efsm-isabelle/EFSM"
 begin
 
 text_raw\<open>\snip{coin}{1}{2}{%\<close>

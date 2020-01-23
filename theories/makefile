@@ -4,4 +4,4 @@ snippets:
 	mv snippets.tex ../../verifying-trace-properties/figures/snippets.tex ;\
 
 clean:
-	@find . -name "*thy~" -exec rm {} \;
+	@find . -name "*thy~*" -exec rm {} \;

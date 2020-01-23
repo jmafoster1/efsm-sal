@@ -3,7 +3,7 @@ text{*This theory presents a simple EFSM definition and uses contexts to prove
 transition subsumption. 
 *}
 theory Generalisation
-imports "../Contexts" "Drinks_Machine_2"
+imports "../efsm-isabelle/Contexts" "../efsm-isabelle/examples/Drinks_Machine_2"
 begin
 
 definition select :: "transition" where
@@ -120,36 +120,18 @@ definition vend_g :: transition_matrix where
 lemmas transitions = select_def coin_init_def vends_g_def venderr_g_def coin_inc_def coin50_def vends_def
 
 lemma "subsumes coin_init <> coin50"
-  apply (rule subsumption)
-      apply (simp add: coin_init_def coin50_def)
-     apply (simp add: coin_init_def coin50_def can_take_def)
-    apply (simp add: coin_init_def coin50_def can_take_def)
-   apply (simp add: coin_init_def coin50_def can_take_def posterior_def apply_guards)
-   apply auto[1]
-  apply (simp add: coin_init_def coin50_def can_take_def posterior_def apply_guards)
-  by auto
+  by (simp add: subsumes_def coin_init_def coin50_def can_take_transition_def can_take_def posterior_separate_def)
 
 lemma "subsumes coin_inc <> coin50"
-  apply (rule subsumption)
-      apply (simp add: coin_inc_def coin50_def)
-     apply (simp add: coin_inc_def coin50_def can_take_def)
-    apply (simp add: coin_inc_def coin50_def can_take_def)
-   apply (simp add: coin_inc_def coin50_def can_take_def posterior_def apply_guards)
-   apply auto[1]
-  apply (simp add: coin_inc_def coin50_def can_take_def posterior_def apply_guards)
-  by auto
+  by (simp add: subsumes_def coin_inc_def coin50_def can_take_transition_def can_take_def posterior_separate_def)
+
 
 lemma  "\<not>subsumes vends_g <> vends"
   apply (rule bad_guards)
-  by (simp add: vends_g_def vends_def can_take_def apply_guards)
+  by (simp add: vends_g_def vends_def can_take_def can_take_transition_def apply_guards_def connectives value_gt_def)
 
-lemma "r 1 = Some (Num n) \<Longrightarrow> n \<ge> 100 \<Longrightarrow> subsumes vends_g r vends"
-  apply (rule subsumption)
-      apply (simp add: vends_g_def vends_def)
-     apply (simp add: vends_g_def vends_def can_take_def apply_guards)
-    apply (simp add: vends_g_def vends_def)
-   apply (simp add: vends_g_def vends_def posterior_def can_take_def)
-  by (simp add: vends_g_def vends_def posterior_def can_take_def)
+lemma "r $ 1 = Some (Num n) \<Longrightarrow> n \<ge> 100 \<Longrightarrow> subsumes vends_g r vends"
+  by (simp add: subsumes_def vends_g_def vends_def can_take_transition_def can_take_def apply_guards_def connectives value_gt_def)
 
 definition test1 :: transition where
 "test1 \<equiv> \<lparr>
@@ -170,26 +152,6 @@ definition test2 :: transition where
       \<rparr>"
 
 lemma test2_subsumes_test1: "subsumes test2 <> test1"
-  apply (rule subsumption)
-      apply (simp add: test1_def test2_def)
-     apply (simp add: test1_def test2_def can_take_def apply_guards)
-    apply (simp add: test1_def test2_def can_take_def apply_outputs apply_guards)
-   apply clarify
-   apply (simp add: posterior_def)
-   apply (case_tac "can_take test2 i <>")
-   apply (case_tac "can_take test1 i <>")
-     apply simp
-     apply (simp add: test1_def test2_def)
-     apply clarify
-     apply (case_tac "r' = 1")
-      apply (simp add: can_take_def apply_guards)
-      apply (metis (no_types, hide_lams) Groups.add_ac(2) Suc_pred add.right_neutral add_Suc_right add_diff_cancel_left' add_diff_inverse_nat append_Nil2 diff_diff_left in_set_enumerate_eq length_0_conv length_append length_replicate list.size(3) list.size(4) map_of_SomeD nat.simps(3) numeral_1_eq_Suc_0 numeral_One prod.sel(1) prod.sel(2) trilean.distinct(1) weak_map_of_SomeI)
-     apply (simp add: can_take_def apply_guards)
-    apply simp
-   apply simp
-  apply (simp add: posterior_def)
-  apply clarify
-  apply (simp add: test1_def test2_def can_take_def apply_guards)
-  by (metis apply_updates.simps(1) option.simps(3) trilean.distinct(1))
-
+  apply (simp add: subsumes_def test1_def test2_def can_take_transition_def can_take_def apply_guards_def posterior_separate_def value_gt_def  apply_outputs_def)
+  by auto
 end

@@ -1,5 +1,5 @@
 theory Drinks_Machine_Change
-  imports Drinks_Machine
+  imports "../efsm-isabelle/examples/Drinks_Machine"
 begin
 
 definition vend :: "transition" where
@@ -20,7 +20,7 @@ definition drinks :: transition_matrix where
 
 lemmas transitions = select_def coin_def vend_def
 
-lemma possible_steps_0:  "length i = 1 \<Longrightarrow> possible_steps drinks 0 Map.empty ((STR ''select'')) i = {|(1, select)|}"
+lemma possible_steps_0:  "length i = 1 \<Longrightarrow> possible_steps drinks 0 <> ((STR ''select'')) i = {|(1, select)|}"
   apply (simp add: possible_steps_def drinks_def transitions)
   by force
 
@@ -33,10 +33,10 @@ lemma possible_steps_1_coin: "possible_steps drinks 1 r (STR ''coin'') [Num n'] 
   apply (simp add: possible_steps_def drinks_def transitions)
   by force
 
-lemma possible_steps_1_vend: "r 2 = Some (Num n) \<and> n \<ge> 100 \<Longrightarrow> possible_steps drinks 1 r (STR ''vend'') [] = {|(2, vend)|}"
+lemma possible_steps_1_vend: "r $ 2 = Some (Num n) \<and> n \<ge> 100 \<Longrightarrow> possible_steps drinks 1 r (STR ''vend'') [] = {|(2, vend)|}"
   apply (simp add: possible_steps_singleton drinks_def)
   apply safe
-  by (simp_all add: transitions apply_guards)
+  by (simp_all add: transitions apply_guards_def connectives value_gt_def)
 
 lemma "observe_trace drinks 0 <> [((STR ''select''), [Str ''coke'']), ((STR ''coin''), [Num 50]), ((STR ''coin''), [Num 50]), ((STR ''vend''), [])] = [[], [Some (Num 50)], [Some (Num 100)], [Some (Str ''coke''), Some (Num 0)]]"
   apply (rule observe_trace_possible_step)
@@ -45,40 +45,42 @@ lemma "observe_trace drinks 0 <> [((STR ''select''), [Str ''coke'']), ((STR ''co
    apply simp
   apply (rule observe_trace_possible_step)
      apply (simp add: possible_steps_1_coin)
-    apply (simp add: coin_def apply_outputs select_def)
+    apply (simp add: coin_def apply_outputs select_def value_plus_def)
    apply simp
   apply (rule observe_trace_possible_step)
      apply (simp add: possible_steps_1_coin)
-    apply (simp add: coin_def apply_outputs select_def)
+    apply (simp add: coin_def apply_outputs select_def value_plus_def)
    apply simp
   apply (rule observe_trace_possible_step)
      apply simp
      apply (rule possible_steps_1_vend)
-     apply (simp add: coin_def select_def datastate)
+     apply (simp add: coin_def select_def datastate value_plus_def)
      apply auto[1]
-    apply (simp add: vend_def apply_outputs coin_def select_def)
+    apply (simp add: vend_def apply_outputs coin_def select_def value_minus_def value_plus_def)
    apply simp
   by simp
 
-lemma "observe_trace drinks 0 <> [((STR ''select''), [Str ''coke'']), ((STR ''coin''), [Num 50]), ((STR ''coin''), [Num 100]), ((STR ''vend''), [])] = [[], [Some (Num 50)], [Some (Num 150)], [Some (Str ''coke''), Some (Num 50)]]"
+lemma "observe_trace drinks 0 <> 
+[((STR ''select''), [Str ''coke'']), ((STR ''coin''), [Num 50]), ((STR ''coin''), [Num 100]), ((STR ''vend''), [])] =
+[[], [Some (Num 50)], [Some (Num 150)], [Some (Str ''coke''), Some (Num 50)]]"
   apply (rule observe_trace_possible_step)
      apply (simp add: possible_steps_0)
     apply (simp add: select_def)
    apply simp
   apply (rule observe_trace_possible_step)
      apply (simp add: possible_steps_1_coin)
-    apply (simp add: coin_def apply_outputs select_def)
+    apply (simp add: coin_def apply_outputs select_def value_plus_def)
    apply simp
   apply (rule observe_trace_possible_step)
      apply (simp add: possible_steps_1_coin)
-    apply (simp add: coin_def apply_outputs select_def)
+    apply (simp add: coin_def apply_outputs select_def value_plus_def)
    apply simp
   apply (rule observe_trace_possible_step)
-     apply simp
+     apply (simp add: coin_def select_def join_ir_def input2state_def finfun_update_twist value_plus_def)
      apply (rule possible_steps_1_vend)
      apply (simp add: coin_def select_def datastate)
      apply auto[1]
-    apply (simp add: vend_def apply_outputs coin_def select_def)
+    apply (simp add: vend_def apply_outputs coin_def select_def value_plus_def value_minus_def)
    apply simp
   by simp
 
@@ -104,27 +106,10 @@ lemma invalid_input: "\<not> accepts drinks 1 d' [((STR ''invalid''), [Num 50])]
   using possible_steps_invalid
   by auto
 
-lemma invalid_valid_prefix: "\<not> (accepts_trace (drinks) [((STR ''select''), [Str ''coke'']), ((STR ''invalid''), [Num 50])])"
-  apply clarify
-  apply (rule EFSM.accepts.induct)
-    apply simp
-   apply simp
-   defer
-   apply simp
-  apply (rule EFSM.accepts.cases)
-    apply simp
-   apply simp
-  apply (simp add: step_def)
-  apply clarify
-  apply (simp add: possible_steps_0 outputs_select)
-  using invalid_input
-  by simp
-
-lemma "observe_trace drinks 0 <> [((STR ''select''), [Str ''coke'']), ((STR ''invalid''), [Num 50]), ((STR ''coin''), [Num 50])] = [[]]"
-  apply (rule observe_trace_possible_step)
-     apply (simp add: possible_steps_0)
-    apply (simp add: select_def)
-   apply simp
-  apply (rule observe_trace_no_possible_step)
-  by (simp add: possible_steps_invalid)
+lemma invalid_valid_prefix: "rejects Drinks_Machine_Change.drinks 0 <> [(STR ''select'', [Str ''coke'']), (STR ''invalid'', [Num 50])]"
+  apply (rule trace_reject_later)
+  apply (simp add: possible_steps_0 select_def)
+  apply (rule trace_reject_no_possible_steps)
+  apply (simp add: possible_steps_def Abs_ffilter Set.filter_def drinks_def apply_guards_def transitions)
+  by auto
 end

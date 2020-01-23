@@ -1,15 +1,13 @@
 theory Lift
-  imports "../EFSM"
+  imports "../efsm-isabelle/EFSM"
 begin
-
-declare One_nat_def [simp del]
 
 definition t1up :: "transition" where
 "t1up \<equiv> \<lparr>
         Label = (STR ''goUp''),
         Arity = 1,
-        Guard = [(gexp.Gt (V (I 1)) (L (Num 0)))],
-        Outputs = [(V (I 1))],
+        Guard = [(gexp.Gt (V (I 0)) (L (Num 0)))],
+        Outputs = [(V (I 0))],
         Updates = []
       \<rparr>"
 
@@ -20,8 +18,8 @@ definition t2up :: "transition" where
 "t2up \<equiv> \<lparr>
         Label = (STR ''goUp''),
         Arity = 1,
-        Guard = [(gexp.Gt (V (I 1)) (L (Num 0)))],
-        Outputs = [(Plus (V (I 1)) (L (Num (-1))))],
+        Guard = [(gexp.Gt (V (I 0)) (L (Num 0)))],
+        Outputs = [(Plus (V (I 0)) (L (Num (-1))))],
         Updates = []
       \<rparr>"
 
@@ -32,7 +30,7 @@ definition t3up :: "transition" where
 "t3up \<equiv> \<lparr>
         Label = (STR ''goUp''),
         Arity = 1,
-        Guard = [(gexp.Eq (V (I 1)) (L (Num 0)))],
+        Guard = [(gexp.Eq (V (I 0)) (L (Num 0)))],
         Outputs = [(L (Num 0))],
         Updates = []
       \<rparr>"
@@ -44,8 +42,8 @@ definition t1down :: "transition" where
 "t1down \<equiv> \<lparr>
         Label = (STR ''goDown''),
         Arity = 1,
-        Guard = [(gexp.Gt (V (I 1)) (L (Num 0)))],
-        Outputs = [(V (I 1))],
+        Guard = [(gexp.Gt (V (I 0)) (L (Num 0)))],
+        Outputs = [(V (I 0))],
         Updates = []
       \<rparr>"
 
@@ -53,8 +51,8 @@ definition t2down :: "transition" where
 "t2down \<equiv> \<lparr>
         Label = (STR ''goDown''),
         Arity = 1,
-        Guard = [(gexp.Gt (V (I 1)) (L (Num 0)))],
-        Outputs = [((Plus (V (I 1)) (L (Num (-1)))))],
+        Guard = [(gexp.Gt (V (I 0)) (L (Num 0)))],
+        Outputs = [((Plus (V (I 0)) (L (Num (-1)))))],
         Updates = []
       \<rparr>"
 
@@ -62,7 +60,7 @@ definition t3down :: "transition" where
 "t3down \<equiv> \<lparr>
         Label = (STR ''goDown''),
         Arity = 1,
-        Guard = [(gexp.Eq (V (I 1)) (L (Num 0)))],
+        Guard = [(gexp.Eq (V (I 0)) (L (Num 0)))],
         Outputs = [(L (Num 0))],
         Updates = []
       \<rparr>"
@@ -102,17 +100,17 @@ definition lift :: transition_matrix where
 lemma possible_steps_0: "possible_steps lift 0 r STR ''goUp'' [Num 1] = {|(1, t1up)|}"
   apply (simp add: possible_steps_singleton lift_def)
   apply safe
-  by (simp_all add: transitions apply_guards)
+  by (simp_all add: transitions apply_guards_def value_gt_def join_ir_def input2state_def)
 
 lemma possible_steps_1_up0: "possible_steps lift 1 <> STR ''goUp'' [Num 0] = {|(0, t3up)|}"
   apply (simp add: possible_steps_singleton lift_def)
   apply safe
-  by (simp_all add: transitions apply_guards)
+  by (simp_all add: transitions apply_guards_def value_gt_def)
 
 lemma open_doors: "possible_steps lift 0 <> STR ''open'' [] = {|(3, openDoors)|}"
   apply (simp add: possible_steps_singleton lift_def)
   apply safe
-  by (simp_all add: transitions apply_guards)
+  by (simp_all add: transitions apply_guards_def)
 
 lemma "observe_trace lift 0 <> [((STR ''goUp''), [Num 1]), ((STR ''goUp''), [Num 0]), ((STR ''open''), [])] = [[Some (Num 1)], [Some (Num 0)], [Some (Num 1)]]"
   apply (rule observe_trace_possible_step)
