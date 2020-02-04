@@ -9,6 +9,5 @@ digraph Horrible_Example_1{
 
     s0->s1[label=<<i>f:1/&#91;r<sub>1</sub> := i<sub>1</sub>&#93;</i>>];
     s1->s1[label=<<i>g:0&#91;r<sub>1</sub> &gt; 5&#93;/&#91;r<sub>1</sub> := r<sub>1</sub> + 5&#93;</i>>];
-    s1->s2[label=<<i>h:0&#91;r<sub>1</sub> &lt; 10&#93;/</i>>];
-    s1->s2[label=<<i>h:0&#91;r<sub>1</sub> &ge; 10&#93;/</i>>];
+    s1->s2[label=<<i>h:0&#91;r<sub>1</sub> &ge; 10&#93;</i>>];
 }
