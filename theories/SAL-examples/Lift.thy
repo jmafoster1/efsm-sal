@@ -6,7 +6,7 @@ definition t1up :: "transition" where
 "t1up \<equiv> \<lparr>
         Label = (STR ''goUp''),
         Arity = 1,
-        Guard = [(gexp.Gt (V (I 0)) (L (Num 0)))],
+        Guard = [(Gt (V (I 0)) (L (Num 0)))],
         Outputs = [(V (I 0))],
         Updates = []
       \<rparr>"
@@ -18,7 +18,7 @@ definition t2up :: "transition" where
 "t2up \<equiv> \<lparr>
         Label = (STR ''goUp''),
         Arity = 1,
-        Guard = [(gexp.Gt (V (I 0)) (L (Num 0)))],
+        Guard = [(Gt (V (I 0)) (L (Num 0)))],
         Outputs = [(Plus (V (I 0)) (L (Num (-1))))],
         Updates = []
       \<rparr>"
@@ -30,7 +30,7 @@ definition t3up :: "transition" where
 "t3up \<equiv> \<lparr>
         Label = (STR ''goUp''),
         Arity = 1,
-        Guard = [(gexp.Eq (V (I 0)) (L (Num 0)))],
+        Guard = [(Eq (V (I 0)) (L (Num 0)))],
         Outputs = [(L (Num 0))],
         Updates = []
       \<rparr>"
@@ -42,7 +42,7 @@ definition t1down :: "transition" where
 "t1down \<equiv> \<lparr>
         Label = (STR ''goDown''),
         Arity = 1,
-        Guard = [(gexp.Gt (V (I 0)) (L (Num 0)))],
+        Guard = [(Gt (V (I 0)) (L (Num 0)))],
         Outputs = [(V (I 0))],
         Updates = []
       \<rparr>"
@@ -51,7 +51,7 @@ definition t2down :: "transition" where
 "t2down \<equiv> \<lparr>
         Label = (STR ''goDown''),
         Arity = 1,
-        Guard = [(gexp.Gt (V (I 0)) (L (Num 0)))],
+        Guard = [(Gt (V (I 0)) (L (Num 0)))],
         Outputs = [((Plus (V (I 0)) (L (Num (-1)))))],
         Updates = []
       \<rparr>"
@@ -60,7 +60,7 @@ definition t3down :: "transition" where
 "t3down \<equiv> \<lparr>
         Label = (STR ''goDown''),
         Arity = 1,
-        Guard = [(gexp.Eq (V (I 0)) (L (Num 0)))],
+        Guard = [(Eq (V (I 0)) (L (Num 0)))],
         Outputs = [(L (Num 0))],
         Updates = []
       \<rparr>"

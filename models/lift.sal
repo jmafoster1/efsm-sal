@@ -1,0 +1,114 @@
+%The biggest absolute integer value used is 0
+lift {n_ : nznat} : CONTEXT = BEGIN
+
+LABEL : TYPE = DATATYPE
+  close,
+  goDown,
+  goUp,
+  open
+END;
+                                                                 %%10
+STRING : TYPE = {String__dummy__, NO__1};
+
+STATE : TYPE =
+    {State__0, State__1, State__2, State__3, NULL_STATE};
+  
+IMPORTING trilean;
+IMPORTING value{n_, STRING};
+IMPORTING option{VALUE};
+IMPORTING arithmetic{n_, STRING};
+                                                                 %%20
+output_sequence : CONTEXT = sequence {B_OPTION, OptionBB, 1};
+input_sequence : CONTEXT = sequence {B_VALUE, ValueBB, 1};
+
+lift : MODULE =
+  BEGIN
+    INPUT label : LABEL
+    LOCAL cfstate : STATE
+    INPUT i : input_sequence ! Sequence
+    OUTPUT o : output_sequence ! Sequence
+    INITIALIZATION [                                             %%30
+        cfstate = State__0 AND
+        o = output_sequence ! empty
+      -->
+    ]
+    TRANSITION [
+      T1UP :
+          cfstate = State__0 AND label = goUp AND
+              input_sequence ! size?(i) = 1 AND
+              gval(value_gt(Some(i(0)), Some(Num(0))))
+        -->                                                      %%40
+          cfstate' = State__1;
+          o' = output_sequence !
+              insert(Some(i(0)), output_sequence ! empty)
+      []
+      T2UP :
+          cfstate = State__1 AND label = goUp AND
+              input_sequence ! size?(i) = 1 AND
+              gval(value_gt(Some(i(0)), Some(Num(0))))
+        -->
+          cfstate' = State__1;                                   %%50
+          o' = output_sequence !
+              insert(value_plus(Some(i(0)), Some(Num(-1))),
+              output_sequence ! empty)
+      []
+      T3UP :
+          cfstate = State__1 AND label = goUp AND
+              input_sequence ! size?(i) = 1 AND
+              gval(value_eq(Some(i(0)), Some(Num(0))))
+        -->
+          cfstate' = State__0;                                   %%60
+          o' = output_sequence !
+              insert(Some(Num(0)), output_sequence ! empty)
+      []
+      T1DOWN :
+          cfstate = State__0 AND label = goDown AND
+              input_sequence ! size?(i) = 1 AND
+              gval(value_gt(Some(i(0)), Some(Num(0))))
+        -->
+          cfstate' = State__2;
+          o' = output_sequence !                                 %%70
+              insert(Some(i(0)), output_sequence ! empty)
+      []
+      T2DOWN :
+          cfstate = State__2 AND label = goDown AND
+              input_sequence ! size?(i) = 1 AND
+              gval(value_gt(Some(i(0)), Some(Num(0))))
+        -->
+          cfstate' = State__2;
+          o' = output_sequence !
+              insert(value_plus(Some(i(0)), Some(Num(-1))),        %%80
+              output_sequence ! empty)
+      []
+      T3DOWN :
+          cfstate = State__2 AND label = goDown AND
+              input_sequence ! size?(i) = 1 AND
+              gval(value_eq(Some(i(0)), Some(Num(0))))
+        -->
+          cfstate' = State__0;
+          o' = output_sequence !
+              insert(Some(Num(0)), output_sequence ! empty)        %%90
+      []
+      OPENDOORS :
+          cfstate = State__0 AND label = open AND
+              input_sequence ! size?(i) = 0
+        -->
+          cfstate' = State__3;
+          o' = output_sequence !
+              insert(Some(Str(NO__1)), output_sequence ! empty)
+      []
+      CLOSEDOORS :                                               %%100
+          cfstate = State__3 AND label = close AND
+              input_sequence ! size?(i) = 0
+        -->
+          cfstate' = State__0;
+          o' = output_sequence !
+              insert(Some(Num(0)), output_sequence ! empty)
+      []
+      SINK_HOLE :
+          ELSE
+        -->                                                      %%110
+          cfstate' = NULL_STATE
+    ]
+  END;
+END

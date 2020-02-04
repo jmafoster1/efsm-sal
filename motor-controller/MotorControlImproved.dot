@@ -1,0 +1,29 @@
+digraph MotorControlImproved {
+  graph [rankdir="TB", fontname="Latin Modern Math"];
+
+  s0[label="0"];
+  s1[label="ready"];
+  s2[label="feeding"];
+  s3[label=""];
+  s4[label=""];
+  s5[label="fed"];
+  s6[label="sintering"];
+  s7[label=""];
+  s8[label="returning"];
+  s9[label=""];
+
+  s0 -> s1 [label=<<i>init:0/&#91;r<sub>1</sub> := 0,r<sub>2</sub> := 0,r<sub>3</sub> := 999&#93;</i>>];
+  s1 -> s2 [label=<<i>feed:1/&#91;r<sub>4</sub> := i<sub>1</sub>&#93;</i>>];
+  s2 -> s3 [label=<<i>m3r:0/&#91;r<sub>3</sub> := r<sub>3</sub> - 1&#93;</i>>];
+  s3 -> s4 [label=<<i>m2:0/&#91;r<sub>2</sub> := r<sub>2</sub> + 1, r<sub>4</sub> := r<sub>4</sub> - 1&#93;</i>>];
+  s4 -> s2 [label=<<i>check:0&#91;r<sub>4</sub> &gt; 0&#93;/</i>>];
+  s4 -> s10 [label=<<i>check:0&#91;r<sub>4</sub> = 0&#93;/</i>>];
+  s10 -> s5 [label=<<i>release:0/</i>>];
+  s5 -> s6 [label=<<i>pass:0/</i>>];
+  s6 -> s7 [label=<<i>m1:0/&#91;r<sub>1</sub> := r<sub>1</sub> + 1&#93;</i>>];
+  s7 -> s6 [label=<<i>check:0&#91;r<sub>1</sub> &le; 500&#93;/</i>>];
+  s7 -> s8 [label=<<i>check:0&#91;r<sub>1</sub> &gt; 500&#93;/</i>>];
+  s8 -> s9 [label=<<i>m1r:0/&#91;r<sub>1</sub> := r<sub>1</sub> - 1&#93;</i>>];
+  s9 -> s8 [label=<<i>check:0&#91;r<sub>1</sub> &gt; 0&#93;/</i>>];
+  s9 -> s1 [label=<<i>check:0&#91;r<sub>1</sub> = 0&#93;/</i>>];
+}

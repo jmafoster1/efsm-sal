@@ -18,7 +18,7 @@ definition "select" :: transition where
         Guard = [], \<comment>\<open> No guards \<close>
         Outputs = [],
         Updates = [
-                    (1, (V (I 1))), \<comment>\<open>  Firstly set value of r1 to value of i1 \<close>
+                    (1, (V (I 0))), \<comment>\<open>  Firstly set value of r1 to value of i1 \<close>
                     (2, (V (R 2)))
                   ]
       \<rparr>"

@@ -10,7 +10,7 @@ definition select :: "transition" where
 "select \<equiv> \<lparr>
         Label = (STR ''select''),
         Arity = 1,
-        Guard = [(gexp.Eq (V (I 1)) (L (Str ''coke'')))],
+        Guard = [(Eq (V (I 0)) (L (Str ''coke'')))],
         Outputs = [],
         Updates = []
       \<rparr>"
@@ -19,12 +19,12 @@ definition coin50 :: "transition" where
 "coin50 \<equiv> \<lparr>
         Label = (STR ''coin''),
         Arity = 1,
-        Guard = [(gexp.Eq (V (I 1)) (L (Num 50)))],
+        Guard = [(Eq (V (I 0)) (L (Num 50)))],
         Outputs = [],
         Updates = []
       \<rparr>"
 
-lemma guard_coin50: "Guard coin50 = [(gexp.Eq (V (I 1)) (L (Num 50)))]"
+lemma guard_coin50: "Guard coin50 = [(gexp.Eq (V (I 0)) (L (Num 50)))]"
   by (simp add: coin50_def)
 
 definition coin_init :: "transition" where
@@ -33,7 +33,7 @@ definition coin_init :: "transition" where
         Arity = 1,
         Guard = [],
         Outputs = [],
-        Updates = [(1, (V (I 1)))]
+        Updates = [(1, (V (I 0)))]
       \<rparr>"
 
 lemma guard_coin_init: "Guard coin_init = []"
@@ -45,7 +45,7 @@ definition coin_inc :: "transition" where
         Arity = 1,
         Guard = [],
         Outputs = [],
-        Updates = [(1, (Plus (V (R 1)) (V (I 1))))]
+        Updates = [(1, (Plus (V (R 1)) (V (I 0))))]
       \<rparr>"
 
 definition vends :: "transition" where
@@ -94,7 +94,7 @@ definition venderr_g :: "transition" where
 "venderr_g \<equiv> \<lparr>
         Label = (STR ''vend''),
         Arity = 0,
-        Guard = [(GExp.Lt (V (R 1)) (L (Num 100)))],
+        Guard = [(Lt (V (R 1)) (L (Num 100)))],
         Outputs =  [L (Num 1)],
         Updates = []
       \<rparr>"
@@ -137,7 +137,7 @@ definition test1 :: transition where
 "test1 \<equiv> \<lparr>
         Label = (STR ''foo''),
         Arity = 1,
-        Guard = [(gexp.Eq (V (I 1)) (L (Num 6)))],
+        Guard = [(Eq (V (I 0)) (L (Num 6)))],
         Outputs =  [(L (Num 6))],
         Updates = [(1, (L (Num 6)))]
       \<rparr>"
@@ -146,9 +146,9 @@ definition test2 :: transition where
 "test2 \<equiv> \<lparr>
         Label = (STR ''foo''),
         Arity = 1,
-        Guard = [(gexp.Gt (V (I 1)) (L (Num 0)))],
-        Outputs =  [(V (I 1))],
-        Updates = [(1, (V (I 1)))]
+        Guard = [(Gt (V (I 0)) (L (Num 0)))],
+        Outputs =  [(V (I 0))],
+        Updates = [(1, (V (I 0)))]
       \<rparr>"
 
 lemma test2_subsumes_test1: "subsumes test2 <> test1"

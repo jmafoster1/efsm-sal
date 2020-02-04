@@ -57,48 +57,58 @@ linkedIn : MODULE =
       VIEW :
           cfstate = State__1 AND label = view AND
               input_sequence ! size?(i) = 3 AND
-              gval(value_eq(Some(i(0)), Some(Str(String__friendID)))) AND      %%60
-              gval(value_eq(Some(i(1)), Some(Str(String__name)))) AND
+              gval(value_eq(Some(i(0)),                            %%60
+              Some(Str(String__friendID)))) AND
+              gval(value_eq(Some(i(1)),
+              Some(Str(String__name)))) AND
               gval(value_eq(Some(i(2)), Some(Str(String__HM8p))))
         -->
           cfstate' = State__2;
           o' = output_sequence ! empty
       []
       VIEW1 :
-          cfstate = State__1 AND label = view AND
+          cfstate = State__1 AND label = view AND                %%70
               input_sequence ! size?(i) = 3 AND
-              gval(value_eq(Some(i(0)), Some(Str(String__otherID)))) AND       %%70
-              gval(value_eq(Some(i(1)), Some(Str(String__OUT_OF_NETWORK)))) AND
+              gval(value_eq(Some(i(0)),
+              Some(Str(String__otherID)))) AND
+              gval(value_eq(Some(i(1)),
+              Some(Str(String__OUT_OF_NETWORK)))) AND
               gval(value_eq(Some(i(2)), Some(Str(String__MNn5))))
         -->
           cfstate' = State__4;
           o' = output_sequence ! empty
-      []
+      []                                                         %%80
       VIEW2 :
           cfstate = State__1 AND label = view AND
-              input_sequence ! size?(i) = 3 AND                    %%80
-              gval(value_eq(Some(i(0)), Some(Str(String__otherID)))) AND
-              gval(value_eq(Some(i(1)), Some(Str(String__name)))) AND
+              input_sequence ! size?(i) = 3 AND
+              gval(value_eq(Some(i(0)),
+              Some(Str(String__otherID)))) AND
+              gval(value_eq(Some(i(1)),
+              Some(Str(String__name)))) AND
               gval(value_eq(Some(i(2)), Some(Str(String__4zoF))))
         -->
-          cfstate' = State__6;
+          cfstate' = State__6;                                   %%90
           o' = output_sequence ! empty
       []
       VIEW3 :
           cfstate = State__1 AND label = view AND
-              input_sequence ! size?(i) = 3 AND                    %%90
-              gval(value_eq(Some(i(0)), Some(Str(String__otherID)))) AND
-              gval(value_eq(Some(i(1)), Some(Str(String__name)))) AND
-              gval(value_eq(Some(i(2)), Some(Str(String__MNn5))))
+              input_sequence ! size?(i) = 3 AND
+              gval(value_eq(Some(i(0)),
+              Some(Str(String__otherID)))) AND
+              gval(value_eq(Some(i(1)),
+              Some(Str(String__name)))) AND
+              gval(value_eq(Some(i(2)), Some(Str(String__MNn5))))  %%100
         -->
           cfstate' = State__6;
           o' = output_sequence ! empty
       []
       PDF :
           cfstate = State__2 AND label = pdf AND
-              input_sequence ! size?(i) = 3 AND                    %%100
-              gval(value_eq(Some(i(0)), Some(Str(String__friendID)))) AND
-              gval(value_eq(Some(i(1)), Some(Str(String__name)))) AND
+              input_sequence ! size?(i) = 3 AND
+              gval(value_eq(Some(i(0)),
+              Some(Str(String__friendID)))) AND
+              gval(value_eq(Some(i(1)),                            %%110
+              Some(Str(String__name)))) AND
               gval(value_eq(Some(i(2)), Some(Str(String__HM8p))))
         -->
           cfstate' = State__3;
@@ -106,26 +116,30 @@ linkedIn : MODULE =
               insert(Some(Str(String__detailed_pdf_of_friendID)),
               output_sequence ! empty)
       []
-      PDF1 :                                                     %%110
-          cfstate = State__4 AND label = pdf AND
+      PDF1 :
+          cfstate = State__4 AND label = pdf AND                 %%120
               input_sequence ! size?(i) = 3 AND
-              gval(value_eq(Some(i(0)), Some(Str(String__otherID)))) AND
-              gval(value_eq(Some(i(1)), Some(Str(String__OUT_OF_NETWORK)))) AND
+              gval(value_eq(Some(i(0)),
+              Some(Str(String__otherID)))) AND
+              gval(value_eq(Some(i(1)),
+              Some(Str(String__OUT_OF_NETWORK)))) AND
               gval(value_eq(Some(i(2)), Some(Str(String__MNn5))))
         -->
           cfstate' = State__5;
           o' = output_sequence !
-              insert(Some(Str(String__summary_pdf_of_otherID)),    %%120
+              insert(Some(Str(String__summary_pdf_of_otherID)),    %%130
               output_sequence ! empty)
       []
       PDF2 :
           cfstate = State__6 AND label = pdf AND
               input_sequence ! size?(i) = 3 AND
-              gval(value_eq(Some(i(0)), Some(Str(String__otherID)))) AND
-              gval(value_eq(Some(i(1)), Some(Str(String__name)))) AND
-              gval(value_eq(Some(i(2)), Some(Str(String__4zoF))))
+              gval(value_eq(Some(i(0)),
+              Some(Str(String__otherID)))) AND
+              gval(value_eq(Some(i(1)),
+              Some(Str(String__name)))) AND
+              gval(value_eq(Some(i(2)), Some(Str(String__4zoF))))  %%140
         -->
-          cfstate' = State__7;                                   %%130
+          cfstate' = State__7;
           o' = output_sequence !
               insert(Some(Str(String__detailed_pdf_of_otherID)),
               output_sequence ! empty)
@@ -133,17 +147,18 @@ linkedIn : MODULE =
       SINK_HOLE :
           ELSE
         -->
-          cfstate' = NULL_STATE
+          cfstate' = NULL_STATE                                  %%150
     ]
-  END;                                                           %%140
+  END;
   LTL_neverDetailed : THEOREM linkedIn |-
     label = login AND
         i = input_sequence !
         insert(Str(String__free), input_sequence ! empty) =>
         X(G(label = pdf AND
-        gval(value_eq(Some(i(0)), Some(Str(String__otherID)))) =>
-        NOT (o = output_sequence !
+        gval(value_eq(Some(i(0)),
+        Some(Str(String__otherID)))) =>
+        NOT (o = output_sequence !                                 %%160
         insert(Some(Str(String__detailed_pdf_of_otherID)),
         output_sequence ! empty))));
-                                                                 %%150
+
 END

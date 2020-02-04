@@ -1,0 +1,69 @@
+%The biggest absolute integer value used is 0
+horrible_example_2 {n_ : nznat} : CONTEXT = BEGIN
+
+LABEL : TYPE = DATATYPE
+  f,
+  g,
+  h
+END;
+
+STRING : TYPE = {String__dummy__, NO__5, NO__10};                %%10
+
+STATE : TYPE = {State__0, State__1, State__2, NULL_STATE};
+
+IMPORTING trilean;
+IMPORTING value{n_, STRING};
+IMPORTING option{VALUE};
+IMPORTING arithmetic{n_, STRING};
+
+output_sequence : CONTEXT = sequence {B_OPTION, OptionBB, 1};
+input_sequence : CONTEXT = sequence {B_VALUE, ValueBB, 1};       %%20
+
+h2 : MODULE =
+  BEGIN
+    INPUT label : LABEL
+    LOCAL cfstate : STATE
+    LOCAL r__1 : OPTION
+    INPUT i : input_sequence ! Sequence
+    OUTPUT o : output_sequence ! Sequence
+    INITIALIZATION [
+        cfstate = State__0 AND                                   %%30
+        o = output_sequence ! empty AND
+        r__1 = None
+      -->
+    ]
+    TRANSITION [
+      T1 :
+          cfstate = State__0 AND label = f AND
+              input_sequence ! size?(i) = 1
+        -->
+          cfstate' = State__1;                                   %%40
+          r__1' = Some(i(1));
+          o' = output_sequence ! empty
+      []
+      T2 :
+          cfstate = State__1 AND label = g AND
+              input_sequence ! size?(i) = 0 AND
+              gval(value_gt(r__1, Some(Str(NO__5)))) AND
+              check_overflow(value_plus(r__1,
+              Some(Str(NO__5)))) AND
+              check_underflow(value_plus(r__1, Some(Str(NO__5))))  %%50
+        -->
+          cfstate' = State__1;
+          r__1' = value_plus(r__1, Some(Str(NO__5)));
+          o' = output_sequence ! empty
+      []
+      T3 :
+          cfstate = State__1 AND label = h AND
+              input_sequence ! size?(i) = 0
+        -->
+          cfstate' = State__2;                                   %%60
+          o' = output_sequence ! empty
+      []
+      SINK_HOLE :
+          ELSE
+        -->
+          cfstate' = NULL_STATE
+    ]
+  END;
+END

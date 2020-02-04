@@ -56,7 +56,7 @@ definition vend_fail :: "transition" where
 "vend_fail \<equiv> \<lparr>
         Label = STR ''vend'',
         Arity = 0,
-        Guard = [(GExp.Lt (V (R 2)) (L (Num 100)))],
+        Guard = [(Lt (V (R 2)) (L (Num 100)))],
         Outputs =  [],
         Updates = [(1, V (R 1)), (2, V (R 2))]
       \<rparr>"

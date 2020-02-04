@@ -1,0 +1,198 @@
+%The biggest absolute integer value used is 500
+xxxmotorcontrolimproved {n_ : nznat} : CONTEXT = BEGIN
+
+LABEL : TYPE = DATATYPE
+  check,
+  feed,
+  init,
+  m1,
+  m1r,
+  m2,                                                            %%10
+  m3r,
+  pass,
+  release
+END;
+
+STRING : TYPE = {String__dummy__};
+
+STATE : TYPE =
+    {State__0, State__1, State__2, State__3, State__4, State__5,
+    State__6, State__7, State__8, State__9, State__10, NULL_STATE};%%20
+
+IMPORTING trilean;
+IMPORTING value{n_, STRING};
+IMPORTING option{VALUE};
+IMPORTING arithmetic{n_, STRING};
+
+output_sequence : CONTEXT = sequence {B_OPTION, OptionBB, 0};
+input_sequence : CONTEXT = sequence {B_VALUE, ValueBB, 0};
+
+thegraph : MODULE =                                              %%30
+  BEGIN
+    INPUT label : LABEL
+    LOCAL cfstate : STATE
+    LOCAL r__1 : OPTION
+    LOCAL r__2 : OPTION
+    LOCAL r__3 : OPTION
+    LOCAL r__4 : OPTION
+    INPUT i : input_sequence ! Sequence
+    OUTPUT o : output_sequence ! Sequence
+    INITIALIZATION [                                             %%40
+        cfstate = State__0
+        AND o = output_sequence ! empty
+        AND r__1 = None
+        AND r__2 = None
+        AND r__3 = None
+        AND r__4 = None
+      -->
+    ]
+    TRANSITION [
+      INIT :                                                     %%50
+          cfstate = State__0
+          AND label = init
+          AND input_sequence ! size?(i) = 0
+        -->
+          cfstate' = State__1;
+          r__1' = Some(Num(0));
+          r__2' = Some(Num(0));
+          r__3' = Some(Num(2));
+          o' = output_sequence ! empty
+      []
+      FEED :                                                     %%60
+          cfstate = State__1
+          AND label = feed
+          AND input_sequence ! size?(i) = 1
+          AND gval(value_ge(Some(i(0)), Some(Num(0))))
+        -->
+          cfstate' = State__2;
+          r__4' = Some(i(0));
+          o' = output_sequence ! empty
+      []
+      M3R :
+          cfstate = State__2
+          AND label = m3r
+          AND input_sequence ! size?(i) = 0
+          AND check_bounds(value_minus(r__3, Some(Num(1))))
+        -->
+          cfstate' = State__3;
+          r__3' = value_minus(r__3, Some(Num(1)));
+          o' = output_sequence ! empty
+      []
+      M2 :
+          cfstate = State__3
+          AND label = m2
+          AND input_sequence ! size?(i) = 0
+          AND check_bounds(value_plus(r__2, Some(Num(1))))
+          AND check_bounds(value_minus(r__4, Some(Num(1))))
+        -->
+          cfstate' = State__4;
+          r__2' = value_plus(r__2, Some(Num(1)));
+          r__4' = value_minus(r__4, Some(Num(1)));
+          o' = output_sequence ! empty
+      []                                                         %%90
+      CHECK :
+          cfstate = State__4
+          AND label = check
+          AND input_sequence ! size?(i) = 0
+          AND gval(value_gt(r__4, Some(Num(0))))
+        -->
+          cfstate' = State__2;
+          o' = output_sequence ! empty
+      []
+      CHECK1 :
+          cfstate = State__4
+          AND label = check
+          AND input_sequence ! size?(i) = 0
+          AND r__4 = Some(Num(0))
+        -->
+          cfstate' = State__10;
+          o' = output_sequence ! empty
+      []
+      RELEASE :
+          cfstate = State__10
+          AND label = release
+          AND input_sequence ! size?(i) = 0
+        -->
+          cfstate' = State__5;                                   %%110
+          o' = output_sequence ! empty
+      []
+      PASS :
+          cfstate = State__5
+          AND label = pass
+          AND input_sequence ! size?(i) = 0
+        -->
+          cfstate' = State__6;
+          o' = output_sequence ! empty
+      []
+      M1 :                                                       %%120
+          cfstate = State__6
+          AND label = m1
+          AND input_sequence ! size?(i) = 0
+          AND check_bounds(value_plus(r__1, Some(Num(1))))
+        -->
+          cfstate' = State__7;
+          r__1' = value_plus(r__1, Some(Num(1)));
+          o' = output_sequence ! empty
+      []
+      CHECK2 :                                                   %%130
+          cfstate = State__7
+          AND label = check
+          AND input_sequence ! size?(i) = 0
+          AND gval(value_le(r__1, Some(Num(5))))
+        -->
+          cfstate' = State__6;
+          o' = output_sequence ! empty
+      []
+      CHECK3 :
+          cfstate = State__7
+          AND label = check
+          AND input_sequence ! size?(i) = 0
+          AND %%140
+              gval(value_gt(r__1, Some(Num(5))))
+        -->
+          cfstate' = State__8;
+          o' = output_sequence ! empty
+      []
+      M1R :
+          cfstate = State__8
+          AND label = m1r
+          AND input_sequence ! size?(i) = 0
+          AND check_bounds(value_minus(r__1, Some(Num(1))))     %%150
+        -->
+          cfstate' = State__9;
+          r__1' = value_minus(r__1, Some(Num(1)));
+          o' = output_sequence ! empty
+      []
+      CHECK4 :
+          cfstate = State__9
+          AND label = check
+          AND input_sequence ! size?(i) = 0
+          AND gval(value_gt(r__1, Some(Num(0))))
+        -->                                                      %%160
+          cfstate' = State__8;
+          o' = output_sequence ! empty
+      []
+      CHECK5 :
+          cfstate = State__9
+          AND label = check
+          AND input_sequence ! size?(i) = 0
+          AND r__1 = Some(Num(0))
+        -->
+          cfstate' = State__1;
+          o' = output_sequence ! empty
+      []                                                         %%170
+      SINK_HOLE :
+          ELSE
+        -->
+          cfstate' = NULL_STATE
+    ]
+  END;
+
+  mustDoRelease: THEOREM thegraph |-
+    G(
+        (label = feed OR label = pass) =>
+        X(F((label = feed OR label = pass) AND X(cfstate /= NULL_STATE))) =>
+        X(label = release)
+     );
+
+END
