@@ -22,7 +22,7 @@ definition "feed" :: "transition" where
       Guard = [],
       Outputs = [],
       Updates = [
-            (4, (V (I 1)))
+            (4, (V (I 0)))
       ]
 \<rparr>"
 

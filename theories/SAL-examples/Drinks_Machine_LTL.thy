@@ -26,6 +26,11 @@ lemma statename_smap: "alw (nxt (state_eq (Some 2)) impl (state_eq (Some 1))) s 
        alw (nxt (\<lambda>x. shd x = (Some 2)) impl (\<lambda>x. shd x = (Some 1))) (smap statename s)"
   by (simp add: state_eq_def alw_iff_sdrop)
 
+(* Here is the lemma with quantified variables that I am trying to prove *)
+lemma "\<forall>r p. alw (\<lambda>x. nxt (state_eq (Some 2)) x \<longrightarrow> state_eq (Some 1) x)
+            (nxt (make_full_observation drinks (Some 1) r p) i)"
+  oops
+
 lemma "alw (\<lambda>xs. shd (stl xs) = Some 2 \<longrightarrow> shd xs = Some 1)
             (smap statename (make_full_observation drinks (Some 1) r p i))"
 proof(coinduction arbitrary: r p)
@@ -61,7 +66,6 @@ proof(coinduction arbitrary: r p)
      apply (rule_tac x=p in exI)
     oops
 
-
 lemma LTL_nxt_2_means_vend: "alw (nxt (state_eq (Some 2)) impl (state_eq (Some 1))) (watch drinks i)"
   apply (simp only: statename_smap watch_def)
   apply simp
@@ -82,6 +86,9 @@ proof(coinduction)
      apply simp
     apply (simp add: possible_steps_0 select_def)
     apply (rule disjI2)
+
+    apply (simp add: alw_smap state_eq_def[symmetric])
+    apply (simp only: nxt.simps[symmetric])
     oops
 
 lemma LTL_costsMoney_aux: "(alw (not (check_exp (Gt (V (Rg 2)) (L (Num 100)))) impl (not (nxt (state_eq (Some 2)))))) (watch drinks i)"

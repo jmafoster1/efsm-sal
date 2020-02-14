@@ -241,13 +241,20 @@ lemma not_suntil: "(\<not> (p suntil q) \<omega>) = (\<not> (p until q) \<omega>
 lemma "(p until q) \<omega> = (q \<omega> \<or> (p \<omega> \<and> (p until q) (stl \<omega>)))"
   using UNTIL.simps by auto
 
-lemma "q (sdrop j \<omega>) \<Longrightarrow> \<forall>k<j. p (sdrop k \<omega>) \<Longrightarrow> (p until q) \<omega>"
-
+lemma "ev q \<omega> \<Longrightarrow> q (sdrop j \<omega>) \<Longrightarrow> \<forall>k<j. p (sdrop k \<omega>) \<Longrightarrow> (p until q) \<omega>"
+proof(induction rule: ev.induct)
+  case (base xs)
+  then show ?case
+    by (simp add: UNTIL.base)
+next
+  case (step xs)
+  then show ?case
+    oops
 
 lemma "q (sdrop j \<omega>) \<Longrightarrow> (\<forall>k < j. p (sdrop k \<omega>)) \<Longrightarrow> (p suntil q) \<omega>"
   apply (simp add: suntil_as_until conj_commute)
   apply standard
    apply (simp add: nxt_ev nxt_sdrop)
-
+  oops
 
 end
