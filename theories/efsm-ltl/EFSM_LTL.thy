@@ -151,16 +151,10 @@ lemma alw_ev: "alw f = not (ev (\<lambda>s. \<not>f s))"
 lemma stream_eq_scons: "shd x = h \<Longrightarrow> stl x = t \<Longrightarrow> x = h##t"
   by auto
 
-lemma test: "smap statename (make_full_observation e None r p i) = smap statename (make_full_observation e None r p' i)"
-  by (metis (no_types, lifting) state.select_convs(1) stream.map unfold_observe_none)
-
 lemma alw_state_eq_smap: "alw (state_eq s) ss = alw (\<lambda>ss. shd ss = s) (smap statename ss)"
   apply standard
    apply (simp add: alw_iff_sdrop state_eq_def)
   by (simp add: alw_mono alw_smap state_eq_def)
-
-lemma scons: "\<exists>h t. s = h##t"
-  by (meson stream.exhaust)
 
 lemma alw_holds: "alw (holds P) (h##t) = (P h \<and> alw (holds P) t)"
   apply standard
@@ -170,15 +164,11 @@ lemma alw_holds: "alw (holds P) (h##t) = (P h \<and> alw (holds P) t)"
 lemma alw_holds2: "alw (holds P) ss = (P (shd ss) \<and> alw (holds P) (stl ss))"
   by (meson alw.simps holds.elims(2) holds.elims(3))
 
-lemma holds_eq: "(\<lambda>ss. shd ss = s) = holds (\<lambda>ss. ss = s)"
-  apply (rule ext)
-  by (simp add: holds_def HLD_iff)
+lemma snth_sconst: "(\<forall>i. s !! i = h) = (s = sconst h)"
+  by (metis funpow_code_def id_funpow sdrop_simps(1) sdrop_siterate siterate.simps(1) smap_alt smap_sconst snth.simps(1) stream.map_id)
 
 lemma alw_sconst: "(alw (\<lambda>xs. shd xs = h) t) = (t = sconst h)"
-  apply standard
-   defer
-   apply (simp add: alw_sconst)
-  sorry
+  by (simp add: snth_sconst[symmetric] alw_iff_sdrop)
 
 lemma smap_statename_None: "smap statename (make_full_observation e None r p i) = sconst None"
   by (meson EFSM_LTL.alw_sconst alw_state_eq_smap once_none_always_none)
@@ -241,20 +231,30 @@ lemma not_suntil: "(\<not> (p suntil q) \<omega>) = (\<not> (p until q) \<omega>
 lemma "(p until q) \<omega> = (q \<omega> \<or> (p \<omega> \<and> (p until q) (stl \<omega>)))"
   using UNTIL.simps by auto
 
-lemma "ev q \<omega> \<Longrightarrow> q (sdrop j \<omega>) \<Longrightarrow> \<forall>k<j. p (sdrop k \<omega>) \<Longrightarrow> (p until q) \<omega>"
-proof(induction rule: ev.induct)
-  case (base xs)
+lemma stl_as_sdrop: "stl s = sdrop 1 s"
+  by simp
+
+lemma less_suc: "(\<forall>k<Suc j. p (sdrop k \<omega>)) = ((\<forall>k< j. p (sdrop k \<omega>)) \<and> p (sdrop j \<omega>))"
+  using less_Suc_eq by auto
+
+lemma sdrop_until: "q (sdrop j \<omega>) \<Longrightarrow> \<forall>k<j. p (sdrop k \<omega>) \<Longrightarrow> (p until q) \<omega>"
+proof(induct j arbitrary: \<omega>)
+  case 0
   then show ?case
     by (simp add: UNTIL.base)
 next
-  case (step xs)
+  case (Suc j)
   then show ?case
-    oops
+    by (metis Suc_mono UNTIL.simps sdrop.simps(1) sdrop.simps(2) zero_less_Suc)
+qed
 
-lemma "q (sdrop j \<omega>) \<Longrightarrow> (\<forall>k < j. p (sdrop k \<omega>)) \<Longrightarrow> (p suntil q) \<omega>"
+lemma sdrop_suntil: "q (sdrop j \<omega>) \<Longrightarrow> (\<forall>k < j. p (sdrop k \<omega>)) \<Longrightarrow> (p suntil q) \<omega>"
   apply (simp add: suntil_as_until conj_commute)
   apply standard
    apply (simp add: nxt_ev nxt_sdrop)
-  oops
+  by (simp add: sdrop_until)
+
+lemma sdrop_iff_suntil: "(p suntil q) \<omega> = (\<exists>j. q (sdrop j \<omega>) \<and> (\<forall>k < j. p (sdrop k \<omega>)))"
+  using sdrop_if_suntil sdrop_suntil by blast
 
 end
