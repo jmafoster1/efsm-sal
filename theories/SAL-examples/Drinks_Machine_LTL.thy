@@ -133,24 +133,116 @@ proof(coinduction)
     using one_before_two_aux by blast
 qed
 
-lemma LTL_costsMoney_aux: "(alw (not (check_exp (Gt (V (Rg 2)) (L (Num 100)))) impl (not (nxt (state_eq (Some 2)))))) (watch drinks i)"
-  oops
+lemma possible_steps_0_invalid: "\<not> (l = STR ''select'' \<and> length i = 1) \<Longrightarrow> possible_steps drinks 0 <> l i = {||}"
+  using possible_steps_0_not_select possible_steps_select_wrong_arity by blast
 
-  (* costsMoney: THEOREM drinks |- G(X(cfstate=State_2) => gval(value_ge(r_2, Some(NUM(100))))); *)
-lemma LTL_costsMoney: "(alw (nxt (state_eq (Some 2)) impl (check_exp (Gt (V (Rg 2)) (L (Num 100)))))) (watch drinks i)"
-  oops
+lemma costsMoney_aux:
+  assumes "\<exists>p r i. j = (nxt (make_full_observation drinks (Some 1) r p) i)"
+  shows "alw (\<lambda>xs. nxt (state_eq (Some 2)) xs \<longrightarrow> check_exp (Ge (V (Rg 2)) (L (Num 100))) xs) j"
+  using assms apply(coinduct)
+  apply (simp add: state_eq_def)
+  apply clarify
+  apply (case_tac i)
+  apply clarify
+  apply simp
+  apply (case_tac x2)
+  apply clarify
+  apply simp
+  apply (case_tac "a = STR ''vend'' \<and> b = []")
+   apply simp
+   apply (case_tac "r $ 2")
+    apply (simp add: drinks_vend_invalid)
+    apply (rule disjI2)
+    apply (rule alw_mono[of "nxt (state_eq None)"])
+     apply (simp add: once_none_nxt_always_none)
+    apply (simp add: state_eq_def)
+   apply (case_tac aa)
+    defer
+    apply (simp add: drinks_vend_invalid)
+    apply (rule disjI2)
+    apply (rule alw_mono[of "nxt (state_eq None)"])
+     apply (simp add: once_none_nxt_always_none)
+    apply (simp add: state_eq_def)
+   apply (case_tac "a = STR ''coin'' \<and> length b = 1")
+    prefer 2
+    apply (simp add: drinks_no_possible_steps_1)
+    apply (rule disjI2)
+    apply (rule alw_mono[of "nxt (state_eq None)"])
+     apply (simp add: once_none_nxt_always_none)
+    apply (simp add: state_eq_def)
+   apply (simp add: possible_steps_1_coin)
+   apply (rule disjI1)
+   apply (metis stream.sel(2))
+  apply clarify
+  apply simp
+  apply (case_tac "x1 < 100")
+   apply (simp add: drinks_vend_insufficient)
+   apply (metis stream.sel(2))
+  apply (simp add: drinks_vend_sufficient apply_updates_vend)
+  apply standard
+   apply (simp add: check_exp_def connectives value_gt_def)
+  apply (rule disjI2)
+  apply (rule alw_mono[of "nxt (state_eq None)"])
+   apply (coinduction, simp)
+   apply (simp add: state_eq_def drinks_step_2_none once_none_nxt_always_none)
+  by (simp add: state_eq_def)
+
+(* costsMoney: THEOREM drinks |- G(X(cfstate=State_2) => gval(value_ge(r_2, Some(NUM(100))))); *)
+lemma LTL_costsMoney: "(alw (nxt (state_eq (Some 2)) impl (check_exp (Ge (V (Rg 2)) (L (Num 100)))))) (watch drinks i)"
+proof(coinduction)
+  case alw
+  then show ?case
+    apply (simp add: watch_def state_eq_def)
+    apply (cases "shd i")
+    subgoal for l ip
+      apply (case_tac "l = STR ''select'' \<and> length ip = 1")
+       defer
+       apply (simp add: possible_steps_0_invalid)
+       apply (rule disjI2)
+       apply (rule alw_mono[of "nxt (state_eq None)"])
+        apply (simp add: once_none_nxt_always_none)
+       apply (simp add: state_eq_def)
+      apply (simp add: possible_steps_0 select_def)
+      apply (rule disjI2)
+      apply (simp add: state_eq_def[symmetric])
+      apply (simp only: nxt.simps[symmetric])
+      using costsMoney_aux by blast
+    done
+qed
+
+lemma LTL_costsMoney_aux: "(alw (not (check_exp (Ge (V (Rg 2)) (L (Num 100)))) impl (not (nxt (state_eq (Some 2)))))) (watch drinks i)"
+  by (metis (no_types, lifting) LTL_costsMoney alw_mono)
+
+lemma implode_select: "String.implode ''select'' = STR ''select''"
+  by (metis Literal.rep_eq String.implode_explode_eq zero_literal.rep_eq)
+
+lemma implode_coin: "String.implode ''coin'' = STR ''coin''"
+  by (metis Literal.rep_eq String.implode_explode_eq zero_literal.rep_eq)
+
+lemma implode_vend: "String.implode ''vend'' = STR ''vend''"
+  by (metis Literal.rep_eq String.implode_explode_eq zero_literal.rep_eq)
+
+lemmas implode_labels = implode_select implode_coin implode_vend
 
 (* neverReachS2: THEOREM drinks |- label=select AND I(1) = STR(String_coke) AND
                                 X(label=coin AND I(1) = NUM(100)) AND
                                 X(X(label=vend AND I=InputSequence !empty)) => X(X(X(cfstate=State_2)));;*)
-lemma LTL_neverReachS2:"(((((label_eq ''select'') aand (check_exp (Eq (V (Ip 1)) (L (Str ''coke'')))))
+lemma LTL_neverReachS2:"(((((event_eq (''select'', [Str ''coke''])))
                     aand
-                    (nxt ((label_eq ''coin'') aand (check_exp (Eq (V (Ip 1)) (L (Num 100)))))))
+                    (nxt ((event_eq (''coin'', [Num 100])))))
                     aand
                     (nxt (nxt((label_eq ''vend'' aand (input_eq []))))))
                     impl
                     (nxt (nxt (nxt (state_eq (Some 2))))))
                     (watch drinks i)"
-  oops
+  apply (simp add: watch_def event_eq implode_labels)
+  apply (cases i)
+  apply clarify
+  apply simp
+  apply (simp add: possible_steps_0 select_def)
+  apply (case_tac "shd x2", clarify)
+  apply (simp add: possible_steps_1_coin coin_def value_plus_def finfun_update_twist)
+  apply (case_tac "shd (stl x2)", clarify)
+  by (simp add: drinks_vend_sufficient state_eq_def)
 
 end

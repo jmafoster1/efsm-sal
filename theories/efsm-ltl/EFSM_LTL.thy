@@ -68,6 +68,8 @@ definition input_eq :: "value list \<Rightarrow> state stream \<Rightarrow> bool
 definition event_eq :: "(string \<times> inputs) \<Rightarrow> state stream \<Rightarrow> bool" where
   "event_eq e = label_eq (fst e) aand input_eq (snd e)"
 
+lemmas event_eq = event_eq_def label_eq_def input_eq_def
+
 definition output_eq :: "value option list \<Rightarrow> state stream \<Rightarrow> bool" where
   "output_eq v s \<equiv> output (shd s) = v"
 
