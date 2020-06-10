@@ -172,12 +172,12 @@ thegraph : MODULE =                                              %%30
     ]
   END;
 
-  % mustDoRelease: THEOREM thegraph |-
-  %   G(
-  %       (label = feed OR label = pass) =>
-  %       X(F((label = feed OR label = pass) AND X(cfstate /= NULL_STATE))) =>
-  %       X(label = release)
-  %    );
+  mustDoReleaseOld: THEOREM thegraph |-
+    G(
+        (label = feed OR label = pass) =>
+        X(F((label = feed OR label = pass) AND X(cfstate /= NULL_STATE))) =>
+        X(label = release)
+     );
 
 %  This gives a valid counterexample that we can get to s9 and then do a "check" and then straight away do a feed
   mustDoRelease: THEOREM thegraph |-

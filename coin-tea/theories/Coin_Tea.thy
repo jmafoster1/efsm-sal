@@ -1,5 +1,5 @@
 theory Coin_Tea
-  imports "../../efsm-ltl/EFSM_LTL"
+  imports "EFSM.EFSM_LTL"
 begin
 
 declare One_nat_def [simp del]
