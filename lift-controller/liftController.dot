@@ -1,0 +1,65 @@
+digraph liftController2 {
+    graph [rankdir="RL", fontname="Latin Modern Math", margin=0];
+    node [color="black", fillcolor="white", shape="circle", style="filled", fontname="Latin Modern Math"];
+    edge [fontname="Latin Modern Math"];
+    newrank="true"
+
+    subgraph init_subs {
+      initElevator[fillcolor="gray", label=<InitElevator>];
+      searchRequest[label=<SearchRequest>];
+      rank="min"
+    }
+
+    subgraph floor_subs {
+      floor4[label=<Floor4>];
+      floor3[label=<Floor3>];
+      floor2[label=<Floor2>];
+      floor1[label=<Floor1>];
+      rank="max"
+    }
+
+    subgraph door_subs {
+      openCloseDoor4[label=<OpenCloseDoor4>];
+      openCloseDoor3[label=<OpenCloseDoor3>];
+      openCloseDoor2[label=<OpenCloseDoor2>];
+      openCloseDoor1[label=<OpenCloseDoor1>];
+      rank="same"
+    }
+
+    initElevator->searchRequest[label="continit"];
+
+    floor4->openCloseDoor4[label="motorstop4"];
+    floor3->openCloseDoor3[label="motorstop3"];
+    floor2->openCloseDoor2[label="motorstop2"];
+    floor1->openCloseDoor1[label="motorstop1"];
+
+    openCloseDoor4->searchRequest[label="startsearch4"];
+    openCloseDoor3->searchRequest[label="startsearch3"];
+    openCloseDoor2->searchRequest[label="startsearch2"];
+    openCloseDoor1->searchRequest[label="startsearch1"];
+
+    openCloseDoor4->openCloseDoor4[label="opendoor4"];
+    openCloseDoor3->openCloseDoor3[label="opendoor3"];
+    openCloseDoor2->openCloseDoor2[label="opendoor2"];
+    openCloseDoor1->openCloseDoor1[label="opendoor1"];
+
+    searchRequest->floor4[label="return4"];
+    searchRequest->floor3[label="return3"];
+    searchRequest->floor2[label="return2"];
+    searchRequest->floor1[label="return1"];
+
+    floor4->floor3[label="down43stop"];
+    floor4->floor3[label="down43"];
+    floor3->floor4[label="up34stop"];
+
+    floor3->floor2[label="down32stop"];
+    floor3->floor2[label="down32"];
+    floor2->floor3[label="up23stop"];
+    floor2->floor3[label="up23"];
+
+    floor2->floor1[label="down21stop"];
+    floor1->floor2[label="up12stop"];
+    floor1->floor2[label="up12"];
+
+
+}
