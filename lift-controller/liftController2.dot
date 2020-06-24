@@ -1,53 +1,51 @@
 digraph liftController2 {
-graph [rankdir="RL", fontname="Latin Modern Math", margin=0];
-node [color="black", fillcolor="white", shape="circle", style="filled", fontname="Latin Modern Math"];
-edge [fontname="Latin Modern Math"];
+  graph [rankdir="RL", fontname="Latin Modern Math", margin=0];
+  node [color="black", fillcolor="white", shape="circle", style="filled", fontname="Latin Modern Math"];
+  edge [fontname="Latin Modern Math"];
 
-s0[fillcolor="gray", label="InitElevator"];
-s1[label="SearchRequest"];
-s2[label="Floor4"];
-s3[label="Floor3"];
-s4[label="Floor2"];
-s5[label="Floor1"];
-s6[label="OpenCloseDoor4"];
-s7[label="OpenCloseDoor3"];
-s8[label="OpenCloseDoor2"];
-s9[label="OpenCloseDoor1"];
+  s0[fillcolor="gray", label="InitElevator"];
+  s1[label="SearchRequest"];
+  s2[label="Floor4"];
+  s3[label="Floor3"];
+  s4[label="Floor2"];
+  s5[label="Floor1"];
+  s6[label="OpenCloseDoor4"];
+  s7[label="OpenCloseDoor3"];
+  s8[label="OpenCloseDoor2"];
+  s9[label="OpenCloseDoor1"];
 
-s0->s1[label=<<i>continit:0/&#91;r<sub>1</sub> := "true"&#93;</i>>];
+  s0->s1[label=<<i>continit:0/&#91;r<sub>1</sub> := "true"&#93;</i>>];
 
-s2->s6[label=<<i>motorstop4:2&#91;r<sub>1</sub> = "true", i<sub>1</sub> = "true", i<sub>2</sub> = "true"&#93;/o<sub>1</sub> := 0, o<sub>2</sub> := 4, o<sub>3</sub> := "true"</i>>];
-s3->s7[label=<<i>motorstop3:2&#91;r<sub>1</sub> = "true", i<sub>1</sub> = "true", i<sub>2</sub> = "true"&#93;/o<sub>1</sub> := 0, o<sub>2</sub> := 3, o<sub>3</sub> := "true"</i>>];
-s4->s8[label=<<i>motorstop2:2&#91;r<sub>1</sub> = "true", i<sub>1</sub> = "true", i<sub>2</sub> = "true"&#93;/o<sub>1</sub> := 0, o<sub>2</sub> := 2, o<sub>3</sub> := "true"</i>>];
-s5->s9[label=<<i>motorstop1:2&#91;r<sub>1</sub> = "true", i<sub>1</sub> = "true", i<sub>2</sub> = "true"&#93;/o<sub>1</sub> := 0, o<sub>2</sub> := 1, o<sub>3</sub> := "true"</i>>];
+  s2->s6[label=<<i>motorstop4:2&#91;r<sub>1</sub> = "true", i<sub>1</sub> = "true", i<sub>2</sub> = "true"&#93;/o<sub>1</sub> := 0, o<sub>2</sub> := 4, o<sub>3</sub> := "true"</i>>];
+  s3->s7[label=<<i>motorstop3:2&#91;r<sub>1</sub> = "true", i<sub>1</sub> = "true", i<sub>2</sub> = "true"&#93;/o<sub>1</sub> := 0, o<sub>2</sub> := 3, o<sub>3</sub> := "true"</i>>];
+  s4->s8[label=<<i>motorstop2:2&#91;r<sub>1</sub> = "true", i<sub>1</sub> = "true", i<sub>2</sub> = "true"&#93;/o<sub>1</sub> := 0, o<sub>2</sub> := 2, o<sub>3</sub> := "true"</i>>];
+  s5->s9[label=<<i>motorstop1:2&#91;r<sub>1</sub> = "true", i<sub>1</sub> = "true", i<sub>2</sub> = "true"&#93;/o<sub>1</sub> := 0, o<sub>2</sub> := 1, o<sub>3</sub> := "true"</i>>];
 
-s6->s1[label=<<i>startsearch4:2&#91;i<sub>1</sub> = "true", i<sub>2</sub> = "false"&#93;/</i>>];
-s7->s1[label=<<i>startsearch3:2&#91;i<sub>1</sub> = "true", i<sub>2</sub> = "false"&#93;/</i>>];
-s8->s1[label=<<i>startsearch2:2&#91;i<sub>1</sub> = "true", i<sub>2</sub> = "false"&#93;/</i>>];
-s9->s1[label=<<i>startsearch1:2&#91;i<sub>1</sub> = "true", i<sub>2</sub> = "false"&#93;/</i>>];
+  s6->s1[label=<<i>startsearch4:2&#91;i<sub>1</sub> = "true", i<sub>2</sub> = "false"&#93;/</i>>];
+  s7->s1[label=<<i>startsearch3:2&#91;i<sub>1</sub> = "true", i<sub>2</sub> = "false"&#93;/</i>>];
+  s8->s1[label=<<i>startsearch2:2&#91;i<sub>1</sub> = "true", i<sub>2</sub> = "false"&#93;/</i>>];
+  s9->s1[label=<<i>startsearch1:2&#91;i<sub>1</sub> = "true", i<sub>2</sub> = "false"&#93;/</i>>];
 
-s6->s6[label=<<i>opendoor4:1&#91;i<sub>1</sub> = "true"&#93;/o<sub>1</sub> := "true", o<sub>2</sub> := 4</i>>];
-s7->s7[label=<<i>opendoor3:1&#91;i<sub>1</sub> = "true"&#93;/o<sub>1</sub> := "true", o<sub>2</sub> := 3</i>>];
-s8->s8[label=<<i>opendoor2:1&#91;i<sub>1</sub> = "true"&#93;/o<sub>1</sub> := "true", o<sub>2</sub> := 2</i>>];
-s9->s9[label=<<i>opendoor1:1&#91;i<sub>1</sub> = "true"&#93;/o<sub>1</sub> := "true", o<sub>2</sub> := 1</i>>];
+  s6->s6[label=<<i>opendoor4:1&#91;i<sub>1</sub> = "true"&#93;/o<sub>1</sub> := "true", o<sub>2</sub> := 4</i>>];
+  s7->s7[label=<<i>opendoor3:1&#91;i<sub>1</sub> = "true"&#93;/o<sub>1</sub> := "true", o<sub>2</sub> := 3</i>>];
+  s8->s8[label=<<i>opendoor2:1&#91;i<sub>1</sub> = "true"&#93;/o<sub>1</sub> := "true", o<sub>2</sub> := 2</i>>];
+  s9->s9[label=<<i>opendoor1:1&#91;i<sub>1</sub> = "true"&#93;/o<sub>1</sub> := "true", o<sub>2</sub> := 1</i>>];
 
-s1->s2[label=<<i>return4:0&#91;r<sub>4</sub> = 4&#93;/</i>>];
-s1->s3[label=<<i>return3:0&#91;r<sub>4</sub> = 3&#93;/</i>>];
-s1->s4[label=<<i>return2:0&#91;r<sub>4</sub> = 2&#93;/</i>>];
-s1->s5[label=<<i>return1:0&#91;r<sub>4</sub> = 1&#93;/</i>>];
+  s1->s2[label=<<i>return4:0&#91;r<sub>4</sub> = 4&#93;/</i>>];
+  s1->s3[label=<<i>return3:0&#91;r<sub>4</sub> = 3&#93;/</i>>];
+  s1->s4[label=<<i>return2:0&#91;r<sub>4</sub> = 2&#93;/</i>>];
+  s1->s5[label=<<i>return1:0&#91;r<sub>4</sub> = 1&#93;/</i>>];
 
-s2->s3[label=<<i>down43stop:3&#91;r<sub>2</sub> = 2, r<sub>1</sub> = "false", i<sub>1</sub> = "true", i<sub>2</sub> = "true", i<sub>3</sub> = "true"&#93;/o<sub>1</sub> := 2, o<sub>2</sub> := "true"&#91;r<sub>4</sub> := 3, r<sub>1</sub> := "true"&#93;</i>>];
-s2->s3[label=<<i>down43:3&#91;r<sub>2</sub> = 2, r<sub>1</sub> = "false", i<sub>1</sub> = "true", i<sub>2</sub> = "true", i<sub>3</sub> = "false"&#93;/o<sub>1</sub> := 2, o<sub>2</sub> := "false"&#91;r<sub>4</sub> := 3, r<sub>1</sub> := "false"&#93;</i>>];
-s3->s2[label=<<i>up34stop:2&#91;r<sub>2</sub> = 1, r<sub>1</sub> = "false", i<sub>1</sub> = "true", i<sub>2</sub> = "true"&#93;/o<sub>1</sub> := 1, o<sub>2</sub> := "true"&#91;r<sub>4</sub> := 4, r<sub>1</sub> := "true"&#93;</i>>];
+  s2->s3[label=<<i>down43stop:3&#91;r<sub>2</sub> = 2, r<sub>1</sub> = "false", i<sub>1</sub> = "true", i<sub>2</sub> = "true", i<sub>3</sub> = "true"&#93;/o<sub>1</sub> := 2, o<sub>2</sub> := "true"&#91;r<sub>4</sub> := 3, r<sub>1</sub> := "true"&#93;</i>>];
+  s2->s3[label=<<i>down43:3&#91;r<sub>2</sub> = 2, r<sub>1</sub> = "false", i<sub>1</sub> = "true", i<sub>2</sub> = "true", i<sub>3</sub> = "false"&#93;/o<sub>1</sub> := 2, o<sub>2</sub> := "false"&#91;r<sub>4</sub> := 3, r<sub>1</sub> := "false"&#93;</i>>];
+  s3->s2[label=<<i>up34stop:2&#91;r<sub>2</sub> = 1, r<sub>1</sub> = "false", i<sub>1</sub> = "true", i<sub>2</sub> = "true"&#93;/o<sub>1</sub> := 1, o<sub>2</sub> := "true"&#91;r<sub>4</sub> := 4, r<sub>1</sub> := "true"&#93;</i>>];
 
-s3->s4[label=<<i>down32stop:3&#91;r<sub>2</sub> = 2, r<sub>1</sub> = "false", i<sub>1</sub> = "true", i<sub>2</sub> = "true", i<sub>3</sub> = "true"&#93;/o<sub>1</sub> := 2, o<sub>2</sub> := "true"&#91;r<sub>4</sub> := 2, r<sub>1</sub> := "true"&#93;</i>>];
-s3->s4[label=<<i>down32:3&#91;r<sub>2</sub> = 2, r<sub>1</sub> = "false", i<sub>1</sub> = "true", i<sub>2</sub> = "true", i<sub>3</sub> = "false"&#93;/o<sub>1</sub> := 2, o<sub>2</sub> := "false"&#91;r<sub>4</sub> := 2, r<sub>1</sub> := "false"&#93;</i>>];
-s4->s3[label=<<i>up23stop:3&#91;r<sub>2</sub> = 1, r<sub>1</sub> = "false", i<sub>1</sub> = "true", i<sub>2</sub> = "true", i<sub>3</sub> = "true"&#93;/o<sub>1</sub> := 1, o<sub>2</sub> := "true"&#91;r<sub>4</sub> := 3, r<sub>1</sub> := "true"&#93;</i>>];
-s4->s3[label=<<i>up23:3&#91;r<sub>2</sub> = 1, r<sub>1</sub> = "false", i<sub>1</sub> = "true", i<sub>2</sub> = "true", i<sub>3</sub> = "false"&#93;/o<sub>1</sub> := 1, o<sub>2</sub> := "false"&#91;r<sub>4</sub> := 3, r<sub>1</sub> := "false"&#93;</i>>];
+  s3->s4[label=<<i>down32stop:3&#91;r<sub>2</sub> = 2, r<sub>1</sub> = "false", i<sub>1</sub> = "true", i<sub>2</sub> = "true", i<sub>3</sub> = "true"&#93;/o<sub>1</sub> := 2, o<sub>2</sub> := "true"&#91;r<sub>4</sub> := 2, r<sub>1</sub> := "true"&#93;</i>>];
+  s3->s4[label=<<i>down32:3&#91;r<sub>2</sub> = 2, r<sub>1</sub> = "false", i<sub>1</sub> = "true", i<sub>2</sub> = "true", i<sub>3</sub> = "false"&#93;/o<sub>1</sub> := 2, o<sub>2</sub> := "false"&#91;r<sub>4</sub> := 2, r<sub>1</sub> := "false"&#93;</i>>];
+  s4->s3[label=<<i>up23stop:3&#91;r<sub>2</sub> = 1, r<sub>1</sub> = "false", i<sub>1</sub> = "true", i<sub>2</sub> = "true", i<sub>3</sub> = "true"&#93;/o<sub>1</sub> := 1, o<sub>2</sub> := "true"&#91;r<sub>4</sub> := 3, r<sub>1</sub> := "true"&#93;</i>>];
+  s4->s3[label=<<i>up23:3&#91;r<sub>2</sub> = 1, r<sub>1</sub> = "false", i<sub>1</sub> = "true", i<sub>2</sub> = "true", i<sub>3</sub> = "false"&#93;/o<sub>1</sub> := 1, o<sub>2</sub> := "false"&#91;r<sub>4</sub> := 3, r<sub>1</sub> := "false"&#93;</i>>];
 
-s4->s5[label=<<i>down21stop:2&#91;r<sub>2</sub> = 2, r<sub>1</sub> = "false", i<sub>1</sub> = "true", i<sub>2</sub> = "true"&#93;/o<sub>1</sub> := 2, o<sub>2</sub> := "true"&#91;r<sub>3</sub> := 1, r<sub>1</sub> := "true"&#93;</i>>];
-s5->s4[label=<<i>up12stop:3&#91;r<sub>2</sub> = 1, r<sub>1</sub> = "false", i<sub>1</sub> = "true", i<sub>2</sub> = "true", i<sub>3</sub> = "true"&#93;/o<sub>1</sub> := 1, o<sub>2</sub> := "true"&#91;r<sub>1</sub> := "true", r<sub>4</sub> := 2&#93;</i>>];
-s5->s4[label=<<i>up12:3&#91;r<sub>2</sub> = 1, r<sub>1</sub> = "false", i<sub>1</sub> = "true", i<sub>2</sub> = "true", i<sub>3</sub> = "false"&#93;/o<sub>1</sub> := 1, o<sub>2</sub> := "false"&#91;r<sub>4</sub> := 2, r<sub>1</sub> := "false"&#93;</i>>];
-
-
+  s4->s5[label=<<i>down21stop:2&#91;r<sub>2</sub> = 2, r<sub>1</sub> = "false", i<sub>1</sub> = "true", i<sub>2</sub> = "true"&#93;/o<sub>1</sub> := 2, o<sub>2</sub> := "true"&#91;r<sub>3</sub> := 1, r<sub>1</sub> := "true"&#93;</i>>];
+  s5->s4[label=<<i>up12stop:3&#91;r<sub>2</sub> = 1, r<sub>1</sub> = "false", i<sub>1</sub> = "true", i<sub>2</sub> = "true", i<sub>3</sub> = "true"&#93;/o<sub>1</sub> := 1, o<sub>2</sub> := "true"&#91;r<sub>1</sub> := "true", r<sub>4</sub> := 2&#93;</i>>];
+  s5->s4[label=<<i>up12:3&#91;r<sub>2</sub> = 1, r<sub>1</sub> = "false", i<sub>1</sub> = "true", i<sub>2</sub> = "true", i<sub>3</sub> = "false"&#93;/o<sub>1</sub> := 1, o<sub>2</sub> := "false"&#91;r<sub>4</sub> := 2, r<sub>1</sub> := "false"&#93;</i>>];
 }

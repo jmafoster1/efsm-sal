@@ -1,4 +1,4 @@
-theory XXXliftController2
+theory XXXliftController3
 imports "EFSM.EFSM"
 begin
 
@@ -13,14 +13,14 @@ definition "continit" :: "transition" where
       ]
 \<rparr>"
 
-definition "motorstop4" :: "transition" where
-"motorstop4 \<equiv> \<lparr>
-      Label = STR ''motorstop4'',
+definition "motorstop" :: "transition" where
+"motorstop \<equiv> \<lparr>
+      Label = STR ''motorstop'',
       Arity = 2,
       Guards = [
             (Eq (V (R 1)) (L (Str ''true''))),
-            (Eq (V (I 0)) (L (Str ''true''))),
-            (Eq (V (I 1)) (L (Str ''true'')))
+            (Eq (V (I 1)) (L (Str ''true''))),
+            (Eq (V (I 2)) (L (Str ''true'')))
       ],
       Outputs = [
             (L (Num 0)),
@@ -30,14 +30,14 @@ definition "motorstop4" :: "transition" where
       Updates = []
 \<rparr>"
 
-definition "motorstop3" :: "transition" where
-"motorstop3 \<equiv> \<lparr>
-      Label = STR ''motorstop3'',
+definition "motorstop1" :: "transition" where
+"motorstop1 \<equiv> \<lparr>
+      Label = STR ''motorstop'',
       Arity = 2,
       Guards = [
             (Eq (V (R 1)) (L (Str ''true''))),
-            (Eq (V (I 0)) (L (Str ''true''))),
-            (Eq (V (I 1)) (L (Str ''true'')))
+            (Eq (V (I 1)) (L (Str ''true''))),
+            (Eq (V (I 2)) (L (Str ''true'')))
       ],
       Outputs = [
             (L (Num 0)),
@@ -49,12 +49,12 @@ definition "motorstop3" :: "transition" where
 
 definition "motorstop2" :: "transition" where
 "motorstop2 \<equiv> \<lparr>
-      Label = STR ''motorstop2'',
+      Label = STR ''motorstop'',
       Arity = 2,
       Guards = [
             (Eq (V (R 1)) (L (Str ''true''))),
-            (Eq (V (I 0)) (L (Str ''true''))),
-            (Eq (V (I 1)) (L (Str ''true'')))
+            (Eq (V (I 1)) (L (Str ''true''))),
+            (Eq (V (I 2)) (L (Str ''true'')))
       ],
       Outputs = [
             (L (Num 0)),
@@ -64,14 +64,14 @@ definition "motorstop2" :: "transition" where
       Updates = []
 \<rparr>"
 
-definition "motorstop1" :: "transition" where
-"motorstop1 \<equiv> \<lparr>
-      Label = STR ''motorstop1'',
+definition "motorstop3" :: "transition" where
+"motorstop3 \<equiv> \<lparr>
+      Label = STR ''motorstop'',
       Arity = 2,
       Guards = [
             (Eq (V (R 1)) (L (Str ''true''))),
-            (Eq (V (I 0)) (L (Str ''true''))),
-            (Eq (V (I 1)) (L (Str ''true'')))
+            (Eq (V (I 1)) (L (Str ''true''))),
+            (Eq (V (I 2)) (L (Str ''true'')))
       ],
       Outputs = [
             (L (Num 0)),
@@ -81,37 +81,13 @@ definition "motorstop1" :: "transition" where
       Updates = []
 \<rparr>"
 
-definition "startsearch4" :: "transition" where
-"startsearch4 \<equiv> \<lparr>
-      Label = STR ''startsearch4'',
+definition "startsearch" :: "transition" where
+"startsearch \<equiv> \<lparr>
+      Label = STR ''startsearch'',
       Arity = 2,
       Guards = [
-            (Eq (V (I 0)) (L (Str ''true''))),
-            (Eq (V (I 1)) (L (Str ''false'')))
-      ],
-      Outputs = [],
-      Updates = []
-\<rparr>"
-
-definition "startsearch3" :: "transition" where
-"startsearch3 \<equiv> \<lparr>
-      Label = STR ''startsearch3'',
-      Arity = 2,
-      Guards = [
-            (Eq (V (I 0)) (L (Str ''true''))),
-            (Eq (V (I 1)) (L (Str ''false'')))
-      ],
-      Outputs = [],
-      Updates = []
-\<rparr>"
-
-definition "startsearch2" :: "transition" where
-"startsearch2 \<equiv> \<lparr>
-      Label = STR ''startsearch2'',
-      Arity = 2,
-      Guards = [
-            (Eq (V (I 0)) (L (Str ''true''))),
-            (Eq (V (I 1)) (L (Str ''false'')))
+            (Eq (V (I 1)) (L (Str ''true''))),
+            (Eq (V (I 2)) (L (Str ''false'')))
       ],
       Outputs = [],
       Updates = []
@@ -119,22 +95,46 @@ definition "startsearch2" :: "transition" where
 
 definition "startsearch1" :: "transition" where
 "startsearch1 \<equiv> \<lparr>
-      Label = STR ''startsearch1'',
+      Label = STR ''startsearch'',
       Arity = 2,
       Guards = [
-            (Eq (V (I 0)) (L (Str ''true''))),
-            (Eq (V (I 1)) (L (Str ''false'')))
+            (Eq (V (I 1)) (L (Str ''true''))),
+            (Eq (V (I 2)) (L (Str ''false'')))
       ],
       Outputs = [],
       Updates = []
 \<rparr>"
 
-definition "opendoor4" :: "transition" where
-"opendoor4 \<equiv> \<lparr>
-      Label = STR ''opendoor4'',
+definition "startsearch2" :: "transition" where
+"startsearch2 \<equiv> \<lparr>
+      Label = STR ''startsearch'',
+      Arity = 2,
+      Guards = [
+            (Eq (V (I 1)) (L (Str ''true''))),
+            (Eq (V (I 2)) (L (Str ''false'')))
+      ],
+      Outputs = [],
+      Updates = []
+\<rparr>"
+
+definition "startsearch3" :: "transition" where
+"startsearch3 \<equiv> \<lparr>
+      Label = STR ''startsearch'',
+      Arity = 2,
+      Guards = [
+            (Eq (V (I 1)) (L (Str ''true''))),
+            (Eq (V (I 2)) (L (Str ''false'')))
+      ],
+      Outputs = [],
+      Updates = []
+\<rparr>"
+
+definition "opendoor" :: "transition" where
+"opendoor \<equiv> \<lparr>
+      Label = STR ''opendoor'',
       Arity = 1,
       Guards = [
-            (Eq (V (I 0)) (L (Str ''true'')))
+            (Eq (V (I 1)) (L (Str ''true'')))
       ],
       Outputs = [
             (L (Str ''true'')),
@@ -143,12 +143,12 @@ definition "opendoor4" :: "transition" where
       Updates = []
 \<rparr>"
 
-definition "opendoor3" :: "transition" where
-"opendoor3 \<equiv> \<lparr>
-      Label = STR ''opendoor3'',
+definition "opendoor1" :: "transition" where
+"opendoor1 \<equiv> \<lparr>
+      Label = STR ''opendoor'',
       Arity = 1,
       Guards = [
-            (Eq (V (I 0)) (L (Str ''true'')))
+            (Eq (V (I 1)) (L (Str ''true'')))
       ],
       Outputs = [
             (L (Str ''true'')),
@@ -159,10 +159,10 @@ definition "opendoor3" :: "transition" where
 
 definition "opendoor2" :: "transition" where
 "opendoor2 \<equiv> \<lparr>
-      Label = STR ''opendoor2'',
+      Label = STR ''opendoor'',
       Arity = 1,
       Guards = [
-            (Eq (V (I 0)) (L (Str ''true'')))
+            (Eq (V (I 1)) (L (Str ''true'')))
       ],
       Outputs = [
             (L (Str ''true'')),
@@ -171,12 +171,12 @@ definition "opendoor2" :: "transition" where
       Updates = []
 \<rparr>"
 
-definition "opendoor1" :: "transition" where
-"opendoor1 \<equiv> \<lparr>
-      Label = STR ''opendoor1'',
+definition "opendoor3" :: "transition" where
+"opendoor3 \<equiv> \<lparr>
+      Label = STR ''opendoor'',
       Arity = 1,
       Guards = [
-            (Eq (V (I 0)) (L (Str ''true'')))
+            (Eq (V (I 1)) (L (Str ''true'')))
       ],
       Outputs = [
             (L (Str ''true'')),
@@ -185,9 +185,9 @@ definition "opendoor1" :: "transition" where
       Updates = []
 \<rparr>"
 
-definition "return4" :: "transition" where
-"return4 \<equiv> \<lparr>
-      Label = STR ''return4'',
+definition "return" :: "transition" where
+"return \<equiv> \<lparr>
+      Label = STR ''return'',
       Arity = 0,
       Guards = [
             (Eq (V (R 4)) (L (Num 4)))
@@ -196,9 +196,9 @@ definition "return4" :: "transition" where
       Updates = []
 \<rparr>"
 
-definition "return3" :: "transition" where
-"return3 \<equiv> \<lparr>
-      Label = STR ''return3'',
+definition "return1" :: "transition" where
+"return1 \<equiv> \<lparr>
+      Label = STR ''return'',
       Arity = 0,
       Guards = [
             (Eq (V (R 4)) (L (Num 3)))
@@ -209,7 +209,7 @@ definition "return3" :: "transition" where
 
 definition "return2" :: "transition" where
 "return2 \<equiv> \<lparr>
-      Label = STR ''return2'',
+      Label = STR ''return'',
       Arity = 0,
       Guards = [
             (Eq (V (R 4)) (L (Num 2)))
@@ -218,9 +218,9 @@ definition "return2" :: "transition" where
       Updates = []
 \<rparr>"
 
-definition "return1" :: "transition" where
-"return1 \<equiv> \<lparr>
-      Label = STR ''return1'',
+definition "return3" :: "transition" where
+"return3 \<equiv> \<lparr>
+      Label = STR ''return'',
       Arity = 0,
       Guards = [
             (Eq (V (R 4)) (L (Num 1)))
@@ -229,16 +229,16 @@ definition "return1" :: "transition" where
       Updates = []
 \<rparr>"
 
-definition "down43stop" :: "transition" where
-"down43stop \<equiv> \<lparr>
-      Label = STR ''down43stop'',
+definition "down" :: "transition" where
+"down \<equiv> \<lparr>
+      Label = STR ''down'',
       Arity = 3,
       Guards = [
             (Eq (V (R 2)) (L (Num 2))),
             (Eq (V (R 1)) (L (Str ''false''))),
-            (Eq (V (I 0)) (L (Str ''true''))),
             (Eq (V (I 1)) (L (Str ''true''))),
-            (Eq (V (I 2)) (L (Str ''true'')))
+            (Eq (V (I 2)) (L (Str ''true''))),
+            (Eq (V (I 3)) (L (Str ''true'')))
       ],
       Outputs = [
             (L (Num 2)),
@@ -250,16 +250,16 @@ definition "down43stop" :: "transition" where
       ]
 \<rparr>"
 
-definition "down43" :: "transition" where
-"down43 \<equiv> \<lparr>
-      Label = STR ''down43'',
+definition "down1" :: "transition" where
+"down1 \<equiv> \<lparr>
+      Label = STR ''down'',
       Arity = 3,
       Guards = [
             (Eq (V (R 2)) (L (Num 2))),
             (Eq (V (R 1)) (L (Str ''false''))),
-            (Eq (V (I 0)) (L (Str ''true''))),
             (Eq (V (I 1)) (L (Str ''true''))),
-            (Eq (V (I 2)) (L (Str ''false'')))
+            (Eq (V (I 2)) (L (Str ''true''))),
+            (Eq (V (I 3)) (L (Str ''false'')))
       ],
       Outputs = [
             (L (Num 2)),
@@ -271,15 +271,15 @@ definition "down43" :: "transition" where
       ]
 \<rparr>"
 
-definition "up34stop" :: "transition" where
-"up34stop \<equiv> \<lparr>
-      Label = STR ''up34stop'',
+definition "up" :: "transition" where
+"up \<equiv> \<lparr>
+      Label = STR ''up'',
       Arity = 2,
       Guards = [
             (Eq (V (R 2)) (L (Num 1))),
             (Eq (V (R 1)) (L (Str ''false''))),
-            (Eq (V (I 0)) (L (Str ''true''))),
-            (Eq (V (I 1)) (L (Str ''true'')))
+            (Eq (V (I 1)) (L (Str ''true''))),
+            (Eq (V (I 2)) (L (Str ''true'')))
       ],
       Outputs = [
             (L (Num 1)),
@@ -291,16 +291,16 @@ definition "up34stop" :: "transition" where
       ]
 \<rparr>"
 
-definition "down32stop" :: "transition" where
-"down32stop \<equiv> \<lparr>
-      Label = STR ''down32stop'',
+definition "down2" :: "transition" where
+"down2 \<equiv> \<lparr>
+      Label = STR ''down'',
       Arity = 3,
       Guards = [
             (Eq (V (R 2)) (L (Num 2))),
             (Eq (V (R 1)) (L (Str ''false''))),
-            (Eq (V (I 0)) (L (Str ''true''))),
             (Eq (V (I 1)) (L (Str ''true''))),
-            (Eq (V (I 2)) (L (Str ''true'')))
+            (Eq (V (I 2)) (L (Str ''true''))),
+            (Eq (V (I 3)) (L (Str ''true'')))
       ],
       Outputs = [
             (L (Num 2)),
@@ -312,16 +312,16 @@ definition "down32stop" :: "transition" where
       ]
 \<rparr>"
 
-definition "down32" :: "transition" where
-"down32 \<equiv> \<lparr>
-      Label = STR ''down32'',
+definition "down3" :: "transition" where
+"down3 \<equiv> \<lparr>
+      Label = STR ''down'',
       Arity = 3,
       Guards = [
             (Eq (V (R 2)) (L (Num 2))),
             (Eq (V (R 1)) (L (Str ''false''))),
-            (Eq (V (I 0)) (L (Str ''true''))),
             (Eq (V (I 1)) (L (Str ''true''))),
-            (Eq (V (I 2)) (L (Str ''false'')))
+            (Eq (V (I 2)) (L (Str ''true''))),
+            (Eq (V (I 3)) (L (Str ''false'')))
       ],
       Outputs = [
             (L (Num 2)),
@@ -333,16 +333,16 @@ definition "down32" :: "transition" where
       ]
 \<rparr>"
 
-definition "up23stop" :: "transition" where
-"up23stop \<equiv> \<lparr>
-      Label = STR ''up23stop'',
+definition "up1" :: "transition" where
+"up1 \<equiv> \<lparr>
+      Label = STR ''up'',
       Arity = 3,
       Guards = [
             (Eq (V (R 2)) (L (Num 1))),
             (Eq (V (R 1)) (L (Str ''false''))),
-            (Eq (V (I 0)) (L (Str ''true''))),
             (Eq (V (I 1)) (L (Str ''true''))),
-            (Eq (V (I 2)) (L (Str ''true'')))
+            (Eq (V (I 2)) (L (Str ''true''))),
+            (Eq (V (I 3)) (L (Str ''true'')))
       ],
       Outputs = [
             (L (Num 1)),
@@ -354,16 +354,16 @@ definition "up23stop" :: "transition" where
       ]
 \<rparr>"
 
-definition "up23" :: "transition" where
-"up23 \<equiv> \<lparr>
-      Label = STR ''up23'',
+definition "up2" :: "transition" where
+"up2 \<equiv> \<lparr>
+      Label = STR ''up'',
       Arity = 3,
       Guards = [
             (Eq (V (R 2)) (L (Num 1))),
             (Eq (V (R 1)) (L (Str ''false''))),
-            (Eq (V (I 0)) (L (Str ''true''))),
             (Eq (V (I 1)) (L (Str ''true''))),
-            (Eq (V (I 2)) (L (Str ''false'')))
+            (Eq (V (I 2)) (L (Str ''true''))),
+            (Eq (V (I 3)) (L (Str ''false'')))
       ],
       Outputs = [
             (L (Num 1)),
@@ -375,15 +375,15 @@ definition "up23" :: "transition" where
       ]
 \<rparr>"
 
-definition "down21stop" :: "transition" where
-"down21stop \<equiv> \<lparr>
-      Label = STR ''down21stop'',
+definition "down4" :: "transition" where
+"down4 \<equiv> \<lparr>
+      Label = STR ''down'',
       Arity = 2,
       Guards = [
             (Eq (V (R 2)) (L (Num 2))),
             (Eq (V (R 1)) (L (Str ''false''))),
-            (Eq (V (I 0)) (L (Str ''true''))),
-            (Eq (V (I 1)) (L (Str ''true'')))
+            (Eq (V (I 1)) (L (Str ''true''))),
+            (Eq (V (I 2)) (L (Str ''true'')))
       ],
       Outputs = [
             (L (Num 2)),
@@ -395,16 +395,16 @@ definition "down21stop" :: "transition" where
       ]
 \<rparr>"
 
-definition "up12stop" :: "transition" where
-"up12stop \<equiv> \<lparr>
-      Label = STR ''up12stop'',
+definition "up3" :: "transition" where
+"up3 \<equiv> \<lparr>
+      Label = STR ''up'',
       Arity = 3,
       Guards = [
             (Eq (V (R 2)) (L (Num 1))),
             (Eq (V (R 1)) (L (Str ''false''))),
-            (Eq (V (I 0)) (L (Str ''true''))),
             (Eq (V (I 1)) (L (Str ''true''))),
-            (Eq (V (I 2)) (L (Str ''true'')))
+            (Eq (V (I 2)) (L (Str ''true''))),
+            (Eq (V (I 3)) (L (Str ''true'')))
       ],
       Outputs = [
             (L (Num 1)),
@@ -416,16 +416,16 @@ definition "up12stop" :: "transition" where
       ]
 \<rparr>"
 
-definition "up12" :: "transition" where
-"up12 \<equiv> \<lparr>
-      Label = STR ''up12'',
+definition "up4" :: "transition" where
+"up4 \<equiv> \<lparr>
+      Label = STR ''up'',
       Arity = 3,
       Guards = [
             (Eq (V (R 2)) (L (Num 1))),
             (Eq (V (R 1)) (L (Str ''false''))),
-            (Eq (V (I 0)) (L (Str ''true''))),
             (Eq (V (I 1)) (L (Str ''true''))),
-            (Eq (V (I 2)) (L (Str ''false'')))
+            (Eq (V (I 2)) (L (Str ''true''))),
+            (Eq (V (I 3)) (L (Str ''false'')))
       ],
       Outputs = [
             (L (Num 1)),
@@ -440,32 +440,32 @@ definition "up12" :: "transition" where
 definition "thegraph" :: "transition_matrix" where
 "thegraph \<equiv> {|
       ((0, 1), continit),
-      ((2, 6), motorstop4),
-      ((3, 7), motorstop3),
+      ((2, 6), motorstop),
+      ((3, 7), motorstop1),
       ((4, 8), motorstop2),
-      ((5, 9), motorstop1),
-      ((6, 1), startsearch4),
-      ((7, 1), startsearch3),
+      ((5, 9), motorstop3),
+      ((6, 1), startsearch),
+      ((7, 1), startsearch1),
       ((8, 1), startsearch2),
-      ((9, 1), startsearch1),
-      ((6, 6), opendoor4),
-      ((7, 7), opendoor3),
+      ((9, 1), startsearch3),
+      ((6, 6), opendoor),
+      ((7, 7), opendoor1),
       ((8, 8), opendoor2),
-      ((9, 9), opendoor1),
-      ((1, 2), return4),
-      ((1, 3), return3),
+      ((9, 9), opendoor3),
+      ((1, 2), return),
+      ((1, 3), return1),
       ((1, 4), return2),
-      ((1, 5), return1),
-      ((2, 3), down43stop),
-      ((2, 3), down43),
-      ((3, 2), up34stop),
-      ((3, 4), down32stop),
-      ((3, 4), down32),
-      ((4, 3), up23stop),
-      ((4, 3), up23),
-      ((4, 5), down21stop),
-      ((5, 4), up12stop),
-      ((5, 4), up12)
+      ((1, 5), return3),
+      ((2, 3), down),
+      ((2, 3), down1),
+      ((3, 2), up),
+      ((3, 4), down2),
+      ((3, 4), down3),
+      ((4, 3), up1),
+      ((4, 3), up2),
+      ((4, 5), down4),
+      ((5, 4), up3),
+      ((5, 4), up4)
 |}"
 
 end
