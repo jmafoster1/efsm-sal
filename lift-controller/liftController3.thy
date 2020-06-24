@@ -598,7 +598,7 @@ lemma choice_return: "choice (return n) (return n') \<Longrightarrow> n = n'"
   apply (simp add: choice_def)
   by (metis option.inject trilean.simps(2) value.inject(1))
 
-lemma "deterministic lift"
+lemma deterministic_lift: "deterministic lift"
   apply (rule outgoing_transitions_fprod_deterministic)
   apply (case_tac "s=0")
    apply (simp add: outgoing_transitions_0)
