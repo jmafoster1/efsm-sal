@@ -271,42 +271,6 @@ lemma must_stop_to_open_aux1a:
     by fastforce
   done
 
-lemma aux_aux:
-"((\<lambda>xs. statename (shd xs) \<notin> {Some o1, Some o2, Some o3, Some o4} \<and>
-         \<not> (label_eq ''opendoor'' xs \<and> nxt (output_eq [Some (Num n)]) xs)) until
-   label_eq ''motorstop'')
-   (watch lift t)"
-  apply (case_tac "shd t \<noteq> (STR ''continit'', [])")
-   apply (rule alw_implies_until)
-   apply (cases "shd t")
-   apply coinduction
-   apply (simp add: ltl_step_0_invalid nxt.simps del: ltl_step.simps)
-   apply (rule disjI2, rule alw_mono[of "state_eq None aand nxt (output_eq [])"])
-    apply (rule alw_conj)
-  using once_none_always_none apply blast
-  using no_output_none_nxt apply blast
-   apply (simp add: nxt.simps)
-  apply (rule UNTIL.step)
-   apply simp
-  apply (simp add: possible_steps_0)
-  using must_stop_to_open_aux1a[of "(make_full_observation lift (Some 9) (apply_updates (Updates continit) Map.empty <>)
-       (apply_outputs (Outputs continit) Map.empty) (stl t))" n]
-  apply (simp add: nxt.simps)
-
-
-  sorry
-
-lemma aux:
-  "((\<lambda>s. statename (shd s) \<notin> {Some o1, Some o2, Some o3, Some o4}) until (label_eq ''motorstop'')) (watch lift t) \<Longrightarrow>
-   ((not (label_eq ''opendoor'' aand nxt (output_eq [Some (Num n)]))) until (label_eq ''motorstop'')) (watch lift t)"
-  using combine[of
-"(\<lambda>s. statename (shd s) \<notin> {Some o1, Some o2, Some o3, Some o4})"
-"(not (label_eq ''opendoor'' aand nxt (output_eq [Some (Num n)])))"
-"(label_eq ''motorstop'')"
-"(watch lift t)"
-    ]
-aux_aux by simp
-
 declare nxt.simps [simp]
 
 (* We cannot open the door until we have stopped the motor (not global)*)
