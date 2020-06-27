@@ -10,6 +10,9 @@ lemma possible_steps_0: "possible_steps lift 0 r STR ''continit'' [] = {|(9, con
   apply (case_tac "a=0")
   by (auto simp add: continit_def)
 
+lemma ltl_step_0: "ltl_step lift (Some 0) r (STR ''continit'', []) = (Some 9, [], r(1 $:= Some (Str ''true'')))"
+  by (simp add: possible_steps_0 continit_def apply_updates_def)
+
 lemma ltl_step_0_invalid: "e \<noteq> (STR ''continit'', []) \<Longrightarrow> ltl_step lift (Some 0) r e = (None, [], r)"
   apply (cases e)
   apply (simp del: ltl_step.simps)
@@ -158,7 +161,7 @@ lemma must_stop_to_open_aux2:
 lemma must_stop_to_open_aux3:
     assumes "\<exists> n r p t. j = (make_full_observation lift (Some n) r p t) \<and> (n = 1 \<or> n = 2 \<or> n = 3 \<or> n = 4)"
     shows "
-       ((not (label_eq ''opendoor'' aand nxt (output_eq [Some (Num n)]))) until (\<lambda>s. label (shd s) = STR ''motorstop'')) j"
+       ((not (label_eq ''opendoor'' aand nxt (output_eq [Some (Str ''true''), Some (Num n)]))) until (\<lambda>s. label (shd s) = STR ''motorstop'')) j"
   using assms apply coinduct
   apply (erule exE)+
   apply (case_tac "fst (shd t) = STR ''motorstop''")
@@ -237,8 +240,8 @@ lemma alw_conj: "alw p s \<Longrightarrow> alw q s \<Longrightarrow> alw (p aand
   by (simp add: alw_iff_sdrop)
 
 lemma must_stop_to_open_aux1a:
-    assumes "\<exists> s r p t. j = (make_full_observation lift (Some 9) r p t)"
-    shows "((not (label_eq ''opendoor'' aand nxt (output_eq [Some (Num n)]))) until (label_eq ''motorstop'')) j"
+    assumes "\<exists> r p t. j = (make_full_observation lift (Some 9) r p t)"
+    shows "((not (label_eq ''opendoor'' aand nxt (output_eq [Some (Str ''true''), Some (Num n)]))) until (label_eq ''motorstop'')) j"
   using assms apply coinduct
   apply (erule exE)+
   apply (case_tac "shd t")
@@ -271,26 +274,172 @@ lemma must_stop_to_open_aux1a:
     by fastforce
   done
 
-declare nxt.simps [simp]
-
 (* We cannot open the door until we have stopped the motor (not global)*)
+(* This does not hold globally *)
 lemma must_stop_to_open:
-  shows "((not (label_eq ''opendoor'' aand nxt (output_eq [Some (Num n)]))) until (label_eq ''motorstop'')) (watch lift t)"
+  shows "((not (label_eq ''opendoor'' aand nxt (output_eq [Some (Str ''true''), Some (Num n)]))) until (label_eq ''motorstop'')) (make_full_observation lift (Some 0) r p t)"
   apply (rule UNTIL.step)
    apply (case_tac "shd t")
-  apply (simp del: ltl_step.simps add: ltl_step_0_invalid)
+  apply (simp del: ltl_step.simps add: ltl_step_0_invalid nxt.simps)
   apply (case_tac "shd t = (STR ''continit'', [])")
    defer
    apply (rule alw_implies_until)
    apply (rule alw_mono[of "nxt (output_eq [])"])
-    apply (simp add: ltl_step_0_invalid)
+    apply (simp add: ltl_step_0_invalid nxt.simps)
   using no_output_none_nxt apply blast
-   apply simp
+   apply (simp add: nxt.simps)
   apply (simp add: possible_steps_0 continit_def apply_updates_def)
-  using must_stop_to_open_aux1a[of "(make_full_observation lift (Some 9) <1 $:= Some (EFSM.Str ''true'')> [] (stl t))"]
+  using must_stop_to_open_aux1a[of "(make_full_observation lift (Some 9) (r(1 $:= Some (EFSM.Str ''true''))) [] (stl t))"]
   by fastforce
 
-(* We can use the never_on_a_floor lemma maybe *)
-(* We could also use the \<exists> technique as above and do a case tac for every state. That might work actually. *)
+lemma ltl_step_9_invalid: "\<not>(\<exists>n. r $ 4 = Some (Num n) \<and> n \<in> {1, 2, 3, 4}) \<Longrightarrow> ltl_step lift (Some 9) r e = (None, [], r)"
+  apply (cases e)
+  apply (simp del: ltl_step.simps)
+  apply (rule ltl_step_none)
+  apply (simp add: possible_steps_empty lift_def)
+  apply (simp add: transitions can_take)
+  by auto
+
+declare ltl_step.simps [simp del]
+
+lemma label_motorstop:
+"(ffilter (\<lambda>((origin, dest), t). Label t = STR ''motorstop'') lift) =
+{|((f4, o4), motorstop4),
+  ((f3, o3), motorstop3),
+  ((f2, o2), motorstop2),
+  ((f1, o1), motorstop1)
+|}"
+  apply (simp add: lift_def Abs_ffilter set_eq_iff)
+  apply clarify
+   apply (simp add: transitions)
+  apply (case_tac "a=1")
+   apply (simp add: transitions)
+   apply auto[1]
+  apply (case_tac "a=2")
+   apply (simp add: transitions)
+   apply auto[1]
+  apply (case_tac "a=3")
+   apply (simp add: transitions)
+   apply auto[1]
+  apply (case_tac "a=4")
+   apply (simp add: transitions)
+  by auto
+
+lemma ltl_step_motorstop:
+"r $ 1 = Some (EFSM.Str ''true'') \<Longrightarrow>
+ n \<in> {1, 2, 3, 4} \<Longrightarrow>
+ ltl_step lift (Some n) r (STR ''motorstop'', [EFSM.Str ''true'', EFSM.Str ''true'']) = (Some (n + 4), [Some (Num 0), Some (Num n), Some (Str ''true'')], r)"
+  apply (rule ltl_step_singleton)
+  apply (rule_tac x="motorstop n" in exI)
+  apply simp
+  apply standard
+   apply (simp add: possible_steps_alt3 split_label label_motorstop)
+   apply (simp add: Abs_ffilter set_eq_iff)
+   apply clarify
+   apply (case_tac "a=1")
+    apply standard
+     apply (simp add: transitions can_take)
+     apply auto[1]
+    apply (simp add: transitions can_take apply_guards_def)
+   apply (case_tac "a=2")
+    apply standard
+     apply (simp add: transitions can_take)
+     apply auto[1]
+    apply (simp add: transitions can_take apply_guards_def)
+   apply (case_tac "a=3")
+    apply standard
+     apply (simp add: transitions can_take)
+     apply auto[1]
+    apply (simp add: transitions can_take apply_guards_def)
+   apply (simp add: transitions can_take apply_guards_def)
+   apply standard
+    apply auto[1]
+   apply auto[1]
+  by (simp add: apply_updates_def apply_outputs_def)
+
+lemma ltl_step_motorstop_invalid_r1:
+"r $ 1 \<noteq> Some (EFSM.Str ''true'') \<Longrightarrow>
+ n \<in> {1, 2, 3, 4} \<Longrightarrow>
+ ltl_step lift (Some n) r (STR ''motorstop'', [EFSM.Str ''true'', EFSM.Str ''true'']) = (None, [], r)"
+  apply (rule ltl_step_none)
+  apply (rule possible_steps_empty_guards_false)
+  apply (simp add: label_motorstop)
+  by (simp add: can_take transitions apply_guards_def Str_def)
+
+lemma alw_must_stop_to_open_end:
+  "alw ((\<lambda>xs. label (shd xs) = STR ''opendoor'' \<longrightarrow> \<not> nxt (output_eq [Some (Num n)]) xs) until
+            (\<lambda>s. label (shd s) = STR ''motorstop''))
+        (make_full_observation lift None r [] t)"
+  apply (rule alw_mono[of "alw (output_eq [])"])
+   apply (simp add: no_output_none_if_empty)
+  apply (rule alw_implies_until)
+  apply (rule alw_mono[of "nxt (output_eq [])"])
+   apply (meson alw_nxt nxt_alw)
+  by (simp add: nxt.simps)
+
+
+(* This is the lemma I'm having trouble with *)
+(* That's because it's not true!*)
+lemma alw_must_stop_to_open:
+    assumes "\<exists>s r p t. j = (make_full_observation lift (Some s) r p t) \<and> s \<notin> {5, 6, 7, 8}"
+    shows "alw ((not (label_eq ''opendoor'' aand nxt (output_eq [Some (Str ''true''), Some (Num n)]))) until (label_eq ''motorstop'')) j"
+  using assms apply coinduct
+
+  apply (erule exE)
+  apply (case_tac "s=9")
+
+  apply simp
+  apply standard
+  using must_stop_to_open_aux1a apply simp
+   apply (erule exE)+
+    apply (case_tac "\<exists>n. r $ 4 = Some (Num n) \<and> n \<in> {1, 2, 3, 4}")
+    prefer 2
+     apply (case_tac "shd t")
+  using ltl_step_9_invalid apply simp
+     apply (rule disjI2)
+     apply (rule alw_mono[of "alw (output_eq [])"])
+    apply (simp add: no_output_none_if_empty)
+     apply (rule alw_implies_until)
+     apply (rule alw_mono[of "nxt (output_eq [])"])
+      apply (meson alw_nxt nxt_alw)
+     apply (simp add: nxt.simps)
+    apply (case_tac "shd t = (STR ''return'', [])")
+      prefer 2
+      apply (case_tac "shd t")
+      apply (simp add:  possible_steps_9_invalid ltl_step.simps alw_must_stop_to_open_end)
+     apply (simp add: nxt.simps)
+     apply (erule exE)+
+    apply (simp add: ltl_step.simps return apply_updates_def)
+    apply (case_tac "\<exists>ta. stl t = ta")
+      prefer 2 apply simp
+     apply fastforce
+
+    apply (case_tac "s = 0")
+     apply simp
+     apply standard
+    using must_stop_to_open apply auto[1]
+     apply (erule exE)+
+     apply (case_tac "shd t = (STR ''continit'', [])")
+      apply (simp add: ltl_step_0)
+      apply fastforce
+     apply (simp add: ltl_step_0_invalid alw_must_stop_to_open_end)
+
+    apply (case_tac "s \<in> {1, 2, 3, 4}")
+     apply simp
+     apply standard
+    using must_stop_to_open_aux3 apply fastforce
+     apply (erule conjE)
+     apply (erule exE)+
+     apply (case_tac "shd t = (STR ''motorstop'', [EFSM.Str ''true'', EFSM.Str ''true''])")
+      apply (case_tac "r $ 1 \<noteq> Some (EFSM.Str ''true'')")
+       apply (simp add: ltl_step_motorstop_invalid_r1 alw_must_stop_to_open_end)
+      apply (simp add: ltl_step_motorstop)
+      apply (rule disjI2)
+    oops
+
+
+
+declare ltl_step.simps [simp]
+
 
 end

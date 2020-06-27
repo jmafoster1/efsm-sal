@@ -1,4 +1,4 @@
-digraph liftController3{
+digraph liftController3SAL{
     graph [rankdir="LR", fontname="Latin Modern Math"];
     node [color="black", fillcolor="white", shape="circle", style="filled", fontname="Latin Modern Math"];
     edge [fontname="Latin Modern Math"];

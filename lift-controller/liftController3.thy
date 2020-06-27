@@ -458,6 +458,7 @@ definition "lift" :: "transition_matrix" where
     ((f1, f2), up12)
   |}"
 
+
 thm lift_def
 
 lemmas transitions =
@@ -581,6 +582,9 @@ outgoing_transitions lift s = {|
     ((s, search), startsearch),
     ((s, s), opendoor (int s - 4))
 |}"
+
+  apply (simp add: lift_def)
+
   apply (simp add: outgoing_transitions_def)
   apply (simp add: Abs_ffilter set_eq_iff)
   apply clarify

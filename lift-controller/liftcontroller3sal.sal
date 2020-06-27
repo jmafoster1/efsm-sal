@@ -1,0 +1,429 @@
+%The biggest absolute integer value used is 4
+liftcontroller3sal {n_ : nznat} : CONTEXT = BEGIN
+
+LABEL : TYPE = DATATYPE
+  continit,
+  down,
+  motorstop,
+  opendoor,
+  return,
+  startsearch,                                                   %%10
+  up
+END;
+
+STRING : TYPE = {String__false, String__true, String__dummy__};
+
+STATE : TYPE =
+    {State__0, State__1, State__2, State__3, State__4, State__5,
+    State__6, State__7, State__8, State__9, NULL_STATE};
+  
+IMPORTING trilean;                                               %%20
+IMPORTING value{n_, STRING};
+IMPORTING option{VALUE};
+IMPORTING arithmetic{n_, STRING};
+
+output_sequence : CONTEXT = sequence {B_OPTION, OptionBB, 2};
+input_sequence : CONTEXT = sequence {B_VALUE, ValueBB, 2};
+
+lift : MODULE =
+  BEGIN
+    INPUT label : LABEL                                          %%30
+    LOCAL cfstate : STATE
+    LOCAL r__1 : OPTION
+    LOCAL r__2 : OPTION
+    LOCAL r__3 : OPTION
+    LOCAL r__4 : OPTION
+    INPUT i : input_sequence ! Sequence
+    OUTPUT o : output_sequence ! Sequence
+    INITIALIZATION [
+        cfstate = State__0 AND
+        o = output_sequence ! empty AND                          %%40
+        r__1 = None AND
+        r__2 = None AND
+        r__3 = None AND
+        r__4 = None
+      -->
+    ]
+    TRANSITION [
+      CONTINIT :
+          cfstate = State__0 AND label = continit AND
+              input_sequence ! size?(i) = 0                        %%50
+        -->
+          cfstate' = State__9;
+          r__1' = Some(Str(String__true));
+          o' = output_sequence ! empty
+      []
+      MOTORSTOP4 :
+          cfstate = State__4 AND label = motorstop AND
+              input_sequence ! size?(i) = 2 AND
+              gval(value_eq(r__1, Some(Str(String__true)))) AND
+              gval(value_eq(Some(i(0)),                            %%60
+              Some(Str(String__true)))) AND
+              gval(value_eq(Some(i(0)), Some(Str(String__true))))
+        -->
+          cfstate' = State__8;
+          o' = output_sequence !
+              insert(Some(Num(0)), output_sequence !
+              insert(Some(Num(4)), output_sequence !
+              insert(Some(Str(String__true)), output_sequence !
+              empty)))
+      []                                                         %%70
+      MOTORSTOP3 :
+          cfstate = State__3 AND label = motorstop AND
+              input_sequence ! size?(i) = 2 AND
+              gval(value_eq(r__1, Some(Str(String__true)))) AND
+              gval(value_eq(Some(i(0)),
+              Some(Str(String__true)))) AND
+              gval(value_eq(Some(i(0)), Some(Str(String__true))))
+        -->
+          cfstate' = State__7;
+          o' = output_sequence !                                 %%80
+              insert(Some(Num(0)), output_sequence !
+              insert(Some(Num(3)), output_sequence !
+              insert(Some(Str(String__true)), output_sequence !
+              empty)))
+      []
+      MOTORSTOP2 :
+          cfstate = State__2 AND label = motorstop AND
+              input_sequence ! size?(i) = 2 AND
+              gval(value_eq(r__1, Some(Str(String__true)))) AND
+              gval(value_eq(Some(i(0)),                            %%90
+              Some(Str(String__true)))) AND
+              gval(value_eq(Some(i(0)), Some(Str(String__true))))
+        -->
+          cfstate' = State__6;
+          o' = output_sequence !
+              insert(Some(Num(0)), output_sequence !
+              insert(Some(Num(2)), output_sequence !
+              insert(Some(Str(String__true)), output_sequence !
+              empty)))
+      []                                                         %%100
+      MOTORSTOP1 :
+          cfstate = State__1 AND label = motorstop AND
+              input_sequence ! size?(i) = 2 AND
+              gval(value_eq(r__1, Some(Str(String__true)))) AND
+              gval(value_eq(Some(i(0)),
+              Some(Str(String__true)))) AND
+              gval(value_eq(Some(i(0)), Some(Str(String__true))))
+        -->
+          cfstate' = State__5;
+          o' = output_sequence !                                 %%110
+              insert(Some(Num(0)), output_sequence !
+              insert(Some(Num(1)), output_sequence !
+              insert(Some(Str(String__true)), output_sequence !
+              empty)))
+      []
+      STARTSEARCH__A :
+          cfstate = State__8 AND label = startsearch AND
+              input_sequence ! size?(i) = 2 AND
+              gval(value_eq(Some(i(0)),
+              Some(Str(String__true)))) AND                        %%120
+              gval(value_eq(Some(i(0)), Some(Str(String__false))))
+        -->
+          cfstate' = State__9;
+          o' = output_sequence ! empty
+      []
+      STARTSEARCH__B :
+          cfstate = State__7 AND label = startsearch AND
+              input_sequence ! size?(i) = 2 AND
+              gval(value_eq(Some(i(0)),
+              Some(Str(String__true)))) AND                        %%130
+              gval(value_eq(Some(i(0)), Some(Str(String__false))))
+        -->
+          cfstate' = State__9;
+          o' = output_sequence ! empty
+      []
+      STARTSEARCH__C :
+          cfstate = State__6 AND label = startsearch AND
+              input_sequence ! size?(i) = 2 AND
+              gval(value_eq(Some(i(0)),
+              Some(Str(String__true)))) AND                        %%140
+              gval(value_eq(Some(i(0)), Some(Str(String__false))))
+        -->
+          cfstate' = State__9;
+          o' = output_sequence ! empty
+      []
+      STARTSEARCH__D :
+          cfstate = State__5 AND label = startsearch AND
+              input_sequence ! size?(i) = 2 AND
+              gval(value_eq(Some(i(0)),
+              Some(Str(String__true)))) AND                        %%150
+              gval(value_eq(Some(i(0)), Some(Str(String__false))))
+        -->
+          cfstate' = State__9;
+          o' = output_sequence ! empty
+      []
+      OPENDOOR4 :
+          cfstate = State__8 AND label = opendoor AND
+              input_sequence ! size?(i) = 1 AND
+              gval(value_eq(Some(i(0)), Some(Str(String__true))))
+        -->                                                      %%160
+          cfstate' = State__8;
+          o' = output_sequence !
+              insert(Some(Str(String__true)), output_sequence !
+              insert(Some(Num(4)), output_sequence ! empty))
+      []
+      OPENDOOR3 :
+          cfstate = State__7 AND label = opendoor AND
+              input_sequence ! size?(i) = 1 AND
+              gval(value_eq(Some(i(0)), Some(Str(String__true))))
+        -->                                                      %%170
+          cfstate' = State__7;
+          o' = output_sequence !
+              insert(Some(Str(String__true)), output_sequence !
+              insert(Some(Num(3)), output_sequence ! empty))
+      []
+      OPENDOOR2 :
+          cfstate = State__6 AND label = opendoor AND
+              input_sequence ! size?(i) = 1 AND
+              gval(value_eq(Some(i(0)), Some(Str(String__true))))
+        -->                                                      %%180
+          cfstate' = State__6;
+          o' = output_sequence !
+              insert(Some(Str(String__true)), output_sequence !
+              insert(Some(Num(2)), output_sequence ! empty))
+      []
+      OPENDOOR1 :
+          cfstate = State__5 AND label = opendoor AND
+              input_sequence ! size?(i) = 1 AND
+              gval(value_eq(Some(i(0)), Some(Str(String__true))))
+        -->                                                      %%190
+          cfstate' = State__5;
+          o' = output_sequence !
+              insert(Some(Str(String__true)), output_sequence !
+              insert(Some(Num(1)), output_sequence ! empty))
+      []
+      RETURN4 :
+          cfstate = State__9 AND label = return AND
+              input_sequence ! size?(i) = 0 AND
+              gval(value_eq(r__4, Some(Num(4))))
+        -->                                                      %%200
+          cfstate' = State__4;
+          o' = output_sequence ! empty
+      []
+      RETURN3 :
+          cfstate = State__9 AND label = return AND
+              input_sequence ! size?(i) = 0 AND
+              gval(value_eq(r__4, Some(Num(3))))
+        -->
+          cfstate' = State__3;
+          o' = output_sequence ! empty                           %%210
+      []
+      RETURN2 :
+          cfstate = State__9 AND label = return AND
+              input_sequence ! size?(i) = 0 AND
+              gval(value_eq(r__4, Some(Num(2))))
+        -->
+          cfstate' = State__2;
+          o' = output_sequence ! empty
+      []
+      RETURN1 :                                                  %%220
+          cfstate = State__9 AND label = return AND
+              input_sequence ! size?(i) = 0 AND
+              gval(value_eq(r__4, Some(Num(1))))
+        -->
+          cfstate' = State__1;
+          o' = output_sequence ! empty
+      []
+      DOWN43STOP :
+          cfstate = State__4 AND label = down AND
+              input_sequence ! size?(i) = 3 AND                    %%230
+              gval(value_eq(r__2, Some(Num(2)))) AND
+              gval(value_eq(r__1, Some(Str(String__false)))) AND
+              gval(value_eq(Some(i(0)),
+              Some(Str(String__true)))) AND
+              gval(value_eq(Some(i(0)),
+              Some(Str(String__true)))) AND
+              gval(value_eq(Some(i(0)), Some(Str(String__true))))
+        -->
+          cfstate' = State__3;
+          r__4' = Some(Num(3));                                  %%240
+          r__1' = Some(Str(String__true));
+          o' = output_sequence !
+              insert(Some(Num(2)), output_sequence !
+              insert(Some(Str(String__true)), output_sequence !
+              empty))
+      []
+      DOWN43 :
+          cfstate = State__4 AND label = down AND
+              input_sequence ! size?(i) = 3 AND
+              gval(value_eq(r__2, Some(Num(2)))) AND               %%250
+              gval(value_eq(r__1, Some(Str(String__false)))) AND
+              gval(value_eq(Some(i(0)),
+              Some(Str(String__true)))) AND
+              gval(value_eq(Some(i(0)),
+              Some(Str(String__true)))) AND
+              gval(value_eq(Some(i(0)), Some(Str(String__false))))
+        -->
+          cfstate' = State__3;
+          r__4' = Some(Num(3));
+          r__1' = Some(Str(String__false));                      %%260
+          o' = output_sequence !
+              insert(Some(Num(2)), output_sequence !
+              insert(Some(Str(String__false)), output_sequence !
+              empty))
+      []
+      UP34STOP :
+          cfstate = State__3 AND label = up AND
+              input_sequence ! size?(i) = 2 AND
+              gval(value_eq(r__2, Some(Num(1)))) AND
+              gval(value_eq(r__1, Some(Str(String__false)))) AND   %%270
+              gval(value_eq(Some(i(0)),
+              Some(Str(String__true)))) AND
+              gval(value_eq(Some(i(0)), Some(Str(String__true))))
+        -->
+          cfstate' = State__4;
+          r__4' = Some(Num(4));
+          r__1' = Some(Str(String__true));
+          o' = output_sequence !
+              insert(Some(Num(1)), output_sequence !
+              insert(Some(Str(String__true)), output_sequence !    %%280
+              empty))
+      []
+      DOWN32STOP :
+          cfstate = State__3 AND label = down AND
+              input_sequence ! size?(i) = 3 AND
+              gval(value_eq(r__2, Some(Num(2)))) AND
+              gval(value_eq(r__1, Some(Str(String__false)))) AND
+              gval(value_eq(Some(i(0)),
+              Some(Str(String__true)))) AND
+              gval(value_eq(Some(i(0)),                            %%290
+              Some(Str(String__true)))) AND
+              gval(value_eq(Some(i(0)), Some(Str(String__true))))
+        -->
+          cfstate' = State__2;
+          r__4' = Some(Num(2));
+          r__1' = Some(Str(String__true));
+          o' = output_sequence !
+              insert(Some(Num(2)), output_sequence !
+              insert(Some(Str(String__true)), output_sequence !
+              empty))                                              %%300
+      []
+      DOWN32 :
+          cfstate = State__3 AND label = down AND
+              input_sequence ! size?(i) = 3 AND
+              gval(value_eq(r__2, Some(Num(2)))) AND
+              gval(value_eq(r__1, Some(Str(String__false)))) AND
+              gval(value_eq(Some(i(0)),
+              Some(Str(String__true)))) AND
+              gval(value_eq(Some(i(0)),
+              Some(Str(String__true)))) AND                        %%310
+              gval(value_eq(Some(i(0)), Some(Str(String__false))))
+        -->
+          cfstate' = State__2;
+          r__4' = Some(Num(2));
+          r__1' = Some(Str(String__false));
+          o' = output_sequence !
+              insert(Some(Num(2)), output_sequence !
+              insert(Some(Str(String__false)), output_sequence !
+              empty))
+      []                                                         %%320
+      UP23STOP :
+          cfstate = State__2 AND label = up AND
+              input_sequence ! size?(i) = 3 AND
+              gval(value_eq(r__2, Some(Num(1)))) AND
+              gval(value_eq(r__1, Some(Str(String__false)))) AND
+              gval(value_eq(Some(i(0)),
+              Some(Str(String__true)))) AND
+              gval(value_eq(Some(i(0)),
+              Some(Str(String__true)))) AND
+              gval(value_eq(Some(i(0)), Some(Str(String__true))))  %%330
+        -->
+          cfstate' = State__3;
+          r__4' = Some(Num(3));
+          r__1' = Some(Str(String__true));
+          o' = output_sequence !
+              insert(Some(Num(1)), output_sequence !
+              insert(Some(Str(String__true)), output_sequence !
+              empty))
+      []
+      UP23 :                                                     %%340
+          cfstate = State__2 AND label = up AND
+              input_sequence ! size?(i) = 3 AND
+              gval(value_eq(r__2, Some(Num(1)))) AND
+              gval(value_eq(r__1, Some(Str(String__false)))) AND
+              gval(value_eq(Some(i(0)),
+              Some(Str(String__true)))) AND
+              gval(value_eq(Some(i(0)),
+              Some(Str(String__true)))) AND
+              gval(value_eq(Some(i(0)), Some(Str(String__false))))
+        -->                                                      %%350
+          cfstate' = State__3;
+          r__4' = Some(Num(3));
+          r__1' = Some(Str(String__false));
+          o' = output_sequence !
+              insert(Some(Num(1)), output_sequence !
+              insert(Some(Str(String__false)), output_sequence !
+              empty))
+      []
+      DOWN21STOP :
+          cfstate = State__2 AND label = down AND                %%360
+              input_sequence ! size?(i) = 2 AND
+              gval(value_eq(r__2, Some(Num(2)))) AND
+              gval(value_eq(r__1, Some(Str(String__false)))) AND
+              gval(value_eq(Some(i(0)),
+              Some(Str(String__true)))) AND
+              gval(value_eq(Some(i(0)), Some(Str(String__true))))
+        -->
+          cfstate' = State__1;
+          r__3' = Some(Num(1));
+          r__1' = Some(Str(String__true));                       %%370
+          o' = output_sequence !
+              insert(Some(Num(2)), output_sequence !
+              insert(Some(Str(String__true)), output_sequence !
+              empty))
+      []
+      UP12STOP :
+          cfstate = State__1 AND label = up AND
+              input_sequence ! size?(i) = 3 AND
+              gval(value_eq(r__2, Some(Num(1)))) AND
+              gval(value_eq(r__1, Some(Str(String__false)))) AND   %%380
+              gval(value_eq(Some(i(0)),
+              Some(Str(String__true)))) AND
+              gval(value_eq(Some(i(0)),
+              Some(Str(String__true)))) AND
+              gval(value_eq(Some(i(0)), Some(Str(String__true))))
+        -->
+          cfstate' = State__2;
+          r__1' = Some(Str(String__true));
+          r__4' = Some(Num(2));
+          o' = output_sequence !                                 %%390
+              insert(Some(Num(1)), output_sequence !
+              insert(Some(Str(String__true)), output_sequence !
+              empty))
+      []
+      UP12 :
+          cfstate = State__1 AND label = up AND
+              input_sequence ! size?(i) = 3 AND
+              gval(value_eq(r__2, Some(Num(1)))) AND
+              gval(value_eq(r__1, Some(Str(String__false)))) AND
+              gval(value_eq(Some(i(0)),                            %%400
+              Some(Str(String__true)))) AND
+              gval(value_eq(Some(i(0)),
+              Some(Str(String__true)))) AND
+              gval(value_eq(Some(i(0)), Some(Str(String__false))))
+        -->
+          cfstate' = State__2;
+          r__4' = Some(Num(2));
+          r__1' = Some(Str(String__false));
+          o' = output_sequence !
+              insert(Some(Num(1)), output_sequence !               %%410
+              insert(Some(Str(String__false)), output_sequence !
+              empty))
+      []
+      SINK_HOLE :
+          ELSE
+        -->
+          cfstate' = NULL_STATE
+    ]
+  END;
+  alw_must_stop_to_open : THEOREM lift |-                        %%420
+    G(U(NOT (label = opendoor AND
+        X(o = output_sequence !
+        insert(Some(Num(1)), output_sequence !
+        empty))), label = motorstop) OR
+        G(NOT (label = opendoor AND
+        X(o = output_sequence !
+        insert(Some(Num(1)), output_sequence ! empty)))));
+      
+END
