@@ -57,11 +57,10 @@ lift : MODULE =
               gval(value_eq(Some(i(1)), Some(Str(String__true))))
         -->
           cfstate' = State__8;
-          o' = output_sequence !
-              insert(Some(Num(0)), output_sequence !
-              insert(Some(Num(4)), output_sequence !
-              insert(Some(Str(String__true)), output_sequence !
-              empty)))
+          o' = output_sequence ! insert(Some(Num(0)),
+               output_sequence ! insert(Some(Num(4)),
+               output_sequence ! insert(Some(Str(String__true)),
+               output_sequence ! empty)))
       []
       MOTORSTOP3 :
           cfstate = State__3 AND
@@ -409,25 +408,38 @@ lift : MODULE =
       SINK_HOLE :
           ELSE
         -->
-          cfstate' = NULL_STATE;
-          o' = output_sequence ! empty
+          cfstate' = NULL_STATE
     ]
   END;
 
   test: THEOREM lift |- FORALL (n:BOUNDED_INT):
   G(
-    F(label = opendoor AND X(o(0) = Some(Str(String__true)) AND o(1) = Some(Num(n)) AND o(2) = OptionBB)) =>
-    U(NOT(label = opendoor), (label = motorstop OR (o(0) = Some(Str(String__true)) AND o(1) = Some(Num(n)) AND o(2) = OptionBB)))
+    F(
+      X(label = opendoor AND
+      X(
+      o=output_sequence !insert(Some(Str(String__true)), output_sequence ! insert(Some(Num(n)), output_sequence ! empty))
+      ))
+    ) =>
+    U(
+      NOT(X(label = opendoor)),
+      (
+        label = motorstop OR
+        X(
+        o=output_sequence !insert(Some(Str(String__true)), output_sequence ! insert(Some(Num(n)), output_sequence ! empty))
+        )
+      )
+    )
   );
 
-  alw_must_stop_to_open: THEOREM lift |- FORALL (n:BOUNDED_INT):
+  test2: THEOREM lift |- FORALL (n:BOUNDED_INT):
   G(
     U(
-      NOT(label = opendoor AND X(o(0) = Some(Str(String__true)) AND o(1) = Some(Num(n)) AND o(2) = OptionBB)),
-      label = motorstop
+      NOT(label = opendoor AND X(o=output_sequence !insert(Some(Str(String__true)), output_sequence ! insert(Some(Num(n)), output_sequence ! empty)))),
+      label = motorstop OR o=output_sequence !insert(Some(Str(String__true)), output_sequence ! insert(Some(Num(n)), output_sequence ! empty))
     )
-    OR G(NOT(label = opendoor AND X(o(0) = Some(Str(String__true)) AND o(1) = Some(Num(n)) AND o(2) = OptionBB)))
-  );
+  )
+  OR G(NOT(label = opendoor AND X(o=output_sequence !insert(Some(Str(String__true)), output_sequence ! insert(Some(Num(n)), output_sequence ! empty)))))
+;
 
 
 END

@@ -53,7 +53,7 @@ lemma not_nxt: "nxt (not f) s \<Longrightarrow> \<not> nxt f s"
 lemma no_step_empty_out:
 "possible_steps lift s r (fst (shd t)) (snd (shd t)) = {||} \<Longrightarrow>
 fst (shd t) = STR ''opendoor'' \<Longrightarrow>
- \<not> nxt (output_eq [Some (Num n)]) (make_full_observation lift (Some s) r p t)"
+ \<not> nxt (output_eq [Some (Str ''true''), Some (Num n)]) (make_full_observation lift (Some s) r p t)"
     apply (rule not_nxt)
   apply (rule nxt_mono[of "output_eq []"])
    apply (case_tac "shd t")
@@ -367,7 +367,7 @@ lemma ltl_step_motorstop_invalid_r1:
   by (simp add: can_take transitions apply_guards_def Str_def)
 
 lemma alw_must_stop_to_open_end:
-  "alw ((\<lambda>xs. label (shd xs) = STR ''opendoor'' \<longrightarrow> \<not> nxt (output_eq [Some (Num n)]) xs) until
+  "alw ((\<lambda>xs. label (shd xs) = STR ''opendoor'' \<longrightarrow> \<not> nxt (output_eq [Some (Str ''true''), Some (Num n)]) xs) until
             (\<lambda>s. label (shd s) = STR ''motorstop''))
         (make_full_observation lift None r [] t)"
   apply (rule alw_mono[of "alw (output_eq [])"])
@@ -437,7 +437,275 @@ lemma alw_must_stop_to_open:
       apply (rule disjI2)
     oops
 
+lemma bad_step:
+  assumes "ltl_step lift (Some s) r (shd t) = (None, [], r)"
+shows "((ev (nxt ((label_eq ''opendoor '') aand (nxt (output_eq [Some(Str ''true''), Some(n)]))))) impl
+       ((not (nxt (label_eq ''opendoor ''))) until(((label_eq ''motorstop'') or (nxt (output_eq [Some(Str ''true''), Some(n)]))))))
+      (make_full_observation lift (Some s) r p t)"
+proof-
+  have aux: "\<not>ev (nxt (\<lambda>xs. label_eq ''opendoor '' xs \<and> nxt (output_eq [Some (EFSM.Str ''true''), Some n]) xs))
+     (\<lparr>statename = Some s, datastate = r, action = shd t, output = p\<rparr> ## make_full_observation lift None r [] (stl t))"
+    apply (simp add: not_ev_iff)
+    apply (rule alw_mono[of "nxt (nxt (output_eq []))"])
+     apply (simp add: no_output_none_nxt nxt.simps nxt_alw)
+    by (simp add: nxt.simps)
+  show ?thesis
+    using assms
+    by (simp add: make_full_observation.ctr[of lift "Some s"] aux)
+qed
 
+declare nxt.simps [simp]
+
+lemma ltl_step_9_invalid_label:
+"e \<noteq> (STR ''return'', []) \<Longrightarrow>
+  ltl_step lift (Some 9) r e = (None, [], r)"
+  apply (case_tac e, simp)
+  apply (rule ltl_step_none)
+  apply (simp add: possible_steps_empty lift_def)
+  by (simp add: transitions can_take)
+
+lemma opendoor_9: "ltl_step lift (Some 9) r (STR ''opendoor'', b) = (None, [], r)"
+  apply (rule ltl_step_none)
+  by (simp add: possible_steps_empty lift_def transitions)
+
+lemma opendoor_invalid: "s \<notin> {5, 6, 7, 8} \<Longrightarrow> ltl_step lift (Some s) r (STR ''opendoor'', b) = (None, [], r)"
+  apply (rule ltl_step_none)
+  by (simp add: possible_steps_empty lift_def transitions)
+
+lemma opendoor_invalid_nat: "s \<notin> {5, 6, 7, 8} \<Longrightarrow> ltl_step lift (Some (nat s)) r (STR ''opendoor'', b) = (None, [], r)"
+  apply (rule ltl_step_none)
+  apply (simp add: possible_steps_empty lift_def transitions)
+  by auto
+
+lemma not_ev: "ev p s \<Longrightarrow> alw (not p) s \<Longrightarrow> False"
+  by (metis alw_iff_sdrop sdrop_wait)
+
+lemma stop_at_None: "alw (\<lambda>xs. label (shd (stl xs)) = a \<longrightarrow> output (shd (stl (stl xs))) \<noteq> [Some (EFSM.Str ''true''), Some n])
+        (make_full_observation lift None r [] s)"
+  apply (rule alw_mono[of "alw (output_eq [])"])
+   apply (simp add: no_output_none_if_empty)
+  by fastforce
+
+lemma ev_step: "ev p s = p s \<or> ev p (stl s)"
+  using ev.simps by auto
+
+lemma prem_ignore_fst:
+  "a \<noteq> STR ''opendoor'' \<Longrightarrow>
+ ev (\<lambda>a. label (shd (stl a)) = STR ''opendoor'' \<and> output_eq [Some (EFSM.Str ''true''), Some n] (stl (stl a)))
+        (ss ## make_full_observation lift (Some s') r' p' ((a, b) ## x2)) =
+ ev (\<lambda>a. label (shd (stl a)) = STR ''opendoor'' \<and> output_eq [Some (EFSM.Str ''true''), Some n] (stl (stl a)))
+        (make_full_observation lift (Some s') r' p' ((a, b) ## x2))"
+  apply standard
+   apply (simp add: ev_Stream)
+  by auto
+
+lemma prem_stop_at_none_scons: "\<not> ev (\<lambda>a. label (shd (stl a)) = STR ''opendoor'' \<and> output_eq [Some (EFSM.Str ''true''), Some n] (stl (stl a)))
+        (ss ## make_full_observation lift None r [] t)"
+  apply (simp add: not_ev_iff)
+  apply (coinduction)
+  by (simp add: ltl_step.simps stop_at_None)
+
+lemma prem_stop_at_none: "\<not> ev (\<lambda>a. label (shd (stl a)) = STR ''opendoor'' \<and> output_eq [Some (EFSM.Str ''true''), Some n] (stl (stl a)))
+        (make_full_observation lift None r [] t)"
+  apply (simp add: not_ev_iff)
+  apply (rule alw_mono[of "alw (output_eq [])"])
+   apply (simp add: no_output_none_if_empty)
+  by fastforce
+
+lemma label_up:
+"ffilter (\<lambda>((origin, dest), t). Label t = STR ''up'') lift = {|
+    ((f3, f4), up34stop),
+    ((f2, f3), up23stop),
+    ((f2, f3), up23),
+    ((f1, f2), up12stop),
+    ((f1, f2), up12)
+|}"
+  apply (simp add: Abs_ffilter lift_def set_eq_iff)
+  apply clarify
+  apply (case_tac "a=1")
+   apply (simp add: transitions) apply auto[1]
+  apply (case_tac "a=2")
+   apply (simp add: transitions) apply auto[1]
+  apply (case_tac "a=3")
+   apply (simp add: transitions) apply auto[1]
+  apply (case_tac "a=4")
+   apply (simp add: transitions) apply auto[1]
+  apply (simp add: transitions)
+  by auto
+
+lemma not_motorstop: "Label (motorstop n) = l \<and> can_take_transition (motorstop n) i r \<Longrightarrow>
+(l, i) = (STR ''motorstop'', [EFSM.Str ''true'', EFSM.Str ''true''])"
+  apply (simp add: can_take apply_guards_def )
+  apply clarsimp
+  apply (case_tac "r $ 1 = Some (EFSM.Str ''true'')")
+   apply (case_tac "i ! 0 = (EFSM.Str ''true'')")
+    apply (case_tac "i ! 1 = (EFSM.Str ''true'')")
+     apply simp
+     apply (case_tac i) apply simp
+     apply (case_tac list) apply simp
+  by auto
+
+lemma not_motorstop_step_state:
+  "s \<in> {1, 2, 3, 4} \<Longrightarrow>
+   e \<noteq> (STR ''motorstop'', [EFSM.Str ''true'', EFSM.Str ''true'']) \<Longrightarrow>
+   ltl_step lift (Some s) r e = (Some s', p, r') \<Longrightarrow>
+   s' \<in> {1, 2, 3, 4}"
+  using ltl_step_lift_deterministic[of s r e s' p r']
+  apply simp
+  apply (erule exE)
+  apply (simp add: possible_steps_alt3 Abs_ffilter lift_def set_eq_iff)
+  apply (erule_tac x=s in allE)
+  apply (erule_tac x=s' in allE)
+  apply (erule_tac x=t in allE)
+  apply (erule disjE)
+   apply simp
+   apply (erule conjE)
+   apply (erule disjE)
+    apply (simp add: motorstop1_def)
+  using not_motorstop apply auto[1]
+   apply auto[1]
+  apply (erule disjE)
+   apply simp
+   apply (erule conjE)
+   apply (erule disjE)
+    apply (simp add: motorstop2_def)
+  using not_motorstop apply auto[1]
+   apply auto[1]
+  apply (erule disjE)
+   apply simp
+   apply (erule conjE)
+   apply (erule disjE)
+    apply (simp add: motorstop3_def)
+  using not_motorstop apply auto[1]
+   apply auto[1]
+   apply simp
+   apply (erule conjE)
+   apply (erule disjE)
+    apply (simp add: motorstop4_def)
+  using not_motorstop by auto
+
+lemma ltl_step_state_none: "(ltl_step lift (Some s) r e = (None, b, c)) \<Longrightarrow> b = [] \<and> c = r"
+  apply (cases e)
+  apply (simp add: ltl_step.simps Let_def)
+  apply (case_tac "possible_steps lift s r a ba = {||}")
+   apply simp
+  apply (case_tac "SOME x. x |\<in>| possible_steps lift s r a ba")
+  by simp
+
+lemma opendoor_moving:
+  "s \<in> {1, 2, 3, 4} \<Longrightarrow> ltl_step lift (Some s) r (STR ''opendoor'', ba) = (None, [], r)"
+  apply (rule ltl_step_none)
+  apply (simp add: possible_steps_empty lift_def)
+  apply (simp add: transitions)
+  by auto
+
+
+lemma problem:
+  assumes "\<exists>s r p t. j= make_full_observation lift (Some s) r p t"
+  shows "((ev (nxt ((label_eq ''opendoor'') aand (nxt (output_eq [Some(Str ''true''), Some(n)]))))) impl
+         ((not (nxt (label_eq ''opendoor''))) until(((label_eq ''motorstop'') or (nxt (output_eq [Some(Str ''true''), Some(n)])))))) j"
+proof-
+  {assume "(ev (nxt ((label_eq ''opendoor'') aand (nxt (output_eq [Some(Str ''true''), Some(n)]))))) j \<and>
+           (\<exists>s r p t. j= make_full_observation lift (Some s) r p t)"
+   hence "((not (nxt (label_eq ''opendoor''))) until(((label_eq ''motorstop'') or (nxt (output_eq [Some(Str ''true''), Some(n)]))))) j"
+     apply coinduct
+     apply simp
+     apply (erule conjE)
+     apply (erule exE)+
+     apply (case_tac "s=0")
+     apply (case_tac "shd t = (STR ''continit'', [])")
+       apply (simp add: ltl_step_0)
+       apply (case_tac "shd (stl t)")
+       apply (case_tac "a = STR ''opendoor''")
+        apply simp
+        apply (rule not_ev)
+         apply simp
+        apply coinduction
+        apply (simp add: ltl_step_0)
+        apply standard
+         apply (rule impI)
+         apply (simp add: eq_commute opendoor_9)
+        apply (rule disjI2)
+        apply (coinduction)
+        apply (simp add: opendoor_9)
+        apply (simp add: ltl_step.simps stop_at_None)
+       apply (simp add: make_full_observation.ctr[of lift "Some 0"] ltl_step_0)
+       apply (case_tac "(stl t)")
+       apply clarsimp
+       apply (simp add: prem_ignore_fst)
+       apply fastforce
+      apply (simp add: make_full_observation.ctr[of lift "Some 0"] ltl_step_0_invalid prem_stop_at_none_scons)
+
+     apply (case_tac "s=9")
+      apply (case_tac "\<exists>n. r $ 4 = Some (Num n) \<and> n \<in> {1, 2, 3, 4}")
+       apply (case_tac "shd t = (STR ''return'', [])")
+        apply (erule exE)
+        apply (simp add: make_full_observation.ctr[of lift "Some 9"] return ltl_step.simps apply_updates_def)
+        apply (case_tac "(shd (stl t))")
+        apply (case_tac " a = STR ''opendoor''")
+         apply simp
+         apply (rule not_ev)
+          apply simp
+         apply (coinduction)
+         apply simp
+         apply standard
+     using opendoor_invalid apply auto[1]
+         apply (rule disjI2)
+         apply (coinduction)
+         apply simp
+         apply (case_tac "ltl_step lift (Some (nat naaa)) raa (STR ''opendoor'', baa) = (None, [], raa)")
+          prefer 2 using opendoor_invalid apply auto[1]
+         apply (simp add: ltl_step.simps stop_at_None)
+        apply simp
+        apply (rule disjI1)
+        apply standard
+     using prem_ignore_fst apply (simp add: ev_Stream)
+        apply fastforce
+       apply (case_tac "label (shd x) = STR ''motorstop''")
+        apply simp
+       apply simp
+       apply (rule disjI2)
+       apply (case_tac "(shd (stl t))")
+       apply (simp add: ltl_step_9_invalid_label make_full_observation.ctr[of lift "Some 9"] prem_stop_at_none_scons)
+      apply (simp add: make_full_observation.ctr[of lift "Some 9"] ltl_step_9_invalid prem_stop_at_none_scons)
+
+     apply (case_tac "s \<in> {1, 2, 3, 4}")
+      apply (case_tac "shd t = (STR ''motorstop'', [Str ''true'', Str ''true''])")
+       apply simp
+      apply simp
+      apply (rule disjI2)+
+     subgoal for x s r p t
+       apply (simp add: make_full_observation.ctr[of lift "Some s"])
+       apply (case_tac "ltl_step lift (Some s) r (shd t)")
+       apply simp
+       apply (case_tac a)
+        apply simp
+        apply (case_tac "b=[] \<and> c = r")
+         prefer 2 apply (simp add: ltl_step_state_none)
+        apply (simp add: prem_stop_at_none_scons)
+       apply simp
+       subgoal for a b c s'
+         using not_motorstop_step_state[of s "shd t" r s' b c]
+         apply simp
+         apply (case_tac "stl t", case_tac x1)
+         apply simp
+         apply (case_tac "aa \<noteq> STR ''opendoor''")
+          apply (simp add: prem_ignore_fst)
+          apply (rule disjI1)
+          apply fastforce
+         apply simp
+         apply (simp add: make_full_observation.ctr[of lift "Some s'"] opendoor_moving)
+         apply (simp add: ev_Stream prem_stop_at_none ltl_step.simps)
+         done
+       done
+
+
+
+
+     sorry
+  }
+  thus ?thesis using assms by auto
+qed
 
 declare ltl_step.simps [simp]
 
