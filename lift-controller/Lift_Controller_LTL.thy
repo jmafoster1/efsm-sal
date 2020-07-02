@@ -599,105 +599,69 @@ lemma opendoor_moving:
   apply (simp add: transitions)
   by auto
 
+lemma label_opendoor: "ffilter (\<lambda>((origin, dest), t). Label t = STR ''opendoor'') lift =
+       {|((5, 5), opendoor1), ((6, 6), opendoor2), ((7, 7), opendoor3), ((8, 8), opendoor4)|}"
+  apply (simp add: Abs_ffilter set_eq_iff lift_def)
+  apply clarify
+  apply (case_tac "a=5")
+   apply (simp add: transitions)
+   apply auto[1]
+  apply (case_tac "a=6")
+   apply (simp add: transitions)
+   apply auto[1]
+  apply (case_tac "a=7")
+   apply (simp add: transitions)
+   apply auto[1]
+  apply (case_tac "a=8")
+   apply (simp add: transitions)
+   apply auto[1]
+  apply (simp add: transitions)
+  by auto
+
+lemma ltl_step_opendoor:
+  "s \<in> {5, 6, 7, 8} \<Longrightarrow> ltl_step lift (Some s) r (STR ''opendoor'', [EFSM.Str ''true'']) = (Some s, [Some (Str ''true''), Some (Num (s-4))], r)"
+  apply (rule ltl_step_some[of _ _ _ _ _ s "opendoor (s-4)"])
+    apply (simp add: possible_steps_alt3 split_label label_opendoor transitions Abs_ffilter set_eq_iff)
+    apply (simp add: can_take)
+    apply clarify
+    apply auto[1]
+   apply (simp add: apply_outputs_def)
+  by (simp add: apply_updates_def)
 
 lemma problem:
   assumes "\<exists>s r p t. j= make_full_observation lift (Some s) r p t"
   shows "((ev (nxt ((label_eq ''opendoor'') aand (nxt (output_eq [Some(Str ''true''), Some(n)]))))) impl
-         ((not (nxt (label_eq ''opendoor''))) until(((label_eq ''motorstop'') or (nxt (output_eq [Some(Str ''true''), Some(n)])))))) j"
+         ((not (nxt (label_eq ''opendoor'' aand (nxt (output_eq [Some(Str ''true''), Some(n)]))))) until(((label_eq ''motorstop'') or (nxt (output_eq [Some(Str ''true''), Some(n)])))))) j"
 proof-
   {assume "(ev (nxt ((label_eq ''opendoor'') aand (nxt (output_eq [Some(Str ''true''), Some(n)]))))) j \<and>
            (\<exists>s r p t. j= make_full_observation lift (Some s) r p t)"
-   hence "((not (nxt (label_eq ''opendoor''))) until(((label_eq ''motorstop'') or (nxt (output_eq [Some(Str ''true''), Some(n)]))))) j"
+   hence "((not (nxt (label_eq ''opendoor'' aand (nxt (output_eq [Some(Str ''true''), Some(n)]))))) until(((label_eq ''motorstop'') or (nxt (output_eq [Some(Str ''true''), Some(n)]))))) j"
      apply coinduct
      apply simp
      apply (erule conjE)
      apply (erule exE)+
+     apply (case_tac "(shd (stl t)) = (STR ''motorstop'', [Str ''true'', Str ''true''])")
+     apply (simp add: UNTIL.base)
+
      apply (case_tac "s=0")
-     apply (case_tac "shd t = (STR ''continit'', [])")
-       apply (simp add: ltl_step_0)
-       apply (case_tac "shd (stl t)")
-       apply (case_tac "a = STR ''opendoor''")
-        apply simp
-        apply (rule not_ev)
-         apply simp
-        apply coinduction
-        apply (simp add: ltl_step_0)
-        apply standard
-         apply (rule impI)
-         apply (simp add: eq_commute opendoor_9)
-        apply (rule disjI2)
-        apply (coinduction)
-        apply (simp add: opendoor_9)
-        apply (simp add: ltl_step.simps stop_at_None)
-       apply (simp add: make_full_observation.ctr[of lift "Some 0"] ltl_step_0)
-       apply (case_tac "(stl t)")
-       apply clarsimp
-       apply (simp add: prem_ignore_fst)
-       apply fastforce
-      apply (simp add: make_full_observation.ctr[of lift "Some 0"] ltl_step_0_invalid prem_stop_at_none_scons)
+      apply (case_tac "shd t = (STR ''continit'', [])")
+       apply (simp add: ltl_step_0 make_full_observation.ctr[of lift "Some 0"])
+       apply (case_tac "stl t", case_tac x1)
+       apply (simp add: opendoor_invalid ev_Stream)
+       apply (erule disjE)
+        apply clarify
+        apply (simp add: make_full_observation.ctr[of lift "Some 9"] opendoor_invalid)
+       apply auto[1]
+      apply (simp add: make_full_observation.ctr[of lift "Some 0"] ltl_step_0_invalid ev_Stream prem_stop_at_none)
+      apply (simp add: ltl_step.simps)
 
-     apply (case_tac "s=9")
-      apply (case_tac "\<exists>n. r $ 4 = Some (Num n) \<and> n \<in> {1, 2, 3, 4}")
-       apply (case_tac "shd t = (STR ''return'', [])")
-        apply (erule exE)
-        apply (simp add: make_full_observation.ctr[of lift "Some 9"] return ltl_step.simps apply_updates_def)
-        apply (case_tac "(shd (stl t))")
-        apply (case_tac " a = STR ''opendoor''")
-         apply simp
-         apply (rule not_ev)
-          apply simp
-         apply (coinduction)
-         apply simp
-         apply standard
-     using opendoor_invalid apply auto[1]
-         apply (rule disjI2)
-         apply (coinduction)
-         apply simp
-         apply (case_tac "ltl_step lift (Some (nat naaa)) raa (STR ''opendoor'', baa) = (None, [], raa)")
-          prefer 2 using opendoor_invalid apply auto[1]
-         apply (simp add: ltl_step.simps stop_at_None)
-        apply simp
-        apply (rule disjI1)
-        apply standard
-     using prem_ignore_fst apply (simp add: ev_Stream)
-        apply fastforce
-       apply (case_tac "label (shd x) = STR ''motorstop''")
-        apply simp
-       apply simp
-       apply (rule disjI2)
-       apply (case_tac "(shd (stl t))")
-       apply (simp add: ltl_step_9_invalid_label make_full_observation.ctr[of lift "Some 9"] prem_stop_at_none_scons)
-      apply (simp add: make_full_observation.ctr[of lift "Some 9"] ltl_step_9_invalid prem_stop_at_none_scons)
-
-     apply (case_tac "s \<in> {1, 2, 3, 4}")
-      apply (case_tac "shd t = (STR ''motorstop'', [Str ''true'', Str ''true''])")
-       apply simp
-      apply simp
-      apply (rule disjI2)+
+     apply (case_tac "s \<in> {5, 6, 7, 8}")
      subgoal for x s r p t
-       apply (simp add: make_full_observation.ctr[of lift "Some s"])
-       apply (case_tac "ltl_step lift (Some s) r (shd t)")
-       apply simp
-       apply (case_tac a)
-        apply simp
-        apply (case_tac "b=[] \<and> c = r")
-         prefer 2 apply (simp add: ltl_step_state_none)
-        apply (simp add: prem_stop_at_none_scons)
-       apply simp
-       subgoal for a b c s'
-         using not_motorstop_step_state[of s "shd t" r s' b c]
+       apply (case_tac "shd t = (STR ''opendoor'', [Str ''true''])")
+        apply (simp add: ltl_step_opendoor ev_Stream make_full_observation.ctr[of lift "Some s" r p t])
+        apply (case_tac "Num (int (s - 4)) = n")
          apply simp
-         apply (case_tac "stl t", case_tac x1)
-         apply simp
-         apply (case_tac "aa \<noteq> STR ''opendoor''")
-          apply (simp add: prem_ignore_fst)
-          apply (rule disjI1)
-          apply fastforce
-         apply simp
-         apply (simp add: make_full_observation.ctr[of lift "Some s'"] opendoor_moving)
-         apply (simp add: ev_Stream prem_stop_at_none ltl_step.simps)
-         done
-       done
+
 
 
 
