@@ -628,6 +628,165 @@ lemma ltl_step_opendoor:
    apply (simp add: apply_outputs_def)
   by (simp add: apply_updates_def)
 
+lemma possible_steps_lift_fset:
+  "possible_steps lift s r STR ''opendoor'' b \<noteq> {||} \<Longrightarrow>
+   \<exists>s' t. possible_steps lift s r STR ''opendoor'' b = {|(s', t)|}"
+  by (meson deterministic_alt_aux deterministic_def deterministic_lift possible_steps_alt)
+
+lemma can_take_opendoors:
+"can_take_transition (opendoor (int (s - 4))) i r = (i=[Str ''true''])"
+  apply (simp add: can_take)
+  by (case_tac i, auto)
+
+lemma output_opendoors:
+  "Num (int (s - 4)) \<noteq> n \<Longrightarrow>
+  fst e = STR ''opendoor'' \<Longrightarrow>
+  fst (snd (ltl_step lift (Some s) r e)) \<noteq> [Some (EFSM.Str ''true''), Some n]"
+  apply (cases e)
+  apply (simp add: ltl_step.simps)
+  apply (case_tac "possible_steps lift s r STR ''opendoor'' b = {||}")
+   apply simp
+  apply simp
+  apply (case_tac "SOME x. x |\<in>| possible_steps lift s r STR ''opendoor'' b")
+  apply simp
+  subgoal for l i s' t
+    apply (insert possible_steps_lift_fset[of s r i])
+    apply simp
+    apply (erule exE)+
+    apply (simp add: possible_steps_singleton set_eq_iff can_take[symmetric])
+    apply (erule_tac x=s in allE)
+    apply (erule_tac x=s' in allE)
+    apply (erule_tac x=t in allE)
+    apply (simp add: lift_def)
+    apply (erule conjE)+
+    apply (erule disjE, simp add: transitions)+
+     apply (simp add: can_take apply_outputs_def)
+    apply (erule disjE, simp add: transitions)+
+     apply (simp add: can_take apply_outputs_def)
+    apply (erule disjE, simp add: transitions)+
+     apply (simp add: can_take apply_outputs_def)
+    apply (erule disjE, simp add: transitions)+
+     apply (simp add: can_take apply_outputs_def)
+    apply (erule disjE, simp add: transitions)+
+    apply (simp add: can_take apply_outputs_def)
+    by (simp add: transitions)
+  done
+
+lemma ltl_step_ocd_invalid:
+  "e \<noteq> (STR ''opendoor'', [EFSM.Str ''true'']) \<Longrightarrow>
+   e \<noteq> (STR ''startsearch'', [EFSM.Str ''true'', EFSM.Str ''false'']) \<Longrightarrow>
+   s \<in> {5, 6, 7, 8} \<Longrightarrow>
+   ltl_step lift (Some s) r e = (None, [], r)"
+  apply (cases e, simp)
+  apply (rule ltl_step_none)
+  apply (simp add: possible_steps_empty lift_def)
+  apply (erule disjE)
+   apply (simp add: can_take transitions apply_guards_def)
+   apply (case_tac b, simp)
+   apply (case_tac list, simp)
+    apply auto[1]
+  apply simp
+  apply (erule disjE)
+   apply (simp add: can_take transitions apply_guards_def)
+   apply (case_tac b, simp)
+   apply (case_tac list, simp)
+    apply auto[1]
+  apply simp
+  apply (erule disjE)
+   apply (simp add: can_take transitions apply_guards_def)
+   apply (case_tac b, simp)
+   apply (case_tac list, simp)
+    apply auto[1]
+  apply simp
+   apply (simp add: can_take transitions apply_guards_def)
+   apply (case_tac b, simp)
+   apply (case_tac list, simp)
+  by auto
+
+lemma ltl_step_startsearch:
+  "s \<in> {5, 6, 7, 8} \<Longrightarrow>
+  ltl_step lift (Some s) r (STR ''startsearch'', [EFSM.Str ''true'', EFSM.Str ''false'']) = (Some 9, [], r)"
+  apply (rule ltl_step_some[of _ _ _ _ _ 9 startsearch])
+    defer apply simp
+   apply (simp add: apply_updates_def)
+  apply (simp add: lift_def possible_steps_singleton set_eq_iff)
+  apply clarify
+  apply (case_tac "ba=startsearch")
+   apply (simp add: transitions apply_guards_def)
+   apply auto[1]
+  apply (simp add: transitions)
+  apply clarify
+  by auto
+
+lemma possible_steps_lift: "possible_steps lift s r a ba \<noteq> {||} \<Longrightarrow>
+       \<exists>aa t. possible_steps lift s r a ba = {|(aa, t)|}"
+  using deterministic_alt deterministic_lift possible_steps_alt by blast
+
+lemma ltl_step_Some_lift: "(ltl_step lift (Some s) r e = (Some aa, b, c)) =
+       (\<exists>t. possible_steps lift s r (fst e) (snd e) = {|(aa, t)|} \<and> evaluate_outputs t (snd e) r = b \<and> evaluate_updates t (snd e) r = c)"
+  apply standard
+   prefer 2 apply (simp add: ltl_step_singleton)
+  apply (cases e)
+  apply (simp add: ltl_step.simps Let_def)
+  apply (case_tac "possible_steps lift s r a ba = {||}")
+   apply simp
+  apply simp
+  apply (case_tac "SOME x. x |\<in>| possible_steps lift s r a ba")
+  apply simp
+  apply (rule_tac x=baa in exI)
+  apply simp
+  apply (insert deterministic_lift)
+  using possible_steps_lift by fastforce
+
+lemma ltl_step_floor_output:
+  "s \<in> {1, 2, 3, 4} \<Longrightarrow> fst (snd (ltl_step lift (Some s) r e)) \<noteq> [Some (EFSM.Str ''true''), Some n]"
+  apply (case_tac "ltl_step lift (Some s) r e")
+  apply simp
+  apply (case_tac a)
+   apply (metis list.simps(3) ltl_step_state_none)
+  apply (simp add: ltl_step_Some_lift)
+  apply (erule_tac exE)
+  apply (erule conjE)+
+  apply (simp add: possible_steps_singleton set_eq_iff)
+  apply (erule_tac x=s in allE)
+  apply (erule_tac x=aa in allE)
+  apply (erule_tac x=t in allE)
+  apply simp
+  apply (erule conjE)+
+  subgoal for a b c aa t
+    apply (simp add: eq_commute[of "evaluate_outputs t (snd e) r" b])
+    apply (simp add: lift_def apply_outputs_def Str_def)
+    apply (erule disjE)
+     apply (simp add: transitions)
+     apply (erule disjE, simp)
+     apply (erule disjE, simp)
+     apply simp
+    apply (erule disjE)
+     apply (simp add: transitions)
+    apply (erule disjE)
+     apply (simp add: transitions)
+     apply (erule disjE, simp)
+     apply auto[1]
+     apply (erule disjE)
+     apply (simp add: transitions)
+     apply (erule disjE)
+     apply (simp add: transitions)
+     apply (erule disjE, simp)
+     apply auto[1]
+     apply (simp add: transitions)
+     apply (erule disjE, simp)
+    by auto
+  done
+
+lemma invalid_state:
+  "s \<noteq> 0 \<Longrightarrow>
+   s \<noteq> 5 \<and> s \<noteq> 6 \<and> s \<noteq> 7 \<and> s \<noteq> 8 \<Longrightarrow>
+   s \<noteq> 1 \<and> s \<noteq> 2 \<and> s \<noteq> 3 \<and> s \<noteq> 4 \<Longrightarrow>
+   s \<noteq> 9 \<Longrightarrow>
+   ltl_step lift (Some s) r e = (None, [], r)"
+  apply (cases e, simp, rule ltl_step_none)
+  by (simp add: possible_steps_empty lift_def)
+
 lemma problem:
   assumes "\<exists>s r p t. j= make_full_observation lift (Some s) r p t"
   shows "((ev (nxt ((label_eq ''opendoor'') aand (nxt (output_eq [Some(Str ''true''), Some(n)]))))) impl
@@ -661,17 +820,107 @@ proof-
         apply (simp add: ltl_step_opendoor ev_Stream make_full_observation.ctr[of lift "Some s" r p t])
         apply (case_tac "Num (int (s - 4)) = n")
          apply simp
+        apply (erule disjE)
+       using output_opendoors apply blast
+       using output_opendoors apply blast
+       apply (case_tac "(shd t) = (STR ''motorstop'', [Str ''true'', Str ''true''])")
+        apply simp
+       apply simp
+       apply (rule disjI2)
+       apply (case_tac "(shd t) = (STR ''startsearch'', [Str ''true'', Str ''false''])")
+       apply simp
+        apply (simp add: ltl_step_startsearch)
+        apply standard
+       apply (metis (no_types, hide_lams) fst_conv list.simps(3) opendoor_9 prod.collapse snd_conv)
+        apply (rule disjI1)
+        apply standard
+         apply (simp add: ltl_step_startsearch ev_Stream make_full_observation.ctr[of lift "Some s" r p t])
+         apply (metis (no_types, lifting) Pair_inject list.simps(3) opendoor_9 prod.collapse)
+        apply fastforce
+       apply (simp add: ev_Stream make_full_observation.ctr[of lift "Some s" r p t] ltl_step_ocd_invalid)
+       apply (erule disjE)
+        apply (simp add: ltl_step.simps)
+       by (simp add: prem_stop_at_none)
 
+     apply (case_tac "s \<in> {1, 2, 3, 4}")
+     subgoal for x s r p t
+       apply (case_tac "(shd t) = (STR ''motorstop'', [Str ''true'', Str ''true''])")
+        apply simp
+       apply (rule disjI2)+
+       apply standard
+        apply simp
+        apply (rule impI)
+        apply (case_tac "ltl_step lift (Some s) r (shd t)", case_tac a)
+         apply (simp add: ltl_step.simps)
+        apply simp
+        apply (case_tac "aa \<in> {1, 2, 3, 4}")
+       prefer 2
+       using not_motorstop_step_state apply blast
+       apply (simp add: ltl_step_floor_output)
+       apply standard
+       apply standard
+       apply simp
+        apply (case_tac "ltl_step lift (Some s) r (shd t)", case_tac a)
+         apply (simp add: ev_Stream make_full_observation.ctr[of lift "Some s" r p t] ltl_step.simps)
+         apply (simp add: ev_Stream make_full_observation.ctr[of lift "Some s" r p t])
+       using ltl_step_floor_output not_motorstop_step_state apply auto[1]
+       apply simp
+       apply (case_tac "ltl_step lift (Some s) r (shd t)", case_tac a)
+        apply (simp add: ev_Stream make_full_observation.ctr[of lift "Some s" r p t] ltl_step.simps)
+       using prem_stop_at_none ltl_step_state_none apply blast
+       by fastforce
 
+     apply (case_tac "s=9")
+      apply simp
+      apply (rule disjI2)+
+      apply standard
+       apply (rule impI)
+       apply (case_tac "\<exists>n. r $ 4 = Some (Num n) \<and> n \<in> {1, 2, 3, 4}")
+        apply (case_tac "shd t = (STR ''return'', [])")
+         apply (erule exE)
+         apply simp
+         apply (simp add: return ltl_step.simps apply_updates_def)
+         apply (case_tac "nat na \<in> {1, 2, 3, 4}")
+          apply (simp add: ltl_step_floor_output)
+         apply auto[1]
+        apply (case_tac "shd t", simp add: possible_steps_9_invalid ltl_step.simps)
+       apply (simp add: ltl_step_9_invalid)
+       apply (simp add: ltl_step.simps)
+      apply standard
+      apply standard
 
+       apply (case_tac "\<exists>n. r $ 4 = Some (Num n) \<and> n \<in> {1, 2, 3, 4}")
+        apply (case_tac "shd t = (STR ''return'', [])")
+         apply (erule exE)
+         apply (simp add: ev_Stream make_full_observation.ctr[of lift "Some 9"] return ltl_step.simps apply_updates_def)
+         apply (metis (no_types, lifting) insertCI ltl_step_floor_output nat_numeral numeral_Bit0 numeral_eq_one_iff)
 
+        apply (case_tac "shd t")
+        apply (simp add: ev_Stream make_full_observation.ctr[of lift "Some 9"] possible_steps_9_invalid ltl_step.simps)
 
-     sorry
+       apply (case_tac "shd t", simp add: ev_Stream make_full_observation.ctr[of lift "Some 9"] ltl_step_9_invalid)
+       apply (simp add: ltl_step.simps(1))
+
+      apply (case_tac "ltl_step lift (Some s) r (shd t)", case_tac a)
+       apply (simp add: ev_Stream make_full_observation.ctr[of lift "Some 9"] ltl_step.simps)
+     using prem_stop_at_none ltl_step_state_none apply blast
+      apply fastforce
+
+     apply (rule disjI2)+
+     apply simp
+     apply standard
+     apply (simp add: invalid_state ltl_step.simps)
+     apply (rule disjI2)
+     apply (simp add: invalid_state ltl_step.simps)
+     apply (rule alw_implies_until)
+     apply (rule alw_mono[of "alw (output_eq [])"])
+      apply (simp add: no_output_none_if_empty)
+     by fastforce
   }
   thus ?thesis using assms by auto
 qed
 
 declare ltl_step.simps [simp]
-
+(*not_motorstop_step_state*)
 
 end
