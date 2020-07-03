@@ -419,18 +419,21 @@ lift : MODULE =
   test: THEOREM lift |- FORALL (n:BOUNDED_INT):
   G(
     F(
-      X(label = opendoor AND
       X(
-      o=output_sequence !insert(Some(Str(String__true)), output_sequence ! insert(Some(Num(n)), output_sequence ! empty))
-      ))
+        label = opendoor AND
+        X(o=output_sequence !insert(Some(Str(String__true)), output_sequence ! insert(Some(Num(n)), output_sequence ! empty)))
+      )
     ) =>
     U(
-      NOT(X(label = opendoor AND o=output_sequence !insert(Some(Str(String__true)), output_sequence ! insert(Some(Num(n)), output_sequence ! empty)))),
+      NOT(
+        X(
+          label = opendoor AND
+          X(o=output_sequence !insert(Some(Str(String__true)), output_sequence ! insert(Some(Num(n)), output_sequence ! empty)))
+        )
+      ),
       (
         label = motorstop OR
-        X(
-        o=output_sequence !insert(Some(Str(String__true)), output_sequence ! insert(Some(Num(n)), output_sequence ! empty))
-        )
+        X(o=output_sequence !insert(Some(Str(String__true)), output_sequence ! insert(Some(Num(n)), output_sequence ! empty)))
       )
     )
   );

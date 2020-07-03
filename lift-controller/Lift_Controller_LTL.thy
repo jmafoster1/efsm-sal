@@ -920,6 +920,28 @@ proof-
   thus ?thesis using assms by auto
 qed
 
+lemma test:
+  assumes "\<exists>s r p t. j= make_full_observation lift (Some s) r p t"
+  shows "alw ((ev (nxt ((label_eq ''opendoor'') aand (nxt (output_eq [Some (Str ''true''), Some (n)]))))) impl ((not (nxt ((label_eq ''opendoor'') aand (nxt (output_eq [Some (Str ''true''), Some (n)]))))) until (((label_eq ''motorstop'') or (nxt (output_eq [Some (Str ''true''), Some (n)])))))) j"
+  using assms apply coinduct
+  apply simp
+  apply standard
+  using problem apply simp
+  apply (erule exE)+
+  apply simp
+  apply (case_tac "ltl_step lift (Some s) r (shd t)", case_tac a)
+   apply simp
+   apply (rule disjI2)
+   apply (rule alw_mono[of "alw (output_eq [])"])
+    apply (metis alw_alw ltl_step_state_none no_output_none_if_empty)
+   apply clarify
+   apply (rule alw_implies_until)
+   apply (rule alw_mono[of "alw (output_eq [])"])
+    apply simp
+   apply fastforce
+  by fastforce
+
+
 declare ltl_step.simps [simp]
 (*not_motorstop_step_state*)
 
