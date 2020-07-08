@@ -34,7 +34,7 @@ lift : MODULE =
         r__1 = None AND
         r__2 = None AND
         r__3 = None AND
-        r__4 = None
+        r__4 = Some(Num(1))
       -->
     ]
     TRANSITION [
@@ -45,7 +45,6 @@ lift : MODULE =
         -->
           cfstate' = State__9;
           r__1' = Some(Str(String__true));
-          r__4' = Some(Num(1));
           o' = output_sequence ! empty
       []
       MOTORSTOP4 :
@@ -408,7 +407,8 @@ lift : MODULE =
       SINK_HOLE :
           ELSE
         -->
-          cfstate' = NULL_STATE
+          cfstate' = NULL_STATE;
+          o' = output_sequence ! empty
     ]
   END;
 
@@ -438,4 +438,11 @@ lift : MODULE =
     )
   );
 
+  test2: THEOREM lift |- FORALL (n:BOUNDED_INT):
+  G(
+    NOT(
+        label = opendoor AND
+        X(o=output_sequence !insert(Some(Str(String__true)), output_sequence ! insert(Some(Num(n)), output_sequence ! empty)))
+      )
+  );
 END
