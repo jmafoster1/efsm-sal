@@ -439,8 +439,8 @@ lemma alw_must_stop_to_open:
 
 lemma bad_step:
   assumes "ltl_step lift (Some s) r (shd t) = (None, [], r)"
-shows "((ev (nxt ((label_eq ''opendoor '') aand (nxt (output_eq [Some(Str ''true''), Some(n)]))))) impl
-       ((not (nxt (label_eq ''opendoor ''))) until(((label_eq ''motorstop'') or (nxt (output_eq [Some(Str ''true''), Some(n)]))))))
+shows "((ev (nxt ((label_eq ''opendoor '') aand (nxt (output_eq [Some(Str ''true''), Some n]))))) impl
+       ((not (nxt (label_eq ''opendoor ''))) until(((label_eq ''motorstop'') or (nxt (output_eq [Some(Str ''true''), Some n]))))))
       (make_full_observation lift (Some s) r p t)"
 proof-
   have aux: "\<not>ev (nxt (\<lambda>xs. label_eq ''opendoor '' xs \<and> nxt (output_eq [Some (EFSM.Str ''true''), Some n]) xs))
@@ -789,12 +789,12 @@ lemma invalid_state:
 
 lemma problem:
   assumes "\<exists>s r p t. j= make_full_observation lift (Some s) r p t"
-  shows "((ev (nxt ((label_eq ''opendoor'') aand (nxt (output_eq [Some(Str ''true''), Some(n)]))))) impl
-         ((not (nxt (label_eq ''opendoor'' aand (nxt (output_eq [Some(Str ''true''), Some(n)]))))) until(((label_eq ''motorstop'') or (nxt (output_eq [Some(Str ''true''), Some(n)])))))) j"
+  shows "((ev (nxt ((label_eq ''opendoor'') aand (nxt (output_eq [Some(Str ''true''), Some n]))))) impl
+         ((not (nxt (label_eq ''opendoor'' aand (nxt (output_eq [Some(Str ''true''), Some n]))))) until(((label_eq ''motorstop'') or (nxt (output_eq [Some(Str ''true''), Some n])))))) j"
 proof-
-  {assume "(ev (nxt ((label_eq ''opendoor'') aand (nxt (output_eq [Some(Str ''true''), Some(n)]))))) j \<and>
+  {assume "(ev (nxt ((label_eq ''opendoor'') aand (nxt (output_eq [Some(Str ''true''), Some n]))))) j \<and>
            (\<exists>s r p t. j= make_full_observation lift (Some s) r p t)"
-   hence "((not (nxt (label_eq ''opendoor'' aand (nxt (output_eq [Some(Str ''true''), Some(n)]))))) until(((label_eq ''motorstop'') or (nxt (output_eq [Some(Str ''true''), Some(n)]))))) j"
+   hence "((not (nxt (label_eq ''opendoor'' aand (nxt (output_eq [Some(Str ''true''), Some n]))))) until(((label_eq ''motorstop'') or (nxt (output_eq [Some(Str ''true''), Some n]))))) j"
      apply coinduct
      apply simp
      apply (erule conjE)
@@ -920,9 +920,9 @@ proof-
   thus ?thesis using assms by auto
 qed
 
-lemma test:
+lemma alw_must_stop_to_open:
   assumes "\<exists>s r p t. j= make_full_observation lift (Some s) r p t"
-  shows "alw ((ev (nxt ((label_eq ''opendoor'') aand (nxt (output_eq [Some (Str ''true''), Some (n)]))))) impl ((not (nxt ((label_eq ''opendoor'') aand (nxt (output_eq [Some (Str ''true''), Some (n)]))))) until (((label_eq ''motorstop'') or (nxt (output_eq [Some (Str ''true''), Some (n)])))))) j"
+  shows "alw ((ev (nxt ((label_eq ''opendoor'') aand (nxt (output_eq [Some (Str ''true''), Some  n]))))) impl ((not (nxt ((label_eq ''opendoor'') aand (nxt (output_eq [Some (Str ''true''), Some  n]))))) until (((label_eq ''motorstop'') or (nxt (output_eq [Some (Str ''true''), Some  n])))))) j"
   using assms apply coinduct
   apply simp
   apply standard
@@ -941,8 +941,63 @@ lemma test:
    apply fastforce
   by fastforce
 
+lemma problem_suntil:
+  assumes "\<exists>s r p t. j= make_full_observation lift (Some s) r p t"
+  shows "((ev (nxt ((label_eq ''opendoor'') aand (nxt (output_eq [Some(Str ''true''), Some n]))))) impl
+         ((not (nxt (label_eq ''opendoor'' aand (nxt (output_eq [Some(Str ''true''), Some n]))))) suntil(((label_eq ''motorstop'') or (nxt (output_eq [Some(Str ''true''), Some n])))))) j"
+  apply (simp add: suntil_as_until)
+  apply standard
+  apply standard
+  using assms problem apply simp
+  using assms apply clarify
+  by (rule ev.induct, simp, auto)
 
-declare ltl_step.simps [simp]
-(*not_motorstop_step_state*)
+lemma abstract_watch:
+  assumes "\<And>j. \<exists>s r p t. j= make_full_observation e (Some s) r p t \<Longrightarrow> P j"
+  shows "P (watch e i)"
+  using assms by blast
+
+declare nxt.simps [simp del]
+
+lemma aux:
+"alw (output_eq []) xs \<Longrightarrow>
+ \<not>ev (nxt (\<lambda>xs. label (shd xs) = STR ''opendoor'' \<and> nxt (output_eq [Some (EFSM.Str ''true''), Some n]) xs)) xs"
+  apply (simp add: not_ev_iff)
+  apply (rule alw_mono[of "alw (output_eq [])"])
+   apply simp
+  apply (simp add: nxt.simps)
+  apply (rule impI)
+  apply (case_tac "xsa", case_tac x2)
+  apply simp
+  by fastforce
+
+theorem test :
+  assumes "\<exists>s r p t. j= make_full_observation lift (Some s) r p t"
+  shows "alw ((ev (nxt ((label_eq ''opendoor'') aand (nxt (output_eq [Some(Str ''true''), Some n]))))) impl
+      ((not (nxt ((label_eq ''opendoor'') aand (nxt (output_eq [Some(Str ''true''), Some n]))))) suntil
+      (((label_eq ''motorstop'') or (nxt (output_eq [Some(Str ''true''), Some n])))))) j"
+  using assms apply coinduct
+  apply simp
+  apply standard
+   apply (simp add: suntil_as_until)
+   apply standard
+   apply standard
+  using problem apply auto[1]
+  apply (rule ev.induct)
+     apply simp
+    apply (simp add: nxt.simps)
+    apply auto[1]
+   apply auto[1]
+
+  apply (erule exE)+
+  apply simp
+  apply (case_tac "ltl_step lift (Some s) r (shd t)", case_tac a)
+   apply simp
+   apply (rule disjI2)
+   apply (rule alw_mono[of "alw (output_eq [])"])
+    apply (metis alw_alw ltl_step_state_none no_output_none_if_empty)
+   apply clarify
+   apply (simp add: suntil_as_until aux)
+  by auto
 
 end
