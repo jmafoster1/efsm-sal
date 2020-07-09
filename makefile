@@ -1,7 +1,6 @@
 DOT_FILES = $(shell find ./ -type f -name '*.dot')
 DATE=`date +'%d/%m/%y'`
 
-
 dot:
 	@ for b in $(basename $(DOT_FILES)) ; do \
 	  dot -T pdf -o $$b.pdf $$b.dot ; \
@@ -11,3 +10,6 @@ eod:
 	git add -A ; \
 	git commit -m "end of day $(DATE)" ; \
 	git push origin master ; \
+
+snippets:
+	sed -n '/\\snip{/,/endsnip/p' output/document/*.tex > snippets.tex; \

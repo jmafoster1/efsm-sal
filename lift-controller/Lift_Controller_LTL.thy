@@ -787,10 +787,12 @@ lemma invalid_state:
   apply (cases e, simp, rule ltl_step_none)
   by (simp add: possible_steps_empty lift_def)
 
-lemma problem:
+text_raw\<open>\snip{alwMustStopToOpenAux}{1}{2}{%\<close>
+lemma alw_must_stop_to_open_aux:
   assumes "\<exists>s r p t. j= make_full_observation lift (Some s) r p t"
   shows "((ev (nxt ((label_eq ''opendoor'') aand (nxt (output_eq [Some(Str ''true''), Some n]))))) impl
          ((not (nxt (label_eq ''opendoor'' aand (nxt (output_eq [Some(Str ''true''), Some n]))))) until(((label_eq ''motorstop'') or (nxt (output_eq [Some(Str ''true''), Some n])))))) j"
+text_raw\<open>}%endsnip\<close>
 proof-
   {assume "(ev (nxt ((label_eq ''opendoor'') aand (nxt (output_eq [Some(Str ''true''), Some n]))))) j \<and>
            (\<exists>s r p t. j= make_full_observation lift (Some s) r p t)"
@@ -920,13 +922,15 @@ proof-
   thus ?thesis using assms by auto
 qed
 
-lemma alw_must_stop_to_open:
+text_raw\<open>\snip{alwMustStopToOpenGen}{1}{2}{%\<close>
+lemma alw_must_stop_to_open_gen:
   assumes "\<exists>s r p t. j= make_full_observation lift (Some s) r p t"
   shows "alw ((ev (nxt ((label_eq ''opendoor'') aand (nxt (output_eq [Some (Str ''true''), Some  n]))))) impl ((not (nxt ((label_eq ''opendoor'') aand (nxt (output_eq [Some (Str ''true''), Some  n]))))) until (((label_eq ''motorstop'') or (nxt (output_eq [Some (Str ''true''), Some  n])))))) j"
+text_raw\<open>}%endsnip\<close>
   using assms apply coinduct
   apply simp
   apply standard
-  using problem apply simp
+  using alw_must_stop_to_open_aux apply simp
   apply (erule exE)+
   apply simp
   apply (case_tac "ltl_step lift (Some s) r (shd t)", case_tac a)
@@ -941,14 +945,19 @@ lemma alw_must_stop_to_open:
    apply fastforce
   by fastforce
 
-lemma problem_suntil:
+text_raw\<open>\snip{alwMustStopToOpen}{1}{2}{%\<close>
+lemma alw_must_stop_to_open: "alw ((ev (nxt ((label_eq ''opendoor'') aand (nxt (output_eq [Some (Str ''true''), Some  n]))))) impl ((not (nxt ((label_eq ''opendoor'') aand (nxt (output_eq [Some (Str ''true''), Some  n]))))) until (((label_eq ''motorstop'') or (nxt (output_eq [Some (Str ''true''), Some  n])))))) (watch lift i)"
+  using alw_must_stop_to_open_gen by blast
+text_raw\<open>}%endsnip\<close>
+
+lemma alw_must_stop_to_open_aux_suntil:
   assumes "\<exists>s r p t. j= make_full_observation lift (Some s) r p t"
   shows "((ev (nxt ((label_eq ''opendoor'') aand (nxt (output_eq [Some(Str ''true''), Some n]))))) impl
          ((not (nxt (label_eq ''opendoor'' aand (nxt (output_eq [Some(Str ''true''), Some n]))))) suntil(((label_eq ''motorstop'') or (nxt (output_eq [Some(Str ''true''), Some n])))))) j"
   apply (simp add: suntil_as_until)
   apply standard
   apply standard
-  using assms problem apply simp
+  using assms alw_must_stop_to_open_aux apply simp
   using assms apply clarify
   by (rule ev.induct, simp, auto)
 
@@ -982,7 +991,7 @@ theorem test :
    apply (simp add: suntil_as_until)
    apply standard
    apply standard
-  using problem apply auto[1]
+  using alw_must_stop_to_open_aux apply auto[1]
   apply (rule ev.induct)
      apply simp
     apply (simp add: nxt.simps)

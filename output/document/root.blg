@@ -1,0 +1,48 @@
+This is BibTeX, Version 0.99d (TeX Live 2019)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: root.aux
+The style file: abbrvnat.bst
+Database file #1: root.bib
+Warning--I didn't find a database entry for "foster.ea:efsm:2018"
+You've used 1 entry,
+            2773 wiz_defined-function locations,
+            606 strings with 4910 characters,
+and the built_in function-call counts, 820 in all, are:
+= -- 79
+> -- 47
+< -- 2
++ -- 15
+- -- 14
+* -- 71
+:= -- 127
+add.period$ -- 7
+call.type$ -- 1
+change.case$ -- 7
+chr.to.int$ -- 1
+cite$ -- 2
+duplicate$ -- 34
+empty$ -- 56
+format.name$ -- 15
+if$ -- 176
+int.to.chr$ -- 1
+int.to.str$ -- 1
+missing$ -- 1
+newline$ -- 16
+num.names$ -- 6
+pop$ -- 11
+preamble$ -- 1
+purify$ -- 6
+quote$ -- 0
+skip$ -- 29
+stack$ -- 0
+substring$ -- 34
+swap$ -- 11
+text.length$ -- 2
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 11
+warning$ -- 0
+while$ -- 7
+width$ -- 0
+write$ -- 29
+(There was 1 warning)
