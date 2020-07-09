@@ -412,19 +412,33 @@ lift : MODULE =
     ]
   END;
 
+  test1: THEOREM lift |- FORALL (n:BOUNDED_INT):
+  W(
+    NOT(label = opendoor AND X(o=output_sequence ! insert(Some(Str(String__true)), output_sequence ! insert(Some(Num(n)), output_sequence ! empty)))),
+    label = motorstop
+  );
+
+  test2: THEOREM lift |- FORALL (n:BOUNDED_INT):
+  G(
+    W(
+      NOT(label = opendoor AND X(o=output_sequence ! insert(Some(Str(String__true)), output_sequence ! insert(Some(Num(n)), output_sequence ! empty)))),
+      label = motorstop
+    )
+  );
+
   % It has to be this because outputs come are recorded in the next state.
   % We need the AND o=output_sequence !insert(Some(Str(String__true)), output_sequence ! insert(Some(Num(n)), output_sequence ! empty))))
   % in the first bit of UNTIL to help prove it in Isabelle
 
-  test: THEOREM lift |- FORALL (n:BOUNDED_INT):
+  test3: THEOREM lift |- FORALL (n:BOUNDED_INT):
   G(
     F(
       X(
         label = opendoor AND
-        X(o=output_sequence !insert(Some(Str(String__true)), output_sequence ! insert(Some(Num(n)), output_sequence ! empty)))
+        X(o=output_sequence ! insert(Some(Str(String__true)), output_sequence ! insert(Some(Num(n)), output_sequence ! empty)))
       )
     ) =>
-    U(
+    W(
       NOT(
         X(
           label = opendoor AND
@@ -436,13 +450,5 @@ lift : MODULE =
         X(o=output_sequence !insert(Some(Str(String__true)), output_sequence ! insert(Some(Num(n)), output_sequence ! empty)))
       )
     )
-  );
-
-  test2: THEOREM lift |- FORALL (n:BOUNDED_INT):
-  G(
-    NOT(
-        label = opendoor AND
-        X(o=output_sequence !insert(Some(Str(String__true)), output_sequence ! insert(Some(Num(n)), output_sequence ! empty)))
-      )
   );
 END
