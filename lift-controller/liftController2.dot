@@ -14,7 +14,7 @@ digraph liftController2 {
   s8[label="OpenCloseDoor2"];
   s9[label="OpenCloseDoor1"];
 
-  s0->s1[label=<<i>continit:0/&#91;r<sub>1</sub> := "true"&#93;</i>>];
+  s0->s1[id="CONTINIT" label=<<i>continit:0/&#91;r<sub>1</sub> := "true"&#93;</i>>];
 
   s2->s6[label=<<i>motorstop4:2&#91;r<sub>1</sub> = "true", i<sub>1</sub> = "true", i<sub>2</sub> = "true"&#93;/o<sub>1</sub> := 0, o<sub>2</sub> := 4, o<sub>3</sub> := "true"</i>>];
   s3->s7[label=<<i>motorstop3:2&#91;r<sub>1</sub> = "true", i<sub>1</sub> = "true", i<sub>2</sub> = "true"&#93;/o<sub>1</sub> := 0, o<sub>2</sub> := 3, o<sub>3</sub> := "true"</i>>];

@@ -3,3 +3,5 @@ pdfs/
 *.thy~~
 *.thy#
 *.pdf
+__pycache__/
+*.html

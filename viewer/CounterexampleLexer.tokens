@@ -1,0 +1,51 @@
+T__0=1
+T__1=2
+T__2=3
+T__3=4
+T__4=5
+T__5=6
+T__6=7
+T__7=8
+T__8=9
+T__9=10
+T__10=11
+T__11=12
+T__12=13
+T__13=14
+T__14=15
+T__15=16
+T__16=17
+T__17=18
+HEAD=19
+CYCLE_HEAD=20
+STEP_HEAD=21
+SYSTEM_VARS=22
+HYPHENS=23
+T_INFO=24
+CONTEXT=25
+REG=26
+B_VALUE=27
+NUMBER=28
+AN_STRING=29
+'label = '=1
+'\n'=2
+'cfstate = State__'=3
+'cfstate = NULL_STATE\n'=4
+'OptionBB'=5
+'Some('=6
+')'=7
+'None'=8
+'i('=9
+') = '=10
+'o('=11
+' = '=12
+'label '=13
+'(module instance at '=14
+'\n  ('=15
+'\n    else transition at '=16
+'))\n'=17
+'\n    transition at '=18
+'Counterexample:\n========================\nPath\n========================\n'=19
+'========================\nBegin of Cycle\n========================\n'=20
+'------------------------\n'=23
+'Transition Information:\n'=24

@@ -89,4 +89,7 @@ drinks : MODULE =
   LTL_must_pay_correct : THEOREM drinks |-
     F(cfstate = State__2) => U(NOT (label = vend), label = coin);%%90
 
+  test : THEOREM drinks |-
+    F(cfstate = State__2);
+
 END
