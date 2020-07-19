@@ -11,46 +11,53 @@ else:
 
 def serializedATN():
     with StringIO() as buf:
-        buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\37")
-        buf.write("\u0083\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7")
+        buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\35")
+        buf.write("\u0091\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7")
         buf.write("\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t\13\4\f\t\f\4\r\t\r\4\16")
-        buf.write("\t\16\4\17\t\17\3\2\3\2\3\2\3\2\3\3\3\3\3\3\3\3\5\3\'")
-        buf.write("\n\3\3\4\3\4\3\4\3\4\3\4\5\4.\n\4\3\5\3\5\3\5\3\5\3\5")
-        buf.write("\3\5\3\6\6\6\67\n\6\r\6\16\68\3\7\3\7\3\7\3\7\3\7\3\7")
-        buf.write("\3\b\6\bB\n\b\r\b\16\bC\3\t\3\t\3\t\3\t\3\t\3\n\6\nL\n")
-        buf.write("\n\r\n\16\nM\3\13\3\13\3\13\3\f\3\f\3\f\3\f\3\f\3\f\3")
+        buf.write("\t\16\4\17\t\17\4\20\t\20\4\21\t\21\3\2\3\2\3\2\3\2\3")
+        buf.write("\3\3\3\3\3\3\3\3\4\3\4\3\4\3\4\5\4/\n\4\3\5\3\5\3\5\3")
+        buf.write("\5\3\5\3\5\3\6\6\68\n\6\r\6\16\69\3\7\3\7\3\7\3\7\3\7")
+        buf.write("\3\7\3\b\6\bC\n\b\r\b\16\bD\3\t\3\t\3\t\3\t\3\t\3\n\6")
+        buf.write("\nM\n\n\r\n\16\nN\3\13\3\13\3\13\3\f\3\f\3\f\3\f\3\f\3")
         buf.write("\f\3\f\3\f\3\f\3\f\3\f\3\f\3\f\3\f\3\f\3\f\3\f\3\f\3\f")
-        buf.write("\3\f\3\f\5\fi\n\f\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r")
-        buf.write("\3\r\5\ru\n\r\3\16\3\16\6\16y\n\16\r\16\16\16z\3\17\3")
-        buf.write("\17\6\17\177\n\17\r\17\16\17\u0080\3\17\2\2\20\2\4\6\b")
-        buf.write("\n\f\16\20\22\24\26\30\32\34\2\2\2\177\2\36\3\2\2\2\4")
-        buf.write("&\3\2\2\2\6-\3\2\2\2\b/\3\2\2\2\n\66\3\2\2\2\f:\3\2\2")
-        buf.write("\2\16A\3\2\2\2\20E\3\2\2\2\22K\3\2\2\2\24O\3\2\2\2\26")
-        buf.write("h\3\2\2\2\30j\3\2\2\2\32v\3\2\2\2\34|\3\2\2\2\36\37\7")
-        buf.write("\3\2\2\37 \7\37\2\2 !\7\4\2\2!\3\3\2\2\2\"#\7\5\2\2#$")
-        buf.write("\7\36\2\2$\'\7\4\2\2%\'\7\6\2\2&\"\3\2\2\2&%\3\2\2\2\'")
-        buf.write("\5\3\2\2\2(.\7\7\2\2)*\7\b\2\2*+\7\35\2\2+.\7\t\2\2,.")
-        buf.write("\7\n\2\2-(\3\2\2\2-)\3\2\2\2-,\3\2\2\2.\7\3\2\2\2/\60")
-        buf.write("\7\13\2\2\60\61\7\36\2\2\61\62\7\f\2\2\62\63\7\35\2\2")
-        buf.write("\63\64\7\4\2\2\64\t\3\2\2\2\65\67\5\b\5\2\66\65\3\2\2")
-        buf.write("\2\678\3\2\2\28\66\3\2\2\289\3\2\2\29\13\3\2\2\2:;\7\r")
-        buf.write("\2\2;<\7\36\2\2<=\7\f\2\2=>\5\6\4\2>?\7\4\2\2?\r\3\2\2")
-        buf.write("\2@B\5\f\7\2A@\3\2\2\2BC\3\2\2\2CA\3\2\2\2CD\3\2\2\2D")
-        buf.write("\17\3\2\2\2EF\7\34\2\2FG\7\16\2\2GH\5\6\4\2HI\7\4\2\2")
-        buf.write("I\21\3\2\2\2JL\5\20\t\2KJ\3\2\2\2LM\3\2\2\2MK\3\2\2\2")
-        buf.write("MN\3\2\2\2N\23\3\2\2\2OP\7\17\2\2PQ\7\37\2\2Q\25\3\2\2")
-        buf.write("\2RS\7\31\2\2ST\7\32\2\2TU\7\20\2\2UV\7\33\2\2VW\7\21")
-        buf.write("\2\2WX\5\24\13\2XY\7\22\2\2YZ\7\33\2\2Z[\7\23\2\2[\\\7")
-        buf.write("\31\2\2\\i\3\2\2\2]^\7\31\2\2^_\7\32\2\2_`\7\20\2\2`a")
-        buf.write("\7\33\2\2ab\7\21\2\2bc\5\24\13\2cd\7\24\2\2de\7\33\2\2")
-        buf.write("ef\7\23\2\2fg\7\31\2\2gi\3\2\2\2hR\3\2\2\2h]\3\2\2\2i")
-        buf.write("\27\3\2\2\2jk\7\27\2\2kl\5\2\2\2lm\5\n\6\2mn\7\30\2\2")
-        buf.write("no\5\4\3\2op\5\22\n\2pt\5\16\b\2qu\5\26\f\2ru\5\32\16")
-        buf.write("\2su\7\2\2\3tq\3\2\2\2tr\3\2\2\2ts\3\2\2\2u\31\3\2\2\2")
-        buf.write("vx\7\26\2\2wy\5\30\r\2xw\3\2\2\2yz\3\2\2\2zx\3\2\2\2z")
-        buf.write("{\3\2\2\2{\33\3\2\2\2|~\7\25\2\2}\177\5\30\r\2~}\3\2\2")
-        buf.write("\2\177\u0080\3\2\2\2\u0080~\3\2\2\2\u0080\u0081\3\2\2")
-        buf.write("\2\u0081\35\3\2\2\2\13&-8CMhtz\u0080")
+        buf.write("\3\f\3\f\3\f\5\fj\n\f\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r")
+        buf.write("\3\16\3\16\3\16\3\17\3\17\3\17\3\17\5\17{\n\17\6\17}\n")
+        buf.write("\17\r\17\16\17~\3\20\6\20\u0082\n\20\r\20\16\20\u0083")
+        buf.write("\3\20\5\20\u0087\n\20\3\21\3\21\6\21\u008b\n\21\r\21\16")
+        buf.write("\21\u008c\3\21\3\21\3\21\2\2\22\2\4\6\b\n\f\16\20\22\24")
+        buf.write("\26\30\32\34\36 \2\2\2\u008a\2\"\3\2\2\2\4&\3\2\2\2\6")
+        buf.write(".\3\2\2\2\b\60\3\2\2\2\n\67\3\2\2\2\f;\3\2\2\2\16B\3\2")
+        buf.write("\2\2\20F\3\2\2\2\22L\3\2\2\2\24P\3\2\2\2\26i\3\2\2\2\30")
+        buf.write("k\3\2\2\2\32s\3\2\2\2\34v\3\2\2\2\36\u0086\3\2\2\2 \u0088")
+        buf.write("\3\2\2\2\"#\7\3\2\2#$\7\34\2\2$%\7\4\2\2%\3\3\2\2\2&\'")
+        buf.write("\7\5\2\2\'(\7\35\2\2()\7\6\2\2)\5\3\2\2\2*+\7\7\2\2+,")
+        buf.write("\7\34\2\2,/\7\6\2\2-/\7\b\2\2.*\3\2\2\2.-\3\2\2\2/\7\3")
+        buf.write("\2\2\2\60\61\7\t\2\2\61\62\7\34\2\2\62\63\7\n\2\2\63\64")
+        buf.write("\7\32\2\2\64\65\7\6\2\2\65\t\3\2\2\2\668\5\b\5\2\67\66")
+        buf.write("\3\2\2\289\3\2\2\29\67\3\2\2\29:\3\2\2\2:\13\3\2\2\2;")
+        buf.write("<\7\13\2\2<=\7\34\2\2=>\7\n\2\2>?\7\33\2\2?@\7\6\2\2@")
+        buf.write("\r\3\2\2\2AC\5\f\7\2BA\3\2\2\2CD\3\2\2\2DB\3\2\2\2DE\3")
+        buf.write("\2\2\2E\17\3\2\2\2FG\7\31\2\2GH\7\f\2\2HI\7\33\2\2IJ\7")
+        buf.write("\6\2\2J\21\3\2\2\2KM\5\20\t\2LK\3\2\2\2MN\3\2\2\2NL\3")
+        buf.write("\2\2\2NO\3\2\2\2O\23\3\2\2\2PQ\7\r\2\2QR\7\35\2\2R\25")
+        buf.write("\3\2\2\2ST\7\26\2\2TU\7\27\2\2UV\7\16\2\2VW\7\30\2\2W")
+        buf.write("X\7\17\2\2XY\5\24\13\2YZ\7\20\2\2Z[\7\30\2\2[\\\7\21\2")
+        buf.write("\2\\]\7\26\2\2]j\3\2\2\2^_\7\26\2\2_`\7\27\2\2`a\7\16")
+        buf.write("\2\2ab\7\30\2\2bc\7\17\2\2cd\5\24\13\2de\7\22\2\2ef\7")
+        buf.write("\30\2\2fg\7\21\2\2gh\7\26\2\2hj\3\2\2\2iS\3\2\2\2i^\3")
+        buf.write("\2\2\2j\27\3\2\2\2kl\5\2\2\2lm\5\4\3\2mn\5\n\6\2no\7\25")
+        buf.write("\2\2op\5\6\4\2pq\5\22\n\2qr\5\16\b\2r\31\3\2\2\2st\5\30")
+        buf.write("\r\2tu\5\26\f\2u\33\3\2\2\2vw\5\30\r\2w|\7\24\2\2xz\5")
+        buf.write("\30\r\2y{\5\26\f\2zy\3\2\2\2z{\3\2\2\2{}\3\2\2\2|x\3\2")
+        buf.write("\2\2}~\3\2\2\2~|\3\2\2\2~\177\3\2\2\2\177\35\3\2\2\2\u0080")
+        buf.write("\u0082\5\32\16\2\u0081\u0080\3\2\2\2\u0082\u0083\3\2\2")
+        buf.write("\2\u0083\u0081\3\2\2\2\u0083\u0084\3\2\2\2\u0084\u0087")
+        buf.write("\3\2\2\2\u0085\u0087\5\34\17\2\u0086\u0081\3\2\2\2\u0086")
+        buf.write("\u0085\3\2\2\2\u0087\37\3\2\2\2\u0088\u008a\7\23\2\2\u0089")
+        buf.write("\u008b\5\36\20\2\u008a\u0089\3\2\2\2\u008b\u008c\3\2\2")
+        buf.write("\2\u008c\u008a\3\2\2\2\u008c\u008d\3\2\2\2\u008d\u008e")
+        buf.write("\3\2\2\2\u008e\u008f\7\2\2\3\u008f!\3\2\2\2\f.9DNiz~\u0083")
+        buf.write("\u0086\u008c")
         return buf.getvalue()
 
 
@@ -64,26 +71,25 @@ class CounterexampleParser ( Parser ):
 
     sharedContextCache = PredictionContextCache()
 
-    literalNames = [ "<INVALID>", "'label = '", "'\n'", "'cfstate = State__'", 
-                     "'cfstate = NULL_STATE\n'", "'OptionBB'", "'Some('", 
-                     "')'", "'None'", "'i('", "') = '", "'o('", "' = '", 
-                     "'label '", "'(module instance at '", "'\n  ('", "'\n    else transition at '", 
-                     "'))\n'", "'\n    transition at '", "'Counterexample:\n========================\nPath\n========================\n'", 
+    literalNames = [ "<INVALID>", "'Step '", "':\n--- Input Variables (assignments) ---\n'", 
+                     "'label = '", "'\n'", "'cfstate = State__'", "'cfstate = NULL_STATE\n'", 
+                     "'i('", "') = '", "'o('", "' = '", "'label '", "'(module instance at '", 
+                     "'\n  ('", "'\n    else transition at '", "'))\n'", 
+                     "'\n    transition at '", "'Counterexample:\n========================\nPath\n========================\n'", 
                      "'========================\nBegin of Cycle\n========================\n'", 
-                     "<INVALID>", "<INVALID>", "'------------------------\n'", 
-                     "'Transition Information:\n'" ]
+                     "<INVALID>", "'------------------------\n'", "'Transition Information:\n'" ]
 
     symbolicNames = [ "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
                       "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
                       "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
                       "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
-                      "<INVALID>", "<INVALID>", "<INVALID>", "HEAD", "CYCLE_HEAD", 
-                      "STEP_HEAD", "SYSTEM_VARS", "HYPHENS", "T_INFO", "CONTEXT", 
-                      "REG", "B_VALUE", "NUMBER", "AN_STRING" ]
+                      "<INVALID>", "HEAD", "CYCLE_HEAD", "SYSTEM_VARS", 
+                      "HYPHENS", "T_INFO", "CONTEXT", "REG", "B_VALUE", 
+                      "B_OPTION", "NUMBER", "AN_STRING" ]
 
-    RULE_label = 0
-    RULE_cfstate = 1
-    RULE_b_option = 2
+    RULE_step_head = 0
+    RULE_label = 1
+    RULE_cfstate = 2
     RULE_ip = 3
     RULE_inputs = 4
     RULE_op = 5
@@ -92,13 +98,15 @@ class CounterexampleParser ( Parser ):
     RULE_regs = 8
     RULE_t_id = 9
     RULE_t_info = 10
-    RULE_step = 11
-    RULE_cycle = 12
-    RULE_counterexample = 13
+    RULE_action = 11
+    RULE_transition = 12
+    RULE_cycle = 13
+    RULE_step = 14
+    RULE_counterexample = 15
 
-    ruleNames =  [ "label", "cfstate", "b_option", "ip", "inputs", "op", 
-                   "outputs", "reg", "regs", "t_id", "t_info", "step", "cycle", 
-                   "counterexample" ]
+    ruleNames =  [ "step_head", "label", "cfstate", "ip", "inputs", "op", 
+                   "outputs", "reg", "regs", "t_id", "t_info", "action", 
+                   "transition", "cycle", "step", "counterexample" ]
 
     EOF = Token.EOF
     T__0=1
@@ -117,19 +125,17 @@ class CounterexampleParser ( Parser ):
     T__13=14
     T__14=15
     T__15=16
-    T__16=17
-    T__17=18
-    HEAD=19
-    CYCLE_HEAD=20
-    STEP_HEAD=21
-    SYSTEM_VARS=22
-    HYPHENS=23
-    T_INFO=24
-    CONTEXT=25
-    REG=26
-    B_VALUE=27
-    NUMBER=28
-    AN_STRING=29
+    HEAD=17
+    CYCLE_HEAD=18
+    SYSTEM_VARS=19
+    HYPHENS=20
+    T_INFO=21
+    CONTEXT=22
+    REG=23
+    B_VALUE=24
+    B_OPTION=25
+    NUMBER=26
+    AN_STRING=27
 
     def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
         super().__init__(input, output)
@@ -138,6 +144,50 @@ class CounterexampleParser ( Parser ):
         self._predicates = None
 
 
+
+
+    class Step_headContext(ParserRuleContext):
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def NUMBER(self):
+            return self.getToken(CounterexampleParser.NUMBER, 0)
+
+        def getRuleIndex(self):
+            return CounterexampleParser.RULE_step_head
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterStep_head" ):
+                listener.enterStep_head(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitStep_head" ):
+                listener.exitStep_head(self)
+
+
+
+
+    def step_head(self):
+
+        localctx = CounterexampleParser.Step_headContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 0, self.RULE_step_head)
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 32
+            self.match(CounterexampleParser.T__0)
+            self.state = 33
+            self.match(CounterexampleParser.NUMBER)
+            self.state = 34
+            self.match(CounterexampleParser.T__1)
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
 
 
     class LabelContext(ParserRuleContext):
@@ -166,15 +216,15 @@ class CounterexampleParser ( Parser ):
     def label(self):
 
         localctx = CounterexampleParser.LabelContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 0, self.RULE_label)
+        self.enterRule(localctx, 2, self.RULE_label)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 28
-            self.match(CounterexampleParser.T__0)
-            self.state = 29
+            self.state = 36
+            self.match(CounterexampleParser.T__2)
+            self.state = 37
             self.match(CounterexampleParser.AN_STRING)
-            self.state = 30
-            self.match(CounterexampleParser.T__1)
+            self.state = 38
+            self.match(CounterexampleParser.T__3)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -210,83 +260,23 @@ class CounterexampleParser ( Parser ):
     def cfstate(self):
 
         localctx = CounterexampleParser.CfstateContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 2, self.RULE_cfstate)
+        self.enterRule(localctx, 4, self.RULE_cfstate)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 36
-            self._errHandler.sync(self)
-            token = self._input.LA(1)
-            if token in [CounterexampleParser.T__2]:
-                self.state = 32
-                self.match(CounterexampleParser.T__2)
-                self.state = 33
-                self.match(CounterexampleParser.NUMBER)
-                self.state = 34
-                self.match(CounterexampleParser.T__1)
-                pass
-            elif token in [CounterexampleParser.T__3]:
-                self.state = 35
-                self.match(CounterexampleParser.T__3)
-                pass
-            else:
-                raise NoViableAltException(self)
-
-        except RecognitionException as re:
-            localctx.exception = re
-            self._errHandler.reportError(self, re)
-            self._errHandler.recover(self, re)
-        finally:
-            self.exitRule()
-        return localctx
-
-
-    class B_optionContext(ParserRuleContext):
-
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
-            super().__init__(parent, invokingState)
-            self.parser = parser
-
-        def B_VALUE(self):
-            return self.getToken(CounterexampleParser.B_VALUE, 0)
-
-        def getRuleIndex(self):
-            return CounterexampleParser.RULE_b_option
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterB_option" ):
-                listener.enterB_option(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitB_option" ):
-                listener.exitB_option(self)
-
-
-
-
-    def b_option(self):
-
-        localctx = CounterexampleParser.B_optionContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 4, self.RULE_b_option)
-        try:
-            self.enterOuterAlt(localctx, 1)
-            self.state = 43
+            self.state = 44
             self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [CounterexampleParser.T__4]:
-                self.state = 38
+                self.state = 40
                 self.match(CounterexampleParser.T__4)
+                self.state = 41
+                self.match(CounterexampleParser.NUMBER)
+                self.state = 42
+                self.match(CounterexampleParser.T__3)
                 pass
             elif token in [CounterexampleParser.T__5]:
-                self.state = 39
+                self.state = 43
                 self.match(CounterexampleParser.T__5)
-                self.state = 40
-                self.match(CounterexampleParser.B_VALUE)
-                self.state = 41
-                self.match(CounterexampleParser.T__6)
-                pass
-            elif token in [CounterexampleParser.T__7]:
-                self.state = 42
-                self.match(CounterexampleParser.T__7)
                 pass
             else:
                 raise NoViableAltException(self)
@@ -332,16 +322,16 @@ class CounterexampleParser ( Parser ):
         self.enterRule(localctx, 6, self.RULE_ip)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 45
-            self.match(CounterexampleParser.T__8)
             self.state = 46
-            self.match(CounterexampleParser.NUMBER)
+            self.match(CounterexampleParser.T__6)
             self.state = 47
-            self.match(CounterexampleParser.T__9)
+            self.match(CounterexampleParser.NUMBER)
             self.state = 48
-            self.match(CounterexampleParser.B_VALUE)
+            self.match(CounterexampleParser.T__7)
             self.state = 49
-            self.match(CounterexampleParser.T__1)
+            self.match(CounterexampleParser.B_VALUE)
+            self.state = 50
+            self.match(CounterexampleParser.T__3)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -385,16 +375,16 @@ class CounterexampleParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 52 
+            self.state = 53 
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while True:
-                self.state = 51
+                self.state = 52
                 self.ip()
-                self.state = 54 
+                self.state = 55 
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                if not (_la==CounterexampleParser.T__8):
+                if not (_la==CounterexampleParser.T__6):
                     break
 
         except RecognitionException as re:
@@ -415,9 +405,8 @@ class CounterexampleParser ( Parser ):
         def NUMBER(self):
             return self.getToken(CounterexampleParser.NUMBER, 0)
 
-        def b_option(self):
-            return self.getTypedRuleContext(CounterexampleParser.B_optionContext,0)
-
+        def B_OPTION(self):
+            return self.getToken(CounterexampleParser.B_OPTION, 0)
 
         def getRuleIndex(self):
             return CounterexampleParser.RULE_op
@@ -439,16 +428,16 @@ class CounterexampleParser ( Parser ):
         self.enterRule(localctx, 10, self.RULE_op)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 56
-            self.match(CounterexampleParser.T__10)
             self.state = 57
-            self.match(CounterexampleParser.NUMBER)
+            self.match(CounterexampleParser.T__8)
             self.state = 58
-            self.match(CounterexampleParser.T__9)
+            self.match(CounterexampleParser.NUMBER)
             self.state = 59
-            self.b_option()
+            self.match(CounterexampleParser.T__7)
             self.state = 60
-            self.match(CounterexampleParser.T__1)
+            self.match(CounterexampleParser.B_OPTION)
+            self.state = 61
+            self.match(CounterexampleParser.T__3)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -492,16 +481,16 @@ class CounterexampleParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 63 
+            self.state = 64 
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while True:
-                self.state = 62
+                self.state = 63
                 self.op()
-                self.state = 65 
+                self.state = 66 
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                if not (_la==CounterexampleParser.T__10):
+                if not (_la==CounterexampleParser.T__8):
                     break
 
         except RecognitionException as re:
@@ -522,9 +511,8 @@ class CounterexampleParser ( Parser ):
         def REG(self):
             return self.getToken(CounterexampleParser.REG, 0)
 
-        def b_option(self):
-            return self.getTypedRuleContext(CounterexampleParser.B_optionContext,0)
-
+        def B_OPTION(self):
+            return self.getToken(CounterexampleParser.B_OPTION, 0)
 
         def getRuleIndex(self):
             return CounterexampleParser.RULE_reg
@@ -546,14 +534,14 @@ class CounterexampleParser ( Parser ):
         self.enterRule(localctx, 14, self.RULE_reg)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 67
-            self.match(CounterexampleParser.REG)
             self.state = 68
-            self.match(CounterexampleParser.T__11)
+            self.match(CounterexampleParser.REG)
             self.state = 69
-            self.b_option()
+            self.match(CounterexampleParser.T__9)
             self.state = 70
-            self.match(CounterexampleParser.T__1)
+            self.match(CounterexampleParser.B_OPTION)
+            self.state = 71
+            self.match(CounterexampleParser.T__3)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -597,13 +585,13 @@ class CounterexampleParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 73 
+            self.state = 74 
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while True:
-                self.state = 72
+                self.state = 73
                 self.reg()
-                self.state = 75 
+                self.state = 76 
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if not (_la==CounterexampleParser.REG):
@@ -647,9 +635,9 @@ class CounterexampleParser ( Parser ):
         self.enterRule(localctx, 18, self.RULE_t_id)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 77
-            self.match(CounterexampleParser.T__12)
             self.state = 78
+            self.match(CounterexampleParser.T__10)
+            self.state = 79
             self.match(CounterexampleParser.AN_STRING)
         except RecognitionException as re:
             localctx.exception = re
@@ -704,54 +692,54 @@ class CounterexampleParser ( Parser ):
         localctx = CounterexampleParser.T_infoContext(self, self._ctx, self.state)
         self.enterRule(localctx, 20, self.RULE_t_info)
         try:
-            self.state = 102
+            self.state = 103
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,5,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input,4,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 80
-                self.match(CounterexampleParser.HYPHENS)
                 self.state = 81
-                self.match(CounterexampleParser.T_INFO)
+                self.match(CounterexampleParser.HYPHENS)
                 self.state = 82
-                self.match(CounterexampleParser.T__13)
+                self.match(CounterexampleParser.T_INFO)
                 self.state = 83
-                self.match(CounterexampleParser.CONTEXT)
+                self.match(CounterexampleParser.T__11)
                 self.state = 84
-                self.match(CounterexampleParser.T__14)
-                self.state = 85
-                self.t_id()
-                self.state = 86
-                self.match(CounterexampleParser.T__15)
-                self.state = 87
                 self.match(CounterexampleParser.CONTEXT)
+                self.state = 85
+                self.match(CounterexampleParser.T__12)
+                self.state = 86
+                self.t_id()
+                self.state = 87
+                self.match(CounterexampleParser.T__13)
                 self.state = 88
-                self.match(CounterexampleParser.T__16)
+                self.match(CounterexampleParser.CONTEXT)
                 self.state = 89
+                self.match(CounterexampleParser.T__14)
+                self.state = 90
                 self.match(CounterexampleParser.HYPHENS)
                 pass
 
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 91
-                self.match(CounterexampleParser.HYPHENS)
                 self.state = 92
-                self.match(CounterexampleParser.T_INFO)
+                self.match(CounterexampleParser.HYPHENS)
                 self.state = 93
-                self.match(CounterexampleParser.T__13)
+                self.match(CounterexampleParser.T_INFO)
                 self.state = 94
-                self.match(CounterexampleParser.CONTEXT)
+                self.match(CounterexampleParser.T__11)
                 self.state = 95
-                self.match(CounterexampleParser.T__14)
-                self.state = 96
-                self.t_id()
-                self.state = 97
-                self.match(CounterexampleParser.T__17)
-                self.state = 98
                 self.match(CounterexampleParser.CONTEXT)
+                self.state = 96
+                self.match(CounterexampleParser.T__12)
+                self.state = 97
+                self.t_id()
+                self.state = 98
+                self.match(CounterexampleParser.T__15)
                 self.state = 99
-                self.match(CounterexampleParser.T__16)
+                self.match(CounterexampleParser.CONTEXT)
                 self.state = 100
+                self.match(CounterexampleParser.T__14)
+                self.state = 101
                 self.match(CounterexampleParser.HYPHENS)
                 pass
 
@@ -765,14 +753,15 @@ class CounterexampleParser ( Parser ):
         return localctx
 
 
-    class StepContext(ParserRuleContext):
+    class ActionContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def STEP_HEAD(self):
-            return self.getToken(CounterexampleParser.STEP_HEAD, 0)
+        def step_head(self):
+            return self.getTypedRuleContext(CounterexampleParser.Step_headContext,0)
+
 
         def label(self):
             return self.getTypedRuleContext(CounterexampleParser.LabelContext,0)
@@ -797,69 +786,87 @@ class CounterexampleParser ( Parser ):
             return self.getTypedRuleContext(CounterexampleParser.OutputsContext,0)
 
 
+        def getRuleIndex(self):
+            return CounterexampleParser.RULE_action
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterAction" ):
+                listener.enterAction(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitAction" ):
+                listener.exitAction(self)
+
+
+
+
+    def action(self):
+
+        localctx = CounterexampleParser.ActionContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 22, self.RULE_action)
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 105
+            self.step_head()
+            self.state = 106
+            self.label()
+            self.state = 107
+            self.inputs()
+            self.state = 108
+            self.match(CounterexampleParser.SYSTEM_VARS)
+            self.state = 109
+            self.cfstate()
+            self.state = 110
+            self.regs()
+            self.state = 111
+            self.outputs()
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class TransitionContext(ParserRuleContext):
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def action(self):
+            return self.getTypedRuleContext(CounterexampleParser.ActionContext,0)
+
+
         def t_info(self):
             return self.getTypedRuleContext(CounterexampleParser.T_infoContext,0)
 
 
-        def cycle(self):
-            return self.getTypedRuleContext(CounterexampleParser.CycleContext,0)
-
-
-        def EOF(self):
-            return self.getToken(CounterexampleParser.EOF, 0)
-
         def getRuleIndex(self):
-            return CounterexampleParser.RULE_step
+            return CounterexampleParser.RULE_transition
 
         def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterStep" ):
-                listener.enterStep(self)
+            if hasattr( listener, "enterTransition" ):
+                listener.enterTransition(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitStep" ):
-                listener.exitStep(self)
+            if hasattr( listener, "exitTransition" ):
+                listener.exitTransition(self)
 
 
 
 
-    def step(self):
+    def transition(self):
 
-        localctx = CounterexampleParser.StepContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 22, self.RULE_step)
+        localctx = CounterexampleParser.TransitionContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 24, self.RULE_transition)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 104
-            self.match(CounterexampleParser.STEP_HEAD)
-            self.state = 105
-            self.label()
-            self.state = 106
-            self.inputs()
-            self.state = 107
-            self.match(CounterexampleParser.SYSTEM_VARS)
-            self.state = 108
-            self.cfstate()
-            self.state = 109
-            self.regs()
-            self.state = 110
-            self.outputs()
+            self.state = 113
+            self.action()
             self.state = 114
-            self._errHandler.sync(self)
-            token = self._input.LA(1)
-            if token in [CounterexampleParser.HYPHENS]:
-                self.state = 111
-                self.t_info()
-                pass
-            elif token in [CounterexampleParser.CYCLE_HEAD]:
-                self.state = 112
-                self.cycle()
-                pass
-            elif token in [CounterexampleParser.EOF]:
-                self.state = 113
-                self.match(CounterexampleParser.EOF)
-                pass
-            else:
-                raise NoViableAltException(self)
-
+            self.t_info()
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -875,14 +882,21 @@ class CounterexampleParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
+        def action(self, i:int=None):
+            if i is None:
+                return self.getTypedRuleContexts(CounterexampleParser.ActionContext)
+            else:
+                return self.getTypedRuleContext(CounterexampleParser.ActionContext,i)
+
+
         def CYCLE_HEAD(self):
             return self.getToken(CounterexampleParser.CYCLE_HEAD, 0)
 
-        def step(self, i:int=None):
+        def t_info(self, i:int=None):
             if i is None:
-                return self.getTypedRuleContexts(CounterexampleParser.StepContext)
+                return self.getTypedRuleContexts(CounterexampleParser.T_infoContext)
             else:
-                return self.getTypedRuleContext(CounterexampleParser.StepContext,i)
+                return self.getTypedRuleContext(CounterexampleParser.T_infoContext,i)
 
 
         def getRuleIndex(self):
@@ -902,25 +916,108 @@ class CounterexampleParser ( Parser ):
     def cycle(self):
 
         localctx = CounterexampleParser.CycleContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 24, self.RULE_cycle)
+        self.enterRule(localctx, 26, self.RULE_cycle)
+        self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 116
+            self.action()
+            self.state = 117
             self.match(CounterexampleParser.CYCLE_HEAD)
-
-            self.state = 118 
+            self.state = 122 
             self._errHandler.sync(self)
             _alt = 1
             while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
                 if _alt == 1:
-                    self.state = 117
-                    self.step()
+                    self.state = 118
+                    self.action()
+                    self.state = 120
+                    self._errHandler.sync(self)
+                    _la = self._input.LA(1)
+                    if _la==CounterexampleParser.HYPHENS:
+                        self.state = 119
+                        self.t_info()
+
+
 
                 else:
                     raise NoViableAltException(self)
-                self.state = 120 
+                self.state = 124 
                 self._errHandler.sync(self)
-                _alt = self._interp.adaptivePredict(self._input,7,self._ctx)
+                _alt = self._interp.adaptivePredict(self._input,6,self._ctx)
+
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class StepContext(ParserRuleContext):
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def transition(self, i:int=None):
+            if i is None:
+                return self.getTypedRuleContexts(CounterexampleParser.TransitionContext)
+            else:
+                return self.getTypedRuleContext(CounterexampleParser.TransitionContext,i)
+
+
+        def cycle(self):
+            return self.getTypedRuleContext(CounterexampleParser.CycleContext,0)
+
+
+        def getRuleIndex(self):
+            return CounterexampleParser.RULE_step
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterStep" ):
+                listener.enterStep(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitStep" ):
+                listener.exitStep(self)
+
+
+
+
+    def step(self):
+
+        localctx = CounterexampleParser.StepContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 28, self.RULE_step)
+        try:
+            self.state = 132
+            self._errHandler.sync(self)
+            la_ = self._interp.adaptivePredict(self._input,8,self._ctx)
+            if la_ == 1:
+                self.enterOuterAlt(localctx, 1)
+                self.state = 127 
+                self._errHandler.sync(self)
+                _alt = 1
+                while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
+                    if _alt == 1:
+                        self.state = 126
+                        self.transition()
+
+                    else:
+                        raise NoViableAltException(self)
+                    self.state = 129 
+                    self._errHandler.sync(self)
+                    _alt = self._interp.adaptivePredict(self._input,7,self._ctx)
+
+                pass
+
+            elif la_ == 2:
+                self.enterOuterAlt(localctx, 2)
+                self.state = 131
+                self.cycle()
+                pass
+
 
         except RecognitionException as re:
             localctx.exception = re
@@ -939,6 +1036,9 @@ class CounterexampleParser ( Parser ):
 
         def HEAD(self):
             return self.getToken(CounterexampleParser.HEAD, 0)
+
+        def EOF(self):
+            return self.getToken(CounterexampleParser.EOF, 0)
 
         def step(self, i:int=None):
             if i is None:
@@ -964,25 +1064,27 @@ class CounterexampleParser ( Parser ):
     def counterexample(self):
 
         localctx = CounterexampleParser.CounterexampleContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 26, self.RULE_counterexample)
+        self.enterRule(localctx, 30, self.RULE_counterexample)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 122
+            self.state = 134
             self.match(CounterexampleParser.HEAD)
 
-            self.state = 124 
+            self.state = 136 
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while True:
-                self.state = 123
+                self.state = 135
                 self.step()
-                self.state = 126 
+                self.state = 138 
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                if not (_la==CounterexampleParser.STEP_HEAD):
+                if not (_la==CounterexampleParser.T__0):
                     break
 
+            self.state = 140
+            self.match(CounterexampleParser.EOF)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)

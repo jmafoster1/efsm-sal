@@ -8,6 +8,15 @@ else:
 # This class defines a complete listener for a parse tree produced by CounterexampleParser.
 class CounterexampleListener(ParseTreeListener):
 
+    # Enter a parse tree produced by CounterexampleParser#step_head.
+    def enterStep_head(self, ctx:CounterexampleParser.Step_headContext):
+        pass
+
+    # Exit a parse tree produced by CounterexampleParser#step_head.
+    def exitStep_head(self, ctx:CounterexampleParser.Step_headContext):
+        pass
+
+
     # Enter a parse tree produced by CounterexampleParser#label.
     def enterLabel(self, ctx:CounterexampleParser.LabelContext):
         pass
@@ -23,15 +32,6 @@ class CounterexampleListener(ParseTreeListener):
 
     # Exit a parse tree produced by CounterexampleParser#cfstate.
     def exitCfstate(self, ctx:CounterexampleParser.CfstateContext):
-        pass
-
-
-    # Enter a parse tree produced by CounterexampleParser#b_option.
-    def enterB_option(self, ctx:CounterexampleParser.B_optionContext):
-        pass
-
-    # Exit a parse tree produced by CounterexampleParser#b_option.
-    def exitB_option(self, ctx:CounterexampleParser.B_optionContext):
         pass
 
 
@@ -107,12 +107,21 @@ class CounterexampleListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by CounterexampleParser#step.
-    def enterStep(self, ctx:CounterexampleParser.StepContext):
+    # Enter a parse tree produced by CounterexampleParser#action.
+    def enterAction(self, ctx:CounterexampleParser.ActionContext):
         pass
 
-    # Exit a parse tree produced by CounterexampleParser#step.
-    def exitStep(self, ctx:CounterexampleParser.StepContext):
+    # Exit a parse tree produced by CounterexampleParser#action.
+    def exitAction(self, ctx:CounterexampleParser.ActionContext):
+        pass
+
+
+    # Enter a parse tree produced by CounterexampleParser#transition.
+    def enterTransition(self, ctx:CounterexampleParser.TransitionContext):
+        pass
+
+    # Exit a parse tree produced by CounterexampleParser#transition.
+    def exitTransition(self, ctx:CounterexampleParser.TransitionContext):
         pass
 
 
@@ -122,6 +131,15 @@ class CounterexampleListener(ParseTreeListener):
 
     # Exit a parse tree produced by CounterexampleParser#cycle.
     def exitCycle(self, ctx:CounterexampleParser.CycleContext):
+        pass
+
+
+    # Enter a parse tree produced by CounterexampleParser#step.
+    def enterStep(self, ctx:CounterexampleParser.StepContext):
+        pass
+
+    # Exit a parse tree produced by CounterexampleParser#step.
+    def exitStep(self, ctx:CounterexampleParser.StepContext):
         pass
 
 

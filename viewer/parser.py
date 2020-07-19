@@ -20,10 +20,10 @@ stream =antlr4. CommonTokenStream(lexer)
 parser = CounterexampleParser(stream)
 tree = parser.counterexample()
 
-print(tree)
-
-
 with open("output.html","w") as output:
     listener = HTMLCounterexampleListener(output)
     walker = antlr4.ParseTreeWalker()
     walker.walk(listener, tree)
+
+for e in sorted(list(listener.trace.keys())):
+    print(e, listener.trace[e])

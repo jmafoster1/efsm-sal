@@ -14,38 +14,34 @@ T__12=13
 T__13=14
 T__14=15
 T__15=16
-T__16=17
-T__17=18
-HEAD=19
-CYCLE_HEAD=20
-STEP_HEAD=21
-SYSTEM_VARS=22
-HYPHENS=23
-T_INFO=24
-CONTEXT=25
-REG=26
-B_VALUE=27
-NUMBER=28
-AN_STRING=29
-'label = '=1
-'\n'=2
-'cfstate = State__'=3
-'cfstate = NULL_STATE\n'=4
-'OptionBB'=5
-'Some('=6
-')'=7
-'None'=8
-'i('=9
-') = '=10
-'o('=11
-' = '=12
-'label '=13
-'(module instance at '=14
-'\n  ('=15
-'\n    else transition at '=16
-'))\n'=17
-'\n    transition at '=18
-'Counterexample:\n========================\nPath\n========================\n'=19
-'========================\nBegin of Cycle\n========================\n'=20
-'------------------------\n'=23
-'Transition Information:\n'=24
+HEAD=17
+CYCLE_HEAD=18
+SYSTEM_VARS=19
+HYPHENS=20
+T_INFO=21
+CONTEXT=22
+REG=23
+B_VALUE=24
+B_OPTION=25
+NUMBER=26
+AN_STRING=27
+'Step '=1
+':\n--- Input Variables (assignments) ---\n'=2
+'label = '=3
+'\n'=4
+'cfstate = State__'=5
+'cfstate = NULL_STATE\n'=6
+'i('=7
+') = '=8
+'o('=9
+' = '=10
+'label '=11
+'(module instance at '=12
+'\n  ('=13
+'\n    else transition at '=14
+'))\n'=15
+'\n    transition at '=16
+'Counterexample:\n========================\nPath\n========================\n'=17
+'========================\nBegin of Cycle\n========================\n'=18
+'------------------------\n'=20
+'Transition Information:\n'=21
