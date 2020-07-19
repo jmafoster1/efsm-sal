@@ -56,6 +56,7 @@ class HTMLCounterexampleListener(antlr4.ParseTreeListener):
         self.output.write(f"<h3>Step: <strong>{self.stepNo}</strong></h3>")
         
         self.output.write(f"<p>State: {self.trace[self.stepNo]['state']}</p>")
+        self.output.write(f"<p>Label: {self.trace[self.stepNo]['label']}</p>")
         self.output.write(f"<p>Inputs: {self.trace[self.stepNo]['inputs']}</p>")
         self.output.write(f"<p>Registers: {self.trace[self.stepNo]['regs']}</p>")
 
