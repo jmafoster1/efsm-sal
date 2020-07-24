@@ -20,9 +20,9 @@ t_info: (HYPHENS T_INFO'(module instance at 'CONTEXT'\n  ('t_id'\n    else trans
 
 action: step_head label inputs SYSTEM_VARS cfstate regs outputs;
 
-transition: action t_info;
+transition: action t_info?;
 
-cycle: action CYCLE_HEAD (action t_info?)+;
+cycle: action CYCLE_HEAD (transition)+;
 
 step: transition+ | cycle;
 

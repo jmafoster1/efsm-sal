@@ -12,7 +12,7 @@ else:
 def serializedATN():
     with StringIO() as buf:
         buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\35")
-        buf.write("\u0091\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7")
+        buf.write("\u008f\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7")
         buf.write("\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t\13\4\f\t\f\4\r\t\r\4\16")
         buf.write("\t\16\4\17\t\17\4\20\t\20\4\21\t\21\3\2\3\2\3\2\3\2\3")
         buf.write("\3\3\3\3\3\3\3\3\4\3\4\3\4\3\4\5\4/\n\4\3\5\3\5\3\5\3")
@@ -21,43 +21,42 @@ def serializedATN():
         buf.write("\nM\n\n\r\n\16\nN\3\13\3\13\3\13\3\f\3\f\3\f\3\f\3\f\3")
         buf.write("\f\3\f\3\f\3\f\3\f\3\f\3\f\3\f\3\f\3\f\3\f\3\f\3\f\3\f")
         buf.write("\3\f\3\f\3\f\5\fj\n\f\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r")
-        buf.write("\3\16\3\16\3\16\3\17\3\17\3\17\3\17\5\17{\n\17\6\17}\n")
-        buf.write("\17\r\17\16\17~\3\20\6\20\u0082\n\20\r\20\16\20\u0083")
-        buf.write("\3\20\5\20\u0087\n\20\3\21\3\21\6\21\u008b\n\21\r\21\16")
-        buf.write("\21\u008c\3\21\3\21\3\21\2\2\22\2\4\6\b\n\f\16\20\22\24")
-        buf.write("\26\30\32\34\36 \2\2\2\u008a\2\"\3\2\2\2\4&\3\2\2\2\6")
-        buf.write(".\3\2\2\2\b\60\3\2\2\2\n\67\3\2\2\2\f;\3\2\2\2\16B\3\2")
-        buf.write("\2\2\20F\3\2\2\2\22L\3\2\2\2\24P\3\2\2\2\26i\3\2\2\2\30")
-        buf.write("k\3\2\2\2\32s\3\2\2\2\34v\3\2\2\2\36\u0086\3\2\2\2 \u0088")
-        buf.write("\3\2\2\2\"#\7\3\2\2#$\7\34\2\2$%\7\4\2\2%\3\3\2\2\2&\'")
-        buf.write("\7\5\2\2\'(\7\35\2\2()\7\6\2\2)\5\3\2\2\2*+\7\7\2\2+,")
-        buf.write("\7\34\2\2,/\7\6\2\2-/\7\b\2\2.*\3\2\2\2.-\3\2\2\2/\7\3")
-        buf.write("\2\2\2\60\61\7\t\2\2\61\62\7\34\2\2\62\63\7\n\2\2\63\64")
-        buf.write("\7\32\2\2\64\65\7\6\2\2\65\t\3\2\2\2\668\5\b\5\2\67\66")
-        buf.write("\3\2\2\289\3\2\2\29\67\3\2\2\29:\3\2\2\2:\13\3\2\2\2;")
-        buf.write("<\7\13\2\2<=\7\34\2\2=>\7\n\2\2>?\7\33\2\2?@\7\6\2\2@")
-        buf.write("\r\3\2\2\2AC\5\f\7\2BA\3\2\2\2CD\3\2\2\2DB\3\2\2\2DE\3")
-        buf.write("\2\2\2E\17\3\2\2\2FG\7\31\2\2GH\7\f\2\2HI\7\33\2\2IJ\7")
-        buf.write("\6\2\2J\21\3\2\2\2KM\5\20\t\2LK\3\2\2\2MN\3\2\2\2NL\3")
-        buf.write("\2\2\2NO\3\2\2\2O\23\3\2\2\2PQ\7\r\2\2QR\7\35\2\2R\25")
-        buf.write("\3\2\2\2ST\7\26\2\2TU\7\27\2\2UV\7\16\2\2VW\7\30\2\2W")
-        buf.write("X\7\17\2\2XY\5\24\13\2YZ\7\20\2\2Z[\7\30\2\2[\\\7\21\2")
-        buf.write("\2\\]\7\26\2\2]j\3\2\2\2^_\7\26\2\2_`\7\27\2\2`a\7\16")
-        buf.write("\2\2ab\7\30\2\2bc\7\17\2\2cd\5\24\13\2de\7\22\2\2ef\7")
-        buf.write("\30\2\2fg\7\21\2\2gh\7\26\2\2hj\3\2\2\2iS\3\2\2\2i^\3")
-        buf.write("\2\2\2j\27\3\2\2\2kl\5\2\2\2lm\5\4\3\2mn\5\n\6\2no\7\25")
-        buf.write("\2\2op\5\6\4\2pq\5\22\n\2qr\5\16\b\2r\31\3\2\2\2st\5\30")
-        buf.write("\r\2tu\5\26\f\2u\33\3\2\2\2vw\5\30\r\2w|\7\24\2\2xz\5")
-        buf.write("\30\r\2y{\5\26\f\2zy\3\2\2\2z{\3\2\2\2{}\3\2\2\2|x\3\2")
-        buf.write("\2\2}~\3\2\2\2~|\3\2\2\2~\177\3\2\2\2\177\35\3\2\2\2\u0080")
-        buf.write("\u0082\5\32\16\2\u0081\u0080\3\2\2\2\u0082\u0083\3\2\2")
-        buf.write("\2\u0083\u0081\3\2\2\2\u0083\u0084\3\2\2\2\u0084\u0087")
-        buf.write("\3\2\2\2\u0085\u0087\5\34\17\2\u0086\u0081\3\2\2\2\u0086")
-        buf.write("\u0085\3\2\2\2\u0087\37\3\2\2\2\u0088\u008a\7\23\2\2\u0089")
-        buf.write("\u008b\5\36\20\2\u008a\u0089\3\2\2\2\u008b\u008c\3\2\2")
-        buf.write("\2\u008c\u008a\3\2\2\2\u008c\u008d\3\2\2\2\u008d\u008e")
-        buf.write("\3\2\2\2\u008e\u008f\7\2\2\3\u008f!\3\2\2\2\f.9DNiz~\u0083")
-        buf.write("\u0086\u008c")
+        buf.write("\3\16\3\16\5\16v\n\16\3\17\3\17\3\17\6\17{\n\17\r\17\16")
+        buf.write("\17|\3\20\6\20\u0080\n\20\r\20\16\20\u0081\3\20\5\20\u0085")
+        buf.write("\n\20\3\21\3\21\6\21\u0089\n\21\r\21\16\21\u008a\3\21")
+        buf.write("\3\21\3\21\2\2\22\2\4\6\b\n\f\16\20\22\24\26\30\32\34")
+        buf.write("\36 \2\2\2\u0088\2\"\3\2\2\2\4&\3\2\2\2\6.\3\2\2\2\b\60")
+        buf.write("\3\2\2\2\n\67\3\2\2\2\f;\3\2\2\2\16B\3\2\2\2\20F\3\2\2")
+        buf.write("\2\22L\3\2\2\2\24P\3\2\2\2\26i\3\2\2\2\30k\3\2\2\2\32")
+        buf.write("s\3\2\2\2\34w\3\2\2\2\36\u0084\3\2\2\2 \u0086\3\2\2\2")
+        buf.write("\"#\7\3\2\2#$\7\34\2\2$%\7\4\2\2%\3\3\2\2\2&\'\7\5\2\2")
+        buf.write("\'(\7\35\2\2()\7\6\2\2)\5\3\2\2\2*+\7\7\2\2+,\7\34\2\2")
+        buf.write(",/\7\6\2\2-/\7\b\2\2.*\3\2\2\2.-\3\2\2\2/\7\3\2\2\2\60")
+        buf.write("\61\7\t\2\2\61\62\7\34\2\2\62\63\7\n\2\2\63\64\7\32\2")
+        buf.write("\2\64\65\7\6\2\2\65\t\3\2\2\2\668\5\b\5\2\67\66\3\2\2")
+        buf.write("\289\3\2\2\29\67\3\2\2\29:\3\2\2\2:\13\3\2\2\2;<\7\13")
+        buf.write("\2\2<=\7\34\2\2=>\7\n\2\2>?\7\33\2\2?@\7\6\2\2@\r\3\2")
+        buf.write("\2\2AC\5\f\7\2BA\3\2\2\2CD\3\2\2\2DB\3\2\2\2DE\3\2\2\2")
+        buf.write("E\17\3\2\2\2FG\7\31\2\2GH\7\f\2\2HI\7\33\2\2IJ\7\6\2\2")
+        buf.write("J\21\3\2\2\2KM\5\20\t\2LK\3\2\2\2MN\3\2\2\2NL\3\2\2\2")
+        buf.write("NO\3\2\2\2O\23\3\2\2\2PQ\7\r\2\2QR\7\35\2\2R\25\3\2\2")
+        buf.write("\2ST\7\26\2\2TU\7\27\2\2UV\7\16\2\2VW\7\30\2\2WX\7\17")
+        buf.write("\2\2XY\5\24\13\2YZ\7\20\2\2Z[\7\30\2\2[\\\7\21\2\2\\]")
+        buf.write("\7\26\2\2]j\3\2\2\2^_\7\26\2\2_`\7\27\2\2`a\7\16\2\2a")
+        buf.write("b\7\30\2\2bc\7\17\2\2cd\5\24\13\2de\7\22\2\2ef\7\30\2")
+        buf.write("\2fg\7\21\2\2gh\7\26\2\2hj\3\2\2\2iS\3\2\2\2i^\3\2\2\2")
+        buf.write("j\27\3\2\2\2kl\5\2\2\2lm\5\4\3\2mn\5\n\6\2no\7\25\2\2")
+        buf.write("op\5\6\4\2pq\5\22\n\2qr\5\16\b\2r\31\3\2\2\2su\5\30\r")
+        buf.write("\2tv\5\26\f\2ut\3\2\2\2uv\3\2\2\2v\33\3\2\2\2wx\5\30\r")
+        buf.write("\2xz\7\24\2\2y{\5\32\16\2zy\3\2\2\2{|\3\2\2\2|z\3\2\2")
+        buf.write("\2|}\3\2\2\2}\35\3\2\2\2~\u0080\5\32\16\2\177~\3\2\2\2")
+        buf.write("\u0080\u0081\3\2\2\2\u0081\177\3\2\2\2\u0081\u0082\3\2")
+        buf.write("\2\2\u0082\u0085\3\2\2\2\u0083\u0085\5\34\17\2\u0084\177")
+        buf.write("\3\2\2\2\u0084\u0083\3\2\2\2\u0085\37\3\2\2\2\u0086\u0088")
+        buf.write("\7\23\2\2\u0087\u0089\5\36\20\2\u0088\u0087\3\2\2\2\u0089")
+        buf.write("\u008a\3\2\2\2\u008a\u0088\3\2\2\2\u008a\u008b\3\2\2\2")
+        buf.write("\u008b\u008c\3\2\2\2\u008c\u008d\7\2\2\3\u008d!\3\2\2")
+        buf.write("\2\f.9DNiu|\u0081\u0084\u008a")
         return buf.getvalue()
 
 
@@ -861,12 +860,19 @@ class CounterexampleParser ( Parser ):
 
         localctx = CounterexampleParser.TransitionContext(self, self._ctx, self.state)
         self.enterRule(localctx, 24, self.RULE_transition)
+        self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 113
             self.action()
-            self.state = 114
-            self.t_info()
+            self.state = 115
+            self._errHandler.sync(self)
+            _la = self._input.LA(1)
+            if _la==CounterexampleParser.HYPHENS:
+                self.state = 114
+                self.t_info()
+
+
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -882,21 +888,18 @@ class CounterexampleParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def action(self, i:int=None):
-            if i is None:
-                return self.getTypedRuleContexts(CounterexampleParser.ActionContext)
-            else:
-                return self.getTypedRuleContext(CounterexampleParser.ActionContext,i)
+        def action(self):
+            return self.getTypedRuleContext(CounterexampleParser.ActionContext,0)
 
 
         def CYCLE_HEAD(self):
             return self.getToken(CounterexampleParser.CYCLE_HEAD, 0)
 
-        def t_info(self, i:int=None):
+        def transition(self, i:int=None):
             if i is None:
-                return self.getTypedRuleContexts(CounterexampleParser.T_infoContext)
+                return self.getTypedRuleContexts(CounterexampleParser.TransitionContext)
             else:
-                return self.getTypedRuleContext(CounterexampleParser.T_infoContext,i)
+                return self.getTypedRuleContext(CounterexampleParser.TransitionContext,i)
 
 
         def getRuleIndex(self):
@@ -917,32 +920,23 @@ class CounterexampleParser ( Parser ):
 
         localctx = CounterexampleParser.CycleContext(self, self._ctx, self.state)
         self.enterRule(localctx, 26, self.RULE_cycle)
-        self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 116
-            self.action()
             self.state = 117
+            self.action()
+            self.state = 118
             self.match(CounterexampleParser.CYCLE_HEAD)
-            self.state = 122 
+            self.state = 120 
             self._errHandler.sync(self)
             _alt = 1
             while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
                 if _alt == 1:
-                    self.state = 118
-                    self.action()
-                    self.state = 120
-                    self._errHandler.sync(self)
-                    _la = self._input.LA(1)
-                    if _la==CounterexampleParser.HYPHENS:
-                        self.state = 119
-                        self.t_info()
-
-
+                    self.state = 119
+                    self.transition()
 
                 else:
                     raise NoViableAltException(self)
-                self.state = 124 
+                self.state = 122 
                 self._errHandler.sync(self)
                 _alt = self._interp.adaptivePredict(self._input,6,self._ctx)
 
@@ -991,22 +985,22 @@ class CounterexampleParser ( Parser ):
         localctx = CounterexampleParser.StepContext(self, self._ctx, self.state)
         self.enterRule(localctx, 28, self.RULE_step)
         try:
-            self.state = 132
+            self.state = 130
             self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,8,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 127 
+                self.state = 125 
                 self._errHandler.sync(self)
                 _alt = 1
                 while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
                     if _alt == 1:
-                        self.state = 126
+                        self.state = 124
                         self.transition()
 
                     else:
                         raise NoViableAltException(self)
-                    self.state = 129 
+                    self.state = 127 
                     self._errHandler.sync(self)
                     _alt = self._interp.adaptivePredict(self._input,7,self._ctx)
 
@@ -1014,7 +1008,7 @@ class CounterexampleParser ( Parser ):
 
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 131
+                self.state = 129
                 self.cycle()
                 pass
 
@@ -1068,22 +1062,22 @@ class CounterexampleParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 134
+            self.state = 132
             self.match(CounterexampleParser.HEAD)
 
-            self.state = 136 
+            self.state = 134 
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while True:
-                self.state = 135
+                self.state = 133
                 self.step()
-                self.state = 138 
+                self.state = 136 
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if not (_la==CounterexampleParser.T__0):
                     break
 
-            self.state = 140
+            self.state = 138
             self.match(CounterexampleParser.EOF)
         except RecognitionException as re:
             localctx.exception = re

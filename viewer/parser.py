@@ -25,5 +25,8 @@ with open("output.html","w") as output:
     walker = antlr4.ParseTreeWalker()
     walker.walk(listener, tree)
 
-for e in sorted(list(listener.trace.keys())):
-    print(e, listener.trace[e])
+for e in listener.trace:
+    print(e)
+
+for e in listener.cycle:
+    print(e)
