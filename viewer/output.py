@@ -7,6 +7,13 @@ Created on Thu Jul 23 17:55:51 2020
 """
 
 def output(events):
+    regNames = set()
+    for e in events:
+        regNames = regNames.union(set(e['regs'].keys()))
+
+    regNames = sorted(list(regNames))    
+    regHeads = "".join([f"<th>r<sub>{r}</sub></th>" for r in regNames])
+
     htmlstring ="""
     <html>
 
@@ -28,6 +35,14 @@ def output(events):
     
         td {
           height: 1.5em;
+        }
+        
+        .carousel-indicators li .active {
+            background-color: #666;
+        }
+        
+        .carousel-indicators li {
+            background-color: #333;
         }
       </style>
     
@@ -65,10 +80,20 @@ def output(events):
           <div class="col-sm-12 mx-auto">
             <div class="bd-example">
               <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-interval="false" data-wrap="false">
+                  <ol class="carousel-indicators">
+      """
+    htmlstring += """<li data-target="#carouselExampleControls" data-slide-to="0" class="active"></li>"""
+    for e in events:
+        htmlstring += f"""<li data-target="#carouselExampleControls" data-slide-to="{e['stepNo']+1}"></li>"""
+
+    regVals = "".join([f"<td>None</td>" for r in regNames])
+
+    htmlstring += f"""
+                </ol>
                 <div class="carousel-inner">
     
                   <div class="carousel-item">
-                    <img src="step-init.png" class="d-block w-100" alt="step-init.png">
+                    <img src="step-init.png" class="d-block mw-100 mx-auto" alt="step-init.png">
                     <div class="carousel-caption d-none text-dark d-md-block mb-4">
                       <div class="card">
                         <div class="card-header">
@@ -77,10 +102,10 @@ def output(events):
                         <div class="card-body">
                           <table class="mx-auto text-center">
                             <tr>
-                              <th>r1</th>
+                              {regHeads}
                             </tr>
                             <tr>
-                              <td></td>
+                              {regVals}
                             </tr>
                           </table>
                         </div>
@@ -90,21 +115,27 @@ def output(events):
     
     """
     for e in events:
+        inputs = ", ".join([str(i) for i in e['inputs']])
+        outputs = ", ".join([str(i) for i in e['outputs']])
+        regVals = "".join([f"<td>{e['regs'][r]}</td>" for r in regNames])
+
+        print(regNames)
+
         htmlstring += f"""
-                      <div class="carousel-item">
-                        <img src="step-{e['stepNo']}.png" class="d-block w-100" alt="step-{e['stepNo']}.png">
+                      <div class="carousel-item text-center">
+                        <img src="step-{e['stepNo']}.png" class="d-block mw-100 mx-auto" alt="step-{e['stepNo']}.png">
                         <div class="carousel-caption d-none text-dark d-md-block mb-4">
                           <div class="card">
                             <div class="card-header">
-                              <h5>{e['label']}(", ".join({e['inputs']}))/{e['outputs']}</h5>
+                              <h5>{e['label']}({inputs})/[{outputs}]</h5>
                             </div>
                             <div class="card-body">
                               <table class="mx-auto text-center">
                                 <tr>
-                                  <th>r1</th>
+                                  {regHeads}
                                 </tr>
                                 <tr>
-                                  <td></td>
+                                  {regVals}
                                 </tr>
                               </table>
                             </div>
@@ -119,7 +150,7 @@ def output(events):
             </div>
           </div>
         </div>
-    
+        
         <div class="row">
           <div class="col-xs-12 mx-auto">
             <a id="prev" class="btn btn-dark" href="#carouselExampleControls" role="button" data-slide="prev">

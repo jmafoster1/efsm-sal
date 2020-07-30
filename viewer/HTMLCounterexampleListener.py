@@ -58,7 +58,7 @@ class HTMLCounterexampleListener(antlr4.ParseTreeListener):
         inputstring = [str(i) for i in self.event['inputs']]
         self.output.write(f"<p>Inputs: [{', '.join(inputstring)}]</p>")
         
-        regstring = [f"r<sub>{r}</sub> := {v}" for r,v in self.event['regs'] if v is not None]
+        regstring = [f"r<sub>{r}</sub> := {self.event['regs'][r]}" for r in self.event['regs'] if self.event['regs'][r] is not None]
         self.output.write(f"<p>Registers: [{', '.join(regstring)}]</p>")
 
         if 'tid' in self.event:
@@ -139,7 +139,7 @@ class HTMLCounterexampleListener(antlr4.ParseTreeListener):
         regs = self.event['regs']
         regs = [(k, regs[k]) for k in sorted(list(regs))]
         regs = list(takewhile(lambda x: x[1] != "OptionBB", regs))
-        regs = [(r.replace("r__", ""), just(i)) for r, i in regs]
+        regs = {r.replace("r__", ""): just(i) for r, i in regs}
         self.event['regs'] = regs
 
         # self.output.write(f"<p>Regs: {regs}</p>")
