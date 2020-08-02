@@ -16,17 +16,17 @@ import output as op
 from PIL import Image
 
 
-root = "/home/michael/Documents/efsm-sal/coin-tea"
-dotfile = f"{root}/dotfiles/Coin_Tea_Broken.dot"
-cfile = f"{root}/models/straight.cex"
+root = "/home/michael/Documents/efsm-sal/lift-controller"
+dotfile = f"{root}/liftController3.dot"
+cfile = f"{root}/counterexample/trace"
 steps = f"{root}/counterexample"
 
-if not os.path.exists(steps):
+if not (os.path.exists(steps) and os.path.isdir(steps)):
     os.mkdir(steps)
 
 
 graph = pydotplus.graphviz.graph_from_dot_file(dotfile)
-graph.set_size('"10,10!"')
+graph.set_size('"20,20!"')
 
 edges = {edge.get("id"): edge for edge in graph.get_edges()}
 nodes = {node.get_name(): node for node in graph.get_nodes()}
@@ -74,7 +74,7 @@ def colorstep(e):
         edges[e['tid']].set('fontcolor', 'black')
         nodes[f"s{e['state']}"].set('color', 'black')
 
-    else:
+    elif 'tid' in e and e['tid'] == 'SINK_HOLE':
         dead = pydotplus.graphviz.Dot()
         node = pydotplus.graphviz.Node(name='NULL_STATE', label="err", color="red")
         dead.add_node(node)
@@ -92,4 +92,4 @@ for e in listener.cycle:
 
 
 with open(f"{steps}/autoviz.html", 'w') as f:
-    print(op.output(listener.trace + listener.cycle), file=f)
+    print(op.output((listener.trace + listener.cycle)[:-1]), file=f)

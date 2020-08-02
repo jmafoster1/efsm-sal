@@ -1,0 +1,130 @@
+Counterexample:
+========================
+Path
+========================
+Step 0:
+--- Input Variables (assignments) ---
+label = continit
+i(0) = ValueBB
+i(1) = ValueBB
+i(2) = ValueBB
+--- System Variables (assignments) ---
+ba-pc!1 = 9
+cfstate = State__0
+r__1 = None
+r__2 = None
+r__3 = None
+r__4 = Some(Num(1))
+o(0) = OptionBB
+o(1) = OptionBB
+o(2) = OptionBB
+------------------------
+Transition Information:
+(module instance at [Context: liftcontroller3, line(421), column(17)]
+  (label CONTINIT
+    transition at [Context: liftcontroller3, line(42), column(10)]))
+------------------------
+Step 1:
+--- Input Variables (assignments) ---
+label = return
+i(0) = ValueBB
+i(1) = ValueBB
+i(2) = ValueBB
+--- System Variables (assignments) ---
+ba-pc!1 = 9
+cfstate = State__9
+r__1 = Some(Str(String__true))
+r__2 = None
+r__3 = None
+r__4 = Some(Num(1))
+o(0) = OptionBB
+o(1) = OptionBB
+o(2) = OptionBB
+------------------------
+Transition Information:
+(module instance at [Context: liftcontroller3, line(421), column(17)]
+  (label RETURN1
+    transition at [Context: liftcontroller3, line(221), column(10)]))
+------------------------
+Step 2:
+--- Input Variables (assignments) ---
+label = motorstop
+i(0) = Str(String__true)
+i(1) = Str(String__true)
+i(2) = ValueBB
+--- System Variables (assignments) ---
+ba-pc!1 = 9
+cfstate = State__1
+r__1 = Some(Str(String__true))
+r__2 = None
+r__3 = None
+r__4 = Some(Num(1))
+o(0) = OptionBB
+o(1) = OptionBB
+o(2) = OptionBB
+------------------------
+Transition Information:
+(module instance at [Context: liftcontroller3, line(421), column(17)]
+  (label MOTORSTOP1
+    transition at [Context: liftcontroller3, line(95), column(10)]))
+------------------------
+Step 3:
+--- Input Variables (assignments) ---
+label = opendoor
+i(0) = Str(String__true)
+i(1) = ValueBB
+i(2) = ValueBB
+--- System Variables (assignments) ---
+ba-pc!1 = 9
+cfstate = State__5
+r__1 = Some(Str(String__true))
+r__2 = None
+r__3 = None
+r__4 = Some(Num(1))
+o(0) = Some(Num(0))
+o(1) = Some(Num(1))
+o(2) = Some(Str(String__true))
+------------------------
+Transition Information:
+(module instance at [Context: liftcontroller3, line(421), column(17)]
+  (label OPENDOOR1
+    transition at [Context: liftcontroller3, line(183), column(10)]))
+------------------------
+Step 4:
+--- Input Variables (assignments) ---
+label = opendoor
+i(0) = Str(String__true)
+i(1) = ValueBB
+i(2) = ValueBB
+--- System Variables (assignments) ---
+ba-pc!1 = 8
+cfstate = State__5
+r__1 = Some(Str(String__true))
+r__2 = None
+r__3 = None
+r__4 = Some(Num(1))
+o(0) = Some(Str(String__true))
+o(1) = Some(Num(1))
+o(2) = OptionBB
+------------------------
+Transition Information:
+(module instance at [Context: liftcontroller3, line(421), column(17)]
+  (label OPENDOOR1
+    transition at [Context: liftcontroller3, line(183), column(10)]))
+------------------------
+Step 5:
+--- Input Variables (assignments) ---
+label = up
+i(0) = Num(-1)
+i(1) = Str(String__true)
+i(2) = Str(String__false)
+--- System Variables (assignments) ---
+ba-pc!1 = 20
+cfstate = State__5
+r__1 = Some(Str(String__true))
+r__2 = None
+r__3 = None
+r__4 = Some(Num(1))
+o(0) = Some(Str(String__true))
+o(1) = Some(Num(1))
+o(2) = OptionBB

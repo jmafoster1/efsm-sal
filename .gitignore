@@ -4,4 +4,3 @@ pdfs/
 *.thy#
 *.pdf
 __pycache__/
-*.html
