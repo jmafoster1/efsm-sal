@@ -16,8 +16,8 @@ import output as op
 from PIL import Image
 
 
-root = "/home/michael/Documents/efsm-sal/lift-controller"
-dotfile = f"{root}/liftController3.dot"
+root = "/home/michael/Documents/efsm-sal/motor-controller"
+dotfile = f"{root}/XXXMotorControlImproved.dot"
 cfile = f"{root}/counterexample/trace"
 steps = f"{root}/counterexample"
 

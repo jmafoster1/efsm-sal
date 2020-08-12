@@ -1,0 +1,643 @@
+Counterexample:
+========================
+Path
+========================
+Step 0:
+--- Input Variables (assignments) ---
+label = init
+i(0) = ValueBB
+--- System Variables (assignments) ---
+ba-pc!1 = 6
+cfstate = State__0
+r__1 = None
+r__2 = None
+r__3 = None
+r__4 = None
+o(0) = OptionBB
+------------------------
+Transition Information:
+(module instance at [Context: xxxmotorcontrolimproved, line(183), column(25)]
+  (label INIT
+    transition at [Context: xxxmotorcontrolimproved, line(51), column(10)]))
+------------------------
+Step 1:
+--- Input Variables (assignments) ---
+label = feed
+i(0) = Num(1)
+--- System Variables (assignments) ---
+ba-pc!1 = 6
+cfstate = State__1
+r__1 = Some(Num(0))
+r__2 = Some(Num(0))
+r__3 = Some(Num(7))
+r__4 = None
+o(0) = OptionBB
+------------------------
+Transition Information:
+(module instance at [Context: xxxmotorcontrolimproved, line(183), column(25)]
+  (label FEED
+    transition at [Context: xxxmotorcontrolimproved, line(61), column(10)]))
+------------------------
+Step 2:
+--- Input Variables (assignments) ---
+label = m3r
+i(0) = ValueBB
+--- System Variables (assignments) ---
+ba-pc!1 = 6
+cfstate = State__2
+r__1 = Some(Num(0))
+r__2 = Some(Num(0))
+r__3 = Some(Num(7))
+r__4 = Some(Num(1))
+o(0) = OptionBB
+------------------------
+Transition Information:
+(module instance at [Context: xxxmotorcontrolimproved, line(183), column(25)]
+  (label M3R
+    transition at [Context: xxxmotorcontrolimproved, line(69), column(10)]))
+------------------------
+Step 3:
+--- Input Variables (assignments) ---
+label = m2
+i(0) = ValueBB
+--- System Variables (assignments) ---
+ba-pc!1 = 6
+cfstate = State__3
+r__1 = Some(Num(0))
+r__2 = Some(Num(0))
+r__3 = Some(Num(6))
+r__4 = Some(Num(1))
+o(0) = OptionBB
+------------------------
+Transition Information:
+(module instance at [Context: xxxmotorcontrolimproved, line(183), column(25)]
+  (label M2
+    transition at [Context: xxxmotorcontrolimproved, line(78), column(10)]))
+------------------------
+Step 4:
+--- Input Variables (assignments) ---
+label = check
+i(0) = ValueBB
+--- System Variables (assignments) ---
+ba-pc!1 = 6
+cfstate = State__4
+r__1 = Some(Num(0))
+r__2 = Some(Num(1))
+r__3 = Some(Num(6))
+r__4 = Some(Num(0))
+o(0) = OptionBB
+------------------------
+Transition Information:
+(module instance at [Context: xxxmotorcontrolimproved, line(183), column(25)]
+  (label CHECK1
+    transition at [Context: xxxmotorcontrolimproved, line(97), column(10)]))
+------------------------
+Step 5:
+--- Input Variables (assignments) ---
+label = release
+i(0) = ValueBB
+--- System Variables (assignments) ---
+ba-pc!1 = 6
+cfstate = State__10
+r__1 = Some(Num(0))
+r__2 = Some(Num(1))
+r__3 = Some(Num(6))
+r__4 = Some(Num(0))
+o(0) = OptionBB
+------------------------
+Transition Information:
+(module instance at [Context: xxxmotorcontrolimproved, line(183), column(25)]
+  (label RELEASE
+    transition at [Context: xxxmotorcontrolimproved, line(105), column(10)]))
+------------------------
+Step 6:
+--- Input Variables (assignments) ---
+label = pass
+i(0) = ValueBB
+--- System Variables (assignments) ---
+ba-pc!1 = 6
+cfstate = State__5
+r__1 = Some(Num(0))
+r__2 = Some(Num(1))
+r__3 = Some(Num(6))
+r__4 = Some(Num(0))
+o(0) = OptionBB
+------------------------
+Transition Information:
+(module instance at [Context: xxxmotorcontrolimproved, line(183), column(25)]
+  (label PASS
+    transition at [Context: xxxmotorcontrolimproved, line(112), column(10)]))
+------------------------
+Step 7:
+--- Input Variables (assignments) ---
+label = m1
+i(0) = ValueBB
+--- System Variables (assignments) ---
+ba-pc!1 = 5
+cfstate = State__6
+r__1 = Some(Num(0))
+r__2 = Some(Num(1))
+r__3 = Some(Num(6))
+r__4 = Some(Num(0))
+o(0) = OptionBB
+------------------------
+Transition Information:
+(module instance at [Context: xxxmotorcontrolimproved, line(183), column(25)]
+  (label M1
+    transition at [Context: xxxmotorcontrolimproved, line(119), column(10)]))
+------------------------
+Step 8:
+--- Input Variables (assignments) ---
+label = check
+i(0) = ValueBB
+--- System Variables (assignments) ---
+ba-pc!1 = 5
+cfstate = State__7
+r__1 = Some(Num(1))
+r__2 = Some(Num(1))
+r__3 = Some(Num(6))
+r__4 = Some(Num(0))
+o(0) = OptionBB
+------------------------
+Transition Information:
+(module instance at [Context: xxxmotorcontrolimproved, line(183), column(25)]
+  (label CHECK2
+    transition at [Context: xxxmotorcontrolimproved, line(128), column(10)]))
+------------------------
+Step 9:
+--- Input Variables (assignments) ---
+label = m1
+i(0) = ValueBB
+--- System Variables (assignments) ---
+ba-pc!1 = 5
+cfstate = State__6
+r__1 = Some(Num(1))
+r__2 = Some(Num(1))
+r__3 = Some(Num(6))
+r__4 = Some(Num(0))
+o(0) = OptionBB
+------------------------
+Transition Information:
+(module instance at [Context: xxxmotorcontrolimproved, line(183), column(25)]
+  (label M1
+    transition at [Context: xxxmotorcontrolimproved, line(119), column(10)]))
+------------------------
+Step 10:
+--- Input Variables (assignments) ---
+label = check
+i(0) = ValueBB
+--- System Variables (assignments) ---
+ba-pc!1 = 5
+cfstate = State__7
+r__1 = Some(Num(2))
+r__2 = Some(Num(1))
+r__3 = Some(Num(6))
+r__4 = Some(Num(0))
+o(0) = OptionBB
+------------------------
+Transition Information:
+(module instance at [Context: xxxmotorcontrolimproved, line(183), column(25)]
+  (label CHECK2
+    transition at [Context: xxxmotorcontrolimproved, line(128), column(10)]))
+------------------------
+Step 11:
+--- Input Variables (assignments) ---
+label = m1
+i(0) = ValueBB
+--- System Variables (assignments) ---
+ba-pc!1 = 5
+cfstate = State__6
+r__1 = Some(Num(2))
+r__2 = Some(Num(1))
+r__3 = Some(Num(6))
+r__4 = Some(Num(0))
+o(0) = OptionBB
+------------------------
+Transition Information:
+(module instance at [Context: xxxmotorcontrolimproved, line(183), column(25)]
+  (label M1
+    transition at [Context: xxxmotorcontrolimproved, line(119), column(10)]))
+------------------------
+Step 12:
+--- Input Variables (assignments) ---
+label = check
+i(0) = ValueBB
+--- System Variables (assignments) ---
+ba-pc!1 = 5
+cfstate = State__7
+r__1 = Some(Num(3))
+r__2 = Some(Num(1))
+r__3 = Some(Num(6))
+r__4 = Some(Num(0))
+o(0) = OptionBB
+------------------------
+Transition Information:
+(module instance at [Context: xxxmotorcontrolimproved, line(183), column(25)]
+  (label CHECK2
+    transition at [Context: xxxmotorcontrolimproved, line(128), column(10)]))
+------------------------
+Step 13:
+--- Input Variables (assignments) ---
+label = m1
+i(0) = ValueBB
+--- System Variables (assignments) ---
+ba-pc!1 = 5
+cfstate = State__6
+r__1 = Some(Num(3))
+r__2 = Some(Num(1))
+r__3 = Some(Num(6))
+r__4 = Some(Num(0))
+o(0) = OptionBB
+------------------------
+Transition Information:
+(module instance at [Context: xxxmotorcontrolimproved, line(183), column(25)]
+  (label M1
+    transition at [Context: xxxmotorcontrolimproved, line(119), column(10)]))
+------------------------
+Step 14:
+--- Input Variables (assignments) ---
+label = check
+i(0) = ValueBB
+--- System Variables (assignments) ---
+ba-pc!1 = 5
+cfstate = State__7
+r__1 = Some(Num(4))
+r__2 = Some(Num(1))
+r__3 = Some(Num(6))
+r__4 = Some(Num(0))
+o(0) = OptionBB
+------------------------
+Transition Information:
+(module instance at [Context: xxxmotorcontrolimproved, line(183), column(25)]
+  (label CHECK2
+    transition at [Context: xxxmotorcontrolimproved, line(128), column(10)]))
+------------------------
+Step 15:
+--- Input Variables (assignments) ---
+label = m1
+i(0) = ValueBB
+--- System Variables (assignments) ---
+ba-pc!1 = 5
+cfstate = State__6
+r__1 = Some(Num(4))
+r__2 = Some(Num(1))
+r__3 = Some(Num(6))
+r__4 = Some(Num(0))
+o(0) = OptionBB
+------------------------
+Transition Information:
+(module instance at [Context: xxxmotorcontrolimproved, line(183), column(25)]
+  (label M1
+    transition at [Context: xxxmotorcontrolimproved, line(119), column(10)]))
+------------------------
+Step 16:
+--- Input Variables (assignments) ---
+label = check
+i(0) = ValueBB
+--- System Variables (assignments) ---
+ba-pc!1 = 5
+cfstate = State__7
+r__1 = Some(Num(5))
+r__2 = Some(Num(1))
+r__3 = Some(Num(6))
+r__4 = Some(Num(0))
+o(0) = OptionBB
+------------------------
+Transition Information:
+(module instance at [Context: xxxmotorcontrolimproved, line(183), column(25)]
+  (label CHECK2
+    transition at [Context: xxxmotorcontrolimproved, line(128), column(10)]))
+------------------------
+Step 17:
+--- Input Variables (assignments) ---
+label = m1
+i(0) = ValueBB
+--- System Variables (assignments) ---
+ba-pc!1 = 5
+cfstate = State__6
+r__1 = Some(Num(5))
+r__2 = Some(Num(1))
+r__3 = Some(Num(6))
+r__4 = Some(Num(0))
+o(0) = OptionBB
+------------------------
+Transition Information:
+(module instance at [Context: xxxmotorcontrolimproved, line(183), column(25)]
+  (label M1
+    transition at [Context: xxxmotorcontrolimproved, line(119), column(10)]))
+------------------------
+Step 18:
+--- Input Variables (assignments) ---
+label = check
+i(0) = ValueBB
+--- System Variables (assignments) ---
+ba-pc!1 = 5
+cfstate = State__7
+r__1 = Some(Num(6))
+r__2 = Some(Num(1))
+r__3 = Some(Num(6))
+r__4 = Some(Num(0))
+o(0) = OptionBB
+------------------------
+Transition Information:
+(module instance at [Context: xxxmotorcontrolimproved, line(183), column(25)]
+  (label CHECK3
+    transition at [Context: xxxmotorcontrolimproved, line(136), column(10)]))
+------------------------
+Step 19:
+--- Input Variables (assignments) ---
+label = m1r
+i(0) = ValueBB
+--- System Variables (assignments) ---
+ba-pc!1 = 5
+cfstate = State__8
+r__1 = Some(Num(6))
+r__2 = Some(Num(1))
+r__3 = Some(Num(6))
+r__4 = Some(Num(0))
+o(0) = OptionBB
+------------------------
+Transition Information:
+(module instance at [Context: xxxmotorcontrolimproved, line(183), column(25)]
+  (label M1R
+    transition at [Context: xxxmotorcontrolimproved, line(144), column(10)]))
+------------------------
+Step 20:
+--- Input Variables (assignments) ---
+label = check
+i(0) = ValueBB
+--- System Variables (assignments) ---
+ba-pc!1 = 5
+cfstate = State__9
+r__1 = Some(Num(5))
+r__2 = Some(Num(1))
+r__3 = Some(Num(6))
+r__4 = Some(Num(0))
+o(0) = OptionBB
+------------------------
+Transition Information:
+(module instance at [Context: xxxmotorcontrolimproved, line(183), column(25)]
+  (label CHECK4
+    transition at [Context: xxxmotorcontrolimproved, line(153), column(10)]))
+------------------------
+Step 21:
+--- Input Variables (assignments) ---
+label = m1r
+i(0) = ValueBB
+--- System Variables (assignments) ---
+ba-pc!1 = 5
+cfstate = State__8
+r__1 = Some(Num(5))
+r__2 = Some(Num(1))
+r__3 = Some(Num(6))
+r__4 = Some(Num(0))
+o(0) = OptionBB
+------------------------
+Transition Information:
+(module instance at [Context: xxxmotorcontrolimproved, line(183), column(25)]
+  (label M1R
+    transition at [Context: xxxmotorcontrolimproved, line(144), column(10)]))
+------------------------
+Step 22:
+--- Input Variables (assignments) ---
+label = check
+i(0) = ValueBB
+--- System Variables (assignments) ---
+ba-pc!1 = 5
+cfstate = State__9
+r__1 = Some(Num(4))
+r__2 = Some(Num(1))
+r__3 = Some(Num(6))
+r__4 = Some(Num(0))
+o(0) = OptionBB
+------------------------
+Transition Information:
+(module instance at [Context: xxxmotorcontrolimproved, line(183), column(25)]
+  (label CHECK4
+    transition at [Context: xxxmotorcontrolimproved, line(153), column(10)]))
+------------------------
+Step 23:
+--- Input Variables (assignments) ---
+label = m1r
+i(0) = ValueBB
+--- System Variables (assignments) ---
+ba-pc!1 = 5
+cfstate = State__8
+r__1 = Some(Num(4))
+r__2 = Some(Num(1))
+r__3 = Some(Num(6))
+r__4 = Some(Num(0))
+o(0) = OptionBB
+------------------------
+Transition Information:
+(module instance at [Context: xxxmotorcontrolimproved, line(183), column(25)]
+  (label M1R
+    transition at [Context: xxxmotorcontrolimproved, line(144), column(10)]))
+------------------------
+Step 24:
+--- Input Variables (assignments) ---
+label = check
+i(0) = ValueBB
+--- System Variables (assignments) ---
+ba-pc!1 = 5
+cfstate = State__9
+r__1 = Some(Num(3))
+r__2 = Some(Num(1))
+r__3 = Some(Num(6))
+r__4 = Some(Num(0))
+o(0) = OptionBB
+------------------------
+Transition Information:
+(module instance at [Context: xxxmotorcontrolimproved, line(183), column(25)]
+  (label CHECK4
+    transition at [Context: xxxmotorcontrolimproved, line(153), column(10)]))
+------------------------
+Step 25:
+--- Input Variables (assignments) ---
+label = m1r
+i(0) = ValueBB
+--- System Variables (assignments) ---
+ba-pc!1 = 5
+cfstate = State__8
+r__1 = Some(Num(3))
+r__2 = Some(Num(1))
+r__3 = Some(Num(6))
+r__4 = Some(Num(0))
+o(0) = OptionBB
+------------------------
+Transition Information:
+(module instance at [Context: xxxmotorcontrolimproved, line(183), column(25)]
+  (label M1R
+    transition at [Context: xxxmotorcontrolimproved, line(144), column(10)]))
+------------------------
+Step 26:
+--- Input Variables (assignments) ---
+label = check
+i(0) = ValueBB
+--- System Variables (assignments) ---
+ba-pc!1 = 5
+cfstate = State__9
+r__1 = Some(Num(2))
+r__2 = Some(Num(1))
+r__3 = Some(Num(6))
+r__4 = Some(Num(0))
+o(0) = OptionBB
+------------------------
+Transition Information:
+(module instance at [Context: xxxmotorcontrolimproved, line(183), column(25)]
+  (label CHECK4
+    transition at [Context: xxxmotorcontrolimproved, line(153), column(10)]))
+------------------------
+Step 27:
+--- Input Variables (assignments) ---
+label = m1r
+i(0) = ValueBB
+--- System Variables (assignments) ---
+ba-pc!1 = 5
+cfstate = State__8
+r__1 = Some(Num(2))
+r__2 = Some(Num(1))
+r__3 = Some(Num(6))
+r__4 = Some(Num(0))
+o(0) = OptionBB
+------------------------
+Transition Information:
+(module instance at [Context: xxxmotorcontrolimproved, line(183), column(25)]
+  (label M1R
+    transition at [Context: xxxmotorcontrolimproved, line(144), column(10)]))
+------------------------
+Step 28:
+--- Input Variables (assignments) ---
+label = check
+i(0) = ValueBB
+--- System Variables (assignments) ---
+ba-pc!1 = 5
+cfstate = State__9
+r__1 = Some(Num(1))
+r__2 = Some(Num(1))
+r__3 = Some(Num(6))
+r__4 = Some(Num(0))
+o(0) = OptionBB
+------------------------
+Transition Information:
+(module instance at [Context: xxxmotorcontrolimproved, line(183), column(25)]
+  (label CHECK4
+    transition at [Context: xxxmotorcontrolimproved, line(153), column(10)]))
+------------------------
+Step 29:
+--- Input Variables (assignments) ---
+label = m1r
+i(0) = ValueBB
+--- System Variables (assignments) ---
+ba-pc!1 = 5
+cfstate = State__8
+r__1 = Some(Num(1))
+r__2 = Some(Num(1))
+r__3 = Some(Num(6))
+r__4 = Some(Num(0))
+o(0) = OptionBB
+------------------------
+Transition Information:
+(module instance at [Context: xxxmotorcontrolimproved, line(183), column(25)]
+  (label M1R
+    transition at [Context: xxxmotorcontrolimproved, line(144), column(10)]))
+------------------------
+Step 30:
+--- Input Variables (assignments) ---
+label = check
+i(0) = ValueBB
+--- System Variables (assignments) ---
+ba-pc!1 = 5
+cfstate = State__9
+r__1 = Some(Num(0))
+r__2 = Some(Num(1))
+r__3 = Some(Num(6))
+r__4 = Some(Num(0))
+o(0) = OptionBB
+------------------------
+Transition Information:
+(module instance at [Context: xxxmotorcontrolimproved, line(183), column(25)]
+  (label CHECK5
+    transition at [Context: xxxmotorcontrolimproved, line(161), column(10)]))
+------------------------
+Step 31:
+--- Input Variables (assignments) ---
+label = feed
+i(0) = Num(-7)
+--- System Variables (assignments) ---
+ba-pc!1 = 5
+cfstate = State__1
+r__1 = Some(Num(0))
+r__2 = Some(Num(1))
+r__3 = Some(Num(6))
+r__4 = Some(Num(0))
+o(0) = OptionBB
+------------------------
+Transition Information:
+(module instance at [Context: xxxmotorcontrolimproved, line(183), column(25)]
+  (label FEED
+    transition at [Context: xxxmotorcontrolimproved, line(61), column(10)]))
+------------------------
+Step 32:
+--- Input Variables (assignments) ---
+label = feed
+i(0) = Num(2)
+--- System Variables (assignments) ---
+ba-pc!1 = 1
+cfstate = State__2
+r__1 = Some(Num(0))
+r__2 = Some(Num(1))
+r__3 = Some(Num(6))
+r__4 = Some(Num(-7))
+o(0) = OptionBB
+------------------------
+Transition Information:
+(module instance at [Context: xxxmotorcontrolimproved, line(183), column(25)]
+  (label SINK_HOLE
+    else transition at [Context: xxxmotorcontrolimproved, line(169), column(10)]))
+------------------------
+Step 33:
+--- Input Variables (assignments) ---
+label = pass
+i(0) = Num(-1)
+--- System Variables (assignments) ---
+ba-pc!1 = 3
+cfstate = NULL_STATE
+r__1 = Some(Num(0))
+r__2 = Some(Num(1))
+r__3 = Some(Num(6))
+r__4 = Some(Num(-7))
+o(0) = OptionBB
+========================
+Begin of Cycle
+========================
+Step 33:
+--- Input Variables (assignments) ---
+label = pass
+i(0) = Num(-1)
+--- System Variables (assignments) ---
+ba-pc!1 = 3
+cfstate = NULL_STATE
+r__1 = Some(Num(0))
+r__2 = Some(Num(1))
+r__3 = Some(Num(6))
+r__4 = Some(Num(-7))
+o(0) = OptionBB
+------------------------
+Transition Information:
+(module instance at [Context: xxxmotorcontrolimproved, line(183), column(25)]
+  (label SINK_HOLE
+    else transition at [Context: xxxmotorcontrolimproved, line(169), column(10)]))
+------------------------
+Step 34:
+--- Input Variables (assignments) ---
+label = pass
+i(0) = Num(-1)
+--- System Variables (assignments) ---
+ba-pc!1 = 3
+cfstate = NULL_STATE
+r__1 = Some(Num(0))
+r__2 = Some(Num(1))
+r__3 = Some(Num(6))
+r__4 = Some(Num(-7))
+o(0) = OptionBB

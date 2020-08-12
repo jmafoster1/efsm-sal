@@ -13,7 +13,7 @@ op: ('o('NUMBER') = 'B_OPTION'\n');
 outputs: (op+);
 
 reg: (REG' = 'B_OPTION'\n');
-regs: (reg+);
+regs: (reg*);
 
 t_id: 'label 'AN_STRING;
 t_info: (HYPHENS T_INFO'(module instance at 'CONTEXT'\n  ('t_id'\n    else transition at 'CONTEXT'))\n'HYPHENS)|(HYPHENS T_INFO'(module instance at 'CONTEXT'\n  ('t_id'\n    transition at 'CONTEXT'))\n'HYPHENS);
