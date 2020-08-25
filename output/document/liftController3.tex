@@ -816,8 +816,9 @@ outgoing{\isacharunderscore}transitions\ lift\ s\ {\isacharequal}\ {\isacharbrac
 \isatagproof
 \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}simp\ add{\isacharcolon}\ choice{\isacharunderscore}def{\isacharparenright}\isanewline
-\ \ \isacommand{by}\isamarkupfalse%
-\ {\isacharparenleft}metis\ option{\isachardot}inject\ trilean{\isachardot}simps{\isacharparenleft}{\isadigit{2}}{\isacharparenright}\ value{\isachardot}inject{\isacharparenleft}{\isadigit{1}}{\isacharparenright}{\isacharparenright}%
+\ \ \isacommand{using}\isamarkupfalse%
+\ value{\isacharunderscore}eq{\isacharunderscore}true\ \isacommand{by}\isamarkupfalse%
+\ auto%
 \endisatagproof
 {\isafoldproof}%
 %
@@ -853,31 +854,31 @@ outgoing{\isacharunderscore}transitions\ lift\ s\ {\isacharequal}\ {\isacharbrac
 \ \ \ \ \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}bc{\isacharequal}up{\isadigit{1}}{\isadigit{2}}stop{\isachardoublequoteclose}{\isacharparenright}\isanewline
 \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def\ value{\isacharunderscore}eq{\isacharunderscore}true{\isacharparenright}\isanewline
 \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def\ value{\isacharunderscore}eq{\isacharunderscore}true{\isacharparenright}\isanewline
 \ \ \ \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}ba{\isacharequal}up{\isadigit{1}}{\isadigit{2}}stop{\isachardoublequoteclose}{\isacharparenright}\isanewline
 \ \ \ \ \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}bc{\isacharequal}motorstop\ {\isadigit{1}}{\isachardoublequoteclose}{\isacharparenright}\isanewline
 \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def\ value{\isacharunderscore}eq{\isacharunderscore}true{\isacharparenright}\isanewline
 \ \ \ \ \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}bc{\isacharequal}up{\isadigit{1}}{\isadigit{2}}{\isachardoublequoteclose}{\isacharparenright}\isanewline
 \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def\ value{\isacharunderscore}eq{\isacharunderscore}true{\isacharparenright}\isanewline
 \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def\ value{\isacharunderscore}eq{\isacharunderscore}true{\isacharparenright}\isanewline
 \ \ \ \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}ba{\isacharequal}motorstop\ {\isadigit{1}}{\isachardoublequoteclose}{\isacharparenright}\isanewline
 \ \ \ \ \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}bc{\isacharequal}up{\isadigit{1}}{\isadigit{2}}{\isachardoublequoteclose}{\isacharparenright}\isanewline
 \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def\ value{\isacharunderscore}eq{\isacharunderscore}true{\isacharparenright}\isanewline
 \ \ \ \ \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}bc{\isacharequal}up{\isadigit{1}}{\isadigit{2}}stop{\isachardoublequoteclose}{\isacharparenright}\isanewline
 \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def\ value{\isacharunderscore}eq{\isacharunderscore}true{\isacharparenright}\isanewline
 \ \ \ \ \isacommand{apply}\isamarkupfalse%
 \ simp\isanewline
 \ \ \isacommand{apply}\isamarkupfalse%
@@ -891,65 +892,65 @@ outgoing{\isacharunderscore}transitions\ lift\ s\ {\isacharequal}\ {\isacharbrac
 \ \ \ \ \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}bc{\isacharequal}up{\isadigit{2}}{\isadigit{3}}stop{\isachardoublequoteclose}{\isacharparenright}\isanewline
 \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def\ value{\isacharunderscore}eq{\isacharunderscore}true{\isacharparenright}\isanewline
 \ \ \ \ \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}bc{\isacharequal}up{\isadigit{2}}{\isadigit{3}}{\isachardoublequoteclose}{\isacharparenright}\isanewline
 \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def\ value{\isacharunderscore}eq{\isacharunderscore}true{\isacharparenright}\isanewline
 \ \ \ \ \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}bc{\isacharequal}down{\isadigit{2}}{\isadigit{1}}stop{\isachardoublequoteclose}{\isacharparenright}\isanewline
 \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def\ value{\isacharunderscore}eq{\isacharunderscore}true{\isacharparenright}\isanewline
 \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def\ value{\isacharunderscore}eq{\isacharunderscore}true{\isacharparenright}\isanewline
 \ \ \ \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}ba{\isacharequal}up{\isadigit{2}}{\isadigit{3}}stop{\isachardoublequoteclose}{\isacharparenright}\isanewline
 \ \ \ \ \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}bc{\isacharequal}motorstop{\isadigit{2}}{\isachardoublequoteclose}{\isacharparenright}\isanewline
 \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def\ value{\isacharunderscore}eq{\isacharunderscore}true{\isacharparenright}\isanewline
 \ \ \ \ \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}bc{\isacharequal}up{\isadigit{2}}{\isadigit{3}}{\isachardoublequoteclose}{\isacharparenright}\isanewline
 \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def\ value{\isacharunderscore}eq{\isacharunderscore}true{\isacharparenright}\isanewline
 \ \ \ \ \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}bc{\isacharequal}down{\isadigit{2}}{\isadigit{1}}stop{\isachardoublequoteclose}{\isacharparenright}\isanewline
 \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def\ value{\isacharunderscore}eq{\isacharunderscore}true{\isacharparenright}\isanewline
 \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def\ value{\isacharunderscore}eq{\isacharunderscore}true{\isacharparenright}\isanewline
 \ \ \ \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}ba{\isacharequal}up{\isadigit{2}}{\isadigit{3}}{\isachardoublequoteclose}{\isacharparenright}\isanewline
 \ \ \ \ \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}bc{\isacharequal}motorstop{\isadigit{2}}{\isachardoublequoteclose}{\isacharparenright}\isanewline
 \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def\ value{\isacharunderscore}eq{\isacharunderscore}true{\isacharparenright}\isanewline
 \ \ \ \ \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}bc{\isacharequal}up{\isadigit{2}}{\isadigit{3}}stop{\isachardoublequoteclose}{\isacharparenright}\isanewline
 \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def\ value{\isacharunderscore}eq{\isacharunderscore}true{\isacharparenright}\isanewline
 \ \ \ \ \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}bc{\isacharequal}down{\isadigit{2}}{\isadigit{1}}stop{\isachardoublequoteclose}{\isacharparenright}\isanewline
 \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def\ value{\isacharunderscore}eq{\isacharunderscore}true{\isacharparenright}\isanewline
 \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def\ value{\isacharunderscore}eq{\isacharunderscore}true{\isacharparenright}\isanewline
 \ \ \ \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}ba{\isacharequal}down{\isadigit{2}}{\isadigit{1}}stop{\isachardoublequoteclose}{\isacharparenright}\isanewline
 \ \ \ \ \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}bc{\isacharequal}motorstop{\isadigit{2}}{\isachardoublequoteclose}{\isacharparenright}\isanewline
 \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def\ value{\isacharunderscore}eq{\isacharunderscore}true{\isacharparenright}\isanewline
 \ \ \ \ \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}bc{\isacharequal}up{\isadigit{2}}{\isadigit{3}}stop{\isachardoublequoteclose}{\isacharparenright}\isanewline
 \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def\ value{\isacharunderscore}eq{\isacharunderscore}true{\isacharparenright}\isanewline
 \ \ \ \ \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}bc{\isacharequal}up{\isadigit{2}}{\isadigit{3}}{\isachardoublequoteclose}{\isacharparenright}\isanewline
 \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def\ value{\isacharunderscore}eq{\isacharunderscore}true{\isacharparenright}\isanewline
 \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def\ value{\isacharunderscore}eq{\isacharunderscore}true{\isacharparenright}\isanewline
 \ \ \isacommand{apply}\isamarkupfalse%
 \ simp\isanewline
 \ \ \isacommand{apply}\isamarkupfalse%
@@ -961,65 +962,65 @@ outgoing{\isacharunderscore}transitions\ lift\ s\ {\isacharequal}\ {\isacharbrac
 \ \ \ \ \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}bc{\isacharequal}up{\isadigit{3}}{\isadigit{4}}stop{\isachardoublequoteclose}{\isacharparenright}\isanewline
 \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def\ value{\isacharunderscore}eq{\isacharunderscore}true{\isacharparenright}\isanewline
 \ \ \ \ \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}bc{\isacharequal}down{\isadigit{3}}{\isadigit{2}}{\isachardoublequoteclose}{\isacharparenright}\isanewline
 \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def\ value{\isacharunderscore}eq{\isacharunderscore}true{\isacharparenright}\isanewline
 \ \ \ \ \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}bc{\isacharequal}down{\isadigit{3}}{\isadigit{2}}stop{\isachardoublequoteclose}{\isacharparenright}\isanewline
 \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def\ value{\isacharunderscore}eq{\isacharunderscore}true{\isacharparenright}\isanewline
 \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def\ value{\isacharunderscore}eq{\isacharunderscore}true{\isacharparenright}\isanewline
 \ \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}ba{\isacharequal}up{\isadigit{3}}{\isadigit{4}}stop{\isachardoublequoteclose}{\isacharparenright}\isanewline
 \ \ \ \ \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}bc{\isacharequal}motorstop{\isadigit{3}}{\isachardoublequoteclose}{\isacharparenright}\isanewline
 \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def\ value{\isacharunderscore}eq{\isacharunderscore}true{\isacharparenright}\isanewline
 \ \ \ \ \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}bc{\isacharequal}down{\isadigit{3}}{\isadigit{2}}{\isachardoublequoteclose}{\isacharparenright}\isanewline
 \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def\ value{\isacharunderscore}eq{\isacharunderscore}true{\isacharparenright}\isanewline
 \ \ \ \ \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}bc{\isacharequal}down{\isadigit{3}}{\isadigit{2}}stop{\isachardoublequoteclose}{\isacharparenright}\isanewline
 \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def\ value{\isacharunderscore}eq{\isacharunderscore}true{\isacharparenright}\isanewline
 \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def\ value{\isacharunderscore}eq{\isacharunderscore}true{\isacharparenright}\isanewline
 \ \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}ba{\isacharequal}down{\isadigit{3}}{\isadigit{2}}{\isachardoublequoteclose}{\isacharparenright}\isanewline
 \ \ \ \ \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}bc{\isacharequal}motorstop{\isadigit{3}}{\isachardoublequoteclose}{\isacharparenright}\isanewline
 \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def\ value{\isacharunderscore}eq{\isacharunderscore}true{\isacharparenright}\isanewline
 \ \ \ \ \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}bc{\isacharequal}up{\isadigit{3}}{\isadigit{4}}stop{\isachardoublequoteclose}{\isacharparenright}\isanewline
 \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def\ value{\isacharunderscore}eq{\isacharunderscore}true{\isacharparenright}\isanewline
 \ \ \ \ \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}bc{\isacharequal}down{\isadigit{3}}{\isadigit{2}}stop{\isachardoublequoteclose}{\isacharparenright}\isanewline
 \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def\ value{\isacharunderscore}eq{\isacharunderscore}true{\isacharparenright}\isanewline
 \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def\ value{\isacharunderscore}eq{\isacharunderscore}true{\isacharparenright}\isanewline
 \ \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}ba{\isacharequal}down{\isadigit{3}}{\isadigit{2}}stop{\isachardoublequoteclose}{\isacharparenright}\isanewline
 \ \ \ \ \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}bc{\isacharequal}motorstop{\isadigit{3}}{\isachardoublequoteclose}{\isacharparenright}\isanewline
 \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def\ value{\isacharunderscore}eq{\isacharunderscore}true{\isacharparenright}\isanewline
 \ \ \ \ \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}bc{\isacharequal}up{\isadigit{3}}{\isadigit{4}}stop{\isachardoublequoteclose}{\isacharparenright}\isanewline
 \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def\ value{\isacharunderscore}eq{\isacharunderscore}true{\isacharparenright}\isanewline
 \ \ \ \ \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}bc{\isacharequal}down{\isadigit{3}}{\isadigit{2}}{\isachardoublequoteclose}{\isacharparenright}\isanewline
 \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def\ value{\isacharunderscore}eq{\isacharunderscore}true{\isacharparenright}\isanewline
 \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def\ value{\isacharunderscore}eq{\isacharunderscore}true{\isacharparenright}\isanewline
 \ \ \isacommand{apply}\isamarkupfalse%
 \ simp\isanewline
 \isanewline
@@ -1032,37 +1033,37 @@ outgoing{\isacharunderscore}transitions\ lift\ s\ {\isacharequal}\ {\isacharbrac
 \ \ \ \ \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}bc{\isacharequal}down{\isadigit{4}}{\isadigit{3}}stop{\isachardoublequoteclose}{\isacharparenright}\isanewline
 \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def\ value{\isacharunderscore}eq{\isacharunderscore}true{\isacharparenright}\isanewline
 \ \ \ \ \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}bc{\isacharequal}down{\isadigit{4}}{\isadigit{3}}{\isachardoublequoteclose}{\isacharparenright}\isanewline
 \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def\ value{\isacharunderscore}eq{\isacharunderscore}true{\isacharparenright}\isanewline
 \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def\ value{\isacharunderscore}eq{\isacharunderscore}true{\isacharparenright}\isanewline
 \ \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}ba{\isacharequal}down{\isadigit{4}}{\isadigit{3}}stop{\isachardoublequoteclose}{\isacharparenright}\isanewline
 \ \ \ \ \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}bc{\isacharequal}motorstop{\isadigit{4}}{\isachardoublequoteclose}{\isacharparenright}\isanewline
 \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def\ value{\isacharunderscore}eq{\isacharunderscore}true{\isacharparenright}\isanewline
 \ \ \ \ \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}bc{\isacharequal}down{\isadigit{4}}{\isadigit{3}}{\isachardoublequoteclose}{\isacharparenright}\isanewline
 \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def\ value{\isacharunderscore}eq{\isacharunderscore}true{\isacharparenright}\isanewline
 \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def\ value{\isacharunderscore}eq{\isacharunderscore}true{\isacharparenright}\isanewline
 \ \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}ba{\isacharequal}down{\isadigit{4}}{\isadigit{3}}{\isachardoublequoteclose}{\isacharparenright}\isanewline
 \ \ \ \ \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}bc{\isacharequal}down{\isadigit{4}}{\isadigit{3}}stop{\isachardoublequoteclose}{\isacharparenright}\isanewline
 \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def\ value{\isacharunderscore}eq{\isacharunderscore}true{\isacharparenright}\isanewline
 \ \ \ \ \isacommand{apply}\isamarkupfalse%
 \ {\isacharparenleft}case{\isacharunderscore}tac\ {\isachardoublequoteopen}bc{\isacharequal}motorstop{\isadigit{4}}{\isachardoublequoteclose}{\isacharparenright}\isanewline
 \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def\ value{\isacharunderscore}eq{\isacharunderscore}true{\isacharparenright}\isanewline
 \ \ \ \ \isacommand{apply}\isamarkupfalse%
-\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def{\isacharparenright}\isanewline
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ transitions\ choice{\isacharunderscore}def\ apply{\isacharunderscore}guards{\isacharunderscore}def\ Str{\isacharunderscore}def\ value{\isacharunderscore}eq{\isacharunderscore}true{\isacharparenright}\isanewline
 \ \ \ \ \isacommand{apply}\isamarkupfalse%
 \ simp\isanewline
 \isanewline
@@ -1430,265 +1431,266 @@ outgoing{\isacharunderscore}transitions\ lift\ s\ {\isacharequal}\ {\isacharbrac
 %:%818=602%:%
 %:%819=603%:%
 %:%820=603%:%
-%:%825=603%:%
-%:%828=604%:%
-%:%829=605%:%
+%:%821=603%:%
+%:%826=603%:%
+%:%829=604%:%
 %:%830=605%:%
-%:%833=606%:%
-%:%837=606%:%
+%:%831=605%:%
+%:%834=606%:%
 %:%838=606%:%
-%:%839=607%:%
+%:%839=606%:%
 %:%840=607%:%
-%:%841=608%:%
+%:%841=607%:%
 %:%842=608%:%
-%:%843=609%:%
+%:%843=608%:%
 %:%844=609%:%
-%:%845=610%:%
+%:%845=609%:%
 %:%846=610%:%
-%:%847=611%:%
+%:%847=610%:%
 %:%848=611%:%
-%:%849=612%:%
+%:%849=611%:%
 %:%850=612%:%
-%:%851=613%:%
+%:%851=612%:%
 %:%852=613%:%
-%:%853=614%:%
+%:%853=613%:%
 %:%854=614%:%
-%:%855=615%:%
+%:%855=614%:%
 %:%856=615%:%
-%:%857=616%:%
+%:%857=615%:%
 %:%858=616%:%
-%:%859=617%:%
+%:%859=616%:%
 %:%860=617%:%
-%:%861=618%:%
+%:%861=617%:%
 %:%862=618%:%
-%:%863=619%:%
+%:%863=618%:%
 %:%864=619%:%
-%:%865=620%:%
+%:%865=619%:%
 %:%866=620%:%
-%:%867=621%:%
+%:%867=620%:%
 %:%868=621%:%
-%:%869=622%:%
+%:%869=621%:%
 %:%870=622%:%
-%:%871=623%:%
+%:%871=622%:%
 %:%872=623%:%
-%:%873=624%:%
+%:%873=623%:%
 %:%874=624%:%
-%:%875=625%:%
+%:%875=624%:%
 %:%876=625%:%
-%:%877=626%:%
+%:%877=625%:%
 %:%878=626%:%
-%:%879=627%:%
+%:%879=626%:%
 %:%880=627%:%
-%:%881=628%:%
+%:%881=627%:%
 %:%882=628%:%
-%:%883=629%:%
+%:%883=628%:%
 %:%884=629%:%
-%:%885=630%:%
+%:%885=629%:%
 %:%886=630%:%
-%:%887=631%:%
+%:%887=630%:%
 %:%888=631%:%
-%:%889=632%:%
+%:%889=631%:%
 %:%890=632%:%
-%:%891=633%:%
+%:%891=632%:%
 %:%892=633%:%
-%:%893=634%:%
+%:%893=633%:%
 %:%894=634%:%
-%:%895=635%:%
+%:%895=634%:%
 %:%896=635%:%
-%:%897=636%:%
+%:%897=635%:%
 %:%898=636%:%
-%:%899=637%:%
+%:%899=636%:%
 %:%900=637%:%
-%:%901=638%:%
+%:%901=637%:%
 %:%902=638%:%
-%:%903=639%:%
+%:%903=638%:%
 %:%904=639%:%
-%:%905=640%:%
+%:%905=639%:%
 %:%906=640%:%
-%:%907=641%:%
+%:%907=640%:%
 %:%908=641%:%
-%:%909=642%:%
+%:%909=641%:%
 %:%910=642%:%
-%:%911=643%:%
+%:%911=642%:%
 %:%912=643%:%
-%:%913=644%:%
+%:%913=643%:%
 %:%914=644%:%
-%:%915=645%:%
+%:%915=644%:%
 %:%916=645%:%
-%:%917=646%:%
+%:%917=645%:%
 %:%918=646%:%
-%:%919=647%:%
+%:%919=646%:%
 %:%920=647%:%
-%:%921=648%:%
+%:%921=647%:%
 %:%922=648%:%
-%:%923=649%:%
+%:%923=648%:%
 %:%924=649%:%
-%:%925=650%:%
+%:%925=649%:%
 %:%926=650%:%
-%:%927=651%:%
+%:%927=650%:%
 %:%928=651%:%
-%:%929=652%:%
+%:%929=651%:%
 %:%930=652%:%
-%:%931=653%:%
+%:%931=652%:%
 %:%932=653%:%
-%:%933=654%:%
+%:%933=653%:%
 %:%934=654%:%
-%:%935=655%:%
+%:%935=654%:%
 %:%936=655%:%
-%:%937=656%:%
+%:%937=655%:%
 %:%938=656%:%
-%:%939=657%:%
+%:%939=656%:%
 %:%940=657%:%
-%:%941=658%:%
+%:%941=657%:%
 %:%942=658%:%
-%:%943=659%:%
+%:%943=658%:%
 %:%944=659%:%
-%:%945=660%:%
+%:%945=659%:%
 %:%946=660%:%
-%:%947=661%:%
+%:%947=660%:%
 %:%948=661%:%
-%:%949=662%:%
+%:%949=661%:%
 %:%950=662%:%
-%:%951=663%:%
+%:%951=662%:%
 %:%952=663%:%
-%:%953=664%:%
+%:%953=663%:%
 %:%954=664%:%
-%:%955=665%:%
+%:%955=664%:%
 %:%956=665%:%
-%:%957=666%:%
+%:%957=665%:%
 %:%958=666%:%
-%:%959=667%:%
+%:%959=666%:%
 %:%960=667%:%
-%:%961=668%:%
+%:%961=667%:%
 %:%962=668%:%
-%:%963=669%:%
+%:%963=668%:%
 %:%964=669%:%
-%:%965=670%:%
+%:%965=669%:%
 %:%966=670%:%
-%:%967=671%:%
+%:%967=670%:%
 %:%968=671%:%
-%:%969=672%:%
+%:%969=671%:%
 %:%970=672%:%
-%:%971=673%:%
+%:%971=672%:%
 %:%972=673%:%
-%:%973=674%:%
+%:%973=673%:%
 %:%974=674%:%
-%:%975=675%:%
+%:%975=674%:%
 %:%976=675%:%
-%:%977=676%:%
+%:%977=675%:%
 %:%978=676%:%
-%:%979=677%:%
+%:%979=676%:%
 %:%980=677%:%
-%:%981=678%:%
+%:%981=677%:%
 %:%982=678%:%
-%:%983=679%:%
+%:%983=678%:%
 %:%984=679%:%
-%:%985=680%:%
+%:%985=679%:%
 %:%986=680%:%
-%:%987=681%:%
+%:%987=680%:%
 %:%988=681%:%
-%:%989=682%:%
+%:%989=681%:%
 %:%990=682%:%
-%:%991=683%:%
+%:%991=682%:%
 %:%992=683%:%
-%:%993=684%:%
+%:%993=683%:%
 %:%994=684%:%
-%:%995=685%:%
+%:%995=684%:%
 %:%996=685%:%
-%:%997=686%:%
+%:%997=685%:%
 %:%998=686%:%
-%:%999=687%:%
+%:%999=686%:%
 %:%1000=687%:%
-%:%1001=688%:%
+%:%1001=687%:%
 %:%1002=688%:%
-%:%1003=689%:%
+%:%1003=688%:%
 %:%1004=689%:%
-%:%1005=690%:%
+%:%1005=689%:%
 %:%1006=690%:%
-%:%1007=691%:%
+%:%1007=690%:%
 %:%1008=691%:%
-%:%1009=692%:%
+%:%1009=691%:%
 %:%1010=692%:%
-%:%1011=693%:%
+%:%1011=692%:%
 %:%1012=693%:%
-%:%1013=694%:%
+%:%1013=693%:%
 %:%1014=694%:%
-%:%1015=695%:%
+%:%1015=694%:%
 %:%1016=695%:%
-%:%1017=696%:%
+%:%1017=695%:%
 %:%1018=696%:%
-%:%1019=697%:%
+%:%1019=696%:%
 %:%1020=697%:%
-%:%1021=698%:%
+%:%1021=697%:%
 %:%1022=698%:%
-%:%1023=699%:%
+%:%1023=698%:%
 %:%1024=699%:%
-%:%1025=700%:%
-%:%1026=701%:%
+%:%1025=699%:%
+%:%1026=700%:%
 %:%1027=701%:%
-%:%1028=702%:%
+%:%1028=701%:%
 %:%1029=702%:%
-%:%1030=703%:%
+%:%1030=702%:%
 %:%1031=703%:%
-%:%1032=704%:%
+%:%1032=703%:%
 %:%1033=704%:%
-%:%1034=705%:%
+%:%1034=704%:%
 %:%1035=705%:%
-%:%1036=706%:%
+%:%1036=705%:%
 %:%1037=706%:%
-%:%1038=707%:%
+%:%1038=706%:%
 %:%1039=707%:%
-%:%1040=708%:%
+%:%1040=707%:%
 %:%1041=708%:%
-%:%1042=709%:%
+%:%1042=708%:%
 %:%1043=709%:%
-%:%1044=710%:%
+%:%1044=709%:%
 %:%1045=710%:%
-%:%1046=711%:%
+%:%1046=710%:%
 %:%1047=711%:%
-%:%1048=712%:%
+%:%1048=711%:%
 %:%1049=712%:%
-%:%1050=713%:%
+%:%1050=712%:%
 %:%1051=713%:%
-%:%1052=714%:%
+%:%1052=713%:%
 %:%1053=714%:%
-%:%1054=715%:%
+%:%1054=714%:%
 %:%1055=715%:%
-%:%1056=716%:%
+%:%1056=715%:%
 %:%1057=716%:%
-%:%1058=717%:%
+%:%1058=716%:%
 %:%1059=717%:%
-%:%1060=718%:%
+%:%1060=717%:%
 %:%1061=718%:%
-%:%1062=719%:%
+%:%1062=718%:%
 %:%1063=719%:%
-%:%1064=720%:%
+%:%1064=719%:%
 %:%1065=720%:%
-%:%1066=721%:%
+%:%1066=720%:%
 %:%1067=721%:%
-%:%1068=722%:%
-%:%1069=723%:%
+%:%1068=721%:%
+%:%1069=722%:%
 %:%1070=723%:%
-%:%1071=724%:%
+%:%1071=723%:%
 %:%1072=724%:%
-%:%1073=725%:%
+%:%1073=724%:%
 %:%1074=725%:%
-%:%1075=726%:%
+%:%1075=725%:%
 %:%1076=726%:%
-%:%1077=727%:%
+%:%1077=726%:%
 %:%1078=727%:%
-%:%1079=728%:%
-%:%1080=729%:%
+%:%1079=727%:%
+%:%1080=728%:%
 %:%1081=729%:%
-%:%1082=730%:%
+%:%1082=729%:%
 %:%1083=730%:%
-%:%1084=731%:%
+%:%1084=730%:%
 %:%1085=731%:%
-%:%1086=732%:%
+%:%1086=731%:%
 %:%1087=732%:%
 %:%1088=732%:%
-%:%1089=733%:%
+%:%1089=732%:%
 %:%1090=733%:%
-%:%1095=733%:%
-%:%1100=734%:%
-%:%1105=735%:%
+%:%1091=733%:%
+%:%1096=733%:%
+%:%1101=734%:%
+%:%1106=735%:%

@@ -42,7 +42,7 @@ lemma possible_steps_9_invalid_r4:
   assumes "r $ 4 \<notin> {Some (Num 1), Some (Num 2), Some (Num 3), Some (Num 4)}"
   shows "possible_steps lift 9 r l i = {||}"
   apply (simp add: possible_steps_empty lift_def)
-  apply (simp add: transitions can_take)
+  apply (simp add: transitions can_take value_eq_true)
   using assms by simp
 
 declare nxt.simps [simp del]
@@ -297,7 +297,7 @@ lemma ltl_step_9_invalid: "\<not>(\<exists>n. r $ 4 = Some (Num n) \<and> n \<in
   apply (simp del: ltl_step.simps)
   apply (rule ltl_step_none)
   apply (simp add: possible_steps_empty lift_def)
-  apply (simp add: transitions can_take)
+  apply (simp add: transitions can_take value_eq_true)
   by auto
 
 declare ltl_step.simps [simp del]
@@ -364,7 +364,7 @@ lemma ltl_step_motorstop_invalid_r1:
   apply (rule ltl_step_none)
   apply (rule possible_steps_empty_guards_false)
   apply (simp add: label_motorstop)
-  by (simp add: can_take transitions apply_guards_def Str_def)
+  by (simp add: can_take transitions apply_guards_def Str_def value_eq_true)
 
 lemma alw_must_stop_to_open_end:
   "alw ((\<lambda>xs. label (shd xs) = STR ''opendoor'' \<longrightarrow> \<not> nxt (output_eq [Some (Str ''true''), Some (Num n)]) xs) until
@@ -535,7 +535,7 @@ lemma label_up:
 
 lemma not_motorstop: "Label (motorstop n) = l \<and> can_take_transition (motorstop n) i r \<Longrightarrow>
 (l, i) = (STR ''motorstop'', [EFSM.Str ''true'', EFSM.Str ''true''])"
-  apply (simp add: can_take apply_guards_def )
+  apply (simp add: can_take apply_guards_def value_eq_true)
   apply clarsimp
   apply (case_tac "r $ 1 = Some (EFSM.Str ''true'')")
    apply (case_tac "i ! 0 = (EFSM.Str ''true'')")
@@ -790,8 +790,11 @@ lemma invalid_state:
 text_raw\<open>\snip{alwMustStopToOpenAux}{1}{2}{%\<close>
 lemma alw_must_stop_to_open_aux:
   assumes "\<exists>s r p t. j= make_full_observation lift (Some s) r p t"
-  shows "((ev (nxt ((label_eq ''opendoor'') aand (nxt (output_eq [Some(Str ''true''), Some n]))))) impl
-         ((not (nxt (label_eq ''opendoor'' aand (nxt (output_eq [Some(Str ''true''), Some n]))))) until(((label_eq ''motorstop'') or (nxt (output_eq [Some(Str ''true''), Some n])))))) j"
+  shows "((ev (nxt ((label_eq ''opendoor'') aand
+              (nxt (output_eq [Some(Str ''true''), Some n]))))) impl
+         ((not (nxt (label_eq ''opendoor'' aand
+          (nxt (output_eq [Some(Str ''true''), Some n]))))) until
+         (((label_eq ''motorstop'') or (nxt (output_eq [Some(Str ''true''), Some n])))))) j"
 text_raw\<open>}%endsnip\<close>
 proof-
   {assume "(ev (nxt ((label_eq ''opendoor'') aand (nxt (output_eq [Some(Str ''true''), Some n]))))) j \<and>
@@ -925,7 +928,11 @@ qed
 text_raw\<open>\snip{alwMustStopToOpenGen}{1}{2}{%\<close>
 lemma alw_must_stop_to_open_gen:
   assumes "\<exists>s r p t. j= make_full_observation lift (Some s) r p t"
-  shows "alw ((ev (nxt ((label_eq ''opendoor'') aand (nxt (output_eq [Some (Str ''true''), Some  n]))))) impl ((not (nxt ((label_eq ''opendoor'') aand (nxt (output_eq [Some (Str ''true''), Some  n]))))) until (((label_eq ''motorstop'') or (nxt (output_eq [Some (Str ''true''), Some  n])))))) j"
+  shows "alw ((ev (nxt ((label_eq ''opendoor'') aand
+              (nxt (output_eq [Some (Str ''true''), Some  n]))))) impl
+             ((not (nxt ((label_eq ''opendoor'') aand
+              (nxt (output_eq [Some (Str ''true''), Some  n]))))) until
+             (((label_eq ''motorstop'') or (nxt (output_eq [Some (Str ''true''), Some  n])))))) j"
 text_raw\<open>}%endsnip\<close>
   using assms apply coinduct
   apply simp
@@ -946,7 +953,12 @@ text_raw\<open>}%endsnip\<close>
   by fastforce
 
 text_raw\<open>\snip{alwMustStopToOpen}{1}{2}{%\<close>
-lemma alw_must_stop_to_open: "alw ((ev (nxt ((label_eq ''opendoor'') aand (nxt (output_eq [Some (Str ''true''), Some  n]))))) impl ((not (nxt ((label_eq ''opendoor'') aand (nxt (output_eq [Some (Str ''true''), Some  n]))))) until (((label_eq ''motorstop'') or (nxt (output_eq [Some (Str ''true''), Some  n])))))) (watch lift i)"
+lemma alw_must_stop_to_open:
+  "alw ((ev (nxt ((label_eq ''opendoor'') aand
+        (nxt (output_eq [Some (Str ''true''), Some  n]))))) impl
+       ((not (nxt ((label_eq ''opendoor'') aand
+        (nxt (output_eq [Some (Str ''true''), Some  n]))))) until
+       (((label_eq ''motorstop'') or (nxt (output_eq [Some (Str ''true''), Some  n])))))) (watch lift i)"
   using alw_must_stop_to_open_gen by blast
 text_raw\<open>}%endsnip\<close>
 

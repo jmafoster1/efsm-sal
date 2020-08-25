@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2020.1.19)  9 JUL 2020 18:14
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2020.1.19)  25 AUG 2020 18:10
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -873,34 +873,24 @@ teps lift s r (fst e) (snd e) = {|(aa, t)|} $\OMS/cmsy/m/n/9 ^$ \OT1/cmtt/m/sl/
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [32]
-Overfull \hbox (4.6097pt too wide) in paragraph at lines 2200--2200
-[][]  \OT1/cmr/bx/n/9 shows \OT1/cmtt/m/sl/9 "((ev (nxt ((label_eq ''opendoor''
-) aand (nxt (output_eq [Some(Str ''true''), Some n]))))) impl[] 
- []
-
-
-Overfull \hbox (53.17026pt too wide) in paragraph at lines 2200--2200
-[][]         \OT1/cmtt/m/sl/9 ((not (nxt (label_eq ''opendoor'' aand (nxt (outp
-ut_eq [Some(Str ''true''), Some n]))))) until(((label_eq
- []
-
 LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 2
-209.
+212.
+
 (/usr/local/texlive/2019/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/bx/n' in size <9> not available
-(Font)              Font shape `OMS/cmsy/b/n' tried instead on input line 2209.
+(Font)              Font shape `OMS/cmsy/b/n' tried instead on input line 2212.
 
 
-Overfull \hbox (9.18607pt too wide) in paragraph at lines 2208--2211
+Overfull \hbox (9.18607pt too wide) in paragraph at lines 2211--2214
 [][]  \OMS/cmsy/b/n/9 f\OT1/cmr/bx/n/9 assume \OT1/cmtt/m/sl/9 "(ev (nxt ((labe
 l_eq ''opendoor'') aand (nxt (output_eq [Some(Str ''true''), Some n]))))) j $\O
 MS/cmsy/m/n/9 ^$[] 
  []
 
 
-Overfull \hbox (60.61035pt too wide) in paragraph at lines 2212--2214
+Overfull \hbox (60.61035pt too wide) in paragraph at lines 2215--2217
 [][]   \OT1/cmr/bx/n/9 hence \OT1/cmtt/m/sl/9 "((not (nxt (label_eq ''opendoor'
 ' aand (nxt (output_eq [Some(Str ''true''), Some n]))))) until(((label_eq
  []
@@ -909,25 +899,25 @@ Overfull \hbox (60.61035pt too wide) in paragraph at lines 2212--2214
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [33]
-Overfull \hbox (55.13469pt too wide) in paragraph at lines 2245--2247
+Overfull \hbox (55.13469pt too wide) in paragraph at lines 2248--2250
 [][]      \OT1/cmr/bx/n/9 ap-ply \OT1/cmtt/m/sl/9 (simp add: make_full_observat
 ion.ctr[of lift "Some 0"] ltl_step_0_invalid ev_Stream prem_stop_at_none)[] 
  []
 
 
-Overfull \hbox (3.16013pt too wide) in paragraph at lines 2256--2258
+Overfull \hbox (3.16013pt too wide) in paragraph at lines 2259--2261
 [][]        \OT1/cmr/bx/n/9 ap-ply \OT1/cmtt/m/sl/9 (simp add: ltl_step_opendoo
 r ev_Stream make_full_observation.ctr[of lift "Some s" r p t])[] 
  []
 
 
-Overfull \hbox (3.16013pt too wide) in paragraph at lines 2292--2294
+Overfull \hbox (3.16013pt too wide) in paragraph at lines 2295--2297
 [][]         \OT1/cmr/bx/n/9 ap-ply \OT1/cmtt/m/sl/9 (simp add: ltl_step_starts
 earch ev_Stream make_full_observation.ctr[of lift "Some s" r p
  []
 
 
-Overfull \hbox (12.61005pt too wide) in paragraph at lines 2298--2300
+Overfull \hbox (12.61005pt too wide) in paragraph at lines 2301--2303
 [][]       \OT1/cmr/bx/n/9 ap-ply \OT1/cmtt/m/sl/9 (simp add: ev_Stream make_fu
 ll_observation.ctr[of lift "Some s" r p t] ltl_step_ocd_invalid)[] 
  []
@@ -936,91 +926,67 @@ ll_observation.ctr[of lift "Some s" r p t] ltl_step_ocd_invalid)[]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [34]
-Overfull \hbox (83.48445pt too wide) in paragraph at lines 2408--2410
+Overfull \hbox (83.48445pt too wide) in paragraph at lines 2411--2413
 [][]         \OT1/cmr/bx/n/9 ap-ply \OT1/cmtt/m/sl/9 (simp add: ev_Stream make_
 full_observation.ctr[of lift "Some 9"] return ltl_step.simps apply_updates_def)
 [] 
  []
 
 
-Overfull \hbox (69.30957pt too wide) in paragraph at lines 2410--2412
+Overfull \hbox (69.30957pt too wide) in paragraph at lines 2413--2415
 [][]         \OT1/cmr/bx/n/9 ap-ply \OT1/cmtt/m/sl/9 (metis (no_types, lifting)
  insertCI ltl_step_floor_output nat_numeral numeral_Bit0 numeral_eq_one_iff)[] 
 
  []
 
 
-Overfull \hbox (3.16013pt too wide) in paragraph at lines 2415--2417
+Overfull \hbox (3.16013pt too wide) in paragraph at lines 2418--2420
 [][]        \OT1/cmr/bx/n/9 ap-ply \OT1/cmtt/m/sl/9 (simp add: ev_Stream make_f
 ull_observation.ctr[of lift "Some 9"] possible_steps_9_invalid
  []
 
 
-Overfull \hbox (59.85965pt too wide) in paragraph at lines 2418--2420
+Overfull \hbox (59.85965pt too wide) in paragraph at lines 2421--2423
 [][]       \OT1/cmr/bx/n/9 ap-ply \OT1/cmtt/m/sl/9 (case_tac "shd t", simp add:
  ev_Stream make_full_observation.ctr[of lift "Some 9"] ltl_step_9_invalid)[] 
- []
-
-
-Overfull \hbox (9.33466pt too wide) in paragraph at lines 2474--2474
-[][]  \OT1/cmr/bx/n/9 shows \OT1/cmtt/m/sl/9 "alw ((ev (nxt ((label_eq ''opendo
-or'') aand (nxt (output_eq [Some (Str ''true''), Some  n])))))
- []
-
-
-Overfull \hbox (1.1957pt too wide) in paragraph at lines 2474--2474
-\OT1/cmtt/m/sl/9 impl ((not (nxt ((label_eq ''opendoor'') aand (nxt (output_eq 
-[Some (Str ''true''), Some  n]))))) until
  []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [35]
-Overfull \hbox (46.14241pt too wide) in paragraph at lines 2543--2543
-[][]\OT1/cmr/bx/n/9 lemma \OT1/cmtt/m/sl/9 alw_must_stop_to_open: "alw ((ev (nx
-t ((label_eq ''opendoor'') aand (nxt (output_eq [Some (Str ''true''),
+Overfull \hbox (10.64561pt too wide) in paragraph at lines 2555--2555
+[][]       \OT1/cmtt/m/sl/9 (((label_eq ''motorstop'') or (nxt (output_eq [Some
+ (Str ''true''), Some  n])))))) (watch lift i)"[] 
  []
 
 
-Overfull \hbox (38.99538pt too wide) in paragraph at lines 2543--2543
-\OT1/cmtt/m/sl/9 Some  n]))))) impl ((not (nxt ((label_eq ''opendoor'') aand (n
-xt (output_eq [Some (Str ''true''), Some  n])))))
- []
-
-
-Overfull \hbox (5.92065pt too wide) in paragraph at lines 2543--2543
-\OT1/cmtt/m/sl/9 until (((label_eq ''motorstop'') or (nxt (output_eq [Some (Str
- ''true''), Some  n])))))) (watch lift i)"[] 
- []
-
-
-Overfull \hbox (4.6097pt too wide) in paragraph at lines 2546--2547
+Overfull \hbox (4.6097pt too wide) in paragraph at lines 2558--2559
 [][]  \OT1/cmr/bx/n/9 shows \OT1/cmtt/m/sl/9 "((ev (nxt ((label_eq ''opendoor''
 ) aand (nxt (output_eq [Some(Str ''true''), Some n]))))) impl[] 
  []
 
 
-Overfull \hbox (57.89522pt too wide) in paragraph at lines 2547--2548
+Overfull \hbox (57.89522pt too wide) in paragraph at lines 2559--2560
 [][]         \OT1/cmtt/m/sl/9 ((not (nxt (label_eq ''opendoor'' aand (nxt (outp
 ut_eq [Some(Str ''true''), Some n]))))) suntil(((label_eq
  []
 
 
-Overfull \hbox (2.10828pt too wide) in paragraph at lines 2603--2604
+Overfull \hbox (2.10828pt too wide) in paragraph at lines 2615--2616
 [][] $\OMS/cmsy/m/n/9 :$\OT1/cmtt/m/sl/9 ev (nxt ($\OML/cmm/m/it/9 ^^U$\OT1/cmt
 t/m/sl/9 xs. label (shd xs) = STR ''opendoor'' $\OMS/cmsy/m/n/9 ^$ \OT1/cmtt/m/
 sl/9 nxt (output_eq [Some (EFSM.Str ''true''), Some n])
  []
 
 
-Overfull \hbox (23.50954pt too wide) in paragraph at lines 2637--2638
+Overfull \hbox (23.50954pt too wide) in paragraph at lines 2649--2650
 [][]  \OT1/cmr/bx/n/9 shows \OT1/cmtt/m/sl/9 "alw ((ev (nxt ((label_eq ''opendo
 or'') aand (nxt (output_eq [Some(Str ''true''), Some n]))))) impl[] 
  []
 
 
-Overfull \hbox (1.1957pt too wide) in paragraph at lines 2638--2639
+Overfull \hbox (1.1957pt too wide) in paragraph at lines 2650--2651
 [][]      \OT1/cmtt/m/sl/9 ((not (nxt ((label_eq ''opendoor'') aand (nxt (outpu
 t_eq [Some(Str ''true''), Some n]))))) suntil[] 
  []
@@ -1053,7 +1019,7 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 133.
 Here is how much of TeX's memory you used:
  11372 strings out of 492162
  186708 string characters out of 6125277
- 411812 words of memory out of 5000000
+ 410812 words of memory out of 5000000
  15481 multiletter control sequences out of 15000+600000
  14172 words of font info for 56 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1081,7 +1047,7 @@ ive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texli
 ve/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texliv
 e/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb></usr/local/texlive/
 2019/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on root.pdf (39 pages, 282869 bytes).
+Output written on root.pdf (39 pages, 283294 bytes).
 PDF statistics:
  310 PDF objects out of 1000 (max. 8388607)
  239 compressed objects within 3 object streams

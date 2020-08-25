@@ -12,4 +12,4 @@ eod:
 	git push origin master ; \
 
 snippets:
-	sed -n '/\\snip{/,/endsnip/p' output/document/*.tex > snippets.tex; \
+	sed -n '/\\snip{/,/endsnip/p' output/document/*.tex > snippets-ltl.tex; \
