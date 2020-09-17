@@ -1,0 +1,24 @@
+digraph linkedin_ext{
+    graph [rankdir="LR", fontname="Latin Modern Math"];
+    node [color="black", fillcolor="white", shape="circle", style="filled", fontname="Latin Modern Math"];
+    edge [fontname="Latin Modern Math"];
+
+    s0[fillcolor="gray", label=<s<sub>0</sub>>];
+    s1[label=<s<sub>1</sub>>];
+    s2[label=<s<sub>2</sub>>];
+    s3[label=<s<sub>3</sub>>];
+    s4[label=<s<sub>4</sub>>];
+    s5[label=<s<sub>5</sub>>];
+    s6[label=<s<sub>6</sub>>];
+    s7[label=<s<sub>7</sub>>];
+
+    s0->s1[label=<<i>login:1&#91;i<sub>0</sub> = "free"&#93;</i>>];
+    s0->s1[label=<<i>login:1&#91;i<sub>0</sub> = "paid"&#93;</i>>];
+    s1->s2[label=<<i>view:3&#91;i<sub>0</sub> = "friendID", i<sub>0</sub> = "name", i<sub>0</sub> = "HM8p"&#93;</i>>];
+    s1->s4[label=<<i>view:3&#91;i<sub>0</sub> = "otherID", i<sub>0</sub> = "OUT_OF_NETWORK", i<sub>0</sub> = "MNn5"&#93;</i>>];
+    s1->s6[label=<<i>view:3&#91;i<sub>0</sub> = "otherID", i<sub>0</sub> = "name", i<sub>0</sub> = "4zoF"&#93;</i>>];
+    s1->s6[label=<<i>view:3&#91;i<sub>0</sub> = "otherID", i<sub>0</sub> = "name", i<sub>0</sub> = "MNn5"&#93;</i>>];
+    s2->s3[label=<<i>pdf:3&#91;i<sub>0</sub> = "friendID", i<sub>0</sub> = "name", i<sub>0</sub> = "HM8p"&#93;/o<sub>1</sub> := "detailed_pdf_of_friendID"</i>>];
+    s4->s5[label=<<i>pdf:3&#91;i<sub>0</sub> = "otherID", i<sub>0</sub> = "OUT_OF_NETWORK", i<sub>0</sub> = "MNn5"&#93;/o<sub>1</sub> := "summary_pdf_of_otherID"</i>>];
+    s6->s7[label=<<i>pdf:3&#91;i<sub>0</sub> = "otherID", i<sub>0</sub> = "name", i<sub>0</sub> = "4zoF"&#93;/o<sub>1</sub> := "detailed_pdf_of_otherID"</i>>];
+}

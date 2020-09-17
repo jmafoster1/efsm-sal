@@ -206,9 +206,10 @@ lemma pdf_fuzz: "possible_steps linkedIn 6 <> STR ''pdf'' [EFSM.Str ''otherID'',
 
 text_raw\<open>\snip{contradiction}{1}{2}{%\<close>
 lemma contradiction: "apply_outputs (Outputs pdf2) (join_ir (snd (shd i)) <>) \<noteq> [Some (value.Str STR ''detailed_pdf_of_otherID'')]"
+  text_raw\<open>}%endsnip\<close>
   apply (simp add: apply_outputs_def pdf2_def Str_def implode)
   oops
-  text_raw\<open>}%endsnip\<close>
+
 
 lemma possible_steps_linkedIn_6:
   "possible_steps linkedIn 6 <> STR ''pdf'' i = {|(7, pdf2)|} \<or>
@@ -260,8 +261,8 @@ text_raw\<open>\snip{neverDetailed}{1}{2}{%\<close>
 lemma LTL_neverDetailed:
     "(((label_eq  ''login'' aand input_eq [Str ''free'']) impl
      (nxt (alw ((label_eq ''pdf'' aand
-     check_exp (Eq (V (Ip 0)) (L (Str ''otherID'')))) impl 
-     (not (output_eq [Some (Str ''detailed_pdf_of_otherID'')])))))))
+     check_exp (Eq (V (Ip 0)) (L (Str ''otherID'')))) impl
+     (not (nxt (output_eq [Some (Str ''detailed_pdf_of_otherID'')]))))))))
      (watch linkedIn i)"
 text_raw\<open>}%endsnip\<close>
   apply (simp add: ltl_step_alt)
