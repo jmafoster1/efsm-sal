@@ -38,7 +38,7 @@ lemma possible_steps_9_invalid: "(l, i) \<noteq> (STR ''return'', []) \<Longrigh
   apply (simp add: possible_steps_empty lift_def)
   by (simp add: transitions can_take)
 
-lemma possible_steps_9_invalid_r4: 
+lemma possible_steps_9_invalid_r4:
   assumes "r $ 4 \<notin> {Some (Num 1), Some (Num 2), Some (Num 3), Some (Num 4)}"
   shows "possible_steps lift 9 r l i = {||}"
   apply (simp add: possible_steps_empty lift_def)
@@ -959,8 +959,8 @@ lemma alw_must_stop_to_open:
        ((not (nxt ((label_eq ''opendoor'') aand
         (nxt (output_eq [Some (Str ''true''), Some  n]))))) until
        (((label_eq ''motorstop'') or (nxt (output_eq [Some (Str ''true''), Some  n])))))) (watch lift i)"
-  using alw_must_stop_to_open_gen by blast
 text_raw\<open>}%endsnip\<close>
+  using alw_must_stop_to_open_gen by blast
 
 lemma alw_must_stop_to_open_aux_suntil:
   assumes "\<exists>s r p t. j= make_full_observation lift (Some s) r p t"

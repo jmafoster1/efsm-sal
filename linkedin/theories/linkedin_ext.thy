@@ -1,5 +1,5 @@
-theory XXXlinkedin_ext
-imports "../../efsm-ltl/EFSM_LTL"
+theory linkedin_ext
+imports "EFSM.EFSM_LTL"
 begin
 
 declare One_nat_def [simp del]
@@ -8,7 +8,7 @@ definition "login" :: "transition" where
 "login \<equiv> \<lparr>
       Label = STR ''login'',
       Arity = 1,
-      Guard = [
+      Guards = [
             Eq (V (I 0)) (L (Str ''free''))
       ],
       Outputs = [],
@@ -19,7 +19,7 @@ definition "login1" :: "transition" where
 "login1 \<equiv> \<lparr>
       Label = STR ''login'',
       Arity = 1,
-      Guard = [
+      Guards = [
             Eq (V (I 0)) (L (Str ''paid''))
       ],
       Outputs = [],
@@ -30,7 +30,7 @@ definition "view" :: "transition" where
 "view \<equiv> \<lparr>
       Label = STR ''view'',
       Arity = 3,
-      Guard = [
+      Guards = [
             Eq (V (I 0)) (L (Str ''friendID'')),
             Eq (V (I 1)) (L (Str ''name'')),
             Eq (V (I 2)) (L (Str ''HM8p''))
@@ -43,7 +43,7 @@ definition "view1" :: "transition" where
 "view1 \<equiv> \<lparr>
       Label = STR ''view'',
       Arity = 3,
-      Guard = [
+      Guards = [
             Eq (V (I 0)) (L (Str ''otherID'')),
             Eq (V (I 1)) (L (Str ''OUT_OF_NETWORK'')),
             Eq (V (I 2)) (L (Str ''MNn5''))
@@ -56,7 +56,7 @@ definition "view2" :: "transition" where
 "view2 \<equiv> \<lparr>
       Label = STR ''view'',
       Arity = 3,
-      Guard = [
+      Guards = [
             Eq (V (I 0)) (L (Str ''otherID'')),
             Eq (V (I 1)) (L (Str ''name'')),
             Eq (V (I 2)) (L (Str ''4zoF''))
@@ -69,7 +69,7 @@ definition "view3" :: "transition" where
 "view3 \<equiv> \<lparr>
       Label = STR ''view'',
       Arity = 3,
-      Guard = [
+      Guards = [
             Eq (V (I 0)) (L (Str ''otherID'')),
             Eq (V (I 1)) (L (Str ''name'')),
             Eq (V (I 2)) (L (Str ''MNn5''))
@@ -82,7 +82,7 @@ definition "pdf" :: "transition" where
 "pdf \<equiv> \<lparr>
       Label = STR ''pdf'',
       Arity = 3,
-      Guard = [
+      Guards = [
             Eq (V (I 0)) (L (Str ''friendID'')),
             Eq (V (I 1)) (L (Str ''name'')),
             Eq (V (I 2)) (L (Str ''HM8p''))
@@ -97,7 +97,7 @@ definition "pdf1" :: "transition" where
 "pdf1 \<equiv> \<lparr>
       Label = STR ''pdf'',
       Arity = 3,
-      Guard = [
+      Guards = [
             Eq (V (I 0)) (L (Str ''otherID'')),
             Eq (V (I 1)) (L (Str ''OUT_OF_NETWORK'')),
             Eq (V (I 2)) (L (Str ''MNn5''))
@@ -112,7 +112,7 @@ definition "pdf2" :: "transition" where
 "pdf2 \<equiv> \<lparr>
       Label = STR ''pdf'',
       Arity = 3,
-      Guard = [
+      Guards = [
             Eq (V (I 0)) (L (Str ''otherID'')),
             Eq (V (I 1)) (L (Str ''name'')),
             Eq (V (I 2)) (L (Str ''4zoF''))
@@ -172,7 +172,7 @@ lemmas implode = implode_detailedPDF implode_OON implode_name implode_4zoF implo
 lemma login_free: "possible_steps linkedIn 0 <> STR ''login'' [EFSM.Str ''free''] = {|(1, login)|}"
   apply (simp add: possible_steps_singleton linkedIn_def)
   apply safe
-                   apply (simp_all add: apply_guards login_def login1_def Str_def)
+                   apply (simp_all add: apply_guards_def login_def login1_def Str_def)
   using trilean.distinct(1) by presburger
 
 lemma not_view: "l \<noteq> STR ''view'' \<Longrightarrow>
@@ -202,7 +202,7 @@ lemma pdf_6_invalid_inputs: "i \<noteq> [EFSM.Str ''otherID'', EFSM.Str ''name''
 lemma pdf_fuzz: "possible_steps linkedIn 6 <> STR ''pdf'' [EFSM.Str ''otherID'', EFSM.Str ''name'', EFSM.Str ''4zoF''] = {|(7, pdf2)|}"
   apply (simp add: possible_steps_singleton linkedIn_def)
   apply safe
-  by (simp_all add: pdf2_def apply_guards numeral_2_eq_2 Str_def implode One_nat_def)
+  by (simp_all add: pdf2_def apply_guards_def numeral_2_eq_2 Str_def implode One_nat_def)
 
 text_raw\<open>\snip{contradiction}{1}{2}{%\<close>
 lemma contradiction: "apply_outputs (Outputs pdf2) (join_ir (snd (shd i)) <>) \<noteq> [Some (value.Str STR ''detailed_pdf_of_otherID'')]"
@@ -232,6 +232,9 @@ lemma flaw: "alw (\<lambda>xs. label (shd xs) = STR ''pdf'' \<and> value_eq (Som
     apply (simp add: Str_def implode)
   sorry
 
+lemma view_fuzz_2: "possible_steps linkedIn 1 <> STR ''view'' [value.Str STR ''otherID'', EFSM.Str ''name'', EFSM.Str ''MNn5''] = {|(6, view3)|}"
+  using Str_def implode_otherID view_fuzz by auto
+
 lemma after_login: "alw (\<lambda>xs. label (shd xs) = STR ''pdf'' \<and> value_eq (Some (inputs (shd xs) ! 0)) (Some (EFSM.Str ''otherID'')) = trilean.true \<longrightarrow>
               \<not> output_eq [Some (EFSM.Str ''detailed_pdf_of_otherID'')] (stl xs))
      (make_full_observation linkedIn (Some 1) <> p (stl i))"
@@ -242,21 +245,12 @@ proof(coinduction)
     apply (case_tac "(fst (shd (stl i))) = STR ''view''")
      defer
      apply (simp add: not_view)
-     apply standard
-      apply (simp add: output_eq_def ltl_step_alt not_view)
-      apply standard
-    apply (rule disjI2)
-      apply (rule alw_mono[of "nxt (output_eq [])"])
-       apply (simp add: no_output_none_nxt)
-      apply (simp add: output_eq_def)
-     apply standard
      apply (rule disjI2)
       apply (rule alw_mono[of "nxt (output_eq [])"])
       apply (simp add: no_output_none_nxt)
-     apply (simp add: output_eq_def)
-    apply (simp add: output_eq_def)
+     apply simp
     apply (case_tac "(snd (shd (stl i))) = [Str ''otherID'', Str ''name'', Str ''MNn5'']")
-     apply (simp add: ltl_step_alt view_fuzz view3_def)
+     apply (simp add: ltl_step_alt view_fuzz_2 view3_def Str_def[of "''otherID''"] implode_otherID apply_updates_def)
      apply (rule disjI2)
     using flaw[of "[]" "stl (stl i)"]
      apply (simp add: alw_mono) (* Using a broken proof *)
@@ -270,8 +264,8 @@ lemma LTL_neverDetailed:
      (not (output_eq [Some (Str ''detailed_pdf_of_otherID'')])))))))
      (watch linkedIn i)"
 text_raw\<open>}%endsnip\<close>
-  apply (simp add: watch_def ltl_step_alt)
-  apply (simp add: input_eq_def label_eq_def implode_login)
+  apply (simp add: ltl_step_alt)
+  apply (simp add: implode_login)
   apply (simp add: login_free login_def)
   apply standard
   oops
