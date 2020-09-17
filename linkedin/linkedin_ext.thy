@@ -206,7 +206,7 @@ lemma pdf_fuzz: "possible_steps linkedIn 6 <> STR ''pdf'' [EFSM.Str ''otherID'',
 
 text_raw\<open>\snip{contradiction}{1}{2}{%\<close>
 lemma contradiction: "apply_outputs (Outputs pdf2) (join_ir (snd (shd i)) <>) \<noteq> [Some (value.Str STR ''detailed_pdf_of_otherID'')]"
-  text_raw\<open>}%endsnip\<close>
+text_raw\<open>}%endsnip\<close>
   apply (simp add: apply_outputs_def pdf2_def Str_def implode)
   oops
 

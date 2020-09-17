@@ -409,6 +409,5 @@ lemma LTL_neverDetailed:
   apply (simp add: implode login_user apply_updates_login login_def apply_updates_def join_iro_def)
   using after_login[of "[]" "stl i"]
   by (simp add: alw_mono)
-
 text_raw\<open>}%endsnip\<close>
 end

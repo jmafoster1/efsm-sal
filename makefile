@@ -12,4 +12,5 @@ eod:
 	git push origin master ; \
 
 snippets:
+	isabelle build -D.; \
 	sed -n '/\\snip{/,/endsnip/p' output/document/*.tex > snippets-ltl.tex; \
