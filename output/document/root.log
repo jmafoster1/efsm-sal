@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2020.1.19)  18 MAR 2021 17:40
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2020.1.19)  18 MAR 2021 18:06
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -613,9 +613,9 @@ o1_def o2_def o3_def o4_def f1_def f2_def f3_def f4_def o_def[]
  []
 
 
-Overfull \hbox (38.99538pt too wide) in paragraph at lines 475--476
-[][]  \OT1/cmtt/m/sl/9 "lift_lit = {|((0, 9), continit), ((9, 4), return4), ((9
-, 3), return3), ((9, 2), return2), ((9, 1), return1),
+Overfull \hbox (20.09554pt too wide) in paragraph at lines 475--476
+[][]  \OT1/cmtt/m/sl/9 "lift = {|((0, 9), continit), ((9, 4), return4), ((9, 3)
+, return3), ((9, 2), return2), ((9, 1), return1),
  []
 
 
@@ -659,50 +659,41 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [19])
 (./Lift_Controller_LTL.tex
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [20]
-Overfull \hbox (8.34273pt too wide) in paragraph at lines 48--50
-[][]\OT1/cmr/bx/n/9 lemma \OT1/cmtt/m/sl/9 ltl_step_0: "ltl_step lift_lit (Some
- 0) r (STR ''continit'', []) = (Some 9, [], r(1 $:= Some (Str
+Overfull \hbox (50.86737pt too wide) in paragraph at lines 48--50
+[][]\OT1/cmr/bx/n/9 lemma \OT1/cmtt/m/sl/9 ltl_step_0: "ltl_step lift (Some 0) 
+r (STR ''continit'', []) = (Some 9, [], r(1 $:= Some (Str ''true'')))"[] 
  []
 
 
 Overfull \hbox (4.17342pt too wide) in paragraph at lines 66--68
 [][]\OT1/cmr/bx/n/9 lemma \OT1/cmtt/m/sl/9 ltl_step_0_invalid: "e $\OMS/cmsy/m/
 n/9 6\OT1/cmr/m/n/9 =$ \OT1/cmtt/m/sl/9 (STR ''continit'', []) $[][]\OMS/cmsy/m
-/n/9 )$ \OT1/cmtt/m/sl/9 ltl_step lift_lit (Some 0) r e = (None, [],
+/n/9 )$ \OT1/cmtt/m/sl/9 ltl_step lift (Some 0) r e = (None, [], r)"[] 
  []
 
 
-Overfull \hbox (27.79822pt too wide) in paragraph at lines 168--170
+Overfull \hbox (8.89838pt too wide) in paragraph at lines 168--170
 [][]\OT1/cmr/bx/n/9 lemma \OT1/cmtt/m/sl/9 possible_steps_9_invalid: "(l, i) $\
 OMS/cmsy/m/n/9 6\OT1/cmr/m/n/9 =$ \OT1/cmtt/m/sl/9 (STR ''return'', []) $[][]\O
-MS/cmsy/m/n/9 )$ \OT1/cmtt/m/sl/9 possible_steps lift_lit 9 r l i = {||}"[] 
+MS/cmsy/m/n/9 )$ \OT1/cmtt/m/sl/9 possible_steps lift 9 r l i = {||}"[] 
  []
 
 
-Overfull \hbox (2.63736pt too wide) in paragraph at lines 238--239
-[][] $\OMS/cmsy/m/n/9 :$ \OT1/cmtt/m/sl/9 nxt (output_eq [Some (Str ''true''), 
-Some (Num n)]) (make_full_observation lift_lit (Some s) r p t)"[] 
- []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-
+ [20]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [21]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [22]
-Overfull \hbox (1.85098pt too wide) in paragraph at lines 448--449
+Overfull \hbox (4.33434pt too wide) in paragraph at lines 446--447
 [][]    \OT1/cmr/bx/n/9 as-sumes \OT1/cmtt/m/sl/9 "$\OMS/cmsy/m/n/9 9 $ \OT1/cm
-tt/m/sl/9 n r p t. j = (make_full_observation lift_lit (Some n) r p t) $\OMS/cm
-sy/m/n/9 ^$ \OT1/cmtt/m/sl/9 (n = 1 $\OMS/cmsy/m/n/9 _$ \OT1/cmtt/m/sl/9 n = 2 
-$\OMS/cmsy/m/n/9 _$ \OT1/cmtt/m/sl/9 n = 3
+tt/m/sl/9 n r p t. j = (make_full_observation lift (Some n) r p t) $\OMS/cmsy/m
+/n/9 ^$ \OT1/cmtt/m/sl/9 (n = 1 $\OMS/cmsy/m/n/9 _$ \OT1/cmtt/m/sl/9 n = 2 $\OM
+S/cmsy/m/n/9 _$ \OT1/cmtt/m/sl/9 n = 3 $\OMS/cmsy/m/n/9 _$ \OT1/cmtt/m/sl/9 n
  []
 
 
-Overfull \hbox (21.42073pt too wide) in paragraph at lines 451--452
+Overfull \hbox (21.42073pt too wide) in paragraph at lines 449--450
 [][]             \OT1/cmtt/m/sl/9 statename (shd s) $\OMS/cmsy/m/n/9 6\OT1/cmr/
 m/n/9 =$ \OT1/cmtt/m/sl/9 Some 6 $\OMS/cmsy/m/n/9 ^$ \OT1/cmtt/m/sl/9 statename
  (shd s) $\OMS/cmsy/m/n/9 6\OT1/cmr/m/n/9 =$ \OT1/cmtt/m/sl/9 Some 7 $\OMS/cmsy
@@ -711,15 +702,15 @@ $ \OT1/cmtt/m/sl/9 Some 8) until[]
  []
 
 
-Overfull \hbox (1.85098pt too wide) in paragraph at lines 523--524
+Overfull \hbox (4.33434pt too wide) in paragraph at lines 521--522
 [][]    \OT1/cmr/bx/n/9 as-sumes \OT1/cmtt/m/sl/9 "$\OMS/cmsy/m/n/9 9 $ \OT1/cm
-tt/m/sl/9 n r p t. j = (make_full_observation lift_lit (Some n) r p t) $\OMS/cm
-sy/m/n/9 ^$ \OT1/cmtt/m/sl/9 (n = 1 $\OMS/cmsy/m/n/9 _$ \OT1/cmtt/m/sl/9 n = 2 
-$\OMS/cmsy/m/n/9 _$ \OT1/cmtt/m/sl/9 n = 3
+tt/m/sl/9 n r p t. j = (make_full_observation lift (Some n) r p t) $\OMS/cmsy/m
+/n/9 ^$ \OT1/cmtt/m/sl/9 (n = 1 $\OMS/cmsy/m/n/9 _$ \OT1/cmtt/m/sl/9 n = 2 $\OM
+S/cmsy/m/n/9 _$ \OT1/cmtt/m/sl/9 n = 3 $\OMS/cmsy/m/n/9 _$ \OT1/cmtt/m/sl/9 n
  []
 
 
-Overfull \hbox (12.35814pt too wide) in paragraph at lines 525--526
+Overfull \hbox (12.35814pt too wide) in paragraph at lines 523--524
 [][]       \OT1/cmtt/m/sl/9 ((not (label_eq ''opendoor'' aand nxt (output_eq [S
 ome (Str ''true''), Some (Num n)]))) until ($\OML/cmm/m/it/9 ^^U$\OT1/cmtt/m/sl
 /9 s.
@@ -728,8 +719,8 @@ ome (Str ''true''), Some (Num n)]))) until ($\OML/cmm/m/it/9 ^^U$\OT1/cmtt/m/sl
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [23]
-Overfull \hbox (7.24585pt too wide) in paragraph at lines 589--590
+ [22]
+Overfull \hbox (7.24585pt too wide) in paragraph at lines 587--588
 [][]          \OT1/cmtt/m/sl/9 statename (shd s) $\OMS/cmsy/m/n/9 6\OT1/cmr/m/n
 /9 =$ \OT1/cmtt/m/sl/9 Some 6 $\OMS/cmsy/m/n/9 ^$ \OT1/cmtt/m/sl/9 statename (s
 hd s) $\OMS/cmsy/m/n/9 6\OT1/cmr/m/n/9 =$ \OT1/cmtt/m/sl/9 Some 7 $\OMS/cmsy/m/
@@ -738,68 +729,61 @@ OT1/cmtt/m/sl/9 Some 8) until[]
  []
 
 
-Overfull \hbox (9.33466pt too wide) in paragraph at lines 737--738
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [23]
+Overfull \hbox (9.33466pt too wide) in paragraph at lines 735--736
 [][]    \OT1/cmr/bx/n/9 shows \OT1/cmtt/m/sl/9 "((not (label_eq ''opendoor'' aa
 nd nxt (output_eq [Some (Str ''true''), Some (Num n)]))) until
+ []
+
+
+Overfull \hbox (20.78792pt too wide) in paragraph at lines 801--803
+[][]    \OT1/cmr/bx/n/9 us-ing \OT1/cmtt/m/sl/9 must_stop_to_open_aux3[of "(mak
+e_full_observation lift (Some (nat na)) (apply_updates [] (join_ir
+ []
+
+
+Overfull \hbox (47.13434pt too wide) in paragraph at lines 821--822
+[][]  \OT1/cmr/bx/n/9 shows \OT1/cmtt/m/sl/9 "((not (label_eq ''opendoor'' aand
+ nxt (output_eq [Some (Str ''true''), Some (Num n)]))) until (label_eq
  []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [24]
-Overfull \hbox (39.68776pt too wide) in paragraph at lines 803--805
-[][]    \OT1/cmr/bx/n/9 us-ing \OT1/cmtt/m/sl/9 must_stop_to_open_aux3[of "(mak
-e_full_observation lift_lit (Some (nat na)) (apply_updates [] (join_ir
- []
-
-
-Overfull \hbox (47.13434pt too wide) in paragraph at lines 823--824
-[][]  \OT1/cmr/bx/n/9 shows \OT1/cmtt/m/sl/9 "((not (label_eq ''opendoor'' aand
- nxt (output_eq [Some (Str ''true''), Some (Num n)]))) until (label_eq
- []
-
-
-Overfull \hbox (44.41272pt too wide) in paragraph at lines 853--855
+Overfull \hbox (25.51288pt too wide) in paragraph at lines 851--853
 [][]  \OT1/cmr/bx/n/9 us-ing \OT1/cmtt/m/sl/9 must_stop_to_open_aux1a[of "(make
-_full_observation lift_lit (Some 9) (r(1 $:= Some (EFSM.Str ''true'')))
+_full_observation lift (Some 9) (r(1 $:= Some (EFSM.Str ''true'')))
  []
 
 
-Overfull \hbox (11.10959pt too wide) in paragraph at lines 865--867
+Overfull \hbox (6.38463pt too wide) in paragraph at lines 863--865
 [][]\OT1/cmr/bx/n/9 lemma \OT1/cmtt/m/sl/9 ltl_step_9_invalid: "$\OMS/cmsy/m/n/
 9 :$\OT1/cmtt/m/sl/9 ($\OMS/cmsy/m/n/9 9 $\OT1/cmtt/m/sl/9 n. r $ 4 = Some (Num
  n) $\OMS/cmsy/m/n/9 ^$ \OT1/cmtt/m/sl/9 n $\OMS/cmsy/m/n/9 2$ \OT1/cmtt/m/sl/9
- {1, 2, 3, 4}) $[][]\OMS/cmsy/m/n/9 )$ \OT1/cmtt/m/sl/9 ltl_step lift_lit (Some
+ {1, 2, 3, 4}) $[][]\OMS/cmsy/m/n/9 )$ \OT1/cmtt/m/sl/9 ltl_step lift (Some 9)
+ []
 
+
+Overfull \hbox (24.8205pt too wide) in paragraph at lines 950--951
+[][] \OT1/cmtt/m/sl/9 ltl_step lift (Some n) r (STR ''motorstop'', [EFSM.Str ''
+true'', EFSM.Str ''true'']) = (Some (n + 4), [Some
  []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [25]
-Overfull \hbox (15.37057pt too wide) in paragraph at lines 952--953
-[][] \OT1/cmtt/m/sl/9 ltl_step lift_lit (Some n) r (STR ''motorstop'', [EFSM.St
-r ''true'', EFSM.Str ''true'']) = (Some (n + 4),
- []
-
-
-Overfull \hbox (15.37057pt too wide) in paragraph at lines 1025--1026
-[][] \OT1/cmtt/m/sl/9 ltl_step lift_lit (Some n) r (STR ''motorstop'', [EFSM.St
-r ''true'', EFSM.Str ''true'']) = (None, [], r)"[] 
- []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [26]
-Overfull \hbox (15.56929pt too wide) in paragraph at lines 1050--1051
+Overfull \hbox (15.56929pt too wide) in paragraph at lines 1048--1049
 [][]  \OT1/cmtt/m/sl/9 "alw (($\OML/cmm/m/it/9 ^^U$\OT1/cmtt/m/sl/9 xs. label (
 shd xs) = STR ''opendoor'' $[][]\OMS/cmsy/m/n/9 !$ $:$ \OT1/cmtt/m/sl/9 nxt (ou
 tput_eq [Some (Str ''true''), Some (Num n)])
  []
 
 
-Overfull \hbox (28.2345pt too wide) in paragraph at lines 1085--1086
+Overfull \hbox (28.2345pt too wide) in paragraph at lines 1083--1084
 [][]    \OT1/cmr/bx/n/9 shows \OT1/cmtt/m/sl/9 "alw ((not (label_eq ''opendoor'
 ' aand nxt (output_eq [Some (Str ''true''), Some (Num n)]))) until
  []
@@ -807,14 +791,14 @@ Overfull \hbox (28.2345pt too wide) in paragraph at lines 1085--1086
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [27]
-Overfull \hbox (10.64561pt too wide) in paragraph at lines 1212--1213
+ [26]
+Overfull \hbox (10.64561pt too wide) in paragraph at lines 1210--1211
 [][]       \OT1/cmtt/m/sl/9 ((not (nxt (label_eq ''opendoor ''))) until(((label
 _eq ''motorstop'') or (nxt (output_eq [Some(Str
  []
 
 
-Overfull \hbox (5.25952pt too wide) in paragraph at lines 1222--1224
+Overfull \hbox (5.25952pt too wide) in paragraph at lines 1220--1222
 [][]  \OT1/cmr/bx/n/9 have \OT1/cmtt/m/sl/9 aux: "$\OMS/cmsy/m/n/9 :$\OT1/cmtt/
 m/sl/9 ev (nxt ($\OML/cmm/m/it/9 ^^U$\OT1/cmtt/m/sl/9 xs. label_eq ''opendoor '
 ' xs $\OMS/cmsy/m/n/9 ^$ \OT1/cmtt/m/sl/9 nxt (output_eq [Some (EFSM.Str ''true
@@ -822,27 +806,30 @@ m/sl/9 ev (nxt ($\OML/cmm/m/it/9 ^^U$\OT1/cmtt/m/sl/9 xs. label_eq ''opendoor '
  []
 
 
-Overfull \hbox (3.07909pt too wide) in paragraph at lines 1224--1225
+Overfull \hbox (7.80405pt too wide) in paragraph at lines 1222--1223
 [][]     \OT1/cmtt/m/sl/9 ($[]$statename = Some s, datastate = r, action = shd 
-t, output = p$[]$ ## make_full_observation lift_lit
+t, output = p$[]$ ## make_full_observation lift None
  []
 
 
-Overfull \hbox (22.04549pt too wide) in paragraph at lines 1298--1300
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [27]
+Overfull \hbox (3.14565pt too wide) in paragraph at lines 1296--1298
 [][]\OT1/cmr/bx/n/9 lemma \OT1/cmtt/m/sl/9 opendoor_invalid: "s $[]$ {5, 6, 7, 
-8} $[][]\OMS/cmsy/m/n/9 )$ \OT1/cmtt/m/sl/9 ltl_step lift_lit (Some s) r (STR '
-'opendoor'', b) = (None,
+8} $[][]\OMS/cmsy/m/n/9 )$ \OT1/cmtt/m/sl/9 ltl_step lift (Some s) r (STR ''ope
+ndoor'', b) = (None,
  []
 
 
-Overfull \hbox (12.59557pt too wide) in paragraph at lines 1318--1320
+Overfull \hbox (7.8706pt too wide) in paragraph at lines 1316--1318
 [][]\OT1/cmr/bx/n/9 lemma \OT1/cmtt/m/sl/9 opendoor_invalid_nat: "s $[]$ {5, 6,
- 7, 8} $[][]\OMS/cmsy/m/n/9 )$ \OT1/cmtt/m/sl/9 ltl_step lift_lit (Some (nat s)
-) r (STR ''opendoor'',
+ 7, 8} $[][]\OMS/cmsy/m/n/9 )$ \OT1/cmtt/m/sl/9 ltl_step lift (Some (nat s)) r 
+(STR ''opendoor'', b)
  []
 
 
-Overfull \hbox (24.78578pt too wide) in paragraph at lines 1358--1360
+Overfull \hbox (24.78578pt too wide) in paragraph at lines 1356--1358
 [][]\OT1/cmr/bx/n/9 lemma \OT1/cmtt/m/sl/9 stop_at_None: "alw ($\OML/cmm/m/it/9
  ^^U$\OT1/cmtt/m/sl/9 xs. label (shd (stl xs)) = a $[][]\OMS/cmsy/m/n/9 !$ \OT1
 /cmtt/m/sl/9 output (shd (stl (stl xs))) $\OMS/cmsy/m/n/9 6\OT1/cmr/m/n/9 =$ \O
@@ -850,9 +837,13 @@ T1/cmtt/m/sl/9 [Some (EFSM.Str
  []
 
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Overfull \hbox (10.11653pt too wide) in paragraph at lines 1401--1402
+[][] \OT1/cmtt/m/sl/9 ev ($\OML/cmm/m/it/9 ^^U$\OT1/cmtt/m/sl/9 a. label (shd (
+stl a)) = STR ''opendoor'' $\OMS/cmsy/m/n/9 ^$ \OT1/cmtt/m/sl/9 output_eq [Some
+ (EFSM.Str ''true''), Some n] (stl (stl
+ []
 
- [28]
+
 Overfull \hbox (10.11653pt too wide) in paragraph at lines 1403--1404
 [][] \OT1/cmtt/m/sl/9 ev ($\OML/cmm/m/it/9 ^^U$\OT1/cmtt/m/sl/9 a. label (shd (
 stl a)) = STR ''opendoor'' $\OMS/cmsy/m/n/9 ^$ \OT1/cmtt/m/sl/9 output_eq [Some
@@ -860,14 +851,7 @@ stl a)) = STR ''opendoor'' $\OMS/cmsy/m/n/9 ^$ \OT1/cmtt/m/sl/9 output_eq [Some
  []
 
 
-Overfull \hbox (10.11653pt too wide) in paragraph at lines 1405--1406
-[][] \OT1/cmtt/m/sl/9 ev ($\OML/cmm/m/it/9 ^^U$\OT1/cmtt/m/sl/9 a. label (shd (
-stl a)) = STR ''opendoor'' $\OMS/cmsy/m/n/9 ^$ \OT1/cmtt/m/sl/9 output_eq [Some
- (EFSM.Str ''true''), Some n] (stl (stl
- []
-
-
-Overfull \hbox (38.64676pt too wide) in paragraph at lines 1427--1429
+Overfull \hbox (38.64676pt too wide) in paragraph at lines 1425--1427
 [][]\OT1/cmr/bx/n/9 lemma \OT1/cmtt/m/sl/9 prem_stop_at_none_scons: "$\OMS/cmsy
 /m/n/9 :$ \OT1/cmtt/m/sl/9 ev ($\OML/cmm/m/it/9 ^^U$\OT1/cmtt/m/sl/9 a. label (
 shd (stl a)) = STR ''opendoor'' $\OMS/cmsy/m/n/9 ^$ \OT1/cmtt/m/sl/9 output_eq 
@@ -875,7 +859,7 @@ shd (stl a)) = STR ''opendoor'' $\OMS/cmsy/m/n/9 ^$ \OT1/cmtt/m/sl/9 output_eq
  []
 
 
-Overfull \hbox (10.297pt too wide) in paragraph at lines 1450--1452
+Overfull \hbox (10.297pt too wide) in paragraph at lines 1448--1450
 [][]\OT1/cmr/bx/n/9 lemma \OT1/cmtt/m/sl/9 prem_stop_at_none: "$\OMS/cmsy/m/n/9
  :$ \OT1/cmtt/m/sl/9 ev ($\OML/cmm/m/it/9 ^^U$\OT1/cmtt/m/sl/9 a. label (shd (s
 tl a)) = STR ''opendoor'' $\OMS/cmsy/m/n/9 ^$ \OT1/cmtt/m/sl/9 output_eq [Some 
@@ -885,18 +869,18 @@ tl a)) = STR ''opendoor'' $\OMS/cmsy/m/n/9 ^$ \OT1/cmtt/m/sl/9 output_eq [Some
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [29]
+ [28]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [30]
-Overfull \hbox (5.44853pt too wide) in paragraph at lines 1757--1758
+ [29]
+Overfull \hbox (14.89845pt too wide) in paragraph at lines 1755--1756
 [][]  \OT1/cmtt/m/sl/9 "s $\OMS/cmsy/m/n/9 2$ \OT1/cmtt/m/sl/9 {5, 6, 7, 8} $[]
-[]\OMS/cmsy/m/n/9 )$ \OT1/cmtt/m/sl/9 ltl_step lift_lit (Some s) r (STR ''opend
-oor'', [EFSM.Str ''true'']) = (Some s,
+[]\OMS/cmsy/m/n/9 )$ \OT1/cmtt/m/sl/9 ltl_step lift (Some s) r (STR ''opendoor'
+', [EFSM.Str ''true'']) = (Some s, [Some
  []
 
 
-Overfull \hbox (3.16013pt too wide) in paragraph at lines 1766--1768
+Overfull \hbox (3.16013pt too wide) in paragraph at lines 1764--1766
 [][]    \OT1/cmr/bx/n/9 ap-ply \OT1/cmtt/m/sl/9 (simp add: possible_steps_alt3 
 split_label label_opendoor transitions Abs_ffilter set_eq_iff)[] 
  []
@@ -904,139 +888,118 @@ split_label label_opendoor transitions Abs_ffilter set_eq_iff)[]
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [31]
-Overfull \hbox (5.92065pt too wide) in paragraph at lines 1979--1980
-[][]  \OT1/cmtt/m/sl/9 ltl_step lift_lit (Some s) r (STR ''startsearch'', [EFSM
-.Str ''true'', EFSM.Str ''false'']) = (Some 9,
+ [30]
+Overfull \hbox (5.92065pt too wide) in paragraph at lines 1975--1976
+[][]  \OT1/cmtt/m/sl/9 ltl_step lift (Some s) r (STR ''startsearch'', [EFSM.Str
+ ''true'', EFSM.Str ''false'']) = (Some 9, [],
  []
 
 
-Overfull \hbox (1.95132pt too wide) in paragraph at lines 2041--2042
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [31]
+Overfull \hbox (4.43468pt too wide) in paragraph at lines 2035--2036
 [][]       \OT1/cmtt/m/sl/9 ($\OMS/cmsy/m/n/9 9 $\OT1/cmtt/m/sl/9 t. possible_s
-teps lift_lit s r (fst e) (snd e) = {|(aa, t)|} $\OMS/cmsy/m/n/9 ^$ \OT1/cmtt/m
-/sl/9 evaluate_outputs t (snd e) r =
+teps lift s r (fst e) (snd e) = {|(aa, t)|} $\OMS/cmsy/m/n/9 ^$ \OT1/cmtt/m/sl/
+9 evaluate_outputs t (snd e) r = b $\OMS/cmsy/m/n/9 ^$
  []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [32]
-Overfull \hbox (13.68462pt too wide) in paragraph at lines 2082--2083
-[][]  \OT1/cmtt/m/sl/9 "s $\OMS/cmsy/m/n/9 2$ \OT1/cmtt/m/sl/9 {1, 2, 3, 4} $[]
-[]\OMS/cmsy/m/n/9 )$ \OT1/cmtt/m/sl/9 fst (snd (ltl_step lift_lit (Some s) r e)
-) $\OMS/cmsy/m/n/9 6\OT1/cmr/m/n/9 =$ \OT1/cmtt/m/sl/9 [Some (EFSM.Str ''true''
-), Some n]"[] 
- []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [33]
 LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 2
-214.
+208.
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/bx/n' in size <9> not available
-(Font)              Font shape `OMS/cmsy/b/n' tried instead on input line 2214.
+(Font)              Font shape `OMS/cmsy/b/n' tried instead on input line 2208.
 
 
-Overfull \hbox (9.18607pt too wide) in paragraph at lines 2213--2216
+Overfull \hbox (9.18607pt too wide) in paragraph at lines 2207--2210
 [][]  \OMS/cmsy/b/n/9 f\OT1/cmr/bx/n/9 assume \OT1/cmtt/m/sl/9 "(ev (nxt ((labe
 l_eq ''opendoor'') aand (nxt (output_eq [Some(Str ''true''), Some n]))))) j $\O
 MS/cmsy/m/n/9 ^$[] 
  []
 
 
-Overfull \hbox (60.61035pt too wide) in paragraph at lines 2217--2219
+Overfull \hbox (60.61035pt too wide) in paragraph at lines 2211--2213
 [][]   \OT1/cmr/bx/n/9 hence \OT1/cmtt/m/sl/9 "((not (nxt (label_eq ''opendoor'
 ' aand (nxt (output_eq [Some(Str ''true''), Some n]))))) until(((label_eq
  []
 
 
-Overfull \hbox (74.03453pt too wide) in paragraph at lines 2250--2252
+Overfull \hbox (55.13469pt too wide) in paragraph at lines 2244--2246
 [][]      \OT1/cmr/bx/n/9 ap-ply \OT1/cmtt/m/sl/9 (simp add: make_full_observat
-ion.ctr[of lift_lit "Some 0"] ltl_step_0_invalid ev_Stream prem_stop_at_none)[]
- 
+ion.ctr[of lift "Some 0"] ltl_step_0_invalid ev_Stream prem_stop_at_none)[] 
  []
 
 
-Overfull \hbox (3.16013pt too wide) in paragraph at lines 2261--2263
+Overfull \hbox (3.16013pt too wide) in paragraph at lines 2255--2257
 [][]        \OT1/cmr/bx/n/9 ap-ply \OT1/cmtt/m/sl/9 (simp add: ltl_step_opendoo
-r ev_Stream make_full_observation.ctr[of lift_lit "Some s" r p
- []
-
-
-Overfull \hbox (3.16013pt too wide) in paragraph at lines 2297--2299
-[][]         \OT1/cmr/bx/n/9 ap-ply \OT1/cmtt/m/sl/9 (simp add: ltl_step_starts
-earch ev_Stream make_full_observation.ctr[of lift_lit "Some s"
- []
-
-
-Overfull \hbox (31.50989pt too wide) in paragraph at lines 2303--2305
-[][]       \OT1/cmr/bx/n/9 ap-ply \OT1/cmtt/m/sl/9 (simp add: ev_Stream make_fu
-ll_observation.ctr[of lift_lit "Some s" r p t] ltl_step_ocd_invalid)[] 
+r ev_Stream make_full_observation.ctr[of lift "Some s" r p t])[] 
  []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [34]
-Overfull \hbox (12.61005pt too wide) in paragraph at lines 2351--2353
+ [33]
+Overfull \hbox (3.16013pt too wide) in paragraph at lines 2291--2293
+[][]         \OT1/cmr/bx/n/9 ap-ply \OT1/cmtt/m/sl/9 (simp add: ltl_step_starts
+earch ev_Stream make_full_observation.ctr[of lift "Some s" r p
+ []
+
+
+Overfull \hbox (12.61005pt too wide) in paragraph at lines 2297--2299
+[][]       \OT1/cmr/bx/n/9 ap-ply \OT1/cmtt/m/sl/9 (simp add: ev_Stream make_fu
+ll_observation.ctr[of lift "Some s" r p t] ltl_step_ocd_invalid)[] 
+ []
+
+
+Overfull \hbox (83.48445pt too wide) in paragraph at lines 2407--2409
 [][]         \OT1/cmr/bx/n/9 ap-ply \OT1/cmtt/m/sl/9 (simp add: ev_Stream make_
-full_observation.ctr[of lift_lit "Some s" r p t] ltl_step.simps)[] 
+full_observation.ctr[of lift "Some 9"] return ltl_step.simps apply_updates_def)
+[] 
  []
 
 
-Overfull \hbox (7.88509pt too wide) in paragraph at lines 2362--2364
-[][]        \OT1/cmr/bx/n/9 ap-ply \OT1/cmtt/m/sl/9 (simp add: ev_Stream make_f
-ull_observation.ctr[of lift_lit "Some s" r p t] ltl_step.simps)[] 
- []
-
-
-Overfull \hbox (12.61005pt too wide) in paragraph at lines 2413--2415
-[][]         \OT1/cmr/bx/n/9 ap-ply \OT1/cmtt/m/sl/9 (simp add: ev_Stream make_
-full_observation.ctr[of lift_lit "Some 9"] return ltl_step.simps
- []
-
-
-Overfull \hbox (69.30957pt too wide) in paragraph at lines 2415--2417
+Overfull \hbox (69.30957pt too wide) in paragraph at lines 2409--2411
 [][]         \OT1/cmr/bx/n/9 ap-ply \OT1/cmtt/m/sl/9 (metis (no_types, lifting)
  insertCI ltl_step_floor_output nat_numeral numeral_Bit0 numeral_eq_one_iff)[] 
 
  []
 
 
-Overfull \hbox (22.05997pt too wide) in paragraph at lines 2420--2422
-[][]        \OT1/cmr/bx/n/9 ap-ply \OT1/cmtt/m/sl/9 (simp add: ev_Stream make_f
-ull_observation.ctr[of lift_lit "Some 9"] possible_steps_9_invalid
- []
-
-
-Overfull \hbox (78.75949pt too wide) in paragraph at lines 2423--2425
-[][]       \OT1/cmr/bx/n/9 ap-ply \OT1/cmtt/m/sl/9 (case_tac "shd t", simp add:
- ev_Stream make_full_observation.ctr[of lift_lit "Some 9"] ltl_step_9_invalid)[
-] 
- []
-
-
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [35]
-Overfull \hbox (10.64561pt too wide) in paragraph at lines 2541--2541
-[][]       \OT1/cmtt/m/sl/9 (((label_eq ''motorstop'') or (nxt (output_eq [Some
- (Str ''true''), Some  n])))))) (watch lift_lit
+ [34]
+Overfull \hbox (3.16013pt too wide) in paragraph at lines 2414--2416
+[][]        \OT1/cmr/bx/n/9 ap-ply \OT1/cmtt/m/sl/9 (simp add: ev_Stream make_f
+ull_observation.ctr[of lift "Some 9"] possible_steps_9_invalid
  []
 
 
-Overfull \hbox (4.6097pt too wide) in paragraph at lines 2561--2562
+Overfull \hbox (59.85965pt too wide) in paragraph at lines 2417--2419
+[][]       \OT1/cmr/bx/n/9 ap-ply \OT1/cmtt/m/sl/9 (case_tac "shd t", simp add:
+ ev_Stream make_full_observation.ctr[of lift "Some 9"] ltl_step_9_invalid)[] 
+ []
+
+
+Overfull \hbox (10.64561pt too wide) in paragraph at lines 2535--2535
+[][]       \OT1/cmtt/m/sl/9 (((label_eq ''motorstop'') or (nxt (output_eq [Some
+ (Str ''true''), Some  n])))))) (watch lift i)"[] 
+ []
+
+
+Overfull \hbox (4.6097pt too wide) in paragraph at lines 2555--2556
 [][]  \OT1/cmr/bx/n/9 shows \OT1/cmtt/m/sl/9 "((ev (nxt ((label_eq ''opendoor''
 ) aand (nxt (output_eq [Some(Str ''true''), Some n]))))) impl[] 
  []
 
 
-Overfull \hbox (57.89522pt too wide) in paragraph at lines 2562--2563
+Overfull \hbox (57.89522pt too wide) in paragraph at lines 2556--2557
 [][]         \OT1/cmtt/m/sl/9 ((not (nxt (label_eq ''opendoor'' aand (nxt (outp
 ut_eq [Some(Str ''true''), Some n]))))) suntil(((label_eq
  []
@@ -1044,53 +1007,48 @@ ut_eq [Some(Str ''true''), Some n]))))) suntil(((label_eq
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [36]
-Overfull \hbox (2.10828pt too wide) in paragraph at lines 2618--2619
+ [35]
+Overfull \hbox (2.10828pt too wide) in paragraph at lines 2612--2613
 [][] $\OMS/cmsy/m/n/9 :$\OT1/cmtt/m/sl/9 ev (nxt ($\OML/cmm/m/it/9 ^^U$\OT1/cmt
 t/m/sl/9 xs. label (shd xs) = STR ''opendoor'' $\OMS/cmsy/m/n/9 ^$ \OT1/cmtt/m/
 sl/9 nxt (output_eq [Some (EFSM.Str ''true''), Some n])
  []
 
 
-Overfull \hbox (23.50954pt too wide) in paragraph at lines 2652--2653
+Overfull \hbox (23.50954pt too wide) in paragraph at lines 2646--2647
 [][]  \OT1/cmr/bx/n/9 shows \OT1/cmtt/m/sl/9 "alw ((ev (nxt ((label_eq ''opendo
 or'') aand (nxt (output_eq [Some(Str ''true''), Some n]))))) impl[] 
  []
 
 
-Overfull \hbox (1.1957pt too wide) in paragraph at lines 2653--2654
+Overfull \hbox (1.1957pt too wide) in paragraph at lines 2647--2648
 [][]      \OT1/cmtt/m/sl/9 ((not (nxt ((label_eq ''opendoor'') aand (nxt (outpu
 t_eq [Some(Str ''true''), Some n]))))) suntil[] 
  []
 
 
-Overfull \hbox (36.69249pt too wide) in paragraph at lines 2716--2718
+Overfull \hbox (36.69249pt too wide) in paragraph at lines 2710--2712
 [][]\OT1/cmr/bx/n/9 lemma \OT1/cmtt/m/sl/9 LTL_must_stop_lift_to_open_door: "al
 w ((ev (nxt ((label_eq ''opendoor'') aand (nxt (output_eq [Some(Str
  []
 
 
-Overfull \hbox (1.1957pt too wide) in paragraph at lines 2718--2719
+Overfull \hbox (1.1957pt too wide) in paragraph at lines 2712--2713
 [][]      \OT1/cmtt/m/sl/9 ((not (nxt ((label_eq ''opendoor'') aand (nxt (outpu
 t_eq [Some(Str ''true''), Some n]))))) suntil[] 
  []
 
 
-Overfull \hbox (15.37057pt too wide) in paragraph at lines 2719--2720
-[][]      \OT1/cmtt/m/sl/9 (((label_eq ''motorstop'') or (nxt (output_eq [Some(
-Str ''true''), Some n])))))) (watch lift_lit t)"[] 
- []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-) (./Linked_In.tex
+ [36])
+(./Linked_In.tex
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [37]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [38]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [39]
 Overfull \hbox (17.79265pt too wide) in paragraph at lines 328--330
 [][]\OT1/cmr/bx/n/9 lemma \OT1/cmtt/m/sl/9 implode_detailedPDF: "String.implode
  ''detailed_pdf_of_otherID'' = STR ''detailed_pdf_of_otherID''"[] 
@@ -1109,6 +1067,9 @@ w2_def  view3_def apply_guards_def join_ir_nth Str_def implode)[]
  []
 
 
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [39]
 Overfull \hbox (11.338pt too wide) in paragraph at lines 455--457
 [][]  \OT1/cmr/bx/n/9 us-ing \OT1/cmtt/m/sl/9 nth_equalityI[of "[value.Str STR 
 ''otherID'', value.Str STR ''name'', value.Str STR ''4zoF'']" i][] 
@@ -1121,9 +1082,6 @@ ft' less_2_cases less_Suc_eq nth_Cons' numeral_2_eq_2 numeral_3_eq_3
  []
 
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [40]
 Overfull \hbox (31.96753pt too wide) in paragraph at lines 469--471
 [][]\OT1/cmr/bx/n/9 lemma \OT1/cmtt/m/sl/9 pdf_fuzz: "possible_steps linkedIn 6
  <> STR ''pdf'' [EFSM.Str ''otherID'', EFSM.Str ''name'', EFSM.Str
@@ -1157,23 +1115,22 @@ cmtt/m/sl/9 value_eq (Some (inputs (shd xs) ! 0)) (Some
  []
 
 
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [40]
 Overfull \hbox (69.30957pt too wide) in paragraph at lines 630--632
 [][]     \OT1/cmr/bx/n/9 ap-ply \OT1/cmtt/m/sl/9 (simp add: ltl_step_alt view_f
 uzz_2 view3_def Str_def[of "''otherID''"] implode_otherID apply_updates_def)[] 
 
  []
 
-
+) (./Linked_In_Fixed.tex
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [41])
-(./Linked_In_Fixed.tex
+ [41]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [42]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [43]
 Overfull \hbox (17.79265pt too wide) in paragraph at lines 321--323
 [][]\OT1/cmr/bx/n/9 lemma \OT1/cmtt/m/sl/9 implode_detailedPDF: "String.implode
  ''detailed_pdf_of_otherID'' = STR ''detailed_pdf_of_otherID''"[] 
@@ -1194,7 +1151,7 @@ implode ''detailed_pdf_of_friendID'' = STR ''detailed_pdf_of_friendID''"[]
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [44]
+ [43]
 Overfull \hbox (17.79265pt too wide) in paragraph at lines 438--440
 [][]\OT1/cmr/bx/n/9 lemma \OT1/cmtt/m/sl/9 apply_updates_login: "apply_updates 
 (Updates login) (join_ir [EFSM.Str ''free''] <>) <> = (<>(1 $:=
@@ -1219,6 +1176,9 @@ f Suc_1 add_diff_cancel_left' less_2_cases less_Suc_eq nth_Cons'
  []
 
 
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [44]
 Overfull \hbox (67.34514pt too wide) in paragraph at lines 660--661
 [][]  \OT1/cmtt/m/sl/9 "ltl_step linkedIn (Some 2) (<>(1 $:= Some (Str ''free''
 ))) e = (Some 3, [Some (Str ''detailed_pdf_of_friendID'')],
@@ -1231,9 +1191,6 @@ Overfull \hbox (29.54546pt too wide) in paragraph at lines 661--662
  []
 
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [45]
 Overfull \hbox (7.81364pt too wide) in paragraph at lines 711--713
 [][]\OT1/cmr/bx/n/9 lemma \OT1/cmtt/m/sl/9 s2_ok: "alw ($\OML/cmm/m/it/9 ^^U$\O
 T1/cmtt/m/sl/9 xs. label (shd xs) = STR ''pdf'' $\OMS/cmsy/m/n/9 ^$ \OT1/cmtt/m
@@ -1277,6 +1234,9 @@ ds_def join_ir_def input2state_def implode Str_def numeral_2_eq_2
  []
 
 
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [45]
 Overfull \hbox (29.54546pt too wide) in paragraph at lines 811--812
 [][]                      \OT1/cmtt/m/sl/9 [EFSM.Str ''otherID'', EFSM.Str ''OU
 T_OF_NETWORK'', EFSM.Str ''MNn5''] = {|(5, pdf1)|}"[] 
@@ -1296,9 +1256,6 @@ _OF_NETWORK'', EFSM.Str ''MNn5'']
  []
 
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [46]
 Overfull \hbox (44.41272pt too wide) in paragraph at lines 863--865
 [][]  \OT1/cmr/bx/n/9 us-ing \OT1/cmtt/m/sl/9 nth_equalityI[of "[value.Str STR 
 ''otherID'', value.Str STR ''OUT_OF_NETWORK'', value.Str STR ''MNn5'']"
@@ -1338,7 +1295,7 @@ T1/cmtt/m/sl/9 xs. label (shd xs) = STR ''pdf'' $\OMS/cmsy/m/n/9 ^$ \OT1/cmtt/m
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [47]
+ [46]
 Overfull \hbox (45.68477pt too wide) in paragraph at lines 1020--1022
 [][]   \OT1/cmr/bx/n/9 ap-ply \OT1/cmtt/m/sl/9 (simp add: length_i_3 apply_guar
 ds_cons[of "Eq (V (R 1)) (L (EFSM.Str ''free''))"] apply_guards_cons[of
@@ -1357,10 +1314,11 @@ Overfull \hbox (7.81364pt too wide) in paragraph at lines 1071--1073
 cmtt/m/sl/9 value_eq (Some (nth (inputs (shd xs)) 0))
  []
 
-) (./Coin_Tea.tex
+
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [48]
+ [47])
+(./Coin_Tea.tex
 Overfull \hbox (19.80388pt too wide) in paragraph at lines 86--88
 [][]\OT1/cmr/bx/n/9 lemma \OT1/cmtt/m/sl/9 possible_steps_not_init: "$\OMS/cmsy
 /m/n/9 :$ \OT1/cmtt/m/sl/9 (a = STR ''init'' $\OMS/cmsy/m/n/9 ^$ \OT1/cmtt/m/sl
@@ -1369,15 +1327,15 @@ a b = {||}"[]
  []
 
 
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [48]
 Overfull \hbox (8.34273pt too wide) in paragraph at lines 142--144
 [][]\OT1/cmr/bx/n/9 lemma \OT1/cmtt/m/sl/9 make_full_obs_neq: "make_full_observ
 ation drinks (fst (ltl_step drinks (Some 0) <> (shd t))) (snd
  []
 
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [49]
 Overfull \hbox (36.23485pt too wide) in paragraph at lines 162--164
 [][]  \OT1/cmr/bx/n/9 ap-ply \OT1/cmtt/m/sl/9 (metis (no_types, lifting) make_f
 ull_observation.simps(1) option.inject state.ext_inject zero_neq_one)[] 
@@ -1435,15 +1393,15 @@ lter_def fset_both_sides Abs_fset_inverse Set.filter_def drinks_def)[]
  []
 
 
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [49]
 Overfull \hbox (31.50989pt too wide) in paragraph at lines 342--350
 [][]  \OT1/cmr/bx/n/9 ap-ply \OT1/cmtt/m/sl/9 (simp add: possible_steps_def ffi
 lter_def fset_both_sides Abs_fset_inverse drinks_def Set.filter_def)[] 
  []
 
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [50]
 Overfull \hbox (17.16216pt too wide) in paragraph at lines 408--421
 [][]  \OT1/cmr/bx/n/9 by \OT1/cmtt/m/sl/9 (simp add: possible_steps_def ffilter
 _def fset_both_sides Abs_fset_inverse Set.filter_def drinks_def)[] 
@@ -1503,7 +1461,7 @@ end''
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [51]
+ [50]
 Overfull \hbox (13.06769pt too wide) in paragraph at lines 687--689
 [][]\OT1/cmr/bx/n/9 lemma \OT1/cmtt/m/sl/9 LTL_label_vend_not_2: "((label_eq ''
 vend'') impl (not (ev (state_eq (Some 2))))) (watch drinks t)"[] 
@@ -1525,7 +1483,7 @@ lter_def fset_both_sides Abs_fset_inverse Set.filter_def drinks_def)[]
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [52]
+ [51]
 Overfull \hbox (27.24257pt too wide) in paragraph at lines 884--886
 [][]\OT1/cmr/bx/n/9 lemma \OT1/cmtt/m/sl/9 LTL_must_pay_wrong: "((not (label_eq
  ''vend'' suntil label_eq ''coin'')) suntil state_eq None) (watch
@@ -1560,6 +1518,9 @@ tion drinks (Some 1) <1
  []
 
 
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [52]
 Overfull \hbox (8.34273pt too wide) in paragraph at lines 1025--1027
 [][]\OT1/cmr/bx/n/9 lemma \OT1/cmtt/m/sl/9 LTL_vend_no_coin: "((nxt (label_eq '
 'vend'' aand input_eq [])) impl not (ev (state_eq (Some 2))))
@@ -1570,9 +1531,6 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [53])
 (./Coin_Tea_Broken.tex
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [54]
 Overfull \hbox (19.80388pt too wide) in paragraph at lines 86--88
 [][]\OT1/cmr/bx/n/9 lemma \OT1/cmtt/m/sl/9 possible_steps_not_init: "$\OMS/cmsy
 /m/n/9 :$ \OT1/cmtt/m/sl/9 (a = STR ''init'' $\OMS/cmsy/m/n/9 ^$ \OT1/cmtt/m/sl
@@ -1581,15 +1539,15 @@ a b = {||}"[]
  []
 
 
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [54]
 Overfull \hbox (8.34273pt too wide) in paragraph at lines 142--144
 [][]\OT1/cmr/bx/n/9 lemma \OT1/cmtt/m/sl/9 make_full_obs_neq: "make_full_observ
 ation drinks (fst (ltl_step drinks (Some 0) <> (shd t))) (snd
  []
 
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [55]
 Overfull \hbox (36.23485pt too wide) in paragraph at lines 162--164
 [][]  \OT1/cmr/bx/n/9 ap-ply \OT1/cmtt/m/sl/9 (metis (no_types, lifting) make_f
 ull_observation.simps(1) option.inject state.ext_inject zero_neq_one)[] 
@@ -1646,15 +1604,15 @@ _def fset_both_sides Abs_fset_inverse Set.filter_def drinks_def)[]
  []
 
 
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [55]
 Overfull \hbox (13.06769pt too wide) in paragraph at lines 374--376
 [][]\OT1/cmr/bx/n/9 lemma \OT1/cmtt/m/sl/9 LTL_label_vend_not_2: "((label_eq ''
 vend'') impl (not (ev (state_eq (Some 2))))) (watch drinks t)"[] 
  []
 
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [56]
 Overfull \hbox (14.83717pt too wide) in paragraph at lines 413--415
 [][]\OT1/cmr/bx/n/9 lemma \OT1/cmtt/m/sl/9 possible_steps_0: "possible_steps dr
 inks 0 <> l i = finsert x S' $[][]\OMS/cmsy/m/n/9 )$ \OT1/cmtt/m/sl/9 finsert x
@@ -1682,6 +1640,9 @@ shd s) = Some 2) (make_full_observation
  []
 
 
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [56]
 Overfull \hbox (13.7998pt too wide) in paragraph at lines 578--579
 [][]                           $\OMS/cmsy/m/n/9 :$\OT1/cmtt/m/sl/9 ev ($\OML/cm
 m/m/it/9 ^^U$\OT1/cmtt/m/sl/9 s. statename (shd s) = Some 2) (make_full_observa
@@ -1695,15 +1656,16 @@ Overfull \hbox (8.34273pt too wide) in paragraph at lines 606--608
  []
 
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [57]
 Overfull \hbox (46.14241pt too wide) in paragraph at lines 698--700
 [][]\OT1/cmr/bx/n/9 lemma \OT1/cmtt/m/sl/9 LTL_must_pay_correct: "((ev (state_e
 q (Some 2))) impl (not (label_eq ''vend'') suntil label_eq ''coin''))
  []
 
-)) (./root.bbl [58])
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [57]))
+(./root.bbl [58])
 
 Package natbib Warning: There were undefined citations.
 
@@ -1727,7 +1689,7 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 133.
 Here is how much of TeX's memory you used:
  11416 strings out of 492162
  187278 string characters out of 6125277
- 410812 words of memory out of 5000000
+ 411812 words of memory out of 5000000
  15493 multiletter control sequences out of 15000+600000
  14172 words of font info for 56 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1755,7 +1717,7 @@ ive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texli
 ve/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texliv
 e/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb></usr/local/texlive/
 2019/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on root.pdf (59 pages, 314119 bytes).
+Output written on root.pdf (59 pages, 314539 bytes).
 PDF statistics:
  397 PDF objects out of 1000 (max. 8388607)
  305 compressed objects within 4 object streams
