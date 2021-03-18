@@ -1,13 +1,16 @@
 session "IsabelleSAL" = "EFSM" +
-options [quick_and_dirty, document = pdf, document_output = "output"]
+options [document = pdf, document_output = "output"]
 directories
-  "lift-controller"
-  "linkedin"
+  "lift-controller/theories"
+  "linkedin/theories"
+  "coin-tea/theories"
 theories
-  "lift-controller/liftController3"
-  "lift-controller/Lift_Controller_LTL"
-  "linkedin/linkedin_ext"
-  "linkedin/linkedin_ext_fixed"
+  "lift-controller/theories/Lift_Controller"
+  "lift-controller/theories/Lift_Controller_LTL"
+  "linkedin/theories/Linked_In"
+  "linkedin/theories/Linked_In_Fixed"
+  "coin-tea/theories/Coin_Tea"
+  "coin-tea/theories/Coin_Tea_Broken"
 document_files
   "root.tex"
   "root.bib"

@@ -14,3 +14,6 @@ eod:
 snippets:
 	isabelle build -D.; \
 	sed -n '/\\snip{/,/endsnip/p' output/document/*.tex > snippets-ltl.tex; \
+
+clean:
+	@find . -name "*thy~*" -exec rm {} \;
