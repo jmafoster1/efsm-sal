@@ -418,6 +418,13 @@ definition "o n = n + 4"
 
 lemmas states[simp] = init_def search_def o1_def o2_def o3_def o4_def f1_def f2_def f3_def f4_def o_def
 
+definition lift_lit :: transition_matrix where
+  "lift_lit = {|((0, 9), continit), ((9, 4), return4), ((9, 3), return3), ((9, 2), return2), ((9, 1), return1), ((8, 9), startsearch),
+      ((8, 8), opendoor4), ((7, 9), startsearch), ((7, 7), opendoor3), ((6, 9), startsearch), ((6, 6), opendoor2),
+      ((5, 9), startsearch), ((5, 5), opendoor1), ((4, 8), motorstop4), ((4, 3), down43stop), ((4, 3), down43),
+      ((3, 7), motorstop3), ((3, 4), up34stop), ((3, 2), down32stop), ((3, 2), down32), ((2, 6), motorstop2),
+      ((2, 3), up23stop), ((2, 3), up23), ((2, 1), down21stop), ((1, 5), motorstop1), ((1, 2), up12stop), ((1, 2), up12)|}"
+
 definition "lift" :: "transition_matrix" where
 "lift \<equiv> {|
     ((init, search), continit),
@@ -459,7 +466,9 @@ definition "lift" :: "transition_matrix" where
   |}"
 
 
-thm lift_def
+lemma lift_lit: "lift_lit = lift"
+  unfolding lift_def init_def search_def f1_def f2_def f3_def f4_def o1_def o2_def o3_def o4_def
+  by (simp add: lift_def lift_lit_def)
 
 lemmas transitions =
   continit_def
@@ -486,7 +495,8 @@ lemmas transitions =
   up12stop_def
   up12_def
 
-abbreviation "return n \<equiv> \<lparr>
+abbreviation return :: "int \<Rightarrow> transition" where
+"return n \<equiv> \<lparr>
       Label = STR ''return'',
       Arity = 0,
       Guards = [
@@ -496,7 +506,8 @@ abbreviation "return n \<equiv> \<lparr>
       Updates = []
 \<rparr>"
 
-abbreviation "motorstop n \<equiv> \<lparr>
+abbreviation motorstop :: "int \<Rightarrow> transition" where
+"motorstop n \<equiv> \<lparr>
       Label = STR ''motorstop'',
       Arity = 2,
       Guards = [
@@ -512,7 +523,8 @@ abbreviation "motorstop n \<equiv> \<lparr>
       Updates = []
 \<rparr>"
 
-abbreviation "opendoor n \<equiv> \<lparr>
+abbreviation opendoor :: "int \<Rightarrow> transition" where
+"opendoor n \<equiv> \<lparr>
       Label = STR ''opendoor'',
       Arity = 1,
       Guards = [

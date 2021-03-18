@@ -1,12 +1,12 @@
-theory XXXlinkedin
-imports "../../efsm-ltl/EFSM_LTL"
+theory linkedin
+imports "EFSM.EFSM_LTL"
 begin
 
 definition "login" :: "transition" where
 "login \<equiv> \<lparr>
       Label = STR ''login'',
       Arity = 1,
-      Guard = [
+      Guards = [
             gexp.Eq (aexp.V (vname.I 1)) (aexp.L (Str ''free''))
       ],
       Outputs = [],
@@ -17,7 +17,7 @@ definition "view" :: "transition" where
 "view \<equiv> \<lparr>
       Label = STR ''view'',
       Arity = 3,
-      Guard = [
+      Guards = [
             gexp.Eq (aexp.V (vname.I 1)) (aexp.L (Str ''friendID'')),
             gexp.Eq (aexp.V (vname.I 2)) (aexp.L (Str ''name'')),
             gexp.Eq (aexp.V (vname.I 3)) (aexp.L (Str ''HM8p''))
@@ -30,7 +30,7 @@ definition "view1" :: "transition" where
 "view1 \<equiv> \<lparr>
       Label = STR ''view'',
       Arity = 3,
-      Guard = [
+      Guards = [
             GExp.Eq (aexp.V (vname.I 1)) (aexp.L (Str ''otherID'')),
             GExp.Eq (aexp.V (vname.I 2)) (aexp.L (Str ''OUT_OF_NETWORK'')),
             GExp.Eq (aexp.V (vname.I 3)) (aexp.L (Str ''MNn5''))
@@ -43,7 +43,7 @@ definition "view2" :: "transition" where
 "view2 \<equiv> \<lparr>
       Label = STR ''view'',
       Arity = 3,
-      Guard = [
+      Guards = [
             GExp.Eq (aexp.V (vname.I 1)) (aexp.L (Str ''otherID'')),
             GExp.Eq (aexp.V (vname.I 2)) (aexp.L (Str ''name'')),
             GExp.Eq (aexp.V (vname.I 3)) (aexp.L (Str ''4zoF''))
@@ -56,7 +56,7 @@ definition "view3" :: "transition" where
 "view3 \<equiv> \<lparr>
       Label = STR ''view'',
       Arity = 3,
-      Guard = [
+      Guards = [
             GExp.Eq (aexp.V (vname.I 1)) (aexp.L (Str ''otherID'')),
             GExp.Eq (aexp.V (vname.I 2)) (aexp.L (Str ''name'')),
             GExp.Eq (aexp.V (vname.I 3)) (aexp.L (Str ''MNn5''))
@@ -69,7 +69,7 @@ definition "pdf" :: "transition" where
 "pdf \<equiv> \<lparr>
       Label = STR ''pdf'',
       Arity = 3,
-      Guard = [
+      Guards = [
             GExp.Eq (aexp.V (vname.I 1)) (aexp.L (Str ''friendID'')),
             GExp.Eq (aexp.V (vname.I 2)) (aexp.L (Str ''name'')),
             GExp.Eq (aexp.V (vname.I 3)) (aexp.L (Str ''HM8p''))
@@ -84,7 +84,7 @@ definition "pdf1" :: "transition" where
 "pdf1 \<equiv> \<lparr>
       Label = STR ''pdf'',
       Arity = 3,
-      Guard = [
+      Guards = [
             GExp.Eq (aexp.V (vname.I 1)) (aexp.L (Str ''otherID'')),
             GExp.Eq (aexp.V (vname.I 2)) (aexp.L (Str ''OUT_OF_NETWORK'')),
             GExp.Eq (aexp.V (vname.I 3)) (aexp.L (Str ''MNn5''))
@@ -99,7 +99,7 @@ definition "pdf2" :: "transition" where
 "pdf2 \<equiv> \<lparr>
       Label = STR ''pdf'',
       Arity = 3,
-      Guard = [
+      Guards = [
             GExp.Eq (aexp.V (vname.I 1)) (aexp.L (Str ''otherID'')),
             GExp.Eq (aexp.V (vname.I 2)) (aexp.L (Str ''name'')),
             GExp.Eq (aexp.V (vname.I 3)) (aexp.L (Str ''4zoF''))

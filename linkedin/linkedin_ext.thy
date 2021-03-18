@@ -218,7 +218,7 @@ lemma possible_steps_linkedIn_6:
    apply simp
   by (metis pdf_6_invalid_inputs pdf_fuzz)
 
-(* This should be where the wheels fall off *)
+(* This is where the wheels fall off *)
 lemma flaw: "alw (\<lambda>xs. label (shd xs) = STR ''pdf'' \<and> value_eq (Some (nth (inputs (shd xs)) 0)) (Some (value.Str STR ''otherID'')) = trilean.true \<longrightarrow>
               output (shd (stl xs)) \<noteq> [Some (value.Str STR ''detailed_pdf_of_otherID'')])
      (make_full_observation linkedIn (Some 6) <> p i)"
