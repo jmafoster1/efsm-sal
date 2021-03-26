@@ -245,5 +245,11 @@ lemma LTL_must_pay_correct: "((ev (state_eq (Some 2))) impl (not (label_eq ''ven
      actually stopping us from doing this! *)
   oops
 
+lemma LTL_must_pay_correct_bracketed:
+  "((ev (state_eq (Some 2))) impl
+    ((not (label_eq ''vend'')) suntil label_eq ''coin''))
+   (watch drinks t)"
+  oops
+
 
 end
