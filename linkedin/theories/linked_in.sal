@@ -1,5 +1,5 @@
 %The biggest absolute integer value used is 0
-linkedin_ext {n_ : nznat} : CONTEXT = BEGIN
+linked_in {n_ : nznat} : CONTEXT = BEGIN
 
 LABEL : TYPE = DATATYPE
   login,
@@ -13,7 +13,7 @@ STRING : TYPE =                                                  %%10
     String__detailed_pdf_of_otherID, String__free,
     String__friendID, String__name, String__otherID, String__paid,
     String__summary_pdf_of_otherID, String__dummy__};
-
+  
 STATE : TYPE =
     {State__0, State__1, State__2, State__3, State__4, State__5,
     State__6, State__7, NULL_STATE};
@@ -23,8 +23,8 @@ IMPORTING value{n_, STRING};
 IMPORTING option{VALUE};
 IMPORTING arithmetic{n_, STRING};
 
-output_sequence : CONTEXT = sequence {B_OPTION, OptionBB, 0};
-input_sequence : CONTEXT = sequence {B_VALUE, ValueBB, 2};
+output_sequence : CONTEXT = sequence {B_OPTION, OptionBB, 1};
+input_sequence : CONTEXT = sequence {B_VALUE, ValueBB, 3};
 
 linkedIn : MODULE =
   BEGIN                                                          %%30
@@ -147,18 +147,8 @@ linkedIn : MODULE =
       SINK_HOLE :
           ELSE
         -->
-          cfstate' = NULL_STATE;                                  %%150
+          cfstate' = NULL_STATE;                                 %%150
           o' = output_sequence ! empty
     ]
   END;
-  LTL_neverDetailed : THEOREM linkedIn |-                        %%150
-    label = login AND
-        i = input_sequence !
-        insert(Str(String__free), input_sequence ! empty) =>
-        X(G(label = pdf AND
-        gval(value_eq(Some(i(0)), Some(Str(String__otherID)))) =>
-        NOT (X(o = output_sequence !
-        insert(Some(Str(String__detailed_pdf_of_otherID)),
-        output_sequence ! empty)))));
-
 END

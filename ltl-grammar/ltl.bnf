@@ -1,0 +1,64 @@
+<start> ::= "lemma " <identifier> ": " "\"" <rootLTL>  " (watch " <identifier> " " <identifier> ")\" oops";
+
+<alphabeticCharacter> ::=
+  "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H" | "I" | "J" | "K" | "L" | "M" | "N" | "O" | "P" | "Q" | "R" | "S" | "T" | "U" | "V" | "W" | "X" | "Y" | "Z" |
+  "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i" | "j" | "k" | "l" | "m" | "n" | "o" | "p" | "q" | "r" | "s" | "t" | "u" | "v" | "w" | "x" | "y" | "z";
+
+<symbol> ::= "|" | " " | "!" | "#" | "$" | "%" | "&" | "(" | ")" | "*" | "+" | "," | "-" | "." | "/" | ":" | ";" | ">" | "=" | "<" | "?" | "@" | "^" | "_" | "`" | "{" | "}" | "~";
+
+<digit> ::= "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9";
+
+<alphanumericCharacter> ::= <alphabeticCharacter> | <digit>;
+
+<alphanumericString> ::= <alphanumericCharacter> | <alphanumericString> <alphanumericCharacter>;
+
+<character> ::= <alphanumericCharacter> | <symbol>;
+
+<constant> ::= "Num " <number> | "Num " <identifier> | "Str " "''" <string> "''" | "Str " <identifier>;
+
+<identifierCharacter> ::= <alphanumericCharacter> | "_";
+
+<identifierTail> ::= <identifierCharacter> | <identifierCharacter> <identifierTail>;
+
+<identifier> ::= <alphabeticCharacter> | <alphabeticCharacter> <identifierTail> <alphanumericCharacter>;
+
+<infixOperator> ::= " aand " | " or " | " impl " | " suntil " | " until ";
+
+<inputElement> ::= "(" <inputElement> ")" | <constant>;
+
+<inputList> ::= <inputElement> | <inputList> "," <inputElement> | <inputList> ", " <inputElement>;
+
+<number> ::= <digit> | <number> <digit>;
+
+<outputelement> ::=
+  "(" <outputelement> ")" |
+  "None" |
+  "Some " <identifier> |
+  "Some (" <constant> ")";
+
+<outputlist> ::= <outputelement> | <outputlist> "," <outputelement> | <outputlist> ", " <outputelement>;
+
+<rootLTL> ::= <simpleLTL> | "(" <LTL> ")";
+
+<LTL> ::=
+  <simpleLTL> |
+  "(" <LTL> ")" <infixOperator> <simpleLTL> |
+  <simpleLTL> <infixOperator> "(" <LTL> ")" |
+  "((" <LTL> ")" <infixOperator> "(" <LTL> "))" |
+  <simpleLTL> <infixOperator> <simpleLTL>;
+
+<simpleLTL> ::=
+  <temporaloperator> "(" <LTL> ")" |
+  "(" <LTL> ")" |
+  "label_eq " <identifier> |
+  "label_eq ''" <string> "''" |
+  "state_eq " "None" |
+  "state_eq " "(Some " <number> ")" |
+  "input_eq " "[]" |
+  "input_eq " "[" <inputList> "]" |
+  "output_eq " "[]" |
+  "output_eq " "[" <outputlist> "]";
+
+<string> ::= <character> | <string> <character>;
+
+<temporaloperator> ::= "alw " | "ev " | "nxt " | "not ";
