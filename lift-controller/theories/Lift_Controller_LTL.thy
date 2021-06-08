@@ -292,6 +292,9 @@ lemma must_stop_to_open:
   using must_stop_to_open_aux1a[of "(make_full_observation lift (Some 9) (r(1 $:= Some (EFSM.Str ''true''))) [] (stl t))"]
   by fastforce
 
+lemma must_stop_to_open: "((not (label_eq ''opendoor'' aand nxt (output_eq [Some (Str ''true''), Some (Num n)]))) until (label_eq ''motorstop'')) (watch lift t)"
+oops
+
 (* THIS IS NOT TRUE *)
 lemma must_stop_to_open_false: "alw ((not (label_eq ''opendoor'' aand nxt (output_eq [Some (Str ''true''), Some (Num n)]))) until (label_eq ''motorstop'')) (watch lift i)"
   oops
@@ -1028,7 +1031,7 @@ lemma LTL_must_stop_lift_to_open_door: "alw ((ev (nxt ((label_eq ''opendoor'') a
       (((label_eq ''motorstop'') or (nxt (output_eq [Some(Str ''true''), Some n])))))) (watch lift t)"
   using must_stop_lift_to_open_door_aux by blast
 
-lemma LTL_must_stop_lift_to_open_door: "(ev (state_eq (Some 1)) impl (ev (output_eq [Some (Num 0), Some (Num 1), Some (Str ''true'')]))) (watch lift t)"
+lemma LTL_must_stop_lift_to_open_door_ev: "(ev (state_eq (Some 1)) impl (ev (output_eq [Some (Num 0), Some (Num 1), Some (Str ''true'')]))) (watch lift t)"
   oops
 
 end

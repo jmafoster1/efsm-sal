@@ -23,8 +23,8 @@ IMPORTING value{n_, STRING};
 IMPORTING option{VALUE};
 IMPORTING arithmetic{n_, STRING};
 
-output_sequence : CONTEXT = sequence {B_OPTION, OptionBB, 1};
 input_sequence : CONTEXT = sequence {B_VALUE, ValueBB, 3};
+output_sequence : CONTEXT = sequence {B_OPTION, OptionBB, 1};
 
 linkedIn : MODULE =
   BEGIN                                                          %%30
@@ -63,7 +63,7 @@ linkedIn : MODULE =
       VIEW1 :
           cfstate = State__1 AND label = view AND
               input_sequence ! size?(i) = 3 AND
-              r__1 = Str(String__free) AND
+              r__1 = Some(Str(String__free)) AND
               gval(value_eq(Some(i(0)),
               Some(Str(String__otherID)))) AND
               gval(value_eq(Some(i(1)),
@@ -76,7 +76,7 @@ linkedIn : MODULE =
       VIEW2 :
           cfstate = State__1 AND label = view AND
               input_sequence ! size?(i) = 3 AND
-              r__1 = Str(String__free) AND
+              r__1 = Some(Str(String__free)) AND
               gval(value_eq(Some(i(0)),                            %%80
               Some(Str(String__otherID)))) AND
               gval(value_eq(Some(i(1)),
@@ -89,7 +89,7 @@ linkedIn : MODULE =
       VIEW3 :
           cfstate = State__1 AND label = view AND                %%90
               input_sequence ! size?(i) = 3 AND
-              r__1 = Str(String__paid) AND
+              r__1 = Some(Str(String__paid)) AND
               gval(value_eq(Some(i(0)),
               Some(Str(String__otherID)))) AND
               gval(value_eq(Some(i(1)),
@@ -148,4 +148,14 @@ linkedIn : MODULE =
           o' = output_sequence ! empty
     ]
   END;                                                           %%150
+  LTL_neverDetailed : THEOREM linkedIn |-
+    label = login AND
+        i = input_sequence !
+        insert(Str(String__free), input_sequence ! empty) =>
+        X(G(label = pdf AND
+        gval(value_eq(Some(i(0)), Some(Str(String__otherID)))) =>
+        NOT (X(o = output_sequence !
+        insert(Some(Str(String__detailed_pdf_of_otherID)),
+        output_sequence ! empty)))));
+                                                                 %%160
 END

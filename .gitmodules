@@ -4,3 +4,6 @@
 [submodule "theories/efsm-isabelle"]
 	path = theories/efsm-isabelle
 	url = git@github.com:jmafoster1/efsm-isabelle.git
+[submodule "assert.sh"]
+	path = assert.sh
+	url = https://github.com/torokmark/assert.sh.git

@@ -12,20 +12,20 @@ LABEL : TYPE = DATATYPE
 END;
 
 STRING : TYPE =
-    {String__false, String__true, String__dummy__, NO__1, NO__2,
-    NO__3, NO__4};
-  
+    {NO__1, NO__2, NO__3, NO__4, String__false, String__true,
+    String__dummy__};
+
 STATE : TYPE =
     {State__0, State__1, State__2, State__3, State__4, State__5,
     State__6, State__7, State__8, State__9, NULL_STATE};           %%20
-  
+
 IMPORTING trilean;
 IMPORTING value{n_, STRING};
 IMPORTING option{VALUE};
 IMPORTING arithmetic{n_, STRING};
 
-output_sequence : CONTEXT = sequence {B_OPTION, OptionBB, 3};
 input_sequence : CONTEXT = sequence {B_VALUE, ValueBB, 3};
+output_sequence : CONTEXT = sequence {B_OPTION, OptionBB, 3};
 
 lift : MODULE =                                                  %%30
   BEGIN
@@ -43,7 +43,7 @@ lift : MODULE =                                                  %%30
         r__1 = None AND
         r__2 = None AND
         r__3 = None AND
-        r__4 = None
+        r__4 = Some(Str(NO__1))
       -->
     ]
     TRANSITION [
@@ -420,49 +420,56 @@ lift : MODULE =                                                  %%30
           o' = output_sequence ! empty                           %%420
     ]
   END;
-  must_stop_to_open_false : THEOREM lift |- FORALL(n :
-      BOUNDED_INT) :
+  must_stop_to_open : THEOREM lift |- FORALL(n : BOUNDED_INT) :
+    W(NOT (label = opendoor AND
+        X(o = output_sequence !
+        insert(Some(Str(String__true)), output_sequence !
+        insert(Some(Num(n)), output_sequence !
+        empty)))), label = motorstop);
+
+  must_stop_to_open_false : THEOREM lift |- FORALL(n :           %%430
+      STRING) :
     G(W(NOT (label = opendoor AND
         X(o = output_sequence !
         insert(Some(Str(String__true)), output_sequence !
-        insert(Some(n), output_sequence !
+        insert(Some(Str(n)), output_sequence !
         empty)))), label = motorstop));
-                                                                 %%430
+
   alw_must_stop_to_open : THEOREM lift |- FORALL(n : VALUE) :
     G(F(X(label = opendoor AND
-        X(o = output_sequence !
+        X(o = output_sequence !                                    %%440
         insert(Some(Str(String__true)), output_sequence !
         insert(Some(n), output_sequence ! empty))))) =>
         W(NOT (X(label = opendoor AND
         X(o = output_sequence !
         insert(Some(Str(String__true)), output_sequence !
         insert(Some(n), output_sequence !
-        empty))))), label = motorstop OR                           %%440
+        empty))))), label = motorstop OR
         X(o = output_sequence !
         insert(Some(Str(String__true)), output_sequence !
-        insert(Some(n), output_sequence ! empty)))));
-      
+        insert(Some(n), output_sequence ! empty)))));              %%450
+
   LTL_must_stop_lift_to_open_door : THEOREM lift |- FORALL(n :
       VALUE) :
     G(F(X(label = opendoor AND
         X(o = output_sequence !
         insert(Some(Str(String__true)), output_sequence !
-        insert(Some(n), output_sequence ! empty))))) =>            %%450
+        insert(Some(n), output_sequence ! empty))))) =>
         U(NOT (X(label = opendoor AND
         X(o = output_sequence !
-        insert(Some(Str(String__true)), output_sequence !
+        insert(Some(Str(String__true)), output_sequence !          %%460
         insert(Some(n), output_sequence !
         empty))))), label = motorstop OR
         X(o = output_sequence !
         insert(Some(Str(String__true)), output_sequence !
         insert(Some(n), output_sequence ! empty)))));
-      
-  LTL_must_stop_lift_to_open_door : THEOREM lift |-              %%460
+
+  LTL_must_stop_lift_to_open_door_ev : THEOREM lift |-
     F(cfstate = State__1 =>
         F(o = output_sequence !
-        insert(Some(Num(0)), output_sequence !
+        insert(Some(Num(0)), output_sequence !                     %%470
         insert(Some(Str(NO__1)), output_sequence !
         insert(Some(Str(String__true)), output_sequence !
         empty)))));
-      
+
 END

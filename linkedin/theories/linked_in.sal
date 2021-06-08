@@ -23,8 +23,8 @@ IMPORTING value{n_, STRING};
 IMPORTING option{VALUE};
 IMPORTING arithmetic{n_, STRING};
 
-output_sequence : CONTEXT = sequence {B_OPTION, OptionBB, 1};
 input_sequence : CONTEXT = sequence {B_VALUE, ValueBB, 3};
+output_sequence : CONTEXT = sequence {B_OPTION, OptionBB, 1};
 
 linkedIn : MODULE =
   BEGIN                                                          %%30
@@ -151,4 +151,14 @@ linkedIn : MODULE =
           o' = output_sequence ! empty
     ]
   END;
+  LTL_neverDetailed : THEOREM linkedIn |-
+    label = login AND
+        i = input_sequence !
+        insert(Str(String__free), input_sequence ! empty) =>
+        X(G(label = pdf AND
+        gval(value_eq(Some(i(0)), Some(Str(String__otherID)))) =>
+        NOT (X(o = output_sequence !                               %%160
+        insert(Some(Str(String__detailed_pdf_of_otherID)),
+        output_sequence ! empty)))));
+      
 END

@@ -251,5 +251,9 @@ lemma LTL_must_pay_correct_bracketed:
    (watch drinks t)"
   oops
 
+lemma
+"(((ev (state_eq (Some 2))) impl (not (label_eq ''vend'') suntil label_eq ''coin'')) (watch drinks t)) =
+ (((ev (state_eq (Some 2))) impl ((not (label_eq ''vend'')) suntil label_eq ''coin'')) (watch drinks t))"
+  by simp
 
 end

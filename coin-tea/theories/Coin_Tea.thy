@@ -159,7 +159,7 @@ qed
 
 lemma next_not_lt_zero:
   "n \<ge> 0 \<Longrightarrow>
-   (nxt (not 
+   (nxt (not
     (check_exp (Lt (V (Rg 1)) (L (Num 0))))
     )) (make_full_observation drinks (Some 1) <1 $:= Some (Num n)> p t)"
     apply simp
@@ -370,7 +370,7 @@ lemma LTL_must_pay_correct_bracketed:
   using LTL_must_pay_correct by blast
 
 text_raw\<open>\snip{mustpaycorrectfull}{1}{2}{%\<close>
-lemma LTL_must_pay_correct_full: 
+lemma LTL_must_pay_correct_full:
   "(ev (\<lambda>s. statename (shd s) = Some 2) impl
    ((\<lambda>xs. fst (action (shd xs)) \<noteq> STR ''vend'') suntil
     (\<lambda>xs. fst (action (shd xs)) = STR ''coin'')))
