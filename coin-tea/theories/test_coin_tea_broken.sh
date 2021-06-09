@@ -13,7 +13,7 @@ OUTPUT=$(sal-smc --assertion='coin_tea_broken{2}!LTL_invalid_gets_stuck_2')
 assert_eq "$OUTPUT" "proved." "LTL_invalid_gets_stuck_2 should be true."
 
 OUTPUT=$(sal-smc --assertion='coin_tea_broken{2}!LTL_must_pay_correct')
-assert_eq "$OUTPUT" "proved." "LTL_must_pay_correct should be true."
+assert_contain "$OUTPUT" "Counterexample" "LTL_must_pay_correct should have a counterexample."
 
 OUTPUT=$(sal-smc --assertion='coin_tea_broken{2}!LTL_must_pay_correct_bracketed')
 assert_contain "$OUTPUT" "Counterexample" "LTL_must_pay_correct_bracketed should have a counterexample."

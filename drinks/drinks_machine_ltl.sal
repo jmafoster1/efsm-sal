@@ -90,26 +90,24 @@ drinks : MODULE =
                                                                  %%90
   LTL_nxt_2_means_vend : THEOREM drinks |-
     G(X(cfstate = State__2) => cfstate = State__1);
-
+    
   LTL_costsMoney : THEOREM drinks |-
-    G(X(cfstate = State__2 =>
-        gval(value_ge(r__2, Some(Num(100))))));
-
+    G(X(cfstate = State__2) =>
+        gval(value_ge(r__2, Some(Num(100)))));
+      
   LTL_costsMoney_aux : THEOREM drinks |-
-  G((NOT gval(value_ge(r__2, Some(Num(100)))) =>
-   (NOT X(cfstate = (State__2)))));
-
-  % LTL_neverReachS2
-
+    G(NOT (gval(value_ge(r__2, Some(Num(100))))) =>
+        NOT (X(cfstate = State__2)));                              %%100
+      
   LTL_drinks_cost_money : THEOREM drinks |- FORALL(drink :
       STRING) :
     G(X(o = output_sequence !
-        insert(Some(Str(drink)), output_sequence ! empty) =>
-        gval(value_ge(r__2, Some(Num(100))))));
-
+        insert(Some(Str(drink)), output_sequence ! empty)) =>
+        gval(value_ge(r__2, Some(Num(100)))));
+      
   LTL_output_vend : THEOREM drinks |- FORALL(d : VALUE) :
     G(label = vend AND
         X(o = output_sequence ! insert(Some(d), output_sequence !  %%110
         empty)) => gval(value_ge(r__2, Some(Num(100)))));
-
+      
 END

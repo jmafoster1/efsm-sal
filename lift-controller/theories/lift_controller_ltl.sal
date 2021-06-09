@@ -465,11 +465,11 @@ lift : MODULE =                                                  %%30
         insert(Some(n), output_sequence ! empty)))));
 
   LTL_must_stop_lift_to_open_door_ev : THEOREM lift |-
-    F(cfstate = State__1 =>
+    F(cfstate = State__5) =>
         F(o = output_sequence !
         insert(Some(Num(0)), output_sequence !                     %%470
         insert(Some(Str(NO__1)), output_sequence !
         insert(Some(Str(String__true)), output_sequence !
-        empty)))));
+        empty))));
 
 END
