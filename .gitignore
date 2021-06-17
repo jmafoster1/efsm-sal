@@ -4,3 +4,4 @@ pdfs/
 *.thy#
 *.pdf
 __pycache__/
+jars/
