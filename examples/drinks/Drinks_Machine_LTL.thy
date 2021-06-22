@@ -157,9 +157,9 @@ lemma implode_vend: "String.implode ''vend'' = STR ''vend''"
 
 lemmas implode_labels = implode_select implode_coin implode_vend
 
-lemma LTL_neverReachS2:"(((((action_eq (''select'', [Str ''coke''])))
+lemma LTL_neverReachS2:"((((((label_eq ''select'' aand input_eq [Str ''coke''])))
                     aand
-                    (nxt ((action_eq (''coin'', [Num 100])))))
+                    (nxt (((label_eq ''coin'' aand input_eq [Num 100])))))
                     aand
                     (nxt (nxt((label_eq ''vend'' aand (input_eq []))))))
                     impl
@@ -320,7 +320,7 @@ lemma LTL_output_vend_unfolded:
              nxt (\<lambda>s. output (shd s) = [Some d]) xs) \<longrightarrow>
               \<not>? value_gt (Some (Num 100)) (datastate (shd xs) $ 2) = trilean.true)
      (watch drinks t)"
-text_raw\<open>}%endsnip\<close>
+  text_raw\<open>}%endsnip\<close>
   apply (insert LTL_output_vend[of d t])
   by (simp add: implode_vend)
 

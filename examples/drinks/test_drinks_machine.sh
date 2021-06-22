@@ -1,4 +1,4 @@
-source "../assert.sh/assert.sh"
+source "../../assert.sh/assert.sh"
 
 OUTPUT=$(sal-smc --assertion='drinks_machine_ltl{102}!LTL_r2_not_always_gt_100')
 assert_eq "$OUTPUT" "proved." "LTL_r2_not_always_gt_100 should be true."

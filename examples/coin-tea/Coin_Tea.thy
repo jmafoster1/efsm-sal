@@ -41,6 +41,11 @@ definition drinks :: "transition_matrix" where
           |}"
 text_raw\<open>}%endsnip\<close>
 
+lemmas transitions = select_def
+      init_def
+      coin_def
+      vend_def
+
 lemma possible_steps_init: "possible_steps drinks 0 <> STR ''init'' [] = {|(1, init)|}"
     apply (simp add: possible_steps_alt Abs_ffilter Set.filter_def drinks_def)
     apply safe
