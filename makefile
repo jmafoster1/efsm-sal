@@ -26,6 +26,3 @@ cleanall:
 	@find . -name "*.pdf" -exec rm {} \;
 	@find . -wholename "*/theories/*.sal" -exec rm {} \;
 	@find . -wholename "*/models/*.sal" -exec rm {} \;
-
-wellformed:
-	@find . -name "*.sal" | xargs -n 1 sal-wfc \;

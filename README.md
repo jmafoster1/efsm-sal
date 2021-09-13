@@ -26,10 +26,9 @@ Our repository contains a makefile with several supported commands.
 - `dot` - Converts DOT files to PDFs for easy viewing
 - `clean` - deletes Isabelle temporary files
 - `cleanall` - deletes Isabelle temporary files, dot files, PDF files, and SAL files. This is used for testing and assumes that Isabelle theories are the "original".
-- `wellformed` - runs the SAL wellformedness checker on all SAL files in the repository.
 
 The `examples` directory also contains a makefile, with several commands relating to the examples.
 - `clean` - similar to `cleanall` above but also removes temporary files (e.g. error logs) created by our toolset.
-- `testwf` - similar to `wellformed` above, but specifically for the `examples` directory.
+- `testwf` - runs the SAL wellformedness checker on the examples.
 - `testsal` - executes SAL on all theorems to ensure they pass and fail as expected.
 - `dot` - Same as `dot` above.
