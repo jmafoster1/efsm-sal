@@ -16,16 +16,16 @@ testsal:
 	cd ../linkedin;\
 	bash test_linked_in.sh
 
-testsaltheorems:
-	cd coin-tea;\
-	bash test_coin_tea_theorems.sh;\
-	cd ../drinks;\
-	bash test_drinks_machine_theorems.sh;\
-	cd ../lift-controller;\
-	sed -i 's/r__4 = None/r__4 = Some(Num(1))/' lift_controller_ltltheorems.sal;\
-	bash test_lift_controller_theorems.sh;\
-	cd ../linkedin;\
-	bash test_linked_in_theorems.sh
+# testsaltheorems:
+# 	cd coin-tea;\
+# 	bash test_coin_tea_theorems.sh;\
+# 	cd ../drinks;\
+# 	bash test_drinks_machine_theorems.sh;\
+# 	cd ../lift-controller;\
+# 	sed -i 's/r__4 = None/r__4 = Some(Num(1))/' lift_controller_ltltheorems.sal;\
+# 	bash test_lift_controller_theorems.sh;\
+# 	cd ../linkedin;\
+# 	bash test_linked_in_theorems.sh
 
 dot:
 	find . -name '*.dot' | xargs -n 1 dot -Tpng -O

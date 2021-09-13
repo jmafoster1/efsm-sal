@@ -5,3 +5,4 @@ pdfs/
 *.pdf
 __pycache__/
 jars/
+output/

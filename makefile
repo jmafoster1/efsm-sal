@@ -6,19 +6,22 @@ dot:
 	  dot -T pdf -o $$b.pdf $$b.dot ; \
 	done
 
-eod:
-	git add -A ; \
-	git commit -m "end of day $(DATE)" ; \
-	git push origin master ; \
+# End of day commit
+# eod:
+# 	git add -A ; \
+# 	git commit -m "end of day $(DATE)" ; \
+# 	git push origin master ; \
 
-snippets:
-	isabelle build -D.; \
-	sed -n '/\\snip{/,/endsnip/p' output/document/*.tex > snippets-ltl.tex; \
+# Isabelle snippets
+# snippets:
+# 	isabelle build -D.; \
+# 	sed -n '/\\snip{/,/endsnip/p' output/document/*.tex > snippets-ltl.tex; \
 
 clean:
 	@find . -name "*thy~*" -exec rm {} \;
 
 cleanall:
+	@find . -name "*thy~*" -exec rm {} \;
 	@find . -name "*.dot" -exec rm {} \;
 	@find . -name "*.pdf" -exec rm {} \;
 	@find . -wholename "*/theories/*.sal" -exec rm {} \;
