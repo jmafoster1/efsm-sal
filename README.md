@@ -11,7 +11,13 @@ Our toolset is designed to work with the [Symbolic Analysis Laboratory (SAL)](ht
 In order to run SAL on these examples, you need to have the `lib` directory location in your `SALCONTEXTPATH` environment variable. You can set this variable in your `.bashrc` file if you're using bash. If you're not using bash, you're on your own!
 
 ### Isabelle
-Our toolset is designed to work with the [Isabelle/HOL](https://isabelle.in.tum.de/) theorem prover. Our toolset makes reference to the [Extended Finite State Machine](https://www.isa-afp.org/entries/Extended_Finite_State_Machines.html) entry in the Archive of Formal Proofs. This is only available from 2020 onwards. If you are using an older version, you will need to upgrade or manually install the entry.
+Our toolset is designed to work with the [Isabelle/HOL](https://isabelle.in.tum.de/) theorem prover. Full install instructions can be found (here)[https://isabelle.in.tum.de/installation.html].
+
+###AFP
+Our toolset makes reference to the [Extended Finite State Machine](https://www.isa-afp.org/entries/Extended_Finite_State_Machines.html) entry in Isabelle's Archive of Formal Proofs, which must be [installed separately][https://www.isa-afp.org/using.html] to Isabelle/HOL.
+The Extended Finite State Machine entry is available from 2020 onwards. If you are using an older version, you will need to upgrade or manually install the entry.
+
+Please note that the reference name changed from `EFSM` to `Extended_Finite_State_Machines` between the 2020 and 2021 releases. Our tool supports the 2021 name. If you are using the 2020 version, you will need to either update the entry or manually change `import Extended_Finite_State_Machines.EFSM` to `import EFSM.EFSM` at the top of any generated theory files.
 
 ## Tools
 Our tools are located in the `jars` directory. Each can be run using `java -jar TOOLNAME.jar file/to/convert`, where `file/to/convert` is the filepath of the file to convert, and `TOOLNAME` is one of the following:
