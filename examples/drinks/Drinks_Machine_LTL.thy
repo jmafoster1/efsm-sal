@@ -1,5 +1,5 @@
 theory Drinks_Machine_LTL
-imports "Drinks_Machine" "EFSM.EFSM_LTL"
+imports "Drinks_Machine" "Extended_Finite_State_Machines.EFSM_LTL" "Extended_Finite_State_Machines.EFSM"
 begin
 
 declare One_nat_def [simp del]

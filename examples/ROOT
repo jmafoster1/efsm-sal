@@ -1,0 +1,19 @@
+session "IsabelleSAL" = "Extended_Finite_State_Machines" +
+options [document = pdf, document_output = "output"]
+directories
+  "lift-controller"
+  "linkedin"
+  "coin-tea"
+theories
+  "lift-controller/Lift_Controller"
+  "lift-controller/Lift_Controller_LTL"
+  "lift-controller/Lift_Controller_Equiv"
+  "linkedin/Linked_In"
+  "linkedin/Linked_In_Fixed"
+  "linkedin/Linked_In_Equiv"
+  "coin-tea/Coin_Tea"
+  "coin-tea/Coin_Tea_Broken"
+  "coin-tea/Coin_Tea_Equiv"
+document_files
+  "root.tex"
+  "root.bib"

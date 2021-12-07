@@ -1,5 +1,5 @@
 theory Drinks_Machine
-  imports "EFSM.EFSM"
+  imports "Extended_Finite_State_Machines.EFSM"
 begin
 
 text_raw\<open>\snip{selectdef}{1}{2}{%\<close>

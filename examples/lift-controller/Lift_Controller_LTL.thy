@@ -1,5 +1,5 @@
 theory Lift_Controller_LTL
-imports Lift_Controller "EFSM.EFSM_LTL"
+imports Lift_Controller "Extended_Finite_State_Machines.EFSM_LTL"
 begin
 
 declare One_nat_def [simp del]
@@ -268,7 +268,7 @@ lemma must_stop_to_open_aux1a:
   defer apply (simp add: return)
   apply simp
   apply (rule disjI2)
-  subgoal for x r p t a b na
+  subgoal for x r p t a na
     using must_stop_to_open_aux3[of "(make_full_observation lift (Some (nat na)) (apply_updates [] (join_ir [] r) r) [] (stl t))" n]
     apply (simp add: nxt.simps)
     by fastforce
@@ -338,31 +338,25 @@ lemma ltl_step_motorstop:
  ltl_step lift (Some n) r (STR ''motorstop'', [EFSM.Str ''true'', EFSM.Str ''true'']) = (Some (n + 4), [Some (Num 0), Some (Num n), Some (Str ''true'')], r)"
   apply (rule ltl_step_singleton)
   apply (rule_tac x="motorstop n" in exI)
-  apply simp
-  apply standard
+  apply (simp add: apply_updates_def apply_outputs_def)
    apply (simp add: possible_steps_alt3 split_label label_motorstop)
    apply (simp add: Abs_ffilter set_eq_iff)
-   apply clarify
+  apply clarify
    apply (case_tac "a=1")
+    apply simp
     apply standard
      apply (simp add: transitions can_take)
-     apply auto[1]
-    apply (simp add: transitions can_take apply_guards_def)
+   apply (simp add: transitions can_take apply_guards_def)
    apply (case_tac "a=2")
     apply standard
      apply (simp add: transitions can_take)
-     apply auto[1]
     apply (simp add: transitions can_take apply_guards_def)
    apply (case_tac "a=3")
     apply standard
      apply (simp add: transitions can_take)
-     apply auto[1]
     apply (simp add: transitions can_take apply_guards_def)
-   apply (simp add: transitions can_take apply_guards_def)
-   apply standard
-    apply auto[1]
-   apply auto[1]
-  by (simp add: apply_updates_def apply_outputs_def)
+  apply (simp add: transitions can_take apply_guards_def)
+  by auto
 
 lemma ltl_step_motorstop_invalid_r1:
 "r $ 1 \<noteq> Some (EFSM.Str ''true'') \<Longrightarrow>
@@ -710,20 +704,80 @@ lemma ltl_step_ocd_invalid:
    apply (case_tac list, simp)
   by auto
 
-lemma ltl_step_startsearch:
-  "s \<in> {5, 6, 7, 8} \<Longrightarrow>
-  ltl_step lift (Some s) r (STR ''startsearch'', [EFSM.Str ''true'', EFSM.Str ''false'']) = (Some 9, [], r)"
-  apply (rule ltl_step_some[of _ _ _ _ _ 9 startsearch])
-    defer apply simp
-   apply (simp add: apply_updates_def)
-  apply (simp add: lift_def possible_steps_singleton set_eq_iff)
-  apply clarify
-  apply (case_tac "ba=startsearch")
-   apply (simp add: transitions apply_guards_def)
-   apply auto[1]
-  apply (simp add: transitions)
-  apply clarify
+lemma possible_steps_origin: "possible_steps e s r l i = possible_steps (ffilter (\<lambda>((origin, dest), t). origin = s) e) s r l i"
+  apply (simp add: possible_steps_def)
+  apply (rule arg_cong[of _ _ "fimage (\<lambda>((origin, dest), t). (dest, t))"])
+  apply (simp add: ffilter_def Abs_fset_inverse)
+  apply (rule arg_cong[of _ _ Abs_fset])
   by auto
+
+lemma possible_steps_label: "possible_steps e s r l i = possible_steps (ffilter (\<lambda>((origin, dest), t). Label t = l) e) s r l i"
+  apply (simp add: possible_steps_def)
+  apply (rule arg_cong[of _ _ "fimage (\<lambda>((origin, dest), t). (dest, t))"])
+  apply (simp add: ffilter_def Abs_fset_inverse)
+  apply (rule arg_cong[of _ _ Abs_fset])
+  by auto
+
+lemma fimage_member: "(x |\<in>| fimage f s) = (\<exists>x'. x' |\<in>| s \<and> f x' = x)"
+  by auto
+
+lemma ltl_step_startsearch:
+  assumes "s \<in> {5, 6, 7, 8}"
+  shows "ltl_step lift (Some s) r (STR ''startsearch'', [EFSM.Str ''true'', EFSM.Str ''false'']) = (Some 9, [], r)"
+proof-
+  have possible_s: "s \<in> {5, 6, 7, 8} = (s = 5 \<or> s = 6 \<or> s = 7 \<or> s = 8)"
+    by simp
+  (*Takes ~30s*)
+  have startsearch: "ffilter (\<lambda>((origin, dest), t). Label t = STR ''startsearch'') lift =
+  {|((5, 9), startsearch),
+    ((6, 9), startsearch),
+    ((7, 9), startsearch),
+    ((8, 9), startsearch)|}"
+    apply standard
+    defer
+     apply (simp add: lift_def)
+    apply (rule fsubsetI)
+    apply (simp only: ffmember_filter)
+    apply (case_tac "x |\<in>| lift")
+     defer apply simp
+    apply simp
+    apply (case_tac x)
+    apply simp
+    apply (simp add: lift_def)
+    apply clarsimp
+    apply (simp add: transitions)
+    subgoal for s s' t
+      apply (case_tac "t = startsearch")
+       apply auto[1]
+      by auto
+    done
+  have ffilter: "ffilter
+     (\<lambda>((origin, dest), t).
+         origin = s \<and>
+         Label t = STR ''startsearch'' \<and>
+         Suc (Suc 0) = Arity t \<and> apply_guards (Guards t) (join_ir [EFSM.Str ''true'', EFSM.Str ''false''] r))
+     {|((5, 9), startsearch), ((6, 9), startsearch), ((7, 9), startsearch), ((8, 9), startsearch)|} =
+    ffilter (\<lambda>((origin, dest), t). origin = s) {|((5, 9), startsearch), ((6, 9), startsearch), ((7, 9), startsearch), ((8, 9), startsearch)|}"
+    apply standard
+     apply auto[1]
+    apply (rule fsubsetI)
+    apply (case_tac x)
+    apply clarsimp
+    apply (case_tac "bc = startsearch")
+     apply (simp add: apply_guards_def)
+    by simp
+  show ?thesis
+    apply (rule ltl_step_some[of _ _ _ _ _ 9 startsearch])
+    defer apply simp
+     apply (simp add: apply_updates_def)
+    using possible_s assms
+    apply (simp add: possible_steps_label[of lift] startsearch)
+    apply (simp add: possible_steps_def)
+    apply standard
+     apply auto[1]
+    apply (rule fsubsetI)
+    by (simp add: fimage_member apply_guards_def)
+qed
 
 lemma possible_steps_lift: "possible_steps lift s r a ba \<noteq> {||} \<Longrightarrow>
        \<exists>aa t. possible_steps lift s r a ba = {|(aa, t)|}"

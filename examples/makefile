@@ -25,8 +25,8 @@ testisabellesal:
 	cd ../drinks;\
 	bash test_drinks_machine.sh;\
 	cd ../lift-controller;\
-	sed -i 's/r__4 = None/r__4 = Some(Num(1))/' lift_controller.sal;\
-	sed -i 's/r__4 = None/r__4 = Some(Num(1))/' lift_controller_ltl.sal;\
+	sed -i 's/r__4 = None/r__4 = Some(Num(1))/' Lift_Controller.sal;\
+	sed -i 's/r__4 = None/r__4 = Some(Num(1))/' Lift_Controller_LTL.sal;\
 	bash test_lift_controller.sh;\
 	cd ../linkedin;\
 	bash test_linked_in.sh

@@ -1,5 +1,5 @@
 theory Coin_Tea_Broken
-  imports "EFSM.EFSM_LTL"
+  imports "Extended_Finite_State_Machines.EFSM_LTL"
 begin
 
 declare One_nat_def [simp del]

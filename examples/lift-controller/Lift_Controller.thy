@@ -1,5 +1,5 @@
 theory Lift_Controller
-imports "EFSM.EFSM"
+imports "Extended_Finite_State_Machines.EFSM"
 begin
 
 definition "continit" :: "transition" where
