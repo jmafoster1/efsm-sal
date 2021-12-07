@@ -1,0 +1,15 @@
+cff-version: 1.0.0
+message: "If you use this software, please cite it as below."
+authors:
+  - family-names: Foster
+    given-names: Michael
+    orcid: https://orcid.org/0000-0001-8233-9873
+  - family-names: Taylor
+    given-names: Ramsay
+    orcid: https://orcid.org/0000-0002-4036-7590
+  - family-names: North
+    given-names: Siobhan
+    orcid: https://orcid.org/0000-0002-8478-8960
+title: "EFSM SAL"
+version: 1.0.0
+date-released: 2021-12-07
