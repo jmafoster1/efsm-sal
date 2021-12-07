@@ -15,10 +15,10 @@ testwf:
 # 	txt=`echo $$file | sed -e "s~$$HOME~~"`; \
 # 	echo $$txt
 
-testisabellesal:
+testisabelle2sal:
 	# we need the file path relative to $HOME since this is how the translator works
 	for file in $(shell find . -name '*.thy' | xargs -n 1 realpath --relative-to $(HOME)) ; do \
-	java -jar ../jars/isabellesal.jar $$file ;\
+	java -jar ../jars/isabelle2sal.jar $$file ;\
 	done
 	cd coin-tea;\
 	bash test_coin_tea.sh;\
@@ -34,14 +34,14 @@ testisabellesal:
 testdot:
 	# we need the file path relative to $HOME since this is how the translator works
 	for file in $(shell find . -name '*.dot' | xargs -n 1 realpath --relative-to $(HOME)) ; do \
-	java -jar ../jars/dottoisabelle.jar $$file ;\
+	java -jar ../jars/dot2isabelle.jar $$file ;\
 	done ;\
 	find . -name '*.dot' | xargs -n 1 dot -Tpng -O
 
-testsalisabelle:
+testsal2isabelle:
 	# we need the file path relative to $HOME since this is how the translator works
 	for file in $(shell find . -name '*.sal' | xargs -n 1 realpath --relative-to $(HOME)) ; do \
-	java -jar ../jars/salisabelle.jar $$file ;\
+	java -jar ../jars/sal2isabelle.jar $$file ;\
 	done
 
 dot:

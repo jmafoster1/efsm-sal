@@ -6,3 +6,4 @@ pdfs/
 __pycache__/
 jars/
 output/
+build/

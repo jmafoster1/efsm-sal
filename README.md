@@ -4,6 +4,12 @@ EFSM models fit nicely with the notion of model checking. We can therefore expre
 ## Cloning
 This repository makes reference to several submodules. When cloning this repository, you should do so with the `--recursive` option, i.e. `git clone --recursive https://github.com/jmafoster1/efsm-sal.git`
 
+## Building
+You can build the jars from source by simply running `make` or `make build` from within the `efsm-sal` top level directory. This will compile the sources and create a directory called `jars` in which to place the compiled `.jar` files for the three utilities. These can then be run with `java -jar jars/jarname.jar`, in which `jarname` is one of the three tools listed below. Of course, this requires Java to be installed on your computer.
+
+## Precompiled JARs
+Instead of building from the source code, you can simply download precompiled jar files by clicking on "releases".
+
 ## Prerequisites
 ### SAL
 Our toolset is designed to work with the [Symbolic Analysis Laboratory (SAL)](http://sal.csl.sri.com/) model checker. You need to have this installed on your system. Full installation instructions can be found [here](http://sal.csl.sri.com/download.shtml).
@@ -21,9 +27,9 @@ Please note that the reference name changed from `EFSM` to `Extended_Finite_Stat
 
 ## Tools
 Our tools are located in the `jars` directory. Each can be run using `java -jar TOOLNAME.jar file/to/convert`, where `file/to/convert` is the filepath of the file to convert, and `TOOLNAME` is one of the following:
-- `dottoisabelle` - converts DOT files representing EFSMs into an Isabelle representation. This enables EFSMs to be edited graphically. For examples of the syntax to use, see the [`examples`](/tree/master/examples) directory.
-- `isabellesal` converts Isabelle representations of EFSMs and LTL properties to SAL for quick and easy counterexample generation.
-- `salisabelle` converts SAL EFSMs and properties to Isabelle to enable coinductive proofs for the strongest assurance.
+- `dot2isabelle` - converts DOT files representing EFSMs into an Isabelle representation. This enables EFSMs to be edited graphically. For examples of the syntax to use, see the [`examples`](/tree/master/examples) directory.
+- `isabelle2sal` converts Isabelle representations of EFSMs and LTL properties to SAL for quick and easy counterexample generation.
+- `sal2isabelle` converts SAL EFSMs and properties to Isabelle to enable coinductive proofs for the strongest assurance.
 
 If called without a file argument, all three tools will bring up a file chooser window.
 
