@@ -23,8 +23,8 @@ definition "motorstop4" :: "transition" where
             (Eq (V (I 1)) (L (Str ''true'')))
       ],
       Outputs = [
-            (L (Num 0)),
-            (L (Num 4)),
+            (L (value.Int 0)),
+            (L (value.Int 4)),
             (L (Str ''true''))
       ],
       Updates = []
@@ -40,8 +40,8 @@ definition "motorstop3" :: "transition" where
             (Eq (V (I 1)) (L (Str ''true'')))
       ],
       Outputs = [
-            (L (Num 0)),
-            (L (Num 3)),
+            (L (value.Int 0)),
+            (L (value.Int 3)),
             (L (Str ''true''))
       ],
       Updates = []
@@ -57,8 +57,8 @@ definition "motorstop2" :: "transition" where
             (Eq (V (I 1)) (L (Str ''true'')))
       ],
       Outputs = [
-            (L (Num 0)),
-            (L (Num 2)),
+            (L (value.Int 0)),
+            (L (value.Int 2)),
             (L (Str ''true''))
       ],
       Updates = []
@@ -74,8 +74,8 @@ definition "motorstop1" :: "transition" where
             (Eq (V (I 1)) (L (Str ''true'')))
       ],
       Outputs = [
-            (L (Num 0)),
-            (L (Num 1)),
+            (L (value.Int 0)),
+            (L (value.Int 1)),
             (L (Str ''true''))
       ],
       Updates = []
@@ -102,7 +102,7 @@ definition "opendoor4" :: "transition" where
       ],
       Outputs = [
             (L (Str ''true'')),
-            (L (Num 4))
+            (L (value.Int 4))
       ],
       Updates = []
 \<rparr>"
@@ -116,7 +116,7 @@ definition "opendoor3" :: "transition" where
       ],
       Outputs = [
             (L (Str ''true'')),
-            (L (Num 3))
+            (L (value.Int 3))
       ],
       Updates = []
 \<rparr>"
@@ -130,7 +130,7 @@ definition "opendoor2" :: "transition" where
       ],
       Outputs = [
             (L (Str ''true'')),
-            (L (Num 2))
+            (L (value.Int 2))
       ],
       Updates = []
 \<rparr>"
@@ -144,7 +144,7 @@ definition "opendoor1" :: "transition" where
       ],
       Outputs = [
             (L (Str ''true'')),
-            (L (Num 1))
+            (L (value.Int 1))
       ],
       Updates = []
 \<rparr>"
@@ -154,7 +154,7 @@ definition "return4" :: "transition" where
       Label = STR ''return'',
       Arity = 0,
       Guards = [
-            (Eq (V (R 4)) (L (Num 4)))
+            (Eq (V (R 4)) (L (value.Int 4)))
       ],
       Outputs = [],
       Updates = []
@@ -165,7 +165,7 @@ definition "return3" :: "transition" where
       Label = STR ''return'',
       Arity = 0,
       Guards = [
-            (Eq (V (R 4)) (L (Num 3)))
+            (Eq (V (R 4)) (L (value.Int 3)))
       ],
       Outputs = [],
       Updates = []
@@ -176,7 +176,7 @@ definition "return2" :: "transition" where
       Label = STR ''return'',
       Arity = 0,
       Guards = [
-            (Eq (V (R 4)) (L (Num 2)))
+            (Eq (V (R 4)) (L (value.Int 2)))
       ],
       Outputs = [],
       Updates = []
@@ -187,7 +187,7 @@ definition "return1" :: "transition" where
       Label = STR ''return'',
       Arity = 0,
       Guards = [
-            (Eq (V (R 4)) (L (Num 1)))
+            (Eq (V (R 4)) (L (value.Int 1)))
       ],
       Outputs = [],
       Updates = []
@@ -198,18 +198,18 @@ definition "down43stop" :: "transition" where
       Label = STR ''down'',
       Arity = 3,
       Guards = [
-            (Eq (V (R 2)) (L (Num 2))),
+            (Eq (V (R 2)) (L (value.Int 2))),
             (Eq (V (R 1)) (L (Str ''false''))),
             (Eq (V (I 0)) (L (Str ''true''))),
             (Eq (V (I 1)) (L (Str ''true''))),
             (Eq (V (I 2)) (L (Str ''true'')))
       ],
       Outputs = [
-            (L (Num 2)),
+            (L (value.Int 2)),
             (L (Str ''true''))
       ],
       Updates = [
-            (4, (L (Num 3))),
+            (4, (L (value.Int 3))),
             (1, (L (Str ''true'')))
       ]
 \<rparr>"
@@ -219,18 +219,18 @@ definition "down43" :: "transition" where
       Label = STR ''down'',
       Arity = 3,
       Guards = [
-            (Eq (V (R 2)) (L (Num 2))),
+            (Eq (V (R 2)) (L (value.Int 2))),
             (Eq (V (R 1)) (L (Str ''false''))),
             (Eq (V (I 0)) (L (Str ''true''))),
             (Eq (V (I 1)) (L (Str ''true''))),
             (Eq (V (I 2)) (L (Str ''false'')))
       ],
       Outputs = [
-            (L (Num 2)),
+            (L (value.Int 2)),
             (L (Str ''false''))
       ],
       Updates = [
-            (4, (L (Num 3))),
+            (4, (L (value.Int 3))),
             (1, (L (Str ''false'')))
       ]
 \<rparr>"
@@ -240,17 +240,17 @@ definition "up34stop" :: "transition" where
       Label = STR ''up'',
       Arity = 2,
       Guards = [
-            (Eq (V (R 2)) (L (Num 1))),
+            (Eq (V (R 2)) (L (value.Int 1))),
             (Eq (V (R 1)) (L (Str ''false''))),
             (Eq (V (I 0)) (L (Str ''true''))),
             (Eq (V (I 1)) (L (Str ''true'')))
       ],
       Outputs = [
-            (L (Num 1)),
+            (L (value.Int 1)),
             (L (Str ''true''))
       ],
       Updates = [
-            (4, (L (Num 4))),
+            (4, (L (value.Int 4))),
             (1, (L (Str ''true'')))
       ]
 \<rparr>"
@@ -260,18 +260,18 @@ definition "down32stop" :: "transition" where
       Label = STR ''down'',
       Arity = 3,
       Guards = [
-            (Eq (V (R 2)) (L (Num 2))),
+            (Eq (V (R 2)) (L (value.Int 2))),
             (Eq (V (R 1)) (L (Str ''false''))),
             (Eq (V (I 0)) (L (Str ''true''))),
             (Eq (V (I 1)) (L (Str ''true''))),
             (Eq (V (I 2)) (L (Str ''true'')))
       ],
       Outputs = [
-            (L (Num 2)),
+            (L (value.Int 2)),
             (L (Str ''true''))
       ],
       Updates = [
-            (4, (L (Num 2))),
+            (4, (L (value.Int 2))),
             (1, (L (Str ''true'')))
       ]
 \<rparr>"
@@ -281,18 +281,18 @@ definition "down32" :: "transition" where
       Label = STR ''down'',
       Arity = 3,
       Guards = [
-            (Eq (V (R 2)) (L (Num 2))),
+            (Eq (V (R 2)) (L (value.Int 2))),
             (Eq (V (R 1)) (L (Str ''false''))),
             (Eq (V (I 0)) (L (Str ''true''))),
             (Eq (V (I 1)) (L (Str ''true''))),
             (Eq (V (I 2)) (L (Str ''false'')))
       ],
       Outputs = [
-            (L (Num 2)),
+            (L (value.Int 2)),
             (L (Str ''false''))
       ],
       Updates = [
-            (4, (L (Num 2))),
+            (4, (L (value.Int 2))),
             (1, (L (Str ''false'')))
       ]
 \<rparr>"
@@ -302,18 +302,18 @@ definition "up23stop" :: "transition" where
       Label = STR ''up'',
       Arity = 3,
       Guards = [
-            (Eq (V (R 2)) (L (Num 1))),
+            (Eq (V (R 2)) (L (value.Int 1))),
             (Eq (V (R 1)) (L (Str ''false''))),
             (Eq (V (I 0)) (L (Str ''true''))),
             (Eq (V (I 1)) (L (Str ''true''))),
             (Eq (V (I 2)) (L (Str ''true'')))
       ],
       Outputs = [
-            (L (Num 1)),
+            (L (value.Int 1)),
             (L (Str ''true''))
       ],
       Updates = [
-            (4, (L (Num 3))),
+            (4, (L (value.Int 3))),
             (1, (L (Str ''true'')))
       ]
 \<rparr>"
@@ -323,18 +323,18 @@ definition "up23" :: "transition" where
       Label = STR ''up'',
       Arity = 3,
       Guards = [
-            (Eq (V (R 2)) (L (Num 1))),
+            (Eq (V (R 2)) (L (value.Int 1))),
             (Eq (V (R 1)) (L (Str ''false''))),
             (Eq (V (I 0)) (L (Str ''true''))),
             (Eq (V (I 1)) (L (Str ''true''))),
             (Eq (V (I 2)) (L (Str ''false'')))
       ],
       Outputs = [
-            (L (Num 1)),
+            (L (value.Int 1)),
             (L (Str ''false''))
       ],
       Updates = [
-            (4, (L (Num 3))),
+            (4, (L (value.Int 3))),
             (1, (L (Str ''false'')))
       ]
 \<rparr>"
@@ -344,17 +344,17 @@ definition "down21stop" :: "transition" where
       Label = STR ''down'',
       Arity = 2,
       Guards = [
-            (Eq (V (R 2)) (L (Num 2))),
+            (Eq (V (R 2)) (L (value.Int 2))),
             (Eq (V (R 1)) (L (Str ''false''))),
             (Eq (V (I 0)) (L (Str ''true''))),
             (Eq (V (I 1)) (L (Str ''true'')))
       ],
       Outputs = [
-            (L (Num 2)),
+            (L (value.Int 2)),
             (L (Str ''true''))
       ],
       Updates = [
-            (3, (L (Num 1))),
+            (3, (L (value.Int 1))),
             (1, (L (Str ''true'')))
       ]
 \<rparr>"
@@ -364,19 +364,19 @@ definition "up12stop" :: "transition" where
       Label = STR ''up'',
       Arity = 3,
       Guards = [
-            (Eq (V (R 2)) (L (Num 1))),
+            (Eq (V (R 2)) (L (value.Int 1))),
             (Eq (V (R 1)) (L (Str ''false''))),
             (Eq (V (I 0)) (L (Str ''true''))),
             (Eq (V (I 1)) (L (Str ''true''))),
             (Eq (V (I 2)) (L (Str ''true'')))
       ],
       Outputs = [
-            (L (Num 1)),
+            (L (value.Int 1)),
             (L (Str ''true''))
       ],
       Updates = [
             (1, (L (Str ''true''))),
-            (4, (L (Num 2)))
+            (4, (L (value.Int 2)))
       ]
 \<rparr>"
 
@@ -385,18 +385,18 @@ definition "up12" :: "transition" where
       Label = STR ''up'',
       Arity = 3,
       Guards = [
-            (Eq (V (R 2)) (L (Num 1))),
+            (Eq (V (R 2)) (L (value.Int 1))),
             (Eq (V (R 1)) (L (Str ''false''))),
             (Eq (V (I 0)) (L (Str ''true''))),
             (Eq (V (I 1)) (L (Str ''true''))),
             (Eq (V (I 2)) (L (Str ''false'')))
       ],
       Outputs = [
-            (L (Num 1)),
+            (L (value.Int 1)),
             (L (Str ''false''))
       ],
       Updates = [
-            (4, (L (Num 2))),
+            (4, (L (value.Int 2))),
             (1, (L (Str ''false'')))
       ]
 \<rparr>"
@@ -504,7 +504,7 @@ abbreviation return :: "int \<Rightarrow> transition" where
       Label = STR ''return'',
       Arity = 0,
       Guards = [
-            (Eq (V (R 4)) (L (Num n)))
+            (Eq (V (R 4)) (L (value.Int n)))
       ],
       Outputs = [],
       Updates = []
@@ -520,8 +520,8 @@ abbreviation motorstop :: "int \<Rightarrow> transition" where
             (Eq (V (I 1)) (L (Str ''true'')))
       ],
       Outputs = [
-            (L (Num 0)),
-            (L (Num n)),
+            (L (value.Int 0)),
+            (L (value.Int n)),
             (L (Str ''true''))
       ],
       Updates = []
@@ -536,7 +536,7 @@ abbreviation opendoor :: "int \<Rightarrow> transition" where
       ],
       Outputs = [
             (L (Str ''true'')),
-            (L (Num n))
+            (L (value.Int n))
       ],
       Updates = []
 \<rparr>"
