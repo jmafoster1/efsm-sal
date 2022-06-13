@@ -1,0 +1,66 @@
+Counterexample:
+========================
+Path
+========================
+Step 0:
+--- Input Variables (assignments) ---
+label = init
+i(0) = ValueBB
+i(1) = ValueBB
+--- System Variables (assignments) ---
+ba-pc!1 = 4
+cfstate = State__0
+r__1 = None
+o(0) = OptionBB
+o(1) = OptionBB
+------------------------
+Transition Information: 
+(module instance at [Context: Coin_Tea_Broken, line(81), column(29)]
+  (label INIT
+    transition at [Context: Coin_Tea_Broken, line(39), column(10)]))
+------------------------
+Step 1:
+--- Input Variables (assignments) ---
+label = vend
+i(0) = ValueBB
+i(1) = ValueBB
+--- System Variables (assignments) ---
+ba-pc!1 = 1
+cfstate = State__1
+r__1 = Some(Num(0))
+o(0) = OptionBB
+o(1) = OptionBB
+------------------------
+Transition Information: 
+(module instance at [Context: Coin_Tea_Broken, line(81), column(29)]
+  (label VEND
+    transition at [Context: Coin_Tea_Broken, line(57), column(10)]))
+------------------------
+Step 2:
+--- Input Variables (assignments) ---
+label = vend
+i(0) = ValueBB
+i(1) = Str(String__tea)
+--- System Variables (assignments) ---
+ba-pc!1 = 0
+cfstate = State__2
+r__1 = Some(Num(0))
+o(0) = Some(Str(String__tea))
+o(1) = OptionBB
+------------------------
+Transition Information: 
+(module instance at [Context: Coin_Tea_Broken, line(81), column(29)]
+  (label SINK_HOLE
+    else transition at [Context: Coin_Tea_Broken, line(67), column(10)]))
+------------------------
+Step 3:
+--- Input Variables (assignments) ---
+label = vend
+i(0) = Str(String__tea)
+i(1) = Num(88)
+--- System Variables (assignments) ---
+ba-pc!1 = 2
+cfstate = NULL_STATE
+r__1 = Some(Num(0))
+o(0) = OptionBB
+o(1) = OptionBB
