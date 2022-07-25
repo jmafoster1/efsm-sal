@@ -136,6 +136,8 @@ definition "linkedIn" :: "transition_matrix" where
       ((6, 7), pdf2)
 |}"
 
+lemmas transitions = login_def login1_def view_def view1_def view2_def view3_def pdf_def pdf1_def pdf2_def
+
 lemma implode_login: "String.implode ''login'' = STR ''login''"
   by (metis Literal.rep_eq String.implode_explode_eq zero_literal.rep_eq)
 
@@ -184,7 +186,7 @@ lemma not_view: "l \<noteq> STR ''view'' \<Longrightarrow>
 lemma view_fuzz: "possible_steps linkedIn 1 <> STR ''view'' [EFSM.Str ''otherID'', EFSM.Str ''name'', EFSM.Str ''MNn5''] = {|(6, view3)|}"
   apply (simp add: possible_steps_singleton linkedIn_def)
   apply safe
-  by (simp_all add: view_def view1_def view2_def  view3_def apply_guards_def join_ir_nth Str_def implode)
+  by (simp_all add: view_def view1_def view2_def view3_def apply_guards_def Str_def implode)
 
 lemma not_pdf_6: "l \<noteq> STR ''pdf'' \<Longrightarrow> possible_steps linkedIn 6 <> l i = {||}"
   apply (simp add: possible_steps_empty linkedIn_def)
@@ -194,7 +196,7 @@ lemma not_pdf_6: "l \<noteq> STR ''pdf'' \<Longrightarrow> possible_steps linked
 lemma pdf_6_invalid_inputs: "i \<noteq> [EFSM.Str ''otherID'', EFSM.Str ''name'', EFSM.Str ''4zoF''] \<Longrightarrow>
  possible_steps linkedIn 6 <> STR ''pdf'' i = {||}"
   apply (simp add: possible_steps_def Abs_ffilter Set.filter_def linkedIn_def)
-  apply (simp add: pdf2_def apply_guards_def join_ir_nth Str_def implode)
+  apply (simp add: pdf2_def apply_guards_def Str_def implode)
   using nth_equalityI[of "[value.Str STR ''otherID'', value.Str STR ''name'', value.Str STR ''4zoF'']" i]
   apply simp
   by (metis One_nat_def add_diff_cancel_left' less_2_cases less_Suc_eq nth_Cons' numeral_2_eq_2 numeral_3_eq_3 plus_1_eq_Suc)
@@ -270,5 +272,26 @@ text_raw\<open>}%endsnip\<close>
   apply (simp add: login_free login_def)
   apply standard
   oops
+
+lemma view_hack: "possible_steps linkedIn 1 <> STR ''view'' [EFSM.Str ''otherID'', EFSM.Str ''name'', EFSM.Str ''4zoF''] = {|(6, view2)|}"
+  by (simp add: possible_steps_def linkedIn_def ffilter_finsert transitions apply_guards_def Str_def implode)
+
+lemma possible_steps_7: "possible_steps linkedIn 7 r l i = {||}"
+  by (simp add: possible_steps_def linkedIn_def ffilter_finsert)
+
+lemma LTL_neverDetailed_counterexample :
+  "\<not> ((label_eq ''login'' aand
+    input_eq [Str ''free'']) impl
+    nxt (alw ((label_eq ''pdf'' aand
+    check_exp ((Eq (V (Ip 0)) (L (Str ''otherID''))))) impl
+    not (nxt (output_eq [Some (
+    Str ''detailed_pdf_of_otherID'')])))))
+(watch linkedIn ((STR ''login'', [Str ''free''])##(STR ''view'', [Str ''otherID'', Str ''name'', Str ''4zoF''])##(STR ''pdf'', [Str ''otherID'', Str ''name'', Str ''4zoF''])##(STR ''view'', [])##(STR ''login'', [])##trace))"
+  apply (simp add: make_full_observation_step)
+  apply (simp add: login_free login_def view_hack view2_def pdf_fuzz pdf2_def possible_steps_7)
+  apply (simp add: implode Str_def)
+  apply (simp add: not_alw_iff)
+  apply (rule ev.step, simp)
+  by (rule ev.base, simp add: join_iro_def apply_outputs_def)
 
 end

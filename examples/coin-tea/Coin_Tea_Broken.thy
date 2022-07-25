@@ -12,7 +12,7 @@ definition init :: transition where
           Arity = 0,
           Guards = [],
           Outputs = [],
-          Updates = [(1, (L (Num 0)))]
+          Updates = [(1, (L (value.Int 0)))]
         \<rparr>"
 
 definition coin :: transition where
@@ -21,14 +21,14 @@ definition coin :: transition where
           Arity = 0,
           Guards = [],
           Outputs = [],
-          Updates = [(1, (Plus (V (R 1)) (L (Num 1))))]
+          Updates = [(1, (Plus (V (R 1)) (L (value.Int 1))))]
         \<rparr>"
 
 definition vend :: transition where
 "vend \<equiv> \<lparr>
           Label = (STR ''vend''),
           Arity = 0,
-          Guards = [Ge (V (R 1)) (L (Num 0))],
+          Guards = [Ge (V (R 1)) (L (value.Int 0))],
           Outputs = [L (Str ''tea'')],
           Updates = []
         \<rparr>"
@@ -93,7 +93,7 @@ lemma possible_steps_coin: "possible_steps drinks 1 r STR ''coin'' [] = {|(1, co
   apply safe
   by (simp_all add: vend_def coin_def)
 
-lemma possible_steps_vend_sufficient: "n > 0 \<Longrightarrow> possible_steps drinks 1 <1 $:= Some (Num n)> STR ''vend'' [] = {|(2, vend)|}"
+lemma possible_steps_vend_sufficient: "n \<ge> 0 \<Longrightarrow> possible_steps drinks 1 <1 $r:= Some (value.Int n)> STR ''vend'' [] = {|(2, vend)|}"
   apply (simp add: possible_steps_alt ffilter_def fset_both_sides Abs_fset_inverse Set.filter_def drinks_def)
   apply safe
   by (simp_all add: vend_def coin_def apply_guards_def join_ir_def value_gt_def connectives)
@@ -103,7 +103,7 @@ lemma invalid_possible_steps_1: "shd t \<noteq> (STR ''coin'', []) \<Longrightar
   apply (simp add: possible_steps_def ffilter_def fset_both_sides Abs_fset_inverse drinks_def Set.filter_def)
   by (metis coin_def length_0_conv prod.collapse transition.ext_inject transition.surjective vend_def)
 
-lemma possible_steps_2: "possible_steps drinks 2 r (fst (shd t)) (snd (shd t)) = {||}"
+lemma possible_steps_2: "possible_steps drinks 2 r l i = {||}"
   by (simp add: possible_steps_def ffilter_def fset_both_sides Abs_fset_inverse Set.filter_def drinks_def)
 
 lemma implode_init: "String.implode ''init'' = STR ''init''"
@@ -140,18 +140,18 @@ lemma possible_steps_0: "possible_steps drinks 0 <> l i = finsert x S' \<Longrig
   using possible_steps_not_init
   by auto
 
-lemma apply_updates_init: "apply_updates (Updates init) (\<lambda>x. None) <> = <1 $:= Some (Num 0)>"
+lemma apply_updates_init: "apply_updates (Updates init) (\<lambda>x. None) <> = <1 $r:= Some (value.Int 0)>"
   by (simp add: init_def apply_updates_def)
 
 (* This is supposed to break *)
-lemma vend_insufficient: "possible_steps drinks 1 <1 $:= Some (Num 0)> STR ''vend'' i = {||}"
+lemma vend_insufficient: "possible_steps drinks 1 <1 $r:= Some (value.Int 0)> STR ''vend'' i = {||}"
   apply (simp add: possible_steps_def ffilter_def fset_both_sides Abs_fset_inverse Set.filter_def drinks_def)
   apply safe
    apply (simp add: coin_def)
   apply (simp add: vend_def apply_guards_def connectives value_gt_def)
   oops
 
-lemma LTL_init_makes_r_1_zero: "((label_eq ''init'' aand input_eq []) impl nxt (check_exp (Eq (V (Rg 1)) (L (Num 0))))) (watch drinks t)"
+lemma LTL_init_makes_r_1_zero: "((label_eq ''init'' aand input_eq []) impl nxt (check_exp (Eq (V (Rg 1)) (L (value.Int 0))))) (watch drinks t)"
   apply (case_tac "shd t = (STR ''init'', [])")
    apply (simp add: possible_steps_init apply_updates_init join_iro_def implode_init)
   apply clarify
@@ -171,7 +171,7 @@ qed
 lemma possible_steps_1_invalid:
   "x1 \<noteq> (STR ''coin'', []) \<Longrightarrow>
    x1 \<noteq> (STR ''vend'', []) \<Longrightarrow>
-   possible_steps drinks 1 <1 $:= Some (Num 0)> (fst x1) (snd x1) = {||}"
+   possible_steps drinks 1 <1 $r:= Some (value.Int 0)> (fst x1) (snd x1) = {||}"
   apply (simp add: possible_steps_empty drinks_def)
   apply safe
    apply (simp add: coin_def can_take)
@@ -181,7 +181,7 @@ lemma possible_steps_1_invalid:
 
 lemma invalid_gets_stuck: "x1 \<noteq> (STR ''coin'', []) \<Longrightarrow>
                            x1 \<noteq> (STR ''vend'', []) \<Longrightarrow>
-                           \<not>ev (\<lambda>s. statename (shd s) = Some 2) (make_full_observation drinks (Some 1) <1 $:= Some (Num 0)> p (x1 ## x2))"
+                           \<not>ev (\<lambda>s. statename (shd s) = Some 2) (make_full_observation drinks (Some 1) <1 $r:= Some (value.Int 0)> p (x1 ## x2))"
   apply (simp add: not_ev_iff)
 proof(coinduction)
   case alw
@@ -260,5 +260,22 @@ lemma
 "(((ev (state_eq (Some 2))) impl (not (label_eq ''vend'') suntil label_eq ''coin'')) (watch drinks t)) =
  (((ev (state_eq (Some 2))) impl ((not (label_eq ''vend'')) suntil label_eq ''coin'')) (watch drinks t))"
   by simp
+
+lemma LTL_must_pay_correct_counterexample :
+  "\<not> (ev (state_eq (Some 2)) impl 
+    (not (label_eq ''vend'') suntil label_eq ''coin''))
+(watch drinks ((STR ''init'', [])##(STR ''vend'', [])##(STR ''vend'', [value.Int 42, value.Int 85])##(STR ''vend'', [])##trace))"
+  apply (simp add: make_full_observation_step)
+  apply (simp add: possible_steps_init init_def apply_updates_def possible_steps_vend_sufficient possible_steps_2)
+  by (simp add: ev_Stream implode_coin implode_vend suntil_Stream)
+
+lemma LTL_vend_no_coin_counterexample :
+  "\<not> (nxt (label_eq ''vend'' aand 
+    input_eq []) impl not (ev (state_eq (Some 2))))
+(watch drinks ((STR ''init'', [])##(STR ''vend'', [])##(STR ''vend'', [])##(STR ''vend'', [Str ''tea'', value.Int 88])##trace))"
+  apply (simp add: make_full_observation_step)
+  apply (simp add: possible_steps_init init_def apply_updates_def possible_steps_vend_sufficient possible_steps_2)
+  by (simp add: ev_Stream implode_vend)
+
 
 end

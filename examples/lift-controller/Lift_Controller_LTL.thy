@@ -10,7 +10,7 @@ lemma possible_steps_0: "possible_steps lift 0 r STR ''continit'' [] = {|(9, con
   apply (case_tac "a=0")
   by (auto simp add: continit_def)
 
-lemma ltl_step_0: "ltl_step lift (Some 0) r (STR ''continit'', []) = (Some 9, [], r(1 $:= Some (Str ''true'')))"
+lemma ltl_step_0: "ltl_step lift (Some 0) r (STR ''continit'', []) = (Some 9, [], r(1 $r:= Some (Str ''true'')))"
   by (simp add: possible_steps_0 continit_def apply_updates_def)
 
 lemma ltl_step_0_invalid: "e \<noteq> (STR ''continit'', []) \<Longrightarrow> ltl_step lift (Some 0) r e = (None, [], r)"
@@ -39,7 +39,7 @@ lemma possible_steps_9_invalid: "(l, i) \<noteq> (STR ''return'', []) \<Longrigh
   by (simp add: transitions can_take)
 
 lemma possible_steps_9_invalid_r4:
-  assumes "r $ 4 \<notin> {Some (value.Int 1), Some (value.Int 2), Some (value.Int 3), Some (value.Int 4)}"
+  assumes "r $r 4 \<notin> {Some (value.Int 1), Some (value.Int 2), Some (value.Int 3), Some (value.Int 4)}"
   shows "possible_steps lift 9 r l i = {||}"
   apply (simp add: possible_steps_empty lift_def)
   apply (simp add: transitions can_take value_eq_true)
@@ -61,7 +61,7 @@ fst (shd t) = STR ''opendoor'' \<Longrightarrow>
   by simp
 
 lemma return:
-"r $ 4 = Some (value.Int n) \<Longrightarrow>
+"r $r 4 = Some (value.Int n) \<Longrightarrow>
 n \<in> {1, 2, 3, 4} \<Longrightarrow>
 possible_steps lift 9 r (STR ''return'') [] = {|(nat n, return n)|}"
   apply (simp add: possible_steps_singleton lift_def set_eq_iff)
@@ -203,14 +203,14 @@ lemma must_stop_to_open_aux1:
   using once_none_always_none apply blast
    apply simp
   apply simp
-  apply (case_tac "r $ 4 \<notin> {Some (value.Int 1), Some (value.Int 2), Some (value.Int 3), Some (value.Int 4)}")
+  apply (case_tac "r $r 4 \<notin> {Some (value.Int 1), Some (value.Int 2), Some (value.Int 3), Some (value.Int 4)}")
    apply (simp add: possible_steps_9_invalid_r4)
    apply (rule disjI2)
    apply (rule alw_implies_until)
    apply (rule alw_mono[of "state_eq None"])
   using once_none_always_none apply blast
    apply simp
-  apply (case_tac "\<exists>n. r $ 4 = Some (value.Int n) \<and> n \<in> {int 1, int 2, int 3, int 4}")
+  apply (case_tac "\<exists>n. r $r 4 = Some (value.Int n) \<and> n \<in> {int 1, int 2, int 3, int 4}")
    defer apply auto[1]
   apply (erule exE)
   apply (case_tac "possible_steps lift 9 r (STR ''return'') [] = {|(nat n, return n)|}")
@@ -254,14 +254,14 @@ lemma must_stop_to_open_aux1a:
    apply (rule alw_mono[of "nxt (output_eq [])"])
   using no_output_none_nxt apply blast
    apply (simp add: nxt.simps)
-  apply (case_tac "r $ 4 \<notin> {Some (value.Int 1), Some (value.Int 2), Some (value.Int 3), Some (value.Int 4)}")
+  apply (case_tac "r $r 4 \<notin> {Some (value.Int 1), Some (value.Int 2), Some (value.Int 3), Some (value.Int 4)}")
    apply (simp add: possible_steps_9_invalid_r4)
    apply (rule disjI2)
    apply (rule alw_implies_until)
    apply (rule alw_mono[of "nxt (output_eq [])"])
   using no_output_none_nxt apply blast
    apply (simp add: nxt.simps)
-  apply (case_tac "\<exists>n. r $ 4 = Some (value.Int n) \<and> n \<in> {int 1, int 2, int 3, int 4}")
+  apply (case_tac "\<exists>n. r $r 4 = Some (value.Int n) \<and> n \<in> {int 1, int 2, int 3, int 4}")
    defer apply auto[1]
   apply (erule exE)
   apply (case_tac "possible_steps lift 9 r (STR ''return'') [] = {|(nat na, return na)|}")
@@ -289,7 +289,7 @@ lemma must_stop_to_open:
   using no_output_none_nxt apply blast
    apply (simp add: nxt.simps)
   apply (simp add: possible_steps_0 continit_def apply_updates_def)
-  using must_stop_to_open_aux1a[of "(make_full_observation lift (Some 9) (r(1 $:= Some (EFSM.Str ''true''))) [] (stl t))"]
+  using must_stop_to_open_aux1a[of "(make_full_observation lift (Some 9) (r(1 $r:= Some (EFSM.Str ''true''))) [] (stl t))"]
   by fastforce
 
 lemma must_stop_to_open: "((not (label_eq ''opendoor'' aand nxt (output_eq [Some (Str ''true''), Some (value.Int n)]))) until (label_eq ''motorstop'')) (watch lift t)"
@@ -299,7 +299,7 @@ oops
 lemma must_stop_to_open_false: "alw ((not (label_eq ''opendoor'' aand nxt (output_eq [Some (Str ''true''), Some (value.Int n)]))) until (label_eq ''motorstop'')) (watch lift i)"
   oops
 
-lemma ltl_step_9_invalid: "\<not>(\<exists>n. r $ 4 = Some (value.Int n) \<and> n \<in> {1, 2, 3, 4}) \<Longrightarrow> ltl_step lift (Some 9) r e = (None, [], r)"
+lemma ltl_step_9_invalid: "\<not>(\<exists>n. r $r 4 = Some (value.Int n) \<and> n \<in> {1, 2, 3, 4}) \<Longrightarrow> ltl_step lift (Some 9) r e = (None, [], r)"
   apply (cases e)
   apply (simp del: ltl_step.simps)
   apply (rule ltl_step_none)
@@ -333,7 +333,7 @@ lemma label_motorstop:
   by auto
 
 lemma ltl_step_motorstop:
-"r $ 1 = Some (EFSM.Str ''true'') \<Longrightarrow>
+"r $r 1 = Some (EFSM.Str ''true'') \<Longrightarrow>
  n \<in> {1, 2, 3, 4} \<Longrightarrow>
  ltl_step lift (Some n) r (STR ''motorstop'', [EFSM.Str ''true'', EFSM.Str ''true'']) = (Some (n + 4), [Some (value.Int 0), Some (value.Int n), Some (Str ''true'')], r)"
   apply (rule ltl_step_singleton)
@@ -359,7 +359,7 @@ lemma ltl_step_motorstop:
   by auto
 
 lemma ltl_step_motorstop_invalid_r1:
-"r $ 1 \<noteq> Some (EFSM.Str ''true'') \<Longrightarrow>
+"r $r 1 \<noteq> Some (EFSM.Str ''true'') \<Longrightarrow>
  n \<in> {1, 2, 3, 4} \<Longrightarrow>
  ltl_step lift (Some n) r (STR ''motorstop'', [EFSM.Str ''true'', EFSM.Str ''true'']) = (None, [], r)"
   apply (rule ltl_step_none)
@@ -393,7 +393,7 @@ lemma alw_must_stop_to_open:
   apply standard
   using must_stop_to_open_aux1a apply simp
    apply (erule exE)+
-    apply (case_tac "\<exists>n. r $ 4 = Some (value.Int n) \<and> n \<in> {1, 2, 3, 4}")
+    apply (case_tac "\<exists>n. r $r 4 = Some (value.Int n) \<and> n \<in> {1, 2, 3, 4}")
     prefer 2
      apply (case_tac "shd t")
   using ltl_step_9_invalid apply simp
@@ -432,7 +432,7 @@ lemma alw_must_stop_to_open:
      apply (erule conjE)
      apply (erule exE)+
      apply (case_tac "shd t = (STR ''motorstop'', [EFSM.Str ''true'', EFSM.Str ''true''])")
-      apply (case_tac "r $ 1 \<noteq> Some (EFSM.Str ''true'')")
+      apply (case_tac "r $r 1 \<noteq> Some (EFSM.Str ''true'')")
        apply (simp add: ltl_step_motorstop_invalid_r1 alw_must_stop_to_open_end)
       apply (simp add: ltl_step_motorstop)
       apply (rule disjI2)
@@ -538,7 +538,7 @@ lemma not_motorstop: "Label (motorstop n) = l \<and> can_take_transition (motors
 (l, i) = (STR ''motorstop'', [EFSM.Str ''true'', EFSM.Str ''true''])"
   apply (simp add: can_take apply_guards_def value_eq_true)
   apply clarsimp
-  apply (case_tac "r $ 1 = Some (EFSM.Str ''true'')")
+  apply (case_tac "r $r 1 = Some (EFSM.Str ''true'')")
    apply (case_tac "i ! 0 = (EFSM.Str ''true'')")
     apply (case_tac "i ! 1 = (EFSM.Str ''true'')")
      apply simp
@@ -939,7 +939,7 @@ proof-
       apply (rule disjI2)+
       apply standard
        apply (rule impI)
-       apply (case_tac "\<exists>n. r $ 4 = Some (value.Int n) \<and> n \<in> {1, 2, 3, 4}")
+       apply (case_tac "\<exists>n. r $r 4 = Some (value.Int n) \<and> n \<in> {1, 2, 3, 4}")
         apply (case_tac "shd t = (STR ''return'', [])")
          apply (erule exE)
          apply simp
@@ -952,7 +952,7 @@ proof-
       apply standard
       apply standard
 
-       apply (case_tac "\<exists>n. r $ 4 = Some (value.Int n) \<and> n \<in> {1, 2, 3, 4}")
+       apply (case_tac "\<exists>n. r $r 4 = Some (value.Int n) \<and> n \<in> {1, 2, 3, 4}")
         apply (case_tac "shd t = (STR ''return'', [])")
          apply (erule exE)
          apply (simp add: ev_Stream make_full_observation.ctr[of lift "Some 9"] return ltl_step.simps apply_updates_def)
@@ -1086,5 +1086,37 @@ lemma LTL_must_stop_lift_to_open_door: "alw ((ev (nxt ((label_eq ''opendoor'') a
 
 lemma LTL_must_stop_lift_to_open_door_ev: "(ev (state_eq (Some 5)) impl (ev (output_eq [Some (value.Int 0), Some (value.Int 1), Some (Str ''true'')]))) (watch lift t)"
   oops
+
+declare ltl_step.simps [simp]
+
+lemma motorstop_1: "possible_steps lift 1 <4 $r:= Some (value.Int 1), 1 $r:= Some (EFSM.Str ''true'')> STR ''motorstop''
+                      [EFSM.Str ''true'', EFSM.Str ''true''] = {|(5, motorstop 1)|}"
+  by (simp add: possible_steps_def lift_def ffilter_finsert transitions apply_guards_def)
+
+lemma opendoor_1: "possible_steps lift 5 <4 $r:= Some (value.Int 1), 1 $r:= Some (EFSM.Str ''true'')> STR ''opendoor''
+                      [EFSM.Str ''true''] = {|(5, opendoor 1)|}"
+  by (simp add: possible_steps_def lift_def ffilter_finsert transitions apply_guards_def)
+
+lemma possible_steps_5_invalid: "possible_steps lift 5 <4 $r:= Some (value.Int 1), 1 $r:= Some (EFSM.Str ''true'')> STR ''up''
+                      [EFSM.Str ''dummy__'', value.Int 1, value.Int 3, EFSM.Str ''false''] = {||}"
+  by (simp add: possible_steps_def lift_def ffilter_finsert transitions)
+
+lemma not_until: "\<not>\<phi> \<pi> \<Longrightarrow> \<not>\<psi> \<pi> \<Longrightarrow> \<not> (\<phi> until \<psi>) \<pi>"
+  by (metis UNTIL.cases)
+
+lemma must_stop_to_open_false_counterexample :
+  "\<not> (\<forall>n.(alw (not (label_eq ''opendoor'' aand 
+    nxt (output_eq [Some (Str ''true''), Some (value.Int n)])) until 
+    label_eq ''motorstop''))
+(make_full_observation lift (Some 0) <4 $r:= Some (value.Int 1)> [] ((STR ''continit'', [])##(STR ''return'', [])##(STR ''motorstop'', [Str ''true'', Str ''true''])##(STR ''opendoor'', [Str ''true''])##(STR ''opendoor'', [Str ''true''])##(STR ''up'', [Str ''dummy__'', value.Int 1, value.Int 3, Str ''false''])##trace)))"
+  apply (simp add: make_full_observation_step)
+  apply (rule_tac x=1 in exI)
+  apply (simp add: possible_steps_0 continit_def apply_updates_def return motorstop_1 One_nat_def[symmetric] opendoor_1 possible_steps_5_invalid apply_outputs_def)
+  apply (simp add: not_alw_iff)
+  apply (rule ev.step, simp, rule ev.step, simp, rule ev.step, simp)
+  apply (rule ev.base)
+  apply (rule not_until)
+   apply (simp add: nxt.simps)
+  by simp
 
 end
