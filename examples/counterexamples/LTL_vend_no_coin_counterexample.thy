@@ -30,7 +30,6 @@ lemma "valid_trace drinks (Some 0) <> (watch drinks (
   apply (rule valid_trace.step_some, simp add: possible_steps_vend_sufficient transitions)
   apply (rule valid_trace.step_none, simp add: possible_steps_2)
    apply simp
-  by (metis make_full_observation_none valid_trace_None)
-
+  by (metis make_full_observation_none valid_trace_make_full_observation_None)
 
 end
