@@ -31,6 +31,31 @@ lemma possible_steps_1: "possible_steps drinks 1 r STR ''coin'' [c] = {|(1, coin
 lemma possible_steps_2: "r $r 2 = Some (value.Int n) \<Longrightarrow> n \<ge> 50 \<Longrightarrow> n < 100 \<Longrightarrow> possible_steps drinks 1 r STR ''vend'' [] = {|(1, vend_fail), (2, half_price_vend)|}"
   by (simp add: possible_steps_def drinks_def ffilter_finsert transitions value_gt_def)
 
+lemma "let x=[
+    \<lparr>statename=Some 0, datastate = <>, action=(STR ''select'', [d]), output = p\<rparr>,
+    \<lparr>statename=Some 1, datastate = <1 $r:= Some d, 2 $r:= Some (value.Int 0)>, action=(STR ''coin'', [value.Int 90]), output = []\<rparr>,
+    \<lparr>statename=Some 1, datastate = <1 $r:= Some d, 2 $r:= Some (value.Int 90)>, action=(STR ''vend'', []), output = [Some (value.Int 90)]\<rparr>,
+    \<lparr>statename=Some 2, datastate = <1 $r:= Some d, 2 $r:= Some (value.Int 90)>, action=(STR ''vend'', []), output = [Some d]\<rparr>
+  ] in valid_prefix drinks (Some 0) <> x \<and> (\<forall>t. \<not> alw (\<lambda>xs. label (shd xs) = STR ''vend'' \<and> nxt (output_eq [Some d]) xs \<longrightarrow>
+                      \<not>? value_gt (Some (value.Int 100)) (datastate (shd xs) $r 2) = trilean.true) (shift x t))"
+  apply simp
+  apply standard
+   apply (rule valid_prefix.step_some)
+   apply (simp add: possible_steps_0 select_def apply_updates_def)
+   apply (rule valid_prefix.step_some)
+   apply (simp add: possible_steps_1 coin_def apply_updates_def apply_outputs_def value_plus_def registers_update_twist)
+   apply (rule valid_prefix.step_some)
+   apply (simp add: possible_steps_2 half_price_vend_def apply_outputs_def apply_updates_def vend_def registers_update_twist)
+   apply (rule valid_prefix.step_none)
+     apply (simp add: possible_steps_def drinks_def ffilter_finsert)
+    apply simp
+   apply simp
+  apply (rule allI)
+  apply (simp add: not_alw_iff)
+  apply (rule ev.step, simp)
+  apply (rule ev.step, simp)
+  by (rule ev.base, simp add: value_gt_def)
+
 lemma "\<not>ltl_apply (alw (\<lambda>xs. (label (shd xs) = STR ''vend'' \<and>
              nxt (\<lambda>s. output (shd s) = [Some d]) xs) \<longrightarrow>
               \<not>? value_gt (Some (value.Int 100)) (datastate (shd xs) $r 2) = trilean.true)) drinks"
