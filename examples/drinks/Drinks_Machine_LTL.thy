@@ -47,8 +47,11 @@ proof-
     by (simp add: drinks_no_possible_steps_1 length_i_2 invalid)
 qed
 
-lemma LTL_r2_not_always_gt_100: "not (alw (check_exp (Gt (V (Rg 2)) (L (value.Int 100))))) (watch drinks i)"
-  using value_gt_def by auto
+lemma LTL_r2_not_always_gt_100: "ltl_apply (not (alw (check_exp (Gt (V (Rg 2)) (L (value.Int 100)))))) drinks"
+  apply (rule ltl_apply)
+  apply (simp add: not_alw_iff value_gt_def)
+  apply (rule ev.base)
+  by (rule valid_trace.cases, auto)
 
 lemma drinks_step_2_none: "ltl_step drinks (Some 2) r e = (None, [], r)"
   by (simp add: drinks_end ltl_step_none_2)
@@ -83,20 +86,25 @@ lemma one_before_two_aux:
   apply simp
   by (simp add: one_before_two_2)
 
+lemma go_to_2: "(2, tr) |\<in>| possible_steps drinks s r l i \<Longrightarrow> s = 1 \<and> tr = vend \<and> l = STR ''vend'' \<and> i = []"
+  apply (simp add: possible_steps_def drinks_def ffilter_split)
+  apply (simp add: ffilter_finsert vend_def)
+  apply (case_tac "s=0")
+  by auto
+
 lemma LTL_nxt_2_means_vend:
-  "alw (nxt (state_eq (Some 2)) impl (state_eq (Some 1))) (watch drinks i)"
-proof(coinduction)
-  case alw
-  then show ?case
-    apply (case_tac "shd i")
-    apply (simp del: ltl_step.simps)
-    apply (rule P_ltl_step_0)
-     apply simp
-     apply (rule disjI2)
-     apply (rule alw_mono[of "nxt (state_eq None)"])
-      apply (simp add: once_none_nxt_always_none)
-    using one_before_two_aux by auto
-qed
+  "ltl_apply (alw (nxt (state_eq (Some 2)) impl (state_eq (Some 1)))) drinks"
+  apply (rule ltl_apply_all_states_registers)
+  subgoal for s r t
+    apply (coinduction arbitrary: s r t)
+    apply simp
+    apply (rule valid_trace.cases)
+       apply simp
+      defer
+      apply (metis shd_state_is_none state_eq_None_not_Some stream.sel(2) valid_trace_smap_action_None)
+     apply (metis shd_state_is_none state_eq_None_not_Some stream.sel(2) unfold_observe_none valid_trace_make_full_observation_None valid_trace_smap_action_None)
+    using case_prodE go_to_2 by auto
+  done
 
 lemma costsMoney_aux:
   assumes "\<exists>p r i. j = (nxt (make_full_observation drinks (Some 1) r p) i)"
@@ -122,29 +130,44 @@ lemma costsMoney_aux:
 
 (* costsMoney: THEOREM drinks |- G(X(cfstate=State_2) => gval(value_ge(r_2, Some(NUM(100))))); *)
 lemma LTL_costsMoney:
-  "(alw (nxt (state_eq (Some 2)) impl (check_exp (Ge (V (Rg 2)) (L (value.Int 100)))))) (watch drinks i)"
-proof(coinduction)
-  case alw
-  then show ?case
-    apply (cases "shd i")
-    subgoal for l ip
-      apply (case_tac "l = STR ''select'' \<and> length ip = 1")
-       defer
-       apply (simp add: possible_steps_0_invalid)
-       apply (rule disjI2)
-       apply (rule alw_mono[of "nxt (state_eq None)"])
-        apply (simp add: once_none_nxt_always_none)
-       apply (simp add: )
-      apply (simp add: possible_steps_0 select_def)
-      apply (rule disjI2)
-      apply (simp only: nxt.simps[symmetric])
-      using costsMoney_aux by auto
+  "ltl_apply (alw (nxt (state_eq (Some 2)) impl (check_exp (Ge (V (Rg 2)) (L (value.Int 100)))))) drinks"
+  apply (rule ltl_apply_all_states_registers)
+  subgoal for s r t
+    apply (coinduction arbitrary: s r t)
+    apply simp
+    apply (rule valid_trace.cases)
+       apply simp
+      defer
+      apply (metis shd_state_is_none state_eq_None_not_Some stream.sel(2) valid_trace_smap_action_None)
+     apply (metis shd_state_is_none state_eq_None_not_Some stream.sel(2) unfold_observe_none valid_trace_make_full_observation_None valid_trace_smap_action_None)
+    apply standard
+     apply clarsimp
+    subgoal for sa ra l i ta p b
+      using go_to_2[of b sa ra l i]
+      apply clarsimp
+      by (meson drinks_vend_sufficient possible_steps_can_take_transition r2_0_vend vend_ge_100)
     done
-qed
+  done
 
 lemma LTL_costsMoney_aux:
-  "(alw (not (check_exp (Ge (V (Rg 2)) (L (value.Int 100)))) impl (not (nxt (state_eq (Some 2)))))) (watch drinks i)"
-  by (metis (no_types, lifting) LTL_costsMoney alw_mono)
+  "ltl_apply (alw (not (check_exp (Ge (V (Rg 2)) (L (value.Int 100)))) impl (not (nxt (state_eq (Some 2)))))) drinks"
+  apply (rule ltl_apply_all_states_registers)
+  subgoal for s r t
+    apply (coinduction arbitrary: s r t)
+    apply (rule valid_trace.cases)
+       apply simp
+      defer
+      apply (metis (mono_tags, lifting) nxt.elims option.simps(3) shd_state_is_none stream.sel(2) valid_trace_smap_action_None)
+     apply (metis (mono_tags, lifting) nxt.simps option.distinct(1) shd_state_is_none stream.sel(2) unfold_observe_none valid_trace_make_full_observation_None valid_trace_smap_action_None)
+    apply clarsimp
+    apply standard
+    apply clarsimp
+    subgoal for sa ra l i ta p b
+      using go_to_2[of b sa ra l i]
+      apply clarsimp
+      by (meson drinks_vend_sufficient possible_steps_can_take_transition r2_0_vend vend_ge_100)
+    by auto
+  done
 
 lemma implode_select: "String.implode ''select'' = STR ''select''"
   by (metis Literal.rep_eq String.implode_explode_eq zero_literal.rep_eq)
@@ -157,23 +180,46 @@ lemma implode_vend: "String.implode ''vend'' = STR ''vend''"
 
 lemmas implode_labels = implode_select implode_coin implode_vend
 
-lemma LTL_neverReachS2:"((((((label_eq ''select'' aand input_eq [Str ''coke''])))
+lemma possible_steps_0: "possible_steps drinks 0 r STR ''select'' [d] = {|(1, select)|}"
+  by (simp add: possible_steps_def drinks_def ffilter_finsert select_def)
+
+lemma possible_steps_1_coin: "possible_steps drinks 1 r STR ''coin'' [c] = {|(1, coin)|}"
+  by (simp add: possible_steps_def drinks_def ffilter_finsert transitions)
+
+lemma LTL_neverReachS2:"ltl_apply ((((((label_eq ''select'' aand input_eq [Str ''coke''])))
                     aand
                     (nxt (((label_eq ''coin'' aand input_eq [value.Int 100])))))
                     aand
                     (nxt (nxt((label_eq ''vend'' aand (input_eq []))))))
                     impl
                     (nxt (nxt (nxt (state_eq (Some 2))))))
-                    (watch drinks i)"
+                    drinks"
   apply (simp add: implode_labels)
-  apply (cases i)
-  apply clarify
-  apply simp
-  apply (simp add: possible_steps_0 select_def)
-  apply (case_tac "shd x2", clarify)
-  apply (simp add: possible_steps_1_coin coin_def value_plus_def finfun_update_twist apply_updates_def)
-  apply (case_tac "shd (stl x2)", clarify)
-  by (simp add: drinks_vend_sufficient )
+  apply (rule ltl_apply)
+  apply (rule valid_trace.cases)
+     apply simp
+    defer
+  using rejects_termination apply force
+   apply simp
+    apply clarsimp
+  subgoal for ta p s' tr
+    using first_step_select[of s' tr <> "STR ''select''" "[EFSM.Str ''coke'']"]
+    apply (simp add: select_def apply_updates_def)
+    apply clarsimp
+    apply (rule valid_trace.cases[of drinks "Some 1"])
+       apply simp
+      defer
+      apply (simp add: possible_steps_0 select_def possible_steps_1_coin)
+     apply simp
+    apply (simp add: possible_steps_0 select_def possible_steps_1_coin coin_def apply_outputs_def apply_updates_def value_plus_def)
+    apply clarsimp
+    apply (rule valid_trace.cases[of drinks "Some 1" "<1 $r:= Some (EFSM.Str ''coke''), 2 $r:= Some (value.Int 100)>"])
+       apply simp
+      apply clarsimp
+      apply (simp add: possible_steps_def drinks_def ffilter_finsert transitions value_gt_def)
+     apply (metis no_possible_steps_rejects option.inject prod.collapse recognises_from_2 state.select_convs(3) stream.sel(1))
+    by simp
+  done
 
 lemma ltl_step_not_select:
   "\<nexists>i. e = (STR ''select'', [i]) \<Longrightarrow>
@@ -241,24 +287,43 @@ lemma drink_costs_money_aux:
    apply (simp add: drinks_step_2_none no_output_none_if_empty nxt_alw)
   by simp
 
+lemma in_possible_steps_output:
+  "(a, b) |\<in>| possible_steps drinks sa ra l i \<Longrightarrow>
+   [Some (EFSM.Str drink)] = evaluate_outputs b i ra \<Longrightarrow>
+   a=2 \<and> b = vend \<and> l = STR ''vend'' \<and> i = []"
+  apply (simp add: in_possible_steps[symmetric] can_take_transition_def can_take_def drinks_def)
+  apply clarsimp
+  apply (erule disjE)
+   apply (simp add: select_def)
+  apply (erule disjE)
+   apply (simp add: coin_def apply_outputs_def)
+   apply (case_tac "value_plus (ra $r 2) (Some (i ! 0))")
+    apply simp
+  subgoal for aa
+    apply (cases aa)
+      apply (simp add: Str_def)
+     apply (simp add: Str_def)
+    apply (simp add: Str_def)
+    using value_plus_never_string by blast
+   apply (simp add: vend_def vend_fail_def)
+  by auto
+
 lemma LTL_drinks_cost_money:
-  "alw (nxt (output_eq [Some (Str drink)]) impl (check_exp (Ge (V (Rg 2)) (L (value.Int 100))))) (watch drinks t)"
-proof(coinduction)
-  case alw
-  then show ?case
-    apply (case_tac "shd t")
-    apply (simp del: ltl_step.simps)
-    apply (rule P_ltl_step_0)
-     apply simp
-     apply (rule disjI2)
-     apply (rule alw_mono[of "nxt (output_eq [])"])
-      apply (simp add: no_output_none_nxt)
-     apply simp
+  "ltl_apply (alw (nxt (output_eq [Some (Str drink)]) impl (check_exp (Ge (V (Rg 2)) (L (value.Int 100)))))) drinks"
+  apply (rule ltl_apply_all_states_registers)
+  subgoal for s r t
+    apply (coinduction arbitrary: s r t)
     apply simp
-    using drink_costs_money_aux
-    apply simp
-    by blast
-qed
+    apply (rule valid_trace.cases)
+       apply simp
+      apply clarsimp
+    subgoal for s r l i t p s' tr
+      using in_possible_steps_output[of s' tr s r l i drink]
+      apply simp
+      using drinks_vend_sufficient possible_steps_can_take_transition r2_0_vend vend_ge_100 by blast
+     apply simp
+    by (metis id_def list.discI siterate.simps(1) siterate.simps(2) stream.map_sel(1) stream.map_sel(2) valid_trace_None_smap(2))
+  done
 
 lemma steps_1_invalid:
       "\<nexists>i. (a, b) = (STR ''coin'', [i]) \<Longrightarrow>
@@ -289,40 +354,47 @@ lemma output_vend_aux:
    apply (simp add: drinks_step_2_none no_output_none_if_empty nxt_alw)
   by simp
 
+lemma in_possible_steps_vend:
+  "(a, b) |\<in>| possible_steps drinks sa ra STR ''vend'' i \<Longrightarrow>
+   [Some d] = evaluate_outputs b i ra \<Longrightarrow>
+   a=2 \<and> b = vend \<and> i = []"
+  apply (simp add: in_possible_steps[symmetric] can_take_transition_def can_take_def drinks_def)
+  apply clarsimp
+  apply (erule disjE)
+   apply (simp add: select_def)
+  apply (erule disjE)
+   apply (simp add: coin_def)
+   apply (erule disjE)
+   apply (simp add: vend_fail_def)
+  by (simp add: vend_def value_gt_def)
+
 text_raw\<open>\snip{outputVend}{1}{2}{%\<close>
 lemma LTL_output_vend:
-  "alw (((label_eq ''vend'') aand (nxt (output_eq [Some d]))) impl
-         (check_exp (Ge (V (Rg 2)) (L (value.Int 100))))) (watch drinks t)"
-text_raw\<open>}%endsnip\<close>
-proof(coinduction)
-  case alw
-  then show ?case
-    apply (simp add: implode_vend)
-    apply (case_tac "shd t")
-    apply (simp del: ltl_step.simps)
-    apply (rule P_ltl_step_0)
-     apply simp
-    apply (rule disjI2)
-     apply (rule alw_mono[of "nxt (output_eq [])"])
-      apply (simp add: no_output_none_nxt)
-     apply simp
+  "ltl_apply (alw (((label_eq ''vend'') aand (nxt (output_eq [Some d]))) impl
+         (check_exp (Ge (V (Rg 2)) (L (value.Int 100)))))) drinks"
+  text_raw\<open>}%endsnip\<close>
+  apply (rule ltl_apply_all_states_registers)
+  subgoal for s r t
+    apply (coinduction arbitrary: s r t)
     apply simp
-    subgoal for a b
-      using output_vend_aux[of "(make_full_observation drinks (Some 1)
-              <1 $r:= Some (hd b), 2 $r:= Some (value.Int 0)> [] (stl t))" d]
-      using implode_vend by auto
-    done
-qed
+    apply (rule valid_trace.cases)
+       apply simp
+      apply (clarsimp, simp add: implode_labels)
+ subgoal for s r i ta p s' tr
+   using in_possible_steps_vend[of s' tr s r i d]
+   apply simp
+   by (meson drinks_vend_sufficient possible_steps_can_take_transition r2_0_vend vend_ge_100)
+  apply simp
+  by (metis id_def list.discI siterate.simps(1) siterate.simps(2) stream.map_sel(1) stream.map_sel(2) valid_trace_None_smap(2))
+  done
 
 text_raw\<open>\snip{outputVendUnfolded}{1}{2}{%\<close>
 lemma LTL_output_vend_unfolded:
-  "alw (\<lambda>xs. (label (shd xs) = STR ''vend'' \<and>
+  "ltl_apply (alw (\<lambda>xs. (label (shd xs) = STR ''vend'' \<and>
              nxt (\<lambda>s. output (shd s) = [Some d]) xs) \<longrightarrow>
-              \<not>? value_gt (Some (value.Int 100)) (datastate (shd xs) $r 2) = trilean.true)
-     (watch drinks t)"
+              \<not>? value_gt (Some (value.Int 100)) (datastate (shd xs) $r 2) = trilean.true)) drinks"
   text_raw\<open>}%endsnip\<close>
-  apply (insert LTL_output_vend[of d t])
-  by (simp add: implode_vend)
+  using LTL_output_vend implode_labels by simp
 
 lemma possible_steps_invalid_state: "s \<ge> 2 \<Longrightarrow> possible_steps drinks s r l i = {||}"
   by (simp add: possible_steps_def drinks_def ffilter_finsert)
@@ -333,27 +405,6 @@ lemma all_possible_steps_drinks:
   apply (simp add: possible_steps_def drinks_def)
   by auto
 
-lemma valid_trace_simps: "valid_trace e a2 r a4 =
-(
-  (\<exists>s l i p t.
-     (a4 = \<lparr>statename = Some s, datastate = r, action = (l, i), output = p\<rparr> ## t \<and>
-     a2 = Some s \<and>
-     ((\<exists>(s', tr)|\<in>|possible_steps e s r l i.
-         evaluate_outputs tr i r = output (shd t) \<and>
-         Some s' = statename (shd t) \<and>
-         evaluate_updates tr i r = datastate (shd t) \<and> valid_trace e (Some s') (evaluate_updates tr i r) t) \<or>
-     possible_steps e s r l i = {||} \<and> [] = output (shd t) \<and> valid_trace e None r t) \<or>
-     a4 = t \<and>
-     a2 = None \<and>
-     smap (\<lambda>x. (statename x, datastate x, output x)) t = sconst (None, r, [])
-  )
-  )
-)"
-  apply (simp add: valid_trace.simps[of e a2 r a4])
-  apply standard
-   apply blast
-  by blast (* ~10s *)
-
 lemma in_possible_steps_0: "(s', tr) |\<in>| possible_steps drinks 0 r l i \<Longrightarrow> ((s', tr) = (1, select))"
   apply (simp add: possible_steps_def drinks_def)
   by auto
@@ -361,26 +412,6 @@ lemma in_possible_steps_0: "(s', tr) |\<in>| possible_steps drinks 0 r l i \<Lon
 lemma ex_possible_steps_0: "(\<exists>a b. (a, b) \<in> fset (possible_steps drinks 0 r l i)) = (possible_steps drinks 0 r l i = {|(1, select)|})"
   apply (simp add: possible_steps_def drinks_def ffilter_finsert select_def)
   by auto
-
-lemma ex_possible_steps_1: "(\<exists>a b. (a, b) \<in> fset (possible_steps drinks 1 r l i)) = (
-  possible_steps drinks 1 r l i = {|(1, coin)|} \<or>
-  possible_steps drinks 1 r l i = {|(1, vend_fail)|} \<or>
-  possible_steps drinks 1 r l i = {|(2, vend)|}
-)"
-  apply (case_tac "l=STR ''coin'' \<and> length i = 1")
-   apply (simp add: possible_steps_1_coin)
-  apply (case_tac "l=STR ''vend'' \<and> i = []")
-   apply (case_tac "r $r 2")
-    apply (simp add: drinks_vend_invalid fempty_not_finsert)
-  subgoal for a
-    apply (cases a)
-    subgoal for n
-      apply (case_tac "n \<ge> 100")
-       apply (simp add: drinks_vend_sufficient)
-      using drinks_vend_insufficient by force
-    using drinks_vend_invalid apply auto[1]
-    using drinks_vend_invalid by auto[1]
-  using drinks_no_possible_steps_1 by auto
 
 lemma coin_label: "possible_steps drinks 1 r l i = {|(1, coin)|} \<Longrightarrow> l = STR ''coin''"
   apply (simp add: possible_steps_def drinks_def ffilter_finsert transitions)
@@ -432,49 +463,5 @@ lemma alw_nxt_alw: "alw f s \<Longrightarrow> alw (nxt f) s"
 lemma "ltl_apply (alw (\<lambda>xs. (label (shd xs) = STR ''vend'' \<and>
              nxt (\<lambda>s. output (shd s) = [Some d]) xs) \<longrightarrow>
               \<not>? value_gt (Some (value.Int 100)) (datastate (shd xs) $r 2) = trilean.true)) drinks"
-  apply (rule ltl_apply_all_states_registers)
-  subgoal for s r t
-    apply (coinduction arbitrary: s r t)
-    apply simp
-    apply (case_tac "s=Some 0")
-     apply clarsimp
-    subgoal for r t
-      apply (rule valid_trace.cases)
-         apply simp
-        apply (simp add: fBex_def Bex_def)
-        apply clarsimp
-        apply (case_tac "possible_steps drinks 0 r l i = {|(1, select)|}")
-      using drinks_0_rejects apply auto[1]
-      using ex_possible_steps_0 apply blast
-      by auto
-    apply (case_tac "s=Some 1")
-     apply clarsimp
-    subgoal for r t
-      apply (rule valid_trace.cases)
-         apply simp
-        apply (case_tac "STR ''coin'' = l \<and> length i = 1")
-         apply auto[1]
-        apply (case_tac "STR ''vend'' = l \<and> i = [] \<and> value_gt (Some (value.Int 100)) (r $r 2) = trilean.true")
-         apply (simp add: value_gt_true_int)
-         apply (erule exE)
-         apply (simp add: drinks_vend_insufficient vend_fail_def)
-         apply auto[1]
-        apply (case_tac "STR ''vend'' = l \<and> i = [] \<and> \<not>? value_gt (Some (value.Int 100)) (r $r 2) = trilean.true")
-         apply auto[1]
-        apply (simp add: possible_steps_1_invalid)
-       apply auto[1]
-      by simp
-      apply (rule valid_trace.cases)
-       apply simp
-      apply (simp add:possible_steps_invalid_state)
-     apply auto[1]
-    apply simp
-    apply standard
-    using smap_output apply fastforce
-    apply (rule disjI2)
-    apply (rule alw_mono[of "nxt (output_eq [])"])
-    using smap_output alw_nxt_alw apply blast
-    by simp
-  done
-
+  using LTL_output_vend_unfolded by blast
 end
