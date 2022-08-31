@@ -292,11 +292,11 @@ lemma must_stop_to_open:
   using must_stop_to_open_aux1a[of "(make_full_observation lift (Some 9) (r(1 $r:= Some (EFSM.Str ''true''))) [] (stl t))"]
   by fastforce
 
-lemma must_stop_to_open: "((not (label_eq ''opendoor'' aand nxt (output_eq [Some (Str ''true''), Some (value.Int n)]))) until (label_eq ''motorstop'')) (watch lift t)"
+lemma must_stop_to_open: "ltl_apply ((not (label_eq ''opendoor'' aand nxt (output_eq [Some (Str ''true''), Some (value.Int n)]))) until (label_eq ''motorstop'')) lift"
 oops
 
 (* THIS IS NOT TRUE *)
-lemma must_stop_to_open_false: "alw ((not (label_eq ''opendoor'' aand nxt (output_eq [Some (Str ''true''), Some (value.Int n)]))) until (label_eq ''motorstop'')) (watch lift i)"
+lemma must_stop_to_open_false: "ltl_apply (alw ((not (label_eq ''opendoor'' aand nxt (output_eq [Some (Str ''true''), Some (value.Int n)]))) until (label_eq ''motorstop''))) lift"
   oops
 
 lemma ltl_step_9_invalid: "\<not>(\<exists>n. r $r 4 = Some (value.Int n) \<and> n \<in> {1, 2, 3, 4}) \<Longrightarrow> ltl_step lift (Some 9) r e = (None, [], r)"
@@ -860,7 +860,7 @@ proof-
   {assume "(ev (nxt ((label_eq ''opendoor'') aand (nxt (output_eq [Some(Str ''true''), Some n]))))) j \<and>
            (\<exists>s r p t. j= make_full_observation lift (Some s) r p t)"
    hence "((not (nxt (label_eq ''opendoor'' aand (nxt (output_eq [Some(Str ''true''), Some n]))))) until(((label_eq ''motorstop'') or (nxt (output_eq [Some(Str ''true''), Some n]))))) j"
-    
+
 apply coinduct
      apply simp
      apply (erule conjE)
@@ -1297,7 +1297,7 @@ lemma LTL_must_stop_lift_to_open_door: "ltl_apply (alw ((ev (nxt ((label_eq ''op
   apply (rule ltl_apply)
   using must_stop_lift_to_open_door_aux by auto
 
-lemma LTL_must_stop_lift_to_open_door_ev: "(ev (state_eq (Some 5)) impl (ev (output_eq [Some (value.Int 0), Some (value.Int 1), Some (Str ''true'')]))) (watch lift t)"
+lemma LTL_must_stop_lift_to_open_door_ev: "ltl_apply (ev (state_eq (Some 5)) impl (ev (output_eq [Some (value.Int 0), Some (value.Int 1), Some (Str ''true'')]))) lift"
   oops
 
 declare ltl_step.simps [simp]
@@ -1318,8 +1318,8 @@ lemma not_until: "\<not>\<phi> \<pi> \<Longrightarrow> \<not>\<psi> \<pi> \<Long
   by (metis UNTIL.cases)
 
 lemma must_stop_to_open_false_counterexample :
-  "\<not> (\<forall>n.(alw (not (label_eq ''opendoor'' aand 
-    nxt (output_eq [Some (Str ''true''), Some (value.Int n)])) until 
+  "\<not> (\<forall>n.(alw (not (label_eq ''opendoor'' aand
+    nxt (output_eq [Some (Str ''true''), Some (value.Int n)])) until
     label_eq ''motorstop''))
 (make_full_observation lift (Some 0) <4 $r:= Some (value.Int 1)> [] ((STR ''continit'', [])##(STR ''return'', [])##(STR ''motorstop'', [Str ''true'', Str ''true''])##(STR ''opendoor'', [Str ''true''])##(STR ''opendoor'', [Str ''true''])##(STR ''up'', [Str ''dummy__'', value.Int 1, value.Int 3, Str ''false''])##trace)))"
   apply (simp add: make_full_observation_step)
