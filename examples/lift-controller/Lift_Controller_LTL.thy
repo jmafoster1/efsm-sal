@@ -1112,6 +1112,25 @@ lemma output_true_n_opendoor: "(a, b) |\<in>| possible_steps lift s r l i \<Long
   apply (erule disjE, simp add: transitions apply_outputs_def Str_def)+
   by (simp add: transitions apply_outputs_def Str_def)
 
+lemma in_opendoor: "(a, b) |\<in>| possible_steps lift s r STR ''opendoor'' i = (s \<in> {5, 6, 7, 8} \<and> i = [Str ''true''] \<and> a = s \<and> b = (opendoor (s-4)))"
+  apply standard
+  apply (simp add: in_possible_steps[symmetric] lift_def)
+   apply (erule conjE)
+   apply (erule disjE, simp add: transitions can_take_transition_def can_take_def join_ir_def)+
+    apply (metis i_x_eq input2state_nth input2state_within_bounds length_i_aux r_x_eq)
+   apply (erule disjE, simp add: transitions can_take_transition_def can_take_def join_ir_def)+
+    apply (metis i_x_eq input2state_nth input2state_within_bounds length_i_aux r_x_eq)
+   apply (erule disjE, simp add: transitions can_take_transition_def can_take_def join_ir_def)+
+    apply (metis i_x_eq input2state_nth input2state_within_bounds length_i_aux r_x_eq)
+   apply (erule disjE, simp add: transitions can_take_transition_def can_take_def join_ir_def)+
+    apply (metis i_x_eq input2state_nth input2state_within_bounds length_i_aux r_x_eq)
+   apply (erule disjE, simp add: transitions can_take_transition_def can_take_def join_ir_def)+
+   apply (simp add: transitions)
+  apply clarsimp
+  apply (simp add: in_possible_steps[symmetric] lift_def)
+   apply (simp add: transitions can_take_transition_def can_take_def)
+  by auto
+
 lemma not_opendoor_outputs: "s > 4 \<Longrightarrow> value.Int (s-4) \<noteq> n \<Longrightarrow>
        valid_trace lift (Some s) (datastate (shd t)) t \<Longrightarrow>
        not (output_eq [Some (EFSM.Str ''true''), Some n]) (stl t)"
@@ -1127,18 +1146,20 @@ lemma not_opendoor_outputs: "s > 4 \<Longrightarrow> value.Int (s-4) \<noteq> n 
     by (simp add: apply_outputs_def)
   done
 
-lemma
-  assumes "\<exists>s r t. valid_trace e s r t \<and> j = t"
-shows "(alw ((ev (nxt ((label_eq ''opendoor'') aand
-        (nxt (output_eq [Some (Str ''true''), Some  n]))))) impl
-       ((not (nxt ((label_eq ''opendoor'') aand
-        (nxt (output_eq [Some (Str ''true''), Some  n]))))) until
-       (((label_eq ''motorstop'') or (nxt (output_eq [Some (Str ''true''), Some  n]))))))) j"
+lemma alw_must_stop_to_open_aux:
+  assumes "\<exists>s r t. j=t \<and> valid_trace lift (Some s) r t"
+  shows "((ev (nxt ((label_eq ''opendoor'') aand
+              (nxt (output_eq [Some(Str ''true''), Some n]))))) impl
+         ((not (nxt (label_eq ''opendoor'' aand
+          (nxt (output_eq [Some(Str ''true''), Some n]))))) until
+         (((label_eq ''motorstop'') or (nxt (output_eq [Some(Str ''true''), Some n])))))) j"
+text_raw\<open>}%endsnip\<close>
 proof-
-  {assume "(\<exists>s r p t. (ev (nxt ((label_eq ''opendoor'') aand (nxt (output_eq [Some(Str ''true''), Some n]))))) j \<and> j=t \<and> valid_trace lift s r t)"
-   hence "((not (nxt (label_eq ''opendoor'' aand (nxt (output_eq [Some(Str ''true''), Some n]))))) until(((label_eq ''motorstop'') or (nxt (output_eq [Some(Str ''true''), Some n]))))) j"
-     apply coinduct
-     apply simp
+  {assume "(ev (nxt ((label_eq ''opendoor'') aand (nxt (output_eq [Some(Str ''true''), Some n]))))) j \<and>
+           (\<exists>s r t. j=t \<and> valid_trace lift (Some s) r t)"
+    hence "((not (nxt (label_eq ''opendoor'' aand (nxt (output_eq [Some(Str ''true''), Some n]))))) until(((label_eq ''motorstop'') or (nxt (output_eq [Some(Str ''true''), Some n]))))) j"
+      apply coinduct
+      apply simp
      apply (erule conjE)
      apply (erule exE)+
      apply (case_tac "label (shd x) = STR ''motorstop''")
@@ -1146,258 +1167,44 @@ proof-
      apply (case_tac "output_eq [Some (EFSM.Str ''true''), Some n] (stl x)")
       apply simp
      apply simp
-     apply standard
      subgoal for x s r
        apply (rule valid_trace.cases)
           apply simp
          defer
          apply clarsimp
-         apply (metis (no_types, lifting) list.discI smap_output_None stream.map_sel(1) stream.sel(2) unfold_observe_none valid_trace_smap_action_None)
-        apply (metis (no_types, lifting) smap_output_None stream.map_sel(1) stream.map_sel(2) stream.sel(2) unfold_observe_none valid_trace_None_smap(2))
+       apply (rule conjI)
+          apply (metis (no_types, lifting) list.discI smap_output_None stream.map_sel(1) stream.sel(2) unfold_observe_none valid_trace_smap_action_None)
+         apply (rule disjI2)
+         apply (rule alw_implies_until)
+         apply (rule alw_mono[of "nxt (nxt (output_eq []))"])
+          apply (metis (no_types, lifting) alw.simps no_output_none_nxt nxt.simps nxt_alw valid_trace_smap_action_None)
+         apply simp
+        apply simp
        apply clarsimp
        apply (simp add: in_possible_steps[symmetric] in_lift)
        apply clarsimp
-       apply (erule disjE)
-        apply clarsimp
-        apply (simp add: continit_def can_take_transition_def can_take_def apply_updates_def)
-        apply (rule valid_trace.cases[of lift "Some 9"])
-           apply simp
-          apply clarsimp
-          apply (simp add: possible_steps_9_invalid)
-         apply simp
-        apply simp
-       apply (erule disjE)
-        apply clarsimp
-        apply (rule valid_trace.cases[of lift "Some 4"])
-           apply simp
-          apply clarsimp
-          apply (simp add: no_open_door)
-         apply simp
-        apply simp
-       apply (erule disjE)
-        apply clarsimp
-        apply (rule valid_trace.cases[of lift "Some 3"])
-           apply simp
-          apply clarsimp
-          apply (simp add: no_open_door)
-         apply simp
-        apply simp
-       apply (erule disjE)
-        apply clarsimp
-        apply (rule valid_trace.cases[of lift "Some 2"])
-           apply simp
-          apply clarsimp
-          apply (simp add: no_open_door)
-         apply simp
-        apply simp
-       apply (erule disjE)
-        apply clarsimp
-        apply (rule valid_trace.cases[of lift "Some 1"])
-           apply simp
-          apply clarsimp
-          apply (simp add: no_open_door)
-         apply simp
-        apply simp
-       apply (erule disjE)
-        apply clarsimp
-        apply (rule valid_trace.cases[of lift "Some 9"])
-           apply simp
-          apply clarsimp
-          apply (simp add: possible_steps_9_invalid)
-         apply simp
-        apply simp
-       apply (erule disjE)
-        apply clarsimp
-        apply (simp add: opendoor4_def apply_updates_def apply_outputs_def can_open_door)
-        apply clarsimp
-        apply (rule valid_trace.cases[of lift "Some 8"])
-           apply simp
-          apply clarsimp
-          apply (simp add: eq_commute)
-       subgoal for t p b
-         using in_possible_steps_opendoor[of 8 b r "[EFSM.Str ''true'']"]
-         apply (simp add: apply_updates_def apply_outputs_def opendoor)
-         apply (rule valid_trace.cases[of lift "Some 8"])
+       subgoal for i t p s' tr
+         apply (rule conjI)
+          apply (rule valid_trace.cases[of lift "Some s'"])
+             apply simp
+            apply clarsimp
+            apply (simp add: in_opendoor apply_outputs_def)
+            apply (erule disjE, simp add: transitions)+
+             apply simp
+            apply (erule disjE, simp add: transitions)+
+             apply simp
+            apply (erule disjE, simp add: transitions)+
+             apply simp
+            apply (erule disjE, simp add: transitions)+
             apply simp
-           apply clarsimp
-         apply (simp add: not_opendoor_outputs[of 8])
+           apply simp
           apply simp
-         apply simp
-         done
-         apply simp
-        apply simp
-       apply (erule disjE)
-       apply clarsimp
-        apply (rule valid_trace.cases[of lift "Some 9"])
-           apply simp
-          apply clarsimp
-          apply (simp add: possible_steps_9_invalid)
-         apply simp
-        apply simp
-       apply (erule disjE)
-        apply clarsimp
-        apply (simp add: opendoor3_def apply_updates_def apply_outputs_def can_open_door)
-        apply clarsimp
-        apply (rule valid_trace.cases[of lift "Some 7"])
-           apply simp
-          apply clarsimp
-          apply (simp add: eq_commute)
-       subgoal for t p b
-         using in_possible_steps_opendoor[of 7 b r "[EFSM.Str ''true'']"]
-         apply (simp add: apply_updates_def apply_outputs_def opendoor)
-         apply (rule valid_trace.cases[of lift "Some 7"])
-            apply simp
-           apply clarsimp
-         apply (simp add: not_opendoor_outputs[of 7])
-          apply simp
-         apply simp
-         done
-         apply simp
-        apply simp
-       apply (erule disjE)
-        apply clarsimp
-        apply (rule valid_trace.cases[of lift "Some 9"])
-           apply simp
-          apply clarsimp
-          apply (simp add: possible_steps_9_invalid)
-         apply simp
-        apply simp
-       apply (erule disjE)
-        apply clarsimp
-        apply (simp add: opendoor2_def apply_updates_def apply_outputs_def can_open_door)
-        apply clarsimp
-        apply (rule valid_trace.cases[of lift "Some 6"])
-           apply simp
-          apply clarsimp
-          apply (simp add: eq_commute)
-       subgoal for t p b
-         apply (simp add: apply_updates_def apply_outputs_def opendoor)
-         apply (rule valid_trace.cases[of lift "Some 6"])
-            apply simp
-           apply clarsimp
-         apply (simp add: not_opendoor_outputs[of 6])
-          apply simp
-         apply simp
-         done
-         apply simp
-        apply simp
-       apply (erule disjE)
-        apply clarsimp
-        apply (rule valid_trace.cases[of lift "Some 9"])
-           apply simp
-          apply clarsimp
-          apply (simp add: possible_steps_9_invalid)
-         apply simp
-        apply simp
-       apply (erule disjE)
-        apply clarsimp
-        apply (simp add: opendoor1_def apply_updates_def apply_outputs_def can_open_door)
-        apply clarsimp
-        apply (rule valid_trace.cases[of lift "Some 5"])
-           apply simp
-          apply clarsimp
-          apply (simp add: eq_commute)
-       subgoal for t p b
-         using in_possible_steps_opendoor[of 5 b r "[EFSM.Str ''true'']"]
-         apply (simp add: apply_updates_def apply_outputs_def opendoor)
-         apply (rule valid_trace.cases[of lift "Some 5"])
-            apply simp
-           apply clarsimp
-         apply (simp add: not_opendoor_outputs[of 5])
-          apply simp
-         apply simp
-         done
-         apply simp
-        apply simp
-       apply (erule disjE)
-        apply (simp add:  motorstop4_def)
-       apply (erule disjE)
-        apply clarsimp
-        apply (simp add: transitions apply_updates_def apply_outputs_def)
-        apply (rule valid_trace.cases[of lift "Some 3"])
-           apply simp
-          apply (simp add: Str_def no_open_door)
-         apply simp
-        apply simp
-       apply (erule disjE)
-        apply clarsimp
-        apply (rule valid_trace.cases[of lift "Some 3"])
-           apply simp
-          apply (simp add: Str_def no_open_door)
-         apply simp
-        apply simp
-       apply (erule disjE)
-        apply clarsimp
-        apply (rule valid_trace.cases[of lift "Some 7"])
-           apply simp
-          apply (simp add: motorstop3_def)
-         apply simp
-        apply simp
-       apply (erule disjE)
-        apply clarsimp
-        apply (rule valid_trace.cases[of lift "Some 4"])
-           apply simp
-          apply (simp add: no_open_door)
-         apply simp
-        apply simp
-       apply (erule disjE)
-        apply clarsimp
-        apply (rule valid_trace.cases[of lift "Some 2"])
-           apply simp
-          apply (simp add: no_open_door)
-         apply simp
-        apply simp
-       apply (erule disjE)
-        apply clarsimp
-        apply (rule valid_trace.cases[of lift "Some 2"])
-           apply simp
-          apply (simp add: no_open_door)
-         apply simp
-        apply simp
-       apply (erule disjE)
-        apply clarsimp
-        apply (rule valid_trace.cases[of lift "Some 6"])
-           apply simp
-          apply (simp add: motorstop2_def)
-         apply simp
-        apply simp
-       apply (erule disjE)
-        apply clarsimp
-        apply (rule valid_trace.cases[of lift "Some 3"])
-           apply simp
-          apply (simp add: no_open_door)
-         apply simp
-        apply simp
-       apply (erule disjE)
-        apply clarsimp
-        apply (rule valid_trace.cases[of lift "Some 3"])
-           apply simp
-          apply (simp add: no_open_door)
-         apply simp
-        apply simp
-       apply (erule disjE)
-       apply clarsimp
-        apply (rule valid_trace.cases[of lift "Some 1"])
-           apply simp
-          apply (simp add: no_open_door)
-         apply simp
-        apply simp
-       apply (erule disjE)
-        apply (simp add: motorstop1_def)
-       apply (erule disjE)
-        apply clarsimp
-        apply (rule valid_trace.cases[of lift "Some 2"])
-           apply simp
-          apply (simp add: no_open_door)
-         apply simp
-        apply simp
-       apply clarsimp
-       apply (rule valid_trace.cases[of lift "Some 2"])
-           apply simp
-          apply (simp add: no_open_door)
-         apply simp
-       by simp
-     using \<open>\<And>x s r. \<lbrakk>ev (\<lambda>a. label (shd (stl a)) = STR ''opendoor'' \<and> output_eq [Some (EFSM.Str ''true''), Some n] (stl (stl a))) x; valid_trace lift s r x; label (shd x) \<noteq> STR ''motorstop''; output (shd (stl x)) \<noteq> [Some (EFSM.Str ''true''), Some n]\<rbrakk> \<Longrightarrow> label (shd (stl x)) = STR ''opendoor'' \<longrightarrow> output (shd (stl (stl x))) \<noteq> [Some (EFSM.Str ''true''), Some n]\<close> ev.cases by blast
+         by (erule disjE, simp add: transitions, metis (no_types, lifting) UNTIL.base ev_Stream stream.sel(2))+
+       done
+     done
+ }
+  thus ?thesis using assms by auto
+qed
 
 text_raw\<open>\snip{alwMustStopToOpen}{1}{2}{%\<close>
 lemma alw_must_stop_to_open:
@@ -1415,19 +1222,20 @@ lemma alw_must_stop_to_open:
       apply (rule valid_trace.cases)
          apply simp
         apply clarsimp
-      subgoal for sa l i ta p s' tr
-        apply (simp add: in_possible_steps[symmetric] in_lift)
-        apply clarsimp
-        apply (erule disjE)
-         apply clarsimp
-
-
-
-
-
+      using alw_must_stop_to_open_aux apply auto[1]
+       apply (rule alw_implies_until)
+       apply (rule alw_mono[of "nxt (nxt (output_eq []))"])
+      apply (metis (no_types, lifting) no_output_none_nxt nxt.simps nxt_alw stream.sel(2) valid_trace_smap_action_None)
+       apply simp
+      apply (rule alw_implies_until)
+      apply (rule alw_mono[of "nxt (nxt (output_eq []))"])
+       apply (metis (no_types, lifting) alw_nxt no_output_none_nxt nxt_alw valid_trace_smap_action_None)
+      by simp
+    done
+  done
 
 lemma alw_must_stop_to_open_aux_suntil:
-  assumes "\<exists>s r p t. j= make_full_observation lift (Some s) r p t"
+  assumes "\<exists>s r t. j=t \<and> valid_trace lift (Some s) r t"
   shows "((ev (nxt ((label_eq ''opendoor'') aand (nxt (output_eq [Some(Str ''true''), Some n]))))) impl
          ((not (nxt (label_eq ''opendoor'' aand (nxt (output_eq [Some(Str ''true''), Some n]))))) suntil (((label_eq ''motorstop'') or (nxt (output_eq [Some(Str ''true''), Some n])))))) j"
   apply (simp add: suntil_as_until)
@@ -1436,11 +1244,6 @@ lemma alw_must_stop_to_open_aux_suntil:
   using assms alw_must_stop_to_open_aux apply simp
   using assms apply clarify
   by (rule ev.induct, simp, auto)
-
-lemma abstract_watch:
-  assumes "\<And>j. \<exists>s r p t. j= make_full_observation e (Some s) r p t \<Longrightarrow> P j"
-  shows "P (watch e i)"
-  using assms by blast
 
 declare nxt.simps [simp del]
 
@@ -1457,7 +1260,7 @@ lemma aux:
   by fastforce
 
 theorem must_stop_lift_to_open_door_aux :
-  assumes "\<exists>s r p t. j= make_full_observation lift (Some s) r p t"
+  assumes "\<exists>s r t. j=t \<and> valid_trace lift (Some s) r t"
   shows "alw ((ev (nxt ((label_eq ''opendoor'') aand (nxt (output_eq [Some(Str ''true''), Some n]))))) impl
       ((not (nxt (label_eq ''opendoor'' aand (nxt (output_eq [Some(Str ''true''), Some n]))))) suntil
       (((label_eq ''motorstop'') or (nxt (output_eq [Some(Str ''true''), Some n])))))) j"
@@ -1473,22 +1276,26 @@ theorem must_stop_lift_to_open_door_aux :
     apply (simp add: nxt.simps)
     apply auto[1]
    apply auto[1]
-
   apply (erule exE)+
-  apply simp
-  apply (case_tac "ltl_step lift (Some s) r (shd t)", case_tac a)
-   apply simp
+  apply (rule valid_trace.cases)
+     apply simp
+    apply auto[1]
    apply (rule disjI2)
    apply (rule alw_mono[of "alw (output_eq [])"])
-    apply (metis alw_alw ltl_step_state_none no_output_none_if_empty)
-   apply clarify
-   apply (simp add: suntil_as_until aux)
-  by auto
+    apply (simp add: valid_trace_None(2))
+   apply (rule impI)
+  apply (simp add: aux)
+   apply (rule disjI2)
+   apply (rule alw_mono[of "alw (output_eq [])"])
+    apply (simp add: valid_trace_None(2))
+   apply (rule impI)
+  by (simp add: aux)
 
-lemma LTL_must_stop_lift_to_open_door: "alw ((ev (nxt ((label_eq ''opendoor'') aand (nxt (output_eq [Some(Str ''true''), Some n]))))) impl
+lemma LTL_must_stop_lift_to_open_door: "ltl_apply (alw ((ev (nxt ((label_eq ''opendoor'') aand (nxt (output_eq [Some(Str ''true''), Some n]))))) impl
       ((not (nxt ((label_eq ''opendoor'') aand (nxt (output_eq [Some(Str ''true''), Some n]))))) suntil
-      (((label_eq ''motorstop'') or (nxt (output_eq [Some(Str ''true''), Some n])))))) (watch lift t)"
-  using must_stop_lift_to_open_door_aux by blast
+      (((label_eq ''motorstop'') or (nxt (output_eq [Some(Str ''true''), Some n]))))))) lift"
+  apply (rule ltl_apply)
+  using must_stop_lift_to_open_door_aux by auto
 
 lemma LTL_must_stop_lift_to_open_door_ev: "(ev (state_eq (Some 5)) impl (ev (output_eq [Some (value.Int 0), Some (value.Int 1), Some (Str ''true'')]))) (watch lift t)"
   oops
